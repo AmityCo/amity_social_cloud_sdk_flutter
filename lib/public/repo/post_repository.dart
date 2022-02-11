@@ -3,7 +3,7 @@ import 'package:amity_sdk/public/public.dart';
 
 class PostRepository {
   PostByIdQueryBuilder getPost(String postId) {
-    return PostByIdQueryBuilder(useCase: sl(), postId: postId);
+    return PostByIdQueryBuilder(useCase: serviceLocator(), postId: postId);
   }
 
   // Stream<AmityPost> getPost(String postId) {

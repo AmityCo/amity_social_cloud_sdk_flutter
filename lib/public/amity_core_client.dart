@@ -1,16 +1,38 @@
 import 'package:amity_sdk/core/core.dart';
+import 'package:amity_sdk/public/public.dart';
 import 'package:amity_sdk/public/query_builder/login_query_builder.dart';
+import 'package:amity_sdk/public/repo/user_repository.dart';
 
 class AmityCoreClient {
-  static void setup({required AmityCoreClientOption option}) {
-    sl.unregister<AmityCoreClientOption>();
-    sl.registerLazySingleton<AmityCoreClientOption>(() => option);
-    SdkServiceLocator.initServiceLocator();
+  static void setup({required AmityCoreClientOption option}) async {
+    if (serviceLocator.isRegistered<AmityCoreClientOption>()) {
+      serviceLocator.unregister<AmityCoreClientOption>();
+    }
+    serviceLocator.registerLazySingleton<AmityCoreClientOption>(() => option);
+    await SdkServiceLocator.initServiceLocator();
   }
 
-  LoginQueryBuilder login(String userId) {
-    return LoginQueryBuilder(useCase: sl(), userId: userId);
+  static LoginQueryBuilder login(String userId) {
+    return LoginQueryBuilder(useCase: serviceLocator(), userId: userId);
   }
+
+  static String getUserId() {
+    if (serviceLocator.isRegistered<AmityUser>()) {
+      return serviceLocator<AmityUser>().userId!;
+    }
+    throw AmityException(
+        message: 'App dont have active user, Please login', code: 401);
+  }
+
+  static AmityUser getCurrentUser() {
+    if (serviceLocator.isRegistered<AmityUser>()) {
+      return serviceLocator<AmityUser>();
+    }
+    throw AmityException(
+        message: 'App dont have active user, Please login', code: 401);
+  }
+
+  static UserRepository newUserRepository() => serviceLocator<UserRepository>();
 }
 
 class AmityCoreClientOption {

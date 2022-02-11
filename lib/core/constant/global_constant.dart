@@ -17,3 +17,10 @@ const STAGING_MQTT_ENDPOINT = "ssq.us.amity.co";
 
 //API link
 const SESSION_URL = 'api/v3/sessions';
+const USERS_URL = 'api/v3/users';
+
+const USER_V4_URL = 'api/v4/users';
+
+const ME_FOLLLOWING = 'api/v4/me/following';
+const ME_FOLLLOWERS = 'api/v4/me/followers';
+const ME_FOLLLOW_INFO = 'api/v4/me/followInfo';

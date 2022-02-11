@@ -1,5 +1,8 @@
 // import 'package:amity_sdk/flutter_application_1.dart';
+import 'dart:developer';
+
 import 'package:amity_sdk/core/core.dart';
+import 'package:amity_sdk/core/error/amity_exception.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 
@@ -32,15 +35,49 @@ class _MyAppState extends State<MyApp> {
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: TextButton(
-              onPressed: () async {
-                AmityPost amityPost =
-                    await AmitySocialClient.newPostRepository()
-                        .getPost('postId')
-                        .get();
-                print(amityPost.id);
-              },
-              child: Text('Test')),
+          child: Column(
+            children: [
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.login('87')
+                      .displayName('sorbh')
+                      .deviceId('sorbh_device_id')
+                      .submit()
+                      .then((value) {
+                    log(value.displayName!);
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Login'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.newUserRepository()
+                      .getUsers()
+                      .query()
+                      .then((value) {
+                    log(value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Get All User'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.newUserRepository()
+                      .getUser('87')
+                      .then((value) {
+                    log(value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Get User by ID'),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -46,7 +46,7 @@ class GetPostByIdResponseData {
   final List<PostResponse> posts;
   final List<PostResponse> postChildren;
   final List<CommentEntity> comments;
-  final List<UserEntity> users;
+  final List<UserResponse> users;
   // final List<FileElement> files;
   // final List<Community> communities;
   // final List<CommunityUser> communityUsers;
@@ -60,8 +60,8 @@ class GetPostByIdResponseData {
             json["postChildren"].map((x) => PostResponse.fromJson(x))),
         comments: List<CommentEntity>.from(
             json["comments"].map((x) => CommentEntity.fromJson(x))),
-        users: List<UserEntity>.from(
-            json["users"].map((x) => UserEntity.fromJson(x))),
+        users: List<UserResponse>.from(
+            json["users"].map((x) => UserResponse.fromJson(x))),
         // files: List<FileElement>.from(
         //     json["files"].map((x) => FileElement.fromJson(x))),
         // communities: List<Community>.from(

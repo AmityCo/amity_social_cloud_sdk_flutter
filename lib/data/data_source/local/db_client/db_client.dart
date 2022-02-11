@@ -1,1 +1,1 @@
-abstract class DBClient {}
+export 'abs_db_client.dart';

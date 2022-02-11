@@ -13,17 +13,17 @@ String authenticationRequestToJson(AuthenticationRequest data) =>
 class AuthenticationRequest {
   AuthenticationRequest({
     required this.userId,
-    required this.deviceId,
-    required this.deviceInfo,
-    required this.displayName,
-    required this.authToken,
+    this.deviceId,
+    this.deviceInfo,
+    this.displayName,
+    this.authToken,
   });
 
   final String userId;
-  final String deviceId;
-  final DeviceInfo deviceInfo;
-  final String displayName;
-  final String authToken;
+  String? deviceId;
+  DeviceInfo? deviceInfo;
+  String? displayName;
+  String? authToken;
 
   factory AuthenticationRequest.fromJson(Map<String, dynamic> json) =>
       AuthenticationRequest(
@@ -37,22 +37,27 @@ class AuthenticationRequest {
   Map<String, dynamic> toJson() => {
         "userId": userId,
         "deviceId": deviceId,
-        "deviceInfo": deviceInfo.toJson(),
+        "deviceInfo": deviceInfo?.toJson() ?? null,
         "displayName": displayName,
         "authToken": authToken,
       };
+
+  @override
+  String toString() {
+    return authenticationRequestToJson(this);
+  }
 }
 
 class DeviceInfo {
   DeviceInfo({
-    required this.kind,
-    required this.model,
-    required this.sdkVersion,
+    this.kind,
+    this.model,
+    this.sdkVersion,
   });
 
-  final String kind;
-  final String model;
-  final String sdkVersion;
+  String? kind;
+  String? model;
+  String? sdkVersion;
 
   factory DeviceInfo.fromJson(Map<String, dynamic> json) => DeviceInfo(
         kind: json["kind"],
