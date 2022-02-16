@@ -4,6 +4,17 @@
 ## Git tag convention
 - Use [Semantic Versioning](https://semver.org/).
 
+
+## Architecture Overview
+
+![a7e024fee04b488bad52d31d25e50b11](https://user-images.githubusercontent.com/9884138/154221379-017e14c5-ff90-45f2-a481-4ab0d13a86ed.png)
+
+## Architecture Interaction
+
+![98e5362d41894a3eac55a733258d5317](https://user-images.githubusercontent.com/9884138/154221450-7ae06908-a19f-4d2e-84d6-28c6858d2600.png)
+
+
+
 ## Unit testing
 
 ### (A) Test Components
