@@ -24,3 +24,7 @@ const USER_V4_URL = 'api/v4/users';
 const ME_FOLLLOWING = 'api/v4/me/following';
 const ME_FOLLLOWERS = 'api/v4/me/followers';
 const ME_FOLLLOW_INFO = 'api/v4/me/followInfo';
+
+// const ME_FOLLLOWING = 'api/v4/me/following';
+// const ME_FOLLLOWERS = 'api/v4/me/followers';
+const USERS_v4_URL = 'api/v4/users/';

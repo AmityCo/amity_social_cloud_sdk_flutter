@@ -1,14 +1,13 @@
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/account_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/local/hive_entity/account_hive_entity.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 
 class AccountDbAdapterImpl extends AccountDbAdapter {
-  final HiveDbClient dbClient;
+  final DBClient dbClient;
 
   AccountDbAdapterImpl({required this.dbClient});
   late Box box;
   Future<AccountDbAdapterImpl> init() async {
+    Hive.registerAdapter(AccountHiveEntityAdapter());
     box = await Hive.openBox<AccountHiveEntity>('account_db');
     return this;
   }
@@ -19,7 +18,8 @@ class AccountDbAdapterImpl extends AccountDbAdapter {
   }
 
   @override
-  void saveAccountEntity(AccountHiveEntity entity) {
-    box.add(entity);
+  void saveAccountEntity(AccountHiveEntity entity) async {
+    await box.clear();
+    await box.add(entity);
   }
 }

@@ -14,10 +14,19 @@ class AuthenticationRepoImpl extends AuthenticationRepo {
     // - login user from remote data source
     // - save the user in DTO
     // - Return the public Amity user to domain layer
+
+    //1. Get the data from data remote data source
     final data = await authenticationApiInterface.login(params);
-    final userHiveEntity = data.users[0].convertToUserHiveEntity();
-    // await userHiveEntity.save();
-    final amityUser = userHiveEntity.convertToAmityUser();
+    // final userHiveEntity = data.users[0].convertToUserHiveEntity();
+
+    //2. Change remote response to dto
+    final accountHiveEntity = data.convertToAccountHiveEntity();
+
+    //3. Save the dto in the db
+    accountDbAdapter.saveAccountEntity(accountHiveEntity);
+
+    //4. Change dto to public amity user
+    final amityUser = accountHiveEntity.convertToAmityUser();
 
     //Keep the current session detail (service locator)
     if (serviceLocator.isRegistered<SessionResponse>()) {

@@ -7,6 +7,7 @@ import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
@@ -39,9 +40,9 @@ class _MyAppState extends State<MyApp> {
             children: [
               TextButton(
                 onPressed: () async {
-                  AmityCoreClient.login('87')
-                      .displayName('sorbh')
-                      .deviceId('sorbh_device_id')
+                  AmityCoreClient.login('88')
+                      .displayName('sorbh_88')
+                      .deviceId('sorbh_device_id_88')
                       .submit()
                       .then((value) {
                     log(value.displayName!);
@@ -75,6 +76,109 @@ class _MyAppState extends State<MyApp> {
                   });
                 },
                 child: const Text('Get User by ID'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.newUserRepository()
+                      .searchUserByDisplayName('sor')
+                      .query()
+                      .then((value) {
+                    log(value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Search User by Display Name'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.newUserRepository()
+                      .relationship()
+                      .user('87')
+                      .follow()
+                      .then((value) {
+                    log('Follow 87');
+                    // log(value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Follow user 87'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.newUserRepository()
+                      .relationship()
+                      .me()
+                      .unfollow('87')
+                      .then((value) {
+                    log('Unfollow 87');
+                    // log(value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Unfollow user 87'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.newUserRepository()
+                      .relationship()
+                      .me()
+                      .accept('88')
+                      .then((value) {
+                    log('Accept 88');
+                    // log(value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Accept Follow Request 88'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.newUserRepository()
+                      .relationship()
+                      .me()
+                      .decline('88')
+                      .then((value) {
+                    log('Decline 88');
+                    // log(value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Decline Follow Request 88'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.newUserRepository()
+                      .relationship()
+                      .me()
+                      .getFollowInfo()
+                      .then((value) {
+                    log('Decline 88');
+                    // log(value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Follow Info me'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.newUserRepository()
+                      .relationship()
+                      .user('87')
+                      .getFollowInfo()
+                      .then((value) {
+                    log('Decline 88');
+                    // log(value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Follow Info 87'),
               ),
             ],
           ),
