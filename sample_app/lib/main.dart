@@ -28,20 +28,24 @@ class _MyAppState extends State<MyApp> {
             httpEndpoint: AmityRegionalHttpEndpoint.STAGING));
   }
 
+  late String userId;
+  late String userDisplayName;
   @override
   Widget build(BuildContext context) {
+    userId = 'victimAndroid';
+    userDisplayName = 'victimAndroid';
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
         body: Center(
-          child: Column(
+          child: ListView(
             children: [
               TextButton(
                 onPressed: () async {
-                  AmityCoreClient.login('88')
-                      .displayName('sorbh_88')
+                  AmityCoreClient.login(userId)
+                      .displayName(userDisplayName)
                       .deviceId('sorbh_device_id_88')
                       .submit()
                       .then((value) {
@@ -68,7 +72,7 @@ class _MyAppState extends State<MyApp> {
               TextButton(
                 onPressed: () async {
                   AmityCoreClient.newUserRepository()
-                      .getUser('87')
+                      .getUser('victimiOS')
                       .then((value) {
                     log(value.toString());
                   }).onError<AmityException>((error, stackTrace) {
@@ -179,6 +183,70 @@ class _MyAppState extends State<MyApp> {
                   });
                 },
                 child: const Text('Follow Info 87'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.newUserRepository()
+                      .relationship()
+                      .me()
+                      .getFollowers()
+                      .query()
+                      .then((value) {
+                    log(value.toString());
+                    // log(value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Get my follower'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.newUserRepository()
+                      .relationship()
+                      .me()
+                      .getFollowings()
+                      .query()
+                      .then((value) {
+                    log(value.toString());
+                    // log(value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Get my following'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.newUserRepository()
+                      .relationship()
+                      .user('victimiOS')
+                      .getFollowers()
+                      .query()
+                      .then((value) {
+                    log(value.toString());
+                    // log(value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Get victimiOS followers'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmityCoreClient.newUserRepository()
+                      .relationship()
+                      .user('victimiOS')
+                      .getFollowings()
+                      .query()
+                      .then((value) {
+                    log(value.toString());
+                    // log(value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log(error.message.toString());
+                  });
+                },
+                child: const Text('Get victimiOS following'),
               ),
             ],
           ),

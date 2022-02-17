@@ -37,29 +37,29 @@ class FileResponse {
 class Attributes {
   Attributes({
     required this.name,
-    required this.extension,
+    required this.ext,
     required this.size,
     required this.mimeType,
     required this.metadata,
   });
 
   final String name;
-  final String extension;
+  final String ext;
   final String size;
   final String mimeType;
   final AttributesMetadata metadata;
 
   factory Attributes.fromJson(Map<String, dynamic> json) => Attributes(
         name: json["name"],
-        extension: json["extension"],
-        size: json["size"],
+        ext: json["extension"],
+        size: '${json["size"]}',
         mimeType: json["mimeType"],
         metadata: AttributesMetadata.fromJson(json["metadata"]),
       );
 
   Map<String, dynamic> toJson() => {
         "name": name,
-        "extension": extension,
+        "extension": ext,
         "size": size,
         "mimeType": mimeType,
         "metadata": metadata.toJson(),
@@ -75,24 +75,24 @@ class AttributesMetadata {
     required this.isFull,
   });
 
-  final ExifClass exif;
-  final ExifClass gps;
+  final ExifClass? exif;
+  final ExifClass? gps;
   final int height;
   final int width;
   final bool isFull;
 
   factory AttributesMetadata.fromJson(Map<String, dynamic> json) =>
       AttributesMetadata(
-        exif: ExifClass.fromJson(json["exif"]),
-        gps: ExifClass.fromJson(json["gps"]),
+        exif: json["exif"] == null ? null : ExifClass.fromJson(json["exif"]),
+        gps: json["gps"] == null ? null : ExifClass.fromJson(json["gps"]),
         height: json["height"],
         width: json["width"],
         isFull: json["isFull"],
       );
 
   Map<String, dynamic> toJson() => {
-        "exif": exif.toJson(),
-        "gps": gps.toJson(),
+        "exif": exif == null ? null : exif!.toJson(),
+        "gps": gps == null ? null : gps!.toJson(),
         "height": height,
         "width": width,
         "isFull": isFull,

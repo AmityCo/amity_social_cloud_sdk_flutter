@@ -1,12 +1,19 @@
 import 'package:amity_sdk/core/usercase/usecase.dart';
-import 'package:amity_sdk/domain/model/amity_follow_relationship.dart';
+import 'package:amity_sdk/domain/domain.dart';
 
 class GetMyFollowingsUsecase
     extends UseCaseWithoutParam<List<AmityFollowRelationship>> {
+  final FollowRepo followRepo;
+ final AmityFollowRelationshipComposerUsecase
+      amityFollowRelationshipComposerUsecase;
+  GetMyFollowingsUsecase({required this.followRepo,required this.amityFollowRelationshipComposerUsecase});
   @override
-  Future<List<AmityFollowRelationship>> get() {
-    // TODO: implement get
-    throw UnimplementedError();
+  Future<List<AmityFollowRelationship>> get() async{
+     final followings = await followRepo.getMyFollowing();
+    return Stream.fromIterable(followings)
+        .asyncMap((element) async =>
+            await amityFollowRelationshipComposerUsecase.get(element))
+        .toList();
   }
 
   @override

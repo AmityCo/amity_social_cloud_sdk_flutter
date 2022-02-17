@@ -1,11 +1,10 @@
-import 'package:amity_sdk/domain/model/amity_follow_relationship.dart';
-import 'package:amity_sdk/domain/usecase/relationship/get_user_followers_usecase.dart';
+import 'package:amity_sdk/domain/domain.dart';
 
 class AmityUserFollowingsQueryBuilder {
-  late GetUserFollowersUsecase _useCase;
+  late GetUserFollowingsUsecase _useCase;
   late String _userId;
   AmityUserFollowingsQueryBuilder(
-      {required GetUserFollowersUsecase useCase, required String userId}) {
+      {required GetUserFollowingsUsecase useCase, required String userId}) {
     _useCase = useCase;
     _userId = userId;
   }

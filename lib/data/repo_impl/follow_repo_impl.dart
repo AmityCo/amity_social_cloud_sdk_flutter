@@ -1,21 +1,31 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/data/data.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter/file_db_adapter.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter/follow_db_adapter.dart';
 import 'package:amity_sdk/data/data_source/local/db_adapter/follow_info_db_adapter.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter/user_db_adapter.dart';
+import 'package:amity_sdk/data/data_source/local/hive_entity/file_hive_entity_4.dart';
+import 'package:amity_sdk/data/data_source/local/hive_entity/follow_hive_entity_3.dart';
 import 'package:amity_sdk/domain/domain.dart';
 
 class FollowRepoImpl extends FollowRepo {
   final FollowWApiInterface followWApiInterface;
   final FollowInfoDbAdapter followInfoDbAdapter;
-  FollowRepoImpl(
-      {required this.followWApiInterface, required this.followInfoDbAdapter});
+  final FollowDbAdapter followDbAdapter;
+  final UserDbAdapter userDbAdapter;
+  final FileDbAdapter fileDbAdapter;
+
+  FollowRepoImpl({
+    required this.followWApiInterface,
+    required this.followInfoDbAdapter,
+    required this.followDbAdapter,
+    required this.userDbAdapter,
+    required this.fileDbAdapter,
+  });
 
   @override
   Future<void> accpet(String userId) async {
-    //follow response <-> follow hive entity <-> amity follow relationships
     final data = await followWApiInterface.accpet(userId);
-    // final followHiveEntities = data.convertToFollowHiveEntity();
-    // final amityFollowRelationships = followHiveEntities.
-    // throw UnimplementedError();
     return;
   }
 
@@ -52,12 +62,74 @@ class FollowRepoImpl extends FollowRepo {
 
   @override
   Future<List<AmityFollowRelationship>> getFollower(String userId) async {
-    throw UnimplementedError();
+    final data = await followWApiInterface.getFollower(userId);
+
+    //Covert to Follow Hive Entity
+    List<FollowHiveEntity> followHiveEntitys =
+        data.follows.map((e) => e.convertFollowHiveEntity()).toList();
+
+    //Covert to User Hive Entity
+    List<UserHiveEntity> userHiveEntitys =
+        data.users!.map((e) => e.convertToUserHiveEntity()).toList();
+
+    //Covert to File Hive Entity
+    List<FileHiveEntity> fileHiveEntitys =
+        data.files!.map((e) => e.convertToFileHiveEntity()).toList();
+
+    //Save Follow Hive Entity
+    for (var e in followHiveEntitys) {
+      await followDbAdapter.saveFollowEntity(e);
+    }
+
+    //Save User Hive Entity
+    for (var e in userHiveEntitys) {
+      await userDbAdapter.saveUser(e);
+    }
+
+    //Save File Hive Entity
+    for (var e in fileHiveEntitys) {
+      await fileDbAdapter.saveFileEntity(e);
+    }
+
+    return followHiveEntitys
+        .map((e) => e.convertToAmityFollowRelationship())
+        .toList();
   }
 
   @override
   Future<List<AmityFollowRelationship>> getFollowing(String userId) async {
-    throw UnimplementedError();
+    final data = await followWApiInterface.getFollowing(userId);
+
+    //Covert to Follow Hive Entity
+    List<FollowHiveEntity> followHiveEntitys =
+        data.follows.map((e) => e.convertFollowHiveEntity()).toList();
+
+    //Covert to User Hive Entity
+    List<UserHiveEntity> userHiveEntitys =
+        data.users!.map((e) => e.convertToUserHiveEntity()).toList();
+
+    //Covert to File Hive Entity
+    List<FileHiveEntity> fileHiveEntitys =
+        data.files!.map((e) => e.convertToFileHiveEntity()).toList();
+
+    //Save Follow Hive Entity
+    for (var e in followHiveEntitys) {
+      await followDbAdapter.saveFollowEntity(e);
+    }
+
+    //Save User Hive Entity
+    for (var e in userHiveEntitys) {
+      await userDbAdapter.saveUser(e);
+    }
+
+    //Save File Hive Entity
+    for (var e in fileHiveEntitys) {
+      await fileDbAdapter.saveFileEntity(e);
+    }
+
+    return followHiveEntitys
+        .map((e) => e.convertToAmityFollowRelationship())
+        .toList();
   }
 
   @override
@@ -72,11 +144,73 @@ class FollowRepoImpl extends FollowRepo {
 
   @override
   Future<List<AmityFollowRelationship>> getMyFollower() async {
-    throw UnimplementedError();
+    final data = await followWApiInterface.getMyFollower();
+
+    //Covert to Follow Hive Entity
+    List<FollowHiveEntity> followHiveEntitys =
+        data.follows.map((e) => e.convertFollowHiveEntity()).toList();
+
+    //Covert to User Hive Entity
+    List<UserHiveEntity> userHiveEntitys =
+        data.users!.map((e) => e.convertToUserHiveEntity()).toList();
+
+    //Covert to File Hive Entity
+    List<FileHiveEntity> fileHiveEntitys =
+        data.files!.map((e) => e.convertToFileHiveEntity()).toList();
+
+    //Save Follow Hive Entity
+    for (var e in followHiveEntitys) {
+      await followDbAdapter.saveFollowEntity(e);
+    }
+
+    //Save User Hive Entity
+    for (var e in userHiveEntitys) {
+      await userDbAdapter.saveUser(e);
+    }
+
+    //Save File Hive Entity
+    for (var e in fileHiveEntitys) {
+      await fileDbAdapter.saveFileEntity(e);
+    }
+
+    return followHiveEntitys
+        .map((e) => e.convertToAmityFollowRelationship())
+        .toList();
   }
 
   @override
   Future<List<AmityFollowRelationship>> getMyFollowing() async {
-    throw UnimplementedError();
+    final data = await followWApiInterface.getMyFollowing();
+
+    //Covert to Follow Hive Entity
+    List<FollowHiveEntity> followHiveEntitys =
+        data.follows.map((e) => e.convertFollowHiveEntity()).toList();
+
+    //Covert to User Hive Entity
+    List<UserHiveEntity> userHiveEntitys =
+        data.users!.map((e) => e.convertToUserHiveEntity()).toList();
+
+    //Covert to File Hive Entity
+    List<FileHiveEntity> fileHiveEntitys =
+        data.files!.map((e) => e.convertToFileHiveEntity()).toList();
+
+    //Save Follow Hive Entity
+    for (var e in followHiveEntitys) {
+      await followDbAdapter.saveFollowEntity(e);
+    }
+
+    //Save User Hive Entity
+    for (var e in userHiveEntitys) {
+      await userDbAdapter.saveUser(e);
+    }
+
+    //Save File Hive Entity
+    for (var e in fileHiveEntitys) {
+      await fileDbAdapter.saveFileEntity(e);
+    }
+
+    return followHiveEntitys
+        .map((e) => e.convertToAmityFollowRelationship())
+        .toList();
   }
 }
