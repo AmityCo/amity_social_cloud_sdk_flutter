@@ -13,6 +13,11 @@ class AccountDbAdapterImpl extends AccountDbAdapter {
   }
 
   @override
+  Stream<AccountHiveEntity> listenAccountEntity() {
+    return box.watch().map((event) => event.value as AccountHiveEntity);
+  }
+
+  @override
   AccountHiveEntity getAccountEntity() {
     return box.getAt(0);
   }

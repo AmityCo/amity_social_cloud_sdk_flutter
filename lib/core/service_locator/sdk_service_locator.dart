@@ -7,7 +7,10 @@ import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/file_db_ad
 import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/follow_db_adapter_impl.dart';
 import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/follow_info_db_adapter_impl.dart';
 import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/user_db_adapter_impl.dart';
+import 'package:amity_sdk/data/mqtt/amity_mqtt.dart';
+import 'package:amity_sdk/data/repo_impl/account_repo_impl.dart';
 import 'package:amity_sdk/domain/domain.dart';
+import 'package:amity_sdk/domain/repo/account_repo.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -26,6 +29,10 @@ class SdkServiceLocator {
     //-data_source/remote/
     serviceLocator.registerLazySingleton<HttpApiClient>(
         () => HttpApiClient(amityCoreClientOption: serviceLocator()));
+
+    serviceLocator.registerSingleton<AmityMQTT>(AmityMQTT(
+        accountRepo: serviceLocator(),
+        amityCoreClientOption: serviceLocator()));
 
     //-data_source/remote/api_interface
     // sl.registerLazySingleton<PublicPostApiInterface>(
@@ -85,6 +92,8 @@ class SdkServiceLocator {
           userDbAdapter: serviceLocator(),
           fileDbAdapter: serviceLocator(),
         ));
+    serviceLocator.registerLazySingleton<AccountRepo>(
+        () => AccountRepoImpl(accountDbAdapter: serviceLocator()));
     // serviceLocator.registerLazySingleton<PostRepo>(() => PostRepoImpl(
     //     publicPostApiInterface: serviceLocator(),
     //     postDbAdapter: serviceLocator()));

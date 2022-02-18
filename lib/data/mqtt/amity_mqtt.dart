@@ -1,8 +1,12 @@
-import 'dart:async';
 
+import 'package:amity_sdk/core/enum/mqtt_end_point.dart';
 import 'package:amity_sdk/data/data_source/local/local.dart';
+import 'package:amity_sdk/domain/repo/account_repo.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
+
+import '../../public/amity_core_client.dart';
+
 
 class AmityMQTT {
   MqttServerClient? activeClient;
@@ -10,17 +14,28 @@ class AmityMQTT {
   static final MQTT_CONNECTED = 0;
   static final MQTT_DISCONNECTED = -1;
 
-  //TODO
+  final AccountRepo accountRepo;
+  final AmityCoreClientOption amityCoreClientOption;
+
+  AmityMQTT({required this.accountRepo, required this.amityCoreClientOption}) {
+     accountRepo
+        .listenAccount()
+        .takeWhile((account) => account.accessToken?.isNotEmpty ?? false)
+        .distinct()
+        .listen((account) {
+      print('AMITY_MQTT::connecting with accessToken ${account.accessToken}');
+      _connect(account);
+    });
+  }
+
   void init() {
-    //1. observe account
-    //2. filter only account that contains accessToken
-    //3. then connect with function below
+   
   }
 
   Future<int> _connect(AccountHiveEntity accountEntity) async {
-    //TODO dynamic server url and generate client id from account.deviceId
-    activeClient =
-        MqttServerClient('ssq.staging.amity.co', accountEntity.deviceId!);
+    //TODO dynamic server url
+    activeClient = MqttServerClient(
+        amityCoreClientOption.mqttEndpoint.value, accountEntity.deviceId!);
 
     activeClient?.setProtocolV311();
     activeClient?.keepAlivePeriod = 60;
@@ -73,10 +88,16 @@ class AmityMQTT {
   }
 
   void _addClientListeners() {
-    //1. observe account
-    //2. filter !isActive account
-    //3. disconnect client
-    //4. clear all subscriptions including listeners - call @_obsoleteClient()
+    accountRepo
+        .listenAccount()
+        .takeWhile((account) => account.isActive == false)
+        .distinct()
+        .listen((account) {
+      _obsoleteClient();
+    });
+
+    subscribe(
+        '5b028e4a673f81000fb040e7/social/community/61f2b7289ed52800da3e9c31/post/+');
   }
 
   void _obsoleteClient() {
