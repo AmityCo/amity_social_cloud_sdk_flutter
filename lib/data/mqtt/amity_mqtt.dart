@@ -4,24 +4,13 @@ import 'package:amity_sdk/data/data_source/local/local.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
 
-/// An annotated simple subscribe/publish usage example for mqtt_browser_client. Please read in with reference
-/// to the MQTT specification. The example is runnable.
-/// First create a client, the client is constructed with a broker name, client identifier
-/// and port if needed. The client identifier (short ClientId) is an identifier of each MQTT
-/// client connecting to a MQTT broker. As the word identifier already suggests, it should be unique per broker.
-/// The broker uses it for identifying the client and the current state of the client. If you don’t need a state
-/// to be hold by the broker, in MQTT 3.1.1 you can set an empty ClientId, which results in a connection without any state.
-/// A condition is that clean session connect flag is true, otherwise the connection will be rejected.
-/// The client identifier can be a maximum length of 23 characters. If a port is not specified the standard port
-/// of 1883 is used. Only web sockets are supported in the browser client.
-/// A websocket URL must start with ws:// or wss:// or Dart will throw an exception, consult your websocket MQTT broker
-/// for details.
-///
-
 class AmityMQTT {
-   MqttServerClient? activeClient;
+  MqttServerClient? activeClient;
 
-  //todo
+  static final MQTT_CONNECTED = 0;
+  static final MQTT_DISCONNECTED = -1;
+
+  //TODO
   void init() {
     //1. observe account
     //2. filter only account that contains accessToken
@@ -63,23 +52,24 @@ class AmityMQTT {
     } on Exception catch (e) {
       print('AMITY_MQTT::client exception - $e');
       activeClient?.disconnect();
-      return -1;
+      return MQTT_DISCONNECTED;
     }
 
-    if (activeClient?.connectionStatus!.state == MqttConnectionState.connected) {
+    if (activeClient?.connectionStatus!.state ==
+        MqttConnectionState.connected) {
       print('AMITY_MQTT::Mosquitto client connected');
     } else {
       print(
           'AMITY_MQTT::ERROR Mosquitto client connection failed - disconnecting, status is ${activeClient?.connectionStatus}');
       activeClient?.disconnect();
-      return -1;
+      return MQTT_DISCONNECTED;
     }
 
     //for testing purpose
     // subscribe(
     //     '5b028e4a673f81000fb040e7/social/community/61f2b7289ed52800da3e9c31/post/+');
 
-    return 0;
+    return MQTT_CONNECTED;
   }
 
   void _addClientListeners() {
