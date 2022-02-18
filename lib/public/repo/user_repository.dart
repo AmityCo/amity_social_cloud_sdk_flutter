@@ -1,9 +1,7 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/domain/usecase/get_all_user_usecase.dart';
 import 'package:amity_sdk/public/public.dart';
-import 'package:amity_sdk/public/query_builder/amity_all_user_query_builder.dart';
-import 'package:amity_sdk/public/repo/amity_user_flag_repository.dart';
-import 'package:amity_sdk/public/repo/amity_user_relationships_repository.dart';
+import 'package:amity_sdk/domain/domain.dart';
+import 'package:amity_sdk/public/query_builder/amity_user_search_display_name_query_builder.dart';
 
 class UserRepository {
   AmityAllUserQueryBuilder getUsers() {
@@ -11,8 +9,9 @@ class UserRepository {
         useCase: serviceLocator<GetAllUserUseCase>());
   }
 
-  AmityAllUserQueryBuilder searchUserByDisplayName(String keyboard) {
-    return AmityAllUserQueryBuilder(
+  AmityUserSearchDisplayNameQueryBuilder searchUserByDisplayName(
+      String keyboard) {
+    return AmityUserSearchDisplayNameQueryBuilder(
         useCase: serviceLocator<GetAllUserUseCase>(), keyword: keyboard);
   }
 

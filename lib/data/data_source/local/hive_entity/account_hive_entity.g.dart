@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'account_hive_entity.dart';
+part of 'account_hive_entity_0.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -8,7 +8,7 @@ part of 'account_hive_entity.dart';
 
 class AccountHiveEntityAdapter extends TypeAdapter<AccountHiveEntity> {
   @override
-  final int typeId = 3;
+  final int typeId = 0;
 
   @override
   AccountHiveEntity read(BinaryReader reader) {

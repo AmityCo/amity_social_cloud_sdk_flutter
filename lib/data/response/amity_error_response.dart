@@ -15,27 +15,27 @@ class AmityErrorResponse {
     required this.status,
     required this.message,
     required this.code,
-    required this.data,
+    this.data,
   });
 
   final String status;
   final String message;
   final int code;
-  final Data data;
+  Data? data;
 
   factory AmityErrorResponse.fromJson(Map<String, dynamic> json) =>
       AmityErrorResponse(
         status: json["status"],
         message: json["message"],
         code: json["code"],
-        data: Data.fromJson(json["data"]),
+        // data: Data.fromJson(json["data"]),
       );
 
   Map<String, dynamic> toJson() => {
         "status": status,
         "message": message,
         "code": code,
-        "data": data.toJson(),
+        // "data": data.toJson(),
       };
 }
 

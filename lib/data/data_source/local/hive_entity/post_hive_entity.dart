@@ -2,7 +2,7 @@ import 'package:hive/hive.dart';
 
 part 'post_hive_entity.g.dart';
 
-@HiveType(typeId: 0)
+@HiveType(typeId: 3)
 class PostHiveEntity extends HiveObject {
   @HiveField(0)
   String? id;

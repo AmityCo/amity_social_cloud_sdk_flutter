@@ -1,8 +1,17 @@
-import 'package:amity_sdk/data/response/session_response.dart';
-import 'package:amity_sdk/domain/domain.dart';
+import 'package:amity_sdk/data/data.dart';
 
 extension SessionResponseExtension on SessionResponse {
-  AmityUser convertToAmityUser() {
-    return AmityUser();
+  UserHiveEntity convertToUserHiveEntity() {
+    return UserHiveEntity();
+  }
+
+  AccountHiveEntity convertToAccountHiveEntity() {
+    return AccountHiveEntity()
+      ..id = users[0].id
+      ..userId = users[0].userId
+      ..displayName = users[0].displayName
+      ..isActive = users[0].isGlobalBan
+      ..accessToken = accessToken
+      ..refreshToken = refreshToken;
   }
 }

@@ -1,5 +1,4 @@
-import 'package:amity_sdk/data/data_source/local/hive_entity/user_hive_entity.dart';
-import 'package:amity_sdk/data/response/response.dart';
+import 'package:amity_sdk/data/data.dart';
 
 extension UserResponseExtension on UserResponse {
   UserHiveEntity convertToUserHiveEntity() {
@@ -7,6 +6,15 @@ extension UserResponseExtension on UserResponse {
       ..id = id
       ..userId = userId
       ..displayName = displayName
-      ..description = description;
+      ..description = description
+      ..avatarFileId = avatarFileId;
   }
+
+  // AccountHiveEntity convertToAccountHiveEntity() {
+  //   return AccountHiveEntity()
+  //     ..id = id
+  //     ..userId = userId
+  //     ..displayName = displayName
+  //     ..refreshToken = ;
+  // }
 }
