@@ -4,10 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:amity_sdk/data/response/core_response/file_response.dart';
 import 'package:amity_sdk/data/response/response.dart';
-
-import 'core_response/pagin_response.dart';
 
 FollowResponse followResponseFromJson(String str) =>
     FollowResponse.fromJson(json.decode(str));

@@ -3,7 +3,7 @@ class Paging {
     required this.next,
   });
 
-  final String next;
+  final String? next;
 
   factory Paging.fromJson(Map<String, dynamic> json) => Paging(
         next: json["next"],

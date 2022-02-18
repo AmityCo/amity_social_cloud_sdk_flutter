@@ -1,7 +1,6 @@
 import 'package:amity_sdk/core/core.dart';
+import 'package:amity_sdk/domain/domain.dart';
 import 'package:amity_sdk/public/public.dart';
-import 'package:amity_sdk/public/query_builder/login_query_builder.dart';
-import 'package:amity_sdk/public/repo/user_repository.dart';
 
 class AmityCoreClient {
   static void setup({required AmityCoreClientOption option}) async {
@@ -17,11 +16,7 @@ class AmityCoreClient {
   }
 
   static String getUserId() {
-    if (serviceLocator.isRegistered<AmityUser>()) {
-      return serviceLocator<AmityUser>().userId!;
-    }
-    throw AmityException(
-        message: 'App dont have active user, Please login', code: 401);
+    return getCurrentUser().userId!;
   }
 
   static AmityUser getCurrentUser() {

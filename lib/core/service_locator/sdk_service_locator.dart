@@ -1,10 +1,14 @@
 import 'package:amity_sdk/data/data.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter/file_db_adapter.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter/follow_db_adapter.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter/follow_info_db_adapter.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter/user_db_adapter.dart';
+import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/file_db_adater_impl.dart';
+import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/follow_db_adapter_impl.dart';
+import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/follow_info_db_adapter_impl.dart';
+import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/user_db_adapter_impl.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/repo/authentication_repo.dart';
-import 'package:amity_sdk/domain/usecase/get_all_user_usecase.dart';
-import 'package:amity_sdk/domain/usecase/login_usecase.dart';
-import 'package:amity_sdk/public/repo/post_repository.dart';
-import 'package:amity_sdk/public/repo/user_repository.dart';
+import 'package:amity_sdk/public/public.dart';
 import 'package:get_it/get_it.dart';
 
 final serviceLocator = GetIt.instance; //sl is referred to as Service Locator
@@ -18,6 +22,7 @@ class SdkServiceLocator {
 
     ///----------------------------------- Data Layer -----------------------------------///
 
+    // Remote Data Source
     //-data_source/remote/
     serviceLocator.registerLazySingleton<HttpApiClient>(
         () => HttpApiClient(amityCoreClientOption: serviceLocator()));
@@ -31,11 +36,14 @@ class SdkServiceLocator {
             amityCoreClientOption: serviceLocator()));
     serviceLocator.registerLazySingleton<UserApiInterface>(
         () => UserApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<FollowWApiInterface>(
+        () => FollowApiInterfaceImpl(httpApiClient: serviceLocator()));
 
     //-data_source/remote/mock_api_interface
     serviceLocator.registerLazySingleton<PublicPostApiInterface>(
         () => MockPublicPostApiInterfaceImpl());
 
+    // Local Data Source
     //-data_source/local/
     serviceLocator
         .registerSingletonAsync<DBClient>(() => HiveDbClient().init());
@@ -44,19 +52,42 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<AccountDbAdapter>(
         () => AccountDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<UserDbAdapter>(
+        () => UserDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<FollowInfoDbAdapter>(
+        () => FollowInfoDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<FollowDbAdapter>(
+        () => FollowDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<FileDbAdapter>(
+        () => FileDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
 
     ///----------------------------------- Domain Layer -----------------------------------///
 
     //-Repo
-    serviceLocator.registerLazySingleton<AuthenticationRepo>(() =>
-        AuthenticationRepoImpl(
-            authenticationApiInterface: serviceLocator(),
-            accountDbAdapter: serviceLocator()));
-    serviceLocator.registerLazySingleton<PostRepo>(() => PostRepoImpl(
-        publicPostApiInterface: serviceLocator(),
-        postDbAdapter: serviceLocator()));
-    serviceLocator.registerLazySingleton<UserRepo>(
-        () => UserRepoImpl(userApiInterface: serviceLocator()));
+    serviceLocator
+        .registerLazySingleton<AuthenticationRepo>(() => AuthenticationRepoImpl(
+              authenticationApiInterface: serviceLocator(),
+              accountDbAdapter: serviceLocator(),
+              userDbAdapter: serviceLocator(),
+            ));
+    serviceLocator.registerLazySingleton<UserRepo>(() => UserRepoImpl(
+          userApiInterface: serviceLocator(),
+          userDbAdapter: serviceLocator(),
+        ));
+    serviceLocator.registerLazySingleton<FollowRepo>(() => FollowRepoImpl(
+          followWApiInterface: serviceLocator(),
+          followInfoDbAdapter: serviceLocator(),
+          followDbAdapter: serviceLocator(),
+          userDbAdapter: serviceLocator(),
+          fileDbAdapter: serviceLocator(),
+        ));
+    // serviceLocator.registerLazySingleton<PostRepo>(() => PostRepoImpl(
+    //     publicPostApiInterface: serviceLocator(),
+    //     postDbAdapter: serviceLocator()));
 
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(
@@ -67,6 +98,42 @@ class SdkServiceLocator {
         () => GetAllUserUseCase(userRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<GetUserByIdUseCase>(
         () => GetUserByIdUseCase(userRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<AcceptFollowUsecase>(
+        () => AcceptFollowUsecase(followRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<DeclineFollowUsecase>(
+        () => DeclineFollowUsecase(followRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<UserFollowRequestUsecase>(
+        () => UserFollowRequestUsecase(followRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<UnfollowUsecase>(
+        () => UnfollowUsecase(followRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<RemoveFollowerUsecase>(
+        () => RemoveFollowerUsecase(followRepo: serviceLocator()));
+
+    serviceLocator
+        .registerLazySingleton<AmityFollowRelationshipComposerUsecase>(() =>
+            AmityFollowRelationshipComposerUsecase(userRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<GetMyFollowInfoUsecase>(
+        () => GetMyFollowInfoUsecase(followRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<GetMyFollowersUsecase>(() =>
+        GetMyFollowersUsecase(
+            followRepo: serviceLocator(),
+            amityFollowRelationshipComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<GetMyFollowingsUsecase>(() =>
+        GetMyFollowingsUsecase(
+            followRepo: serviceLocator(),
+            amityFollowRelationshipComposerUsecase: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<GetUserFollowInfoUsecase>(
+        () => GetUserFollowInfoUsecase(followRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<GetUserFollowersUsecase>(() =>
+        GetUserFollowersUsecase(
+            followRepo: serviceLocator(),
+            amityFollowRelationshipComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<GetUserFollowingsUsecase>(() =>
+        GetUserFollowingsUsecase(
+            followRepo: serviceLocator(),
+            amityFollowRelationshipComposerUsecase: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo

@@ -29,12 +29,14 @@ class UsersRequest {
         options: Options.fromJson(json["options"]),
       );
 
-  Map<String, dynamic> toJson() => {
-        "keyword": keyword,
-        "filter": filter,
-        "sortBy": sortBy,
-        "options": options == null ? {} : options!.toJson(),
-      };
+  Map<String, dynamic> toJson() {
+    Map<String, dynamic> data = {};
+    if (keyword != null) data['keyboard'] = keyword;
+    if (filter != null) data['filter'] = filter;
+    if (sortBy != null) data['sortBy'] = sortBy;
+    if (options != null) data['options'] = options!.toJson();
+    return data;
+  }
 
   @override
   String toString() {

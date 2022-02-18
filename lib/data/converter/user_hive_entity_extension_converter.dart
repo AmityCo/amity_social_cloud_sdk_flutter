@@ -8,6 +8,7 @@ extension UserHiveEntityExtension on UserHiveEntity {
       ..id = id
       ..userId = userId
       ..displayName = displayName
-      ..description = description;
+      ..description = description
+      ..avatarFileId = avatarFileId;
   }
 }
