@@ -1,4 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
+import 'package:amity_sdk/core/enum/mqtt_end_point.dart';
 import 'package:amity_sdk/domain/domain.dart';
 import 'package:amity_sdk/public/public.dart';
 
@@ -34,9 +35,11 @@ class AmityCoreClientOption {
   final String apiKey;
   final AmityRegionalHttpEndpoint httpEndpoint;
   final AmityRegionalSocketEndpoint socketEndpoint;
+  final AmityRegionalMqttEndpoint mqttEndpoint;
 
   AmityCoreClientOption(
       {required this.apiKey,
       this.httpEndpoint = AmityRegionalHttpEndpoint.SG,
-      this.socketEndpoint = AmityRegionalSocketEndpoint.SG});
+      this.socketEndpoint = AmityRegionalSocketEndpoint.SG,
+      this.mqttEndpoint = AmityRegionalMqttEndpoint.SG});
 }
