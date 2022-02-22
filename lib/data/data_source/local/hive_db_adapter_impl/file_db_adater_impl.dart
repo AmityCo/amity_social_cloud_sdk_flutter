@@ -1,6 +1,4 @@
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/file_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/local/hive_entity/file_hive_entity_4.dart';
 import 'package:hive/hive.dart';
 
 class FileDbAdapterImpl extends FileDbAdapter {

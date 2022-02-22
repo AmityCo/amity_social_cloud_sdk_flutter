@@ -1,12 +1,9 @@
-
 import 'package:amity_sdk/core/enum/mqtt_end_point.dart';
 import 'package:amity_sdk/data/data_source/local/local.dart';
 import 'package:amity_sdk/domain/repo/account_repo.dart';
+import 'package:amity_sdk/public/amity_core_client.dart';
 import 'package:mqtt_client/mqtt_client.dart';
 import 'package:mqtt_client/mqtt_server_client.dart';
-
-import '../../public/amity_core_client.dart';
-
 
 class AmityMQTT {
   MqttServerClient? activeClient;
@@ -18,7 +15,7 @@ class AmityMQTT {
   final AmityCoreClientOption amityCoreClientOption;
 
   AmityMQTT({required this.accountRepo, required this.amityCoreClientOption}) {
-     accountRepo
+    accountRepo
         .listenAccount()
         .takeWhile((account) => account.accessToken?.isNotEmpty ?? false)
         .distinct()
@@ -28,9 +25,7 @@ class AmityMQTT {
     });
   }
 
-  void init() {
-   
-  }
+  void init() {}
 
   Future<int> _connect(AccountHiveEntity accountEntity) async {
     //TODO dynamic server url

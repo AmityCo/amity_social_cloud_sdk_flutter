@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'post_hive_entity.dart';
+part of 'post_hive_entity_5.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
@@ -8,23 +8,16 @@ part of 'post_hive_entity.dart';
 
 class PostHiveEntityAdapter extends TypeAdapter<PostHiveEntity> {
   @override
-  final int typeId = 3;
+  final int typeId = 5;
 
   @override
   PostHiveEntity read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
-    return PostHiveEntity()..id = fields[0] as String?;
+    return PostHiveEntity();
   }
 
   @override
   void write(BinaryWriter writer, PostHiveEntity obj) {
-    writer
-      ..writeByte(1)
-      ..writeByte(0)
-      ..write(obj.id);
+    writer..writeByte(0);
   }
 
   @override
