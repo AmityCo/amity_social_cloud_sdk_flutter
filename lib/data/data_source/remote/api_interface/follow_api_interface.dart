@@ -1,6 +1,6 @@
 import 'package:amity_sdk/data/data.dart';
 
-abstract class FollowWApiInterface {
+abstract class FollowApiInterface {
   Future<FollowResponse> accpet(String userId);
   Future<FollowResponse> decline(String userId);
 

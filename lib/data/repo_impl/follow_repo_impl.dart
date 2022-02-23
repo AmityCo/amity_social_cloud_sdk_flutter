@@ -3,7 +3,7 @@ import 'package:amity_sdk/data/data.dart';
 import 'package:amity_sdk/domain/domain.dart';
 
 class FollowRepoImpl extends FollowRepo {
-  final FollowWApiInterface followWApiInterface;
+  final FollowApiInterface followWApiInterface;
   final FollowInfoDbAdapter followInfoDbAdapter;
   final FollowDbAdapter followDbAdapter;
   final UserDbAdapter userDbAdapter;

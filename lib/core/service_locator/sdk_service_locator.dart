@@ -1,10 +1,14 @@
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/comment_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/comment_db_adater_impl.dart';
+import 'package:amity_sdk/data/data_source/remote/api_interface/commnet_api_interface.dart';
+import 'package:amity_sdk/data/data_source/remote/api_interface/reaction_api_interface.dart';
+import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/commant_api_interface_impl.dart';
+import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/reaction_api_interface_impl.dart';
+import 'package:amity_sdk/data/repo_impl/reaction_repo_impl.dart';
 import 'package:amity_sdk/domain/composer_usecase/user_compose_usecase.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/repo/account_repo.dart';
-import 'package:amity_sdk/domain/usecase/post/post_create_usecase.dart';
+import 'package:amity_sdk/domain/repo/reaction_repo.dart';
+import 'package:amity_sdk/domain/usecase/reaction/add_reaction_usecase.dart';
+import 'package:amity_sdk/domain/usecase/reaction/remove_reaction_usecase.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -33,8 +37,12 @@ class SdkServiceLocator {
             amityCoreClientOption: serviceLocator()));
     serviceLocator.registerLazySingleton<UserApiInterface>(
         () => UserApiInterfaceImpl(httpApiClient: serviceLocator()));
-    serviceLocator.registerLazySingleton<FollowWApiInterface>(
+    serviceLocator.registerLazySingleton<FollowApiInterface>(
         () => FollowApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentApiInterface>(
+        () => CommentApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<ReactionApiInterface>(
+        () => ReactionApiInterfaceImpl(httpApiClient: serviceLocator()));
 
     // Local Data Source
     //-data_source/local/
@@ -93,12 +101,12 @@ class SdkServiceLocator {
           userDbAdapter: serviceLocator(),
           fileDbAdapter: serviceLocator(),
         ));
-    serviceLocator.registerLazySingleton<CommentRepo>(() => CommentRepoImpl(
-          commentDbAdapter: serviceLocator(),
-        ));
-    serviceLocator.registerLazySingleton<FileRepo>(() => FileRepoImpl(
-          fileDbAdapter: serviceLocator(),
-        ));
+    serviceLocator.registerLazySingleton<CommentRepo>(
+        () => CommentRepoImpl(commentDbAdapter: serviceLocator()));
+    serviceLocator.registerLazySingleton<FileRepo>(
+        () => FileRepoImpl(fileDbAdapter: serviceLocator()));
+    serviceLocator.registerLazySingleton<ReactionRepo>(
+        () => ReactionRepoImpl(reactionApiInterface: serviceLocator()));
 
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
@@ -161,6 +169,11 @@ class SdkServiceLocator {
             postRepo: serviceLocator(), postComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<UserComposerUsecase>(
         () => UserComposerUsecase(fileRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<AddReactionUsecase>(
+        () => AddReactionUsecase(reactionRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<RemoveReactionUsecase>(
+        () => RemoveReactionUsecase(reactionRepo: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
