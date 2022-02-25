@@ -8,12 +8,12 @@ class AddReactionUsecase extends UseCase<void, ReactionRequest> {
   AddReactionUsecase({required this.reactionRepo});
 
   @override
-  Future<void> get(ReactionRequest params) {
+  Future get(ReactionRequest params) {
     return reactionRepo.addReaction(params);
   }
 
   @override
-  Stream<void> listen(ReactionRequest params) {
+  Stream listen(ReactionRequest params) {
     // TODO: implement listen
     throw UnimplementedError();
   }
