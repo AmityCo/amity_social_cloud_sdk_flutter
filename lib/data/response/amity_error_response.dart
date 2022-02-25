@@ -12,16 +12,16 @@ String amityErrorResponseToJson(AmityErrorResponse data) =>
 
 class AmityErrorResponse {
   AmityErrorResponse({
-    required this.status,
+    this.status,
     required this.message,
     required this.code,
-    this.data,
+    // this.data,
   });
 
-  final String status;
+  String? status;
   final String message;
   final int code;
-  Data? data;
+  // Data? data;
 
   factory AmityErrorResponse.fromJson(Map<String, dynamic> json) =>
       AmityErrorResponse(
@@ -39,21 +39,21 @@ class AmityErrorResponse {
       };
 }
 
-class Data {
-  Data({
-    required this.detail,
-  });
+// class Data {
+//   Data({
+//     required this.detail,
+//   });
 
-  final List<String>? detail;
+//   final List<String>? detail;
 
-  factory Data.fromJson(Map<String, dynamic> json) => Data(
-        detail: json["detail"] == null
-            ? null
-            : List<String>.from(json["detail"].map((x) => x)),
-      );
+//   factory Data.fromJson(Map<String, dynamic> json) => Data(
+//         detail: json["detail"] == null
+//             ? null
+//             : List<String>.from(json["detail"].map((x) => x)),
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "detail":
-            detail == null ? null : List<dynamic>.from(detail!.map((x) => x)),
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "detail":
+//             detail == null ? null : List<dynamic>.from(detail!.map((x) => x)),
+//       };
+// }

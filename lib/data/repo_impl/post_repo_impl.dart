@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:amity_sdk/core/model/api_request/create_post_request.dart';
 import 'package:amity_sdk/data/data.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/domain/repo/post_repo.dart';
@@ -7,8 +8,15 @@ import 'package:amity_sdk/domain/repo/post_repo.dart';
 class PostRepoImpl extends PostRepo {
   final PublicPostApiInterface publicPostApiInterface;
   final PostDbAdapter postDbAdapter;
+  final CommentDbAdapter commentDbAdapter;
+  final UserDbAdapter userDbAdapter;
+  final FileDbAdapter fileDbAdapter;
   PostRepoImpl(
-      {required this.publicPostApiInterface, required this.postDbAdapter});
+      {required this.publicPostApiInterface,
+      required this.postDbAdapter,
+      required this.commentDbAdapter,
+      required this.userDbAdapter,
+      required this.fileDbAdapter});
 
   @override
   Future<AmityPost> getPostById(String postId) async {
@@ -20,6 +28,62 @@ class PostRepoImpl extends PostRepo {
 
     //Get the data from remote source and return it
     final data = await publicPostApiInterface.getPostById(postId);
-    return Future.value(data.data.posts[0].convertToAmityPost());
+
+    //Convert to Post Hive Entity
+    List<PostHiveEntity> postHiveEntities =
+        data.posts.map((e) => e.convertToPostHiveEntity()).toList();
+
+    List<PostHiveEntity> postChildHiveEntities =
+        data.postChildren.map((e) => e.convertToPostHiveEntity()).toList();
+
+    //Convert to Comment Hive Entity
+    List<CommentHiveEntity> commentHiveEntities =
+        data.comments.map((e) => e.convertToCommentHiveEntity()).toList();
+
+    //Convert to User Hive Entity
+    List<UserHiveEntity> userHiveEntities =
+        data.users.map((e) => e.convertToUserHiveEntity()).toList();
+
+    //Convert to File Hive Entity
+    List<FileHiveEntity> fileHiveEntities =
+        data.files.map((e) => e.convertToFileHiveEntity()).toList();
+
+    //Save Post Entity
+    for (var e in postHiveEntities) {
+      await postDbAdapter.savePostEntity(e);
+    }
+
+    //Save Child Post Entity
+    for (var e in postChildHiveEntities) {
+      await postDbAdapter.savePostEntity(e);
+    }
+
+    //Save the Comment Entity
+    for (var e in commentHiveEntities) {
+      await commentDbAdapter.saveCommentEntity(e);
+    }
+
+    //Save the User Entity
+    for (var e in userHiveEntities) {
+      await userDbAdapter.saveUserEntity(e);
+    }
+
+    //Save the File Entity
+    for (var e in fileHiveEntities) {
+      await fileDbAdapter.saveFileEntity(e);
+    }
+
+    return Future.value(postHiveEntities[0].convertToAmityPost());
+  }
+
+  @override
+  Future<AmityPost> createPost(CreatePostRequest request) async {
+    final data = await publicPostApiInterface.createPost(request);
+    return AmityPost();
+  }
+
+  @override
+  Future<AmityPost> getPostByIdFromDb(String id) {
+    return Future.value(postDbAdapter.getPostEntity(id).convertToAmityPost());
   }
 }

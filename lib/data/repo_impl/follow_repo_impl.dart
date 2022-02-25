@@ -1,15 +1,9 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/file_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/follow_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/follow_info_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/user_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/local/hive_entity/file_hive_entity_4.dart';
-import 'package:amity_sdk/data/data_source/local/hive_entity/follow_hive_entity_3.dart';
 import 'package:amity_sdk/domain/domain.dart';
 
 class FollowRepoImpl extends FollowRepo {
-  final FollowWApiInterface followWApiInterface;
+  final FollowApiInterface followWApiInterface;
   final FollowInfoDbAdapter followInfoDbAdapter;
   final FollowDbAdapter followDbAdapter;
   final UserDbAdapter userDbAdapter;
@@ -83,7 +77,7 @@ class FollowRepoImpl extends FollowRepo {
 
     //Save User Hive Entity
     for (var e in userHiveEntitys) {
-      await userDbAdapter.saveUser(e);
+      await userDbAdapter.saveUserEntity(e);
     }
 
     //Save File Hive Entity
@@ -119,7 +113,7 @@ class FollowRepoImpl extends FollowRepo {
 
     //Save User Hive Entity
     for (var e in userHiveEntitys) {
-      await userDbAdapter.saveUser(e);
+      await userDbAdapter.saveUserEntity(e);
     }
 
     //Save File Hive Entity
@@ -165,7 +159,7 @@ class FollowRepoImpl extends FollowRepo {
 
     //Save User Hive Entity
     for (var e in userHiveEntitys) {
-      await userDbAdapter.saveUser(e);
+      await userDbAdapter.saveUserEntity(e);
     }
 
     //Save File Hive Entity
@@ -201,7 +195,7 @@ class FollowRepoImpl extends FollowRepo {
 
     //Save User Hive Entity
     for (var e in userHiveEntitys) {
-      await userDbAdapter.saveUser(e);
+      await userDbAdapter.saveUserEntity(e);
     }
 
     //Save File Hive Entity

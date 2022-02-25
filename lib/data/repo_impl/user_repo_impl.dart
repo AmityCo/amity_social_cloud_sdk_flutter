@@ -1,6 +1,5 @@
 import 'package:amity_sdk/core/model/api_request/users_request.dart';
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/user_db_adapter.dart';
 import 'package:amity_sdk/domain/model/amity_user.dart';
 import 'package:amity_sdk/domain/repo/user_repo.dart';
 
@@ -14,8 +13,8 @@ class UserRepoImpl extends UserRepo {
 
     //TODO compare updated at local vs remote
     final userHiveEntity = data.users[0].convertToUserHiveEntity();
-    await userDbAdapter.saveUser(userHiveEntity);
- 
+    await userDbAdapter.saveUserEntity(userHiveEntity);
+
     final amityUser = userHiveEntity.convertToAmityUser();
     return amityUser;
   }
@@ -26,8 +25,9 @@ class UserRepoImpl extends UserRepo {
 
     final userHiveEntities =
         data.users.map((e) => e.convertToUserHiveEntity()).toList();
+
     for (var userEntity in userHiveEntities) {
-      await userDbAdapter.saveUser(userEntity);
+      await userDbAdapter.saveUserEntity(userEntity);
     }
 
     final amityUsers =
@@ -37,7 +37,7 @@ class UserRepoImpl extends UserRepo {
 
   @override
   Future<AmityUser> getUserByIdFromDb(String userId) async {
-    final userHiveEntity = userDbAdapter.getUser(userId);
+    final userHiveEntity = userDbAdapter.getUserEntity(userId);
     return userHiveEntity.convertToAmityUser();
   }
 }

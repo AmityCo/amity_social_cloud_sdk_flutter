@@ -1,5 +1,4 @@
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/user_db_adapter.dart';
 import 'package:hive/hive.dart';
 
 class UserDbAdapterImpl extends UserDbAdapter {
@@ -14,12 +13,12 @@ class UserDbAdapterImpl extends UserDbAdapter {
   }
 
   @override
-  UserHiveEntity getUser(String userId) {
+  UserHiveEntity getUserEntity(String userId) {
     return box.get(userId);
   }
 
   @override
-  Future saveUser(UserHiveEntity entity) async {
+  Future saveUserEntity(UserHiveEntity entity) async {
     await box.put(entity.userId, entity);
   }
 }

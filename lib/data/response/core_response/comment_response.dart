@@ -1,5 +1,9 @@
-class CommentEntity {
-  CommentEntity({
+import 'package:amity_sdk/data/data.dart';
+
+class CommentResponse {
+  CommentResponse({
+    required this.id,
+    required this.path,
     required this.commentId,
     required this.userId,
     required this.parentId,
@@ -7,12 +11,12 @@ class CommentEntity {
     required this.referenceId,
     required this.referenceType,
     required this.dataType,
-    // required this.data,
+    required this.data,
     // required this.metadata,
     required this.childrenNumber,
     required this.flagCount,
-    // required this.hashFlag,
-    // required this.reactions,
+    required this.hashFlag,
+    required this.reactions,
     required this.reactionsCount,
     required this.myReactions,
     required this.isDeleted,
@@ -23,31 +27,35 @@ class CommentEntity {
     required this.segmentNumber,
     required this.required,
   });
-
+  final String id;
+  final String path;
   final String commentId;
   final String userId;
-  final String parentId;
-  final String rootId;
+  final String? parentId;
+  final String? rootId;
   final String referenceId;
   final String referenceType;
   final String dataType;
-  // final DataClass data;
+  final PostDataResponse data;
   // final DataClass metadata;
   final int childrenNumber;
   final int flagCount;
-  // final HashFlag hashFlag;
-  // final Reactions reactions;
+  final HashFlag? hashFlag;
+  final ReactionResponse? reactions;
   final int reactionsCount;
-  final List<String> myReactions;
+  final List<String>? myReactions;
   final bool isDeleted;
   final DateTime editedAt;
   final DateTime createdAt;
   final DateTime updatedAt;
   final List<String> children;
   final int segmentNumber;
-  final String required;
+  final String? required;
 
-  factory CommentEntity.fromJson(Map<String, dynamic> json) => CommentEntity(
+  factory CommentResponse.fromJson(Map<String, dynamic> json) =>
+      CommentResponse(
+        id: json["_id"],
+        path: json["path"],
         commentId: json["commentId"],
         userId: json["userId"],
         parentId: json["parentId"],
@@ -55,14 +63,20 @@ class CommentEntity {
         referenceId: json["referenceId"],
         referenceType: json["referenceType"],
         dataType: json["dataType"],
-        // data: DataClass.fromJson(json["data"]),
+        data: PostDataResponse.fromJson(json["data"]),
         // metadata: DataClass.fromJson(json["metadata"]),
         childrenNumber: json["childrenNumber"],
         flagCount: json["flagCount"],
-        // hashFlag: HashFlag.fromJson(json["hashFlag"]),
-        // reactions: Reactions.fromJson(json["reactions"]),
+        hashFlag: json["hashFlag"] == null
+            ? null
+            : HashFlag.fromJson(json["hashFlag"]),
+        reactions: json["reactions"] == null
+            ? null
+            : ReactionResponse.fromJson(json["reactions"]),
         reactionsCount: json["reactionsCount"],
-        myReactions: List<String>.from(json["myReactions"].map((x) => x)),
+        myReactions: json["myReactions"] == null
+            ? null
+            : List<String>.from(json["myReactions"]!.map((x) => x)),
         isDeleted: json["isDeleted"],
         editedAt: DateTime.parse(json["editedAt"]),
         createdAt: DateTime.parse(json["createdAt"]),
@@ -73,6 +87,8 @@ class CommentEntity {
       );
 
   Map<String, dynamic> toJson() => {
+        "_id": id,
+        "path": path,
         "commentId": commentId,
         "userId": userId,
         "parentId": parentId,
@@ -80,14 +96,16 @@ class CommentEntity {
         "referenceId": referenceId,
         "referenceType": referenceType,
         "dataType": dataType,
-        // "data": data.toJson(),
+        "data": data.toJson(),
         // "metadata": metadata.toJson(),
         "childrenNumber": childrenNumber,
         "flagCount": flagCount,
-        // "hashFlag": hashFlag.toJson(),
-        // "reactions": reactions.toJson(),
+        "hashFlag": hashFlag == null ? null : hashFlag!.toJson(),
+        "reactions": reactions == null ? null : reactions!.toJson(),
         "reactionsCount": reactionsCount,
-        "myReactions": List<dynamic>.from(myReactions.map((x) => x)),
+        "myReactions": myReactions == null
+            ? null
+            : List<dynamic>.from(myReactions!.map((x) => x)),
         "isDeleted": isDeleted,
         "editedAt": editedAt.toIso8601String(),
         "createdAt": createdAt.toIso8601String(),

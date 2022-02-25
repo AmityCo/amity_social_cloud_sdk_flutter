@@ -248,6 +248,33 @@ class _MyAppState extends State<MyApp> {
                 },
                 child: const Text('Get victimiOS following'),
               ),
+              TextButton(
+                onPressed: () async {
+                  AmitySocialClient.newPostRepository()
+                      .getPost('9cf90cd06d874b8e72c7a0057a330de4')
+                      .then((value) {
+                    log('>>>>>' + value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log('>>>>>' + error.message.toString());
+                  });
+                },
+                child: const Text('Get Post'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmitySocialClient.newPostRepository()
+                      .createPost()
+                      .targetUser('victimiOS')
+                      .text('Saurabh')
+                      .post()
+                      .then((value) {
+                    print('>>>>>' + value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log('>>>>>' + error.message.toString());
+                  });
+                },
+                child: const Text('Create Text Post'),
+              ),
             ],
           ),
         ),

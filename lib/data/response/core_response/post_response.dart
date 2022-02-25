@@ -1,5 +1,10 @@
+import 'package:amity_sdk/data/response/core_response/post_data_response.dart';
+import 'package:amity_sdk/data/response/core_response/reaction_response.dart';
+
 class PostResponse {
   PostResponse({
+    required this.id,
+    required this.path,
     required this.postId,
     required this.parentPostId,
     required this.postedUserId,
@@ -11,11 +16,11 @@ class PostResponse {
     required this.data,
     // required this.metadata,
     required this.flagCount,
-    // required this.hashFlag,
+    required this.hashFlag,
     required this.editedAt,
     required this.createdAt,
     required this.updatedAt,
-    // required this.reactions,
+    required this.reactions,
     required this.reactionsCount,
     required this.myReactions,
     required this.commentsCount,
@@ -25,25 +30,26 @@ class PostResponse {
     required this.hasFlaggedComment,
     required this.hasFlaggedChildren,
     required this.feedId,
-    required this.required,
+    required this.require,
   });
-
+  final String id;
+  final String path;
   final String postId;
-  final String parentPostId;
+  String? parentPostId;
   final String postedUserId;
-  final String sharedUserId;
+  String? sharedUserId;
   final int sharedCount;
   final String targetId;
   final String targetType;
   final String dataType;
-  final PostChildData data;
+  final PostDataResponse data;
   // final DataClass metadata;
   final int flagCount;
-  // final HashFlag hashFlag;
+  final HashFlag? hashFlag;
   final DateTime editedAt;
   final DateTime createdAt;
   final DateTime updatedAt;
-  // final Reactions reactions;
+  final ReactionResponse reactions;
   final int reactionsCount;
   final List<String> myReactions;
   final int commentsCount;
@@ -52,10 +58,12 @@ class PostResponse {
   final bool isDeleted;
   final bool hasFlaggedComment;
   final bool hasFlaggedChildren;
-  final String feedId;
-  final String required;
+  final String? feedId;
+  final String? require;
 
   factory PostResponse.fromJson(Map<String, dynamic> json) => PostResponse(
+        id: json["_id"],
+        path: json["path"],
         postId: json["postId"],
         parentPostId: json["parentPostId"],
         postedUserId: json["postedUserId"],
@@ -64,14 +72,16 @@ class PostResponse {
         targetId: json["targetId"],
         targetType: json["targetType"],
         dataType: json["dataType"],
-        data: PostChildData.fromJson(json["data"]),
+        data: PostDataResponse.fromJson(json["data"]),
         // metadata: DataClass.fromJson(json["metadata"]),
         flagCount: json["flagCount"],
-        // hashFlag: HashFlag.fromJson(json["hashFlag"]),
+        hashFlag: json["hashFlag"] == null
+            ? null
+            : HashFlag.fromJson(json["hashFlag"]),
         editedAt: DateTime.parse(json["editedAt"]),
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
-        // reactions: Reactions.fromJson(json["reactions"]),
+        reactions: ReactionResponse.fromJson(json["reactions"]),
         reactionsCount: json["reactionsCount"],
         myReactions: List<String>.from(json["myReactions"].map((x) => x)),
         commentsCount: json["commentsCount"],
@@ -81,10 +91,12 @@ class PostResponse {
         hasFlaggedComment: json["hasFlaggedComment"],
         hasFlaggedChildren: json["hasFlaggedChildren"],
         feedId: json["feedId"],
-        required: json["required"],
+        require: json["required"],
       );
 
   Map<String, dynamic> toJson() => {
+        "_id": id,
+        "path": path,
         "postId": postId,
         "parentPostId": parentPostId,
         "postedUserId": postedUserId,
@@ -96,11 +108,11 @@ class PostResponse {
         "data": data.toJson(),
         // "metadata": metadata.toJson(),
         "flagCount": flagCount,
-        // "hashFlag": hashFlag.toJson(),
+        "hashFlag": hashFlag == null ? null : hashFlag!.toJson(),
         "editedAt": editedAt.toIso8601String(),
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
-        // "reactions": reactions.toJson(),
+        "reactions": reactions.toJson(),
         "reactionsCount": reactionsCount,
         "myReactions": List<dynamic>.from(myReactions.map((x) => x)),
         "commentsCount": commentsCount,
@@ -110,66 +122,30 @@ class PostResponse {
         "hasFlaggedComment": hasFlaggedComment,
         "hasFlaggedChildren": hasFlaggedChildren,
         "feedId": feedId,
-        "required": required,
+        "required": require,
       };
 }
 
-class PostChildData {
-  PostChildData({
-    required this.text,
-    required this.fileId,
-    required this.thumbnailFileId,
-    required this.videoFileId,
-    required this.streamId,
+class HashFlag {
+  HashFlag({
+    required this.bits,
+    required this.hashes,
+    required this.hash,
   });
 
-  final String text;
-  final String fileId;
-  final String thumbnailFileId;
-  final VideoFileId videoFileId;
-  final String streamId;
+  final int bits;
+  final int hashes;
+  final String hash;
 
-  factory PostChildData.fromJson(Map<String, dynamic> json) => PostChildData(
-        text: json["text"],
-        fileId: json["fileId"],
-        thumbnailFileId: json["thumbnailFileId"],
-        videoFileId: VideoFileId.fromJson(json["videoFileId"]),
-        streamId: json["streamId"],
+  factory HashFlag.fromJson(Map<String, dynamic> json) => HashFlag(
+        bits: json["bits"],
+        hashes: json["hashes"],
+        hash: json["hash"],
       );
 
   Map<String, dynamic> toJson() => {
-        "text": text,
-        "fileId": fileId,
-        "thumbnailFileId": thumbnailFileId,
-        "videoFileId": videoFileId.toJson(),
-        "streamId": streamId,
-      };
-}
-
-class VideoFileId {
-  VideoFileId({
-    required this.original,
-    required this.low,
-    required this.medium,
-    required this.high,
-  });
-
-  final String original;
-  final String low;
-  final String medium;
-  final String high;
-
-  factory VideoFileId.fromJson(Map<String, dynamic> json) => VideoFileId(
-        original: json["original"],
-        low: json["low"],
-        medium: json["medium"],
-        high: json["high"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "original": original,
-        "low": low,
-        "medium": medium,
-        "high": high,
+        "bits": bits,
+        "hashes": hashes,
+        "hash": hash,
       };
 }

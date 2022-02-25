@@ -2,7 +2,7 @@ import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/data/data.dart';
 import 'package:dio/dio.dart';
 
-class FollowApiInterfaceImpl extends FollowWApiInterface {
+class FollowApiInterfaceImpl extends FollowApiInterface {
   FollowApiInterfaceImpl({required this.httpApiClient});
   final HttpApiClient httpApiClient;
   @override

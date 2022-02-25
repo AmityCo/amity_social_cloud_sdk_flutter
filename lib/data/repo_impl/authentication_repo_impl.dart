@@ -28,7 +28,7 @@ class AuthenticationRepoImpl extends AuthenticationRepo {
 
     //3. Save the dto in the db
     accountDbAdapter.saveAccountEntity(accountHiveEntity);
-    userDbAdapter.saveUser(userHiveEntity);
+    userDbAdapter.saveUserEntity(userHiveEntity);
 
     //4. Change dto to public amity user
     final amityUser = accountHiveEntity.convertToAmityUser();
