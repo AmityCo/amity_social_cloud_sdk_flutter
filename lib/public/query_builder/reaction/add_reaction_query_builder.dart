@@ -19,7 +19,7 @@ class AddReactionQueryBuilder {
     referenceId = _referenceId;
   }
 
-  Future<String> addReaction(String reaction) {
+  Future<void> addReaction(String reaction) {
     ReactionRequest reactionRequest = ReactionRequest(
         referenceId: _referenceId,
         referenceType: _referenceType,
@@ -27,7 +27,7 @@ class AddReactionQueryBuilder {
     return _addReactionUsecase.get(reactionRequest);
   }
 
-  Future<String> removeReaction(String reaction) {
+  Future<void> removeReaction(String reaction) {
     ReactionRequest reactionRequest = ReactionRequest(
         referenceId: _referenceId,
         referenceType: _referenceType,
