@@ -1,5 +1,5 @@
-export 'get_comment_by_id_usecase.dart';
-export 'get_post_by_id_usecase.dart';
+export 'comment/get_comment_by_id_usecase.dart';
+export 'post/get_post_by_id_usecase.dart';
 export 'login_usecase.dart';
 export 'post/post.dart';
 export 'relationship/relationship.dart';

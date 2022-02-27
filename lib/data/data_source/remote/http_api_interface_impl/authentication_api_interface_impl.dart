@@ -11,7 +11,7 @@ class AuthenticationApiInterfaceImpl extends AuthenticationApiInterface {
   @override
   Future<SessionResponse> login(AuthenticationRequest request) async {
     try {
-      final data = await httpApiClient.dio.post(SESSION_URL,
+      final data = await httpApiClient().post(SESSION_URL,
           data: request,
           options: dio.Options(
               headers: {'X-API-Key': amityCoreClientOption.apiKey}));

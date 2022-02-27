@@ -8,7 +8,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   @override
   Future<CreatePostResponse> getPostById(String postId) async {
     try {
-      final data = await httpApiClient.dio.get(POST_V3 + '/$postId');
+      final data = await httpApiClient().get(POST_V3 + '/$postId');
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -19,7 +19,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   @override
   Future<CreatePostResponse> createPost(CreatePostRequest request) async {
     try {
-      final data = await httpApiClient.dio.post(POST_V4, data: request);
+      final data = await httpApiClient().post(POST_V4, data: request);
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

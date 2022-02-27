@@ -9,7 +9,7 @@ class UserApiInterfaceImpl extends UserApiInterface {
   @override
   Future<UsersResponse> getUsers(UsersRequest request) async {
     try {
-      final data = await httpApiClient.dio.get(
+      final data = await httpApiClient().get(
         USERS_URL,
         queryParameters: request.toJson(),
       );
@@ -23,7 +23,7 @@ class UserApiInterfaceImpl extends UserApiInterface {
   @override
   Future<UsersResponse> getUserById(String userId) async {
     try {
-      final data = await httpApiClient.dio.get(
+      final data = await httpApiClient().get(
         USERS_URL + '/$userId',
       );
       return UsersResponse.fromJson(data.data);
