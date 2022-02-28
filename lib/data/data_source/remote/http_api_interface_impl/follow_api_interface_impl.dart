@@ -8,7 +8,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowResponse> accpet(String userId) async {
     try {
-      final data = await httpApiClient.dio.post(
+      final data = await httpApiClient().post(
         ME_FOLLLOWERS + '/$userId',
       );
       return FollowResponse.fromJson(data.data);
@@ -21,7 +21,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowResponse> decline(String userId) async {
     try {
-      final data = await httpApiClient.dio.delete(
+      final data = await httpApiClient().delete(
         ME_FOLLLOWERS + '/$userId',
       );
       return FollowResponse.fromJson(data.data);
@@ -34,7 +34,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowResponse> follow(String userId) async {
     try {
-      final data = await httpApiClient.dio.post(
+      final data = await httpApiClient().post(
         ME_FOLLLOWING + '/$userId',
       );
       return FollowResponse.fromJson(data.data);
@@ -47,7 +47,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowResponse> unfollow(String userId) async {
     try {
-      final data = await httpApiClient.dio.delete(
+      final data = await httpApiClient().delete(
         ME_FOLLLOWING + '/$userId',
       );
       return FollowResponse.fromJson(data.data);
@@ -60,7 +60,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowInfoResponse> getFollowInfo(String userId) async {
     try {
-      final data = await httpApiClient.dio.get(
+      final data = await httpApiClient().get(
         USERS_v4_URL + '$userId/followInfo',
       );
       return FollowInfoResponse.fromJson(data.data);
@@ -73,7 +73,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowResponse> getFollower(String userId) async {
     try {
-      final data = await httpApiClient.dio.get(
+      final data = await httpApiClient().get(
         USER_V4_URL + '/$userId/followers',
       );
       return FollowResponse.fromJson(data.data);
@@ -86,7 +86,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowResponse> getFollowing(String userId) async {
     try {
-      final data = await httpApiClient.dio.get(
+      final data = await httpApiClient().get(
         USER_V4_URL + '/$userId/following',
       );
       return FollowResponse.fromJson(data.data);
@@ -99,7 +99,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowInfoResponse> getMyFollowInfo() async {
     try {
-      final data = await httpApiClient.dio.get(
+      final data = await httpApiClient().get(
         ME_FOLLLOW_INFO,
       );
       return FollowInfoResponse.fromJson(data.data);
@@ -112,7 +112,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowResponse> getMyFollower() async {
     try {
-      final data = await httpApiClient.dio.get(
+      final data = await httpApiClient().get(
         ME_FOLLLOWERS,
       );
       return FollowResponse.fromJson(data.data);
@@ -125,7 +125,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowResponse> getMyFollowing() async {
     try {
-      final data = await httpApiClient.dio.get(
+      final data = await httpApiClient().get(
         ME_FOLLLOWING,
       );
       return FollowResponse.fromJson(data.data);

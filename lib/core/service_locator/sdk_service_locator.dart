@@ -7,9 +7,12 @@ import 'package:amity_sdk/data/repo_impl/reaction_repo_impl.dart';
 import 'package:amity_sdk/domain/composer_usecase/user_compose_usecase.dart';
 import 'package:amity_sdk/domain/domain.dart';
 import 'package:amity_sdk/domain/repo/reaction_repo.dart';
+import 'package:amity_sdk/domain/usecase/comment/comment_create_usecase.dart';
+import 'package:amity_sdk/domain/usecase/comment/comment_query_usecase.dart';
 import 'package:amity_sdk/domain/usecase/reaction/add_reaction_usecase.dart';
 import 'package:amity_sdk/domain/usecase/reaction/remove_reaction_usecase.dart';
 import 'package:amity_sdk/public/public.dart';
+import 'package:amity_sdk/public/repo/comment_repository.dart';
 import 'package:get_it/get_it.dart';
 
 final serviceLocator = GetIt.instance; //sl is referred to as Service Locator
@@ -101,8 +104,11 @@ class SdkServiceLocator {
           userDbAdapter: serviceLocator(),
           fileDbAdapter: serviceLocator(),
         ));
-    serviceLocator.registerLazySingleton<CommentRepo>(
-        () => CommentRepoImpl(commentDbAdapter: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentRepo>(() => CommentRepoImpl(
+        commentDbAdapter: serviceLocator(),
+        commentApiInterface: serviceLocator(),
+        fileDbAdapter: serviceLocator(),
+        userDbAdapter: serviceLocator()));
     serviceLocator.registerLazySingleton<FileRepo>(
         () => FileRepoImpl(fileDbAdapter: serviceLocator()));
     serviceLocator.registerLazySingleton<ReactionRepo>(
@@ -175,10 +181,16 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<RemoveReactionUsecase>(
         () => RemoveReactionUsecase(reactionRepo: serviceLocator()));
 
+    serviceLocator.registerLazySingleton<CommentCreateUseCase>(
+        () => CommentCreateUseCase(commentRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentQueryUsecase>(
+        () => CommentQueryUsecase(commentRepo: serviceLocator()));
+
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
     serviceLocator.registerLazySingleton(() => PostRepository());
     serviceLocator.registerLazySingleton(() => UserRepository());
+    serviceLocator.registerLazySingleton(() => CommentRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(

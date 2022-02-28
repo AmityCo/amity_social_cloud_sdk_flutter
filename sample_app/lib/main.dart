@@ -275,6 +275,37 @@ class _MyAppState extends State<MyApp> {
                 },
                 child: const Text('Create Text Post'),
               ),
+              TextButton(
+                onPressed: () async {
+                  AmitySocialClient.newCommentRepository()
+                      .createComment()
+                      .post('9cf90cd06d874b8e72c7a0057a330de4')
+                      .create()
+                      .text('Testing Comment from Saurabh')
+                      .send()
+                      .then((value) {
+                    print('>>>>>' + value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log('>>>>>' + error.message.toString());
+                  });
+                },
+                child: const Text('Create Comment For Post'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  AmitySocialClient.newCommentRepository()
+                      .getComments()
+                      .post('9cf90cd06d874b8e72c7a0057a330de4')
+                      .parentId(null)
+                      .query()
+                      .then((value) {
+                    print('>>>>>' + value.toString());
+                  }).onError<AmityException>((error, stackTrace) {
+                    log('>>>>>' + error.message.toString());
+                  });
+                },
+                child: const Text('Get Comment For Post'),
+              ),
             ],
           ),
         ),

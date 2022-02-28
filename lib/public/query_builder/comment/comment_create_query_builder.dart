@@ -1,73 +1,118 @@
 import 'package:amity_sdk/core/enum/amity_comment_target_type.dart';
-import 'package:amity_sdk/domain/model/amity_Comment.dart';
+import 'package:amity_sdk/core/model/api_request/create_comment_request.dart';
+import 'package:amity_sdk/domain/model/amity_comment.dart';
 import 'package:amity_sdk/domain/model/amity_mentionee_target.dart';
 import 'package:amity_sdk/domain/usecase/comment/comment_create_usecase.dart';
-import 'package:amity_sdk/public/amity_core_client.dart';
 
 class AmityCommentCreateTargetSelector {
   late CommentCreateUseCase _useCase;
-  AmityCommentCreateTargetSelector({required CommentCreateUseCase useCase}) {
+  late String _referenceType;
+  late String _referenceId;
+  String? _parentId;
+  // late AmityCommentTargetType _amityCommentTargetType;
+  AmityCommentCreateTargetSelector({
+    required CommentCreateUseCase useCase,
+  }) {
     _useCase = useCase;
+  }
+
+  AmityCommentCreateTargetSelector post(String referenceId) {
+    _referenceId = referenceId;
+    _referenceType = AmityCommentTargetType.POST.value;
+    return this;
+  }
+
+  AmityCommentCreateTargetSelector content(String referenceId) {
+    _referenceId = referenceId;
+    _referenceType = AmityCommentTargetType.CONTENT.value;
+    return this;
+  }
+
+  AmityCommentCreateTargetSelector parentId(String parentId) {
+    _parentId = parentId;
+    return this;
   }
 
   AmityCommentCreateDataTypeSelector create() {
     return AmityCommentCreateDataTypeSelector(
-        useCase: _useCase,
-        userId: AmityCoreClient.getUserId(),
-        targetType: AmityCommentTargetType.POST);
+      useCase: _useCase,
+      referenceType: _referenceType,
+      referenceId: _referenceId,
+      parentId: _parentId,
+      // amityCommentTargetType: _amityCommentTargetType,
+    );
   }
 }
 
 class AmityCommentCreateDataTypeSelector {
   late CommentCreateUseCase _useCase;
-  late String _userId;
-  late AmityCommentTargetType _targetType;
-  AmityCommentCreateDataTypeSelector(
-      {required CommentCreateUseCase useCase,
-      required String userId,
-      required AmityCommentTargetType targetType}) {
+  late String _referenceType;
+  late String _referenceId;
+  String? _parentId;
+  // late AmityCommentTargetType _amityCommentTargetType;
+  AmityCommentCreateDataTypeSelector({
+    required CommentCreateUseCase useCase,
+    required String referenceType,
+    required String referenceId,
+    String? parentId,
+    // required AmityCommentTargetType amityCommentTargetType
+  }) {
     _useCase = useCase;
-    _userId = userId;
-    _targetType = targetType;
+    _referenceType = referenceType;
+    _referenceId = referenceId;
+    _parentId = parentId;
+    // _amityCommentTargetType = amityCommentTargetType;
   }
 
   AmityTextCommentCreator text(String text) {
     return AmityTextCommentCreator(
         useCase: _useCase,
-        targetId: _userId,
-        targetType: _targetType.value,
+        referenceType: _referenceType,
+        referenceId: _referenceId,
+        parentId: _parentId,
+        // amityCommentTargetType: _amityCommentTargetType,
         text: text);
   }
 }
 
 class AmityTextCommentCreator {
   late CommentCreateUseCase _useCase;
-  late String _targetId;
-  late String _targetType;
+  late String _referenceType;
+  late String _referenceId;
+  String? _parentId;
+  // late AmityCommentTargetType _amityCommentTargetType;
   late String? _text;
   Map<String, dynamic>? _metadata;
   List<AmityMentioneeTarget>? _mentionees;
   AmityTextCommentCreator(
       {required CommentCreateUseCase useCase,
-      required String targetId,
-      required String targetType,
+      required String referenceType,
+      required String referenceId,
+      String? parentId,
+      // required AmityCommentTargetType amityCommentTargetType,
       String? text}) {
     _useCase = useCase;
-    _targetId = targetId;
-    _targetType = targetType;
+    _referenceType = referenceType;
+    _referenceId = referenceId;
+    _parentId = parentId;
+    // _amityCommentTargetType = amityCommentTargetType;
     _text = text;
   }
 
   Future<AmityComment> send() {
-    //   CreateCommentRequest request = CreateCommentRequest(
-    //       targetType: _targetType, targetId: _targetId, dataType: null);
+    CreateCommentRequest request = CreateCommentRequest(
+        referenceType: _referenceType, referenceId: _referenceId);
 
-    //   CreateCommentData data = CreateCommentData();
-    //   if (_text != null) data.text = _text;
+    CreateCommentData data = CreateCommentData();
+    if (_text != null) data.text = _text;
 
-    //   request.data = data;
+    request.data = data;
 
-    //   return _useCase.get(request);
-    throw UnimplementedError();
+    if (_parentId != null) {
+      request.parentId = _parentId;
+      request.commentId = _parentId;
+    }
+
+    return _useCase.get(request);
   }
 }

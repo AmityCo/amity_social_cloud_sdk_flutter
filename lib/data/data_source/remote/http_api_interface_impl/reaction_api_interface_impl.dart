@@ -11,7 +11,7 @@ class ReactionApiInterfaceImpl extends ReactionApiInterface {
   @override
   Future<String> addReaction(ReactionRequest request) async {
     try {
-      final data = await httpApiClient.dio.post(
+      final data = await httpApiClient().post(
         REACTION_V2_URL,
         data: request,
       );
@@ -25,7 +25,7 @@ class ReactionApiInterfaceImpl extends ReactionApiInterface {
   @override
   Future<String> removeReaction(ReactionRequest request) async {
     try {
-      final data = await httpApiClient.dio.delete(
+      final data = await httpApiClient().delete(
         REACTION_V2_URL,
         data: request,
       );
