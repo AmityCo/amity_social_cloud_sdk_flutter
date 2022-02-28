@@ -6,3 +6,4 @@ export 'follow_info_hive_entity_2.dart';
 export 'post_data_hive_entity_7.dart';
 export 'post_hive_entity_5.dart';
 export 'user_hive_entity_1.dart';
+export 'reaction_hive_entity_8.dart';
