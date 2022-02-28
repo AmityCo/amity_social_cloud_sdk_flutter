@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:amity_sdk/core/model/api_request/create_post_request.dart';
+import 'package:amity_sdk/core/model/api_request/get_post_request.dart';
 import 'package:amity_sdk/data/data.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/domain/repo/post_repo.dart';
@@ -29,6 +30,23 @@ class PostRepoImpl extends PostRepo {
     //Get the data from remote source and return it
     final data = await publicPostApiInterface.getPostById(postId);
 
+    final amitPosts = await _saveDataTpDb(data);
+
+    return amitPosts[0];
+  }
+
+  @override
+  Future<AmityPost> createPost(CreatePostRequest request) async {
+    final data = await publicPostApiInterface.createPost(request);
+    return AmityPost();
+  }
+
+  @override
+  Future<AmityPost> getPostByIdFromDb(String id) {
+    return Future.value(postDbAdapter.getPostEntity(id).convertToAmityPost());
+  }
+
+  Future<List<AmityPost>> _saveDataTpDb(CreatePostResponse data) async {
     //Convert to Post Hive Entity
     List<PostHiveEntity> postHiveEntities =
         data.posts.map((e) => e.convertToPostHiveEntity()).toList();
@@ -73,17 +91,45 @@ class PostRepoImpl extends PostRepo {
       await fileDbAdapter.saveFileEntity(e);
     }
 
-    return Future.value(postHiveEntities[0].convertToAmityPost());
+    return postChildHiveEntities.map((e) => e.convertToAmityPost()).toList();
   }
 
   @override
-  Future<AmityPost> createPost(CreatePostRequest request) async {
-    final data = await publicPostApiInterface.createPost(request);
-    return AmityPost();
+  Future<bool> deletePostById(String postId) async {
+    final data = await publicPostApiInterface.deletePostById(postId);
+    return data;
   }
 
   @override
-  Future<AmityPost> getPostByIdFromDb(String id) {
-    return Future.value(postDbAdapter.getPostEntity(id).convertToAmityPost());
+  Future<bool> flagPost(String postId) async {
+    final data = await publicPostApiInterface.flagPost(postId);
+    return data;
+  }
+
+  @override
+  Future<bool> isPostFlagByMe(String postId) async {
+    final data = await publicPostApiInterface.isPostFlagByMe(postId);
+    return data;
+  }
+
+  @override
+  Future<bool> unflagPost(String postId) async {
+    final data = await publicPostApiInterface.unflagPost(postId);
+    return data;
+  }
+
+  @override
+  Future<AmityPost> updatePostById(
+      String postId, CreatePostRequest request) async {
+    final data = await publicPostApiInterface.updatePostById(postId, request);
+    final amitPosts = await _saveDataTpDb(data);
+    return amitPosts[0];
+  }
+
+  @override
+  Future<List<AmityPost>> queryPost(GetPostRequest request) async {
+    final data = await publicPostApiInterface.queryPost(request);
+    final amitPosts = await _saveDataTpDb(data);
+    return amitPosts;
   }
 }
