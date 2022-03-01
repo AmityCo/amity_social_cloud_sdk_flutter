@@ -15,7 +15,7 @@ class RemoveReactionQueryBuilder {
     referenceId = _referenceId;
   }
 
-  Future<String> removeReaction(String reaction) {
+  Future removeReaction(String reaction) {
     ReactionRequest reactionRequest = ReactionRequest(
         referenceId: _referenceId,
         referenceType: _referenceType,

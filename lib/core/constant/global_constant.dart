@@ -26,6 +26,9 @@ const POST_V3 = 'api/v3/posts';
 
 const COMMENT_V3 = 'api/v3/comments';
 
+const COMMUNITY_V3 = 'api/v3/communities';
+
+
 const ME_FOLLLOWING = 'api/v4/me/following';
 const ME_FOLLLOWERS = 'api/v4/me/followers';
 const ME_FOLLLOW_INFO = 'api/v4/me/followInfo';
