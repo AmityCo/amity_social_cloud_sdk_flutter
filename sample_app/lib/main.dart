@@ -25,7 +25,8 @@ class _MyAppState extends State<MyApp> {
     AmityCoreClient.setup(
         option: AmityCoreClientOption(
             apiKey: 'b3bee858328ef4344a308e4a5a091688d05fdee2be353a2b',
-            httpEndpoint: AmityRegionalHttpEndpoint.STAGING));
+            httpEndpoint: AmityRegionalHttpEndpoint.STAGING,
+            showLogs: true));
   }
 
   late String userId;
@@ -50,6 +51,16 @@ class _MyAppState extends State<MyApp> {
                       .submit()
                       .then((value) {
                     log(value.displayName!);
+
+                    //
+                    AmitySocialClient.newPostRepository()
+                        .getPostStream('9cf90cd06d874b8e72c7a0057a330de4')
+                        .listen((event) {
+                      print('>>>>>>>>>>> Update from Live Object');
+                      log(event.toString());
+                    }).onError((error, stackTrace) {
+                      log('>>>>>' + error.message.toString());
+                    });
                   }).onError<AmityException>((error, stackTrace) {
                     log(error.message.toString());
                   });
@@ -281,7 +292,7 @@ class _MyAppState extends State<MyApp> {
                       .createComment()
                       .post('9cf90cd06d874b8e72c7a0057a330de4')
                       .create()
-                      .text('Testing Comment from Saurabh')
+                      .text('Comment from Saurabh')
                       .send()
                       .then((value) {
                     print('>>>>>' + value.toString());

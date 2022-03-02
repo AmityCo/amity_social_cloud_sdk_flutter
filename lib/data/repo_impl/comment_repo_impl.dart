@@ -9,8 +9,10 @@ class CommentRepoImpl extends CommentRepo {
   final CommentDbAdapter commentDbAdapter;
   final UserDbAdapter userDbAdapter;
   final FileDbAdapter fileDbAdapter;
+  final PostDbAdapter postDbAdapter;
   CommentRepoImpl(
-      {required this.commentDbAdapter,
+      {required this.postDbAdapter,
+      required this.commentDbAdapter,
       required this.commentApiInterface,
       required this.userDbAdapter,
       required this.fileDbAdapter});
@@ -26,6 +28,10 @@ class CommentRepoImpl extends CommentRepo {
     final data = await commentApiInterface.createComment(request);
 
     final amityComments = await _saveDetailsToDb(data);
+
+    //Update the post entity
+    postDbAdapter.updateComment(
+        request.referenceId, amityComments[0].commentId!);
 
     return Future.value(amityComments[0]);
   }
@@ -83,21 +89,21 @@ class CommentRepoImpl extends CommentRepo {
   }
 
   Future<List<AmityComment>> _saveDetailsToDb(CreatePostResponse data) async {
-    //Convert to Comment Hive Entity
-    List<CommentHiveEntity> commentHiveEntities =
-        data.comments.map((e) => e.convertToCommentHiveEntity()).toList();
+    //Convert to File Hive Entity
+    List<FileHiveEntity> fileHiveEntities =
+        data.files.map((e) => e.convertToFileHiveEntity()).toList();
 
     //Convert to User Hive Entity
     List<UserHiveEntity> userHiveEntities =
         data.users.map((e) => e.convertToUserHiveEntity()).toList();
 
-    //Convert to File Hive Entity
-    List<FileHiveEntity> fileHiveEntities =
-        data.files.map((e) => e.convertToFileHiveEntity()).toList();
+    //Convert to Comment Hive Entity
+    List<CommentHiveEntity> commentHiveEntities =
+        data.comments.map((e) => e.convertToCommentHiveEntity()).toList();
 
-    //Save the Comment Entity
-    for (var e in commentHiveEntities) {
-      await commentDbAdapter.saveCommentEntity(e);
+    //Save the File Entity
+    for (var e in fileHiveEntities) {
+      await fileDbAdapter.saveFileEntity(e);
     }
 
     //Save the User Entity
@@ -105,10 +111,11 @@ class CommentRepoImpl extends CommentRepo {
       await userDbAdapter.saveUserEntity(e);
     }
 
-    //Save the File Entity
-    for (var e in fileHiveEntities) {
-      await fileDbAdapter.saveFileEntity(e);
+    //Save the Comment Entity
+    for (var e in commentHiveEntities) {
+      await commentDbAdapter.saveCommentEntity(e);
     }
+
     return commentHiveEntities.map((e) => e.convertToAmityComment()).toList();
   }
 }

@@ -27,13 +27,14 @@ class HttpApiClient {
         return handler.next(options);
       },
     ));
-
-    dio.interceptors.add(LogInterceptor(
-        requestBody: true,
-        responseBody: true,
-        logPrint: (logs) {
-          log(logs as String);
-        }));
+    if (amityCoreClientOption.showLogs) {
+      dio.interceptors.add(LogInterceptor(
+          requestBody: true,
+          responseBody: true,
+          logPrint: (logs) {
+            log(logs as String);
+          }));
+    }
   }
 
   late Dio dio;
