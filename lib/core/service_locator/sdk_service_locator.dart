@@ -8,7 +8,11 @@ import 'package:amity_sdk/domain/composer_usecase/user_compose_usecase.dart';
 import 'package:amity_sdk/domain/domain.dart';
 import 'package:amity_sdk/domain/repo/reaction_repo.dart';
 import 'package:amity_sdk/domain/usecase/comment/comment_create_usecase.dart';
+import 'package:amity_sdk/domain/usecase/comment/comment_flag_usecase.dart';
 import 'package:amity_sdk/domain/usecase/comment/comment_query_usecase.dart';
+import 'package:amity_sdk/domain/usecase/comment/comment_unflag_usecase.dart';
+import 'package:amity_sdk/domain/usecase/post/post_flag_usecase.dart';
+import 'package:amity_sdk/domain/usecase/post/post_unflag_usecase.dart';
 import 'package:amity_sdk/domain/usecase/reaction/add_reaction_usecase.dart';
 import 'package:amity_sdk/domain/usecase/reaction/remove_reaction_usecase.dart';
 import 'package:amity_sdk/public/public.dart';
@@ -186,6 +190,16 @@ class SdkServiceLocator {
         () => CommentCreateUseCase(commentRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommentQueryUsecase>(
         () => CommentQueryUsecase(commentRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<PostFlagUsecase>(
+        () => PostFlagUsecase(postRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<PostUnflagUsecase>(
+        () => PostUnflagUsecase(postRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<CommentFlagUsecase>(
+        () => CommentFlagUsecase(commentRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentUnflagUsecase>(
+        () => CommentUnflagUsecase(commentRepo: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
