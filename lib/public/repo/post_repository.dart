@@ -7,6 +7,10 @@ class PostRepository {
     return serviceLocator<GetPostByIdUseCase>().get(postId);
   }
 
+  Stream<AmityPost> getPostStream(String postId) {
+    return serviceLocator<GetPostByIdUseCase>().listen(postId);
+  }
+
   AmityPostCreateTargetSelector createPost() {
     return AmityPostCreateTargetSelector(useCase: serviceLocator());
   }

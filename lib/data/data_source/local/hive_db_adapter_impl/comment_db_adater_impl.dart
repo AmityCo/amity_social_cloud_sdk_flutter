@@ -15,7 +15,7 @@ class CommentDbAdapterImpl extends CommentDbAdapter {
   }
 
   @override
- CommentHiveEntity getCommentEntity(String id) {
+  CommentHiveEntity getCommentEntity(String id) {
     return box.get(id);
   }
 

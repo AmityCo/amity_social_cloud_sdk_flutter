@@ -25,4 +25,17 @@ class PostDbAdapterImpl extends PostDbAdapter {
   PostHiveEntity getPostEntity(String postId) {
     return box.get(postId);
   }
+
+  @override
+  Stream<PostHiveEntity> listenPostEntity(String postId) {
+    return box.watch(key: postId).map((event) => event.value);
+  }
+
+  @override
+  Future updateComment(String postId, String commentId) async {
+    getPostEntity(postId)
+      ..comments!.add(commentId)
+      ..save();
+    return;
+  }
 }
