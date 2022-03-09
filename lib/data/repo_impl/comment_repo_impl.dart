@@ -9,8 +9,10 @@ class CommentRepoImpl extends CommentRepo {
   final CommentDbAdapter commentDbAdapter;
   final UserDbAdapter userDbAdapter;
   final FileDbAdapter fileDbAdapter;
+  final PostDbAdapter postDbAdapter;
   CommentRepoImpl(
-      {required this.commentDbAdapter,
+      {required this.postDbAdapter,
+      required this.commentDbAdapter,
       required this.commentApiInterface,
       required this.userDbAdapter,
       required this.fileDbAdapter});
@@ -25,55 +27,83 @@ class CommentRepoImpl extends CommentRepo {
   Future<AmityComment> createComment(CreateCommentRequest request) async {
     final data = await commentApiInterface.createComment(request);
 
-    //Convert to Comment Hive Entity
-    List<CommentHiveEntity> commentHiveEntities =
-        data.comments.map((e) => e.convertToCommentHiveEntity()).toList();
+    final amityComments = await _saveDetailsToDb(data);
 
-    //Convert to User Hive Entity
-    List<UserHiveEntity> userHiveEntities =
-        data.users.map((e) => e.convertToUserHiveEntity()).toList();
+    //Update the post entity
+    postDbAdapter.updateComment(
+        request.referenceId, amityComments[0].commentId!);
 
-    //Convert to File Hive Entity
-    List<FileHiveEntity> fileHiveEntities =
-        data.files.map((e) => e.convertToFileHiveEntity()).toList();
-
-    //Save the Comment Entity
-    for (var e in commentHiveEntities) {
-      await commentDbAdapter.saveCommentEntity(e);
-    }
-
-    //Save the User Entity
-    for (var e in userHiveEntities) {
-      await userDbAdapter.saveUserEntity(e);
-    }
-
-    //Save the File Entity
-    for (var e in fileHiveEntities) {
-      await fileDbAdapter.saveFileEntity(e);
-    }
-
-    return Future.value(commentHiveEntities[0].convertToAmityComment());
+    return Future.value(amityComments[0]);
   }
 
   @override
   Future<List<AmityComment>> queryComment(GetCommentRequest request) async {
     final data = await commentApiInterface.queryComment(request);
 
-    //Convert to Comment Hive Entity
-    List<CommentHiveEntity> commentHiveEntities =
-        data.comments.map((e) => e.convertToCommentHiveEntity()).toList();
+    final amityComments = await _saveDetailsToDb(data);
+
+    return Future.value(amityComments);
+  }
+
+  @override
+  Future<bool> deleteComment(String commentId) async {
+    final data = await commentApiInterface.deleteComment(commentId);
+    return data;
+  }
+
+  @override
+  Future<bool> flagComment(String commentId) async {
+    final data = await commentApiInterface.flagComment(commentId);
+    return data;
+  }
+
+  @override
+  Future<AmityComment> getComment(String commentId) async {
+    final data = await commentApiInterface.getComment(commentId);
+
+    final amityComments = await _saveDetailsToDb(data);
+
+    return Future.value(amityComments[0]);
+  }
+
+  @override
+  Future<bool> isCommentFlagByMe(String commentId) async {
+    final data = await commentApiInterface.isCommentFlagByMe(commentId);
+    return data;
+  }
+
+  @override
+  Future<bool> unflagComment(String commentId) async {
+    final data = await commentApiInterface.unflagComment(commentId);
+    return data;
+  }
+
+  @override
+  Future<AmityComment> updateComment(
+      String commentId, CreateCommentRequest request) async {
+    final data = await commentApiInterface.updateComment(commentId, request);
+
+    final amityComments = await _saveDetailsToDb(data);
+
+    return Future.value(amityComments[0]);
+  }
+
+  Future<List<AmityComment>> _saveDetailsToDb(CreatePostResponse data) async {
+    //Convert to File Hive Entity
+    List<FileHiveEntity> fileHiveEntities =
+        data.files.map((e) => e.convertToFileHiveEntity()).toList();
 
     //Convert to User Hive Entity
     List<UserHiveEntity> userHiveEntities =
         data.users.map((e) => e.convertToUserHiveEntity()).toList();
 
-    //Convert to File Hive Entity
-    List<FileHiveEntity> fileHiveEntities =
-        data.files.map((e) => e.convertToFileHiveEntity()).toList();
+    //Convert to Comment Hive Entity
+    List<CommentHiveEntity> commentHiveEntities =
+        data.comments.map((e) => e.convertToCommentHiveEntity()).toList();
 
-    //Save the Comment Entity
-    for (var e in commentHiveEntities) {
-      await commentDbAdapter.saveCommentEntity(e);
+    //Save the File Entity
+    for (var e in fileHiveEntities) {
+      await fileDbAdapter.saveFileEntity(e);
     }
 
     //Save the User Entity
@@ -81,18 +111,11 @@ class CommentRepoImpl extends CommentRepo {
       await userDbAdapter.saveUserEntity(e);
     }
 
-    //Save the File Entity
-    for (var e in fileHiveEntities) {
-      await fileDbAdapter.saveFileEntity(e);
+    //Save the Comment Entity
+    for (var e in commentHiveEntities) {
+      await commentDbAdapter.saveCommentEntity(e);
     }
 
-    return Future.value(
-        commentHiveEntities.map((e) => e.convertToAmityComment()).toList());
-  }
-
-  @override
-  Future<bool> deleteComment(String commentId) async {
-    final data = await commentApiInterface.deleteComment(commentId);
-    return data;
+    return commentHiveEntities.map((e) => e.convertToAmityComment()).toList();
   }
 }

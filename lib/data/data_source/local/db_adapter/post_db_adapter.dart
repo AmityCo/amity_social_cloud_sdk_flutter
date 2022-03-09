@@ -4,4 +4,8 @@ abstract class PostDbAdapter {
   Future savePostEntity(PostHiveEntity data);
   Future deletePostEntity(PostHiveEntity data);
   PostHiveEntity getPostEntity(String postId);
+
+  Stream<PostHiveEntity> listenPostEntity(String postId);
+
+  Future updateComment(String postId, String commentId);
 }

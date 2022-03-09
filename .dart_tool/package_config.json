@@ -404,6 +404,12 @@
       "languageVersion": "2.14"
     },
     {
+      "name": "rxdart",
+      "rootUri": "file:///Users/saurabhkumar/sorbh/flutter/.pub-cache/hosted/pub.dartlang.org/rxdart-0.27.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "shelf",
       "rootUri": "file:///Users/saurabhkumar/sorbh/flutter/.pub-cache/hosted/pub.dartlang.org/shelf-1.2.0",
       "packageUri": "lib/",
@@ -530,7 +536,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2022-03-08T17:49:17.278180Z",
+  "generated": "2022-03-09T07:02:22.287318Z",
   "generator": "pub",
   "generatorVersion": "2.16.0"
 }

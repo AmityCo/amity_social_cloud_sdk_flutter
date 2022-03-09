@@ -1,5 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/domain/domain.dart';
+import 'package:amity_sdk/domain/model/amity_file.dart';
 
 class FileComposerUsecase extends UseCase<AmityFile, AmityFile> {
   @override

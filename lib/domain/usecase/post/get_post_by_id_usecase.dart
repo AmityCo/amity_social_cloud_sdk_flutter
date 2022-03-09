@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:amity_sdk/core/usercase/usecase.dart';
 import 'package:amity_sdk/domain/domain.dart';
 
@@ -19,6 +21,15 @@ class GetPostByIdUseCase extends UseCase<AmityPost, String> {
 
   @override
   Stream<AmityPost> listen(String params) {
-    throw UnimplementedError();
+    //1. Listen to Amity post stream
+    //2. compose the Amity post
+    StreamController<AmityPost> controller = StreamController<AmityPost>();
+
+    postRepo.getPostByIdStream(params).listen((event) async {
+      final amityComposedPost = await postComposerUsecase.get(event);
+      controller.add(amityComposedPost);
+    });
+
+    return controller.stream;
   }
 }

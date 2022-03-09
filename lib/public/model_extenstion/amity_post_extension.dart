@@ -4,7 +4,6 @@ import 'package:amity_sdk/domain/domain.dart';
 import 'package:amity_sdk/public/query_builder/comment/comment_create_query_builder.dart';
 import 'package:amity_sdk/public/query_builder/post/post_flag_query_builder.dart';
 import 'package:amity_sdk/public/query_builder/post/post_update_query_builder.dart';
-import 'package:amity_sdk/public/query_builder/reaction/add_reaction_query_builder.dart';
 import 'package:amity_sdk/public/query_builder/reaction/reaction_query_builder.dart';
 
 extension AmityPostExtension on AmityPost {

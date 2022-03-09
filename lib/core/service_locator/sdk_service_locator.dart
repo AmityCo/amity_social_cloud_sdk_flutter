@@ -1,4 +1,6 @@
 import 'package:amity_sdk/data/data.dart';
+import 'package:amity_sdk/domain/composer_usecase/community_composer_usecase.dart';
+import 'package:amity_sdk/domain/composer_usecase/user_compose_usecase.dart';
 import 'package:amity_sdk/domain/domain.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:get_it/get_it.dart';
@@ -66,6 +68,9 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<CommentDbAdapter>(
         () => CommentDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<CommunityDbAdapter>(
+        () => CommunityDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
 
     ///----------------------------------- Domain Layer -----------------------------------///
 
@@ -98,26 +103,21 @@ class SdkServiceLocator {
           fileDbAdapter: serviceLocator(),
         ));
     serviceLocator.registerLazySingleton<CommentRepo>(() => CommentRepoImpl(
-          commentDbAdapter: serviceLocator(),
-          commentApiInterface: serviceLocator(),
-          fileDbAdapter: serviceLocator(),
-          userDbAdapter: serviceLocator(),
-          postDbAdapter: serviceLocator(),
-        ));
+        commentDbAdapter: serviceLocator(),
+        commentApiInterface: serviceLocator(),
+        fileDbAdapter: serviceLocator(),
+        userDbAdapter: serviceLocator(),
+        postDbAdapter: serviceLocator()));
     serviceLocator.registerLazySingleton<FileRepo>(() => FileRepoImpl(
-          fileDbAdapter: serviceLocator(),
-          fileApiInterface: serviceLocator(),
-        ));
-    serviceLocator.registerLazySingleton<ReactionRepo>(() => ReactionRepoImpl(
-          reactionApiInterface: serviceLocator(),
-        ));
+        fileDbAdapter: serviceLocator(), fileApiInterface: serviceLocator()));
+    serviceLocator.registerLazySingleton<ReactionRepo>(
+        () => ReactionRepoImpl(reactionApiInterface: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityRepo>(() => CommunityRepoImpl(
-          communityApiInterface: serviceLocator(),
-          communityDbAdapter: serviceLocator(),
-          commentDbAdapter: serviceLocator(),
-          userDbAdapter: serviceLocator(),
-          fileDbAdapter: serviceLocator(),
-        ));
+        communityApiInterface: serviceLocator(),
+        communityDbAdapter: serviceLocator(),
+        commentDbAdapter: serviceLocator(),
+        userDbAdapter: serviceLocator(),
+        fileDbAdapter: serviceLocator()));
 
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
@@ -168,6 +168,16 @@ class SdkServiceLocator {
             followRepo: serviceLocator(),
             amityFollowRelationshipComposerUsecase: serviceLocator()));
 
+    serviceLocator.registerLazySingleton<CommunityComposerUsecase>(() =>
+        CommunityComposerUsecase(
+            communityRepo: serviceLocator(),
+            userRepo: serviceLocator(),
+            userComposerUsecase: serviceLocator(),
+            fileRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityCreateUsecase>(() =>
+        CommunityCreateUsecase(
+            communityRepo: serviceLocator(),
+            communityComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<PostComposerUsecase>(() =>
         PostComposerUsecase(
             userRepo: serviceLocator(),
@@ -178,6 +188,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<PostCreateUsecase>(() =>
         PostCreateUsecase(
             postRepo: serviceLocator(), postComposerUsecase: serviceLocator()));
+
     serviceLocator.registerLazySingleton<UserComposerUsecase>(
         () => UserComposerUsecase(fileRepo: serviceLocator()));
 
