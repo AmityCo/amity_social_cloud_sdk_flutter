@@ -29,6 +29,7 @@ class AmityCoreClient {
   }
 
   static UserRepository newUserRepository() => serviceLocator<UserRepository>();
+  static FileRepository newFileRepository() => serviceLocator<FileRepository>();
 }
 
 class AmityCoreClientOption {

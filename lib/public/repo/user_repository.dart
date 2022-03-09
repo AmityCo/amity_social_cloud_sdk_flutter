@@ -1,7 +1,8 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/public/public.dart';
 import 'package:amity_sdk/domain/domain.dart';
+import 'package:amity_sdk/public/public.dart';
 import 'package:amity_sdk/public/query_builder/amity_user_search_display_name_query_builder.dart';
+import 'package:amity_sdk/public/repo/sub_set/sub_set.dart';
 
 class UserRepository {
   AmityAllUserQueryBuilder getUsers() {

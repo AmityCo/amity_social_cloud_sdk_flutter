@@ -4,4 +4,5 @@ export 'comment_repo.dart';
 export 'file_repo.dart';
 export 'follow_repo.dart';
 export 'post_repo.dart';
+export 'reaction_repo.dart';
 export 'user_repo.dart';

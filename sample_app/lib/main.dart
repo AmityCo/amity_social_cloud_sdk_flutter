@@ -1,10 +1,13 @@
 // import 'package:amity_sdk/flutter_application_1.dart';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/core/error/amity_exception.dart';
+import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -305,6 +308,39 @@ class _MyAppState extends State<MyApp> {
                   });
                 },
                 child: const Text('Get Comment For Post'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  final ImagePicker _picker = ImagePicker();
+                  // Pick an image
+                  final XFile? image =
+                      await _picker.pickImage(source: ImageSource.gallery);
+                  AmityCoreClient.newFileRepository()
+                      .image(File(image!.path))
+                      .upload()
+                      .then((value) {
+                    print('>>>>>' + value.toString());
+                    print('Creating Image Post');
+                    if (value is AmityUploadComplete) {
+                      AmitySocialClient.newPostRepository()
+                          .createPost()
+                          .targetUser('victimiOS')
+                          .image([
+                            (value as AmityUploadComplete).getFile as AmityImage
+                          ])
+                          .post()
+                          .then((value) {
+                            log('>>>>> ' + value.toString());
+                          })
+                          .onError<AmityException>((error, stackTrace) {
+                            log('>>>>>' + error.message.toString());
+                          });
+                    }
+                  }).onError<AmityException>((error, stackTrace) {
+                    log('>>>>>' + error.message.toString());
+                  });
+                },
+                child: const Text('Upload Image'),
               ),
             ],
           ),

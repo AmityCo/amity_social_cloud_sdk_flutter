@@ -9,4 +9,15 @@ class FileHiveEntity {
   String? type;
   DateTime? createdAt;
   DateTime? updatedAt;
+
+  //Attribute
+  String? name;
+  String? ext;
+  String? size;
+  String? mimeType;
+
+  //Metadata
+  int? height;
+  int? width;
+  bool? isFull;
 }

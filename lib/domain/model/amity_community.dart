@@ -1,5 +1,5 @@
+import 'package:amity_sdk/domain/domain.dart';
 import 'package:amity_sdk/domain/model/amity_community_category.dart';
-import 'package:amity_sdk/domain/model/amity_image.dart';
 import 'package:amity_sdk/domain/model/amity_tag.dart';
 import 'package:amity_sdk/domain/model/amity_user.dart';
 
