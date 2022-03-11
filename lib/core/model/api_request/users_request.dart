@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'core/option_request.dart';
+
 UsersRequest usersRequestFromJson(String str) =>
     UsersRequest.fromJson(json.decode(str));
 
@@ -20,13 +22,13 @@ class UsersRequest {
   String? keyword;
   String? filter;
   String? sortBy;
-  Options? options;
+  OptionsRequest? options;
 
   factory UsersRequest.fromJson(Map<String, dynamic> json) => UsersRequest(
         keyword: json["keyword"],
         filter: json["filter"],
         sortBy: json["sortBy"],
-        options: Options.fromJson(json["options"]),
+        options: OptionsRequest.fromJson(json["options"]),
       );
 
   Map<String, dynamic> toJson() {
@@ -42,24 +44,4 @@ class UsersRequest {
   String toString() {
     return usersRequestToJson(this);
   }
-}
-
-class Options {
-  Options({
-    this.limit,
-    this.token,
-  });
-
-  int? limit;
-  String? token;
-
-  factory Options.fromJson(Map<String, dynamic> json) => Options(
-        limit: json["limit"],
-        token: json["token"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "limit": limit,
-        "token": token,
-      };
 }
