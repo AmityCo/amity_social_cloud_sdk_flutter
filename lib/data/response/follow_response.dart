@@ -22,7 +22,7 @@ class FollowResponse {
   final List<Follow> follows;
   final List<UserResponse>? users;
   final List<FileResponse>? files;
-  final Paging? paging;
+  final PagingResponse? paging;
 
   factory FollowResponse.fromJson(Map<String, dynamic> json) => FollowResponse(
         follows:
@@ -35,7 +35,9 @@ class FollowResponse {
             ? null
             : List<FileResponse>.from(
                 json["files"].map((x) => FileResponse.fromJson(x))),
-        paging: json["paging"] == null ? null : Paging.fromJson(json["paging"]),
+        paging: json["paging"] == null
+            ? null
+            : PagingResponse.fromJson(json["paging"]),
       );
 
   Map<String, dynamic> toJson() => {

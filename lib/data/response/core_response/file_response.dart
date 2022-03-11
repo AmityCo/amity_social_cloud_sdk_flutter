@@ -77,9 +77,9 @@ class AttributesMetadata {
 
   final ExifClass? exif;
   final ExifClass? gps;
-  final int height;
-  final int width;
-  final bool isFull;
+  final int? height;
+  final int? width;
+  final bool? isFull;
 
   factory AttributesMetadata.fromJson(Map<String, dynamic> json) =>
       AttributesMetadata(

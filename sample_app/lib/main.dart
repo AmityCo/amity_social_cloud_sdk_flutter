@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/core/error/amity_exception.dart';
+import 'package:amity_sdk/core/utils/paging_controller.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 
@@ -317,10 +318,40 @@ class _MyAppState extends State<MyApp> {
                 },
                 child: const Text('Get Comment For Post'),
               ),
+              TextButton(
+                onPressed: () async {
+                  _controller = PagingController(
+                    pageFuture: (token) => AmitySocialClient.newFeedRepository()
+                        .getGlobalFeed()
+                        .getPagingData(token: token, limit: 12),
+                    pageSize: 12,
+                  )..addListener(() {
+                      print(_controller.loadedItems.toString());
+                    });
+                  _controller.fetchNextPage();
+                  // AmitySocialClient.newFeedRepository()
+                  //     .getGlobalFeed()
+                  //     .getPagingData()
+                  //     .then((value) {
+                  //   print('>>>>>' + value.toString());
+                  // }).onError<AmityException>((error, stackTrace) {
+                  //   log('>>>>>' + error.message.toString());
+                  // });
+                },
+                child: const Text('Get Global Feed'),
+              ),
+              TextButton(
+                onPressed: () async {
+                  _controller.fetchNextPage();
+                },
+                child: const Text('Load Next page'),
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
+  late PagingController _controller;
 }

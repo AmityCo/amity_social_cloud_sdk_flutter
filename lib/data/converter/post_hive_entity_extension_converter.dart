@@ -20,10 +20,10 @@ extension PostHiveEntityExtension on PostHiveEntity {
     AmityPostData? amityPostData;
     switch (amityDataType) {
       case AmityDataType.TEXT:
-        amityPostData = TextData(postId: postId, text: data!.text!);
+        amityPostData = TextData(postId: postId, text: data!.text);
         break;
       case AmityDataType.IMAGE:
-        amityPostData = ImageData(postId: postId, fileId: data!.fileId!);
+        amityPostData = ImageData(postId: postId, fileId: data!.fileId);
         break;
       case AmityDataType.VIDEO:
         // TODO: Handle this case.
