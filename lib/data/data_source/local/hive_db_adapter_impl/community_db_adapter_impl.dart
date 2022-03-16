@@ -1,5 +1,3 @@
-import 'package:amity_sdk/data/data_source/local/db_adapter/community_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/local/hive_entity/community_hive_entity_9.dart';
 import 'package:amity_sdk/data/data.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -9,7 +7,7 @@ class CommunityDbAdapterImpl extends CommunityDbAdapter {
   CommunityDbAdapterImpl({required this.dbClient});
   late Box box;
   Future<CommunityDbAdapterImpl> init() async {
-    Hive.registerAdapter(CommentHiveEntityAdapter());
+    Hive.registerAdapter(CommunityHiveEntityAdapter());
     box = await Hive.openBox<CommunityHiveEntity>('community_db');
     return this;
   }

@@ -1,3 +1,12 @@
+import 'dart:convert';
+
+List<FileResponse> fileResponseFromJson(String str) => List<FileResponse>.from(
+    json.decode(str).map((x) => FileResponse.fromJson(x)));
+List<FileResponse> fileResponseFromList(List<dynamic> data) =>
+    data.map((e) => FileResponse.fromJson(e)).toList();
+String fileResponseToJson(List<FileResponse> data) =>
+    json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class FileResponse {
   FileResponse({
     required this.fileId,
