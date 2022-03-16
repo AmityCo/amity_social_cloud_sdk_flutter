@@ -1,4 +1,5 @@
-import 'package:amity_sdk/domain/model/amity_image.dart';
+
+import 'package:amity_sdk/domain/domain.dart';
 
 class AmityCommunityCategory {
   String? categoryId;

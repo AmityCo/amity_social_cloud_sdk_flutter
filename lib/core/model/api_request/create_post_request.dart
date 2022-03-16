@@ -60,22 +60,26 @@ class CreatePostRequest {
 
 class Attachment {
   Attachment({
-    required this.fileId,
+    this.fileId,
+    this.videoFileId,
     required this.type,
   });
 
-  final String fileId;
+  final String? fileId;
+  final String? videoFileId;
   final String type;
 
   factory Attachment.fromJson(Map<String, dynamic> json) => Attachment(
         fileId: json["fileId"],
+        videoFileId: json["videoFileId"],
         type: json["type"],
       );
 
   Map<String, dynamic> toJson() => {
         "fileId": fileId,
+        "videoFileId": videoFileId,
         "type": type,
-      };
+      }..removeWhere((key, value) => value == null);
 }
 
 class CreatePostData {

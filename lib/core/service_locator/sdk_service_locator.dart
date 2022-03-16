@@ -1,33 +1,9 @@
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/community_db_adapter_impl.dart';
-import 'package:amity_sdk/data/data_source/remote/api_interface/commnet_api_interface.dart';
-import 'package:amity_sdk/data/data_source/remote/api_interface/global_feed_api_interface.dart';
-import 'package:amity_sdk/data/data_source/remote/api_interface/reaction_api_interface.dart';
-import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/commant_api_interface_impl.dart';
-import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/community_api_interface_impl.dart';
-import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/global_feed_api_interface_impl.dart';
-import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/reaction_api_interface_impl.dart';
-import 'package:amity_sdk/data/repo_impl/feed_repo_impl.dart';
 import 'package:amity_sdk/domain/composer_usecase/community_composer_usecase.dart';
 import 'package:amity_sdk/domain/composer_usecase/user_compose_usecase.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/repo/feed_repo.dart';
-import 'package:amity_sdk/domain/repo/reaction_repo.dart';
-import 'package:amity_sdk/domain/usecase/comment/comment_create_usecase.dart';
-import 'package:amity_sdk/domain/usecase/comment/comment_flag_usecase.dart';
-import 'package:amity_sdk/domain/usecase/comment/comment_query_usecase.dart';
-import 'package:amity_sdk/domain/usecase/comment/comment_unflag_usecase.dart';
-import 'package:amity_sdk/domain/usecase/feed/get_global_feed_usecase.dart';
-import 'package:amity_sdk/domain/usecase/post/post_flag_usecase.dart';
-import 'package:amity_sdk/domain/usecase/post/post_unflag_usecase.dart';
-import 'package:amity_sdk/domain/usecase/reaction/add_reaction_usecase.dart';
-import 'package:amity_sdk/domain/usecase/reaction/remove_reaction_usecase.dart';
 import 'package:amity_sdk/public/public.dart';
-import 'package:amity_sdk/public/repo/comment_repository.dart';
-import 'package:amity_sdk/public/repo/feed_repository.dart';
 import 'package:get_it/get_it.dart';
-
-import '../../domain/usecase/community/community_create_usecase.dart';
 
 final serviceLocator = GetIt.instance; //sl is referred to as Service Locator
 
@@ -64,6 +40,8 @@ class SdkServiceLocator {
         () => CommunityApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<GlobalFeedApiInterface>(
         () => GlobalFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<FileApiInterface>(
+        () => FileApiInterfaceImpl(httpApiClient: serviceLocator()));
 
     // Local Data Source
     //-data_source/local/
@@ -116,8 +94,9 @@ class SdkServiceLocator {
           userDbAdapter: serviceLocator(),
           fileDbAdapter: serviceLocator(),
         ));
-    serviceLocator.registerLazySingleton<AccountRepo>(
-        () => AccountRepoImpl(accountDbAdapter: serviceLocator()));
+    serviceLocator.registerLazySingleton<AccountRepo>(() => AccountRepoImpl(
+          accountDbAdapter: serviceLocator(),
+        ));
     serviceLocator.registerLazySingleton<PostRepo>(() => PostRepoImpl(
           publicPostApiInterface: serviceLocator(),
           postDbAdapter: serviceLocator(),
@@ -131,8 +110,8 @@ class SdkServiceLocator {
         fileDbAdapter: serviceLocator(),
         userDbAdapter: serviceLocator(),
         postDbAdapter: serviceLocator()));
-    serviceLocator.registerLazySingleton<FileRepo>(
-        () => FileRepoImpl(fileDbAdapter: serviceLocator()));
+    serviceLocator.registerLazySingleton<FileRepo>(() => FileRepoImpl(
+        fileDbAdapter: serviceLocator(), fileApiInterface: serviceLocator()));
     serviceLocator.registerLazySingleton<ReactionRepo>(
         () => ReactionRepoImpl(reactionApiInterface: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityRepo>(() => CommunityRepoImpl(
@@ -248,12 +227,22 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<GetGlobalFeedUsecase>(
         () => GetGlobalFeedUsecase(serviceLocator(), serviceLocator()));
 
+    serviceLocator.registerLazySingleton<FileUploadUsecase>(
+        () => FileUploadUsecase(serviceLocator()));
+    serviceLocator.registerLazySingleton<FileImageUploadUsecase>(
+        () => FileImageUploadUsecase(serviceLocator()));
+    serviceLocator.registerLazySingleton<FileAudioUploadUsecase>(
+        () => FileAudioUploadUsecase(serviceLocator()));
+    serviceLocator.registerLazySingleton<FileVideoUploadUsecase>(
+        () => FileVideoUploadUsecase(serviceLocator()));
+
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
     serviceLocator.registerLazySingleton(() => PostRepository());
     serviceLocator.registerLazySingleton(() => UserRepository());
     serviceLocator.registerLazySingleton(() => CommentRepository());
     serviceLocator.registerLazySingleton(() => FeedRepository());
+    serviceLocator.registerLazySingleton(() => FileRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(
