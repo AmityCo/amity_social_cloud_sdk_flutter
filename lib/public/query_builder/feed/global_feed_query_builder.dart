@@ -22,4 +22,18 @@ class AmityGlobalFeedQuery {
 
     return _data;
   }
+
+  Stream<Tuple2<List<AmityPost>, String>> getPagingDataStream(
+      {String? token, int? limit}) {
+    GetGlobalFeedRequest request = GetGlobalFeedRequest();
+
+    if (token != null) {
+      request.token = token;
+    }
+    if (limit != null) {
+      request.limit = limit;
+    }
+
+    return _usecase.listen(request);
+  }
 }

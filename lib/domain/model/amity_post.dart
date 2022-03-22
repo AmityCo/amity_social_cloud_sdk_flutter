@@ -1,7 +1,8 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/domain/domain.dart';
+import 'package:flutter/foundation.dart';
 
-class AmityPost {
+class AmityPost extends ChangeNotifier implements ValueListenable {
   String? postId;
   AmityPostTargetType? targetType;
   AmityPostTarget? target; //composer
@@ -9,17 +10,17 @@ class AmityPost {
   String? postedUserId;
   String? sharedUserId;
   AmityDataType? type;
-  AmityPostData? data; // composer - AmityImage
+  AmityPostData? data; // composer - AmityText,AmityImage,AmityFile,AmityVideo
   Map<String, dynamic>? metadata;
   int? sharedCount;
   bool? isFlaggedByMe;
-  List<String>? myReactions = [];
-  AmityReactionMap? reactions;
-  int? reactionCount;
-  int? commentCount;
+  List<String>? myReactions = []; //notifyListeners
+  AmityReactionMap? reactions; //notifyListeners
+  int? reactionCount; // notifyListeners
+  int? commentCount; //notifyListeners
   int? flagCount;
-  List<String>? latestCommentIds;
-  List<AmityComment>? latestComments; //composer
+  List<String>? latestCommentIds; //notifyListeners
+  List<AmityComment>? latestComments; //composer //notifyListeners
   List<String>? childrenPostIds;
   List<AmityPost>? children; //composer
   AmityUser? postedUser; //composer
@@ -36,6 +37,9 @@ class AmityPost {
   String toString() {
     return 'AmityPost(postId: $postId, parentPostId: $parentPostId, postedUserId: $postedUserId, sharedUserId: $sharedUserId, type: $type, metadata: $metadata, sharedCount: $sharedCount, isFlaggedByMe: $isFlaggedByMe, myReactions: $myReactions, reactions: $reactions, reactionCount: $reactionCount, commentCount: $commentCount, flagCount: $flagCount, latestCommentIds: $latestCommentIds, latestComments: $latestComments, childrenPostIds: $childrenPostIds, children: $children, postedUser: $postedUser, sharedUser: $sharedUser, isDeleted: $isDeleted, feedType: $feedType, mentionees: $mentionees, createdAt: $createdAt, editedAt: $editedAt, updatedAt: $updatedAt, path: $path, type: $type,data: $data,comment: $latestComments,children: $children)';
   }
+
+  @override
+  get value => this;
 }
 
 class AmityPostData {

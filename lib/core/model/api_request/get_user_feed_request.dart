@@ -47,8 +47,11 @@ class GetUserFeedRequest {
         "isDeleted": isDeleted,
         "hasFlag": hasFlag,
         "options": options?.toJson(),
-        "dataTypes": dataTypes == null
-            ? null
-            : List<dynamic>.from(dataTypes!.map((x) => x)),
+        "dataTypes": dataTypes?.join(','),
       }..removeWhere((key, value) => value == null);
+
+  @override
+  int get hashCode =>
+      'USER_FEED_$userId _$sortBy _$isDeleted _${dataTypes?.join(',')}'
+          .hashCode;
 }

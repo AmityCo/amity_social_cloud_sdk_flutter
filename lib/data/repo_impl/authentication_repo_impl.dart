@@ -1,6 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/user_db_adapter.dart';
 import 'package:amity_sdk/domain/model/amity_user.dart';
 import 'package:amity_sdk/domain/repo/authentication_repo.dart';
 

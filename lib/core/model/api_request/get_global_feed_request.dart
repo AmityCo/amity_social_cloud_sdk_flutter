@@ -13,4 +13,7 @@ class GetGlobalFeedRequest extends PaginatedApiRequest {
         'limit': limit,
         'dataTypes': dataTypes?.join(','),
       }..removeWhere((key, value) => value == null);
+
+  @override
+  int get hashCode => 'GLOBAL_FEED_${dataTypes?.join('_')}'.hashCode;
 }

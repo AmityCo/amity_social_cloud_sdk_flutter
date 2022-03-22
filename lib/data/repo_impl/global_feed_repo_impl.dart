@@ -1,31 +1,73 @@
+import 'dart:async';
+
 import 'package:amity_sdk/core/model/api_request/get_global_feed_request.dart';
 import 'package:amity_sdk/core/utils/tuple.dart';
 import 'package:amity_sdk/data/data.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter/feed_db_adapter.dart';
 import 'package:amity_sdk/data/data_source/remote/api_interface/global_feed_api_interface.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
-import 'package:amity_sdk/domain/repo/feed_repo.dart';
+import 'package:amity_sdk/domain/repo/global_feed_repo.dart';
 
-class FeedRepoImpl extends FeedRepo {
+class GlobalFeedRepoImpl extends GlobalFeedRepo {
   final GlobalFeedApiInterface feedApiInterface;
   final PostDbAdapter postDbAdapter;
   final CommentDbAdapter commentDbAdapter;
   final UserDbAdapter userDbAdapter;
   final FileDbAdapter fileDbAdapter;
+  final FeedDbAdapter feedDbAdapter;
 
-  FeedRepoImpl(
+  GlobalFeedRepoImpl(
       {required this.feedApiInterface,
       required this.postDbAdapter,
       required this.commentDbAdapter,
       required this.userDbAdapter,
-      required this.fileDbAdapter});
+      required this.fileDbAdapter,
+      required this.feedDbAdapter});
+
   @override
   Future<Tuple2<List<AmityPost>, String>> getGlobalFeed(
       GetGlobalFeedRequest request) async {
     final data = await feedApiInterface.getGlobalFeed(request);
 
+    //Save the feed sequence in to feed db
+    await feedDbAdapter.updateFeedCollection(data.convertToFeedHiveEntity());
+
     final amitPosts = await _saveDataToDb(data);
 
     return Tuple2(amitPosts, data.paging!.next!);
+  }
+
+  @override
+  Stream<Tuple2<List<AmityPost>, String>> getGlobalFeedStream(
+      GetGlobalFeedRequest request) {
+    StreamController<Tuple2<List<AmityPost>, String>> controller =
+        StreamController<Tuple2<List<AmityPost>, String>>();
+
+    ///1. Get Feed Collection from the DB
+    _getGlobalFeedCollectionFromDb('${request.hashCode}').then((value) {
+      if (value != null) {
+        controller.add(value);
+      }
+    }).onError((error, stackTrace) {});
+
+    /// 2. Make the API request and send the updated data back
+    getGlobalFeed(request).then((value) {
+      if (value != null) {
+        controller.add(value);
+      }
+    });
+
+    ///3. Listen any chagnes in the Amity Post Db and send the update back
+    feedDbAdapter.listenFeedEntity('${request.hashCode}').listen((event) {
+      //there is a change in collection, get the collection from the db and add it to stream
+      _getGlobalFeedCollectionFromDb('${request.hashCode}').then((value) {
+        if (value != null) {
+          controller.add(value);
+        }
+      });
+    });
+
+    return controller.stream;
   }
 
   Future<List<AmityPost>> _saveDataToDb(CreatePostResponse data) async {
@@ -75,5 +117,24 @@ class FeedRepoImpl extends FeedRepo {
     }
 
     return postHiveEntities.map((e) => e.convertToAmityPost()).toList();
+  }
+
+  Future<Tuple2<List<AmityPost>, String>?> _getGlobalFeedCollectionFromDb(
+      String collectionId) async {
+    //Get feed collection from the db
+    final data = feedDbAdapter.getFeedEntity(collectionId);
+
+    if (data != null) {
+      //Get all the post in feed collection from post db
+      final amitPosts = await Stream.fromIterable(data.postIds!)
+          .asyncMap((element) async =>
+              postDbAdapter.getPostEntity(element).convertToAmityPost())
+          .toList();
+
+      //return tuple for token and amitypost list
+      return Tuple2(amitPosts, data.nextToken!);
+    }
+
+    return Future.value();
   }
 }

@@ -1,8 +1,16 @@
 import 'package:amity_sdk/data/data.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter/feed_db_adapter.dart';
+import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/feed_db_adapter_impl.dart';
+import 'package:amity_sdk/data/data_source/remote/api_interface/global_feed_api_interface.dart';
+import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/global_feed_api_interface_impl.dart';
+import 'package:amity_sdk/data/repo_impl/global_feed_repo_impl.dart';
 import 'package:amity_sdk/domain/composer_usecase/community_composer_usecase.dart';
 import 'package:amity_sdk/domain/composer_usecase/user_compose_usecase.dart';
 import 'package:amity_sdk/domain/domain.dart';
+import 'package:amity_sdk/domain/repo/global_feed_repo.dart';
+import 'package:amity_sdk/domain/usecase/feed/get_global_feed_usecase.dart';
 import 'package:amity_sdk/public/public.dart';
+import 'package:amity_sdk/public/repo/feed_repository.dart';
 import 'package:get_it/get_it.dart';
 
 final serviceLocator = GetIt.instance; //sl is referred to as Service Locator
@@ -73,6 +81,9 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<CommunityDbAdapter>(
         () => CommunityDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<FeedDbAdapter>(
+        () => FeedDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
 
     ///----------------------------------- Domain Layer -----------------------------------///
 
@@ -121,14 +132,14 @@ class SdkServiceLocator {
         userDbAdapter: serviceLocator(),
         fileDbAdapter: serviceLocator()));
 
-    serviceLocator.registerLazySingleton<FeedRepo>(
-      () => FeedRepoImpl(
-        commentDbAdapter: serviceLocator(),
-        userDbAdapter: serviceLocator(),
-        fileDbAdapter: serviceLocator(),
-        feedApiInterface: serviceLocator(),
-        postDbAdapter: serviceLocator(),
-      ),
+    serviceLocator.registerLazySingleton<GlobalFeedRepo>(
+      () => GlobalFeedRepoImpl(
+          commentDbAdapter: serviceLocator(),
+          userDbAdapter: serviceLocator(),
+          fileDbAdapter: serviceLocator(),
+          feedApiInterface: serviceLocator(),
+          postDbAdapter: serviceLocator(),
+          feedDbAdapter: serviceLocator()),
     );
 
     //-UserCase

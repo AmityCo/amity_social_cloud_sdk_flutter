@@ -42,4 +42,17 @@ class UserFeedQueryBuilder {
 
     return _data;
   }
+
+  Stream<Tuple2<List<AmityPost>, String>> getPagingDataStream(
+      {String? token, int? limit}) {
+    _request.options = OptionsRequest();
+    if (token != null) {
+      _request.options!.token = token;
+    }
+    if (limit != null) {
+      _request.options!.limit = limit;
+    }
+
+    return _usecase.listen(_request);
+  }
 }
