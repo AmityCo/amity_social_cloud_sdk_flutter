@@ -1,6 +1,6 @@
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/feed_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/feed_db_adapter_impl.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter/feed_paging_db_adapter.dart';
+import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/feed_paging_db_adapter_impl.dart';
 import 'package:amity_sdk/data/data_source/remote/api_interface/global_feed_api_interface.dart';
 import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/global_feed_api_interface_impl.dart';
 import 'package:amity_sdk/data/repo_impl/global_feed_repo_impl.dart';
@@ -81,8 +81,8 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<CommunityDbAdapter>(
         () => CommunityDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
-    serviceLocator.registerSingletonAsync<FeedDbAdapter>(
-        () => FeedDbAdapterImpl(dbClient: serviceLocator()).init(),
+    serviceLocator.registerSingletonAsync<FeedPagingDbAdapter>(
+        () => FeedPagingDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
 
     ///----------------------------------- Domain Layer -----------------------------------///

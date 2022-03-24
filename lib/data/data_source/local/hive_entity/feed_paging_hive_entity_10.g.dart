@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'feed_hive_entity_10.dart';
+part of 'feed_paging_hive_entity_10.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class FeedHiveEntityAdapter extends TypeAdapter<FeedHiveEntity> {
+class FeedPagingHiveEntityAdapter extends TypeAdapter<FeedPagingHiveEntity> {
   @override
   final int typeId = 10;
 
   @override
-  FeedHiveEntity read(BinaryReader reader) {
-    return FeedHiveEntity();
+  FeedPagingHiveEntity read(BinaryReader reader) {
+    return FeedPagingHiveEntity();
   }
 
   @override
-  void write(BinaryWriter writer, FeedHiveEntity obj) {
+  void write(BinaryWriter writer, FeedPagingHiveEntity obj) {
     writer..writeByte(0);
   }
 
@@ -26,7 +26,7 @@ class FeedHiveEntityAdapter extends TypeAdapter<FeedHiveEntity> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FeedHiveEntityAdapter &&
+      other is FeedPagingHiveEntityAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
