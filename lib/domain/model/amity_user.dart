@@ -11,7 +11,7 @@ class AmityUser {
   String? avatarCustomUrl;
   int? flagCount;
   //  HashFlag hashFlag;
-  //  DataClass metadata;
+  Map<String, dynamic>? metadata;
   bool? isGlobalBan;
   DateTime? createdAt;
   DateTime? updatedAt;
@@ -32,6 +32,7 @@ class AmityUser {
       'avatarFileId': avatarFileId,
       'avatarCustomUrl': avatarCustomUrl,
       'flagCount': flagCount,
+      'metadata': metadata,
       'isGlobalBan': isGlobalBan,
       'createdAt': createdAt?.millisecondsSinceEpoch,
       'updatedAt': updatedAt?.millisecondsSinceEpoch,

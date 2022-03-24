@@ -14,7 +14,7 @@ class UserHiveEntity extends HiveObject {
   String? avatarCustomUrl;
   int? flagCount;
   //  HashFlag hashFlag;
-  //  DataClass metadata;
+  Map<String, dynamic>? metadata;
   bool? isGlobalBan;
   DateTime? createdAt;
   DateTime? updatedAt;

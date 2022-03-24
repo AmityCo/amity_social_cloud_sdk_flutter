@@ -38,6 +38,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     userId = 'victimAndroid';
     userDisplayName = 'victimAndroid';
+    final _themeData = Theme.of(context);
     return MaterialApp(
       home: const LoginScreen(),
       theme: ThemeData(
@@ -48,6 +49,12 @@ class _MyAppState extends State<MyApp> {
           ),
           border: UnderlineInputBorder(
             borderSide: BorderSide(color: Colors.grey),
+          ),
+        ),
+        textTheme: _themeData.textTheme.apply(bodyColor: Colors.black),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            primary: Colors.black,
           ),
         ),
         backgroundColor: Colors.white,

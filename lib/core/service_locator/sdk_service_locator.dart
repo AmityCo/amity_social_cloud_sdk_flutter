@@ -81,6 +81,7 @@ class SdkServiceLocator {
               authenticationApiInterface: serviceLocator(),
               accountDbAdapter: serviceLocator(),
               userDbAdapter: serviceLocator(),
+              fileDbAdapter: serviceLocator(),
             ));
     serviceLocator.registerLazySingleton<UserRepo>(() => UserRepoImpl(
           userApiInterface: serviceLocator(),
@@ -124,12 +125,15 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
         GetPostByIdUseCase(
             postRepo: serviceLocator(), postComposerUsecase: serviceLocator()));
-    serviceLocator.registerLazySingleton<LoginUsecase>(
-        () => LoginUsecase(authenticationRepo: serviceLocator()));
-    serviceLocator.registerLazySingleton<GetAllUserUseCase>(
-        () => GetAllUserUseCase(userRepo: serviceLocator()));
-    serviceLocator.registerLazySingleton<GetUserByIdUseCase>(
-        () => GetUserByIdUseCase(userRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<LoginUsecase>(() => LoginUsecase(
+        authenticationRepo: serviceLocator(),
+        userComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<GetAllUserUseCase>(() =>
+        GetAllUserUseCase(
+            userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<GetUserByIdUseCase>(() =>
+        GetUserByIdUseCase(
+            userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<AcceptFollowUsecase>(
         () => AcceptFollowUsecase(followRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<DeclineFollowUsecase>(

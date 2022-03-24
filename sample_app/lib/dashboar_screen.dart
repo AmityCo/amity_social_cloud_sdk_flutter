@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_application_1_example/user_profile_screen.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -11,30 +12,41 @@ class DashboardScreen extends StatefulWidget {
 class _DashboardScreenState extends State<DashboardScreen> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          TextButton(
-            onPressed: () {},
-            child: const Text('User Profile'),
+    return SafeArea(
+      child: Scaffold(
+        body: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const UserProfileScreen(),
+                    ),
+                  );
+                },
+                child: const Text('User Profile'),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text('Global Feed'),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text('My Feed'),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text('User Feed'),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text('Community Feed'),
+              ),
+            ],
           ),
-          TextButton(
-            onPressed: () {},
-            child: const Text('Global Feed'),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: const Text('My Feed'),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: const Text('User Feed'),
-          ),
-          TextButton(
-            onPressed: () {},
-            child: const Text('Community Feed'),
-          ),
-        ],
+        ),
       ),
     );
   }

@@ -9,8 +9,8 @@ class UserResponse {
     this.avatarFileId,
     this.avatarCustomUrl,
     this.flagCount,
-    // required this.hashFlag,
-    // required this.metadata,
+    // this.hashFlag,
+    this.metadata,
     this.isGlobalBan,
     this.createdAt,
     this.updatedAt,
@@ -26,7 +26,7 @@ class UserResponse {
   final String? avatarCustomUrl;
   final int? flagCount;
   // final HashFlag hashFlag;
-  // final DataClass metadata;
+  final Map<String, dynamic>? metadata;
   final bool? isGlobalBan;
   final DateTime? createdAt;
   final DateTime? updatedAt;
@@ -42,7 +42,7 @@ class UserResponse {
         avatarCustomUrl: json["avatarCustomUrl"],
         flagCount: json["flagCount"],
         // hashFlag: HashFlag.fromJson(json["hashFlag"]),
-        // metadata: DataClass.fromJson(json["metadata"]),
+        metadata: json["metadata"],
         isGlobalBan: json["isGlobalBan"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
@@ -62,7 +62,7 @@ class UserResponse {
         "avatarCustomUrl": avatarCustomUrl,
         "flagCount": flagCount,
         // "hashFlag": hashFlag.toJson(),
-        // "metadata": metadata.toJson(),
+        "metadata": metadata,
         "isGlobalBan": isGlobalBan,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),

@@ -9,6 +9,9 @@ extension UserHiveEntityExtension on UserHiveEntity {
       ..userId = userId
       ..displayName = displayName
       ..description = description
-      ..avatarFileId = avatarFileId;
+      ..avatarFileId = avatarFileId
+      ..metadata = metadata
+      ..createdAt = createdAt
+      ..updatedAt = updatedAt;
   }
 }

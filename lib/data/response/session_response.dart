@@ -23,7 +23,7 @@ class SessionResponse {
   final String accessToken;
   final String refreshToken;
   final List<UserResponse> users;
-  final List<dynamic> files;
+  final List<FileResponse> files;
 
   factory SessionResponse.fromJson(Map<String, dynamic> json) =>
       SessionResponse(
@@ -31,21 +31,14 @@ class SessionResponse {
         refreshToken: json["refreshToken"],
         users: List<UserResponse>.from(
             json["users"].map((x) => UserResponse.fromJson(x))),
-        files: List<dynamic>.from(json["files"].map((x) => x)),
+        files: List<FileResponse>.from(
+            json["files"].map((x) => FileResponse.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "accessToken": accessToken,
         "refreshToken": refreshToken,
         "users": List<dynamic>.from(users.map((x) => x.toJson())),
-        "files": List<dynamic>.from(files.map((x) => x)),
+        "files": List<dynamic>.from(files.map((x) => x.toJson())),
       };
-}
-
-class Metadata {
-  Metadata();
-
-  factory Metadata.fromJson(Map<String, dynamic> json) => Metadata();
-
-  Map<String, dynamic> toJson() => {};
 }
