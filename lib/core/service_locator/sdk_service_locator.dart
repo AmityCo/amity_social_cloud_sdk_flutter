@@ -9,7 +9,8 @@ final serviceLocator = GetIt.instance; //sl is referred to as Service Locator
 
 class SdkServiceLocator {
 //Dependency injection
-  static Future<void> initServiceLocator() async {
+  static Future<void> initServiceLocator({bool syc = false}) async {
+    DateTime startTime = DateTime.now();
     print('>>>>>> Init all the dependenciies');
 
     ///----------------------------------- Core Layer -----------------------------------///
@@ -44,7 +45,7 @@ class SdkServiceLocator {
     // Local Data Source
     //-data_source/local/
     serviceLocator
-        .registerSingletonAsync<DBClient>(() => HiveDbClient().init());
+        .registerSingletonAsync<DBClient>(() async => HiveDbClient().init());
 
     //-data_source/local/adapter
     serviceLocator.registerSingletonAsync<AccountDbAdapter>(
@@ -234,5 +235,13 @@ class SdkServiceLocator {
           accountRepo: serviceLocator(),
           amityCoreClientOption: serviceLocator()),
     );
+
+    DateTime endTime = DateTime.now();
+
+    //wait to init all the dependency.
+    if (syc) await serviceLocator.allReady();
+
+    print(
+        '>> Time took to initilize the DI ${endTime.difference(startTime).inMilliseconds} Milis');
   }
 }

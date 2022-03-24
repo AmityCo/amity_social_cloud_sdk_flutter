@@ -3,12 +3,16 @@ import 'package:amity_sdk/domain/domain.dart';
 import 'package:amity_sdk/public/public.dart';
 
 class AmityCoreClient {
-  static void setup({required AmityCoreClientOption option}) async {
+  static Future setup(
+      {required AmityCoreClientOption option,
+      bool sycInitialization = false}) async {
     if (serviceLocator.isRegistered<AmityCoreClientOption>()) {
       serviceLocator.unregister<AmityCoreClientOption>();
     }
     serviceLocator.registerLazySingleton<AmityCoreClientOption>(() => option);
-    await SdkServiceLocator.initServiceLocator();
+    final voidFuture =
+        await SdkServiceLocator.initServiceLocator(syc: sycInitialization);
+    return voidFuture;
   }
 
   static LoginQueryBuilder login(String userId) {

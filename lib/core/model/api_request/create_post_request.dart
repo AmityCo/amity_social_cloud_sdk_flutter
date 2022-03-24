@@ -26,7 +26,7 @@ class CreatePostRequest {
   String? dataType;
   final String targetType;
   final String targetId;
-  Metadata? metadata;
+  PostMetadata? metadata;
   String? postId;
 
   factory CreatePostRequest.fromJson(Map<String, dynamic> json) =>
@@ -37,7 +37,7 @@ class CreatePostRequest {
         dataType: json["dataType"],
         targetType: json["targetType"],
         targetId: json["targetId"],
-        metadata: Metadata.fromJson(json["metadata"]),
+        metadata: PostMetadata.fromJson(json["metadata"]),
         postId: json["postId"],
       );
 
@@ -106,14 +106,14 @@ class CreatePostData {
       }..removeWhere((key, value) => value == null);
 }
 
-class Metadata {
-  Metadata({
+class PostMetadata {
+  PostMetadata({
     required this.anything,
   });
 
   final String anything;
 
-  factory Metadata.fromJson(Map<String, dynamic> json) => Metadata(
+  factory PostMetadata.fromJson(Map<String, dynamic> json) => PostMetadata(
         anything: json["anything"],
       );
 
