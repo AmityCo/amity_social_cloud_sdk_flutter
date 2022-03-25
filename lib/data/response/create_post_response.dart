@@ -25,6 +25,7 @@ class CreatePostResponse {
     required this.feeds,
     required this.videoStreamings,
     required this.polls,
+    required this.paging,
   });
 
   final List<PostResponse> posts;
@@ -38,6 +39,7 @@ class CreatePostResponse {
   final List<FeedResponse> feeds;
   final List<VideoStreamingResponse> videoStreamings;
   final List<PollResponse> polls;
+  final PagingResponse? paging;
 
   factory CreatePostResponse.fromJson(Map<String, dynamic> json) =>
       CreatePostResponse(
@@ -85,6 +87,9 @@ class CreatePostResponse {
             ? []
             : List<PollResponse>.from(
                 json["polls"].map((x) => PollResponse.fromJson(x))),
+        paging: json["paging"] == null
+            ? null
+            : PagingResponse.fromJson(json['paging']),
       );
 
   Map<String, dynamic> toJson() => {
@@ -101,5 +106,6 @@ class CreatePostResponse {
         "videoStreamings":
             List<dynamic>.from(videoStreamings.map((x) => x.toJson())),
         "polls": List<dynamic>.from(polls.map((x) => x.toJson())),
+        "paging": paging,
       };
 }

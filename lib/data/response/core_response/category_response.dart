@@ -1,5 +1,3 @@
-import 'package:amity_sdk/data/data.dart';
-
 class CategoryResponse {
   CategoryResponse({
     required this.categoryId,
@@ -11,13 +9,13 @@ class CategoryResponse {
     required this.updatedAt,
   });
 
-  final String categoryId;
-  final String name;
+  final String? categoryId;
+  final String? name;
   // final DataClass metadata;
-  final String avatarFileId;
-  final bool isDeleted;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final String? avatarFileId;
+  final bool? isDeleted;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   factory CategoryResponse.fromJson(Map<String, dynamic> json) =>
       CategoryResponse(
@@ -26,8 +24,12 @@ class CategoryResponse {
         // metadata: DataClass.fromJson(json["metadata"]),
         avatarFileId: json["avatarFileId"],
         isDeleted: json["isDeleted"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -36,7 +38,7 @@ class CategoryResponse {
         // "metadata": metadata.toJson(),
         "avatarFileId": avatarFileId,
         "isDeleted": isDeleted,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
       };
 }

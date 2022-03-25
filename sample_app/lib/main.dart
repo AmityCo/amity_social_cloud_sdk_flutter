@@ -1,13 +1,11 @@
 // import 'package:amity_sdk/flutter_application_1.dart';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/core/error/amity_exception.dart';
-import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
+import 'package:amity_sdk/core/utils/paging_controller.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +44,7 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child: ListView(
             children: [
+              // ValueListenableBuilder(valueListenable: AmityPost,builder:),
               TextButton(
                 onPressed: () async {
                   AmityCoreClient.login(userId)
@@ -322,41 +321,69 @@ class _MyAppState extends State<MyApp> {
               ),
               TextButton(
                 onPressed: () async {
-                  final ImagePicker _picker = ImagePicker();
-                  // Pick an image
-                  final XFile? image =
-                      await _picker.pickImage(source: ImageSource.gallery);
-                  AmityCoreClient.newFileRepository()
-                      .image(File(image!.path))
-                      .upload()
-                      .then((value) {
-                    print('>>>>>' + value.toString());
-                    print('Creating Image Post');
-                    if (value is AmityUploadComplete) {
-                      AmitySocialClient.newPostRepository()
-                          .createPost()
-                          .targetUser('victimiOS')
-                          .image([
-                            (value as AmityUploadComplete).getFile as AmityImage
-                          ])
-                          .post()
-                          .then((value) {
-                            log('>>>>> ' + value.toString());
-                          })
-                          .onError<AmityException>((error, stackTrace) {
-                            log('>>>>>' + error.message.toString());
-                          });
-                    }
-                  }).onError<AmityException>((error, stackTrace) {
-                    log('>>>>>' + error.message.toString());
-                  });
+                  _controller = PagingController(
+                    pageFuture: (token) => AmitySocialClient.newFeedRepository()
+                        .getGlobalFeed()
+                        .getPagingData(token: token, limit: 15),
+                    pageSize: 15,
+                  )..addListener(() {
+                      print(_controller.loadedItems.toString());
+                    });
+                  _controller.fetchNextPage();
+                  // AmitySocialClient.newFeedRepository()
+                  //     .getGlobalFeed()
+                  //     .getPagingData()
+                  //     .then((value) {
+                  //   print('>>>>>' + value.toString());
+                  // }).onError<AmityException>((error, stackTrace) {
+                  //   log('>>>>>' + error.message.toString());
+                  // });
                 },
-                child: const Text('Upload Image'),
+                child: const Text('Get Global Feed'),
               ),
+              TextButton(
+                onPressed: () async {
+                  _controller.fetchNextPage();
+                },
+                child: const Text('Load Next page'),
+              ),
+
+              //  final ImagePicker _picker = ImagePicker();
+              //     // Pick an image
+              //     final XFile? image =
+              //         await _picker.pickImage(source: ImageSource.gallery);
+              //     AmityCoreClient.newFileRepository()
+              //         .image(File(image!.path))
+              //         .upload()
+              //         .then((value) {
+              //       print('>>>>>' + value.toString());
+              //       print('Creating Image Post');
+              //       if (value is AmityUploadComplete) {
+              //         AmitySocialClient.newPostRepository()
+              //             .createPost()
+              //             .targetUser('victimiOS')
+              //             .image([
+              //               (value as AmityUploadComplete).getFile as AmityImage
+              //             ])
+              //             .post()
+              //             .then((value) {
+              //               log('>>>>> ' + value.toString());
+              //             })
+              //             .onError<AmityException>((error, stackTrace) {
+              //               log('>>>>>' + error.message.toString());
+              //             });
+              //       }
+              //     }).onError<AmityException>((error, stackTrace) {
+              //       log('>>>>>' + error.message.toString());
+              //     });
+              //   },
+              //   child: const Text('Upload Image'),
             ],
           ),
         ),
       ),
     );
   }
+
+  late PagingController _controller;
 }

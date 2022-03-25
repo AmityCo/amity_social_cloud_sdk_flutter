@@ -1,11 +1,11 @@
-class Paging {
-  Paging({
+class PagingResponse {
+  PagingResponse({
     required this.next,
   });
 
   final String? next;
 
-  factory Paging.fromJson(Map<String, dynamic> json) => Paging(
+  factory PagingResponse.fromJson(Map<String, dynamic> json) => PagingResponse(
         next: json["next"],
       );
 

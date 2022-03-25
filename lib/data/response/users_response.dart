@@ -4,8 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:amity_sdk/data/response/core_response/file_response.dart';
-import 'package:amity_sdk/data/response/core_response/pagin_response.dart';
+import 'package:amity_sdk/data/response/core_response/paging_response.dart';
 import 'package:amity_sdk/data/response/response.dart';
 
 UsersResponse usersResponseFromJson(String str) =>
@@ -22,14 +21,14 @@ class UsersResponse {
 
   final List<UserResponse> users;
   final List<FileResponse> files;
-  Paging? paging;
+  PagingResponse? paging;
 
   factory UsersResponse.fromJson(Map<String, dynamic> json) => UsersResponse(
         users: List<UserResponse>.from(
             json["users"].map((x) => UserResponse.fromJson(x))),
         files: List<FileResponse>.from(
             json["files"].map((x) => FileResponse.fromJson(x))),
-        paging: json["paging"] == null ? null : Paging.fromJson(json["paging"]),
+        paging: json["paging"] == null ? null : PagingResponse.fromJson(json["paging"]),
       );
 
   Map<String, dynamic> toJson() => {
