@@ -42,9 +42,9 @@ class VideoFileId {
   });
 
   final String original;
-  final String low;
-  final String medium;
-  final String high;
+  final String? low;
+  final String? medium;
+  final String? high;
 
   factory VideoFileId.fromJson(Map<String, dynamic> json) => VideoFileId(
         original: json["original"],

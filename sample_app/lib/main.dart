@@ -1,6 +1,5 @@
 // import 'package:amity_sdk/flutter_application_1.dart';
 import 'dart:developer';
-import 'dart:io';
 
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
@@ -8,6 +7,10 @@ import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1_example/login_screen.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:amity_sdk/core/error/amity_exception.dart';
+import 'package:amity_sdk/core/utils/paging_controller.dart';
+import 'package:amity_sdk/public/public.dart';
+import 'package:flutter/material.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -389,4 +392,6 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
+
+  late PagingController _controller;
 }

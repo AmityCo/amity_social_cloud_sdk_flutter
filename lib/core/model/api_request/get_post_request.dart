@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:amity_sdk/core/model/api_request/core/option_request.dart';
+
 GetPostRequest getPostRequestFromJson(String str) =>
     GetPostRequest.fromJson(json.decode(str));
 
@@ -13,24 +15,24 @@ class GetPostRequest {
   GetPostRequest({
     required this.targetId,
     required this.targetType,
-    required this.sortBy,
-    required this.hasFlag,
-    required this.isDeleted,
-    required this.options,
-    required this.feedType,
-    required this.dataTypes,
-    required this.matchingOnlyParentPost,
+    this.sortBy,
+    this.hasFlag,
+    this.isDeleted,
+    this.options,
+    this.feedType,
+    this.dataTypes,
+    this.matchingOnlyParentPost,
   });
 
   final String targetId;
   final String targetType;
-  final String sortBy;
-  final dynamic hasFlag;
-  final dynamic isDeleted;
-  final Options options;
-  final String feedType;
-  final List<String> dataTypes;
-  final bool matchingOnlyParentPost;
+  String? sortBy;
+  bool? hasFlag;
+  bool? isDeleted;
+  OptionsRequest? options;
+  String? feedType;
+  List<String>? dataTypes;
+  bool? matchingOnlyParentPost;
 
   factory GetPostRequest.fromJson(Map<String, dynamic> json) => GetPostRequest(
         targetId: json["targetId"],
@@ -38,7 +40,7 @@ class GetPostRequest {
         sortBy: json["sortBy"],
         hasFlag: json["hasFlag"],
         isDeleted: json["isDeleted"],
-        options: Options.fromJson(json["options"]),
+        options: OptionsRequest.fromJson(json["options"]),
         feedType: json["feedType"],
         dataTypes: List<String>.from(json["dataTypes"].map((x) => x)),
         matchingOnlyParentPost: json["matchingOnlyParentPost"],
@@ -50,29 +52,11 @@ class GetPostRequest {
         "sortBy": sortBy,
         "hasFlag": hasFlag,
         "isDeleted": isDeleted,
-        "options": options.toJson(),
+        "options": options == null ? null : options!.toJson(),
         "feedType": feedType,
-        "dataTypes": List<dynamic>.from(dataTypes.map((x) => x)),
+        "dataTypes": dataTypes == null
+            ? null
+            : List<dynamic>.from(dataTypes!.map((x) => x)),
         "matchingOnlyParentPost": matchingOnlyParentPost,
-      };
-}
-
-class Options {
-  Options({
-    required this.limit,
-    required this.token,
-  });
-
-  final int limit;
-  final String token;
-
-  factory Options.fromJson(Map<String, dynamic> json) => Options(
-        limit: json["limit"],
-        token: json["token"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "limit": limit,
-        "token": token,
-      };
+      }..removeWhere((key, value) => value == null);
 }

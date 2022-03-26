@@ -33,7 +33,7 @@ class PostResponse {
     required this.require,
   });
   final String id;
-  final String path;
+  final String? path;
   final String postId;
   String? parentPostId;
   final String postedUserId;

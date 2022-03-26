@@ -27,8 +27,8 @@ class CommunityResponse {
   final String channelId;
   final String userId;
   final String displayName;
-  final String avatarFileId;
-  final String description;
+  final String? avatarFileId;
+  final String? description;
   final bool isOfficial;
   final bool isPublic;
   final bool onlyAdminCanPost;

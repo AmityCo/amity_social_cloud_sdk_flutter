@@ -1,5 +1,3 @@
-import 'package:amity_sdk/data/data.dart';
-
 class VideoStreamingResponse {
   VideoStreamingResponse({
     required this.streamId,
@@ -22,24 +20,24 @@ class VideoStreamingResponse {
     required this.watcherUrl,
   });
 
-  final String streamId;
-  final String userId;
-  final String thumbnailFileId;
-  final String title;
-  final String status;
-  final bool isLive;
-  final bool isDeleted;
-  final String description;
-  final Platform platform;
-  final DateTime startedAt;
-  final DateTime endedAt;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final String? streamId;
+  final String? userId;
+  final String? thumbnailFileId;
+  final String? title;
+  final String? status;
+  final bool? isLive;
+  final bool? isDeleted;
+  final String? description;
+  final Platform? platform;
+  final DateTime? startedAt;
+  final DateTime? endedAt;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
   // final DataClass metadata;
-  final String resolution;
-  final ErUrl streamerUrl;
-  final List<Map<String, Recording>> recordings;
-  final Map<String, ErUrl> watcherUrl;
+  final String? resolution;
+  final ErUrl? streamerUrl;
+  final List<Map<String, Recording>>? recordings;
+  final Map<String, ErUrl>? watcherUrl;
 
   factory VideoStreamingResponse.fromJson(Map<String, dynamic> json) =>
       VideoStreamingResponse(
@@ -75,18 +73,22 @@ class VideoStreamingResponse {
         "isLive": isLive,
         "isDeleted": isDeleted,
         "description": description,
-        "platform": platform.toJson(),
-        "startedAt": startedAt.toIso8601String(),
-        "endedAt": endedAt.toIso8601String(),
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
+        "platform": platform?.toJson(),
+        "startedAt": startedAt?.toIso8601String(),
+        "endedAt": endedAt?.toIso8601String(),
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
         // "metadata": metadata.toJson(),
         "resolution": resolution,
-        "streamerUrl": streamerUrl.toJson(),
-        "recordings": List<dynamic>.from(recordings.map((x) => Map.from(x)
-            .map((k, v) => MapEntry<String, dynamic>(k, v.toJson())))),
-        "watcherUrl": Map.from(watcherUrl)
-            .map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
+        "streamerUrl": streamerUrl?.toJson(),
+        "recordings": recordings == null
+            ? null
+            : List<dynamic>.from(recordings!.map((x) => Map.from(x)
+                .map((k, v) => MapEntry<String, dynamic>(k, v.toJson())))),
+        "watcherUrl": watcherUrl == null
+            ? null
+            : Map.from(watcherUrl!)
+                .map((k, v) => MapEntry<String, dynamic>(k, v.toJson())),
       };
 }
 
@@ -118,16 +120,16 @@ class Recording {
     required this.stopTime,
   });
 
-  final String url;
-  final int duration;
-  final int startTime;
-  final int stopTime;
+  final String? url;
+  final double? duration;
+  final double? startTime;
+  final double? stopTime;
 
   factory Recording.fromJson(Map<String, dynamic> json) => Recording(
         url: json["url"],
-        duration: json["duration"],
-        startTime: json["startTime"],
-        stopTime: json["stopTime"],
+        duration: double.parse('${json["duration"]}'),
+        startTime: double.parse('${json["startTime"]}'),
+        stopTime: double.parse('${json["stopTime"]}'),
       );
 
   Map<String, dynamic> toJson() => {
