@@ -358,30 +358,30 @@ class _MyAppState extends State<MyApp> {
                 // Pick an image
                 final XFile? image =
                     await _picker.pickImage(source: ImageSource.gallery);
-                AmityCoreClient.newFileRepository()
-                    .image(File(image!.path))
-                    .upload()
-                    .then((value) {
-                  print('>>>>>' + value.toString());
-                  print('Creating Image Post');
-                  if (value is AmityUploadComplete) {
-                    AmitySocialClient.newPostRepository()
-                        .createPost()
-                        .targetUser('victimiOS')
-                        .image([
-                          (value as AmityUploadComplete).getFile as AmityImage
-                        ])
-                        .post()
-                        .then((value) {
-                          log('>>>>> ' + value.toString());
-                        })
-                        .onError<AmityException>((error, stackTrace) {
-                          log('>>>>>' + error.message.toString());
-                        });
-                  }
-                }).onError<AmityException>((error, stackTrace) {
-                  log('>>>>>' + error.message.toString());
-                });
+                // AmityCoreClient.newFileRepository()
+                //     .image(File(image!.path))
+                //     .upload()
+                //     .then((value) {
+                //   print('>>>>>' + value.toString());
+                //   print('Creating Image Post');
+                //   if (value is AmityUploadComplete) {
+                //     AmitySocialClient.newPostRepository()
+                //         .createPost()
+                //         .targetUser('victimiOS')
+                //         .image([
+                //           (value as AmityUploadComplete).getFile as AmityImage
+                //         ])
+                //         .post()
+                //         .then((value) {
+                //           log('>>>>> ' + value.toString());
+                //         })
+                //         .onError<AmityException>((error, stackTrace) {
+                //           log('>>>>>' + error.message.toString());
+                //         });
+                //   }
+                // }).onError<AmityException>((error, stackTrace) {
+                //   log('>>>>>' + error.message.toString());
+                // });
               },
               child: const Text('Upload Image'),
             ),
