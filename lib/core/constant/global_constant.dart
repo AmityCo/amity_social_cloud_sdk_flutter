@@ -42,7 +42,7 @@ const COMMUNITY_FEED_V3_URL = 'api/v3/me/community-feeds';
 
 const REACTION_V2_URL = 'api/v2/reactions';
 
-const REGISTER_NOTIFICATION_V1_URL = 'api/v1/notification';
-const UNREGISTER_NOTIFICATION_V1_URL = 'api/v1/notification';
+const REGISTER_NOTIFICATION_V1_URL = 'v1/notification';
+const UNREGISTER_NOTIFICATION_V1_URL = 'v1/notification';
 
 

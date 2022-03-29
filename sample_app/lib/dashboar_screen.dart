@@ -1,3 +1,4 @@
+import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_application_1_example/user_profile_screen.dart';
@@ -43,6 +44,18 @@ class _DashboardScreenState extends State<DashboardScreen> {
               TextButton(
                 onPressed: () {},
                 child: const Text('Community Feed'),
+              ),
+              TextButton(
+                onPressed: () {
+                  AmityCoreClient.registerDeviceNotification("blah");
+                },
+                child: const Text('Register notification'),
+              ),
+              TextButton(
+                onPressed: () {
+                  AmityCoreClient.unregisterDeviceNotification();
+                },
+                child: const Text('Unregister notification'),
               ),
             ],
           ),

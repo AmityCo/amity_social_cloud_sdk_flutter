@@ -24,9 +24,11 @@ class AuthenticationRepoImpl extends AuthenticationRepo {
     // final userHiveEntity = data.users[0].convertToUserHiveEntity();
 
     //2. Change remote response to dto
-    final accountHiveEntity = data.convertToAccountHiveEntity();
+    var accountHiveEntity = data.convertToAccountHiveEntity();
     final userHiveEntity = data.users[0].convertToUserHiveEntity();
     final fileHiveEntities = data.files.map((e) => e.convertToFileHiveEntity());
+
+    accountHiveEntity.deviceId = params.deviceId;
 
     //3. Save the dto in the db
     accountDbAdapter.saveAccountEntity(accountHiveEntity);

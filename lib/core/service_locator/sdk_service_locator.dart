@@ -17,6 +17,7 @@ import 'package:amity_sdk/domain/usecase/notification/register_device_notificati
 import 'package:amity_sdk/domain/usecase/notification/unregister_device_notification_usecase.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:amity_sdk/public/repo/feed_repository.dart';
+import 'package:amity_sdk/public/repo/notification_repository.dart';
 import 'package:get_it/get_it.dart';
 
 final serviceLocator = GetIt.instance; //sl is referred to as Service Locator
@@ -57,8 +58,10 @@ class SdkServiceLocator {
         () => GlobalFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<FileApiInterface>(
         () => FileApiInterfaceImpl(httpApiClient: serviceLocator()));
-    serviceLocator.registerLazySingleton<NotificationApiInterface>(
-        () => NotificationApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<NotificationApiInterface>(() =>
+        NotificationApiInterfaceImpl(
+            httpApiClient: serviceLocator(),
+            amityCoreClientOption: serviceLocator()));
 
     // Local Data Source
     //-data_source/local/
@@ -279,6 +282,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => CommentRepository());
     serviceLocator.registerLazySingleton(() => FeedRepository());
     serviceLocator.registerLazySingleton(() => FileRepository());
+    serviceLocator.registerLazySingleton(() => NotificationRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(
