@@ -7,7 +7,7 @@ class AccountDbAdapterImpl extends AccountDbAdapter {
   AccountDbAdapterImpl({required this.dbClient});
   late Box box;
   Future<AccountDbAdapterImpl> init() async {
-    Hive.registerAdapter(AccountHiveEntityAdapter());
+    Hive.registerAdapter(AccountHiveEntityAdapter(), override: true);
     box = await Hive.openBox<AccountHiveEntity>('account_db');
     return this;
   }

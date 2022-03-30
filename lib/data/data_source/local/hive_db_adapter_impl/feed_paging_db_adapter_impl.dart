@@ -9,7 +9,7 @@ class FeedPagingDbAdapterImpl extends FeedPagingDbAdapter {
   FeedPagingDbAdapterImpl({required this.dbClient});
   late Box box;
   Future<FeedPagingDbAdapterImpl> init() async {
-    Hive.registerAdapter(FeedPagingHiveEntityAdapter());
+    Hive.registerAdapter(FeedPagingHiveEntityAdapter(), override: true);
     box = await Hive.openBox<FeedPagingHiveEntity>('feed_db');
     return this;
   }

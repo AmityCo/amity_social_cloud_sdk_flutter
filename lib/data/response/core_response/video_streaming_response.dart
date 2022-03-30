@@ -49,19 +49,34 @@ class VideoStreamingResponse {
         isLive: json["isLive"],
         isDeleted: json["isDeleted"],
         description: json["description"],
-        platform: Platform.fromJson(json["platform"]),
-        startedAt: DateTime.parse(json["startedAt"]),
-        endedAt: DateTime.parse(json["endedAt"]),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        platform: json["platform"] == null
+            ? null
+            : Platform.fromJson(json["platform"]),
+        startedAt: json["startedAt"] == null
+            ? null
+            : DateTime.parse(json["startedAt"]),
+        endedAt:
+            json["endedAt"] == null ? null : DateTime.parse(json["endedAt"]),
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
         // metadata: DataClass.fromJson(json["metadata"]),
         resolution: json["resolution"],
-        streamerUrl: ErUrl.fromJson(json["streamerUrl"]),
-        recordings: List<Map<String, Recording>>.from(json["recordings"].map(
-            (x) => Map.from(x).map((k, v) =>
-                MapEntry<String, Recording>(k, Recording.fromJson(v))))),
-        watcherUrl: Map.from(json["watcherUrl"])
-            .map((k, v) => MapEntry<String, ErUrl>(k, ErUrl.fromJson(v))),
+        streamerUrl: json["platform"] == null
+            ? null
+            : ErUrl.fromJson(json["streamerUrl"]),
+        recordings: json["recordings"] == null
+            ? null
+            : List<Map<String, Recording>>.from(json["recordings"].map((x) =>
+                Map.from(x).map((k, v) =>
+                    MapEntry<String, Recording>(k, Recording.fromJson(v))))),
+        watcherUrl: json["watcherUrl"] == null
+            ? null
+            : Map.from(json["watcherUrl"])
+                .map((k, v) => MapEntry<String, ErUrl>(k, ErUrl.fromJson(v))),
       );
 
   Map<String, dynamic> toJson() => {

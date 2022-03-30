@@ -1,6 +1,4 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/enum/amity_post_target_type.dart';
-import 'package:amity_sdk/core/model/api_request/create_post_request.dart';
 import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
 import 'package:amity_sdk/domain/model/amity_mentionee_target.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
@@ -153,8 +151,8 @@ class AmityImagePostCreator {
         targetType: _targetType, targetId: _targetId, dataType: null);
 
     request.attachments = _images
-        .map((e) => Attachment(
-            fileId: e.getFileId(), type: 'image')) //TODO: Add type here
+        .map((e) =>
+            Attachment(fileId: e.fileId, type: 'image')) //TODO: Add type here
         .toList();
 
     // CreatePostData data = CreatePostData();
@@ -187,8 +185,8 @@ class AmityFilePostCreator {
         targetType: _targetType, targetId: _targetId, dataType: null);
 
     request.attachments = _files
-        .map((e) => Attachment(
-            fileId: e.getFileId(), type: 'file')) //TODO: Add type here
+        .map((e) =>
+            Attachment(fileId: e.fileId, type: 'file')) //TODO: Add type here
         .toList();
 
     // CreatePostData data = CreatePostData();
@@ -222,8 +220,8 @@ class AmityVideoPostCreator {
         targetType: _targetType, targetId: _targetId, dataType: null);
 
     request.attachments = _videos
-        .map((e) => Attachment(
-            fileId: e.getFileId(), type: 'video')) //TODO: Add type here
+        .map((e) =>
+            Attachment(fileId: e.fileId, type: 'video')) //TODO: Add type here
         .toList();
 
     // CreatePostData data = CreatePostData();

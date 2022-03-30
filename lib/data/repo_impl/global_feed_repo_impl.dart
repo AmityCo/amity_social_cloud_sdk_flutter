@@ -16,13 +16,15 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
   final FileDbAdapter fileDbAdapter;
   final FeedPagingDbAdapter feedDbAdapter;
 
+  final CommunityDbAdapter communityDbAdapter;
   GlobalFeedRepoImpl(
       {required this.feedApiInterface,
       required this.postDbAdapter,
       required this.commentDbAdapter,
       required this.userDbAdapter,
       required this.fileDbAdapter,
-      required this.feedDbAdapter});
+      required this.feedDbAdapter,
+      required this.communityDbAdapter});
 
   @override
   Future<Tuple2<List<AmityPost>, String>> getGlobalFeed(
@@ -76,6 +78,10 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
     List<FileHiveEntity> fileHiveEntities =
         data.files.map((e) => e.convertToFileHiveEntity()).toList();
 
+    //Convert to Community Hive Entity
+    List<CommunityHiveEntity> communityHiveEntities =
+        data.communities.map((e) => e.convertToCommunityHiveEntity()).toList();
+
     //Convert to User Hive Entity
     List<UserHiveEntity> userHiveEntities =
         data.users.map((e) => e.convertToUserHiveEntity()).toList();
@@ -84,16 +90,22 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
     List<CommentHiveEntity> commentHiveEntities =
         data.comments.map((e) => e.convertToCommentHiveEntity()).toList();
 
-    //Convert to Post Hive Entity
+    //Convert Child Post to Post Hive Entity
     List<PostHiveEntity> postChildHiveEntities =
         data.postChildren.map((e) => e.convertToPostHiveEntity()).toList();
 
+    //Conver Post to Post Hive Entity
     List<PostHiveEntity> postHiveEntities =
         data.posts.map((e) => e.convertToPostHiveEntity()).toList();
 
     //Save the File Entity
     for (var e in fileHiveEntities) {
       await fileDbAdapter.saveFileEntity(e);
+    }
+
+    //Save the Community Entity
+    for (var e in communityHiveEntities) {
+      await communityDbAdapter.saveCommunityEntity(e);
     }
 
     //Save Child Post Entity

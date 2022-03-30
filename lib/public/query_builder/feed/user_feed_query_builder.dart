@@ -8,7 +8,7 @@ import 'package:amity_sdk/domain/usecase/feed/get_user_feed_usecase.dart';
 
 class UserFeedQueryBuilder {
   final GetUserFeedUsecase _usecase;
-  late GetUserFeedRequest _request;
+  final GetUserFeedRequest _request;
 
   UserFeedQueryBuilder(this._usecase, String userId)
       : _request = GetUserFeedRequest(userId: userId);
@@ -31,6 +31,7 @@ class UserFeedQueryBuilder {
   Future<Tuple2<List<AmityPost>, String>> getPagingData(
       {String? token, int? limit}) async {
     _request.options = OptionsRequest();
+
     if (token != null) {
       _request.options!.token = token;
     }

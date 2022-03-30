@@ -1,6 +1,4 @@
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/comment_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/local/hive_entity/comment_hive_entity_6.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class CommentDbAdapterImpl extends CommentDbAdapter {
@@ -9,7 +7,7 @@ class CommentDbAdapterImpl extends CommentDbAdapter {
   CommentDbAdapterImpl({required this.dbClient});
   late Box box;
   Future<CommentDbAdapterImpl> init() async {
-    Hive.registerAdapter(CommentHiveEntityAdapter());
+    Hive.registerAdapter(CommentHiveEntityAdapter(), override: true);
     box = await Hive.openBox<CommentHiveEntity>('comment_db');
     return this;
   }

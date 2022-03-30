@@ -9,8 +9,9 @@ class UserComposerUsecase extends UseCase<AmityUser, AmityUser> {
   @override
   Future<AmityUser> get(AmityUser params) async {
     if (params.avatarFileId != null) {
-      params.avatarCustomUrl =
+      final _fileProperties =
           await fileRepo.getFileByIdFromDb(params.avatarFileId!);
+      params.avatarCustomUrl = _fileProperties.fileUrl;
     }
     return params;
   }

@@ -6,7 +6,7 @@ class ReactionDbAdapterImpl extends ReactionDbAdapter {
   final DBClient dbClient;
   late Box box;
   Future<ReactionDbAdapter> init() async {
-    Hive.registerAdapter(ReactionHiveEntityAdapter());
+    Hive.registerAdapter(ReactionHiveEntityAdapter(),override: true);
     box = await Hive.openBox<ReactionHiveEntity>('reaction_db');
     return this;
   }

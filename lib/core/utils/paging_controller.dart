@@ -41,6 +41,8 @@ class PagingController<T> extends ChangeNotifier {
   /// set to true if no data was found
   bool? get noItemsFound => _loadedItems.isEmpty && hasMoreItems == false;
 
+  bool get isFetching => _isFetching;
+
   /// Called to initialize the controller. Same as [reset]
   void init() {
     reset();
@@ -86,6 +88,7 @@ class PagingController<T> extends ChangeNotifier {
         _nextPageToken = data.item2;
         _numberOfLoadedPages++;
       } catch (error, stacktrace) {
+        print(error.toString());
         print(stacktrace.toString());
         _error = error;
         _isFetching = false;

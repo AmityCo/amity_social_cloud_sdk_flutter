@@ -7,6 +7,7 @@ extension PostDataResponseExtension on PostDataResponse {
       ..text = text
       ..fileId = fileId
       ..thumbnailFileId = thumbnailFileId
+      ..videoFileId = videoFileId
       ..streamId = streamId;
   }
 }

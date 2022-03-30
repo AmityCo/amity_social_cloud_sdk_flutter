@@ -8,7 +8,7 @@ part 'comment_hive_entity_6.g.dart';
 class CommentHiveEntity {
   String? id;
   String? path;
-  String? commentId;
+  String commentId = '';
   String? userId;
   String? parentId;
   String? rootId;

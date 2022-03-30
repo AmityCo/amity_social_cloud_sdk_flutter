@@ -1,16 +1,15 @@
 // import 'package:amity_sdk/flutter_application_1.dart';
 import 'dart:developer';
+import 'dart:io';
 
 import 'package:amity_sdk/core/core.dart';
+import 'package:amity_sdk/core/error/amity_exception.dart';
+import 'package:amity_sdk/core/utils/paging_controller.dart';
 import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1_example/login_screen.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:amity_sdk/core/error/amity_exception.dart';
-import 'package:amity_sdk/core/utils/paging_controller.dart';
-import 'package:amity_sdk/public/public.dart';
-import 'package:flutter/material.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,11 +27,6 @@ class _MyAppState extends State<MyApp> {
   @override
   void initState() {
     super.initState();
-    // AmityCoreClient.setup(
-    //     option: AmityCoreClientOption(
-    //         apiKey: 'b3bee858328ef4344a308e4a5a091688d05fdee2be353a2b',
-    //         httpEndpoint: AmityRegionalHttpEndpoint.STAGING,
-    //         showLogs: true));
   }
 
   late String userId;
@@ -55,9 +49,13 @@ class _MyAppState extends State<MyApp> {
           ),
         ),
         textTheme: _themeData.textTheme.apply(bodyColor: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.grey, size: 18),
         textButtonTheme: TextButtonThemeData(
           style: TextButton.styleFrom(
             primary: Colors.black,
+            minimumSize: Size.zero,
+            padding: EdgeInsets.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
           ),
         ),
         backgroundColor: Colors.white,

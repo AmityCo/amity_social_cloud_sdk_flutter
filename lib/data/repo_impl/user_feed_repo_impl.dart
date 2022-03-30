@@ -9,24 +9,24 @@ import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/domain/repo/user_feed_repo.dart';
 
 class UserFeedRepoImpl extends UserFeedRepo {
-  final UserFeedApiInterface _userFeedApiInterface;
+  final UserFeedApiInterface userFeedApiInterface;
   final PostDbAdapter postDbAdapter;
   final CommentDbAdapter commentDbAdapter;
   final UserDbAdapter userDbAdapter;
   final FileDbAdapter fileDbAdapter;
   final FeedPagingDbAdapter feedDbAdapter;
   UserFeedRepoImpl(
-      this._userFeedApiInterface,
-      this.postDbAdapter,
-      this.commentDbAdapter,
-      this.userDbAdapter,
-      this.fileDbAdapter,
-      this.feedDbAdapter);
+      {required this.userFeedApiInterface,
+      required this.postDbAdapter,
+      required this.commentDbAdapter,
+      required this.userDbAdapter,
+      required this.fileDbAdapter,
+      required this.feedDbAdapter});
 
   @override
   Future<Tuple2<List<AmityPost>, String>> getUserFeed(
       GetUserFeedRequest request) async {
-    final data = await _userFeedApiInterface.getUserFeed(request);
+    final data = await userFeedApiInterface.getUserFeed(request);
 
     //Save the feed sequence in to feed db
     await feedDbAdapter.updateFeedCollection(data.convertToFeedHiveEntity());

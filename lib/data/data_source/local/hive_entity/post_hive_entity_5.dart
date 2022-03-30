@@ -7,7 +7,7 @@ part 'post_hive_entity_5.g.dart';
 class PostHiveEntity extends HiveObject {
   String? id;
   String? path;
-  String? postId;
+  String postId = '';
   String? parentPostId;
   String? postedUserId;
   String? sharedUserId;

@@ -18,13 +18,13 @@ class _LoginScreenState extends State<LoginScreen> {
   final _serverUrlTextController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    if (kDebugMode) {
-      _userIdTextController.text = 'victimAndroid';
-      _displayNameTextController.text = 'Victim Android';
-      _apiKeyTextController.text =
-          'b3bee858328ef4344a308e4a5a091688d05fdee2be353a2b';
-      _serverUrlTextController.text = AmityRegionalHttpEndpoint.STAGING.value;
-    }
+    // if (kDebugMode) {
+    _userIdTextController.text = 'victimAndroid';
+    _displayNameTextController.text = 'Victim Android';
+    _apiKeyTextController.text =
+        'b3bee858328ef4344a308e4a5a091688d05fdee2be353a2b';
+    _serverUrlTextController.text = AmityRegionalHttpEndpoint.STAGING.value;
+    // }
 
     ThemeData _themeData = Theme.of(context);
     return SafeArea(
@@ -93,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       .deviceId('sorbh_device_id_88')
                       .submit();
 
-                  Navigator.of(context).push(
+                  Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => const DashboardScreen(),
                     ),
@@ -102,10 +102,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Container(
                   width: 200,
                   alignment: Alignment.center,
-                  child: Text('Login'),
+                  child: const Text('Login'),
                 ),
                 style: TextButton.styleFrom(
-                    backgroundColor: Colors.blue, primary: Colors.white),
+                  backgroundColor: Colors.blue,
+                  primary: Colors.white,
+                  padding: const EdgeInsets.all(12),
+                ),
               )
             ],
           ),

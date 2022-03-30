@@ -10,8 +10,9 @@ class UserFeedApiInterfaceImpl extends UserFeedApiInterface {
   @override
   Future<CreatePostResponse> getUserFeed(GetUserFeedRequest request) async {
     try {
-      final data = await httpApiClient()
-          .get(USER_FEED_V3_URL, queryParameters: request.toJson());
+      final data = await httpApiClient().get(
+          USER_FEED_V3_URL + '/${request.userId}',
+          queryParameters: request.toJson());
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

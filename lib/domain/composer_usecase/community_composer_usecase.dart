@@ -1,7 +1,6 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/domain/composer_usecase/user_compose_usecase.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/repo/community_repo.dart';
 
 class CommunityComposerUsecase extends UseCase<AmityCommunity, AmityCommunity> {
   //TODO: Missing communityUserRepo tags and categoryRepo
@@ -23,9 +22,11 @@ class CommunityComposerUsecase extends UseCase<AmityCommunity, AmityCommunity> {
       params.user = await userRepo.getUserByIdFromDb(params.userId!);
       params.user = await userComposerUsecase.get(params.user!);
     }
-    //TODO: compose file
+
     if (params.avatarFileId != null) {
-      // params.avatarImage = await fileRepo.getFileByIdFromDb(params.avatarFileId!)
+      final _fileProperties =
+          await fileRepo.getFileByIdFromDb(params.avatarFileId!);
+      params.avatarImage = AmityImage(_fileProperties);
     }
     return params;
   }

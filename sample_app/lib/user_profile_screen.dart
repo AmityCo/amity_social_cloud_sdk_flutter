@@ -15,6 +15,7 @@ class _UserProfileScreenState extends State<UserProfileScreen> {
     final amityUser = AmityCoreClient.getCurrentUser();
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(title: const Text('User Profile')),
         body: Center(
           child: Column(
             mainAxisSize: MainAxisSize.min,

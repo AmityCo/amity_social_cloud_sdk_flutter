@@ -1,7 +1,5 @@
 import 'package:amity_sdk/core/model/api_request/upload_file_request.dart';
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/data_source.dart';
-import 'package:amity_sdk/data/response/response.dart';
 import 'package:amity_sdk/domain/model/amity_file/amity_file_info.dart';
 import 'package:amity_sdk/domain/model/amity_file/amity_file_properties.dart';
 import 'package:amity_sdk/domain/model/amity_file/amity_upload_result.dart';
@@ -12,8 +10,9 @@ class FileRepoImpl extends FileRepo {
   final FileApiInterface fileApiInterface;
   FileRepoImpl({required this.fileDbAdapter, required this.fileApiInterface});
   @override
-  Future<String> getFileByIdFromDb(String fileId) {
-    return Future.value(fileDbAdapter.getFileEntity(fileId).fileUrl);
+  Future<AmityFileProperties> getFileByIdFromDb(String fileId) {
+    return Future.value(
+        fileDbAdapter.getFileEntity(fileId).convertToAmityFileProperties());
   }
 
   @override

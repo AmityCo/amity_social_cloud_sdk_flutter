@@ -6,10 +6,12 @@ class AmityCoreClient {
   static Future setup(
       {required AmityCoreClientOption option,
       bool sycInitialization = false}) async {
-    if (serviceLocator.isRegistered<AmityCoreClientOption>()) {
-      serviceLocator.unregister<AmityCoreClientOption>();
-    }
+    // if (serviceLocator.isRegistered<AmityCoreClientOption>()) {
+    //   serviceLocator.unregister<AmityCoreClientOption>();
+    // }
+    await serviceLocator.reset(dispose: true);
     serviceLocator.registerLazySingleton<AmityCoreClientOption>(() => option);
+
     final voidFuture =
         await SdkServiceLocator.initServiceLocator(syc: sycInitialization);
     return voidFuture;

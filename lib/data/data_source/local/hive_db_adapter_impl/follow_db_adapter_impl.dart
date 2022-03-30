@@ -1,6 +1,4 @@
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/follow_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/local/hive_entity/follow_hive_entity_3.dart';
 import 'package:hive/hive.dart';
 
 class FollowDbAdapterImpl extends FollowDbAdapter {
@@ -9,7 +7,7 @@ class FollowDbAdapterImpl extends FollowDbAdapter {
   FollowDbAdapterImpl({required this.dbClient});
   late Box box;
   Future<FollowDbAdapter> init() async {
-    Hive.registerAdapter(FollowHiveEntityAdapter());
+    Hive.registerAdapter(FollowHiveEntityAdapter(), override: true);
     box = await Hive.openBox<FollowHiveEntity>('follow_db');
     return this;
   }
