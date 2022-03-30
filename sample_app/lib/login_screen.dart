@@ -1,6 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/public/public.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1_example/dashboar_screen.dart';
 

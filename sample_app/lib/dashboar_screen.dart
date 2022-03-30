@@ -61,7 +61,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   Navigator.of(context).push(
                     MaterialPageRoute(
                       builder: (context) =>
-                          const UserFeedScreen(userId: 'victimAndroid'),
+                          const UserFeedScreen(userId: 'victimIOS'),
                     ),
                   );
                 },
