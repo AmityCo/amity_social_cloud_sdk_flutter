@@ -25,7 +25,7 @@ class NotificationApiInterfaceImpl extends NotificationApiInterface {
     }
   }
 
-   @override
+  @override
   Future unregisterNotification(UnregisterNotificationRequest request) {
     try {
       return httpApiClient().delete(UNREGISTER_NOTIFICATION_V1_URL,
