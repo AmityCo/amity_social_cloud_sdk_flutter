@@ -1,7 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/model/api_request/get_community_feed_request.dart';
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/remote/api_interface/community_feed_api_interface.dart';
 import 'package:dio/dio.dart';
 
 class CommunityFeedApiInterfaceImpl extends CommunityFeedApiInterface {

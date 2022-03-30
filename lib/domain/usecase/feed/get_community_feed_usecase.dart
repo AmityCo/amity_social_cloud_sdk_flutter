@@ -1,8 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/model/api_request/get_community_feed_request.dart';
-import 'package:amity_sdk/core/utils/tuple.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/repo/community_feed_repo.dart';
 
 class GetCommunityFeedUsecase
     extends UseCase<Tuple2<List<AmityPost>, String>, GetCommunityFeedRequest> {

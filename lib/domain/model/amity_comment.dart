@@ -1,5 +1,4 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/enum/amity_comment_reference_type.dart';
 import 'package:amity_sdk/domain/domain.dart';
 
 class AmityComment {

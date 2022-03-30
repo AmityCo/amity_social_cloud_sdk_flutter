@@ -1,12 +1,11 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/usecase/post/post_update_usecase.dart';
 
 class AmityPostUpdateDataTypeSelector {
-  late PostUpdateUsecase _useCase;
-  late String _postId;
-  late String _userId;
-  late AmityPostTargetType _targetType;
+  late final PostUpdateUsecase _useCase;
+  late final String _postId;
+  late final String _userId;
+  late final AmityPostTargetType _targetType;
   AmityPostUpdateDataTypeSelector(
       {required PostUpdateUsecase useCase,
       required String postId,

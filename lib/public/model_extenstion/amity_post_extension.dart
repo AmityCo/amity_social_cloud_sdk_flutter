@@ -1,5 +1,4 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/enum/reaction_reference_type.dart';
 import 'package:amity_sdk/domain/domain.dart';
 import 'package:amity_sdk/public/query_builder/comment/comment_create_query_builder.dart';
 import 'package:amity_sdk/public/query_builder/post/post_flag_query_builder.dart';

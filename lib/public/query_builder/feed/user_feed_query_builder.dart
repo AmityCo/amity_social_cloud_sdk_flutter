@@ -1,10 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/enum/amity_user_feed_sort_option.dart';
-import 'package:amity_sdk/core/model/api_request/core/option_request.dart';
-import 'package:amity_sdk/core/model/api_request/get_user_feed_request.dart';
-import 'package:amity_sdk/core/utils/tuple.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/usecase/feed/get_user_feed_usecase.dart';
 
 class UserFeedQueryBuilder {
   final GetUserFeedUsecase _usecase;

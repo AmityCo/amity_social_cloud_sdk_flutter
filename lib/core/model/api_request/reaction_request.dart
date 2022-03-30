@@ -2,13 +2,11 @@
 //
 //     final reactionRequest = reactionRequestFromJson(jsonString);
 
-import 'dart:convert';
+// ReactionRequest reactionRequestFromJson(String str) =>
+//     ReactionRequest.fromJson(json.decode(str));
 
-ReactionRequest reactionRequestFromJson(String str) =>
-    ReactionRequest.fromJson(json.decode(str));
-
-String reactionRequestToJson(ReactionRequest data) =>
-    json.encode(data.toJson());
+// String reactionRequestToJson(ReactionRequest data) =>
+//     json.encode(data.toJson());
 
 class ReactionRequest {
   ReactionRequest({

@@ -1,5 +1,6 @@
 export 'comment/comment.dart';
 export 'community/community.dart';
+export 'feed/feed.dart';
 export 'file/file.dart';
 export 'login_usecase.dart';
 export 'post/post.dart';

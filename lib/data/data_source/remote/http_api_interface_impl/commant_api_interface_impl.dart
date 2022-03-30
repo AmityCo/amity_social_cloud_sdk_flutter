@@ -1,8 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/model/api_request/create_comment_request.dart';
-import 'package:amity_sdk/core/model/api_request/get_comment_request.dart';
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/remote/api_interface/commnet_api_interface.dart';
 import 'package:dio/dio.dart';
 
 class CommentApiInterfaceImpl extends CommentApiInterface {

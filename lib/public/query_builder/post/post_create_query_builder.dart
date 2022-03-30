@@ -164,10 +164,10 @@ class AmityImagePostCreator {
 }
 
 class AmityFilePostCreator {
-  late PostCreateUsecase _useCase;
-  late String _targetId;
-  late String _targetType;
-  late List<AmityFile> _files;
+  late final PostCreateUsecase _useCase;
+  late final String _targetId;
+  late final String _targetType;
+  late final List<AmityFile> _files;
   Map<String, dynamic>? _metadata;
   List<AmityMentioneeTarget>? _mentionees;
   AmityFilePostCreator(

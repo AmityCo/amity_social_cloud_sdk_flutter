@@ -77,9 +77,7 @@ class AmityCommentQueryBuilder {
       getCommentRequest.isDeleted = _isDeleted;
     }
 
-    if (_sortOption != null) {
-      getCommentRequest.sortBy = _sortOption.apiKey;
-    }
+    getCommentRequest.sortBy = _sortOption.apiKey;
 
     return _useCase.get(getCommentRequest);
   }

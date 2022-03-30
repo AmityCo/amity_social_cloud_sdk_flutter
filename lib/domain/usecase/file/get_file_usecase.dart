@@ -1,6 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/model/amity_file/amity_file_properties.dart';
 
 class GetFileUserCase extends UseCase<AmityFileProperties, String> {
   final FileRepo fileRepo;

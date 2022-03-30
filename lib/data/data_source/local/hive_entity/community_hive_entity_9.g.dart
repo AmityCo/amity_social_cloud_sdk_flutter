@@ -17,7 +17,7 @@ class CommunityHiveEntityAdapter extends TypeAdapter<CommunityHiveEntity> {
 
   @override
   void write(BinaryWriter writer, CommunityHiveEntity obj) {
-    writer..writeByte(0);
+    writer.writeByte(0);
   }
 
   @override

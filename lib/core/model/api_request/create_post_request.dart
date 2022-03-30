@@ -2,14 +2,6 @@
 //
 //     final createPostRequest = createPostRequestFromJson(jsonString);
 
-import 'dart:convert';
-
-CreatePostRequest createPostRequestFromJson(String str) =>
-    CreatePostRequest.fromJson(json.decode(str));
-
-String createPostRequestToJson(CreatePostRequest data) =>
-    json.encode(data.toJson());
-
 class CreatePostRequest {
   CreatePostRequest({
     this.data,
@@ -52,9 +44,10 @@ class CreatePostRequest {
         "metadata": metadata == null ? null : metadata!.toJson(),
         "postId": postId,
       }..removeWhere((key, value) => value == null);
+
   @override
   String toString() {
-    return createPostRequestToJson(this);
+    return toJson().toString();
   }
 }
 

@@ -2,11 +2,7 @@
 //
 //     final reactionRequest = reactionRequestFromJson(jsonString);
 
-import 'dart:convert';
 import 'dart:io';
-
-String reactionRequestToJson(UploadFileRequest data) =>
-    json.encode(data.toJson());
 
 class UploadFileRequest {
   UploadFileRequest({

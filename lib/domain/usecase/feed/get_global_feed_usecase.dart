@@ -1,10 +1,7 @@
 import 'dart:async';
 
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/model/api_request/get_global_feed_request.dart';
-import 'package:amity_sdk/core/utils/tuple.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/repo/global_feed_repo.dart';
 
 class GetGlobalFeedUsecase
     extends UseCase<Tuple2<List<AmityPost>, String>, GetGlobalFeedRequest> {

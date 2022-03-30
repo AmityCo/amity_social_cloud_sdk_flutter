@@ -1,10 +1,6 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/model/api_request/create_community_request.dart';
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/response/create_community_response.dart';
 import 'package:dio/dio.dart';
-
-import '../api_interface/community_api_interface.dart';
 
 class CommunityApiInterfaceImpl extends CommunityApiInterface {
   CommunityApiInterfaceImpl({required this.httpApiClient});

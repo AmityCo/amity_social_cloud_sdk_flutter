@@ -1,7 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/model/api_request/reaction_request.dart';
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/remote/api_interface/reaction_api_interface.dart';
 import 'package:dio/dio.dart';
 
 class ReactionApiInterfaceImpl extends ReactionApiInterface {

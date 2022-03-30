@@ -2,15 +2,7 @@
 //
 //     final userFeedRequest = userFeedRequestFromJson(jsonString);
 
-import 'dart:convert';
-
 import 'core/option_request.dart';
-
-GetUserFeedRequest userFeedRequestFromJson(String str) =>
-    GetUserFeedRequest.fromJson(json.decode(str));
-
-String userFeedRequestToJson(GetUserFeedRequest data) =>
-    json.encode(data.toJson());
 
 class GetUserFeedRequest {
   GetUserFeedRequest({
@@ -54,4 +46,10 @@ class GetUserFeedRequest {
   int get hashCode =>
       'USER_FEED_$userId _$sortBy _$isDeleted _${dataTypes?.join(',')}'
           .hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    // TODO: implement ==
+    return super == other;
+  }
 }
