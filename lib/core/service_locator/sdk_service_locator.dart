@@ -159,7 +159,6 @@ class SdkServiceLocator {
               feedDbAdapter: serviceLocator(),
               communityDbAdapter: serviceLocator(),
             ));
-
     serviceLocator.registerLazySingleton<UserFeedRepo>(() => UserFeedRepoImpl(
         userFeedApiInterface: serviceLocator(),
         postDbAdapter: serviceLocator(),

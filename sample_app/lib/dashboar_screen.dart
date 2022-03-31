@@ -87,7 +87,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 },
                 child: const Text('Unregister notification'),
               ),
-              const SizedBox(height: 200),
+              const SizedBox(height: 20),
               TextButton(
                 onPressed: () {
                   Navigator.of(context).pushAndRemoveUntil(
