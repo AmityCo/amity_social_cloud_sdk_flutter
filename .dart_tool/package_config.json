@@ -200,6 +200,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "get",
+      "rootUri": "file:///Users/trusteko/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "get_it",
       "rootUri": "file:///Users/trusteko/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/get_it-7.2.0",
       "packageUri": "lib/",
@@ -536,7 +542,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2022-03-31T13:50:01.031146Z",
+  "generated": "2022-03-31T14:29:37.171638Z",
   "generator": "pub",
   "generatorVersion": "2.16.2"
 }
