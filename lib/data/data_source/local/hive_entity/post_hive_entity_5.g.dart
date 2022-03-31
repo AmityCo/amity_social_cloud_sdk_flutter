@@ -17,7 +17,7 @@ class PostHiveEntityAdapter extends TypeAdapter<PostHiveEntity> {
 
   @override
   void write(BinaryWriter writer, PostHiveEntity obj) {
-    writer.writeByte(0);
+    writer..writeByte(0);
   }
 
   @override
