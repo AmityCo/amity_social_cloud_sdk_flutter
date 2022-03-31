@@ -17,7 +17,7 @@ class FollowInfoHiveEntityAdapter extends TypeAdapter<FollowInfoHiveEntity> {
 
   @override
   void write(BinaryWriter writer, FollowInfoHiveEntity obj) {
-    writer.writeByte(0);
+    writer..writeByte(0);
   }
 
   @override
