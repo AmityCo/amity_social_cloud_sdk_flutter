@@ -73,6 +73,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 onPressed: () {},
                 child: const Text('Community Feed'),
               ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  AmityCoreClient.registerDeviceNotification("blah");
+                },
+                child: const Text('Register notification'),
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  AmityCoreClient.unregisterDeviceNotification();
+                },
+                child: const Text('Unregister notification'),
+              ),
               const SizedBox(height: 200),
               TextButton(
                 onPressed: () {
@@ -88,18 +102,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   style: _themeData.textTheme.subtitle1!
                       .copyWith(color: Colors.red),
                 ),
-              ),
-              TextButton(
-                onPressed: () {
-                  AmityCoreClient.registerDeviceNotification("blah");
-                },
-                child: const Text('Register notification'),
-              ),
-              TextButton(
-                onPressed: () {
-                  AmityCoreClient.unregisterDeviceNotification();
-                },
-                child: const Text('Unregister notification'),
               ),
             ],
           ),
