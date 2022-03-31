@@ -118,8 +118,10 @@ class SdkServiceLocator {
         postDbAdapter: serviceLocator()));
     serviceLocator.registerLazySingleton<FileRepo>(() => FileRepoImpl(
         fileDbAdapter: serviceLocator(), fileApiInterface: serviceLocator()));
-    serviceLocator.registerLazySingleton<ReactionRepo>(
-        () => ReactionRepoImpl(reactionApiInterface: serviceLocator()));
+    serviceLocator.registerLazySingleton<ReactionRepo>(() => ReactionRepoImpl(
+        reactionApiInterface: serviceLocator(),
+        commentDbAdapter: serviceLocator(),
+        postDbAdapter: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityRepo>(() => CommunityRepoImpl(
         communityApiInterface: serviceLocator(),
         communityDbAdapter: serviceLocator(),

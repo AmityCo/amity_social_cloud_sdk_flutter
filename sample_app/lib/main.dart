@@ -9,6 +9,7 @@ import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1_example/login_screen.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 void main() {
@@ -36,30 +37,31 @@ class _MyAppState extends State<MyApp> {
     userId = 'victimAndroid';
     userDisplayName = 'victimAndroid';
     final _themeData = Theme.of(context);
-    return MaterialApp(
+    return GetMaterialApp(
       home: const LoginScreen(),
       theme: ThemeData(
-        primarySwatch: Colors.blue,
-        inputDecorationTheme: const InputDecorationTheme(
-          labelStyle: TextStyle(
-            color: Colors.grey,
+          primarySwatch: Colors.blue,
+          inputDecorationTheme: const InputDecorationTheme(
+            labelStyle: TextStyle(
+              color: Colors.grey,
+            ),
+            border: UnderlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey),
+            ),
           ),
-          border: UnderlineInputBorder(
-            borderSide: BorderSide(color: Colors.grey),
+          textTheme: _themeData.textTheme.apply(bodyColor: Colors.black),
+          iconTheme: const IconThemeData(color: Colors.grey, size: 18),
+          textButtonTheme: TextButtonThemeData(
+            style: TextButton.styleFrom(
+              primary: Colors.black,
+              minimumSize: Size.zero,
+              padding: EdgeInsets.zero,
+              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+            ),
           ),
-        ),
-        textTheme: _themeData.textTheme.apply(bodyColor: Colors.black),
-        iconTheme: const IconThemeData(color: Colors.grey, size: 18),
-        textButtonTheme: TextButtonThemeData(
-          style: TextButton.styleFrom(
-            primary: Colors.black,
-            minimumSize: Size.zero,
-            padding: EdgeInsets.zero,
-            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-          ),
-        ),
-        backgroundColor: Colors.white,
-      ),
+          backgroundColor: Colors.white,
+          snackBarTheme:
+              _themeData.snackBarTheme.copyWith(backgroundColor: Colors.white)),
       themeMode: ThemeMode.light,
 
       // onGenerateRoute: (settings){

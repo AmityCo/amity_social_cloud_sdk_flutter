@@ -1,5 +1,4 @@
 import 'package:amity_sdk/data/response/core_response/post_data_response.dart';
-import 'package:amity_sdk/data/response/core_response/reaction_response.dart';
 
 class PostResponse {
   PostResponse({
@@ -49,7 +48,7 @@ class PostResponse {
   final DateTime editedAt;
   final DateTime createdAt;
   final DateTime updatedAt;
-  final ReactionResponse reactions;
+  final Map<String, int>? reactions;
   final int reactionsCount;
   final List<String> myReactions;
   final int commentsCount;
@@ -81,7 +80,7 @@ class PostResponse {
         editedAt: DateTime.parse(json["editedAt"]),
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
-        reactions: ReactionResponse.fromJson(json["reactions"]),
+        reactions: Map.from(json["reactions"]),
         reactionsCount: json["reactionsCount"],
         myReactions: List<String>.from(json["myReactions"].map((x) => x)),
         commentsCount: json["commentsCount"],
@@ -112,7 +111,7 @@ class PostResponse {
         "editedAt": editedAt.toIso8601String(),
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
-        "reactions": reactions.toJson(),
+        "reactions": reactions,
         "reactionsCount": reactionsCount,
         "myReactions": List<dynamic>.from(myReactions.map((x) => x)),
         "commentsCount": commentsCount,

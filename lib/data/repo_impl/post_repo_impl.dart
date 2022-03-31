@@ -124,14 +124,14 @@ class PostRepoImpl extends PostRepo {
       await communityDbAdapter.saveCommunityEntity(e);
     }
 
-    //Save Child Post Entity
-    for (var e in postChildHiveEntities) {
-      await postDbAdapter.savePostEntity(e);
-    }
-
     //Save the User Entity
     for (var e in userHiveEntities) {
       await userDbAdapter.saveUserEntity(e);
+    }
+
+    //Save Child Post Entity
+    for (var e in postChildHiveEntities) {
+      await postDbAdapter.savePostEntity(e);
     }
 
     //Save the Comment Entity
@@ -152,16 +152,12 @@ class PostRepoImpl extends PostRepo {
     StreamController<AmityPost> controller = StreamController<AmityPost>();
     //1. Get Amity Post from local db
     getPostByIdFromDb(postId).then((value) {
-      if (value != null) {
-        controller.add(value);
-      }
+      controller.add(value);
     }).onError((error, stackTrace) {});
 
     // 2. Make the API request and send the updated data back
     getPostById(postId).then((value) {
-      if (value != null) {
-        controller.add(value);
-      }
+      controller.add(value);
     });
 
     //3. Listen any chagnes in the Amity Post Db and send the update back

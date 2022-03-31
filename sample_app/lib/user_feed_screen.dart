@@ -2,7 +2,8 @@ import 'package:amity_sdk/core/utils/paging_controller.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/feed_widget.dart';
+import 'package:flutter_application_1_example/core/widget/feed_widget.dart';
+import 'package:flutter_application_1_example/global_constant.dart';
 
 class UserFeedScreen extends StatefulWidget {
   const UserFeedScreen({Key? key, required this.userId}) : super(key: key);
@@ -22,11 +23,12 @@ class _UserFeedScreenState extends State<UserFeedScreen> {
     _controller = PagingController(
       pageFuture: (token) => AmitySocialClient.newFeedRepository()
           .getUserFeed(widget.userId)
-          .getPagingData(token: token, limit: 10),
-      pageSize: 10,
+          .getPagingData(token: token, limit: GlobalConstant.pageSize),
+      pageSize: GlobalConstant.pageSize,
     )..addListener(
         () {
           setState(() {
+            amityPosts.clear();
             amityPosts.addAll(_controller.loadedItems);
           });
 
@@ -60,13 +62,19 @@ class _UserFeedScreenState extends State<UserFeedScreen> {
       body: Column(
         children: [
           Expanded(
-            child: ListView.builder(
-              controller: scrollcontroller,
-              itemCount: amityPosts.length,
-              itemBuilder: (context, index) {
-                final amityPost = amityPosts[index];
-                return FeedWidget(amityPost: amityPost);
+            child: RefreshIndicator(
+              onRefresh: () async {
+                _controller.reset();
+                _controller.fetchNextPage();
               },
+              child: ListView.builder(
+                controller: scrollcontroller,
+                itemCount: amityPosts.length,
+                itemBuilder: (context, index) {
+                  final amityPost = amityPosts[index];
+                  return FeedWidget(amityPost: amityPost);
+                },
+              ),
             ),
           ),
           if (_controller.isFetching)

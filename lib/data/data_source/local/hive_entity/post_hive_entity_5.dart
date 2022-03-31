@@ -22,7 +22,7 @@ class PostHiveEntity extends HiveObject {
   DateTime? editedAt;
   DateTime? createdAt;
   DateTime? updatedAt;
-  //  Reactions reactions;
+  Map<String, int>? reactions;
   int? reactionsCount;
   List<String>? myReactions;
   int? commentsCount;

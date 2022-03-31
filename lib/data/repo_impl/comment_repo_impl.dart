@@ -18,8 +18,7 @@ class CommentRepoImpl extends CommentRepo {
       required this.fileDbAdapter});
   @override
   Future<AmityComment> getCommentByIdFromDb(String commentId) async {
-    final commentHiveEntity =
-        await commentDbAdapter.getCommentEntity(commentId);
+    final commentHiveEntity = commentDbAdapter.getCommentEntity(commentId);
     return commentHiveEntity.convertToAmityComment();
   }
 

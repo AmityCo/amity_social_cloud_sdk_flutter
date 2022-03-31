@@ -54,9 +54,7 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
 
     /// 2. Make the API request and send the updated data back
     getGlobalFeed(request).then((value) {
-      if (value != null) {
-        controller.add(value);
-      }
+      controller.add(value);
     });
 
     ///3. Listen any chagnes in the Amity Post Db and send the update back

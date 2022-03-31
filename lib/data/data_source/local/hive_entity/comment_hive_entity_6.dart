@@ -21,6 +21,7 @@ class CommentHiveEntity {
   int? flagCount;
   // HashFlag? hashFlag;
   // ReactionResponse? reactions;
+  Map<String, int>? reactions;
   int? reactionsCount;
   List<String>? myReactions;
   bool? isDeleted;

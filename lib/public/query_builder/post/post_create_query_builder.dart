@@ -132,6 +132,7 @@ class AmityImagePostCreator {
   late PostCreateUsecase _useCase;
   late String _targetId;
   late String _targetType;
+  String? _text;
   late List<AmityImage> _images;
   Map<String, dynamic>? _metadata;
   List<AmityMentioneeTarget>? _mentionees;
@@ -146,18 +147,25 @@ class AmityImagePostCreator {
     _images = images;
   }
 
+  AmityImagePostCreator text(String text) {
+    _text = text;
+    return this;
+  }
+
   Future<AmityPost> post() {
     CreatePostRequest request = CreatePostRequest(
         targetType: _targetType, targetId: _targetId, dataType: null);
 
     request.attachments = _images
         .map((e) =>
-            Attachment(fileId: e.fileId, type: 'image')) //TODO: Add type here
+            Attachment(fileId: e.fileId, type: AmityDataType.IMAGE.value))
         .toList();
 
-    // CreatePostData data = CreatePostData();
-    //  data. = _text;
-    // request.data = data;
+    if (_text != null) {
+      CreatePostData data = CreatePostData();
+      data.text = _text;
+      request.data = data;
+    }
 
     return _useCase.get(request);
   }
@@ -167,6 +175,7 @@ class AmityFilePostCreator {
   late final PostCreateUsecase _useCase;
   late final String _targetId;
   late final String _targetType;
+  String? _text;
   late final List<AmityFile> _files;
   Map<String, dynamic>? _metadata;
   List<AmityMentioneeTarget>? _mentionees;
@@ -180,18 +189,25 @@ class AmityFilePostCreator {
         _targetType = targetType,
         _files = files;
 
+  AmityFilePostCreator text(String text) {
+    _text = text;
+    return this;
+  }
+
   Future<AmityPost> post() {
     CreatePostRequest request = CreatePostRequest(
         targetType: _targetType, targetId: _targetId, dataType: null);
 
     request.attachments = _files
-        .map((e) =>
-            Attachment(fileId: e.fileId, type: 'file')) //TODO: Add type here
+        .map(
+            (e) => Attachment(fileId: e.fileId, type: AmityDataType.FILE.value))
         .toList();
 
-    // CreatePostData data = CreatePostData();
-    //  data. = _text;
-    // request.data = data;
+    if (_text != null) {
+      CreatePostData data = CreatePostData();
+      data.text = _text;
+      request.data = data;
+    }
 
     return _useCase.get(request);
   }

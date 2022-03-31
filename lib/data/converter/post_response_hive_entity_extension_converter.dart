@@ -45,8 +45,7 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
         // TODO: Handle this case.
         break;
     }
-    return AmityPost()
-      ..postId = postId
+    return AmityPost(postId: postId)
       ..targetType = amityPostTargetType
       ..target = amityPostTarget
       ..parentPostId = parentPostId
@@ -55,7 +54,7 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
       ..type = amityDataType
       ..data = amityPostData
       ..sharedCount = sharedCount
-      // ..reactions = reactions
+      ..reactions = AmityReactionMap(reactions: reactions)
       ..myReactions = myReactions
       ..reactionCount = reactionsCount
       ..commentCount = commentsCount

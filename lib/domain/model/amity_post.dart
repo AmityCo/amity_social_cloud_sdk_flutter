@@ -1,8 +1,18 @@
 import 'package:amity_sdk/core/core.dart';
+import 'package:amity_sdk/data/data.dart';
 import 'package:amity_sdk/domain/domain.dart';
 import 'package:flutter/foundation.dart';
 
-class AmityPost extends ChangeNotifier implements ValueListenable {
+class AmityPost extends ChangeNotifier implements ValueListenable<AmityPost> {
+  AmityPost({required this.postId}) {
+    serviceLocator<PostDbAdapter>().listenPostEntity(postId!).listen((event) {
+      print('>>>>Amity Post Notify Update');
+      final _updateAmityPost = event.convertToAmityPost();
+      apply(_updateAmityPost);
+      notifyListeners();
+    });
+  }
+
   String? postId;
   AmityPostTargetType? targetType;
   AmityPostTarget? target; //composer
@@ -32,6 +42,17 @@ class AmityPost extends ChangeNotifier implements ValueListenable {
   DateTime? editedAt;
   DateTime? updatedAt;
   String? path;
+
+  void apply(AmityPost amityPost) {
+    //reaction update
+    myReactions = amityPost.myReactions;
+    reactionCount = amityPost.reactionCount;
+    reactions = amityPost.reactions;
+
+    //flag
+    isFlaggedByMe = amityPost.isFlaggedByMe;
+    flagCount = amityPost.flagCount;
+  }
 
   @override
   String toString() {

@@ -1,5 +1,6 @@
 import 'package:amity_sdk/public/amity_core_client.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1_example/create_post_screen.dart';
 import 'package:flutter_application_1_example/global_feed_screen.dart';
 import 'package:flutter_application_1_example/login_screen.dart';
 import 'package:flutter_application_1_example/user_feed_screen.dart';
@@ -31,6 +32,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   );
                 },
                 child: const Text('User Profile'),
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => CreatePostScreen(),
+                    ),
+                  );
+                },
+                child: const Text('Create Post'),
               ),
               const SizedBox(height: 20),
               TextButton(

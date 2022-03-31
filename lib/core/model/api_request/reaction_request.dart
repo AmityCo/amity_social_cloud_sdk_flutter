@@ -8,6 +8,8 @@
 // String reactionRequestToJson(ReactionRequest data) =>
 //     json.encode(data.toJson());
 
+import 'package:amity_sdk/core/core.dart';
+
 class ReactionRequest {
   ReactionRequest({
     required this.referenceId,
@@ -31,4 +33,9 @@ class ReactionRequest {
         "referenceType": referenceType,
         "reactionName": reactionName,
       };
+
+  @override
+  String toString() {
+    return toJson().toJson();
+  }
 }

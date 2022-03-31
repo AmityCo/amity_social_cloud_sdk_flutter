@@ -1,11 +1,6 @@
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/domain/domain.dart';
 
 extension PostResponseExtension on PostResponse {
-  AmityPost convertToAmityPost() {
-    return AmityPost();
-  }
-
   PostHiveEntity convertToPostHiveEntity() {
     return PostHiveEntity()
       ..id = id
@@ -20,7 +15,7 @@ extension PostResponseExtension on PostResponse {
       ..dataType = dataType
       ..data = data.convertToPostDataHiveEntity()
       ..flagCount = flagCount
-      // ..rections =reactions
+      ..reactions = reactions
       ..reactionsCount = reactionsCount
       ..myReactions = myReactions
       ..commentsCount = commentsCount

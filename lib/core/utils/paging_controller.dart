@@ -7,7 +7,7 @@ class PagingController<T> extends ChangeNotifier {
   PagingController({required this.pageFuture, this.pageSize = 10});
 
   List<T> _loadedItems = [];
-  List _appendedItems = [];
+  List<T> _lastLoadedItems = [];
 
   String? _nextPageToken;
   int _numberOfLoadedPages = 0;
@@ -50,12 +50,13 @@ class PagingController<T> extends ChangeNotifier {
 
   /// Resets all the information of the controller
   void reset() {
-    _appendedItems = [];
+    _lastLoadedItems = [];
     _loadedItems = [];
     _numberOfLoadedPages = 0;
     _hasMoreItems = true;
     _error = null;
     _isFetching = false;
+    _nextPageToken = null;
     notifyListeners();
   }
 
@@ -81,9 +82,7 @@ class PagingController<T> extends ChangeNotifier {
 
       List<T>? page;
       try {
-        final data = await pageFuture(
-          _nextPageToken,
-        );
+        final data = await pageFuture(_nextPageToken);
         page = data.item1;
         _nextPageToken = data.item2;
         _numberOfLoadedPages++;
@@ -107,18 +106,22 @@ class PagingController<T> extends ChangeNotifier {
       }
 
       if (length > 0 && length < pageSize) {
-        // This should only happen when loading the last page.
-        // In that case, we append the last page with a few items to make its size
-        // similar to normal pages. This is useful especially with GridView,
-        // because we want the loading to show on a new line on its own
-        _appendedItems = List.generate(pageSize - length, (value) => {});
+        //   // This should only happen when loading the last page.
+        //   // In that case, we append the last page with a few items to make its size
+        //   // similar to normal pages. This is useful especially with GridView,
+        //   // because we want the loading to show on a new line on its own
+        ///Last page condition
+        // _lastLoadedItems = List.generate(pageSize - length, (value) => {});
+        _hasMoreItems = false;
       }
 
       if (length == 0) {
         _hasMoreItems = false;
       } else {
+        _lastLoadedItems = page;
         _loadedItems.addAll(page);
       }
+
       _isFetching = false;
 
       notifyListeners();
