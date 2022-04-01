@@ -1,6 +1,24 @@
 import 'package:amity_sdk/data/data.dart';
 import 'package:amity_sdk/domain/domain.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter/feed_paging_db_adapter.dart';
+import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/feed_paging_db_adapter_impl.dart';
+import 'package:amity_sdk/data/data_source/remote/api_interface/global_feed_api_interface.dart';
+import 'package:amity_sdk/data/data_source/remote/api_interface/notification_api_interface.dart';
+import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/global_feed_api_interface_impl.dart';
+import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/notification_api_interface_impl.dart';
+import 'package:amity_sdk/data/repo_impl/global_feed_repo_impl.dart';
+import 'package:amity_sdk/data/repo_impl/notification_repo_impl.dart';
+import 'package:amity_sdk/domain/composer_usecase/community_composer_usecase.dart';
+import 'package:amity_sdk/domain/composer_usecase/user_compose_usecase.dart';
+import 'package:amity_sdk/domain/domain.dart';
+import 'package:amity_sdk/domain/repo/global_feed_repo.dart';
+import 'package:amity_sdk/domain/repo/notification_repo.dart';
+import 'package:amity_sdk/domain/usecase/feed/get_global_feed_usecase.dart';
+import 'package:amity_sdk/domain/usecase/notification/register_device_notification_usecase.dart';
+import 'package:amity_sdk/domain/usecase/notification/unregister_device_notification_usecase.dart';
 import 'package:amity_sdk/public/public.dart';
+import 'package:amity_sdk/public/repo/feed_repository.dart';
+import 'package:amity_sdk/public/repo/notification_repository.dart';
 import 'package:get_it/get_it.dart';
 
 final serviceLocator = GetIt.instance; //sl is referred to as Service Locator
@@ -44,6 +62,10 @@ class SdkServiceLocator {
         () => UserFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<FileApiInterface>(
         () => FileApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<NotificationApiInterface>(() =>
+        NotificationApiInterfaceImpl(
+            httpApiClient: serviceLocator(),
+            amityCoreClientOption: serviceLocator()));
 
     // Local Data Source
     //-data_source/local/
@@ -139,7 +161,6 @@ class SdkServiceLocator {
               feedDbAdapter: serviceLocator(),
               communityDbAdapter: serviceLocator(),
             ));
-
     serviceLocator.registerLazySingleton<UserFeedRepo>(() => UserFeedRepoImpl(
         userFeedApiInterface: serviceLocator(),
         postDbAdapter: serviceLocator(),
@@ -148,6 +169,10 @@ class SdkServiceLocator {
         fileDbAdapter: serviceLocator(),
         feedDbAdapter: serviceLocator()));
 
+  serviceLocator.registerLazySingleton<NotificationRepo>(
+      () => NotificationRepoImpl(
+          notificationApiInterface: serviceLocator()),
+    );
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
         GetPostByIdUseCase(
@@ -277,6 +302,14 @@ class SdkServiceLocator {
         () => FileAudioUploadUsecase(serviceLocator()));
     serviceLocator.registerLazySingleton<FileVideoUploadUsecase>(
         () => FileVideoUploadUsecase(serviceLocator()));
+    
+    serviceLocator.registerLazySingleton<RegisterDeviceNotificationUseCase>(
+        () => RegisterDeviceNotificationUseCase(
+            notificationRepo: serviceLocator(), accountRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<UnregisterDeviceNotificationUseCase>(
+        () => UnregisterDeviceNotificationUseCase(
+            notificationRepo: serviceLocator(), accountRepo: serviceLocator()));
+
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
@@ -285,6 +318,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => CommentRepository());
     serviceLocator.registerLazySingleton(() => FeedRepository());
     serviceLocator.registerLazySingleton(() => FileRepository());
+    serviceLocator.registerLazySingleton(() => NotificationRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(

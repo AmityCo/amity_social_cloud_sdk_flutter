@@ -1,6 +1,7 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/domain/domain.dart';
 import 'package:amity_sdk/public/public.dart';
+import 'package:amity_sdk/public/repo/notification_repository.dart';
 
 class AmityCoreClient {
   static Future setup(
@@ -31,6 +32,16 @@ class AmityCoreClient {
     }
     throw AmityException(
         message: 'App dont have active user, Please login', code: 401);
+  }
+
+  static Future registerDeviceNotification(String fcmToken) {
+    return serviceLocator<NotificationRepository>()
+        .registerDeviceNotification("FAKE TOKEN!");
+  }
+
+  static Future unregisterDeviceNotification() {
+    return serviceLocator<NotificationRepository>()
+        .unregisterDeviceNotification();
   }
 
   static UserRepository newUserRepository() => serviceLocator<UserRepository>();
