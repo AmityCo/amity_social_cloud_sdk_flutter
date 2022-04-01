@@ -19,7 +19,6 @@ class CommunityFeedQueryBuilder {
   }
 
   CommunityFeedQueryBuilder feedType(AmityFeedType feedType) {
-    // _request.dataTypes = types.map((e) => e.value).toList();
     return this;
   }
 

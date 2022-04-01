@@ -1,4 +1,5 @@
 import 'package:amity_sdk/data/data.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter_repo.dart';
 import 'package:amity_sdk/domain/domain.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:get_it/get_it.dart';
@@ -44,6 +45,8 @@ class SdkServiceLocator {
         () => UserFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<FileApiInterface>(
         () => FileApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityFeedApiInterface>(
+        () => CommunityFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
 
     // Local Data Source
     //-data_source/local/
@@ -78,6 +81,16 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<FeedPagingDbAdapter>(
         () => FeedPagingDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+
+    //Register Db adapter Repo which hold all the Db Adapters
+    serviceLocator.registerLazySingleton<DbAdapterRepo>(() => DbAdapterRepo(
+          postDbAdapter: serviceLocator(),
+          commentDbAdapter: serviceLocator(),
+          communityDbAdapter: serviceLocator(),
+          feedDbAdapter: serviceLocator(),
+          fileDbAdapter: serviceLocator(),
+          userDbAdapter: serviceLocator(),
+        ));
 
     ///----------------------------------- Domain Layer -----------------------------------///
 
@@ -131,22 +144,25 @@ class SdkServiceLocator {
 
     serviceLocator
         .registerLazySingleton<GlobalFeedRepo>(() => GlobalFeedRepoImpl(
-              commentDbAdapter: serviceLocator(),
-              userDbAdapter: serviceLocator(),
-              fileDbAdapter: serviceLocator(),
               feedApiInterface: serviceLocator(),
-              postDbAdapter: serviceLocator(),
-              feedDbAdapter: serviceLocator(),
-              communityDbAdapter: serviceLocator(),
+              dbAdapterRepo: serviceLocator(),
             ));
 
     serviceLocator.registerLazySingleton<UserFeedRepo>(() => UserFeedRepoImpl(
-        userFeedApiInterface: serviceLocator(),
-        postDbAdapter: serviceLocator(),
-        commentDbAdapter: serviceLocator(),
-        userDbAdapter: serviceLocator(),
-        fileDbAdapter: serviceLocator(),
-        feedDbAdapter: serviceLocator()));
+          userFeedApiInterface: serviceLocator(),
+          postDbAdapter: serviceLocator(),
+          commentDbAdapter: serviceLocator(),
+          userDbAdapter: serviceLocator(),
+          fileDbAdapter: serviceLocator(),
+          feedDbAdapter: serviceLocator(),
+        ));
+
+    serviceLocator
+        .registerLazySingleton<CommunityFeedRepo>(() => CommunityFeedRepoImpl(
+              communiytFeedApiInterface: serviceLocator(),
+              postRepo: serviceLocator(),
+              dbAdapterRepo: serviceLocator(),
+            ));
 
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
@@ -277,6 +293,8 @@ class SdkServiceLocator {
         () => FileAudioUploadUsecase(serviceLocator()));
     serviceLocator.registerLazySingleton<FileVideoUploadUsecase>(
         () => FileVideoUploadUsecase(serviceLocator()));
+    serviceLocator.registerLazySingleton<GetCommunityFeedUsecase>(
+        () => GetCommunityFeedUsecase(serviceLocator(), serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo

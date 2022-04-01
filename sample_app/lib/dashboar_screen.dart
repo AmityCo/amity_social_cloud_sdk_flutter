@@ -1,5 +1,6 @@
 import 'package:amity_sdk/public/amity_core_client.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1_example/community_feed_screen.dart';
 import 'package:flutter_application_1_example/create_post_screen.dart';
 import 'package:flutter_application_1_example/global_feed_screen.dart';
 import 'package:flutter_application_1_example/login_screen.dart';
@@ -81,7 +82,14 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               const SizedBox(height: 20),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(
+                      builder: (context) => const CommunityFeedScreen(
+                          communityId: 'f5a99abc1f275df3f4259b6ca0e3cb15'),
+                    ),
+                  );
+                },
                 child: const Text('Community Feed'),
               ),
               const SizedBox(height: 200),

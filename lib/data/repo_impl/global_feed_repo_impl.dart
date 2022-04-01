@@ -3,28 +3,16 @@ import 'dart:async';
 import 'package:amity_sdk/core/model/api_request/get_global_feed_request.dart';
 import 'package:amity_sdk/core/utils/tuple.dart';
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/feed_paging_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/remote/api_interface/global_feed_api_interface.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter_repo.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/domain/repo/global_feed_repo.dart';
 
 class GlobalFeedRepoImpl extends GlobalFeedRepo {
   final GlobalFeedApiInterface feedApiInterface;
-  final PostDbAdapter postDbAdapter;
-  final CommentDbAdapter commentDbAdapter;
-  final UserDbAdapter userDbAdapter;
-  final FileDbAdapter fileDbAdapter;
-  final FeedPagingDbAdapter feedDbAdapter;
 
-  final CommunityDbAdapter communityDbAdapter;
+  final DbAdapterRepo dbAdapterRepo;
   GlobalFeedRepoImpl(
-      {required this.feedApiInterface,
-      required this.postDbAdapter,
-      required this.commentDbAdapter,
-      required this.userDbAdapter,
-      required this.fileDbAdapter,
-      required this.feedDbAdapter,
-      required this.communityDbAdapter});
+      {required this.feedApiInterface, required this.dbAdapterRepo});
 
   @override
   Future<Tuple2<List<AmityPost>, String>> getGlobalFeed(
@@ -32,7 +20,8 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
     final data = await feedApiInterface.getGlobalFeed(request);
 
     //Save the feed sequence in to feed db
-    await feedDbAdapter.updateFeedCollection(data.convertToFeedHiveEntity());
+    await dbAdapterRepo.feedDbAdapter
+        .updateFeedCollection(data.convertToFeedHiveEntity());
 
     final amitPosts = await _saveDataToDb(data);
 
@@ -58,7 +47,9 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
     });
 
     ///3. Listen any chagnes in the Amity Post Db and send the update back
-    feedDbAdapter.listenFeedEntity('${request.hashCode}').listen((event) {
+    dbAdapterRepo.feedDbAdapter
+        .listenFeedEntity('${request.hashCode}')
+        .listen((event) {
       //there is a change in collection, get the collection from the db and add it to stream
       _getGlobalFeedCollectionFromDb('${request.hashCode}').then((value) {
         if (value != null) {
@@ -98,32 +89,32 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
 
     //Save the File Entity
     for (var e in fileHiveEntities) {
-      await fileDbAdapter.saveFileEntity(e);
+      await dbAdapterRepo.fileDbAdapter.saveFileEntity(e);
     }
 
     //Save the Community Entity
     for (var e in communityHiveEntities) {
-      await communityDbAdapter.saveCommunityEntity(e);
+      await dbAdapterRepo.communityDbAdapter.saveCommunityEntity(e);
     }
 
     //Save Child Post Entity
     for (var e in postChildHiveEntities) {
-      await postDbAdapter.savePostEntity(e);
+      await dbAdapterRepo.postDbAdapter.savePostEntity(e);
     }
 
     //Save the User Entity
     for (var e in userHiveEntities) {
-      await userDbAdapter.saveUserEntity(e);
+      await dbAdapterRepo.userDbAdapter.saveUserEntity(e);
     }
 
     //Save the Comment Entity
     for (var e in commentHiveEntities) {
-      await commentDbAdapter.saveCommentEntity(e);
+      await dbAdapterRepo.commentDbAdapter.saveCommentEntity(e);
     }
 
     //Save Post Entity
     for (var e in postHiveEntities) {
-      await postDbAdapter.savePostEntity(e);
+      await dbAdapterRepo.postDbAdapter.savePostEntity(e);
     }
 
     return postHiveEntities.map((e) => e.convertToAmityPost()).toList();
@@ -132,13 +123,14 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
   Future<Tuple2<List<AmityPost>, String>?> _getGlobalFeedCollectionFromDb(
       String collectionId) async {
     //Get feed collection from the db
-    final data = feedDbAdapter.getFeedEntity(collectionId);
+    final data = dbAdapterRepo.feedDbAdapter.getFeedEntity(collectionId);
 
     if (data != null) {
       //Get all the post in feed collection from post db
       final amitPosts = await Stream.fromIterable(data.postIds!)
-          .asyncMap((element) async =>
-              postDbAdapter.getPostEntity(element).convertToAmityPost())
+          .asyncMap((element) async => dbAdapterRepo.postDbAdapter
+              .getPostEntity(element)
+              .convertToAmityPost())
           .toList();
 
       //return tuple for token and amitypost list

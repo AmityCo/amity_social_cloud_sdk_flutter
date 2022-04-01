@@ -39,6 +39,6 @@ const USERS_V4_URL = 'api/v4/users/';
 
 const GLOBAL_FEED_V3_URL = 'api/v4/me/global-feeds';
 const USER_FEED_V3_URL = 'api/v3/user-feeds';
-const COMMUNITY_FEED_V3_URL = 'api/v3/me/community-feeds';
+const COMMUNITY_FEED_V3_URL = 'api/v3/community-feeds';
 
 const REACTION_V2_URL = 'api/v2/reactions';

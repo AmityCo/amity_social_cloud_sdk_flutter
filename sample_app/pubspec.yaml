@@ -25,6 +25,7 @@ dependencies:
   video_player: ^2.3.0
   get: ^4.6.1
   path: ^1.8.0
+  file_picker: ^4.5.1
 
   amity_sdk:
     # When depending on this package from a real application you should use:

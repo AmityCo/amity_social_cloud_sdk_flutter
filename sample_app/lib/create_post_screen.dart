@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:amity_sdk/lib.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1_example/core/widget/common_snackbar.dart';
 import 'package:get/get.dart';
@@ -59,7 +60,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                 final _file = files[index];
                 return TextButton.icon(
                     onPressed: () {},
-                    icon: const Icon(Icons.image),
+                    icon: Icon(isTextPost ? Icons.image : Icons.attach_file),
                     label: Text(basename(_file.path)),
                     style: TextButton.styleFrom(primary: Colors.blue));
               }),
@@ -67,8 +68,16 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             const Spacer(),
             const SizedBox(height: 20),
             TextButton.icon(
-                onPressed: () {
+                onPressed: () async {
                   files.clear();
+
+                  FilePickerResult? result =
+                      await FilePicker.platform.pickFiles(allowMultiple: true);
+
+                  if (result != null) {
+                    files.addAll(
+                        result.paths.map((path) => File(path!)).toList());
+                  }
                   setState(() {
                     isTextPost = false;
                     isImagePost = false;
@@ -84,9 +93,10 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                   files.clear();
                   final ImagePicker _picker = ImagePicker();
                   // Pick an image
-                  final XFile? image =
-                      await _picker.pickImage(source: ImageSource.gallery);
-                  if (image != null) files.add(File(image.path));
+                  final image = await _picker.pickMultiImage();
+                  if (image != null) {
+                    files.addAll(image.map((e) => File(e.path)).toList());
+                  }
 
                   setState(() {
                     isTextPost = false;
@@ -166,6 +176,34 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           .createPost()
           .targetUser(_targetUser)
           .image(_images)
+          .text(_text)
+          .post()
+          .then((value) {
+        CommanSnackbar.showPositiveSnackbar(
+            'Post Created', 'Image Post Created Successfully');
+      }).onError<AmityException>((error, stackTrace) {
+        CommanSnackbar.showPositiveSnackbar('Error', error.toString());
+      });
+    }
+
+    if (isFilePost) {
+      final _targetUser = _targetuserTextEditController.text.trim();
+      final _text = _postTextEditController.text.trim();
+
+      List<AmityFile> _files = [];
+      for (final _file in files) {
+        AmityUploadResult<AmityFile> amityUploadResult =
+            await AmityCoreClient.newFileRepository().file(_file).upload();
+        if (amityUploadResult is AmityUploadComplete) {
+          final amityUploadComplete = amityUploadResult as AmityUploadComplete;
+          _files.add(amityUploadComplete.getFile as AmityFile);
+        }
+      }
+
+      AmitySocialClient.newPostRepository()
+          .createPost()
+          .targetUser(_targetUser)
+          .file(_files)
           .text(_text)
           .post()
           .then((value) {
