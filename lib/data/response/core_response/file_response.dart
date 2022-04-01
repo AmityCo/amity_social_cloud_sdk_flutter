@@ -56,14 +56,16 @@ class Attributes {
   final String ext;
   final String size;
   final String mimeType;
-  final AttributesMetadata metadata;
+  final AttributesMetadata? metadata;
 
   factory Attributes.fromJson(Map<String, dynamic> json) => Attributes(
         name: json["name"],
         ext: json["extension"],
         size: '${json["size"]}',
         mimeType: json["mimeType"],
-        metadata: AttributesMetadata.fromJson(json["metadata"]),
+        metadata: json["metadata"] == null
+            ? null
+            : AttributesMetadata.fromJson(json["metadata"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -71,7 +73,7 @@ class Attributes {
         "extension": ext,
         "size": size,
         "mimeType": mimeType,
-        "metadata": metadata.toJson(),
+        "metadata": metadata?.toJson(),
       };
 }
 

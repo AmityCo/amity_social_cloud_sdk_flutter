@@ -3,6 +3,7 @@ import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1_example/core/utils/extension/date_extension.dart';
+import 'package:flutter_application_1_example/core/widget/user_profile_info_row_widget.dart';
 import 'package:flutter_application_1_example/full_screen_video_player.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -31,6 +32,19 @@ class FeedWidget extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              UserProfileInfoRowWidget(
+                userAvatar: value.postedUser!.avatarCustomUrl,
+                userName: value.postedUser!.displayName!,
+                options: [
+                  IconButton(
+                    onPressed: () {},
+                    icon: const Icon(
+                      Icons.more_vert,
+                      size: 18,
+                    ),
+                  )
+                ],
+              ),
               Row(
                 children: [
                   Text(
@@ -373,16 +387,19 @@ class FeedActionWidget extends StatelessWidget {
                 style: _themeData.textTheme.subtitle1!.copyWith(
                     color: Colors.black54, fontWeight: FontWeight.w600),
               )),
-          TextButton.icon(
-              onPressed: () {},
-              icon: const ImageIcon(
-                  AssetImage('packages/amity_sdk/assets/ic_flag.png')),
-              // icon: Image.asset('packages/amity_sdk/assets/ic_comment.png'),
-              label: Text(
-                'Flag',
-                style: _themeData.textTheme.subtitle1!.copyWith(
-                    color: Colors.black54, fontWeight: FontWeight.w600),
-              ))
+          Visibility(
+            visible: false,
+            child: TextButton.icon(
+                onPressed: () {},
+                icon: const ImageIcon(
+                    AssetImage('packages/amity_sdk/assets/ic_flag.png')),
+                // icon: Image.asset('packages/amity_sdk/assets/ic_comment.png'),
+                label: Text(
+                  'Flag',
+                  style: _themeData.textTheme.subtitle1!.copyWith(
+                      color: Colors.black54, fontWeight: FontWeight.w600),
+                )),
+          )
         ],
       ),
     );

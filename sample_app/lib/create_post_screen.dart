@@ -208,7 +208,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           .post()
           .then((value) {
         CommanSnackbar.showPositiveSnackbar(
-            'Post Created', 'Image Post Created Successfully');
+            'Post Created', 'File Post Created Successfully');
       }).onError<AmityException>((error, stackTrace) {
         CommanSnackbar.showPositiveSnackbar('Error', error.toString());
       });

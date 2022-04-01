@@ -59,31 +59,35 @@ class _UserFeedScreenState extends State<UserFeedScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('User Feed - ${widget.userId}')),
-      body: Column(
-        children: [
-          Expanded(
-            child: RefreshIndicator(
-              onRefresh: () async {
-                _controller.reset();
-                _controller.fetchNextPage();
-              },
-              child: ListView.builder(
-                controller: scrollcontroller,
-                itemCount: amityPosts.length,
-                itemBuilder: (context, index) {
-                  final amityPost = amityPosts[index];
-                  return FeedWidget(amityPost: amityPost);
-                },
-              ),
-            ),
-          ),
-          if (_controller.isFetching)
-            Container(
-              alignment: Alignment.center,
-              child: const CircularProgressIndicator(),
+      body: amityPosts.isEmpty
+          ? const Center(
+              child: Text('No Post Found'),
             )
-        ],
-      ),
+          : Column(
+              children: [
+                Expanded(
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      _controller.reset();
+                      _controller.fetchNextPage();
+                    },
+                    child: ListView.builder(
+                      controller: scrollcontroller,
+                      itemCount: amityPosts.length,
+                      itemBuilder: (context, index) {
+                        final amityPost = amityPosts[index];
+                        return FeedWidget(amityPost: amityPost);
+                      },
+                    ),
+                  ),
+                ),
+                if (_controller.isFetching)
+                  Container(
+                    alignment: Alignment.center,
+                    child: const CircularProgressIndicator(),
+                  )
+              ],
+            ),
     );
   }
 }
