@@ -1,4 +1,5 @@
 import 'package:amity_sdk/public/amity_core_client.dart';
+import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1_example/community_feed_screen.dart';
 import 'package:flutter_application_1_example/create_post_screen.dart';
@@ -92,6 +93,20 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 },
                 child: const Text('Community Feed'),
               ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  AmityCoreClient.registerDeviceNotification("blah");
+                },
+                child: const Text('Register notification'),
+              ),
+              const SizedBox(height: 20),
+              TextButton(
+                onPressed: () {
+                  AmityCoreClient.unregisterDeviceNotification();
+                },
+                child: const Text('Unregister notification'),
+              ),
               const SizedBox(height: 200),
               TextButton(
                 onPressed: () {
@@ -107,7 +122,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   style: _themeData.textTheme.subtitle1!
                       .copyWith(color: Colors.red),
                 ),
-              )
+              ),
             ],
           ),
         ),

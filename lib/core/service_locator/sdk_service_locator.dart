@@ -1,7 +1,12 @@
 import 'package:amity_sdk/data/data.dart';
 import 'package:amity_sdk/data/data_source/local/db_adapter_repo.dart';
+import 'package:amity_sdk/data/data_source/remote/api_interface/notification_api_interface.dart';
+import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/notification_api_interface_impl.dart';
+import 'package:amity_sdk/data/repo_impl/notification_repo_impl.dart';
 import 'package:amity_sdk/domain/domain.dart';
+import 'package:amity_sdk/domain/repo/notification_repo.dart';
 import 'package:amity_sdk/public/public.dart';
+import 'package:amity_sdk/public/repo/notification_repository.dart';
 import 'package:get_it/get_it.dart';
 
 final serviceLocator = GetIt.instance; //sl is referred to as Service Locator
@@ -47,6 +52,10 @@ class SdkServiceLocator {
         () => FileApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityFeedApiInterface>(
         () => CommunityFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<NotificationApiInterface>(() =>
+        NotificationApiInterfaceImpl(
+            httpApiClient: serviceLocator(),
+            amityCoreClientOption: serviceLocator()));
 
     // Local Data Source
     //-data_source/local/
@@ -147,7 +156,6 @@ class SdkServiceLocator {
               feedApiInterface: serviceLocator(),
               dbAdapterRepo: serviceLocator(),
             ));
-
     serviceLocator.registerLazySingleton<UserFeedRepo>(() => UserFeedRepoImpl(
           userFeedApiInterface: serviceLocator(),
           postDbAdapter: serviceLocator(),
@@ -164,6 +172,9 @@ class SdkServiceLocator {
               dbAdapterRepo: serviceLocator(),
             ));
 
+    serviceLocator.registerLazySingleton<NotificationRepo>(
+      () => NotificationRepoImpl(notificationApiInterface: serviceLocator()),
+    );
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
         GetPostByIdUseCase(
@@ -296,6 +307,13 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<GetCommunityFeedUsecase>(
         () => GetCommunityFeedUsecase(serviceLocator(), serviceLocator()));
 
+    serviceLocator.registerLazySingleton<RegisterDeviceNotificationUseCase>(
+        () => RegisterDeviceNotificationUseCase(
+            notificationRepo: serviceLocator(), accountRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<UnregisterDeviceNotificationUseCase>(
+        () => UnregisterDeviceNotificationUseCase(
+            notificationRepo: serviceLocator(), accountRepo: serviceLocator()));
+
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
     serviceLocator.registerLazySingleton(() => PostRepository());
@@ -303,6 +321,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => CommentRepository());
     serviceLocator.registerLazySingleton(() => FeedRepository());
     serviceLocator.registerLazySingleton(() => FileRepository());
+    serviceLocator.registerLazySingleton(() => NotificationRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(
