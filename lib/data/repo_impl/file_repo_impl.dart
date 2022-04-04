@@ -65,7 +65,7 @@ class FileRepoImpl extends FileRepo {
   @override
   Future<AmityUploadResult<AmityVideo>> uploadVidoe(
       UploadFileRequest request) async {
-    final data = await fileApiInterface.uploadFile(request);
+    final data = await fileApiInterface.uploadVideo(request);
 
     final fileProperties = await _saveDataToDb(data);
 

@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_1_example/core/utils/extension/date_extension.dart';
 import 'package:flutter_application_1_example/core/widget/user_profile_info_row_widget.dart';
 import 'package:flutter_application_1_example/full_screen_video_player.dart';
+import 'package:flutter_application_1_example/update_post_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FeedWidget extends StatelessWidget {
@@ -17,130 +18,182 @@ class FeedWidget extends StatelessWidget {
     return ValueListenableBuilder<AmityPost>(
       valueListenable: amityPost,
       builder: (context, value, child) {
-        return Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.shade300,
-                  blurRadius: 10,
-                ),
-              ]),
-          margin: const EdgeInsets.all(12),
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              UserProfileInfoRowWidget(
-                userAvatar: value.postedUser!.avatarCustomUrl,
-                userName: value.postedUser!.displayName!,
-                options: [
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.more_vert,
-                      size: 18,
+        print('>>>>>>> updating the UI widget');
+        return Stack(
+          fit: StackFit.loose,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade300,
+                      blurRadius: 10,
                     ),
-                  )
-                ],
-              ),
-              Row(
+                  ]),
+              margin: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    value.postedUser!.displayName!,
-                    style: _themeData.textTheme.headline5,
-                  ),
-                  const Spacer(),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.more_vert,
-                      size: 18,
-                    ),
-                  )
-                ],
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 2),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Created At - ' + value.createdAt!.format(),
-                      style: _themeData.textTheme.caption,
-                    ),
-                    Text(
-                      'Updated At - ' + value.updatedAt!.format(),
-                      style: _themeData.textTheme.caption,
-                    ),
-                    if (value.target is UserTarget)
-                      Text(
-                        'Posted On : ' +
-                            ((value.target as UserTarget)
-                                    .targetUser
-                                    ?.displayName ??
-                                'No name'),
-                        style: _themeData.textTheme.caption,
-                      ),
-                    if (value.target is CommunityTarget)
-                      Text(
-                        'Posted On : ' +
-                            ((value.target as CommunityTarget)
-                                    .targetCommunity
-                                    ?.displayName ??
-                                'No name') +
-                            ' Community',
-                        style: _themeData.textTheme.caption,
-                      ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 6),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FeedContentWidget(amityPostData: value.data!),
-                    const SizedBox(height: 8),
-                    if (value.children != null)
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: [
-                          ...List.generate(value.children!.length, (index) {
-                            final amityChildPost = value.children![index];
-                            if (amityChildPost.data == null) {
-                              return Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                    color: Colors.red.shade400,
-                                    borderRadius: BorderRadius.circular(12)),
-                                child: Text(
-                                  'Media Type ${amityChildPost.type} not supported',
-                                  style: _themeData.textTheme.bodyText1!
-                                      .copyWith(color: Colors.white),
+                  UserProfileInfoRowWidget(
+                    userId: value.postedUser!.userId!,
+                    userAvatar: value.postedUser!.avatarCustomUrl,
+                    userName: value.postedUser!.displayName!,
+                    options: [
+                      if (amityPost.postedUserId == AmityCoreClient.getUserId())
+                        PopupMenuButton(
+                          itemBuilder: (context) {
+                            return const [
+                              PopupMenuItem(
+                                child: Text("Edit"),
+                                value: 1,
+                              ),
+                              PopupMenuItem(
+                                child: Text("Delete (Soft)"),
+                                value: 2,
+                              ),
+                              PopupMenuItem(
+                                child: Text("Delete (Hard)"),
+                                value: 3,
+                                enabled: false,
+                              )
+                            ];
+                          },
+                          child: const Icon(
+                            Icons.more_vert,
+                            size: 18,
+                          ),
+                          onSelected: (index) {
+                            if (index == 1) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => UpdatePostScreen(
+                                    amityPost: amityPost,
+                                  ),
                                 ),
                               );
                             }
-                            return FeedContentWidget(
-                                amityPostData: amityChildPost.data!);
-                          })
-                        ],
-                      )
-                  ],
-                ),
+                            if (index == 2) {
+                              amityPost.delete();
+                            }
+                          },
+                        ),
+                      // IconButton(
+                      //   onPressed: () {},
+                      //   icon: const Icon(
+                      //     Icons.more_vert,
+                      //     size: 18,
+                      //   ),
+                      // )
+                    ],
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 2),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Created At - ' + value.createdAt!.format(),
+                          style: _themeData.textTheme.caption,
+                        ),
+                        Text(
+                          'Updated At - ' + value.updatedAt!.format(),
+                          style: _themeData.textTheme.caption,
+                        ),
+                        if (value.target is UserTarget)
+                          Text(
+                            'Posted On : ' +
+                                ((value.target as UserTarget)
+                                        .targetUser
+                                        ?.displayName ??
+                                    'No name'),
+                            style: _themeData.textTheme.caption,
+                          ),
+                        if (value.target is CommunityTarget)
+                          Text(
+                            'Posted On : ' +
+                                ((value.target as CommunityTarget)
+                                        .targetCommunity
+                                        ?.displayName ??
+                                    'No name') +
+                                ' Community',
+                            style: _themeData.textTheme.caption,
+                          ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FeedContentWidget(amityPostData: value.data!),
+                        const SizedBox(height: 8),
+                        if (value.children != null)
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: [
+                              ...List.generate(value.children!.length, (index) {
+                                final amityChildPost = value.children![index];
+                                if (amityChildPost.data == null) {
+                                  return Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                        color: Colors.red.shade400,
+                                        borderRadius:
+                                            BorderRadius.circular(12)),
+                                    child: Text(
+                                      'Media Type ${amityChildPost.type} not supported',
+                                      style: _themeData.textTheme.bodyText1!
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                  );
+                                }
+                                return FeedContentWidget(
+                                    amityPostData: amityChildPost.data!);
+                              })
+                            ],
+                          )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Divider(height: .5, color: Colors.grey.shade300),
+                  Container(
+                      key: UniqueKey(),
+                      margin: const EdgeInsets.symmetric(horizontal: 12),
+                      child: FeedReactionInfoWidget(amityPost: value)),
+                  Divider(height: .5, color: Colors.grey.shade300),
+                  FeedReactionActionWidget(key: UniqueKey(), amityPost: value),
+                ],
               ),
-              const SizedBox(height: 12),
-              Divider(height: .5, color: Colors.grey.shade300),
-              Container(
-                  key: UniqueKey(),
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  child: FeedReactionInfoWidget(amityPost: value)),
-              Divider(height: .5, color: Colors.grey.shade300),
-              FeedActionWidget(key: UniqueKey(), amityPost: value),
-            ],
-          ),
+            ),
+            if (amityPost.isDeleted ?? false)
+              Positioned.fill(
+                child: Container(
+                    margin: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(.4),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            color: Colors.red.shade400,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Text(
+                          'Soft Deleted Amity Post',
+                          style: _themeData.textTheme.bodyText1!
+                              .copyWith(color: Colors.white),
+                        ),
+                      ),
+                    )),
+              )
+          ],
         );
       },
     );
@@ -284,9 +337,10 @@ class FeedReactionInfoWidget extends StatelessWidget {
   }
 }
 
-class FeedActionWidget extends StatelessWidget {
+class FeedReactionActionWidget extends StatelessWidget {
   final AmityPost amityPost;
-  const FeedActionWidget({Key? key, required this.amityPost}) : super(key: key);
+  const FeedReactionActionWidget({Key? key, required this.amityPost})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {

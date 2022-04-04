@@ -1,4 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
+import 'package:amity_sdk/core/model/api_request/update_post_request.dart';
 import 'package:amity_sdk/data/data.dart';
 import 'package:dio/dio.dart';
 
@@ -85,11 +86,10 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   }
 
   @override
-  Future<CreatePostResponse> updatePostById(
-      String postId, CreatePostRequest request) async {
+  Future<CreatePostResponse> updatePostById(UpdatePostRequest request) async {
     try {
-      final data =
-          await httpApiClient().put(POST_V3 + '/$postId', data: request);
+      final data = await httpApiClient()
+          .put(POST_V3 + '/${request.postId}', data: request);
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

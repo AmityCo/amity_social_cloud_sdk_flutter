@@ -217,6 +217,7 @@ class AmityVideoPostCreator {
   late PostCreateUsecase _useCase;
   late String _targetId;
   late String _targetType;
+  String? _text;
   late List<AmityVideo> _videos;
   Map<String, dynamic>? _metadata;
   List<AmityMentioneeTarget>? _mentionees;
@@ -231,18 +232,25 @@ class AmityVideoPostCreator {
     _videos = video;
   }
 
+  AmityVideoPostCreator text(String text) {
+    _text = text;
+    return this;
+  }
+
   Future<AmityPost> post() {
     CreatePostRequest request = CreatePostRequest(
         targetType: _targetType, targetId: _targetId, dataType: null);
 
     request.attachments = _videos
         .map((e) =>
-            Attachment(fileId: e.fileId, type: 'video')) //TODO: Add type here
+            Attachment(fileId: e.fileId, type: AmityDataType.VIDEO.value))
         .toList();
 
-    // CreatePostData data = CreatePostData();
-    //  data. = _text;
-    // request.data = data;
+    if (_text != null) {
+      CreatePostData data = CreatePostData();
+      data.text = _text;
+      request.data = data;
+    }
 
     return _useCase.get(request);
   }

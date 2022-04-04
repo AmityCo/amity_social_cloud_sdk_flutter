@@ -40,28 +40,30 @@ class _MyAppState extends State<MyApp> {
     return GetMaterialApp(
       home: const LoginScreen(),
       theme: ThemeData(
-          primarySwatch: Colors.blue,
-          inputDecorationTheme: const InputDecorationTheme(
-            labelStyle: TextStyle(
-              color: Colors.grey,
-            ),
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
-            ),
+        primarySwatch: Colors.blue,
+        inputDecorationTheme: const InputDecorationTheme(
+          labelStyle: TextStyle(
+            color: Colors.grey,
           ),
-          textTheme: _themeData.textTheme.apply(bodyColor: Colors.black),
-          iconTheme: const IconThemeData(color: Colors.grey, size: 18),
-          textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(
-              primary: Colors.black,
-              minimumSize: Size.zero,
-              padding: EdgeInsets.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
+          border: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
           ),
-          backgroundColor: Colors.white,
-          snackBarTheme:
-              _themeData.snackBarTheme.copyWith(backgroundColor: Colors.white)),
+        ),
+        textTheme: _themeData.textTheme.apply(bodyColor: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.grey, size: 18),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            primary: Colors.black,
+            minimumSize: Size.zero,
+            padding: EdgeInsets.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        snackBarTheme:
+            _themeData.snackBarTheme.copyWith(backgroundColor: Colors.white),
+        tabBarTheme: TabBarTheme(labelColor: Colors.black),
+      ),
       themeMode: ThemeMode.light,
 
       // onGenerateRoute: (settings){

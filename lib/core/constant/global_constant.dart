@@ -26,6 +26,7 @@ const POST_V3 = 'api/v3/posts';
 
 const COMMENT_V3 = 'api/v3/comments';
 const FILE_V3 = 'api/v3/files';
+const VIDEO_FILE_V3 = 'api/v4/videos';
 
 const COMMUNITY_V3 = 'api/v3/communities';
 
@@ -45,5 +46,3 @@ const REACTION_V2_URL = 'api/v2/reactions';
 
 const REGISTER_NOTIFICATION_V1_URL = 'v1/notification';
 const UNREGISTER_NOTIFICATION_V1_URL = 'v1/notification';
-
-

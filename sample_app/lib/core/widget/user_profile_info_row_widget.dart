@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1_example/user_profile_screen.dart';
 
 class UserProfileInfoRowWidget extends StatelessWidget {
   const UserProfileInfoRowWidget(
       {Key? key,
+      required this.userId,
       required this.userAvatar,
       required this.userName,
       this.subTitle,
       this.options})
       : super(key: key);
+  final String userId;
   final String? userAvatar;
   final String userName;
   final String? subTitle;
@@ -38,17 +41,26 @@ class UserProfileInfoRowWidget extends StatelessWidget {
             clipBehavior: Clip.antiAliasWithSaveLayer,
           ),
           const SizedBox(width: 18),
-          Column(
-            children: [
-              Text(
-                userName,
-                style: _themeData.textTheme.headline6,
-              ),
-              Text(
-                subTitle ?? '',
-                style: _themeData.textTheme.caption,
-              ),
-            ],
+          InkWell(
+            onTap: () {
+              Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                  builder: (context) => UserProfileScreen(userId: userId),
+                ),
+              );
+            },
+            child: Column(
+              children: [
+                Text(
+                  userName,
+                  style: _themeData.textTheme.headline6,
+                ),
+                Text(
+                  subTitle ?? '',
+                  style: _themeData.textTheme.caption,
+                ),
+              ],
+            ),
           ),
           const Spacer(),
           ...?options

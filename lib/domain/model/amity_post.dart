@@ -6,7 +6,6 @@ import 'package:flutter/foundation.dart';
 class AmityPost extends ChangeNotifier implements ValueListenable<AmityPost> {
   AmityPost({required this.postId}) {
     serviceLocator<PostDbAdapter>().listenPostEntity(postId!).listen((event) {
-      print('>>>>Amity Post Notify Update');
       final _updateAmityPost = event.convertToAmityPost();
       apply(_updateAmityPost);
       notifyListeners();
@@ -52,6 +51,9 @@ class AmityPost extends ChangeNotifier implements ValueListenable<AmityPost> {
     //flag
     isFlaggedByMe = amityPost.isFlaggedByMe;
     flagCount = amityPost.flagCount;
+
+    //Delete
+    isDeleted = amityPost.isDeleted;
   }
 
   @override

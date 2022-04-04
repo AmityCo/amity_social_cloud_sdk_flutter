@@ -9,7 +9,8 @@ import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
 class CreatePostScreen extends StatefulWidget {
-  const CreatePostScreen({Key? key}) : super(key: key);
+  const CreatePostScreen({Key? key, required this.userId}) : super(key: key);
+  final String userId;
 
   @override
   State<CreatePostScreen> createState() => _CreatePostScreenState();
@@ -24,10 +25,11 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   bool isTextPost = true;
   bool isImagePost = false;
   bool isFilePost = false;
+  bool isVideoPost = false;
 
   @override
   void initState() {
-    _targetuserTextEditController.text = 'victimIOS';
+    _targetuserTextEditController.text = widget.userId;
     super.initState();
   }
 
@@ -82,10 +84,36 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     isTextPost = false;
                     isImagePost = false;
                     isFilePost = true;
+                    isVideoPost = false;
                   });
                 },
                 icon: const Icon(Icons.attach_file_outlined),
                 label: const Text('Attach File'),
+                style: TextButton.styleFrom(primary: Colors.blue)),
+            const SizedBox(height: 12),
+            TextButton.icon(
+                onPressed: () async {
+                  files.clear();
+
+                  FilePickerResult? result = await FilePicker.platform
+                      .pickFiles(
+                          type: FileType.custom,
+                          allowMultiple: true,
+                          allowedExtensions: ['mp4', 'mov']);
+
+                  if (result != null) {
+                    files.addAll(
+                        result.paths.map((path) => File(path!)).toList());
+                  }
+                  setState(() {
+                    isTextPost = false;
+                    isImagePost = false;
+                    isFilePost = false;
+                    isVideoPost = true;
+                  });
+                },
+                icon: const Icon(Icons.video_camera_back_rounded),
+                label: const Text('Attach Video'),
                 style: TextButton.styleFrom(primary: Colors.blue)),
             const SizedBox(height: 12),
             TextButton.icon(
@@ -102,6 +130,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     isTextPost = false;
                     isImagePost = true;
                     isFilePost = false;
+                    isVideoPost = false;
                   });
                 },
                 icon: const Icon(Icons.add_a_photo),
@@ -112,9 +141,13 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
               child: TextButton(
                 onPressed: () async {
                   Get.showOverlay(
-                      asyncFunction: createPost,
-                      loadingWidget:
-                          const Center(child: CircularProgressIndicator()));
+                    asyncFunction: createPost,
+                    loadingWidget:
+                        const Center(child: CircularProgressIndicator()),
+                  ).then((value) {
+                    Navigator.of(context).pop();
+                  });
+                  ;
                 },
                 child: Container(
                   width: 200,
@@ -125,6 +158,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                     if (isTextPost) const TextSpan(text: ' Text'),
                     if (isImagePost) const TextSpan(text: ' Image'),
                     if (isFilePost) const TextSpan(text: ' File'),
+                    if (isVideoPost) const TextSpan(text: ' Video'),
                     const TextSpan(text: ' Post'),
                   ])),
                 ),
@@ -142,6 +176,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
   }
 
   Future createPost() async {
+    FocusManager.instance.primaryFocus?.unfocus();
     if (isTextPost) {
       final _targetUser = _targetuserTextEditController.text.trim();
       final _text = _postTextEditController.text.trim();
@@ -183,6 +218,34 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
             'Post Created', 'Image Post Created Successfully');
       }).onError<AmityException>((error, stackTrace) {
         CommanSnackbar.showPositiveSnackbar('Error', error.toString());
+      });
+    }
+
+    if (isVideoPost) {
+      final _targetUser = _targetuserTextEditController.text.trim();
+      final _text = _postTextEditController.text.trim();
+
+      List<AmityVideo> _video = [];
+      for (final _file in files) {
+        AmityUploadResult<AmityVideo> amityUploadResult =
+            await AmityCoreClient.newFileRepository().video(_file).upload();
+        if (amityUploadResult is AmityUploadComplete) {
+          final amityUploadComplete = amityUploadResult as AmityUploadComplete;
+          _video.add(amityUploadComplete.getFile as AmityVideo);
+        }
+      }
+
+      AmitySocialClient.newPostRepository()
+          .createPost()
+          .targetUser(_targetUser)
+          .video(_video)
+          .text(_text)
+          .post()
+          .then((value) {
+        CommanSnackbar.showPositiveSnackbar(
+            'Post Created', 'Image Post Created Successfully');
+      }).onError<AmityException>((error, stackTrace) {
+        CommanSnackbar.showPositiveSnackbar('Error', (error).message);
       });
     }
 

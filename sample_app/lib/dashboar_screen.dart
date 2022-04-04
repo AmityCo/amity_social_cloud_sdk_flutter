@@ -29,7 +29,8 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => const UserProfileScreen(),
+                      builder: (context) => UserProfileScreen(
+                          userId: AmityCoreClient.getUserId()),
                     ),
                   );
                 },
@@ -40,7 +41,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                      builder: (context) => CreatePostScreen(),
+                      builder: (context) => const CreatePostScreen(
+                        userId: 'victimIOS',
+                      ),
                     ),
                   );
                 },
