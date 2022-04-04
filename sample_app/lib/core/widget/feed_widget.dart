@@ -132,67 +132,6 @@ class FeedWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     TextButton.icon(
-              //       onPressed: () {},
-              //       icon: const Icon(
-              //         Icons.thumb_up,
-              //         color: Colors.grey,
-              //       ),
-              //       label: Text(
-              //         'My : ${amityPost.myReactions}',
-              //         style: _themeData.textTheme.bodyText1,
-              //       ),
-              //     ),
-              //     TextButton.icon(
-              //       onPressed: () {},
-              //       icon: const Icon(
-              //         Icons.thumb_up,
-              //         color: Colors.grey,
-              //       ),
-              //       label: Text(
-              //         'Count : ${amityPost.reactionCount}',
-              //         style: _themeData.textTheme.bodyText1,
-              //       ),
-              //     ),
-              //     TextButton.icon(
-              //       onPressed: () {},
-              //       icon: const Icon(
-              //         Icons.comment,
-              //         color: Colors.grey,
-              //       ),
-              //       label: Text(
-              //         'Count : ${amityPost.commentCount}',
-              //         style: _themeData.textTheme.bodyText1,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // const SizedBox(height: 8),
-              // Row(
-              //   children: [
-              //     TextButton.icon(
-              //       onPressed: () {},
-              //       icon: const Icon(Icons.flag_rounded, color: Colors.red),
-              //       label: Text(
-              //         'Count : ${amityPost.flagCount}',
-              //         style: _themeData.textTheme.bodyText1,
-              //       ),
-              //     ),
-              //     const SizedBox(width: 18),
-              //     TextButton.icon(
-              //       onPressed: () {},
-              //       icon: const Icon(Icons.flag_rounded, color: Colors.red),
-              //       label: Text(
-              //         'Flag by me : ${amityPost.isFlaggedByMe ?? false}',
-              //         style: _themeData.textTheme.bodyText1,
-              //       ),
-              //     )
-              //   ],
-              // ),
-              // const SizedBox(height: 12),
               Divider(height: .5, color: Colors.grey.shade300),
               Container(
                   key: UniqueKey(),
@@ -329,13 +268,13 @@ class FeedReactionInfoWidget extends StatelessWidget {
               )),
           const Spacer(),
           Text(
-            '0 Comment',
+            '${amityPost.commentCount} Comment',
             style:
                 _themeData.textTheme.subtitle1!.copyWith(color: Colors.black54),
           ),
           const SizedBox(width: 12),
           Text(
-            '0 Flag',
+            '${amityPost.flagCount} Flag',
             style:
                 _themeData.textTheme.subtitle1!.copyWith(color: Colors.black54),
           )
