@@ -1,7 +1,7 @@
 import 'package:amity_sdk/amity.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/core/widget/common_snackbar.dart';
-import 'package:flutter_application_1_example/core/widget/progress_dialog_widget.dart';
+import 'package:flutter_social_sample_app/core/widget/common_snackbar.dart';
+import 'package:flutter_social_sample_app/core/widget/progress_dialog_widget.dart';
 
 class UpdatePostScreen extends StatefulWidget {
   final AmityPost amityPost;

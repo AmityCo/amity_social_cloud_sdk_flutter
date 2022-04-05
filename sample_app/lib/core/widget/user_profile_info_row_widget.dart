@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/user_profile_screen.dart';
+import 'package:flutter_social_sample_app/core/route/app_route.dart';
+import 'package:go_router/go_router.dart';
 
 class UserProfileInfoRowWidget extends StatelessWidget {
   const UserProfileInfoRowWidget(
@@ -43,11 +44,8 @@ class UserProfileInfoRowWidget extends StatelessWidget {
           const SizedBox(width: 18),
           InkWell(
             onTap: () {
-              Navigator.of(context).pushReplacement(
-                MaterialPageRoute(
-                  builder: (context) => UserProfileScreen(userId: userId),
-                ),
-              );
+              GoRouter.of(context)
+                  .goNamed(AppRoute.home, params: {'userId': userId});
             },
             child: Column(
               children: [

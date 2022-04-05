@@ -1,12 +1,10 @@
 import 'package:amity_sdk/public/amity_core_client.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/community_feed_screen.dart';
-import 'package:flutter_application_1_example/create_post_screen.dart';
-import 'package:flutter_application_1_example/global_feed_screen.dart';
-import 'package:flutter_application_1_example/login_screen.dart';
-import 'package:flutter_application_1_example/user_feed_screen.dart';
-import 'package:flutter_application_1_example/user_profile_screen.dart';
+import 'package:flutter_social_sample_app/core/route/app_route.dart';
+import 'package:flutter_social_sample_app/presentation/screen/login/login_screen.dart';
+import 'package:flutter_social_sample_app/presentation/screen/user_feed/user_feed_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class DashboardScreen extends StatefulWidget {
   const DashboardScreen({Key? key}) : super(key: key);
@@ -27,36 +25,23 @@ class _DashboardScreenState extends State<DashboardScreen> {
             children: [
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => UserProfileScreen(
-                          userId: AmityCoreClient.getUserId()),
-                    ),
-                  );
+                  GoRouter.of(context).goNamed(AppRoute.profile,
+                      params: {'userId': AmityCoreClient.getUserId()});
                 },
                 child: const Text('User Profile'),
               ),
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const CreatePostScreen(
-                        userId: 'victimIOS',
-                      ),
-                    ),
-                  );
+                  GoRouter.of(context).goNamed(AppRoute.createPost,
+                      params: {'userId': 'victimIOS'});
                 },
                 child: const Text('Create Post'),
               ),
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const GlobalFeedScreen(),
-                    ),
-                  );
+                  GoRouter.of(context).goNamed(AppRoute.globalFeed);
                 },
                 child: const Text('Global Feed'),
               ),
@@ -87,12 +72,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => const CommunityFeedScreen(
-                          communityId: 'f5a99abc1f275df3f4259b6ca0e3cb15'),
-                    ),
-                  );
+                  GoRouter.of(context).goNamed(AppRoute.communityFeed, params: {
+                    'communityId': 'f5a99abc1f275df3f4259b6ca0e3cb15'
+                  });
                 },
                 child: const Text('Community Feed'),
               ),

@@ -30,7 +30,7 @@ class _AmityPostGetQueryBuilder {
 
   String? _sortOption = AmityCommentSortOption.LAST_CREATED.apiKey;
   bool? _hasFlag;
-  bool? _isDeleted;
+  bool? _isDeleted = false; //Default Value false
   String? _amityFeedType;
   List<String>? _dataTypes;
 

@@ -2,19 +2,19 @@ import 'package:amity_sdk/core/utils/paging_controller.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/core/widget/feed_widget.dart';
-import 'package:flutter_application_1_example/global_constant.dart';
+import 'package:flutter_social_sample_app/core/widget/feed_widget.dart';
+import 'package:flutter_social_sample_app/core/constant/global_constant.dart';
 
-class UserPostScreen extends StatefulWidget {
-  const UserPostScreen({Key? key, required this.userId, this.showAppBar = true})
+class UserFeedScreen extends StatefulWidget {
+  const UserFeedScreen({Key? key, required this.userId, this.showAppBar = true})
       : super(key: key);
-  final bool showAppBar;
   final String userId;
+  final bool showAppBar;
   @override
-  State<UserPostScreen> createState() => _UserPostScreenState();
+  State<UserFeedScreen> createState() => _UserFeedScreenState();
 }
 
-class _UserPostScreenState extends State<UserPostScreen> {
+class _UserFeedScreenState extends State<UserFeedScreen> {
   late PagingController<AmityPost> _controller;
   final amityPosts = <AmityPost>[];
 
@@ -23,9 +23,8 @@ class _UserPostScreenState extends State<UserPostScreen> {
   @override
   void initState() {
     _controller = PagingController(
-      pageFuture: (token) => AmitySocialClient.newPostRepository()
-          .getPosts()
-          .targetUser(widget.userId)
+      pageFuture: (token) => AmitySocialClient.newFeedRepository()
+          .getUserFeed(widget.userId)
           .getPagingData(token: token, limit: GlobalConstant.pageSize),
       pageSize: GlobalConstant.pageSize,
     )..addListener(
@@ -62,7 +61,7 @@ class _UserPostScreenState extends State<UserPostScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: widget.showAppBar
-          ? AppBar(title: Text('User Post - ${widget.userId}'))
+          ? AppBar(title: Text('User Feed - ${widget.userId}'))
           : null,
       body: amityPosts.isEmpty
           ? const Center(

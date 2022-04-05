@@ -2,17 +2,18 @@ import 'package:amity_sdk/core/utils/paging_controller.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/core/widget/feed_widget.dart';
-import 'package:flutter_application_1_example/global_constant.dart';
+import 'package:flutter_social_sample_app/core/widget/feed_widget.dart';
+import 'package:flutter_social_sample_app/core/constant/global_constant.dart';
 
-class GlobalFeedScreen extends StatefulWidget {
-  const GlobalFeedScreen({Key? key}) : super(key: key);
-
+class CommunityFeedScreen extends StatefulWidget {
+  const CommunityFeedScreen({Key? key, required this.communityId})
+      : super(key: key);
+  final String communityId;
   @override
-  State<GlobalFeedScreen> createState() => _GlobalFeedScreenState();
+  State<CommunityFeedScreen> createState() => _CommunityFeedScreenState();
 }
 
-class _GlobalFeedScreenState extends State<GlobalFeedScreen> {
+class _CommunityFeedScreenState extends State<CommunityFeedScreen> {
   late PagingController<AmityPost> _controller;
   final amityPosts = <AmityPost>[];
 
@@ -22,7 +23,7 @@ class _GlobalFeedScreenState extends State<GlobalFeedScreen> {
   void initState() {
     _controller = PagingController(
       pageFuture: (token) => AmitySocialClient.newFeedRepository()
-          .getGlobalFeed()
+          .getCommunityFeed(widget.communityId)
           .getPagingData(token: token, limit: GlobalConstant.pageSize),
       pageSize: GlobalConstant.pageSize,
     )..addListener(
@@ -32,7 +33,7 @@ class _GlobalFeedScreenState extends State<GlobalFeedScreen> {
             amityPosts.addAll(_controller.loadedItems);
           });
 
-          print(_controller.loadedItems.length);
+          print(_controller.loadedItems.toString());
         },
       );
 
@@ -58,7 +59,7 @@ class _GlobalFeedScreenState extends State<GlobalFeedScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Global Feed')),
+      appBar: AppBar(title: Text('Community Feed - ${widget.communityId}')),
       body: Column(
         children: [
           Expanded(
