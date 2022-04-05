@@ -22,6 +22,15 @@ class AmityCoreClient {
     return LoginQueryBuilder(useCase: serviceLocator(), userId: userId);
   }
 
+  static bool isUserLoggedIn() {
+    try {
+      getCurrentUser();
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   static String getUserId() {
     return getCurrentUser().userId!;
   }

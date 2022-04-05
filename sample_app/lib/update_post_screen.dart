@@ -1,6 +1,6 @@
 import 'package:amity_sdk/amity.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_application_1_example/core/widget/progress_dialog_widget.dart';
 
 class UpdatePostScreen extends StatefulWidget {
   final AmityPost amityPost;
@@ -45,11 +45,8 @@ class _UpdatePostScreenState extends State<UpdatePostScreen> {
             Center(
               child: TextButton(
                 onPressed: () async {
-                  Get.showOverlay(
-                    asyncFunction: updatePost,
-                    loadingWidget:
-                        const Center(child: CircularProgressIndicator()),
-                  ).then((value) {
+                  ProgressDialog.show(context, asyncFunction: updatePost)
+                      .then((value) {
                     Navigator.of(context).pop();
                   });
                 },

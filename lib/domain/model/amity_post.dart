@@ -54,6 +54,9 @@ class AmityPost extends ChangeNotifier implements ValueListenable<AmityPost> {
 
     //Delete
     isDeleted = amityPost.isDeleted;
+
+    //data
+    data = amityPost.data;
   }
 
   @override

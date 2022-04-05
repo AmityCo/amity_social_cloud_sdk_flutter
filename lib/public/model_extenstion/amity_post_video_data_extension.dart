@@ -5,7 +5,9 @@ import 'package:amity_sdk/domain/usecase/file/get_file_usecase.dart';
 
 extension AmityPostVideoDataExtension on VideoData {
   Future<AmityVideo> getVideo(AmityVideoQuality quality) async {
-    String fileId = rawData![quality.value];
+    String fileId = rawData!.containsKey(quality.value)
+        ? rawData![quality.value]
+        : rawData![AmityVideoQuality.ORIGINAL.value];
     return AmityVideo(await serviceLocator<GetFileUserCase>().get(fileId));
   }
 }

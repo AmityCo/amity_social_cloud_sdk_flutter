@@ -3,12 +3,10 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/error/amity_exception.dart';
-import 'package:amity_sdk/core/utils/paging_controller.dart';
 import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/login_screen.dart';
+import 'package:flutter_application_1_example/core/route/app_router.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -37,8 +35,9 @@ class _MyAppState extends State<MyApp> {
     userId = 'victimAndroid';
     userDisplayName = 'victimAndroid';
     final _themeData = Theme.of(context);
-    return GetMaterialApp(
-      home: const LoginScreen(),
+    return GetMaterialApp.router(
+      routeInformationParser: AppRouter.router.routeInformationParser,
+      routerDelegate: AppRouter.router.routerDelegate,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         inputDecorationTheme: const InputDecorationTheme(

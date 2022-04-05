@@ -1,7 +1,9 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1_example/core/route/app_route.dart';
 import 'package:flutter_application_1_example/dashboar_screen.dart';
+import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -92,11 +94,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       .deviceId('sorbh_device_id_88')
                       .submit();
 
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const DashboardScreen(),
-                    ),
-                  );
+                  GoRouter.of(context).go(AppRoute.homeRoute);
+                  // Go.of(context).Navigator.of(context).pushReplacement(
+                  //       MaterialPageRoute(
+                  //         builder: (context) => const DashboardScreen(),
+                  //       ),
+                  //     );
                 },
                 child: Container(
                   width: 200,

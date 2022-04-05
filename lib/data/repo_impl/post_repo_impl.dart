@@ -1,12 +1,7 @@
 import 'dart:async';
 
 import 'package:amity_sdk/amity.dart';
-import 'package:amity_sdk/core/model/api_request/create_post_request.dart';
-import 'package:amity_sdk/core/model/api_request/get_post_request.dart';
 import 'package:amity_sdk/core/model/api_request/update_post_request.dart';
-import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/domain/model/amity_post.dart';
-import 'package:amity_sdk/domain/repo/post_repo.dart';
 
 class PostRepoImpl extends PostRepo {
   final PublicPostApiInterface publicPostApiInterface;
