@@ -3,8 +3,8 @@ import 'dart:io';
 import 'package:amity_sdk/lib.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/core/widget/common_snackbar.dart';
-import 'package:flutter_application_1_example/core/widget/progress_dialog_widget.dart';
+import 'package:flutter_social_sample_app/core/widget/common_snackbar.dart';
+import 'package:flutter_social_sample_app/core/widget/progress_dialog_widget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 

@@ -2,10 +2,10 @@ import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/core/utils/extension/date_extension.dart';
-import 'package:flutter_application_1_example/core/widget/user_profile_info_row_widget.dart';
-import 'package:flutter_application_1_example/full_screen_video_player.dart';
-import 'package:flutter_application_1_example/update_post_screen.dart';
+import 'package:flutter_social_sample_app/core/utils/extension/date_extension.dart';
+import 'package:flutter_social_sample_app/core/widget/user_profile_info_row_widget.dart';
+import 'package:flutter_social_sample_app/presentation/screen/video_player/full_screen_video_player.dart';
+import 'package:flutter_social_sample_app/presentation/screen/update_post/update_post_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FeedWidget extends StatelessWidget {
@@ -18,7 +18,6 @@ class FeedWidget extends StatelessWidget {
     return ValueListenableBuilder<AmityPost>(
       valueListenable: amityPost,
       builder: (context, value, child) {
-        print('>>>>>>> updating the UI widget');
         return Stack(
           fit: StackFit.loose,
           children: [

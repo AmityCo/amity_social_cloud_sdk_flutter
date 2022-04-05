@@ -1,8 +1,9 @@
 import 'package:amity_sdk/lib.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/create_post_screen.dart';
-import 'package:flutter_application_1_example/user_feed_screen.dart';
-import 'package:flutter_application_1_example/user_post_screen.dart';
+import 'package:flutter_social_sample_app/presentation/screen/create_post/create_post_screen.dart';
+import 'package:flutter_social_sample_app/presentation/screen/user_post/user_post_screen.dart';
+
+import '../user_feed/user_feed_screen.dart';
 
 class UserProfileScreen extends StatefulWidget {
   const UserProfileScreen({Key? key, required this.userId}) : super(key: key);
@@ -28,7 +29,9 @@ class _UserProfileScreenState extends State<UserProfileScreen>
 
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(title: const Text('User Profile')),
+        appBar: AppBar(
+          title: const Text('User Profile'),
+        ),
         body: FutureBuilder<AmityUser>(
           future: AmityCoreClient.newUserRepository().getUser(widget.userId),
           builder: (context, snapshot) {

@@ -1,8 +1,7 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/core/route/app_route.dart';
-import 'package:flutter_application_1_example/dashboar_screen.dart';
+import 'package:flutter_social_sample_app/core/route/app_route.dart';
 import 'package:go_router/go_router.dart';
 
 class LoginScreen extends StatefulWidget {

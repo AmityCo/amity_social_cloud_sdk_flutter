@@ -6,7 +6,7 @@ import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/core/route/app_router.dart';
+import 'package:flutter_social_sample_app/core/route/app_router.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
