@@ -1,5 +1,6 @@
 import 'package:amity_sdk/amity.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_application_1_example/core/widget/common_snackbar.dart';
 import 'package:flutter_application_1_example/core/widget/progress_dialog_widget.dart';
 
 class UpdatePostScreen extends StatefulWidget {
@@ -48,6 +49,9 @@ class _UpdatePostScreenState extends State<UpdatePostScreen> {
                   ProgressDialog.show(context, asyncFunction: updatePost)
                       .then((value) {
                     Navigator.of(context).pop();
+                  }).onError((error, stackTrace) {
+                    CommonSnackbar.showPositiveSnackbar(
+                        context, 'Error', error.toString());
                   });
                 },
                 child: Container(

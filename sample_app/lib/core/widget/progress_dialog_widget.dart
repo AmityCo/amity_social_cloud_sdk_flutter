@@ -10,16 +10,18 @@ class ProgressDialog extends StatelessWidget {
     //Show loading overlay
     final overlayState = Navigator.of(context).overlay!;
 
-    final overlayEntryLoader = OverlayEntry(builder: (context) {
-      return loadingWidget ??
-          Container(
-            decoration: BoxDecoration(color: Colors.black38.withOpacity(.5)),
-            alignment: Alignment.center,
-            child: const ProgressDialog(
-              message: 'Loading',
-            ),
-          );
-    });
+    final overlayEntryLoader = OverlayEntry(
+      builder: (context) {
+        return loadingWidget ??
+            Container(
+              decoration: BoxDecoration(color: Colors.black38.withOpacity(.5)),
+              alignment: Alignment.center,
+              child: const ProgressDialog(
+                message: 'Loading',
+              ),
+            );
+      },
+    );
 
     overlayState.insert(overlayEntryLoader);
 

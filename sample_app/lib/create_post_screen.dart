@@ -4,7 +4,7 @@ import 'package:amity_sdk/lib.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_application_1_example/core/widget/common_snackbar.dart';
-import 'package:get/get.dart';
+import 'package:flutter_application_1_example/core/widget/progress_dialog_widget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
 
@@ -17,6 +17,8 @@ class CreatePostScreen extends StatefulWidget {
 }
 
 class _CreatePostScreenState extends State<CreatePostScreen> {
+  late BuildContext _context;
+
   final _targetuserTextEditController = TextEditingController();
   final _postTextEditController = TextEditingController();
 
@@ -38,140 +40,142 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     final _themeData = Theme.of(context);
     return Scaffold(
       appBar: AppBar(title: const Text('Create Post')),
-      body: Container(
-        margin: const EdgeInsets.all(20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            TextFormField(
-              controller: _targetuserTextEditController,
-              decoration: const InputDecoration(
-                label: Text('Target User'),
-              ),
-            ),
-            const SizedBox(height: 20),
-            TextFormField(
-              controller: _postTextEditController,
-              decoration: const InputDecoration(
-                label: Text('Text*'),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Column(
-              children: List.generate(files.length, (index) {
-                final _file = files[index];
-                return TextButton.icon(
-                    onPressed: () {},
-                    icon: Icon(isTextPost ? Icons.image : Icons.attach_file),
-                    label: Text(basename(_file.path)),
-                    style: TextButton.styleFrom(primary: Colors.blue));
-              }),
-            ),
-            const Spacer(),
-            const SizedBox(height: 20),
-            TextButton.icon(
-                onPressed: () async {
-                  files.clear();
-
-                  FilePickerResult? result =
-                      await FilePicker.platform.pickFiles(allowMultiple: true);
-
-                  if (result != null) {
-                    files.addAll(
-                        result.paths.map((path) => File(path!)).toList());
-                  }
-                  setState(() {
-                    isTextPost = false;
-                    isImagePost = false;
-                    isFilePost = true;
-                    isVideoPost = false;
-                  });
-                },
-                icon: const Icon(Icons.attach_file_outlined),
-                label: const Text('Attach File'),
-                style: TextButton.styleFrom(primary: Colors.blue)),
-            const SizedBox(height: 12),
-            TextButton.icon(
-                onPressed: () async {
-                  files.clear();
-
-                  FilePickerResult? result = await FilePicker.platform
-                      .pickFiles(
-                          type: FileType.custom,
-                          allowMultiple: true,
-                          allowedExtensions: ['mp4', 'mov']);
-
-                  if (result != null) {
-                    files.addAll(
-                        result.paths.map((path) => File(path!)).toList());
-                  }
-                  setState(() {
-                    isTextPost = false;
-                    isImagePost = false;
-                    isFilePost = false;
-                    isVideoPost = true;
-                  });
-                },
-                icon: const Icon(Icons.video_camera_back_rounded),
-                label: const Text('Attach Video'),
-                style: TextButton.styleFrom(primary: Colors.blue)),
-            const SizedBox(height: 12),
-            TextButton.icon(
-                onPressed: () async {
-                  files.clear();
-                  final ImagePicker _picker = ImagePicker();
-                  // Pick an image
-                  final image = await _picker.pickMultiImage();
-                  if (image != null) {
-                    files.addAll(image.map((e) => File(e.path)).toList());
-                  }
-
-                  setState(() {
-                    isTextPost = false;
-                    isImagePost = true;
-                    isFilePost = false;
-                    isVideoPost = false;
-                  });
-                },
-                icon: const Icon(Icons.add_a_photo),
-                label: const Text('Attach Image'),
-                style: TextButton.styleFrom(primary: Colors.blue)),
-            const SizedBox(height: 48),
-            Center(
-              child: TextButton(
-                onPressed: () async {
-                  Get.showOverlay(
-                    asyncFunction: createPost,
-                    loadingWidget:
-                        const Center(child: CircularProgressIndicator()),
-                  ).then((value) {
-                    Navigator.of(context).pop();
-                  });
-                  ;
-                },
-                child: Container(
-                  width: 200,
-                  alignment: Alignment.center,
-                  child: RichText(
-                      text: TextSpan(children: [
-                    const TextSpan(text: 'Create'),
-                    if (isTextPost) const TextSpan(text: ' Text'),
-                    if (isImagePost) const TextSpan(text: ' Image'),
-                    if (isFilePost) const TextSpan(text: ' File'),
-                    if (isVideoPost) const TextSpan(text: ' Video'),
-                    const TextSpan(text: ' Post'),
-                  ])),
-                ),
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  primary: Colors.white,
-                  padding: const EdgeInsets.all(12),
+      body: Builder(builder: (context) {
+        _context = context;
+        return Container(
+          margin: const EdgeInsets.all(20),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              TextFormField(
+                controller: _targetuserTextEditController,
+                decoration: const InputDecoration(
+                  label: Text('Target User'),
                 ),
               ),
-            )
-          ],
-        ),
-      ),
+              const SizedBox(height: 20),
+              TextFormField(
+                controller: _postTextEditController,
+                decoration: const InputDecoration(
+                  label: Text('Text*'),
+                ),
+              ),
+              const SizedBox(height: 20),
+              Column(
+                children: List.generate(files.length, (index) {
+                  final _file = files[index];
+                  return TextButton.icon(
+                      onPressed: () {},
+                      icon: Icon(isTextPost ? Icons.image : Icons.attach_file),
+                      label: Text(basename(_file.path)),
+                      style: TextButton.styleFrom(primary: Colors.blue));
+                }),
+              ),
+              const Spacer(),
+              const SizedBox(height: 20),
+              TextButton.icon(
+                  onPressed: () async {
+                    files.clear();
+
+                    FilePickerResult? result = await FilePicker.platform
+                        .pickFiles(allowMultiple: true);
+
+                    if (result != null) {
+                      files.addAll(
+                          result.paths.map((path) => File(path!)).toList());
+                    }
+                    setState(() {
+                      isTextPost = false;
+                      isImagePost = false;
+                      isFilePost = true;
+                      isVideoPost = false;
+                    });
+                  },
+                  icon: const Icon(Icons.attach_file_outlined),
+                  label: const Text('Attach File'),
+                  style: TextButton.styleFrom(primary: Colors.blue)),
+              const SizedBox(height: 12),
+              TextButton.icon(
+                  onPressed: () async {
+                    files.clear();
+
+                    FilePickerResult? result = await FilePicker.platform
+                        .pickFiles(
+                            type: FileType.custom,
+                            allowMultiple: true,
+                            allowedExtensions: ['mp4', 'mov']);
+
+                    if (result != null) {
+                      files.addAll(
+                          result.paths.map((path) => File(path!)).toList());
+                    }
+                    setState(() {
+                      isTextPost = false;
+                      isImagePost = false;
+                      isFilePost = false;
+                      isVideoPost = true;
+                    });
+                  },
+                  icon: const Icon(Icons.video_camera_back_rounded),
+                  label: const Text('Attach Video'),
+                  style: TextButton.styleFrom(primary: Colors.blue)),
+              const SizedBox(height: 12),
+              TextButton.icon(
+                  onPressed: () async {
+                    files.clear();
+                    final ImagePicker _picker = ImagePicker();
+                    // Pick an image
+                    final image = await _picker.pickMultiImage();
+                    if (image != null) {
+                      files.addAll(image.map((e) => File(e.path)).toList());
+                    }
+
+                    setState(() {
+                      isTextPost = false;
+                      isImagePost = true;
+                      isFilePost = false;
+                      isVideoPost = false;
+                    });
+                  },
+                  icon: const Icon(Icons.add_a_photo),
+                  label: const Text('Attach Image'),
+                  style: TextButton.styleFrom(primary: Colors.blue)),
+              const SizedBox(height: 48),
+              Center(
+                child: TextButton(
+                  onPressed: () async {
+                    ProgressDialog.show(context, asyncFunction: createPost)
+                        .then((value) {
+                      Navigator.of(context).pop();
+                    }).onError((error, stackTrace) {
+                      CommonSnackbar.showPositiveSnackbar(
+                          context, 'Error', error.toString());
+                    });
+                  },
+                  child: Container(
+                    width: 200,
+                    alignment: Alignment.center,
+                    child: RichText(
+                        text: TextSpan(children: [
+                      const TextSpan(text: 'Create'),
+                      if (isTextPost) const TextSpan(text: ' Text'),
+                      if (isImagePost) const TextSpan(text: ' Image'),
+                      if (isFilePost) const TextSpan(text: ' File'),
+                      if (isVideoPost) const TextSpan(text: ' Video'),
+                      const TextSpan(text: ' Post'),
+                    ])),
+                  ),
+                  style: TextButton.styleFrom(
+                    backgroundColor: Colors.blue,
+                    primary: Colors.white,
+                    padding: const EdgeInsets.all(12),
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
+      }),
     );
   }
 
@@ -184,13 +188,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           .createPost()
           .targetUser(_targetUser)
           .text(_text)
-          .post()
-          .then((value) {
-        CommanSnackbar.showPositiveSnackbar(
-            'Post Created', 'Text Post Created Successfully');
-      }).onError<AmityException>((error, stackTrace) {
-        CommanSnackbar.showPositiveSnackbar('Error', error.toString());
-      });
+          .post();
     }
 
     if (isImagePost) {
@@ -212,13 +210,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           .targetUser(_targetUser)
           .image(_images)
           .text(_text)
-          .post()
-          .then((value) {
-        CommanSnackbar.showPositiveSnackbar(
-            'Post Created', 'Image Post Created Successfully');
-      }).onError<AmityException>((error, stackTrace) {
-        CommanSnackbar.showPositiveSnackbar('Error', error.toString());
-      });
+          .post();
     }
 
     if (isVideoPost) {
@@ -240,13 +232,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           .targetUser(_targetUser)
           .video(_video)
           .text(_text)
-          .post()
-          .then((value) {
-        CommanSnackbar.showPositiveSnackbar(
-            'Post Created', 'Image Post Created Successfully');
-      }).onError<AmityException>((error, stackTrace) {
-        CommanSnackbar.showPositiveSnackbar('Error', (error).message);
-      });
+          .post();
     }
 
     if (isFilePost) {
@@ -268,13 +254,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
           .targetUser(_targetUser)
           .file(_files)
           .text(_text)
-          .post()
-          .then((value) {
-        CommanSnackbar.showPositiveSnackbar(
-            'Post Created', 'File Post Created Successfully');
-      }).onError<AmityException>((error, stackTrace) {
-        CommanSnackbar.showPositiveSnackbar('Error', error.toString());
-      });
+          .post();
     }
   }
 }
