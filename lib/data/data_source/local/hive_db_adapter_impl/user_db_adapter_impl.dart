@@ -7,7 +7,7 @@ class UserDbAdapterImpl extends UserDbAdapter {
   UserDbAdapterImpl({required this.dbClient});
   late Box box;
   Future<UserDbAdapterImpl> init() async {
-    Hive.registerAdapter(UserHiveEntityAdapter());
+    Hive.registerAdapter(UserHiveEntityAdapter(), override: true);
     box = await Hive.openBox<UserHiveEntity>('user_db');
     return this;
   }

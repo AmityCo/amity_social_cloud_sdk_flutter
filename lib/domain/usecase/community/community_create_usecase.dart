@@ -1,9 +1,6 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/domain/domain.dart';
 
-import '../../../core/model/api_request/create_community_request.dart';
-import '../../composer_usecase/community_composer_usecase.dart';
-
 class CommunityCreateUsecase
     extends UseCase<AmityCommunity, CreateCommunityRequest> {
   final CommunityRepo communityRepo;

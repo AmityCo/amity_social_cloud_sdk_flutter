@@ -1,6 +1,4 @@
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/feed_paging_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/local/hive_entity/feed_paging_hive_entity_10.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class FeedPagingDbAdapterImpl extends FeedPagingDbAdapter {
@@ -9,7 +7,7 @@ class FeedPagingDbAdapterImpl extends FeedPagingDbAdapter {
   FeedPagingDbAdapterImpl({required this.dbClient});
   late Box box;
   Future<FeedPagingDbAdapterImpl> init() async {
-    Hive.registerAdapter(FeedPagingHiveEntityAdapter());
+    Hive.registerAdapter(FeedPagingHiveEntityAdapter(), override: true);
     box = await Hive.openBox<FeedPagingHiveEntity>('feed_db');
     return this;
   }

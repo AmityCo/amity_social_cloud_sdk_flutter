@@ -1,7 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/model/api_request/create_comment_request.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/model/amity_comment.dart';
 
 class CommentCreateUseCase extends UseCase<AmityComment, CreateCommentRequest> {
   final CommentRepo commentRepo;

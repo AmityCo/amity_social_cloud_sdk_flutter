@@ -2,7 +2,7 @@ import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/data/data_source/local/hive_entity/post_hive_entity_5.dart';
 import 'package:amity_sdk/domain/domain.dart';
 
-extension PostHiveEntityExtension on PostHiveEntity {
+extension PostResponseHiveEntityExtension on PostHiveEntity {
   AmityPost convertToAmityPost() {
     AmityPostTargetType amityPostTargetType =
         AmityPostTargetTypeExtension.enumOf(targetType!);
@@ -12,7 +12,7 @@ extension PostHiveEntityExtension on PostHiveEntity {
         amityPostTarget = UserTarget(targetUserId: targetId);
         break;
       case AmityPostTargetType.COMMUNITY:
-        // TODO: Handle this case.
+        amityPostTarget = CommunityTarget(targetCommunityId: targetId);
         break;
     }
 
@@ -26,10 +26,14 @@ extension PostHiveEntityExtension on PostHiveEntity {
         amityPostData = ImageData(postId: postId, fileId: data!.fileId);
         break;
       case AmityDataType.VIDEO:
-        // TODO: Handle this case.
+        amityPostData = VideoData(
+          postId: postId,
+          fileId: data!.thumbnailFileId,
+          rawData: data?.videoFileId,
+        );
         break;
       case AmityDataType.FILE:
-        // TODO: Handle this case.
+        amityPostData = FileData(postId: postId, fileId: data!.fileId);
         break;
       case AmityDataType.LIVE_STREAM:
         // TODO: Handle this case.
@@ -41,8 +45,7 @@ extension PostHiveEntityExtension on PostHiveEntity {
         // TODO: Handle this case.
         break;
     }
-    return AmityPost()
-      ..postId = postId
+    return AmityPost(postId: postId)
       ..targetType = amityPostTargetType
       ..target = amityPostTarget
       ..parentPostId = parentPostId
@@ -51,7 +54,7 @@ extension PostHiveEntityExtension on PostHiveEntity {
       ..type = amityDataType
       ..data = amityPostData
       ..sharedCount = sharedCount
-      // ..reactions = reactions
+      ..reactions = AmityReactionMap(reactions: reactions)
       ..myReactions = myReactions
       ..reactionCount = reactionsCount
       ..commentCount = commentsCount

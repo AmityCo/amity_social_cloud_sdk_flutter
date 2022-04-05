@@ -1,5 +1,3 @@
-import 'package:amity_sdk/core/enum/amity_flag_type.dart';
-
 class AmityUserFlagRepository {
   final String userId;
 

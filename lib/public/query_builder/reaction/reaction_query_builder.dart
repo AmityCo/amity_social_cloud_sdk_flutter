@@ -15,8 +15,8 @@ class AddReactionQueryBuilder {
       required String referenceId}) {
     _addReactionUsecase = addReactionUsecase;
     _removeReactionUsecase = removeReactionUsecase;
-    referenceType = _referenceType;
-    referenceId = _referenceId;
+    _referenceType = referenceType;
+    _referenceId = referenceId;
   }
 
   Future<void> addReaction(String reaction) {

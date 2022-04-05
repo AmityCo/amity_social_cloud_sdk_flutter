@@ -8,59 +8,39 @@ abstract class AmityFileInfo {
     return _fileProperties;
   }
 
-  // Map<String, dynamic>? _getAttributes() {
-  //   return _fileProperties["attributes"] as Map<String, dynamic>;
-  // }
+  String get fileId => _fileProperties.fileId!;
+  // set fileId(String fileId) => _fileProperties.fileId = fileId;
 
-  // Map<String, dynamic> getMetaData() {
-  //   return _getAttributes()?['metadata'] as Map<String, dynamic>;
-  // }
+  String get fileUrl => _fileProperties.fileUrl!;
+  // set fileUrl(String fileId) => _fileProperties.fileId = fileUrl;
 
-  String getFileId() {
-    return _fileProperties.fileId!;
-  }
+  String get fileExtension => _fileProperties.ext!;
 
-  String getFileUrl() {
-    return _fileProperties.fileUrl!;
-  }
-
-  String getFileExtension() {
-    return _fileProperties.ext!;
-  }
-
-  String getFileName() {
-    return _fileProperties.name!;
-  }
+  String get fileName => _fileProperties.name!;
 
   String getMimeType() {
     return _fileProperties.mimeType!;
   }
 
-  String getFileSize() {
-    return _fileProperties.size!;
-  }
+  String get fileSize => _fileProperties.size!;
 
   String getFilePath() {
     throw UnimplementedError();
   }
-
-  // int getProgressPercentage() {
-  //   return getResponseBody()['progress'];
-  // }
 
   @override
   String toString() => 'AmityFileInfo(_fileProperties: $_fileProperties)';
 }
 
 class AmityFile extends AmityFileInfo {
-  AmityFile(AmityFileProperties fileProperties) : super(fileProperties);
+  AmityFile(AmityFileProperties _fileProperties) : super(_fileProperties);
 }
 
 class AmityImage extends AmityFileInfo {
-  AmityImage(AmityFileProperties fileProperties) : super(fileProperties);
+  AmityImage(AmityFileProperties _fileProperties) : super(_fileProperties);
 
   String getUrl(AmityImageSize size) {
-    return '${getFileUrl()}?size=${size.value}';
+    return '$fileUrl?size=${size.value}';
   }
 
   int getWidth() {
@@ -96,8 +76,9 @@ extension AmityImageSizeExtension on AmityImageSize {
   }
 }
 
+///Amity Video
 class AmityVideo extends AmityFileInfo {
-  AmityVideo(AmityFileProperties fileProperties) : super(fileProperties);
+  AmityVideo(AmityFileProperties _fileProperties) : super(_fileProperties);
 }
 
 enum AmityVideoQuality { ORIGINAL, HIGH, MEDIUM, LOW }
@@ -114,6 +95,8 @@ extension AmityVideoQualityExtension on AmityVideoQuality {
         orElse: () => AmityVideoQuality.ORIGINAL);
   }
 }
+
+///
 
 class AmityAudio extends AmityFileInfo {
   AmityAudio(AmityFileProperties fileProperties) : super(fileProperties);

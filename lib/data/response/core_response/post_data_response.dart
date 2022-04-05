@@ -10,7 +10,7 @@ class PostDataResponse {
   String? text;
   String? fileId;
   String? thumbnailFileId;
-  VideoFileId? videoFileId;
+  Map<String, String>? videoFileId;
   String? streamId;
 
   factory PostDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -20,7 +20,7 @@ class PostDataResponse {
         thumbnailFileId: json["thumbnailFileId"],
         videoFileId: json["videoFileId"] == null
             ? null
-            : VideoFileId.fromJson(json["videoFileId"]),
+            : Map<String, String>.from(json["videoFileId"]),
         streamId: json["streamId"],
       );
 
@@ -28,35 +28,7 @@ class PostDataResponse {
         "text": text,
         "fileId": fileId,
         "thumbnailFileId": thumbnailFileId,
-        "videoFileId": videoFileId == null ? null : videoFileId!.toJson(),
+        "videoFileId": videoFileId,
         "streamId": streamId,
-      };
-}
-
-class VideoFileId {
-  VideoFileId({
-    required this.original,
-    required this.low,
-    required this.medium,
-    required this.high,
-  });
-
-  final String original;
-  final String? low;
-  final String? medium;
-  final String? high;
-
-  factory VideoFileId.fromJson(Map<String, dynamic> json) => VideoFileId(
-        original: json["original"],
-        low: json["low"],
-        medium: json["medium"],
-        high: json["high"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "original": original,
-        "low": low,
-        "medium": medium,
-        "high": high,
       };
 }

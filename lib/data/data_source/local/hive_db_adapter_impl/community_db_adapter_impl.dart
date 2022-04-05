@@ -7,18 +7,18 @@ class CommunityDbAdapterImpl extends CommunityDbAdapter {
   CommunityDbAdapterImpl({required this.dbClient});
   late Box box;
   Future<CommunityDbAdapterImpl> init() async {
-    Hive.registerAdapter(CommunityHiveEntityAdapter());
+    Hive.registerAdapter(CommunityHiveEntityAdapter(), override: true);
     box = await Hive.openBox<CommunityHiveEntity>('community_db');
     return this;
   }
 
   @override
   CommunityHiveEntity getCommunityEntity(String id) {
-    throw UnimplementedError();
+    return box.get(id);
   }
 
   @override
-  Future saveCommunityEntity(CommunityHiveEntity entity) {
-    throw UnimplementedError();
+  Future saveCommunityEntity(CommunityHiveEntity entity) async {
+    await box.put(entity.communityId, entity);
   }
 }

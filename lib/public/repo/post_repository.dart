@@ -1,10 +1,15 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/public/query_builder/post/post_create_query_builder.dart';
+import 'package:amity_sdk/domain/usecase/post/post_delete_usecase.dart';
+import 'package:amity_sdk/public/public.dart';
 
 class PostRepository {
   Future<AmityPost> getPost(String postId) {
     return serviceLocator<GetPostByIdUseCase>().get(postId);
+  }
+
+  AmityPostGetTargetSelector getPosts() {
+    return AmityPostGetTargetSelector(useCase: serviceLocator());
   }
 
   Stream<AmityPost> getPostStream(String postId) {
@@ -15,7 +20,7 @@ class PostRepository {
     return AmityPostCreateTargetSelector(useCase: serviceLocator());
   }
 
-  // Stream<AmityPost> getPost(String postId) {
-  //   return getPostByIdUseCase.callRepo(postId);
-  // }
+  Future deletePost({required String postId, bool hardDelete = false}) {
+    return serviceLocator<PostDeleteUseCase>().get(postId);
+  }
 }

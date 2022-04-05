@@ -1,5 +1,4 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/model/api_request/get_comment_request.dart';
 import 'package:amity_sdk/domain/domain.dart';
 
 class CommentQueryUsecase

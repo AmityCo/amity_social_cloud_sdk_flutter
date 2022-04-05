@@ -43,5 +43,16 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>NSPhotoLibraryUsageDescription</key> 
+	<string>We need access to photo library so that photos can be selected to create Amity Post</string>
+	<key>NSCameraUsageDescription</key> 
+	<string>We need access to Camera  so that photos can be selected to create Amity Post</string>
+	<key>NSMicrophoneUsageDescription</key> 
+	<string>We need access to Microphone so that audio can be selected to create Amity Post</string>
+	<key>UIBackgroundModes</key>
+	<array>
+	<string>fetch</string>
+	<string>remote-notification</string>
+	</array>
 </dict>
 </plist>

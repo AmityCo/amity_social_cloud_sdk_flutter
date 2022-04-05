@@ -7,7 +7,10 @@ extension UserResponseExtension on UserResponse {
       ..userId = userId
       ..displayName = displayName
       ..description = description
-      ..avatarFileId = avatarFileId;
+      ..avatarFileId = avatarFileId
+      ..metadata = metadata
+      ..createdAt = createdAt
+      ..updatedAt = updatedAt;
   }
 
   // AccountHiveEntity convertToAccountHiveEntity() {

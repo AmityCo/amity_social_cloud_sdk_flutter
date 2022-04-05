@@ -17,7 +17,7 @@ class UserHiveEntityAdapter extends TypeAdapter<UserHiveEntity> {
 
   @override
   void write(BinaryWriter writer, UserHiveEntity obj) {
-    writer..writeByte(0);
+    writer.writeByte(0);
   }
 
   @override

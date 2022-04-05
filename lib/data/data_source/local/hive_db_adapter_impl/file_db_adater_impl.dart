@@ -7,7 +7,7 @@ class FileDbAdapterImpl extends FileDbAdapter {
   FileDbAdapterImpl({required this.dbClient});
   late Box box;
   Future<FileDbAdapterImpl> init() async {
-    Hive.registerAdapter(FileHiveEntityAdapter());
+    Hive.registerAdapter(FileHiveEntityAdapter(), override: true);
     box = await Hive.openBox<FileHiveEntity>('file_db');
     return this;
   }

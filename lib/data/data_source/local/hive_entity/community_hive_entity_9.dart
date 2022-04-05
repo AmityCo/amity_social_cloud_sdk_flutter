@@ -1,4 +1,3 @@
-import 'package:amity_sdk/data/data.dart';
 import 'package:hive/hive.dart';
 
 part 'community_hive_entity_9.g.dart';
@@ -14,7 +13,7 @@ class CommunityHiveEntity {
   String? avatarFileId;
   bool? isOfficial;
   bool isPublic = false;
-  bool onlyAdminCanPos = false;
+  bool onlyAdminCanPost = false;
   //  DataClass metadata;
   int postCount = 0;
   int membersCount = 0;

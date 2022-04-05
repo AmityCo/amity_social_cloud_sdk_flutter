@@ -1,8 +1,4 @@
-import 'package:amity_sdk/core/enum/amity_post_target_type.dart';
-import 'package:amity_sdk/domain/model/amity_mentionee_target.dart';
-import 'package:amity_sdk/domain/model/amity_post.dart';
-import 'package:amity_sdk/domain/usecase/post/post_get_usecase.dart';
-import 'package:amity_sdk/public/amity_core_client.dart';
+import 'package:amity_sdk/amity.dart';
 
 class AmityPostGetTargetSelector {
   late PostGetUsecase _useCase;
@@ -10,99 +6,82 @@ class AmityPostGetTargetSelector {
     _useCase = useCase;
   }
 
-  AmityPostGetDataTypeSelector targetMe() {
-    return AmityPostGetDataTypeSelector(
-        useCase: _useCase,
-        targetId: AmityCoreClient.getUserId(),
-        targetType: AmityPostTargetType.USER);
+  _AmityPostGetQueryBuilder targetMe() {
+    return _AmityPostGetQueryBuilder(
+        _useCase, AmityCoreClient.getUserId(), AmityPostTargetType.USER.value);
   }
 
-  AmityPostGetDataTypeSelector targetUser(String targetUser) {
-    return AmityPostGetDataTypeSelector(
-        useCase: _useCase,
-        targetId: targetUser,
-        targetType: AmityPostTargetType.USER);
+  _AmityPostGetQueryBuilder targetUser(String targetUser) {
+    return _AmityPostGetQueryBuilder(
+        _useCase, targetUser, AmityPostTargetType.USER.value);
   }
 
-  AmityPostGetDataTypeSelector targetCommunity(String communityId) {
-    return AmityPostGetDataTypeSelector(
-        useCase: _useCase,
-        targetId: communityId,
-        targetType: AmityPostTargetType.COMMUNITY);
-  }
-
-  // PostGetQueryBuilder text(String text) {
-  //   _text = text;
-  //   return this;
-  // }
-
-  // Future post() {
-  //   throw UnimplementedError();
-  // }
-}
-
-//Target
-// class AmityMyFeedPostCreator {}
-
-// class AmityUserFeedPostCreator {
-//   late String _userId;
-//   AmityUserFeedPostCreator({required String userId}) {
-//     _userId = userId;
-//   }
-// }
-
-class AmityCommunityFeedPostCreator {}
-
-class AmityPostGetDataTypeSelector {
-  late PostGetUsecase _useCase;
-  late String _targetId;
-  late AmityPostTargetType _targetType;
-  AmityPostGetDataTypeSelector(
-      {required PostGetUsecase useCase,
-      required String targetId,
-      required AmityPostTargetType targetType}) {
-    _useCase = useCase;
-    _targetId = targetId;
-    _targetType = targetType;
-  }
-
-  AmityTextPostCreator text(String text) {
-    return AmityTextPostCreator(
-        useCase: _useCase,
-        targetId: _targetId,
-        targetType: _targetType.value,
-        text: text);
+  _AmityPostGetQueryBuilder targetCommunity(String communityId) {
+    return _AmityPostGetQueryBuilder(
+        _useCase, communityId, AmityPostTargetType.COMMUNITY.value);
   }
 }
 
-class AmityTextPostCreator {
-  late PostGetUsecase _useCase;
-  late String _targetId;
-  late String _targetType;
-  late String? _text;
-  Map<String, dynamic>? _metadata;
-  List<AmityMentioneeTarget>? _mentionees;
-  AmityTextPostCreator(
-      {required PostGetUsecase useCase,
-      required String targetId,
-      required String targetType,
-      String? text}) {
-    _useCase = useCase;
-    _targetId = targetId;
-    _targetType = targetType;
-    _text = text;
+class _AmityPostGetQueryBuilder {
+  final PostGetUsecase _useCase;
+  final String _targetId;
+  final String _targetType;
+  final GetPostRequest _request;
+
+  String? _sortOption = AmityCommentSortOption.LAST_CREATED.apiKey;
+  bool? _hasFlag;
+  bool? _isDeleted;
+  String? _amityFeedType;
+  List<String>? _dataTypes;
+
+  _AmityPostGetQueryBuilder(this._useCase, this._targetId, this._targetType)
+      : _request = GetPostRequest(targetId: _targetId, targetType: _targetType);
+
+  _AmityPostGetQueryBuilder sortBy(
+      {required AmityCommentSortOption sortOption}) {
+    _sortOption = sortOption.apiKey;
+    return this;
   }
 
-  Future<AmityPost> post() {
-    throw UnimplementedError();
-    // GetPostRequest request = GetPostRequest(
-    //     targetType: _targetType, targetId: _targetId, dataType: null);
+  _AmityPostGetQueryBuilder includeDeleted({required bool includeDeleted}) {
+    _isDeleted = includeDeleted;
+    return this;
+  }
 
-    // CreatePostData data = CreatePostData();
-    // if (_text != null) data.text = _text;
+  _AmityPostGetQueryBuilder hasFlag({required bool hasFlag}) {
+    _hasFlag = hasFlag;
+    return this;
+  }
 
-    // // request.data = data;
+  _AmityPostGetQueryBuilder feedType({required AmityFeedType feedType}) {
+    _amityFeedType = feedType.value;
+    return this;
+  }
 
-    // return _useCase.get(request);
+  _AmityPostGetQueryBuilder types({required List<AmityDataType> postTypes}) {
+    _dataTypes = postTypes.map((e) => e.value).toList();
+    return this;
+  }
+
+  Future<Tuple2<List<AmityPost>, String>> getPagingData(
+      {String? token, int? limit}) async {
+    if (_sortOption != null) _request.sortBy = _sortOption;
+    if (_hasFlag != null) _request.hasFlag = _hasFlag;
+    if (_isDeleted != null) _request.isDeleted = _isDeleted;
+    if (_amityFeedType != null) _request.feedType = _amityFeedType;
+    if (_dataTypes != null) _request.dataTypes = _dataTypes;
+
+    _request.options = OptionsRequest();
+
+    if (token != null) {
+      _request.options!.token = token;
+    }
+    if (limit != null) {
+      _request.options!.limit = limit;
+    }
+
+    final _data = await _useCase.get(_request);
+
+    return _data;
   }
 }

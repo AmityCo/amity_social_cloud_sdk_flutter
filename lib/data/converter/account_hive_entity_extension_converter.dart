@@ -7,6 +7,9 @@ extension AccountHiveEntityExtension on AccountHiveEntity {
       ..id = id
       ..userId = userId
       ..displayName = displayName
-      ..isGlobalBan = isActive;
+      ..isGlobalBan = isActive
+      ..metadata = metadata
+      ..createdAt = createdAt
+      ..updatedAt = updatedAt;
   }
 }

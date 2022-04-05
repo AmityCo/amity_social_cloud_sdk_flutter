@@ -1,8 +1,17 @@
 import 'package:amity_sdk/core/core.dart';
+import 'package:amity_sdk/data/data.dart';
 import 'package:amity_sdk/domain/domain.dart';
 import 'package:flutter/foundation.dart';
 
-class AmityPost extends ChangeNotifier implements ValueListenable {
+class AmityPost extends ChangeNotifier implements ValueListenable<AmityPost> {
+  AmityPost({required this.postId}) {
+    serviceLocator<PostDbAdapter>().listenPostEntity(postId!).listen((event) {
+      final _updateAmityPost = event.convertToAmityPost();
+      apply(_updateAmityPost);
+      notifyListeners();
+    });
+  }
+
   String? postId;
   AmityPostTargetType? targetType;
   AmityPostTarget? target; //composer
@@ -33,6 +42,23 @@ class AmityPost extends ChangeNotifier implements ValueListenable {
   DateTime? updatedAt;
   String? path;
 
+  void apply(AmityPost amityPost) {
+    //reaction update
+    myReactions = amityPost.myReactions;
+    reactionCount = amityPost.reactionCount;
+    reactions = amityPost.reactions;
+
+    //flag
+    isFlaggedByMe = amityPost.isFlaggedByMe;
+    flagCount = amityPost.flagCount;
+
+    //Delete
+    isDeleted = amityPost.isDeleted;
+
+    //data
+    data = amityPost.data;
+  }
+
   @override
   String toString() {
     return 'AmityPost(postId: $postId, parentPostId: $parentPostId, postedUserId: $postedUserId, sharedUserId: $sharedUserId, type: $type, metadata: $metadata, sharedCount: $sharedCount, isFlaggedByMe: $isFlaggedByMe, myReactions: $myReactions, reactions: $reactions, reactionCount: $reactionCount, commentCount: $commentCount, flagCount: $flagCount, latestCommentIds: $latestCommentIds, latestComments: $latestComments, childrenPostIds: $childrenPostIds, children: $children, postedUser: $postedUser, sharedUser: $sharedUser, isDeleted: $isDeleted, feedType: $feedType, mentionees: $mentionees, createdAt: $createdAt, editedAt: $editedAt, updatedAt: $updatedAt, path: $path, type: $type,data: $data,comment: $latestComments,children: $children)';
@@ -42,34 +68,39 @@ class AmityPost extends ChangeNotifier implements ValueListenable {
   get value => this;
 }
 
-class AmityPostData {
+abstract class AmityPostData {
+  final String postId;
+  final String? fileId;
+  final Map<String, dynamic>? rawData;
+  AmityFileInfo?
+      fileInfo; //Incase of Text post we dont have fileId, File Info or Raw Data
+
+  AmityPostData(
+      {required this.postId, this.fileId, this.rawData, this.fileInfo});
+
   @override
   String toString() => 'AmityPostData()';
 }
 
 class TextData extends AmityPostData {
-  String? postId;
   String? text;
   TextData({
-    this.postId,
+    required String postId,
     this.text,
-  });
+  }) : super(postId: postId);
 
   @override
   String toString() => 'TextData(postId: $postId, text: $text)';
 }
 
 class ImageData extends AmityPostData {
-  String? postId;
-  String? fileId;
-  Map<String, dynamic>? rawData;
   AmityImage? image; //composer
   ImageData({
-    this.postId,
-    this.fileId,
-    this.rawData,
+    required String postId,
+    String? fileId,
+    Map<String, dynamic>? rawData,
     this.image,
-  });
+  }) : super(postId: postId, fileId: fileId, rawData: rawData, fileInfo: image);
 
   @override
   String toString() {
@@ -78,34 +109,37 @@ class ImageData extends AmityPostData {
 }
 
 class FileData extends AmityPostData {
-  String? postId;
-  String? fileId;
-  Map<String, dynamic>? rawData;
-  AmityImage? file;
+  AmityFile? file;
+  FileData({
+    required String postId,
+    String? fileId,
+    Map<String, dynamic>? rawData,
+    this.file,
+  }) : super(postId: postId, fileId: fileId, rawData: rawData, fileInfo: file);
 }
 
 class VideoData extends AmityPostData {
-  String? postId;
-  String? fileId;
-  Map<String, dynamic>? rawData;
   AmityImage? thumbnail;
   VideoData({
-    this.postId,
-    this.fileId,
-    this.rawData,
+    required String postId,
+    String? fileId,
+    Map<String, dynamic>? rawData,
     this.thumbnail,
-  });
+  }) : super(
+            postId: postId,
+            fileId: fileId,
+            rawData: rawData,
+            fileInfo: thumbnail);
 }
 
 class LiveStreamData extends AmityPostData {
-  String? postId;
   String? streamId;
-  Map<String, dynamic>? rawData;
   LiveStreamData({
-    this.postId,
+    required String postId,
     this.streamId,
-    this.rawData,
-  });
+    Map<String, dynamic>? rawData,
+  }) : super(
+            postId: postId, fileId: streamId, rawData: rawData, fileInfo: null);
 }
 
 // class PollData extends AmityPostData {
@@ -136,7 +170,7 @@ class CommunityTarget extends AmityPostTarget {
   String? targetCommunityId;
   AmityCommunity? targetCommunity; //composer
   AmityCommunityMember? postedCommunityMember; //composer
-
+  CommunityTarget({this.targetCommunityId, this.targetCommunity});
   @override
   String toString() =>
       'CommunityTarget(targetCommunityId: $targetCommunityId, targetCommunity: $targetCommunity, postedCommunityMember: $postedCommunityMember)';
@@ -145,11 +179,7 @@ class CommunityTarget extends AmityPostTarget {
 class UserTarget extends AmityPostTarget {
   String? targetUserId;
   AmityUser? targetUser; //composer
-  UserTarget({
-    this.targetUserId,
-    this.targetUser,
-  });
-
+  UserTarget({this.targetUserId, this.targetUser});
   @override
   String toString() =>
       'UserTarget(targetUserId: $targetUserId, targetUser: $targetUser)';

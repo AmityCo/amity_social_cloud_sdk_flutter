@@ -1,6 +1,7 @@
 class CommunityResponse {
   CommunityResponse({
     required this.communityId,
+    required this.path,
     required this.channelId,
     required this.userId,
     required this.displayName,
@@ -24,6 +25,7 @@ class CommunityResponse {
   });
 
   final String communityId;
+  final String path;
   final String channelId;
   final String userId;
   final String displayName;
@@ -48,6 +50,7 @@ class CommunityResponse {
   factory CommunityResponse.fromJson(Map<String, dynamic> json) =>
       CommunityResponse(
         communityId: json["communityId"],
+        path: json["path"],
         channelId: json["channelId"],
         userId: json["userId"],
         displayName: json["displayName"],

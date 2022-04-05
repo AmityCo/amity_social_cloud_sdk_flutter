@@ -7,6 +7,7 @@ export 'amity_follow_relationship.dart';
 export 'amity_mentionee.dart';
 export 'amity_mentionee_target.dart';
 export 'amity_post.dart';
+export 'amity_post/amity_post.dart';
 export 'amity_premissions.dart';
 export 'amity_reaction.dart';
 export 'amity_reaction_map.dart';

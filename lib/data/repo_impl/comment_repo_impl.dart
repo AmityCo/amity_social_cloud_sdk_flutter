@@ -1,7 +1,6 @@
 import 'package:amity_sdk/core/model/api_request/create_comment_request.dart';
 import 'package:amity_sdk/core/model/api_request/get_comment_request.dart';
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/remote/api_interface/commnet_api_interface.dart';
 import 'package:amity_sdk/domain/domain.dart';
 
 class CommentRepoImpl extends CommentRepo {
@@ -18,8 +17,7 @@ class CommentRepoImpl extends CommentRepo {
       required this.fileDbAdapter});
   @override
   Future<AmityComment> getCommentByIdFromDb(String commentId) async {
-    final commentHiveEntity =
-        await commentDbAdapter.getCommentEntity(commentId);
+    final commentHiveEntity = commentDbAdapter.getCommentEntity(commentId);
     return commentHiveEntity.convertToAmityComment();
   }
 

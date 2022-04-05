@@ -7,12 +7,6 @@ class PostChildDataHiveEntity {
   String? text;
   String? fileId;
   String? thumbnailFileId;
-  // VideoFileIdHiveEntity? videoFileId;
+  Map<String, String>? videoFileId;
   String? streamId;
 }
-// class VideoFileIdHiveEntity {
-//   String? original;
-//   String? low;
-//   String? medium;
-//   String? high;
-// }

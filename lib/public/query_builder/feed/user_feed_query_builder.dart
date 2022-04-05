@@ -1,14 +1,9 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/enum/amity_user_feed_sort_option.dart';
-import 'package:amity_sdk/core/model/api_request/core/option_request.dart';
-import 'package:amity_sdk/core/model/api_request/get_user_feed_request.dart';
-import 'package:amity_sdk/core/utils/tuple.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/usecase/feed/get_user_feed_usecase.dart';
 
 class UserFeedQueryBuilder {
   final GetUserFeedUsecase _usecase;
-  late GetUserFeedRequest _request;
+  final GetUserFeedRequest _request;
 
   UserFeedQueryBuilder(this._usecase, String userId)
       : _request = GetUserFeedRequest(userId: userId);
@@ -31,6 +26,7 @@ class UserFeedQueryBuilder {
   Future<Tuple2<List<AmityPost>, String>> getPagingData(
       {String? token, int? limit}) async {
     _request.options = OptionsRequest();
+
     if (token != null) {
       _request.options!.token = token;
     }

@@ -1,6 +1,4 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/enum/amity_post_target_type.dart';
-import 'package:amity_sdk/core/model/api_request/create_post_request.dart';
 import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
 import 'package:amity_sdk/domain/model/amity_mentionee_target.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
@@ -134,6 +132,7 @@ class AmityImagePostCreator {
   late PostCreateUsecase _useCase;
   late String _targetId;
   late String _targetType;
+  String? _text;
   late List<AmityImage> _images;
   Map<String, dynamic>? _metadata;
   List<AmityMentioneeTarget>? _mentionees;
@@ -148,28 +147,36 @@ class AmityImagePostCreator {
     _images = images;
   }
 
+  AmityImagePostCreator text(String text) {
+    _text = text;
+    return this;
+  }
+
   Future<AmityPost> post() {
     CreatePostRequest request = CreatePostRequest(
         targetType: _targetType, targetId: _targetId, dataType: null);
 
     request.attachments = _images
-        .map((e) => Attachment(
-            fileId: e.getFileId(), type: 'image')) //TODO: Add type here
+        .map((e) =>
+            Attachment(fileId: e.fileId, type: AmityDataType.IMAGE.value))
         .toList();
 
-    // CreatePostData data = CreatePostData();
-    //  data. = _text;
-    // request.data = data;
+    if (_text != null) {
+      CreatePostData data = CreatePostData();
+      data.text = _text;
+      request.data = data;
+    }
 
     return _useCase.get(request);
   }
 }
 
 class AmityFilePostCreator {
-  late PostCreateUsecase _useCase;
-  late String _targetId;
-  late String _targetType;
-  late List<AmityFile> _files;
+  late final PostCreateUsecase _useCase;
+  late final String _targetId;
+  late final String _targetType;
+  String? _text;
+  late final List<AmityFile> _files;
   Map<String, dynamic>? _metadata;
   List<AmityMentioneeTarget>? _mentionees;
   AmityFilePostCreator(
@@ -182,18 +189,25 @@ class AmityFilePostCreator {
         _targetType = targetType,
         _files = files;
 
+  AmityFilePostCreator text(String text) {
+    _text = text;
+    return this;
+  }
+
   Future<AmityPost> post() {
     CreatePostRequest request = CreatePostRequest(
         targetType: _targetType, targetId: _targetId, dataType: null);
 
     request.attachments = _files
-        .map((e) => Attachment(
-            fileId: e.getFileId(), type: 'file')) //TODO: Add type here
+        .map(
+            (e) => Attachment(fileId: e.fileId, type: AmityDataType.FILE.value))
         .toList();
 
-    // CreatePostData data = CreatePostData();
-    //  data. = _text;
-    // request.data = data;
+    if (_text != null) {
+      CreatePostData data = CreatePostData();
+      data.text = _text;
+      request.data = data;
+    }
 
     return _useCase.get(request);
   }
@@ -203,6 +217,7 @@ class AmityVideoPostCreator {
   late PostCreateUsecase _useCase;
   late String _targetId;
   late String _targetType;
+  String? _text;
   late List<AmityVideo> _videos;
   Map<String, dynamic>? _metadata;
   List<AmityMentioneeTarget>? _mentionees;
@@ -217,18 +232,25 @@ class AmityVideoPostCreator {
     _videos = video;
   }
 
+  AmityVideoPostCreator text(String text) {
+    _text = text;
+    return this;
+  }
+
   Future<AmityPost> post() {
     CreatePostRequest request = CreatePostRequest(
         targetType: _targetType, targetId: _targetId, dataType: null);
 
     request.attachments = _videos
-        .map((e) => Attachment(
-            fileId: e.getFileId(), type: 'video')) //TODO: Add type here
+        .map((e) =>
+            Attachment(fileId: e.fileId, type: AmityDataType.VIDEO.value))
         .toList();
 
-    // CreatePostData data = CreatePostData();
-    //  data. = _text;
-    // request.data = data;
+    if (_text != null) {
+      CreatePostData data = CreatePostData();
+      data.text = _text;
+      request.data = data;
+    }
 
     return _useCase.get(request);
   }

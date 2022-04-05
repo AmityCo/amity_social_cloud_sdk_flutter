@@ -3,6 +3,7 @@ import 'package:amity_sdk/data/response/response.dart';
 
 abstract class FileApiInterface {
   Future<List<FileResponse>> uploadFile(UploadFileRequest request);
+  Future<List<FileResponse>> uploadVideo(UploadFileRequest request);
   Future<CreatePostResponse> getFile(String fileId);
   Future<bool> deleteFile(String fileId);
 }

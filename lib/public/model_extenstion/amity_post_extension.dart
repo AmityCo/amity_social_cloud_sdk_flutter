@@ -1,6 +1,6 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/enum/reaction_reference_type.dart';
 import 'package:amity_sdk/domain/domain.dart';
+import 'package:amity_sdk/domain/usecase/post/post_delete_usecase.dart';
 import 'package:amity_sdk/public/query_builder/comment/comment_create_query_builder.dart';
 import 'package:amity_sdk/public/query_builder/post/post_flag_query_builder.dart';
 import 'package:amity_sdk/public/query_builder/post/post_update_query_builder.dart';
@@ -28,11 +28,11 @@ extension AmityPostExtension on AmityPost {
         postId: postId!);
   }
 
-  AmityPostUpdateDataTypeSelector edit() {
-    return AmityPostUpdateDataTypeSelector(
-        useCase: serviceLocator(),
-        postId: postId!,
-        userId: postedUserId!,
-        targetType: targetType!);
+  AmityTextPostUpdator edit() {
+    return AmityTextPostUpdator(useCase: serviceLocator(), targetId: postId!);
+  }
+
+  Future delete({bool hardDelete = false}) {
+    return serviceLocator<PostDeleteUseCase>().get(postId!);
   }
 }

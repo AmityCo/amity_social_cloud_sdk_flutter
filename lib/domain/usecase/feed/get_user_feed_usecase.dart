@@ -1,10 +1,7 @@
 import 'dart:async';
 
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/model/api_request/get_user_feed_request.dart';
-import 'package:amity_sdk/core/utils/tuple.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/repo/user_feed_repo.dart';
 
 class GetUserFeedUsecase
     extends UseCase<Tuple2<List<AmityPost>, String>, GetUserFeedRequest> {
@@ -23,7 +20,7 @@ class GetUserFeedUsecase
 
   @override
   Stream<Tuple2<List<AmityPost>, String>> listen(GetUserFeedRequest params) {
-   //1. Listen to Global Feed collection
+    //1. Listen to Global Feed collection
     //2. Compose Global Feed Collection post
     StreamController<Tuple2<List<AmityPost>, String>> controller =
         StreamController<Tuple2<List<AmityPost>, String>>();

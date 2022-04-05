@@ -2,13 +2,13 @@
 //
 //     final reactionRequest = reactionRequestFromJson(jsonString);
 
-import 'dart:convert';
+// ReactionRequest reactionRequestFromJson(String str) =>
+//     ReactionRequest.fromJson(json.decode(str));
 
-ReactionRequest reactionRequestFromJson(String str) =>
-    ReactionRequest.fromJson(json.decode(str));
+// String reactionRequestToJson(ReactionRequest data) =>
+//     json.encode(data.toJson());
 
-String reactionRequestToJson(ReactionRequest data) =>
-    json.encode(data.toJson());
+import 'package:amity_sdk/core/core.dart';
 
 class ReactionRequest {
   ReactionRequest({
@@ -33,4 +33,9 @@ class ReactionRequest {
         "referenceType": referenceType,
         "reactionName": reactionName,
       };
+
+  @override
+  String toString() {
+    return toJson().toJson();
+  }
 }

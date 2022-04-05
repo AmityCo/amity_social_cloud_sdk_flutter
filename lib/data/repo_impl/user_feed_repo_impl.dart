@@ -3,37 +3,35 @@ import 'dart:async';
 import 'package:amity_sdk/core/model/api_request/get_user_feed_request.dart';
 import 'package:amity_sdk/core/utils/tuple.dart';
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/feed_paging_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/remote/api_interface/user_feed_api_interface.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/domain/repo/user_feed_repo.dart';
 
 class UserFeedRepoImpl extends UserFeedRepo {
-  final UserFeedApiInterface _userFeedApiInterface;
+  final UserFeedApiInterface userFeedApiInterface;
   final PostDbAdapter postDbAdapter;
   final CommentDbAdapter commentDbAdapter;
   final UserDbAdapter userDbAdapter;
   final FileDbAdapter fileDbAdapter;
   final FeedPagingDbAdapter feedDbAdapter;
   UserFeedRepoImpl(
-      this._userFeedApiInterface,
-      this.postDbAdapter,
-      this.commentDbAdapter,
-      this.userDbAdapter,
-      this.fileDbAdapter,
-      this.feedDbAdapter);
+      {required this.userFeedApiInterface,
+      required this.postDbAdapter,
+      required this.commentDbAdapter,
+      required this.userDbAdapter,
+      required this.fileDbAdapter,
+      required this.feedDbAdapter});
 
   @override
   Future<Tuple2<List<AmityPost>, String>> getUserFeed(
       GetUserFeedRequest request) async {
-    final data = await _userFeedApiInterface.getUserFeed(request);
+    final data = await userFeedApiInterface.getUserFeed(request);
 
     //Save the feed sequence in to feed db
     await feedDbAdapter.updateFeedCollection(data.convertToFeedHiveEntity());
 
     final amitPosts = await _saveDataToDb(data);
 
-    return Tuple2(amitPosts, data.paging!.next!);
+    return Tuple2(amitPosts, data.paging!.next ?? '');
   }
 
   @override
@@ -51,9 +49,7 @@ class UserFeedRepoImpl extends UserFeedRepo {
 
     /// 2. Make the API request and send the updated data back
     getUserFeed(request).then((value) {
-      if (value != null) {
-        controller.add(value);
-      }
+      controller.add(value);
     });
 
     ///3. Listen any chagnes in the Amity Post Db and send the update back

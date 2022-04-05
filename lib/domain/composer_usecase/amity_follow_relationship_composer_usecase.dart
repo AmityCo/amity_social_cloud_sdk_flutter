@@ -1,5 +1,4 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/domain/composer_usecase/user_compose_usecase.dart';
 import 'package:amity_sdk/domain/domain.dart';
 
 class AmityFollowRelationshipComposerUsecase

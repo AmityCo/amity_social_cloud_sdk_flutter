@@ -1,63 +1,41 @@
-import 'package:amity_sdk/core/core.dart';
+import 'package:amity_sdk/core/model/api_request/update_post_request.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/usecase/post/post_update_usecase.dart';
 
-class AmityPostUpdateDataTypeSelector {
+class AmityTextPostUpdator {
   late PostUpdateUsecase _useCase;
-  late String _postId;
-  late String _userId;
-  late AmityPostTargetType _targetType;
-  AmityPostUpdateDataTypeSelector(
-      {required PostUpdateUsecase useCase,
-      required String postId,
-      required String userId,
-      required AmityPostTargetType targetType})
-      : _useCase = useCase,
-        _postId = postId,
-        _userId = userId,
-        _targetType = targetType;
+  late String _targetId;
+  AmityTextPostUpdator({
+    required PostUpdateUsecase useCase,
+    required String targetId,
+  }) {
+    _useCase = useCase;
+    _targetId = targetId;
+  }
 
-  AmityTextPostUpdatetor text(String text) {
-    return AmityTextPostUpdatetor(
-        useCase: _useCase,
-        targetId: _userId,
-        targetType: _targetType.value,
-        text: text);
+  AmityPostUpdater text(String text) {
+    return AmityPostUpdater.textUpate(_useCase, _targetId, text);
   }
 }
 
-class AmityTextPostUpdatetor {
-  late PostUpdateUsecase _useCase;
-  late String _targetId;
-  late String _targetType;
-  late String _text;
-  Map<String, dynamic>? _metadata;
-  List<AmityMentioneeTarget>? _mentionees;
-  AmityTextPostUpdatetor(
-      {required PostUpdateUsecase useCase,
-      required String targetId,
-      required String targetType,
-      required String text}) {
-    _useCase = useCase;
-    _targetId = targetId;
-    _targetType = targetType;
-    _text = text;
-  }
+class AmityPostUpdater {
+  final PostUpdateUsecase _usecase;
+  final String _targetId;
+  String? _text;
 
-  AmityTextPostUpdatetor text(String text) {
-    _text = text;
-    return this;
-  }
+  factory AmityPostUpdater.textUpate(usecase, targetId, text) =>
+      AmityPostUpdater(usecase,targetId).._text = text;
 
-  Future<AmityPost> apply() {
-    CreatePostRequest request = CreatePostRequest(
-        targetType: _targetType, targetId: _targetId, dataType: null);
+  AmityPostUpdater(this._usecase, this._targetId);
 
-    CreatePostData data = CreatePostData();
-    data.text = _text;
+  Future update() {
 
-    request.data = data;
+    UpdatePostRequest updatePostRequest = UpdatePostRequest(postId: _targetId);
 
-    return _useCase.get(request);
+    UpdatePostData updateData = UpdatePostData();
+    if (_text != null) updateData.text = _text;
+
+    updatePostRequest.data = updateData;
+
+    return _usecase.get(updatePostRequest);
   }
 }

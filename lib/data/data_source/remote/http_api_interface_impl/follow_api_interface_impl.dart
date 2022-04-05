@@ -61,7 +61,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   Future<FollowInfoResponse> getFollowInfo(String userId) async {
     try {
       final data = await httpApiClient().get(
-        USERS_v4_URL + '$userId/followInfo',
+        USERS_V4_URL + '$userId/followInfo',
       );
       return FollowInfoResponse.fromJson(data.data);
     } on DioError catch (error) {

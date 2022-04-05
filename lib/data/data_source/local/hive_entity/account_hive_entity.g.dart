@@ -17,7 +17,7 @@ class AccountHiveEntityAdapter extends TypeAdapter<AccountHiveEntity> {
 
   @override
   void write(BinaryWriter writer, AccountHiveEntity obj) {
-    writer..writeByte(0);
+    writer.writeByte(0);
   }
 
   @override

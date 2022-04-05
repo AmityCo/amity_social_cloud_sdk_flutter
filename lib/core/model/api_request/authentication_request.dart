@@ -37,7 +37,7 @@ class AuthenticationRequest {
   Map<String, dynamic> toJson() => {
         "userId": userId,
         "deviceId": deviceId,
-        "deviceInfo": deviceInfo?.toJson() ?? null,
+        "deviceInfo": deviceInfo?.toJson(),
         "displayName": displayName,
         "authToken": authToken,
       };

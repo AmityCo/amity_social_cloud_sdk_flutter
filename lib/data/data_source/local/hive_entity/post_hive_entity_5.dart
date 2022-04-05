@@ -7,7 +7,7 @@ part 'post_hive_entity_5.g.dart';
 class PostHiveEntity extends HiveObject {
   String? id;
   String? path;
-  String? postId;
+  String postId = '';
   String? parentPostId;
   String? postedUserId;
   String? sharedUserId;
@@ -22,7 +22,7 @@ class PostHiveEntity extends HiveObject {
   DateTime? editedAt;
   DateTime? createdAt;
   DateTime? updatedAt;
-  //  Reactions reactions;
+  Map<String, int>? reactions;
   int? reactionsCount;
   List<String>? myReactions;
   int? commentsCount;

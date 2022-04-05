@@ -16,4 +16,10 @@ class GetGlobalFeedRequest extends PaginatedApiRequest {
 
   @override
   int get hashCode => 'GLOBAL_FEED_${dataTypes?.join('_')}'.hashCode;
+
+  @override
+  bool operator ==(Object other) {
+    // TODO: implement ==
+    return super == other;
+  }
 }

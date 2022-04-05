@@ -2,14 +2,6 @@
 //
 //     final createPostRequest = createPostRequestFromJson(jsonString);
 
-import 'dart:convert';
-
-CreatePostRequest createPostRequestFromJson(String str) =>
-    CreatePostRequest.fromJson(json.decode(str));
-
-String createPostRequestToJson(CreatePostRequest data) =>
-    json.encode(data.toJson());
-
 class CreatePostRequest {
   CreatePostRequest({
     this.data,
@@ -26,7 +18,7 @@ class CreatePostRequest {
   String? dataType;
   final String targetType;
   final String targetId;
-  Metadata? metadata;
+  PostMetadata? metadata;
   String? postId;
 
   factory CreatePostRequest.fromJson(Map<String, dynamic> json) =>
@@ -37,7 +29,7 @@ class CreatePostRequest {
         dataType: json["dataType"],
         targetType: json["targetType"],
         targetId: json["targetId"],
-        metadata: Metadata.fromJson(json["metadata"]),
+        metadata: PostMetadata.fromJson(json["metadata"]),
         postId: json["postId"],
       );
 
@@ -52,9 +44,10 @@ class CreatePostRequest {
         "metadata": metadata == null ? null : metadata!.toJson(),
         "postId": postId,
       }..removeWhere((key, value) => value == null);
+
   @override
   String toString() {
-    return createPostRequestToJson(this);
+    return toJson().toString();
   }
 }
 
@@ -106,14 +99,14 @@ class CreatePostData {
       }..removeWhere((key, value) => value == null);
 }
 
-class Metadata {
-  Metadata({
+class PostMetadata {
+  PostMetadata({
     required this.anything,
   });
 
   final String anything;
 
-  factory Metadata.fromJson(Map<String, dynamic> json) => Metadata(
+  factory PostMetadata.fromJson(Map<String, dynamic> json) => PostMetadata(
         anything: json["anything"],
       );
 

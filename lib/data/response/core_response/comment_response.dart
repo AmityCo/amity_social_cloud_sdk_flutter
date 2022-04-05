@@ -41,7 +41,7 @@ class CommentResponse {
   final int childrenNumber;
   final int flagCount;
   final HashFlag? hashFlag;
-  final ReactionResponse? reactions;
+  final Map<String, int>? reactions;
   final int reactionsCount;
   final List<String>? myReactions;
   final bool isDeleted;
@@ -70,9 +70,7 @@ class CommentResponse {
         hashFlag: json["hashFlag"] == null
             ? null
             : HashFlag.fromJson(json["hashFlag"]),
-        reactions: json["reactions"] == null
-            ? null
-            : ReactionResponse.fromJson(json["reactions"]),
+        reactions: Map.from(json["reactions"]),
         reactionsCount: json["reactionsCount"],
         myReactions: json["myReactions"] == null
             ? null
@@ -101,7 +99,7 @@ class CommentResponse {
         "childrenNumber": childrenNumber,
         "flagCount": flagCount,
         "hashFlag": hashFlag == null ? null : hashFlag!.toJson(),
-        "reactions": reactions == null ? null : reactions!.toJson(),
+        "reactions": reactions,
         "reactionsCount": reactionsCount,
         "myReactions": myReactions == null
             ? null
