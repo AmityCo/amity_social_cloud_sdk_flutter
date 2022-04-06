@@ -45,8 +45,8 @@ class AppRouter {
             GoRoute(
               name: AppRoute.communityFeed,
               path: AppRoute.communityFeedRoute,
-              builder: (context, state) =>
-                  CommunityFeedScreen(communityId: state.params['userId']!),
+              builder: (context, state) => CommunityFeedScreen(
+                  communityId: state.params['communityId']!),
             ),
             GoRoute(
               name: AppRoute.userFeed,
