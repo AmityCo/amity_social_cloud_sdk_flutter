@@ -7,8 +7,11 @@ class AmityPost extends ChangeNotifier implements ValueListenable<AmityPost> {
   AmityPost({required this.postId}) {
     serviceLocator<PostDbAdapter>().listenPostEntity(postId!).listen((event) {
       final _updateAmityPost = event.convertToAmityPost();
-      apply(_updateAmityPost);
-      notifyListeners();
+
+      //TOOD: Good idea would be have compose method inside the object itself
+      serviceLocator<PostComposerUsecase>().get(_updateAmityPost).then(
+            (value) => apply(value),
+          );
     });
   }
 
@@ -57,6 +60,8 @@ class AmityPost extends ChangeNotifier implements ValueListenable<AmityPost> {
 
     //data
     data = amityPost.data;
+
+    notifyListeners();
   }
 
   @override
