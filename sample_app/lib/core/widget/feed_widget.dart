@@ -4,8 +4,8 @@ import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/utils/extension/date_extension.dart';
 import 'package:flutter_social_sample_app/core/widget/user_profile_info_row_widget.dart';
-import 'package:flutter_social_sample_app/presentation/screen/video_player/full_screen_video_player.dart';
 import 'package:flutter_social_sample_app/presentation/screen/update_post/update_post_screen.dart';
+import 'package:flutter_social_sample_app/presentation/screen/video_player/full_screen_video_player.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class FeedWidget extends StatelessWidget {
@@ -227,7 +227,7 @@ class FeedContentWidget extends StatelessWidget {
         width: 100,
         height: 100,
         child: Image.network(
-          data.image!.getUrl(AmityImageSize.MEDIUM),
+          data.image.getUrl(AmityImageSize.MEDIUM),
           fit: BoxFit.cover,
         ),
       );
@@ -243,7 +243,7 @@ class FeedContentWidget extends StatelessWidget {
           children: [
             Positioned.fill(
               child: Image.network(
-                data.thumbnail!.getUrl(AmityImageSize.MEDIUM),
+                data.thumbnail.getUrl(AmityImageSize.MEDIUM),
                 fit: BoxFit.cover,
               ),
             ),
@@ -277,11 +277,11 @@ class FeedContentWidget extends StatelessWidget {
       final data = amityPostData as FileData;
       return TextButton.icon(
         onPressed: () {
-          launch(data.fileInfo!.fileName);
+          launch(data.fileInfo.fileName);
         },
         icon: const Icon(Icons.attach_file_rounded, color: Colors.blue),
         label: Text(
-          '${data.fileInfo?.fileName}',
+          data.fileInfo.fileName,
           style: _themeData.textTheme.bodyText1!.copyWith(color: Colors.blue),
         ),
       );

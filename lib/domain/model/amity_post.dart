@@ -7,8 +7,11 @@ class AmityPost extends ChangeNotifier implements ValueListenable<AmityPost> {
   AmityPost({required this.postId}) {
     serviceLocator<PostDbAdapter>().listenPostEntity(postId!).listen((event) {
       final _updateAmityPost = event.convertToAmityPost();
-      apply(_updateAmityPost);
-      notifyListeners();
+
+      //TOOD: Good idea would be have compose method inside the object itself
+      serviceLocator<PostComposerUsecase>().get(_updateAmityPost).then(
+            (value) => apply(value),
+          );
     });
   }
 
@@ -57,6 +60,8 @@ class AmityPost extends ChangeNotifier implements ValueListenable<AmityPost> {
 
     //data
     data = amityPost.data;
+
+    notifyListeners();
   }
 
   @override
@@ -72,11 +77,10 @@ abstract class AmityPostData {
   final String postId;
   final String? fileId;
   final Map<String, dynamic>? rawData;
-  AmityFileInfo?
-      fileInfo; //Incase of Text post we dont have fileId, File Info or Raw Data
+  late AmityFileInfo
+      fileInfo; //Composer, Incase of Text post we dont have fileId, File Info or Raw Data
 
-  AmityPostData(
-      {required this.postId, this.fileId, this.rawData, this.fileInfo});
+  AmityPostData({required this.postId, this.fileId, this.rawData});
 
   @override
   String toString() => 'AmityPostData()';
@@ -94,13 +98,12 @@ class TextData extends AmityPostData {
 }
 
 class ImageData extends AmityPostData {
-  AmityImage? image; //composer
+  late AmityImage image; //composer
   ImageData({
     required String postId,
     String? fileId,
     Map<String, dynamic>? rawData,
-    this.image,
-  }) : super(postId: postId, fileId: fileId, rawData: rawData, fileInfo: image);
+  }) : super(postId: postId, fileId: fileId, rawData: rawData);
 
   @override
   String toString() {
@@ -109,37 +112,34 @@ class ImageData extends AmityPostData {
 }
 
 class FileData extends AmityPostData {
-  AmityFile? file;
+  late AmityFile file; //composer
   FileData({
     required String postId,
     String? fileId,
     Map<String, dynamic>? rawData,
-    this.file,
-  }) : super(postId: postId, fileId: fileId, rawData: rawData, fileInfo: file);
+  }) : super(postId: postId, fileId: fileId, rawData: rawData);
 }
 
 class VideoData extends AmityPostData {
-  AmityImage? thumbnail;
+  late AmityImage thumbnail; //composer
   VideoData({
     required String postId,
     String? fileId,
     Map<String, dynamic>? rawData,
-    this.thumbnail,
   }) : super(
-            postId: postId,
-            fileId: fileId,
-            rawData: rawData,
-            fileInfo: thumbnail);
+          postId: postId,
+          fileId: fileId,
+          rawData: rawData,
+        );
 }
 
 class LiveStreamData extends AmityPostData {
   String? streamId;
   LiveStreamData({
     required String postId,
-    this.streamId,
+    required this.streamId,
     Map<String, dynamic>? rawData,
-  }) : super(
-            postId: postId, fileId: streamId, rawData: rawData, fileInfo: null);
+  }) : super(postId: postId, fileId: streamId, rawData: rawData);
 }
 
 // class PollData extends AmityPostData {
