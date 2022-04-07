@@ -32,6 +32,6 @@ class CommunityFeedRepoImpl extends CommunityFeedRepo {
         .asyncMap((postId) => postRepo.getPostByIdFromDb(postId))
         .toList();
 
-    return Tuple2(amitPosts, data.paging!.next!);
+    return Tuple2(amitPosts, data.paging!.next ?? '');
   }
 }

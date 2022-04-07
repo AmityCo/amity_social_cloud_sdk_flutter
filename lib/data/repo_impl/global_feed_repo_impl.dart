@@ -25,7 +25,7 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
 
     final amitPosts = await _saveDataToDb(data);
 
-    return Tuple2(amitPosts, data.paging!.next!);
+    return Tuple2(amitPosts, data.paging!.next ?? '');
   }
 
   @override
