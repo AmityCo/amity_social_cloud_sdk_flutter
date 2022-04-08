@@ -121,7 +121,8 @@ class FileData extends AmityPostData {
 }
 
 class VideoData extends AmityPostData {
-  late AmityImage thumbnail; //composer
+  //FIX: - some vidoe post dont have thubnail, we have to keep thubnail nullable instead of late.
+  AmityImage? thumbnail; //composer
   VideoData({
     required String postId,
     String? fileId,

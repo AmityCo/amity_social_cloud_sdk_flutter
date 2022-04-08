@@ -2,7 +2,6 @@ import 'package:amity_sdk/public/amity_core_client.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/route/app_route.dart';
-import 'package:flutter_social_sample_app/presentation/screen/login/login_screen.dart';
 import 'package:flutter_social_sample_app/presentation/screen/user_feed/user_feed_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -95,12 +94,7 @@ class _DashboardScreenState extends State<DashboardScreen> {
               const SizedBox(height: 200),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(
-                      builder: (context) => const LoginScreen(),
-                    ),
-                    (route) => false,
-                  );
+                  GoRouter.of(context).goNamed(AppRoute.login);
                 },
                 child: Text(
                   'Logout',

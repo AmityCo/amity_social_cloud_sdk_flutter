@@ -26,6 +26,7 @@ class _UserFeedScreenState extends State<UserFeedScreen> {
     _controller = PagingController(
       pageFuture: (token) => AmitySocialClient.newFeedRepository()
           .getUserFeed(widget.userId)
+          .includeDeleted(false)
           .getPagingData(token: token, limit: GlobalConstant.pageSize),
       pageSize: GlobalConstant.pageSize,
     )..addListener(
@@ -69,14 +70,11 @@ class _UserFeedScreenState extends State<UserFeedScreen> {
       appBar: widget.showAppBar
           ? AppBar(title: Text('User Feed - ${widget.userId}'))
           : null,
-      body: amityPosts.isEmpty
-          ? const Center(
-              child: Text('No Post Found'),
-            )
-          : Column(
-              children: [
-                Expanded(
-                  child: RefreshIndicator(
+      body: Column(
+        children: [
+          Expanded(
+            child: amityPosts.isNotEmpty
+                ? RefreshIndicator(
                     onRefresh: () async {
                       _controller.reset();
                       _controller.fetchNextPage();
@@ -89,22 +87,21 @@ class _UserFeedScreenState extends State<UserFeedScreen> {
                         return FeedWidget(amityPost: amityPost);
                       },
                     ),
-                  ),
-                ),
-                if (_controller.isFetching)
-                  Container(
+                  )
+                : Container(
                     alignment: Alignment.center,
                     child: _controller.isFetching
                         ? const CircularProgressIndicator()
                         : const Text('No Post'),
                   ),
-                if (_controller.isFetching && amityPosts.isNotEmpty)
-                  Container(
-                    alignment: Alignment.center,
-                    child: const CircularProgressIndicator(),
-                  )
-              ],
+          ),
+          if (_controller.isFetching && amityPosts.isNotEmpty)
+            Container(
+              alignment: Alignment.center,
+              child: const CircularProgressIndicator(),
             ),
+        ],
+      ),
     );
   }
 }

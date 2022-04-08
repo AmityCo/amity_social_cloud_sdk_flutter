@@ -238,11 +238,12 @@ class FeedContentWidget extends StatelessWidget {
       return Container(
         width: 100,
         height: 100,
+        // color: Colors.red,
         child: Stack(
           children: [
             Positioned.fill(
               child: Image.network(
-                data.thumbnail.getUrl(AmityImageSize.MEDIUM),
+                data.thumbnail?.getUrl(AmityImageSize.MEDIUM) ?? '',
                 fit: BoxFit.cover,
               ),
             ),

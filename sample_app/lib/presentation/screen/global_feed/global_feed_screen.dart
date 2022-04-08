@@ -3,10 +3,8 @@ import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/constant/global_constant.dart';
-import 'package:flutter_social_sample_app/core/route/app_route.dart';
 import 'package:flutter_social_sample_app/core/widget/dialog/error_dialog.dart';
 import 'package:flutter_social_sample_app/core/widget/feed_widget.dart';
-import 'package:flutter_social_sample_app/core/constant/global_constant.dart';
 
 class GlobalFeedScreen extends StatefulWidget {
   const GlobalFeedScreen({Key? key}) : super(key: key);

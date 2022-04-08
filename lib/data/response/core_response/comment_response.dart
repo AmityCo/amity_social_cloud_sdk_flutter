@@ -45,9 +45,9 @@ class CommentResponse {
   final int reactionsCount;
   final List<String>? myReactions;
   final bool isDeleted;
-  final DateTime editedAt;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? editedAt;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
   final List<String> children;
   final int segmentNumber;
   final String? required;
@@ -76,9 +76,14 @@ class CommentResponse {
             ? null
             : List<String>.from(json["myReactions"]!.map((x) => x)),
         isDeleted: json["isDeleted"],
-        editedAt: DateTime.parse(json["editedAt"]),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        editedAt:
+            json["editedAt"] == null ? null : DateTime.parse(json["editedAt"]),
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
         children: List<String>.from(json["children"].map((x) => x)),
         segmentNumber: json["segmentNumber"],
         required: json["required"],
@@ -105,9 +110,9 @@ class CommentResponse {
             ? null
             : List<dynamic>.from(myReactions!.map((x) => x)),
         "isDeleted": isDeleted,
-        "editedAt": editedAt.toIso8601String(),
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
+        "editedAt": editedAt?.toIso8601String(),
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
         "children": List<dynamic>.from(children.map((x) => x)),
         "segmentNumber": segmentNumber,
         "required": required,
