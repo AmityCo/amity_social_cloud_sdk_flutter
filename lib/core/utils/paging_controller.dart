@@ -79,7 +79,7 @@ class PagingController<T> extends ChangeNotifier {
   Future<void> fetchNextPage() async {
     if (!_isFetching) {
       _isFetching = true;
-
+      notifyListeners();
       List<T>? page;
       try {
         final data = await pageFuture(_nextPageToken);

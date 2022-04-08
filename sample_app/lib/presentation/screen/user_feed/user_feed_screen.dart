@@ -2,8 +2,9 @@ import 'package:amity_sdk/core/utils/paging_controller.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_social_sample_app/core/widget/feed_widget.dart';
 import 'package:flutter_social_sample_app/core/constant/global_constant.dart';
+import 'package:flutter_social_sample_app/core/widget/dialog/error_dialog.dart';
+import 'package:flutter_social_sample_app/core/widget/feed_widget.dart';
 
 class UserFeedScreen extends StatefulWidget {
   const UserFeedScreen({Key? key, required this.userId, this.showAppBar = true})
@@ -29,12 +30,17 @@ class _UserFeedScreenState extends State<UserFeedScreen> {
       pageSize: GlobalConstant.pageSize,
     )..addListener(
         () {
-          setState(() {
-            amityPosts.clear();
-            amityPosts.addAll(_controller.loadedItems);
-          });
-
-          print(_controller.loadedItems.toString());
+          if (_controller.error == null) {
+            setState(() {
+              amityPosts.clear();
+              amityPosts.addAll(_controller.loadedItems);
+            });
+          } else {
+            //Error on pagination controller
+            setState(() {});
+            ErrorDialog.show(context,
+                title: 'Error', message: _controller.error.toString());
+          }
         },
       );
 
@@ -86,6 +92,13 @@ class _UserFeedScreenState extends State<UserFeedScreen> {
                   ),
                 ),
                 if (_controller.isFetching)
+                  Container(
+                    alignment: Alignment.center,
+                    child: _controller.isFetching
+                        ? const CircularProgressIndicator()
+                        : const Text('No Post'),
+                  ),
+                if (_controller.isFetching && amityPosts.isNotEmpty)
                   Container(
                     alignment: Alignment.center,
                     child: const CircularProgressIndicator(),

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:amity_sdk/lib.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_social_sample_app/core/widget/common_snackbar.dart';
+import 'package:flutter_social_sample_app/core/widget/dialog/error_dialog.dart';
 import 'package:flutter_social_sample_app/core/widget/progress_dialog_widget.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path/path.dart';
@@ -148,8 +148,8 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
                         .then((value) {
                       Navigator.of(context).pop();
                     }).onError((error, stackTrace) {
-                      CommonSnackbar.showPositiveSnackbar(
-                          context, 'Error', error.toString());
+                      ErrorDialog.show(context,
+                          title: 'Error', message: error.toString());
                     });
                   },
                   child: Container(
@@ -184,7 +184,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
     if (isTextPost) {
       final _targetUser = _targetuserTextEditController.text.trim();
       final _text = _postTextEditController.text.trim();
-      AmitySocialClient.newPostRepository()
+      await AmitySocialClient.newPostRepository()
           .createPost()
           .targetUser(_targetUser)
           .text(_text)
@@ -205,7 +205,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         }
       }
 
-      AmitySocialClient.newPostRepository()
+      await AmitySocialClient.newPostRepository()
           .createPost()
           .targetUser(_targetUser)
           .image(_images)
@@ -227,7 +227,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         }
       }
 
-      AmitySocialClient.newPostRepository()
+      await AmitySocialClient.newPostRepository()
           .createPost()
           .targetUser(_targetUser)
           .video(_video)
@@ -249,7 +249,7 @@ class _CreatePostScreenState extends State<CreatePostScreen> {
         }
       }
 
-      AmitySocialClient.newPostRepository()
+      await AmitySocialClient.newPostRepository()
           .createPost()
           .targetUser(_targetUser)
           .file(_files)
