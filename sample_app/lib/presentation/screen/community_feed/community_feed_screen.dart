@@ -26,6 +26,7 @@ class _CommunityFeedScreenState extends State<CommunityFeedScreen> {
     _controller = PagingController(
       pageFuture: (token) => AmitySocialClient.newFeedRepository()
           .getCommunityFeed(widget.communityId)
+          .includeDeleted(false)
           .getPagingData(token: token, limit: GlobalConstant.pageSize),
       pageSize: GlobalConstant.pageSize,
     )..addListener(
