@@ -45,9 +45,9 @@ class PostResponse {
   // final DataClass metadata;
   final int flagCount;
   final HashFlag? hashFlag;
-  final DateTime editedAt;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? editedAt;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
   final Map<String, int>? reactions;
   final int reactionsCount;
   final List<String> myReactions;
@@ -77,9 +77,14 @@ class PostResponse {
         hashFlag: json["hashFlag"] == null
             ? null
             : HashFlag.fromJson(json["hashFlag"]),
-        editedAt: DateTime.parse(json["editedAt"]),
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        editedAt:
+            json["editedAt"] == null ? null : DateTime.parse(json["editedAt"]),
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
         reactions: Map.from(json["reactions"]),
         reactionsCount: json["reactionsCount"],
         myReactions: List<String>.from(json["myReactions"].map((x) => x)),
@@ -108,9 +113,9 @@ class PostResponse {
         // "metadata": metadata.toJson(),
         "flagCount": flagCount,
         "hashFlag": hashFlag == null ? null : hashFlag!.toJson(),
-        "editedAt": editedAt.toIso8601String(),
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
+        "editedAt": editedAt?.toIso8601String(),
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
         "reactions": reactions,
         "reactionsCount": reactionsCount,
         "myReactions": List<dynamic>.from(myReactions.map((x) => x)),
