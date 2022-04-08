@@ -36,6 +36,8 @@ class _UserProfileScreenState extends State<UserProfileScreen>
           future: AmityCoreClient.newUserRepository().getUser(widget.userId),
           builder: (context, snapshot) {
             if (snapshot.hasError) {
+              // ErrorDialog.show(context,
+              //     title: 'Error', message: snapshot.error.toString());
               return Center(
                 child: Text(snapshot.error.toString()),
               );

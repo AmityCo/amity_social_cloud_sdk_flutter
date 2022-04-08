@@ -3,9 +3,8 @@ import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/constant/global_constant.dart';
-import 'package:flutter_social_sample_app/core/route/app_route.dart';
+import 'package:flutter_social_sample_app/core/widget/dialog/error_dialog.dart';
 import 'package:flutter_social_sample_app/core/widget/feed_widget.dart';
-import 'package:go_router/go_router.dart';
 
 class CommunityFeedScreen extends StatefulWidget {
   const CommunityFeedScreen({Key? key, required this.communityId})
@@ -38,22 +37,9 @@ class _CommunityFeedScreenState extends State<CommunityFeedScreen> {
             });
           } else {
             //Error on pagination controller
-            showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (context) => AlertDialog(
-                title: const Text('Error'),
-                content: Text(_controller.error.toString()),
-                actions: [
-                  ElevatedButton(
-                    onPressed: () {
-                      GoRouter.of(context).goNamed(AppRoute.login);
-                    },
-                    child: const Text('Logout'),
-                  )
-                ],
-              ),
-            );
+            setState(() {});
+            ErrorDialog.show(context,
+                title: 'Error', message: _controller.error.toString());
           }
         },
       );
@@ -101,10 +87,12 @@ class _CommunityFeedScreenState extends State<CommunityFeedScreen> {
                   )
                 : Container(
                     alignment: Alignment.center,
-                    child: const CircularProgressIndicator(),
+                    child: _controller.isFetching
+                        ? const CircularProgressIndicator()
+                        : const Text('No Post'),
                   ),
           ),
-          if (_controller.isFetching)
+          if (_controller.isFetching && amityPosts.isNotEmpty)
             Container(
               alignment: Alignment.center,
               child: const CircularProgressIndicator(),
