@@ -8,6 +8,17 @@ class HiveDbClient extends DBClient {
     // var path = Directory.current.path;
     // print('path >>>>>> $path');
     await Hive.initFlutter();
+
     return this;
+  }
+
+  Future<void> reset() async {
+    //initialized Hive
+    // final appDocumentDirectory = await getApplicationDocumentsDirectory();
+    // var path = Directory.current.path;
+    // print('path >>>>>> $path');
+    await Hive.deleteFromDisk();
+
+    return;
   }
 }

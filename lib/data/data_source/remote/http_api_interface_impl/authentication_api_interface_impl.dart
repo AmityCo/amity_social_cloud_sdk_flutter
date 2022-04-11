@@ -21,4 +21,19 @@ class AuthenticationApiInterfaceImpl extends AuthenticationApiInterface {
       return Future.error(amityError.amityException());
     }
   }
+
+  @override
+  Future<SessionResponse> refreshToken(
+      String userId, String refreshToken) async {
+    try {
+      final data = await httpApiClient().get(
+        REFRESH_TOKEN,
+        queryParameters: {'userId': userId, 'refreshToken': refreshToken},
+      );
+      return SessionResponse.fromJson(data.data);
+    } on dio.DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
 }
