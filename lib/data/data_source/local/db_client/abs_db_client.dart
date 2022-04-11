@@ -1,1 +1,4 @@
-class DBClient {}
+abstract class DBClient {
+  Future init();
+  Future reset();
+}
