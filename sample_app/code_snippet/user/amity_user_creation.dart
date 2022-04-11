@@ -1,13 +1,13 @@
 import 'package:amity_sdk/lib.dart';
 
-class AmityAuthentication {
+class AmityUserCreation {
   /* begin_sample_code
-    gist_id: 4a3d37b5e164655802bdd2c646f9d44a
-    filename: AmityAuthentication.dart
+    gist_id: fd3786704c153809097973272591f338
+    filename: AmityUserCreation.dart
     asc_page: https://docs.amity.co/social/flutter
     description: Flutter login example
     */
-  void login() async {
+  void createUser() async {
    await AmityCoreClient.login('userId')
                       .displayName('userDisplayName')
                       .submit();
