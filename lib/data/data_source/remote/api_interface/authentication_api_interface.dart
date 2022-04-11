@@ -3,4 +3,5 @@ import 'package:amity_sdk/data/response/session_response.dart';
 
 abstract class AuthenticationApiInterface {
   Future<SessionResponse> login(AuthenticationRequest request);
+  Future<SessionResponse> refreshToken(String userId, String refreshToken);
 }

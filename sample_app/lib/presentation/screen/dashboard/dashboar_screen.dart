@@ -94,7 +94,9 @@ class _DashboardScreenState extends State<DashboardScreen> {
               const SizedBox(height: 200),
               TextButton(
                 onPressed: () {
-                  GoRouter.of(context).goNamed(AppRoute.login);
+                  AmityCoreClient.logout().then((value) {
+                    GoRouter.of(context).goNamed(AppRoute.login);
+                  });
                 },
                 child: Text(
                   'Logout',
