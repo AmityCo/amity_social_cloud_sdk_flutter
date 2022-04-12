@@ -1,0 +1,260 @@
+{
+    "status": "string",
+    "data": {
+        "posts": [
+            {
+                "postId": "string",
+                "parentPostId": "string",
+                "postedUserId": "string",
+                "sharedUserId": "string",
+                "sharedCount": 0,
+                "targetId": "string",
+                "targetType": "user",
+                "dataType": "text",
+                "data": {
+                    "text": "string",
+                    "fileId": "string",
+                    "thumbnailFileId": "string",
+                    "videoFileId": {
+                        "original": "string",
+                        "low": "string",
+                        "medium": "string",
+                        "high": "string"
+                    },
+                    "streamId": "string"
+                },
+                "metadata": {},
+                "flagCount": 0,
+                "hashFlag": {
+                    "bits": 0,
+                    "hashes": 0,
+                    "hash": [
+                        0
+                    ]
+                },
+                "editedAt": "2022-02-07T09:03:45.724Z",
+                "createdAt": "2022-02-07T09:03:45.724Z",
+                "updatedAt": "2022-02-07T09:03:45.724Z",
+                "reactions": {
+                    "like": 1
+                },
+                "reactionsCount": 1,
+                "myReactions": [
+                    "like"
+                ],
+                "commentsCount": 1,
+                "comments": [
+                    "string"
+                ],
+                "children": [
+                    "string"
+                ],
+                "isDeleted": false,
+                "hasFlaggedComment": false,
+                "hasFlaggedChildren": false,
+                "feedId": "string",
+                "required": "string"
+            }
+        ],
+        "postChildren": [
+            {
+                "postId": "string",
+                "parentPostId": "string",
+                "postedUserId": "string",
+                "sharedUserId": "string",
+                "sharedCount": 0,
+                "targetId": "string",
+                "targetType": "user",
+                "dataType": "text",
+                "data": {
+                    "text": "string",
+                    "fileId": "string",
+                    "thumbnailFileId": "string",
+                    "videoFileId": {
+                        "original": "string",
+                        "low": "string",
+                        "medium": "string",
+                        "high": "string"
+                    },
+                    "streamId": "string"
+                },
+                "metadata": {},
+                "flagCount": 0,
+                "hashFlag": {
+                    "bits": 0,
+                    "hashes": 0,
+                    "hash": [
+                        0
+                    ]
+                },
+                "editedAt": "2022-02-07T09:03:45.724Z",
+                "createdAt": "2022-02-07T09:03:45.724Z",
+                "updatedAt": "2022-02-07T09:03:45.724Z",
+                "reactions": {
+                    "like": 1
+                },
+                "reactionsCount": 1,
+                "myReactions": [
+                    "like"
+                ],
+                "commentsCount": 1,
+                "comments": [
+                    "string"
+                ],
+                "children": [
+                    "string"
+                ],
+                "isDeleted": false,
+                "hasFlaggedComment": false,
+                "hasFlaggedChildren": false,
+                "feedId": "string",
+                "required": "string"
+            }
+        ],
+        "comments": [
+            {
+                "commentId": "string",
+                "userId": "string",
+                "parentId": "string",
+                "rootId": "string",
+                "referenceId": "string",
+                "referenceType": "post",
+                "dataType": "string",
+                "data": {},
+                "metadata": {},
+                "childrenNumber": 0,
+                "flagCount": 0,
+                "hashFlag": {
+                    "bits": 0,
+                    "hashes": 0,
+                    "hash": [
+                        0
+                    ]
+                },
+                "reactions": {
+                    "like": 1
+                },
+                "reactionsCount": 1,
+                "myReactions": [
+                    "like"
+                ],
+                "isDeleted": false,
+                "editedAt": "2022-02-07T09:03:45.724Z",
+                "createdAt": "2022-02-07T09:03:45.724Z",
+                "updatedAt": "2022-02-07T09:03:45.724Z",
+                "children": [
+                    "string"
+                ],
+                "segmentNumber": 1,
+                "required": "string"
+            }
+        ],
+        "users": [
+            {
+                "userId": "string",
+                "roles": [
+                    "string"
+                ],
+                "permissions": [
+                    "MUTE_CHANNEL"
+                ],
+                "displayName": "string",
+                "description": "string",
+                "avatarFileId": "string",
+                "avatarCustomUrl": "string",
+                "flagCount": 0,
+                "hashFlag": {
+                    "bits": 0,
+                    "hashes": 0,
+                    "hash": [
+                        0
+                    ]
+                },
+                "metadata": {},
+                "isGlobalBan": true,
+                "createdAt": "2022-02-07T09:03:45.724Z",
+                "updatedAt": "2022-02-07T09:03:45.724Z"
+            }
+        ],
+        "files": [
+            {
+                "fileId": "string",
+                "fileUrl": "string",
+                "type": "image",
+                "createdAt": "2022-02-07T09:03:45.725Z",
+                "updatedAt": "2022-02-07T09:03:45.725Z",
+                "attributes": {
+                    "name": "string",
+                    "extension": "string",
+                    "size": "string",
+                    "mimeType": "string",
+                    "metadata": {
+                        "exif": {},
+                        "gps": {},
+                        "height": 0,
+                        "width": 0,
+                        "isFull": true
+                    }
+                }
+            }
+        ],
+        "communities": [
+            {
+                "communityId": "string",
+                "channelId": "string",
+                "userId": "string",
+                "displayName": "string",
+                "avatarFileId": "string",
+                "description": "string",
+                "isOfficial": true,
+                "isPublic": true,
+                "onlyAdminCanPost": true,
+                "tags": [
+                    "string"
+                ],
+                "metadata": {},
+                "postsCount": 0,
+                "membersCount": 0,
+                "isJoined": true,
+                "categoryIds": [
+                    "string"
+                ],
+                "isDeleted": false,
+                "createdAt": "2022-02-07T09:03:45.725Z",
+                "updatedAt": "2022-02-07T09:03:45.725Z",
+                "hasFlaggedComment": false,
+                "hasFlaggedPost": false,
+                "needApprovalOnPostCreation": false
+            }
+        ],
+        "communityUsers": [
+            {
+                "userId": "string",
+                "channelId": "string",
+                "communityId": "string",
+                "communityMembership": "none",
+                "isBanned": false,
+                "lastActivity": "2022-02-07T09:03:45.725Z",
+                "roles": [
+                    "string"
+                ],
+                "permissions": [
+                    "MUTE_CHANNEL"
+                ],
+                "createdAt": "2022-02-07T09:03:45.725Z",
+                "updatedAt": "2022-02-07T09:03:45.725Z"
+            }
+        ],
+        "categories": [
+            {
+                "categoryId": "string",
+                "name": "string",
+                "metadata": {},
+                "avatarFileId": "string",
+                "isDeleted": false,
+                "createdAt": "2022-02-07T09:03:45.725Z",
+                "updatedAt": "2022-02-07T09:03:45.725Z"
+            }
+        ]
+    }
+}
