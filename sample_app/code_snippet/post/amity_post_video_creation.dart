@@ -20,7 +20,7 @@ class AmityPostVideoCreation {
         final amityUploadComplete = amityUploadResult as AmityUploadComplete;
         //cast amityUploadResult to AmityVideo 
         AmityVideo uploadedVideo = amityUploadComplete.getFile as AmityVideo;
-        //then create a file post
+        //then create a video post
         createVideoPost(uploadedVideo);
       }
       //check if the upload result is complete

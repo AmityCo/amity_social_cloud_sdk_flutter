@@ -9,29 +9,34 @@ class AmityPostImageCreation {
     asc_page: https://docs.amity.co/social/flutter
     description: Flutter create image post example
     */
-  void createImagePost(File uploadingImage) async {
+  void uploadImage(File uploadingImage) {
     //first, upload image
-    AmityImage? uploadedImage;
-    AmityUploadResult<AmityImage> amityUploadResult =
-        await AmityCoreClient.newFileRepository().image(uploadingImage).upload();
-    //check if the upload result is complete
-    if (amityUploadResult is AmityUploadComplete) {
-      final amityUploadComplete = amityUploadResult as AmityUploadComplete;
-      //cast amityUploadResult to AmityImage and store it in uploadedImage variable
-      uploadedImage = amityUploadComplete.getFile as AmityImage;
-    }
-    //check if the upload result is complete
-    else if (amityUploadResult is AmityUploadError) {
-      final amityUploadError = amityUploadResult as AmityUploadError;
-      final AmityException amityException = amityUploadError.getErrror;
-      //handle error
-    }
+    AmityCoreClient.newFileRepository()
+        .image(uploadingImage)
+        .upload()
+        .then((AmityUploadResult<AmityImage> amityUploadResult) {
+      //check if the upload result is complete
+      if (amityUploadResult is AmityUploadComplete) {
+        final amityUploadComplete = amityUploadResult as AmityUploadComplete;
+        //cast amityUploadResult to AmityImage 
+        AmityImage uploadedImage = amityUploadComplete.getFile as AmityImage;
+        //then create an image post
+        createImagePost(uploadedImage);
+      }
+      //check if the upload result is complete
+      else if (amityUploadResult is AmityUploadError) {
+        final amityUploadError = amityUploadResult as AmityUploadError;
+        final AmityException amityException = amityUploadError.getErrror;
+        //handle error
+      }
+    });
+  }
 
-    //then create an image post
+  void createImagePost(AmityImage uploadedImage) {
     AmitySocialClient.newPostRepository()
         .createPost()
         .targetUser('userId') // or targetMe(), targetCommunity(communityId: String)
-        .image([uploadedImage!])
+        .image([uploadedImage])
         .text('Hello from flutter with image!')
         .post()
         .then((AmityPost post) => {

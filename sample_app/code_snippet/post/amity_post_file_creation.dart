@@ -9,29 +9,34 @@ class AmityPostFileCreation {
     asc_page: https://docs.amity.co/social/flutter
     description: Flutter create file post example
     */
-  void createFilePost(File uploadingFile) async {
+ void uploadFile(File uploadinFile) {
     //first, upload file
-    AmityFile? uploadedFile;
-    AmityUploadResult<AmityFile> amityUploadResult =
-        await AmityCoreClient.newFileRepository().file(uploadingFile).upload();
-    //check if the upload result is complete
-    if (amityUploadResult is AmityUploadComplete) {
-      final amityUploadComplete = amityUploadResult as AmityUploadComplete;
-      //cast amityUploadResult to AmityFile and store it in uploadedFile variable
-      uploadedFile = amityUploadComplete.getFile as AmityFile;
-    }
-    //check if the upload result is complete
-    else if (amityUploadResult is AmityUploadError) {
-      final amityUploadError = amityUploadResult as AmityUploadError;
-      final AmityException amityException = amityUploadError.getErrror;
-      //handle error
-    }
+    AmityCoreClient.newFileRepository()
+        .file(uploadinFile)
+        .upload()
+        .then((AmityUploadResult<AmityFile> amityUploadResult) {
+      //check if the upload result is complete
+      if (amityUploadResult is AmityUploadComplete) {
+        final amityUploadComplete = amityUploadResult as AmityUploadComplete;
+        //cast amityUploadResult to AmityFile
+        AmityFile uploadedFile = amityUploadComplete.getFile as AmityFile;
+        //then create a file post
+        createFilePost(uploadedFile);
+      }
+      //check if the upload result is complete
+      else if (amityUploadResult is AmityUploadError) {
+        final amityUploadError = amityUploadResult as AmityUploadError;
+        final AmityException amityException = amityUploadError.getErrror;
+        //handle error
+      }
+    });
+  }
 
-    //then create a file post
+  void createFilePost(AmityFile uploadedFile) {
     AmitySocialClient.newPostRepository()
         .createPost()
         .targetUser('userId') // or targetMe(), targetCommunity(communityId: String)
-        .file([uploadedFile!])
+        .file([uploadedFile])
         .text('Hello from flutter with file!')
         .post()
         .then((AmityPost post) => {
