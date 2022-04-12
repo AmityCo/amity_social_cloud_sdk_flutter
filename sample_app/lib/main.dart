@@ -85,7 +85,6 @@ class _MyAppState extends State<MyApp> {
               onPressed: () async {
                 AmityCoreClient.login(userId)
                     .displayName(userDisplayName)
-                    .deviceId('sorbh_device_id_88')
                     .submit()
                     .then((value) {
                   log(value.displayName!);
