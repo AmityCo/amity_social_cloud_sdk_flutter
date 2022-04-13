@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/core/model/api_request/update_post_request.dart';
 import 'package:amity_sdk/data/data.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: hash_and_equals
+
 import 'package:hive/hive.dart';
 
 part 'reaction_hive_entity_8.g.dart';

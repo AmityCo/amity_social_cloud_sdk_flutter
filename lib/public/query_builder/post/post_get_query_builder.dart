@@ -24,8 +24,6 @@ class AmityPostGetTargetSelector {
 
 class _AmityPostGetQueryBuilder {
   final PostGetUsecase _useCase;
-  final String _targetId;
-  final String _targetType;
   final GetPostRequest _request;
 
   String? _sortOption = AmityCommentSortOption.LAST_CREATED.apiKey;
@@ -34,8 +32,8 @@ class _AmityPostGetQueryBuilder {
   String? _amityFeedType;
   List<String>? _dataTypes;
 
-  _AmityPostGetQueryBuilder(this._useCase, this._targetId, this._targetType)
-      : _request = GetPostRequest(targetId: _targetId, targetType: _targetType);
+  _AmityPostGetQueryBuilder(this._useCase, String targetId, String targetType)
+      : _request = GetPostRequest(targetId: targetId, targetType: targetType);
 
   _AmityPostGetQueryBuilder sortBy(
       {required AmityCommentSortOption sortOption}) {

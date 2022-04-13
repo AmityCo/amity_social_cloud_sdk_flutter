@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/data/data.dart';
 import 'package:dio/dio.dart';

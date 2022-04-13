@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:async';
 
 import 'package:amity_sdk/core/model/api_request/create_community_request.dart';
@@ -23,7 +25,6 @@ class CommunityRepoImpl extends CommunityRepo {
 
   @override
   Future<AmityCommunity> createCommunity(CreateCommunityRequest request) async {
-    //TODO: compose actual data
     final data = await communityApiInterface.createCommunity(request);
     return AmityCommunity();
   }

@@ -15,10 +15,6 @@ final serviceLocator = GetIt.instance; //sl is referred to as Service Locator
 class SdkServiceLocator {
 //Dependency injection
   static Future<void> initServiceLocator({bool syc = false}) async {
-    DateTime startTime = DateTime.now();
-
-    print('>>>>>> Init all the dependenciies');
-
     ///----------------------------------- Core Layer -----------------------------------///
 
     ///----------------------------------- Data Layer -----------------------------------///
@@ -339,12 +335,7 @@ class SdkServiceLocator {
           amityCoreClientOption: serviceLocator()),
     );
 
-    DateTime endTime = DateTime.now();
-
     //wait to init all the dependency.
     if (syc) await serviceLocator.allReady();
-
-    print(
-        '>> Time took to initilize the DI ${endTime.difference(startTime).inMilliseconds} Milis');
   }
 }

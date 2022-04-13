@@ -32,15 +32,4 @@ class Tuple2<T1, T2> {
 
   @override
   String toString() => '[$item1, $item2]';
-
-  @override
-  bool operator ==(Object other) =>
-      other is Tuple2 && other.item1 == item1 && other.item2 == item2;
-
-  @override
-  // TODO: implement hashCode
-  int get hashCode => super.hashCode;
-
-  // @override
-  // int get hashCode => hash2(item1.hashCode, item2.hashCode);
 }

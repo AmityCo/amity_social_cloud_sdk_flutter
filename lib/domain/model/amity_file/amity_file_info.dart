@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:amity_sdk/domain/model/amity_file/amity_file_properties.dart';
 
 abstract class AmityFileInfo {

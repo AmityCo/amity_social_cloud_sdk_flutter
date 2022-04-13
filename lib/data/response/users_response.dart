@@ -4,7 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:amity_sdk/data/response/core_response/paging_response.dart';
 import 'package:amity_sdk/data/response/response.dart';
 
 UsersResponse usersResponseFromJson(String str) =>
@@ -28,7 +27,9 @@ class UsersResponse {
             json["users"].map((x) => UserResponse.fromJson(x))),
         files: List<FileResponse>.from(
             json["files"].map((x) => FileResponse.fromJson(x))),
-        paging: json["paging"] == null ? null : PagingResponse.fromJson(json["paging"]),
+        paging: json["paging"] == null
+            ? null
+            : PagingResponse.fromJson(json["paging"]),
       );
 
   Map<String, dynamic> toJson() => {

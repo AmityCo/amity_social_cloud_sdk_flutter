@@ -19,13 +19,13 @@ class FollowRepoImpl extends FollowRepo {
 
   @override
   Future<void> accpet(String userId) async {
-    final data = await followWApiInterface.accpet(userId);
+    await followWApiInterface.accpet(userId);
     return;
   }
 
   @override
   Future<void> decline(String userId) async {
-    final data = await followWApiInterface.decline(userId);
+    await followWApiInterface.decline(userId);
     return;
   }
 
@@ -40,7 +40,7 @@ class FollowRepoImpl extends FollowRepo {
 
   @override
   Future<void> unfollow(String userId) async {
-    final data = await followWApiInterface.unfollow(userId);
+    await followWApiInterface.unfollow(userId);
     return;
   }
 

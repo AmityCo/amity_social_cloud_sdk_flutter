@@ -1,3 +1,5 @@
+// ignore_for_file: hash_and_equals
+
 import 'package:amity_sdk/core/model/api_request/paginated_api_request.dart';
 
 class GetGlobalFeedRequest extends PaginatedApiRequest {
@@ -16,10 +18,4 @@ class GetGlobalFeedRequest extends PaginatedApiRequest {
 
   @override
   int get hashCode => 'GLOBAL_FEED_${dataTypes?.join('_')}'.hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    // TODO: implement ==
-    return super == other;
-  }
 }

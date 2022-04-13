@@ -1,6 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
-import 'package:amity_sdk/domain/model/amity_mentionee_target.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/domain/usecase/post/post_create_usecase.dart';
 import 'package:amity_sdk/public/amity_core_client.dart';
@@ -102,8 +101,8 @@ class AmityTextPostCreator {
   late String _targetId;
   late String _targetType;
   late String _text;
-  Map<String, dynamic>? _metadata;
-  List<AmityMentioneeTarget>? _mentionees;
+  // Map<String, dynamic>? _metadata;
+  // List<AmityMentioneeTarget>? _mentionees;
   AmityTextPostCreator(
       {required PostCreateUsecase useCase,
       required String targetId,
@@ -134,8 +133,8 @@ class AmityImagePostCreator {
   late String _targetType;
   String? _text;
   late List<AmityImage> _images;
-  Map<String, dynamic>? _metadata;
-  List<AmityMentioneeTarget>? _mentionees;
+  // Map<String, dynamic>? _metadata;
+  // List<AmityMentioneeTarget>? _mentionees;
   AmityImagePostCreator(
       {required PostCreateUsecase useCase,
       required String targetId,
@@ -177,8 +176,8 @@ class AmityFilePostCreator {
   late final String _targetType;
   String? _text;
   late final List<AmityFile> _files;
-  Map<String, dynamic>? _metadata;
-  List<AmityMentioneeTarget>? _mentionees;
+  // Map<String, dynamic>? _metadata;
+  // List<AmityMentioneeTarget>? _mentionees;
   AmityFilePostCreator(
       {required PostCreateUsecase useCase,
       required String targetId,
@@ -219,8 +218,8 @@ class AmityVideoPostCreator {
   late String _targetType;
   String? _text;
   late List<AmityVideo> _videos;
-  Map<String, dynamic>? _metadata;
-  List<AmityMentioneeTarget>? _mentionees;
+  // Map<String, dynamic>? _metadata;
+  // List<AmityMentioneeTarget>? _mentionees;
   AmityVideoPostCreator(
       {required PostCreateUsecase useCase,
       required String targetId,

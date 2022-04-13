@@ -2,6 +2,8 @@
 //
 //     final userFeedRequest = userFeedRequestFromJson(jsonString);
 
+// ignore_for_file: hash_and_equals
+
 import 'core/option_request.dart';
 
 class GetUserFeedRequest {
@@ -47,9 +49,4 @@ class GetUserFeedRequest {
       'USER_FEED_$userId _$sortBy _$isDeleted _${dataTypes?.join(',')}'
           .hashCode;
 
-  @override
-  bool operator ==(Object other) {
-    // TODO: implement ==
-    return super == other;
-  }
 }

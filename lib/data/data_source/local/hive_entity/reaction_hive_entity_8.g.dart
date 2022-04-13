@@ -17,7 +17,7 @@ class ReactionHiveEntityAdapter extends TypeAdapter<ReactionHiveEntity> {
 
   @override
   void write(BinaryWriter writer, ReactionHiveEntity obj) {
-    writer..writeByte(0);
+    writer.writeByte(0);
   }
 
   @override

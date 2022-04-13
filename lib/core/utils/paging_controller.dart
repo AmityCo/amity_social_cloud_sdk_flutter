@@ -7,7 +7,7 @@ class PagingController<T> extends ChangeNotifier {
   PagingController({required this.pageFuture, this.pageSize = 10});
 
   List<T> _loadedItems = [];
-  List<T> _lastLoadedItems = [];
+  // List<T> _lastLoadedItems = [];
 
   String? _nextPageToken;
   int _numberOfLoadedPages = 0;
@@ -50,7 +50,7 @@ class PagingController<T> extends ChangeNotifier {
 
   /// Resets all the information of the controller
   void reset() {
-    _lastLoadedItems = [];
+    // _lastLoadedItems = [];
     _loadedItems = [];
     _numberOfLoadedPages = 0;
     _hasMoreItems = true;
@@ -86,9 +86,7 @@ class PagingController<T> extends ChangeNotifier {
         page = data.item1;
         _nextPageToken = data.item2;
         _numberOfLoadedPages++;
-      } catch (error, stacktrace) {
-        print(error.toString());
-        print(stacktrace.toString());
+      } catch (error) {
         _error = error;
         _isFetching = false;
         page = [];
@@ -118,7 +116,7 @@ class PagingController<T> extends ChangeNotifier {
       if (length == 0) {
         _hasMoreItems = false;
       } else {
-        _lastLoadedItems = page;
+        // _lastLoadedItems = page;
         _loadedItems.addAll(page);
       }
 

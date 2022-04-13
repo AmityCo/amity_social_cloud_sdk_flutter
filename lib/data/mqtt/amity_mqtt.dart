@@ -1,3 +1,7 @@
+// ignore_for_file: constant_identifier_names, unused_element
+
+import 'dart:developer';
+
 import 'package:amity_sdk/core/enum/mqtt_end_point.dart';
 import 'package:amity_sdk/data/data_source/local/local.dart';
 import 'package:amity_sdk/domain/repo/account_repo.dart';
@@ -8,8 +12,8 @@ import 'package:mqtt_client/mqtt_server_client.dart';
 class AmityMQTT {
   MqttServerClient? activeClient;
 
-  static final MQTT_CONNECTED = 0;
-  static final MQTT_DISCONNECTED = -1;
+  static const MQTT_CONNECTED = 0;
+  static const MQTT_DISCONNECTED = -1;
 
   final AccountRepo accountRepo;
   final AmityCoreClientOption amityCoreClientOption;
@@ -20,7 +24,7 @@ class AmityMQTT {
         .takeWhile((account) => account.accessToken?.isNotEmpty ?? false)
         .distinct()
         .listen((account) {
-      print('AMITY_MQTT::connecting with accessToken ${account.accessToken}');
+      log('AMITY_MQTT::connecting with accessToken ${account.accessToken}');
       _connect(account);
     });
   }
@@ -53,24 +57,22 @@ class AmityMQTT {
         //TODO accountEntity.internalUserId
         .authenticateAs(accountEntity.userId, accountEntity.accessToken);
 
-    print(
-        'AMITY_MQTT::Mosquitto client connecting to - ssq.staging.amity.co....');
+    log('AMITY_MQTT::Mosquitto client connecting to - ssq.staging.amity.co....');
     activeClient?.connectionMessage = connMess;
 
     try {
       await activeClient?.connect();
     } on Exception catch (e) {
-      print('AMITY_MQTT::client exception - $e');
+      log('AMITY_MQTT::client exception - $e');
       activeClient?.disconnect();
       return MQTT_DISCONNECTED;
     }
 
     if (activeClient?.connectionStatus!.state ==
         MqttConnectionState.connected) {
-      print('AMITY_MQTT::Mosquitto client connected');
+      log('AMITY_MQTT::Mosquitto client connected');
     } else {
-      print(
-          'AMITY_MQTT::ERROR Mosquitto client connection failed - disconnecting, status is ${activeClient?.connectionStatus}');
+      log('AMITY_MQTT::ERROR Mosquitto client connection failed - disconnecting, status is ${activeClient?.connectionStatus}');
       activeClient?.disconnect();
       return MQTT_DISCONNECTED;
     }
@@ -102,46 +104,43 @@ class AmityMQTT {
 
 //todo change parameter to AmityTopic
   void subscribe(String topic) {
-    print('AMITY_MQTT::Subscribing to - $topic');
+    log('AMITY_MQTT::Subscribing to - $topic');
     activeClient?.subscribe(topic, MqttQos.atMostOnce);
     activeClient?.updates?.listen((List<MqttReceivedMessage<MqttMessage?>>? c) {
       final recMess = c?[0].payload as MqttPublishMessage;
       final pt =
           MqttPublishPayload.bytesToStringAsString(recMess.payload.message);
-      print(
-          'AMITY_MQTT::Change notification:: topic is <${c?[0].topic}>, payload is <-- $pt -->');
+      log('AMITY_MQTT::Change notification:: topic is <${c?[0].topic}>, payload is <-- $pt -->');
     });
   }
 
 //todo change parameter to AmityTopic
   void unsubscribe(String topic) {
-    print('AMITY_MQTT::Unsubscribing');
+    log('AMITY_MQTT::Unsubscribing');
     activeClient?.unsubscribe(topic);
   }
 
   /// The subscribed callback
   void _onSubscribed(String topic) {
-    print('AMITY_MQTT::Subscription confirmed for topic $topic');
+    log('AMITY_MQTT::Subscription confirmed for topic $topic');
   }
 
   /// The unsolicited disconnect callback
   void _onDisconnected() {
-    print('AMITY_MQTT::OnDisconnected client callback - Client disconnection');
+    log('AMITY_MQTT::OnDisconnected client callback - Client disconnection');
     if (activeClient?.connectionStatus?.disconnectionOrigin ==
         MqttDisconnectionOrigin.solicited) {
-      print(
-          'AMITY_MQTT::OnDisconnected callback is solicited, this is correct');
+      log('AMITY_MQTT::OnDisconnected callback is solicited, this is correct');
     }
   }
 
   /// The successful connect callback
   void _onConnected() {
-    print(
-        'AMITY_MQTT::OnConnected client callback - Client connection was sucessful');
+    log('AMITY_MQTT::OnConnected client callback - Client connection was sucessful');
   }
 
   /// Pong callback
   void _pong() {
-    print('AMITY_MQTT::Ping response client callback invoked');
+    log('AMITY_MQTT::Ping response client callback invoked');
   }
 }

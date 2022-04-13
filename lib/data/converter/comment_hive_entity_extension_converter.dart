@@ -1,5 +1,4 @@
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/enum/amity_comment_reference_type.dart';
 import 'package:amity_sdk/data/data_source/local/hive_entity/comment_hive_entity_6.dart';
 import 'package:amity_sdk/domain/model/model.dart';
 

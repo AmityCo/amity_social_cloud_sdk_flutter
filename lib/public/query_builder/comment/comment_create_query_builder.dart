@@ -1,7 +1,6 @@
 import 'package:amity_sdk/core/enum/amity_comment_target_type.dart';
 import 'package:amity_sdk/core/model/api_request/create_comment_request.dart';
 import 'package:amity_sdk/domain/model/amity_comment.dart';
-import 'package:amity_sdk/domain/model/amity_mentionee_target.dart';
 import 'package:amity_sdk/domain/usecase/comment/comment_create_usecase.dart';
 
 class AmityCommentCreateTargetSelector {
@@ -82,8 +81,8 @@ class AmityTextCommentCreator {
   String? _parentId;
   // late AmityCommentTargetType _amityCommentTargetType;
   late String? _text;
-  Map<String, dynamic>? _metadata;
-  List<AmityMentioneeTarget>? _mentionees;
+  // Map<String, dynamic>? _metadata;
+  // List<AmityMentioneeTarget>? _mentionees;
   AmityTextCommentCreator(
       {required CommentCreateUseCase useCase,
       required String referenceType,

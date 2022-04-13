@@ -27,7 +27,7 @@ class GetCommentRequest {
   bool? filterByParentId;
   String? parentId;
   bool? hasFlag;
-  dynamic? isDeleted;
+  bool? isDeleted;
   String? sortBy;
   Options? options;
 

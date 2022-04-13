@@ -5,7 +5,6 @@ class LoginQueryBuilder {
   late LoginUsecase _useCase;
   late String _userId;
   String? _displayName;
-  String? _deviceId;
   String? _authToekn;
 
   LoginQueryBuilder({required LoginUsecase useCase, required String userId}) {
