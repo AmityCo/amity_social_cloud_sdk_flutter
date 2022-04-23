@@ -10,7 +10,10 @@ class AmityInitializer {
   void setup() async {
     await AmityCoreClient.setup(
         option: AmityCoreClientOption(
-            apiKey: 'apikey', httpEndpoint: AmityRegionalHttpEndpoint.SG));
+          apiKey: 'apikey',
+          httpEndpoint: AmityRegionalHttpEndpoint.SG,
+        ),
+        sycInitialization: true);
   }
   /* end_sample_code */
 
