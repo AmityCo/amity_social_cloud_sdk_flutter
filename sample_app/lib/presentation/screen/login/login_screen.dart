@@ -22,8 +22,8 @@ class _LoginScreenState extends State<LoginScreen> {
     _userIdTextController.text = 'victimAndroid';
     _displayNameTextController.text = 'Victim Android';
     _apiKeyTextController.text =
-        'b3bee858328ef4344a308e4a5a091688d05fdee2be353a2b';
-    _serverUrlTextController.text = AmityRegionalHttpEndpoint.STAGING.value;
+        'b3bee90c39d9a5644831d84e5a0d1688d100ddebef3c6e78';
+    _serverUrlTextController.text = AmityRegionalHttpEndpoint.SG.value;
     // }
 
     ThemeData _themeData = Theme.of(context);
@@ -67,6 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
               const SizedBox(height: 48),
               TextButton(
                 onPressed: () async {
+                  FocusManager.instance.primaryFocus!.unfocus();
                   // Setup the Amity Option First
                   String apikey = _apiKeyTextController.text.trim();
                   String serverUrl = _serverUrlTextController.text.trim();

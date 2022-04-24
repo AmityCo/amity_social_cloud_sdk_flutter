@@ -3,4 +3,5 @@ import 'package:amity_sdk/data/data_source/local/hive_entity/comment_hive_entity
 abstract class CommentDbAdapter {
   Future saveCommentEntity(CommentHiveEntity entity);
   CommentHiveEntity getCommentEntity(String id);
+  Stream<CommentHiveEntity> listenCommentEntity(String commentId);
 }

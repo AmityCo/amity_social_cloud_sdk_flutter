@@ -1,6 +1,7 @@
 import 'package:amity_sdk/core/enum/amity_comment_sort_option.dart';
 import 'package:amity_sdk/core/enum/amity_comment_target_type.dart';
 import 'package:amity_sdk/core/model/api_request/get_comment_request.dart';
+import 'package:amity_sdk/core/utils/tuple.dart';
 import 'package:amity_sdk/domain/model/amity_comment.dart';
 import 'package:amity_sdk/domain/usecase/comment/comment_query_usecase.dart';
 
@@ -80,5 +81,44 @@ class AmityCommentQueryBuilder {
     getCommentRequest.sortBy = _sortOption.apiKey;
 
     return _useCase.get(getCommentRequest);
+  }
+
+  Future<Tuple2<List<AmityComment>, String>> getPagingData(
+      {String? token, int? limit}) {
+    GetCommentRequest getCommentRequest = GetCommentRequest(
+        referenceId: _referenceId, referenceType: _referenceType);
+
+    if (_parentId != null) {
+      getCommentRequest.parentId = _parentId;
+      getCommentRequest.filterByParentId = _isFilterByParentId;
+    }
+
+    if (_isDeleted != null) {
+      getCommentRequest.isDeleted = _isDeleted;
+    }
+
+    // getCommentRequest.sortBy = _sortOption.apiKey;
+
+    Options options = Options();
+    getCommentRequest.options = options;
+    // options.type = 'scrollable'; //Default option
+    if (token != null) {
+      getCommentRequest.options?.token = token;
+    }
+    // if (limit != null) {
+    //   getCommentRequest.options?.limit = limit;
+    // }
+
+    return _useCase.getPagingData(getCommentRequest);
+    // GetGlobalFeedRequest request = GetGlobalFeedRequest();
+
+    // if (token != null) {
+    //   request.token = token;
+    // }
+    // if (limit != null) {
+    //   request.limit = limit;
+    // }
+
+    // return _usecase.listen(request);
   }
 }

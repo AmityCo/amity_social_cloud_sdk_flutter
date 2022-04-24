@@ -1,7 +1,25 @@
 import 'package:amity_sdk/core/core.dart';
+import 'package:amity_sdk/data/converter/comment_response_hive_entity_extension_converter.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter/comment_db_adapter.dart';
 import 'package:amity_sdk/domain/domain.dart';
+import 'package:flutter/foundation.dart';
 
-class AmityComment {
+class AmityComment extends ChangeNotifier
+    implements ValueListenable<AmityComment> {
+  AmityComment({required this.commentId}) {
+    serviceLocator<CommentDbAdapter>()
+        .listenCommentEntity(commentId!)
+        .listen((event) {
+      print('>>>>>>>> Amity Comment');
+      final _updateAmityComment = event.convertToAmityComment();
+
+      //TOOD: Good idea would be have compose method inside the object itself
+      serviceLocator<CommentComposerUsecase>().get(_updateAmityComment).then(
+            (value) => apply(value),
+          );
+    });
+  }
+
   String? commentId;
   AmityCommentReferenceType? referenceType; //TODO: should be enum
   String? referenceId;
@@ -9,7 +27,7 @@ class AmityComment {
   String? parentId;
   String? rootId;
   AmityDataType? dataType;
-  AmityPostData? data;
+  AmityCommentData? data;
   int? childrenNumber;
   List<String>? repliesId;
   List<AmityComment>? latestReplies; //composer
@@ -26,47 +44,99 @@ class AmityComment {
   AmityUser? user; //composer
   String? path;
 
+  void apply(AmityComment amityComment) {
+    //reaction update
+    myReactions = amityComment.myReactions;
+    reactionCount = amityComment.reactionCount;
+    reactions = amityComment.reactions;
+
+    //flag
+    flagCount = amityComment.flagCount;
+
+    //Delete
+    isDeleted = amityComment.isDeleted;
+
+    //data
+    data = amityComment.data;
+
+    notifyListeners();
+  }
+
   @override
   String toString() {
     return 'AmityComment(commentId: $commentId, referenceType: $referenceType, referenceId: $referenceId, userId: $userId, parentId: $parentId, rootId: $rootId, dataType: $dataType, data: $data, childrenNumber: $childrenNumber, repliesId: $repliesId, latestReplies: $latestReplies, flagCount: $flagCount, myReactions: $myReactions, reactionCount: $reactionCount, reactions: $reactions, isDeleted: $isDeleted, createdAt: $createdAt, editedAt: $editedAt, updatedAt: $updatedAt, syncState: $syncState, mentionees: $mentionees, user: $user, path: $path)';
   }
+
+  @override
+  get value => this;
 }
 
-// enum CommentDataType { TEXT }
+abstract class AmityCommentData {
+  final String commentId;
+  final String? fileId;
+  final Map<String, dynamic>? rawData;
+  late AmityFileInfo
+      fileInfo; //Composer, Incase of Text post we dont have fileId, File Info or Raw Data
 
-// extension DataTypeExtension on CommentDataType {
-//   String get value {
-//     return CommentDataType.values[index].name.toLowerCase();
-//   }
+  AmityCommentData({required this.commentId, this.fileId, this.rawData});
 
-//   CommentDataType enumOf(String value) {
-//     return CommentDataType.values.firstWhere(
-//       (element) => element.name.toLowerCase() == value.toLowerCase(),
-//       orElse: () => CommentDataType.TEXT,
-//     );
-//   }
-// }
+  @override
+  String toString() => 'AmityCommentData()';
+}
 
-// class AmityCommentData {}
+class CommentTextData extends AmityCommentData {
+  String? text;
+  CommentTextData({
+    required String commentId,
+    this.text,
+  }) : super(commentId: commentId);
 
-// class AmityCommentTextData extends AmityCommentData {
-//   String? text;
-//   AmityCommentTextData({
-//     this.text,
-//   });
-// }
+  @override
+  String toString() => 'TextData(commentId: $commentId, text: $text)';
+}
 
-// enum _State { CREATED, SYNCING, SYNCED, FAILED }
+class CommentImageData extends AmityCommentData {
+  late AmityImage image; //composer
+  CommentImageData({
+    required String commentId,
+    String? fileId,
+    Map<String, dynamic>? rawData,
+  }) : super(commentId: commentId, fileId: fileId, rawData: rawData);
 
-// extension _StateExtension on _State {
-//   String get value {
-//     return _State.values[index].name.toLowerCase();
-//   }
+  @override
+  String toString() {
+    return 'ImageData(commentId: $commentId, fileId: $fileId, rawData: $rawData, image: $image)';
+  }
+}
 
-//   _State enumOf(String value) {
-//     return _State.values.firstWhere(
-//       (element) => element.name.toLowerCase() == value.toLowerCase(),
-//       orElse: () => _State.SYNCED,
-//     );
-//   }
-// }
+class CommentFileData extends AmityCommentData {
+  late AmityFile file; //composer
+  CommentFileData({
+    required String commentId,
+    String? fileId,
+    Map<String, dynamic>? rawData,
+  }) : super(commentId: commentId, fileId: fileId, rawData: rawData);
+}
+
+class CommentVideoData extends AmityCommentData {
+  //FIXME: - some vidoe post dont have thubnail, we have to keep thubnail nullable instead of late.
+  AmityImage? thumbnail; //composer
+  CommentVideoData({
+    required String commentId,
+    String? fileId,
+    Map<String, dynamic>? rawData,
+  }) : super(
+          commentId: commentId,
+          fileId: fileId,
+          rawData: rawData,
+        );
+}
+
+class CommentLiveStreamData extends AmityCommentData {
+  String? streamId;
+  CommentLiveStreamData({
+    required String commentId,
+    required this.streamId,
+    Map<String, dynamic>? rawData,
+  }) : super(commentId: commentId, fileId: streamId, rawData: rawData);
+}

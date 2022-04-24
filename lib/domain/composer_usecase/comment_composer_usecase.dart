@@ -1,11 +1,34 @@
-import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/domain/model/amity_comment.dart';
+import 'package:amity_sdk/lib.dart';
 
 class CommentComposerUsecase extends UseCase<AmityComment, AmityComment> {
+  final CommentRepo commentRepo;
+  final UserRepo userRepo;
+  final UserComposerUsecase userComposerUsecase;
+
+  CommentComposerUsecase({
+    required this.commentRepo,
+    required this.userRepo,
+    required this.userComposerUsecase,
+  });
   @override
-  Future<AmityComment> get(AmityComment params) {
-    // TODO: implement get
-    throw UnimplementedError();
+  Future<AmityComment> get(AmityComment params) async {
+    //Compose child comment
+    if (params.repliesId != null && params.repliesId!.isNotEmpty) {
+      //Add Child Amity Comment
+      params.latestReplies = await Stream.fromIterable(params.repliesId!)
+          .asyncMap((element) async =>
+              await commentRepo.getCommentByIdFromDb(element))
+          .toList();
+      //Compose Child Amity Comment
+      params.latestReplies = await Stream.fromIterable(params.latestReplies!)
+          .asyncMap((element) async => await get(element))
+          .toList();
+    }
+
+    //Compose the user
+    params.user = await userRepo.getUserByIdFromDb(params.userId!);
+    params.user = await userComposerUsecase.get(params.user!);
+    return params;
   }
 
   @override

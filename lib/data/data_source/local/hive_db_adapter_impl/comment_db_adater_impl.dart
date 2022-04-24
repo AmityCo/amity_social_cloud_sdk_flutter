@@ -21,4 +21,9 @@ class CommentDbAdapterImpl extends CommentDbAdapter {
   Future saveCommentEntity(CommentHiveEntity entity) async {
     await box.put(entity.commentId, entity);
   }
+
+  @override
+  Stream<CommentHiveEntity> listenCommentEntity(String commentId) {
+    return box.watch(key: commentId).map((event) => event.value);
+  }
 }

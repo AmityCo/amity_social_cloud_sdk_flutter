@@ -1,6 +1,6 @@
 export 'account_hive_entity_extension_converter.dart';
-export 'comment_hive_entity_extension_converter.dart';
 export 'comment_response_extension_converter.dart';
+export 'comment_response_hive_entity_extension_converter.dart';
 export 'community_hive_entity_extension_converter.dart';
 export 'community_response_extension_converter.dart';
 export 'create_post_response_extension_converter.dart';

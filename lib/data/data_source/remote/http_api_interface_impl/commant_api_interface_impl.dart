@@ -1,4 +1,5 @@
 import 'package:amity_sdk/core/core.dart';
+import 'package:amity_sdk/core/model/api_request/update_comment_request.dart';
 import 'package:amity_sdk/data/data.dart';
 import 'package:dio/dio.dart';
 
@@ -21,7 +22,7 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
   @override
   Future<bool> deleteComment(String commentId) async {
     try {
-      final data = await httpApiClient().get(COMMENT_V3 + '/$commentId');
+      final data = await httpApiClient().delete(COMMENT_V3 + '/$commentId');
       return true;
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -92,7 +93,7 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
 
   @override
   Future<CreatePostResponse> updateComment(
-      String commentId, CreateCommentRequest request) async {
+      String commentId, UpdateCommentRequest request) async {
     try {
       final data =
           await httpApiClient().put(COMMENT_V3 + '/$commentId', data: request);

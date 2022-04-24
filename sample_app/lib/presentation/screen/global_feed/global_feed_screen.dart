@@ -19,6 +19,7 @@ class _GlobalFeedScreenState extends State<GlobalFeedScreen> {
 
   final scrollcontroller = ScrollController();
   bool loading = false;
+
   @override
   void initState() {
     _controller = PagingController(

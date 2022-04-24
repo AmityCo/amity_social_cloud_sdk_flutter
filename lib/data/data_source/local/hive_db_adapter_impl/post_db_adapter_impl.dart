@@ -33,9 +33,10 @@ class PostDbAdapterImpl extends PostDbAdapter {
 
   @override
   Future updateComment(String postId, String commentId) async {
-    getPostEntity(postId)
-      ..comments!.add(commentId)
-      ..save();
+    PostHiveEntity postHiveEntity = getPostEntity(postId);
+    postHiveEntity.comments!.add(commentId);
+    postHiveEntity.commentsCount = ((postHiveEntity.commentsCount) ?? 0) + 1;
+    postHiveEntity.save();
     return;
   }
 }

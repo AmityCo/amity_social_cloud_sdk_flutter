@@ -1,5 +1,6 @@
 import 'package:amity_sdk/lib.dart';
 import 'package:flutter_social_sample_app/core/route/app_route.dart';
+import 'package:flutter_social_sample_app/presentation/screen/comment_query/comment_query_screen.dart';
 import 'package:flutter_social_sample_app/presentation/screen/community_feed/community_feed_screen.dart';
 import 'package:flutter_social_sample_app/presentation/screen/create_post/create_post_screen.dart';
 import 'package:flutter_social_sample_app/presentation/screen/dashboard/dashboar_screen.dart';
@@ -41,18 +42,40 @@ class AppRouter {
               name: AppRoute.globalFeed,
               path: AppRoute.globalFeedRoute,
               builder: (context, state) => const GlobalFeedScreen(),
+              routes: [
+                GoRoute(
+                  name: 'commentGlobalFeed',
+                  path: 'comment/:postId',
+                  builder: (context, state) =>
+                      CommentQueryScreen(state.params['postId']!),
+                ),
+              ],
             ),
             GoRoute(
               name: AppRoute.communityFeed,
               path: AppRoute.communityFeedRoute,
               builder: (context, state) => CommunityFeedScreen(
                   communityId: state.params['communityId']!),
+              routes: [
+                GoRoute(
+                  path: 'comment/:postId',
+                  builder: (context, state) =>
+                      CommentQueryScreen(state.params['postId']!),
+                ),
+              ],
             ),
             GoRoute(
               name: AppRoute.userFeed,
               path: AppRoute.userFeedRoute,
               builder: (context, state) =>
                   UserFeedScreen(userId: state.params['userId']!),
+              routes: [
+                GoRoute(
+                  path: 'comment/:postId',
+                  builder: (context, state) =>
+                      CommentQueryScreen(state.params['postId']!),
+                ),
+              ],
             ),
           ]),
       GoRoute(

@@ -4,6 +4,7 @@ import 'package:amity_sdk/domain/domain.dart';
 
 extension PostResponseHiveEntityExtension on PostHiveEntity {
   AmityPost convertToAmityPost() {
+    //Target type
     AmityPostTargetType amityPostTargetType =
         AmityPostTargetTypeExtension.enumOf(targetType!);
     AmityPostTarget? amityPostTarget;
@@ -16,6 +17,7 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
         break;
     }
 
+    //Data type
     AmityDataType amityDataType = AmityDataTypeExtension.enumOf(dataType!);
     AmityPostData? amityPostData;
     switch (amityDataType) {

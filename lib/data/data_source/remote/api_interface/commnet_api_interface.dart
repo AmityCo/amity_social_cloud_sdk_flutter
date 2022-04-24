@@ -1,5 +1,6 @@
 import 'package:amity_sdk/core/model/api_request/create_comment_request.dart';
 import 'package:amity_sdk/core/model/api_request/get_comment_request.dart';
+import 'package:amity_sdk/core/model/api_request/update_comment_request.dart';
 import 'package:amity_sdk/data/response/response.dart';
 
 abstract class CommentApiInterface {
@@ -8,7 +9,7 @@ abstract class CommentApiInterface {
 
   Future<CreatePostResponse> getComment(String commentId);
   Future<CreatePostResponse> updateComment(
-      String commentId, CreateCommentRequest request);
+      String commentId, UpdateCommentRequest request);
   Future<bool> deleteComment(String commentId);
 
   Future<bool> flagComment(String commentId);
