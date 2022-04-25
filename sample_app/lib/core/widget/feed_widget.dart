@@ -1,12 +1,17 @@
+import 'package:amity_sdk/amity.dart';
 import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/utils/extension/date_extension.dart';
+import 'package:flutter_social_sample_app/core/widget/add_comment_widget.dart';
 import 'package:flutter_social_sample_app/core/widget/user_profile_info_row_widget.dart';
 import 'package:flutter_social_sample_app/presentation/screen/update_post/update_post_screen.dart';
 import 'package:flutter_social_sample_app/presentation/screen/video_player/full_screen_video_player.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+typedef ArgumentCallback<T> = void Function(T);
 
 class FeedWidget extends StatelessWidget {
   final AmityPost amityPost;
@@ -167,6 +172,10 @@ class FeedWidget extends StatelessWidget {
                       child: FeedReactionInfoWidget(amityPost: value)),
                   Divider(height: .5, color: Colors.grey.shade300),
                   FeedReactionActionWidget(key: UniqueKey(), amityPost: value),
+                  const SizedBox(height: 12),
+                  AddCommentWidget(AmityCoreClient.getCurrentUser(), (text) {
+                    value.comment().create().text(text).send();
+                  }),
                 ],
               ),
             ),
@@ -211,11 +220,9 @@ class FeedContentWidget extends StatelessWidget {
     if (amityPostData is TextData) {
       final data = amityPostData as TextData;
       if (data.text != null && data.text!.isNotEmpty) {
-        return Container(
-          child: Text(
-            data.text ?? '',
-            style: _themeData.textTheme.subtitle1,
-          ),
+        return Text(
+          data.text ?? '',
+          style: _themeData.textTheme.subtitle1,
         );
       }
       return Container();
@@ -223,7 +230,7 @@ class FeedContentWidget extends StatelessWidget {
 
     if (amityPostData is ImageData) {
       final data = amityPostData as ImageData;
-      return Container(
+      return SizedBox(
         width: 100,
         height: 100,
         child: Image.network(
@@ -235,7 +242,7 @@ class FeedContentWidget extends StatelessWidget {
 
     if (amityPostData is VideoData) {
       final data = amityPostData as VideoData;
-      return Container(
+      return SizedBox(
         width: 100,
         height: 100,
         // color: Colors.red,
@@ -371,7 +378,10 @@ class FeedReactionActionWidget extends StatelessWidget {
                     color: Colors.black54, fontWeight: FontWeight.w600),
               )),
           TextButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).goNamed('commentGlobalFeed',
+                    params: {'postId': amityPost.postId!});
+              },
               icon: const ImageIcon(
                   AssetImage('packages/amity_sdk/assets/ic_comment.png')),
               label: Text(

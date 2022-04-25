@@ -5,6 +5,8 @@ import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/notifi
 import 'package:amity_sdk/data/repo_impl/notification_repo_impl.dart';
 import 'package:amity_sdk/domain/domain.dart';
 import 'package:amity_sdk/domain/repo/notification_repo.dart';
+import 'package:amity_sdk/domain/usecase/comment/comment_delete_usecase.dart';
+import 'package:amity_sdk/domain/usecase/comment/comment_update_usecase.dart';
 import 'package:amity_sdk/domain/usecase/post/post_delete_usecase.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:amity_sdk/public/repo/notification_repository.dart';
@@ -177,6 +179,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<NotificationRepo>(
       () => NotificationRepoImpl(notificationApiInterface: serviceLocator()),
     );
+
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
         GetPostByIdUseCase(
@@ -262,6 +265,12 @@ class SdkServiceLocator {
               communityRepo: serviceLocator(),
               communityComposerUsecase: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<CommentComposerUsecase>(
+        () => CommentComposerUsecase(
+              commentRepo: serviceLocator(),
+              userRepo: serviceLocator(),
+              userComposerUsecase: serviceLocator(),
+            ));
     serviceLocator
         .registerLazySingleton<PostCreateUsecase>(() => PostCreateUsecase(
               postRepo: serviceLocator(),
@@ -280,8 +289,10 @@ class SdkServiceLocator {
 
     serviceLocator.registerLazySingleton<CommentCreateUseCase>(
         () => CommentCreateUseCase(commentRepo: serviceLocator()));
-    serviceLocator.registerLazySingleton<CommentQueryUsecase>(
-        () => CommentQueryUsecase(commentRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentQueryUsecase>(() =>
+        CommentQueryUsecase(
+            commentRepo: serviceLocator(),
+            commentComposerUsecase: serviceLocator()));
 
     serviceLocator.registerLazySingleton<PostFlagUsecase>(
         () => PostFlagUsecase(postRepo: serviceLocator()));
@@ -323,6 +334,13 @@ class SdkServiceLocator {
             postRepo: serviceLocator(), postComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<PostGetUsecase>(() => PostGetUsecase(
         postRepo: serviceLocator(), postComposerUsecase: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<CommentDeleteUseCase>(
+        () => CommentDeleteUseCase(commentRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentUpdateUsecase>(() =>
+        CommentUpdateUsecase(
+            commentRepo: serviceLocator(),
+            postComposerUsecase: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo

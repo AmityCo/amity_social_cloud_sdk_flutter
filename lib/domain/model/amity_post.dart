@@ -61,6 +61,9 @@ class AmityPost extends ChangeNotifier implements ValueListenable<AmityPost> {
     //data
     data = amityPost.data;
 
+    //Comment
+    commentCount = amityPost.commentCount;
+
     notifyListeners();
   }
 
@@ -121,7 +124,7 @@ class FileData extends AmityPostData {
 }
 
 class VideoData extends AmityPostData {
-  //FIX: - some vidoe post dont have thubnail, we have to keep thubnail nullable instead of late.
+  //FIXME: - some vidoe post dont have thubnail, we have to keep thubnail nullable instead of late.
   AmityImage? thumbnail; //composer
   VideoData({
     required String postId,

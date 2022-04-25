@@ -110,7 +110,7 @@ class AmityTextCommentCreator {
 
     if (_parentId != null) {
       request.parentId = _parentId;
-      request.commentId = _parentId;
+      // request.commentId = _parentId;
     }
 
     return _useCase.get(request);
