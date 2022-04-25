@@ -97,11 +97,11 @@ class AmityCommentQueryBuilder {
       getCommentRequest.isDeleted = _isDeleted;
     }
 
-    // getCommentRequest.sortBy = _sortOption.apiKey;
+    getCommentRequest.sortBy = _sortOption.apiKey;
 
     Options options = Options();
     getCommentRequest.options = options;
-    // options.type = 'scrollable'; //Default option
+    options.type = 'pagination'; //Default option
     if (token != null) {
       getCommentRequest.options?.token = token;
     }
