@@ -10,7 +10,8 @@ import 'package:amity_sdk/public/public.dart';
 import 'package:amity_sdk/public/repo/notification_repository.dart';
 import 'package:get_it/get_it.dart';
 
-final serviceLocator = GetIt.instance; //sl is referred to as Service Locator
+final serviceLocator =
+    GetIt.asNewInstance(); //sl is referred to as Service Locator
 
 class SdkServiceLocator {
 //Dependency injection

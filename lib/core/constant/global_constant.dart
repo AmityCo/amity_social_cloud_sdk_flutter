@@ -2,12 +2,12 @@
 
 const SG_HTTP_ENDPOINT = "https://api.sg.amity.co/";
 const EU_HTTP_ENDPOINT = "https://api.eu.amity.co/";
-const US_HTTP_ENDPOINT = "";
+const US_HTTP_ENDPOINT = "https://api.us.amity.co/";
 const STAGING_HTTP_ENDPOINT = "https://api.staging.amity.co/";
 
 const SG_SOCKET_ENDPOINT = "https://api.sg.amity.co/";
 const EU_SOCKET_ENDPOINT = "https://api.eu.amity.co/";
-const US_SOCKET_ENDPOINT = "";
+const US_SOCKET_ENDPOINT = "https://api.us.amity.co/";
 const STAGING_SOCKET_ENDPOINT = "https://api.staging.amity.co/";
 
 const SG_MQTT_ENDPOINT = "ssq.sg.amity.co";
