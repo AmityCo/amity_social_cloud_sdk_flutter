@@ -1,6 +1,7 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/core/model/api_request/update_comment_request.dart';
 import 'package:amity_sdk/data/data.dart';
+import 'package:amity_sdk/data/response/create_comment_response.dart';
 import 'package:dio/dio.dart';
 
 class CommentApiInterfaceImpl extends CommentApiInterface {
@@ -9,10 +10,11 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
   CommentApiInterfaceImpl({required this.httpApiClient});
 
   @override
-  Future<CreatePostResponse> createComment(CreateCommentRequest request) async {
+  Future<CreateCommentResponse> createComment(
+      CreateCommentRequest request) async {
     try {
       final data = await httpApiClient().post(COMMENT_V3, data: request);
-      return CreatePostResponse.fromJson(data.data);
+      return CreateCommentResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
@@ -31,13 +33,13 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
   }
 
   @override
-  Future<CreatePostResponse> queryComment(GetCommentRequest request) async {
+  Future<CreateCommentResponse> queryComment(GetCommentRequest request) async {
     try {
       // final data =
       //     await httpApiClient().get(COMMENT_V3, data: request.toJson());
       final data = await httpApiClient()
           .get(COMMENT_V3, queryParameters: request.toJson());
-      return CreatePostResponse.fromJson(data.data);
+      return CreateCommentResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
@@ -57,10 +59,10 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
   }
 
   @override
-  Future<CreatePostResponse> getComment(String commentId) async {
+  Future<CreateCommentResponse> getComment(String commentId) async {
     try {
       final data = await httpApiClient().get(COMMENT_V3 + '/$commentId');
-      return CreatePostResponse.fromJson(data.data);
+      return CreateCommentResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
@@ -92,12 +94,12 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
   }
 
   @override
-  Future<CreatePostResponse> updateComment(
+  Future<CreateCommentResponse> updateComment(
       String commentId, UpdateCommentRequest request) async {
     try {
       final data =
           await httpApiClient().put(COMMENT_V3 + '/$commentId', data: request);
-      return CreatePostResponse.fromJson(data.data);
+      return CreateCommentResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());

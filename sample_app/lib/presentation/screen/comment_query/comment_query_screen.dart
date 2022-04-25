@@ -145,6 +145,7 @@ class _CommentQueryScreenState extends State<CommentQueryScreen> {
                       .create()
                       .text(text)
                       .send();
+
                   return;
                 }
 

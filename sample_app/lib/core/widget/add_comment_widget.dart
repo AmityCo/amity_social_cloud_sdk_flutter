@@ -51,6 +51,7 @@ class AddCommentWidget extends StatelessWidget {
               FocusManager.instance.primaryFocus!.unfocus();
               final text = _commentTextEditController.text.trim();
               _addCommentCallback.call(text);
+              _commentTextEditController.text = '';
               // _amityPost
               //     .comment()
               //     .create()
