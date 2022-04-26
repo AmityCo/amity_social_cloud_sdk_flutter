@@ -9,8 +9,9 @@ class CommunityFeedApiInterfaceImpl extends CommunityFeedApiInterface {
   Future<CreatePostResponse> getCommunityFeed(
       GetCommunityFeedRequest request) async {
     try {
-      final data = await httpApiClient()
-          .get(COMMUNITY_FEED_V3_URL, queryParameters: request.toJson());
+      final data = await httpApiClient().get(
+          COMMUNITY_FEED_V3_URL + '/${request.communityId}',
+          queryParameters: request.toJson());
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

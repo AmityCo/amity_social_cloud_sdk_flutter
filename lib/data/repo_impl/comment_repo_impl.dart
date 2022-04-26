@@ -1,7 +1,9 @@
 import 'package:amity_sdk/core/model/api_request/create_comment_request.dart';
 import 'package:amity_sdk/core/model/api_request/get_comment_request.dart';
+import 'package:amity_sdk/core/model/api_request/update_comment_request.dart';
+import 'package:amity_sdk/core/utils/tuple.dart';
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/remote/api_interface/commnet_api_interface.dart';
+import 'package:amity_sdk/data/response/create_comment_response.dart';
 import 'package:amity_sdk/domain/domain.dart';
 
 class CommentRepoImpl extends CommentRepo {
@@ -47,6 +49,13 @@ class CommentRepoImpl extends CommentRepo {
   @override
   Future<bool> deleteComment(String commentId) async {
     final data = await commentApiInterface.deleteComment(commentId);
+
+    final amityCommentEntity = commentDbAdapter.getCommentEntity(commentId);
+
+    amityCommentEntity
+      ..isDeleted = true
+      ..save();
+
     return data;
   }
 
@@ -79,7 +88,7 @@ class CommentRepoImpl extends CommentRepo {
 
   @override
   Future<AmityComment> updateComment(
-      String commentId, CreateCommentRequest request) async {
+      String commentId, UpdateCommentRequest request) async {
     final data = await commentApiInterface.updateComment(commentId, request);
 
     final amityComments = await _saveDetailsToDb(data);
@@ -87,7 +96,8 @@ class CommentRepoImpl extends CommentRepo {
     return Future.value(amityComments[0]);
   }
 
-  Future<List<AmityComment>> _saveDetailsToDb(CreatePostResponse data) async {
+  Future<List<AmityComment>> _saveDetailsToDb(
+      CreateCommentResponse data) async {
     //Convert to File Hive Entity
     List<FileHiveEntity> fileHiveEntities =
         data.files.map((e) => e.convertToFileHiveEntity()).toList();
@@ -95,6 +105,11 @@ class CommentRepoImpl extends CommentRepo {
     //Convert to User Hive Entity
     List<UserHiveEntity> userHiveEntities =
         data.users.map((e) => e.convertToUserHiveEntity()).toList();
+
+    //Convert to Child Comment Hive Entity
+    List<CommentHiveEntity> childCommentHiveEntities = data.commentChildren
+        .map((e) => e.convertToCommentHiveEntity())
+        .toList();
 
     //Convert to Comment Hive Entity
     List<CommentHiveEntity> commentHiveEntities =
@@ -110,11 +125,26 @@ class CommentRepoImpl extends CommentRepo {
       await userDbAdapter.saveUserEntity(e);
     }
 
+    //Save the Child Comment Entity
+    for (var e in childCommentHiveEntities) {
+      await commentDbAdapter.saveCommentEntity(e);
+    }
+
     //Save the Comment Entity
     for (var e in commentHiveEntities) {
       await commentDbAdapter.saveCommentEntity(e);
     }
 
     return commentHiveEntities.map((e) => e.convertToAmityComment()).toList();
+  }
+
+  @override
+  Future<Tuple2<List<AmityComment>, String>> queryCommentPagingData(
+      GetCommentRequest request) async {
+    final data = await commentApiInterface.queryComment(request);
+
+    final amityComments = await _saveDetailsToDb(data);
+
+    return Tuple2(amityComments, data.paging!.next ?? '');
   }
 }

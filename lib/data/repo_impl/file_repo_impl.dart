@@ -8,7 +8,9 @@ import 'package:amity_sdk/domain/repo/file_repo.dart';
 class FileRepoImpl extends FileRepo {
   final FileDbAdapter fileDbAdapter;
   final FileApiInterface fileApiInterface;
+
   FileRepoImpl({required this.fileDbAdapter, required this.fileApiInterface});
+
   @override
   Future<AmityFileProperties> getFileByIdFromDb(String fileId) {
     return Future.value(
@@ -34,6 +36,7 @@ class FileRepoImpl extends FileRepo {
 
     //Save the File Entity
     for (var e in fileHiveEntities) {
+      print('>>>>>>>>');
       await fileDbAdapter.saveFileEntity(e);
     }
 
@@ -65,7 +68,7 @@ class FileRepoImpl extends FileRepo {
   @override
   Future<AmityUploadResult<AmityVideo>> uploadVidoe(
       UploadFileRequest request) async {
-    final data = await fileApiInterface.uploadFile(request);
+    final data = await fileApiInterface.uploadVideo(request);
 
     final fileProperties = await _saveDataToDb(data);
 

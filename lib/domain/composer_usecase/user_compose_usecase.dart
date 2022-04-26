@@ -11,7 +11,7 @@ class UserComposerUsecase extends UseCase<AmityUser, AmityUser> {
     if (params.avatarFileId != null) {
       final _fileProperties =
           await fileRepo.getFileByIdFromDb(params.avatarFileId!);
-      params.avatarCustomUrl = _fileProperties.fileUrl;
+      params.avatarUrl = _fileProperties.fileUrl;
     }
     return params;
   }

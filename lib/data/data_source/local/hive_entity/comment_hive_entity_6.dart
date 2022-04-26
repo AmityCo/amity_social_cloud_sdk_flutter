@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 part 'comment_hive_entity_6.g.dart';
 
 @HiveType(typeId: 6)
-class CommentHiveEntity {
+class CommentHiveEntity extends HiveObject {
   String? id;
   String? path;
   String commentId = '';

@@ -15,8 +15,8 @@ extension FileResponsseExtension on FileResponse {
       ..mimeType = attributes.mimeType
       ..size = attributes.size
       //metadata
-      ..height = attributes.metadata.height
-      ..width = attributes.metadata.width
-      ..isFull = attributes.metadata.isFull;
+      ..height = attributes.metadata?.height
+      ..width = attributes.metadata?.width
+      ..isFull = attributes.metadata?.isFull;
   }
 }

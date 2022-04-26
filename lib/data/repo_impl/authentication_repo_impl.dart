@@ -19,9 +19,14 @@ class AuthenticationRepoImpl extends AuthenticationRepo {
     // - save the user in DTO
     // - Return the public Amity user to domain layer
 
+    ///FIXME: saving auth request to use it in Dio [AuthInterceptor]
+    if (serviceLocator.isRegistered<AuthenticationRequest>()) {
+      serviceLocator.unregister<AuthenticationRequest>();
+    }
+    serviceLocator.registerSingleton<AuthenticationRequest>(params);
+
     //1. Get the data from data remote data source
     final data = await authenticationApiInterface.login(params);
-    // final userHiveEntity = data.users[0].convertToUserHiveEntity();
 
     //2. Change remote response to dto
     var accountHiveEntity = data.convertToAccountHiveEntity();

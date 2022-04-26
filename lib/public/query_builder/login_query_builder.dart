@@ -1,5 +1,6 @@
 import 'package:amity_sdk/core/core.dart';
 import 'package:amity_sdk/domain/domain.dart';
+import 'package:uuid/uuid.dart';
 
 class LoginQueryBuilder {
   late LoginUsecase _useCase;
@@ -18,11 +19,6 @@ class LoginQueryBuilder {
     return this;
   }
 
-  LoginQueryBuilder deviceId(String deviceId) {
-    _deviceId = deviceId;
-    return this;
-  }
-
   LoginQueryBuilder authToken(String authToken) {
     _authToekn = authToken;
     return this;
@@ -33,12 +29,14 @@ class LoginQueryBuilder {
     if (_displayName != null) {
       params.displayName = _displayName;
     }
-    if (_deviceId != null) {
-      params.deviceId = _deviceId;
-    }
+
     if (_authToekn != null) {
       params.authToken = _authToekn;
     }
+
+    // Generating unique id for each login session
+    params.deviceId = const Uuid().v1();
+
     return _useCase.get(params);
   }
 }

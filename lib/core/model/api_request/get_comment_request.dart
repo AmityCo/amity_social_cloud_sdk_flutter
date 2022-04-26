@@ -55,29 +55,30 @@ class GetCommentRequest {
       }..removeWhere((key, value) => value == null);
 
   @override
-  String toString() => 'GetCommentRequest(referenceId: $referenceId, referenceType: $referenceType)';
+  String toString() =>
+      'GetCommentRequest(referenceId: $referenceId, referenceType: $referenceType)';
 }
 
 class Options {
   Options({
-    required this.type,
-    required this.limit,
-    required this.skip,
-    required this.after,
-    required this.first,
-    required this.before,
-    required this.last,
-    required this.token,
+    this.type,
+    this.limit,
+    this.skip,
+    this.after,
+    this.first,
+    this.before,
+    this.last,
+    this.token,
   });
 
-  final String type;
-  final int limit;
-  final int skip;
-  final int after;
-  final int first;
-  final int before;
-  final int last;
-  final String token;
+  String? type;
+  int? limit;
+  int? skip;
+  int? after;
+  int? first;
+  int? before;
+  int? last;
+  String? token;
 
   factory Options.fromJson(Map<String, dynamic> json) => Options(
         type: json["type"],
@@ -99,7 +100,7 @@ class Options {
         "before": before,
         "last": last,
         "token": token,
-      };
+      }..removeWhere((key, value) => value == null);
 
   @override
   String toString() {

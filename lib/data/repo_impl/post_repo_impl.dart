@@ -1,10 +1,7 @@
 import 'dart:async';
 
-import 'package:amity_sdk/core/model/api_request/create_post_request.dart';
-import 'package:amity_sdk/core/model/api_request/get_post_request.dart';
-import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/domain/model/amity_post.dart';
-import 'package:amity_sdk/domain/repo/post_repo.dart';
+import 'package:amity_sdk/amity.dart';
+import 'package:amity_sdk/core/model/api_request/update_post_request.dart';
 
 class PostRepoImpl extends PostRepo {
   final PublicPostApiInterface publicPostApiInterface;
@@ -52,6 +49,13 @@ class PostRepoImpl extends PostRepo {
   @override
   Future<bool> deletePostById(String postId) async {
     final data = await publicPostApiInterface.deletePostById(postId);
+
+    ///Get the post from DB and update the delete flag to true
+    final amityPostDb = postDbAdapter.getPostEntity(postId);
+    amityPostDb
+      ..isDeleted = true
+      ..save();
+
     return data;
   }
 
@@ -74,18 +78,18 @@ class PostRepoImpl extends PostRepo {
   }
 
   @override
-  Future<AmityPost> updatePostById(
-      String postId, CreatePostRequest request) async {
-    final data = await publicPostApiInterface.updatePostById(postId, request);
+  Future<AmityPost> updatePostById(UpdatePostRequest request) async {
+    final data = await publicPostApiInterface.updatePostById(request);
     final amitPosts = await _saveDataToDb(data);
     return amitPosts[0];
   }
 
   @override
-  Future<List<AmityPost>> queryPost(GetPostRequest request) async {
+  Future<Tuple2<List<AmityPost>, String>> queryPost(
+      GetPostRequest request) async {
     final data = await publicPostApiInterface.queryPost(request);
     final amitPosts = await _saveDataToDb(data);
-    return amitPosts;
+    return Tuple2(amitPosts, data.paging!.next ?? '');
   }
 
   Future<List<AmityPost>> _saveDataToDb(CreatePostResponse data) async {

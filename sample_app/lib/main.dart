@@ -3,12 +3,10 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/core/error/amity_exception.dart';
-import 'package:amity_sdk/core/utils/paging_controller.dart';
 import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/login_screen.dart';
+import 'package:flutter_social_sample_app/core/route/app_router.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -37,31 +35,34 @@ class _MyAppState extends State<MyApp> {
     userId = 'victimAndroid';
     userDisplayName = 'victimAndroid';
     final _themeData = Theme.of(context);
-    return GetMaterialApp(
-      home: const LoginScreen(),
+    return GetMaterialApp.router(
+      routeInformationParser: AppRouter.router.routeInformationParser,
+      routerDelegate: AppRouter.router.routerDelegate,
       theme: ThemeData(
-          primarySwatch: Colors.blue,
-          inputDecorationTheme: const InputDecorationTheme(
-            labelStyle: TextStyle(
-              color: Colors.grey,
-            ),
-            border: UnderlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey),
-            ),
+        primarySwatch: Colors.blue,
+        inputDecorationTheme: const InputDecorationTheme(
+          labelStyle: TextStyle(
+            color: Colors.grey,
           ),
-          textTheme: _themeData.textTheme.apply(bodyColor: Colors.black),
-          iconTheme: const IconThemeData(color: Colors.grey, size: 18),
-          textButtonTheme: TextButtonThemeData(
-            style: TextButton.styleFrom(
-              primary: Colors.black,
-              minimumSize: Size.zero,
-              padding: EdgeInsets.zero,
-              tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-            ),
+          border: UnderlineInputBorder(
+            borderSide: BorderSide(color: Colors.grey),
           ),
-          backgroundColor: Colors.white,
-          snackBarTheme:
-              _themeData.snackBarTheme.copyWith(backgroundColor: Colors.white)),
+        ),
+        textTheme: _themeData.textTheme.apply(bodyColor: Colors.black),
+        iconTheme: const IconThemeData(color: Colors.grey, size: 18),
+        textButtonTheme: TextButtonThemeData(
+          style: TextButton.styleFrom(
+            primary: Colors.black,
+            minimumSize: Size.zero,
+            padding: EdgeInsets.zero,
+            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+          ),
+        ),
+        backgroundColor: Colors.white,
+        snackBarTheme:
+            _themeData.snackBarTheme.copyWith(backgroundColor: Colors.white),
+        tabBarTheme: TabBarTheme(labelColor: Colors.black),
+      ),
       themeMode: ThemeMode.light,
 
       // onGenerateRoute: (settings){
@@ -84,7 +85,6 @@ class _MyAppState extends State<MyApp> {
               onPressed: () async {
                 AmityCoreClient.login(userId)
                     .displayName(userDisplayName)
-                    .deviceId('sorbh_device_id_88')
                     .submit()
                     .then((value) {
                   log(value.displayName!);

@@ -3,8 +3,6 @@ import 'dart:async';
 import 'package:amity_sdk/core/model/api_request/get_user_feed_request.dart';
 import 'package:amity_sdk/core/utils/tuple.dart';
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/feed_paging_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/remote/api_interface/user_feed_api_interface.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/domain/repo/user_feed_repo.dart';
 
@@ -33,7 +31,7 @@ class UserFeedRepoImpl extends UserFeedRepo {
 
     final amitPosts = await _saveDataToDb(data);
 
-    return Tuple2(amitPosts, data.paging!.next!);
+    return Tuple2(amitPosts, data.paging!.next ?? '');
   }
 
   @override

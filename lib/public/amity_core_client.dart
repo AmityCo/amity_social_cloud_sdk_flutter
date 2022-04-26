@@ -1,6 +1,4 @@
-import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/public/public.dart';
+import 'package:amity_sdk/lib.dart';
 import 'package:amity_sdk/public/repo/notification_repository.dart';
 
 class AmityCoreClient {
@@ -20,6 +18,26 @@ class AmityCoreClient {
 
   static LoginQueryBuilder login(String userId) {
     return LoginQueryBuilder(useCase: serviceLocator(), userId: userId);
+  }
+
+  /// Logout will wipe out all the data [AmityCoreClient] holds.
+  static Future<void> logout() async {
+    //Delete the db data
+    await serviceLocator<DBClient>().reset();
+
+    //reset all the in memory dependencies
+    await serviceLocator.reset(dispose: true);
+
+    return;
+  }
+
+  static bool isUserLoggedIn() {
+    try {
+      getCurrentUser();
+      return true;
+    } catch (error) {
+      return false;
+    }
   }
 
   static String getUserId() {

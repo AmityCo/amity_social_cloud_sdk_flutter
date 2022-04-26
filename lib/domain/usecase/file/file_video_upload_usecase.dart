@@ -7,8 +7,7 @@ class FileVideoUploadUsecase
   FileVideoUploadUsecase(this._fileRepo);
   @override
   Future<AmityUploadResult<AmityVideo>> get(UploadFileRequest params) {
-    // TODO: implement get
-    throw UnimplementedError();
+    return _fileRepo.uploadVidoe(params);
   }
 
   @override

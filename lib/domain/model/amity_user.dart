@@ -8,6 +8,7 @@ class AmityUser {
   String? displayName;
   String? description;
   String? avatarFileId;
+  String? avatarUrl;
   String? avatarCustomUrl;
   int? flagCount;
   //  HashFlag hashFlag;
@@ -30,6 +31,7 @@ class AmityUser {
       'displayName': displayName,
       'description': description,
       'avatarFileId': avatarFileId,
+      'avatarUrl': avatarUrl,
       'avatarCustomUrl': avatarCustomUrl,
       'flagCount': flagCount,
       'metadata': metadata,

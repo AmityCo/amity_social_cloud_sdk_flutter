@@ -1,27 +1,19 @@
 import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/feed_paging_db_adapter.dart';
-import 'package:amity_sdk/data/data_source/local/hive_db_adapter_impl/feed_paging_db_adapter_impl.dart';
-import 'package:amity_sdk/data/data_source/remote/api_interface/global_feed_api_interface.dart';
+import 'package:amity_sdk/data/data_source/local/db_adapter_repo.dart';
 import 'package:amity_sdk/data/data_source/remote/api_interface/notification_api_interface.dart';
-import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/global_feed_api_interface_impl.dart';
 import 'package:amity_sdk/data/data_source/remote/http_api_interface_impl/notification_api_interface_impl.dart';
-import 'package:amity_sdk/data/repo_impl/global_feed_repo_impl.dart';
 import 'package:amity_sdk/data/repo_impl/notification_repo_impl.dart';
-import 'package:amity_sdk/domain/composer_usecase/community_composer_usecase.dart';
-import 'package:amity_sdk/domain/composer_usecase/user_compose_usecase.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:amity_sdk/domain/repo/global_feed_repo.dart';
 import 'package:amity_sdk/domain/repo/notification_repo.dart';
-import 'package:amity_sdk/domain/usecase/feed/get_global_feed_usecase.dart';
-import 'package:amity_sdk/domain/usecase/notification/register_device_notification_usecase.dart';
-import 'package:amity_sdk/domain/usecase/notification/unregister_device_notification_usecase.dart';
+import 'package:amity_sdk/domain/usecase/comment/comment_delete_usecase.dart';
+import 'package:amity_sdk/domain/usecase/comment/comment_update_usecase.dart';
+import 'package:amity_sdk/domain/usecase/post/post_delete_usecase.dart';
 import 'package:amity_sdk/public/public.dart';
-import 'package:amity_sdk/public/repo/feed_repository.dart';
 import 'package:amity_sdk/public/repo/notification_repository.dart';
 import 'package:get_it/get_it.dart';
 
-final serviceLocator = GetIt.instance; //sl is referred to as Service Locator
+final serviceLocator =
+    GetIt.asNewInstance(); //sl is referred to as Service Locator
 
 class SdkServiceLocator {
 //Dependency injection
@@ -62,6 +54,8 @@ class SdkServiceLocator {
         () => UserFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<FileApiInterface>(
         () => FileApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityFeedApiInterface>(
+        () => CommunityFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<NotificationApiInterface>(() =>
         NotificationApiInterfaceImpl(
             httpApiClient: serviceLocator(),
@@ -100,6 +94,16 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<FeedPagingDbAdapter>(
         () => FeedPagingDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+
+    //Register Db adapter Repo which hold all the Db Adapters
+    serviceLocator.registerLazySingleton<DbAdapterRepo>(() => DbAdapterRepo(
+          postDbAdapter: serviceLocator(),
+          commentDbAdapter: serviceLocator(),
+          communityDbAdapter: serviceLocator(),
+          feedDbAdapter: serviceLocator(),
+          fileDbAdapter: serviceLocator(),
+          userDbAdapter: serviceLocator(),
+        ));
 
     ///----------------------------------- Domain Layer -----------------------------------///
 
@@ -153,26 +157,29 @@ class SdkServiceLocator {
 
     serviceLocator
         .registerLazySingleton<GlobalFeedRepo>(() => GlobalFeedRepoImpl(
-              commentDbAdapter: serviceLocator(),
-              userDbAdapter: serviceLocator(),
-              fileDbAdapter: serviceLocator(),
               feedApiInterface: serviceLocator(),
-              postDbAdapter: serviceLocator(),
-              feedDbAdapter: serviceLocator(),
-              communityDbAdapter: serviceLocator(),
+              dbAdapterRepo: serviceLocator(),
             ));
     serviceLocator.registerLazySingleton<UserFeedRepo>(() => UserFeedRepoImpl(
-        userFeedApiInterface: serviceLocator(),
-        postDbAdapter: serviceLocator(),
-        commentDbAdapter: serviceLocator(),
-        userDbAdapter: serviceLocator(),
-        fileDbAdapter: serviceLocator(),
-        feedDbAdapter: serviceLocator()));
+          userFeedApiInterface: serviceLocator(),
+          postDbAdapter: serviceLocator(),
+          commentDbAdapter: serviceLocator(),
+          userDbAdapter: serviceLocator(),
+          fileDbAdapter: serviceLocator(),
+          feedDbAdapter: serviceLocator(),
+        ));
 
-  serviceLocator.registerLazySingleton<NotificationRepo>(
-      () => NotificationRepoImpl(
-          notificationApiInterface: serviceLocator()),
+    serviceLocator
+        .registerLazySingleton<CommunityFeedRepo>(() => CommunityFeedRepoImpl(
+              communiytFeedApiInterface: serviceLocator(),
+              postRepo: serviceLocator(),
+              dbAdapterRepo: serviceLocator(),
+            ));
+
+    serviceLocator.registerLazySingleton<NotificationRepo>(
+      () => NotificationRepoImpl(notificationApiInterface: serviceLocator()),
     );
+
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
         GetPostByIdUseCase(
@@ -258,6 +265,12 @@ class SdkServiceLocator {
               communityRepo: serviceLocator(),
               communityComposerUsecase: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<CommentComposerUsecase>(
+        () => CommentComposerUsecase(
+              commentRepo: serviceLocator(),
+              userRepo: serviceLocator(),
+              userComposerUsecase: serviceLocator(),
+            ));
     serviceLocator
         .registerLazySingleton<PostCreateUsecase>(() => PostCreateUsecase(
               postRepo: serviceLocator(),
@@ -276,8 +289,10 @@ class SdkServiceLocator {
 
     serviceLocator.registerLazySingleton<CommentCreateUseCase>(
         () => CommentCreateUseCase(commentRepo: serviceLocator()));
-    serviceLocator.registerLazySingleton<CommentQueryUsecase>(
-        () => CommentQueryUsecase(commentRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentQueryUsecase>(() =>
+        CommentQueryUsecase(
+            commentRepo: serviceLocator(),
+            commentComposerUsecase: serviceLocator()));
 
     serviceLocator.registerLazySingleton<PostFlagUsecase>(
         () => PostFlagUsecase(postRepo: serviceLocator()));
@@ -302,7 +317,9 @@ class SdkServiceLocator {
         () => FileAudioUploadUsecase(serviceLocator()));
     serviceLocator.registerLazySingleton<FileVideoUploadUsecase>(
         () => FileVideoUploadUsecase(serviceLocator()));
-    
+    serviceLocator.registerLazySingleton<GetCommunityFeedUsecase>(
+        () => GetCommunityFeedUsecase(serviceLocator(), serviceLocator()));
+
     serviceLocator.registerLazySingleton<RegisterDeviceNotificationUseCase>(
         () => RegisterDeviceNotificationUseCase(
             notificationRepo: serviceLocator(), accountRepo: serviceLocator()));
@@ -310,6 +327,20 @@ class SdkServiceLocator {
         () => UnregisterDeviceNotificationUseCase(
             notificationRepo: serviceLocator(), accountRepo: serviceLocator()));
 
+    serviceLocator.registerLazySingleton<PostDeleteUseCase>(
+        () => PostDeleteUseCase(postRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<PostUpdateUsecase>(() =>
+        PostUpdateUsecase(
+            postRepo: serviceLocator(), postComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<PostGetUsecase>(() => PostGetUsecase(
+        postRepo: serviceLocator(), postComposerUsecase: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<CommentDeleteUseCase>(
+        () => CommentDeleteUseCase(commentRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentUpdateUsecase>(() =>
+        CommentUpdateUsecase(
+            commentRepo: serviceLocator(),
+            postComposerUsecase: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo

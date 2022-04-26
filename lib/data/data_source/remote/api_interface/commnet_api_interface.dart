@@ -1,14 +1,15 @@
 import 'package:amity_sdk/core/model/api_request/create_comment_request.dart';
 import 'package:amity_sdk/core/model/api_request/get_comment_request.dart';
-import 'package:amity_sdk/data/response/response.dart';
+import 'package:amity_sdk/core/model/api_request/update_comment_request.dart';
+import 'package:amity_sdk/data/response/create_comment_response.dart';
 
 abstract class CommentApiInterface {
-  Future<CreatePostResponse> createComment(CreateCommentRequest request);
-  Future<CreatePostResponse> queryComment(GetCommentRequest request);
+  Future<CreateCommentResponse> createComment(CreateCommentRequest request);
+  Future<CreateCommentResponse> queryComment(GetCommentRequest request);
 
-  Future<CreatePostResponse> getComment(String commentId);
-  Future<CreatePostResponse> updateComment(
-      String commentId, CreateCommentRequest request);
+  Future<CreateCommentResponse> getComment(String commentId);
+  Future<CreateCommentResponse> updateComment(
+      String commentId, UpdateCommentRequest request);
   Future<bool> deleteComment(String commentId);
 
   Future<bool> flagComment(String commentId);

@@ -1,5 +1,6 @@
 import 'package:amity_sdk/core/model/api_request/create_post_request.dart';
 import 'package:amity_sdk/core/model/api_request/get_post_request.dart';
+import 'package:amity_sdk/core/model/api_request/update_post_request.dart';
 import 'package:amity_sdk/data/data.dart';
 
 abstract class PublicPostApiInterface {
@@ -7,8 +8,7 @@ abstract class PublicPostApiInterface {
   Future<CreatePostResponse> createPost(CreatePostRequest request);
 
   Future<CreatePostResponse> getPostById(String postId);
-  Future<CreatePostResponse> updatePostById(
-      String postId, CreatePostRequest request);
+  Future<CreatePostResponse> updatePostById(UpdatePostRequest request);
   Future<bool> deletePostById(String postId);
 
   Future<bool> flagPost(String postId);

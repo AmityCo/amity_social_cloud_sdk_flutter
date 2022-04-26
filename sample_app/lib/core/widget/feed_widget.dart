@@ -1,10 +1,17 @@
+import 'package:amity_sdk/amity.dart';
 import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
 import 'package:amity_sdk/domain/model/amity_post.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_application_1_example/core/utils/extension/date_extension.dart';
-import 'package:flutter_application_1_example/full_screen_video_player.dart';
+import 'package:flutter_social_sample_app/core/utils/extension/date_extension.dart';
+import 'package:flutter_social_sample_app/core/widget/add_comment_widget.dart';
+import 'package:flutter_social_sample_app/core/widget/user_profile_info_row_widget.dart';
+import 'package:flutter_social_sample_app/presentation/screen/update_post/update_post_screen.dart';
+import 'package:flutter_social_sample_app/presentation/screen/video_player/full_screen_video_player.dart';
+import 'package:go_router/go_router.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+typedef ArgumentCallback<T> = void Function(T);
 
 class FeedWidget extends StatelessWidget {
   final AmityPost amityPost;
@@ -16,178 +23,185 @@ class FeedWidget extends StatelessWidget {
     return ValueListenableBuilder<AmityPost>(
       valueListenable: amityPost,
       builder: (context, value, child) {
-        return Container(
-          decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.shade300,
-                  blurRadius: 10,
-                ),
-              ]),
-          margin: const EdgeInsets.all(12),
-          padding: const EdgeInsets.all(12),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
+        return Stack(
+          fit: StackFit.loose,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(8),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.shade300,
+                      blurRadius: 10,
+                    ),
+                  ]),
+              margin: const EdgeInsets.all(12),
+              padding: const EdgeInsets.all(12),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    value.postedUser!.displayName!,
-                    style: _themeData.textTheme.headline5,
-                  ),
-                  const Spacer(),
-                  IconButton(
-                    onPressed: () {},
-                    icon: const Icon(
-                      Icons.more_vert,
-                      size: 18,
-                    ),
-                  )
-                ],
-              ),
-              Container(
-                margin: const EdgeInsets.symmetric(vertical: 2),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Created At - ' + value.createdAt!.format(),
-                      style: _themeData.textTheme.caption,
-                    ),
-                    Text(
-                      'Updated At - ' + value.updatedAt!.format(),
-                      style: _themeData.textTheme.caption,
-                    ),
-                    if (value.target is UserTarget)
-                      Text(
-                        'Posted On : ' +
-                            ((value.target as UserTarget)
-                                    .targetUser
-                                    ?.displayName ??
-                                'No name'),
-                        style: _themeData.textTheme.caption,
-                      ),
-                    if (value.target is CommunityTarget)
-                      Text(
-                        'Posted On : ' +
-                            ((value.target as CommunityTarget)
-                                    .targetCommunity
-                                    ?.displayName ??
-                                'No name') +
-                            ' Community',
-                        style: _themeData.textTheme.caption,
-                      ),
-                  ],
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(vertical: 6),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    FeedContentWidget(amityPostData: value.data!),
-                    const SizedBox(height: 8),
-                    if (value.children != null)
-                      Wrap(
-                        spacing: 8,
-                        runSpacing: 8,
-                        children: [
-                          ...List.generate(value.children!.length, (index) {
-                            final amityChildPost = value.children![index];
-                            if (amityChildPost.data == null) {
-                              return Container(
-                                padding: const EdgeInsets.all(8),
-                                decoration: BoxDecoration(
-                                    color: Colors.red.shade400,
-                                    borderRadius: BorderRadius.circular(12)),
-                                child: Text(
-                                  'Media Type ${amityChildPost.type} not supported',
-                                  style: _themeData.textTheme.bodyText1!
-                                      .copyWith(color: Colors.white),
+                  UserProfileInfoRowWidget(
+                    userId: value.postedUser!.userId!,
+                    userAvatar: value.postedUser!.avatarCustomUrl,
+                    userName: value.postedUser!.displayName!,
+                    options: [
+                      if (amityPost.postedUserId == AmityCoreClient.getUserId())
+                        PopupMenuButton(
+                          itemBuilder: (context) {
+                            return const [
+                              PopupMenuItem(
+                                child: Text("Edit"),
+                                value: 1,
+                              ),
+                              PopupMenuItem(
+                                child: Text("Delete (Soft)"),
+                                value: 2,
+                              ),
+                              PopupMenuItem(
+                                child: Text("Delete (Hard)"),
+                                value: 3,
+                                enabled: false,
+                              )
+                            ];
+                          },
+                          child: const Icon(
+                            Icons.more_vert,
+                            size: 18,
+                          ),
+                          onSelected: (index) {
+                            if (index == 1) {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => UpdatePostScreen(
+                                    amityPost: amityPost,
+                                  ),
                                 ),
                               );
                             }
-                            return FeedContentWidget(
-                                amityPostData: amityChildPost.data!);
-                          })
-                        ],
-                      )
-                  ],
-                ),
+                            if (index == 2) {
+                              amityPost.delete();
+                            }
+                          },
+                        ),
+                      // IconButton(
+                      //   onPressed: () {},
+                      //   icon: const Icon(
+                      //     Icons.more_vert,
+                      //     size: 18,
+                      //   ),
+                      // )
+                    ],
+                  ),
+                  Container(
+                    margin: const EdgeInsets.symmetric(vertical: 2),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Created At - ' + value.createdAt!.format(),
+                          style: _themeData.textTheme.caption,
+                        ),
+                        Text(
+                          'Updated At - ' + value.updatedAt!.format(),
+                          style: _themeData.textTheme.caption,
+                        ),
+                        if (value.target is UserTarget)
+                          Text(
+                            'Posted On : ' +
+                                ((value.target as UserTarget)
+                                        .targetUser
+                                        ?.displayName ??
+                                    'No name'),
+                            style: _themeData.textTheme.caption,
+                          ),
+                        if (value.target is CommunityTarget)
+                          Text(
+                            'Posted On : ' +
+                                ((value.target as CommunityTarget)
+                                        .targetCommunity
+                                        ?.displayName ??
+                                    'No name') +
+                                ' Community',
+                            style: _themeData.textTheme.caption,
+                          ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 6),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        FeedContentWidget(amityPostData: value.data!),
+                        const SizedBox(height: 8),
+                        if (value.children != null)
+                          Wrap(
+                            spacing: 8,
+                            runSpacing: 8,
+                            children: [
+                              ...List.generate(value.children!.length, (index) {
+                                final amityChildPost = value.children![index];
+                                if (amityChildPost.data == null) {
+                                  return Container(
+                                    padding: const EdgeInsets.all(8),
+                                    decoration: BoxDecoration(
+                                        color: Colors.red.shade400,
+                                        borderRadius:
+                                            BorderRadius.circular(12)),
+                                    child: Text(
+                                      'Media Type ${amityChildPost.type} not supported',
+                                      style: _themeData.textTheme.bodyText1!
+                                          .copyWith(color: Colors.white),
+                                    ),
+                                  );
+                                }
+                                return FeedContentWidget(
+                                    amityPostData: amityChildPost.data!);
+                              })
+                            ],
+                          )
+                      ],
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  Divider(height: .5, color: Colors.grey.shade300),
+                  Container(
+                      key: UniqueKey(),
+                      margin: const EdgeInsets.symmetric(horizontal: 12),
+                      child: FeedReactionInfoWidget(amityPost: value)),
+                  Divider(height: .5, color: Colors.grey.shade300),
+                  FeedReactionActionWidget(key: UniqueKey(), amityPost: value),
+                  const SizedBox(height: 12),
+                  AddCommentWidget(AmityCoreClient.getCurrentUser(), (text) {
+                    value.comment().create().text(text).send();
+                  }),
+                ],
               ),
-              const SizedBox(height: 12),
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //   children: [
-              //     TextButton.icon(
-              //       onPressed: () {},
-              //       icon: const Icon(
-              //         Icons.thumb_up,
-              //         color: Colors.grey,
-              //       ),
-              //       label: Text(
-              //         'My : ${amityPost.myReactions}',
-              //         style: _themeData.textTheme.bodyText1,
-              //       ),
-              //     ),
-              //     TextButton.icon(
-              //       onPressed: () {},
-              //       icon: const Icon(
-              //         Icons.thumb_up,
-              //         color: Colors.grey,
-              //       ),
-              //       label: Text(
-              //         'Count : ${amityPost.reactionCount}',
-              //         style: _themeData.textTheme.bodyText1,
-              //       ),
-              //     ),
-              //     TextButton.icon(
-              //       onPressed: () {},
-              //       icon: const Icon(
-              //         Icons.comment,
-              //         color: Colors.grey,
-              //       ),
-              //       label: Text(
-              //         'Count : ${amityPost.commentCount}',
-              //         style: _themeData.textTheme.bodyText1,
-              //       ),
-              //     ),
-              //   ],
-              // ),
-              // const SizedBox(height: 8),
-              // Row(
-              //   children: [
-              //     TextButton.icon(
-              //       onPressed: () {},
-              //       icon: const Icon(Icons.flag_rounded, color: Colors.red),
-              //       label: Text(
-              //         'Count : ${amityPost.flagCount}',
-              //         style: _themeData.textTheme.bodyText1,
-              //       ),
-              //     ),
-              //     const SizedBox(width: 18),
-              //     TextButton.icon(
-              //       onPressed: () {},
-              //       icon: const Icon(Icons.flag_rounded, color: Colors.red),
-              //       label: Text(
-              //         'Flag by me : ${amityPost.isFlaggedByMe ?? false}',
-              //         style: _themeData.textTheme.bodyText1,
-              //       ),
-              //     )
-              //   ],
-              // ),
-              // const SizedBox(height: 12),
-              Divider(height: .5, color: Colors.grey.shade300),
-              Container(
-                  key: UniqueKey(),
-                  margin: const EdgeInsets.symmetric(horizontal: 12),
-                  child: FeedReactionInfoWidget(amityPost: value)),
-              Divider(height: .5, color: Colors.grey.shade300),
-              FeedActionWidget(key: UniqueKey(), amityPost: value),
-            ],
-          ),
+            ),
+            if (amityPost.isDeleted ?? false)
+              Positioned.fill(
+                child: Container(
+                    margin: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      color: Colors.grey.withOpacity(.4),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                            color: Colors.red.shade400,
+                            borderRadius: BorderRadius.circular(12)),
+                        child: Text(
+                          'Soft Deleted Amity Post',
+                          style: _themeData.textTheme.bodyText1!
+                              .copyWith(color: Colors.white),
+                        ),
+                      ),
+                    )),
+              )
+          ],
         );
       },
     );
@@ -206,11 +220,9 @@ class FeedContentWidget extends StatelessWidget {
     if (amityPostData is TextData) {
       final data = amityPostData as TextData;
       if (data.text != null && data.text!.isNotEmpty) {
-        return Container(
-          child: Text(
-            data.text ?? '',
-            style: _themeData.textTheme.subtitle1,
-          ),
+        return Text(
+          data.text ?? '',
+          style: _themeData.textTheme.subtitle1,
         );
       }
       return Container();
@@ -218,11 +230,11 @@ class FeedContentWidget extends StatelessWidget {
 
     if (amityPostData is ImageData) {
       final data = amityPostData as ImageData;
-      return Container(
+      return SizedBox(
         width: 100,
         height: 100,
         child: Image.network(
-          data.image!.getUrl(AmityImageSize.MEDIUM),
+          data.image.getUrl(AmityImageSize.MEDIUM),
           fit: BoxFit.cover,
         ),
       );
@@ -230,15 +242,15 @@ class FeedContentWidget extends StatelessWidget {
 
     if (amityPostData is VideoData) {
       final data = amityPostData as VideoData;
-      return Container(
+      return SizedBox(
         width: 100,
         height: 100,
-        color: Colors.red,
+        // color: Colors.red,
         child: Stack(
           children: [
             Positioned.fill(
               child: Image.network(
-                data.thumbnail!.getUrl(AmityImageSize.MEDIUM),
+                data.thumbnail?.getUrl(AmityImageSize.MEDIUM) ?? '',
                 fit: BoxFit.cover,
               ),
             ),
@@ -272,11 +284,11 @@ class FeedContentWidget extends StatelessWidget {
       final data = amityPostData as FileData;
       return TextButton.icon(
         onPressed: () {
-          launch(data.fileInfo!.fileName);
+          launch(data.fileInfo.fileName);
         },
         icon: const Icon(Icons.attach_file_rounded, color: Colors.blue),
         label: Text(
-          '${data.fileInfo?.fileName}',
+          data.fileInfo.fileName,
           style: _themeData.textTheme.bodyText1!.copyWith(color: Colors.blue),
         ),
       );
@@ -315,13 +327,13 @@ class FeedReactionInfoWidget extends StatelessWidget {
               )),
           const Spacer(),
           Text(
-            '0 Comment',
+            '${amityPost.commentCount} Comment',
             style:
                 _themeData.textTheme.subtitle1!.copyWith(color: Colors.black54),
           ),
           const SizedBox(width: 12),
           Text(
-            '0 Flag',
+            '${amityPost.flagCount} Flag',
             style:
                 _themeData.textTheme.subtitle1!.copyWith(color: Colors.black54),
           )
@@ -331,9 +343,10 @@ class FeedReactionInfoWidget extends StatelessWidget {
   }
 }
 
-class FeedActionWidget extends StatelessWidget {
+class FeedReactionActionWidget extends StatelessWidget {
   final AmityPost amityPost;
-  const FeedActionWidget({Key? key, required this.amityPost}) : super(key: key);
+  const FeedReactionActionWidget({Key? key, required this.amityPost})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -365,7 +378,10 @@ class FeedActionWidget extends StatelessWidget {
                     color: Colors.black54, fontWeight: FontWeight.w600),
               )),
           TextButton.icon(
-              onPressed: () {},
+              onPressed: () {
+                GoRouter.of(context).goNamed('commentGlobalFeed',
+                    params: {'postId': amityPost.postId!});
+              },
               icon: const ImageIcon(
                   AssetImage('packages/amity_sdk/assets/ic_comment.png')),
               label: Text(
@@ -373,16 +389,19 @@ class FeedActionWidget extends StatelessWidget {
                 style: _themeData.textTheme.subtitle1!.copyWith(
                     color: Colors.black54, fontWeight: FontWeight.w600),
               )),
-          TextButton.icon(
-              onPressed: () {},
-              icon: const ImageIcon(
-                  AssetImage('packages/amity_sdk/assets/ic_flag.png')),
-              // icon: Image.asset('packages/amity_sdk/assets/ic_comment.png'),
-              label: Text(
-                'Flag',
-                style: _themeData.textTheme.subtitle1!.copyWith(
-                    color: Colors.black54, fontWeight: FontWeight.w600),
-              ))
+          Visibility(
+            visible: false,
+            child: TextButton.icon(
+                onPressed: () {},
+                icon: const ImageIcon(
+                    AssetImage('packages/amity_sdk/assets/ic_flag.png')),
+                // icon: Image.asset('packages/amity_sdk/assets/ic_comment.png'),
+                label: Text(
+                  'Flag',
+                  style: _themeData.textTheme.subtitle1!.copyWith(
+                      color: Colors.black54, fontWeight: FontWeight.w600),
+                )),
+          )
         ],
       ),
     );
