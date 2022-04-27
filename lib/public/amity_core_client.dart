@@ -54,7 +54,7 @@ class AmityCoreClient {
 
   static Future registerDeviceNotification(String fcmToken) {
     return serviceLocator<NotificationRepository>()
-        .registerDeviceNotification("FAKE TOKEN!");
+        .registerDeviceNotification(fcmToken);
   }
 
   static Future unregisterDeviceNotification() {
