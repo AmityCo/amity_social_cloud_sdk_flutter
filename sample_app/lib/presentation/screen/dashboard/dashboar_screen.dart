@@ -1,5 +1,6 @@
 import 'package:amity_sdk/public/amity_core_client.dart';
 import 'package:amity_sdk/public/public.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/route/app_route.dart';
 import 'package:flutter_social_sample_app/presentation/screen/user_feed/user_feed_screen.dart';
@@ -79,8 +80,25 @@ class _DashboardScreenState extends State<DashboardScreen> {
               ),
               const SizedBox(height: 20),
               TextButton(
-                onPressed: () {
-                  AmityCoreClient.registerDeviceNotification("blah");
+                onPressed: () async {
+                  FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+                  NotificationSettings settings =
+                      await messaging.requestPermission();
+
+                  if (settings.authorizationStatus ==
+                      AuthorizationStatus.authorized) {
+                    print('User granted permission');
+                  } else if (settings.authorizationStatus ==
+                      AuthorizationStatus.provisional) {
+                    print('User granted provisional permission');
+                  } else {
+                    print('User declined or has not accepted permission');
+                    return;
+                  }
+
+                  final token = await messaging.getToken();
+                  AmityCoreClient.registerDeviceNotification(token!);
                 },
                 child: const Text('Register notification'),
               ),
