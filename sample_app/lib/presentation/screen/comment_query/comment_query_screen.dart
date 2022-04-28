@@ -21,12 +21,15 @@ class _CommentQueryScreenState extends State<CommentQueryScreen> {
 
   AmityComment? _replyToComment;
 
+  AmityCommentSortOption _sortOption = AmityCommentSortOption.LAST_CREATED;
+
   @override
   void initState() {
     _controller = PagingController(
       pageFuture: (token) => AmitySocialClient.newCommentRepository()
           .getComments()
           .post(widget._postId)
+          .sortBy(_sortOption)
           .getPagingData(token: token, limit: GlobalConstant.pageSize),
       pageSize: GlobalConstant.pageSize,
     )..addListener(
@@ -67,7 +70,41 @@ class _CommentQueryScreenState extends State<CommentQueryScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Comment Feed')),
+      appBar: AppBar(
+        title: const Text('Comment Feed'),
+        actions: [
+          PopupMenuButton(
+            itemBuilder: (context) {
+              return [
+                PopupMenuItem(
+                  child: Text(AmityCommentSortOption.LAST_CREATED.apiKey),
+                  value: 1,
+                ),
+                PopupMenuItem(
+                  child: Text(AmityCommentSortOption.FIRST_CREATED.apiKey),
+                  value: 2,
+                ),
+              ];
+            },
+            child: const Icon(
+              Icons.sort_rounded,
+              size: 24,
+            ),
+            onSelected: (index1) {
+              if (index1 == 1) {
+                _sortOption = AmityCommentSortOption.LAST_CREATED;
+                _controller.reset();
+                _controller.fetchNextPage();
+              }
+              if (index1 == 2) {
+                _sortOption = AmityCommentSortOption.FIRST_CREATED;
+                _controller.reset();
+                _controller.fetchNextPage();
+              }
+            },
+          )
+        ],
+      ),
       body: Column(
         children: [
           Expanded(
@@ -79,21 +116,16 @@ class _CommentQueryScreenState extends State<CommentQueryScreen> {
                     },
                     child: ListView.builder(
                       controller: scrollcontroller,
+                      physics: const AlwaysScrollableScrollPhysics(),
                       itemCount: amityComments.length,
                       itemBuilder: (context, index) {
                         final amityComment = amityComments[index];
-                        return Container(
-                            child: CommentWidget(amityComment, (value) {
+                        return CommentWidget(amityComment, (value) {
                           setState(() {
                             _replyToComment = value;
                           });
-                        }));
-                        // return FeedWidget(amityPost: amityPost);
+                        });
                       },
-                      // separatorBuilder: (context, index) => Container(
-                      //     margin: const EdgeInsets.symmetric(horizontal: 36),
-                      //     child:
-                      //         Divider(height: 1, color: Colors.grey.shade400)),
                     ),
                   )
                 : Container(
@@ -134,27 +166,38 @@ class _CommentQueryScreenState extends State<CommentQueryScreen> {
             margin: const EdgeInsets.all(12),
             child: AddCommentWidget(
               AmityCoreClient.getCurrentUser(),
-              (text) {
+              (text) async {
                 if (_replyToComment != null) {
                   ///Add comment to [_replyToComment] comment
-                  // _replyToComment!.comment().create().text(text).send();
-                  AmitySocialClient.newCommentRepository()
-                      .createComment()
-                      .post(widget._postId)
-                      .parentId(_replyToComment!.commentId!)
+                  final _comment = await _replyToComment!
+                      .comment()
                       .create()
                       .text(text)
                       .send();
 
+                  // final _comment =
+                  //     await AmitySocialClient.newCommentRepository()
+                  //         .createComment()
+                  //         .post(widget._postId)
+                  //         .parentId(_replyToComment!.commentId!)
+                  //         .create()
+                  //         .text(text)
+                  //         .send();
+                  // _controller.addAtIndex(0, _comment);
+                  setState(() {
+                    _replyToComment = null;
+                  });
+
                   return;
                 }
 
-                AmitySocialClient.newCommentRepository()
+                final _comment = await AmitySocialClient.newCommentRepository()
                     .createComment()
                     .post(widget._postId)
                     .create()
                     .text(text)
                     .send();
+                _controller.addAtIndex(0, _comment);
                 return;
               },
             ),

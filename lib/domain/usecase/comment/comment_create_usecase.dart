@@ -3,11 +3,17 @@ import 'package:amity_sdk/domain/domain.dart';
 
 class CommentCreateUseCase extends UseCase<AmityComment, CreateCommentRequest> {
   final CommentRepo commentRepo;
-
-  CommentCreateUseCase({required this.commentRepo});
+  final CommentComposerUsecase commentComposerUsecase;
+  CommentCreateUseCase(
+      {required this.commentRepo, required this.commentComposerUsecase});
   @override
-  Future<AmityComment> get(CreateCommentRequest params) {
-    return commentRepo.createComment(params);
+  Future<AmityComment> get(CreateCommentRequest params) async {
+    final data = await commentRepo.createComment(params);
+
+    //Composer usecase to fill in the details
+    final composedComment = await commentComposerUsecase.get(data);
+
+    return composedComment;
   }
 
   @override

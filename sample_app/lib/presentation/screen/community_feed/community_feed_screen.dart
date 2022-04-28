@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/constant/global_constant.dart';
 import 'package:flutter_social_sample_app/core/widget/dialog/error_dialog.dart';
 import 'package:flutter_social_sample_app/core/widget/feed_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class CommunityFeedScreen extends StatefulWidget {
   const CommunityFeedScreen({Key? key, required this.communityId})
@@ -81,7 +82,13 @@ class _CommunityFeedScreenState extends State<CommunityFeedScreen> {
                       itemCount: amityPosts.length,
                       itemBuilder: (context, index) {
                         final amityPost = amityPosts[index];
-                        return FeedWidget(amityPost: amityPost);
+                        return FeedWidget(
+                          amityPost: amityPost,
+                          onCommentCallback: () {
+                            GoRouter.of(context).goNamed('commentCommunityFeed',
+                                params: {'postId': amityPost.postId!});
+                          },
+                        );
                       },
                     ),
                   )

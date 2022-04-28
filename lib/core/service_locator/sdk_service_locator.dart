@@ -286,8 +286,10 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<RemoveReactionUsecase>(
         () => RemoveReactionUsecase(reactionRepo: serviceLocator()));
 
-    serviceLocator.registerLazySingleton<CommentCreateUseCase>(
-        () => CommentCreateUseCase(commentRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentCreateUseCase>(() =>
+        CommentCreateUseCase(
+            commentRepo: serviceLocator(),
+            commentComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<CommentQueryUsecase>(() =>
         CommentQueryUsecase(
             commentRepo: serviceLocator(),

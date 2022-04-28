@@ -4,4 +4,6 @@ abstract class CommentDbAdapter {
   Future saveCommentEntity(CommentHiveEntity entity);
   CommentHiveEntity getCommentEntity(String id);
   Stream<CommentHiveEntity> listenCommentEntity(String commentId);
+
+  Future updateChildComment(String parentCommentId, String commentId);
 }

@@ -2,7 +2,6 @@ import 'package:amity_sdk/public/amity_core_client.dart';
 import 'package:amity_sdk/public/public.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/route/app_route.dart';
-import 'package:flutter_social_sample_app/presentation/screen/user_feed/user_feed_screen.dart';
 import 'package:go_router/go_router.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -47,24 +46,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) => UserFeedScreen(
-                          userId: AmityCoreClient.getCurrentUser().userId!),
-                    ),
-                  );
+                  GoRouter.of(context).goNamed(AppRoute.userFeed, params: {
+                    'userId': AmityCoreClient.getCurrentUser().userId!
+                  });
                 },
                 child: const Text('My Feed'),
               ),
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                      builder: (context) =>
-                          const UserFeedScreen(userId: 'victimIOS'),
-                    ),
-                  );
+                  GoRouter.of(context).goNamed(AppRoute.userFeed,
+                      params: {'userId': 'victimIOS'});
                 },
                 child: const Text('User Feed'),
               ),
