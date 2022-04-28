@@ -96,7 +96,6 @@ class _MyAppState extends State<MyApp> {
                   AmitySocialClient.newPostRepository()
                       .getPostStream('9cf90cd06d874b8e72c7a0057a330de4')
                       .listen((event) {
-                    print('>>>>>>>>>>> Update from Live Object');
                     log(event.toString());
                   }).onError((error, stackTrace) {
                     log('>>>>>' + error.message.toString());
@@ -318,9 +317,8 @@ class _MyAppState extends State<MyApp> {
                     .targetUser('victimiOS')
                     .text('Saurabh')
                     .post()
-                    .then((value) {
-                  print('>>>>>' + value.toString());
-                }).onError<AmityException>((error, stackTrace) {
+                    .then((value) {})
+                    .onError<AmityException>((error, stackTrace) {
                   log('>>>>>' + error.message.toString());
                 });
               },
@@ -334,9 +332,8 @@ class _MyAppState extends State<MyApp> {
                     .create()
                     .text('Comment from Saurabh')
                     .send()
-                    .then((value) {
-                  print('>>>>>' + value.toString());
-                }).onError<AmityException>((error, stackTrace) {
+                    .then((value) {})
+                    .onError<AmityException>((error, stackTrace) {
                   log('>>>>>' + error.message.toString());
                 });
               },
@@ -349,9 +346,8 @@ class _MyAppState extends State<MyApp> {
                     .post('9cf90cd06d874b8e72c7a0057a330de4')
                     .parentId(null)
                     .query()
-                    .then((value) {
-                  print('>>>>>' + value.toString());
-                }).onError<AmityException>((error, stackTrace) {
+                    .then((value) {})
+                    .onError<AmityException>((error, stackTrace) {
                   log('>>>>>' + error.message.toString());
                 });
               },
@@ -367,8 +363,6 @@ class _MyAppState extends State<MyApp> {
                     .image(File(image!.path))
                     .upload()
                     .then((value) {
-                  print('>>>>>' + value.toString());
-                  print('Creating Image Post');
                   if (value is AmityUploadComplete) {
                     AmitySocialClient.newPostRepository()
                         .createPost()

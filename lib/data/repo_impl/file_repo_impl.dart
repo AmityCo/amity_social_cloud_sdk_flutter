@@ -36,7 +36,6 @@ class FileRepoImpl extends FileRepo {
 
     //Save the File Entity
     for (var e in fileHiveEntities) {
-      print('>>>>>>>>');
       await fileDbAdapter.saveFileEntity(e);
     }
 

@@ -37,10 +37,23 @@ class _CommentWidgetState extends State<CommentWidget> {
     final _themeData = Theme.of(context);
 
     return ValueListenableBuilder<AmityComment>(
-        valueListenable: widget.amityComment,
-        builder: (context, value, child) => !(value.isDeleted ?? false)
-            ? _getBody(context, value)
-            : Container());
+      valueListenable: widget.amityComment,
+      builder: (context, value, child) => !(value.isDeleted ?? false)
+          ? _getBody(context, value)
+          : Container(
+              margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
+              child: Row(
+                children: [
+                  const Icon(Icons.info_rounded),
+                  const SizedBox(width: 12),
+                  Text(
+                    'Comment has been deleted',
+                    style: _themeData.textTheme.caption,
+                  )
+                ],
+              ),
+            ),
+    );
   }
 
   Widget _getBody(BuildContext context, AmityComment value) {

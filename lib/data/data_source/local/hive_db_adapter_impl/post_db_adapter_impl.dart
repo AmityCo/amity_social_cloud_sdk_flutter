@@ -36,7 +36,7 @@ class PostDbAdapterImpl extends PostDbAdapter {
     PostHiveEntity postHiveEntity = getPostEntity(postId);
     postHiveEntity.comments!.add(commentId);
     postHiveEntity.commentsCount = ((postHiveEntity.commentsCount) ?? 0) + 1;
-    postHiveEntity.save();
+    await postHiveEntity.save();
     return;
   }
 }

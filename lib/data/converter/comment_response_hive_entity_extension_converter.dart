@@ -4,7 +4,6 @@ import 'package:amity_sdk/domain/model/model.dart';
 
 extension CommentHiveEntityExtension on CommentHiveEntity {
   AmityComment convertToAmityComment() {
-    print(commentId);
     AmityCommentReferenceType amityCommentReferenceType =
         AmityCommentReferenceTypeExtension.enumOf(referenceType!);
 
