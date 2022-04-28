@@ -1,23 +1,23 @@
+import 'dart:async';
+
 import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/data/converter/comment_response_hive_entity_extension_converter.dart';
-import 'package:amity_sdk/data/data_source/local/db_adapter/comment_db_adapter.dart';
+import 'package:amity_sdk/data/data.dart';
 import 'package:amity_sdk/domain/domain.dart';
-import 'package:flutter/foundation.dart';
 
-class AmityComment extends ChangeNotifier
-    implements ValueListenable<AmityComment> {
+class AmityComment {
   AmityComment({required this.commentId}) {
-    serviceLocator<CommentDbAdapter>()
-        .listenCommentEntity(commentId!)
-        .listen((event) {
-      print('>>> Value Listenable on CommentId - ${event.commentId}');
-      final _updateAmityComment = event.convertToAmityComment();
+    // _streamSubscription = serviceLocator<CommentDbAdapter>()
+    //     .listenCommentEntity(commentId!)
+    //     .listen((event) {
+    //   print('Comment Stream');
+    //   // print('>>> Value Listenable on CommentId - ${event.commentId}');
+    //   final _updateAmityComment = event.convertToAmityComment();
 
-      //TOOD: Good idea would be have compose method inside the object itself
-      serviceLocator<CommentComposerUsecase>().get(_updateAmityComment).then(
-            (value) => apply(value),
-          );
-    });
+    //   //TOOD: Good idea would be have compose method inside the object itself
+    //   serviceLocator<CommentComposerUsecase>().get(_updateAmityComment).then(
+    //         (value) => apply(value),
+    //       );
+    // });
   }
 
   String? commentId;
@@ -64,7 +64,26 @@ class AmityComment extends ChangeNotifier
     repliesId = amityComment.repliesId;
     latestReplies = amityComment.latestReplies;
 
-    notifyListeners();
+    // notifyListeners();
+  }
+
+  Stream<AmityComment> get listen {
+    StreamController<AmityComment> controller =
+        StreamController<AmityComment>();
+
+    serviceLocator<CommentDbAdapter>()
+        .listenCommentEntity(commentId!)
+        .listen((event) {
+      // print('>>> Value Listenable on CommentId - ${event.commentId}');
+      final _updateAmityComment = event.convertToAmityComment();
+
+      //TOOD: Good idea would be have compose method inside the object itself
+      serviceLocator<CommentComposerUsecase>().get(_updateAmityComment).then(
+            (value) => controller.add(value),
+          );
+    });
+
+    return controller.stream;
   }
 
   @override
@@ -74,6 +93,13 @@ class AmityComment extends ChangeNotifier
 
   @override
   get value => this;
+
+  // @override
+  // void dispose() {
+  //   print('##### Disposing the stream subscription');
+  //   _streamSubscription.cancel();
+  //   super.dispose();
+  // }
 }
 
 abstract class AmityCommentData {

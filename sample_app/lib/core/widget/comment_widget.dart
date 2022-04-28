@@ -36,10 +36,11 @@ class _CommentWidgetState extends State<CommentWidget> {
   Widget build(BuildContext context) {
     final _themeData = Theme.of(context);
 
-    return ValueListenableBuilder<AmityComment>(
-      valueListenable: widget.amityComment,
-      builder: (context, value, child) => !(value.isDeleted ?? false)
-          ? _getBody(context, value)
+    return StreamBuilder<AmityComment>(
+      initialData: widget.amityComment,
+      stream: widget.amityComment.listen,
+      builder: (context, snapshot) => !(snapshot.data!.isDeleted ?? false)
+          ? _getBody(context, snapshot.data!)
           : Container(
               margin: const EdgeInsets.symmetric(vertical: 12, horizontal: 12),
               child: Row(

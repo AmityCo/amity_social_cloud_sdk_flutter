@@ -19,9 +19,10 @@ class FeedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final _themeData = Theme.of(context);
-    return ValueListenableBuilder<AmityPost>(
-      valueListenable: amityPost,
-      builder: (context, value, child) {
+    return StreamBuilder<AmityPost>(
+      initialData: amityPost,
+      stream: amityPost.listen,
+      builder: (context, snapshot) {
         return Stack(
           fit: StackFit.loose,
           children: [
@@ -41,9 +42,9 @@ class FeedWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   UserProfileInfoRowWidget(
-                    userId: value.postedUser!.userId!,
-                    userAvatar: value.postedUser!.avatarCustomUrl,
-                    userName: value.postedUser!.displayName!,
+                    userId: snapshot.data!.postedUser!.userId!,
+                    userAvatar: snapshot.data!.postedUser!.avatarCustomUrl,
+                    userName: snapshot.data!.postedUser!.displayName!,
                     options: [
                       if (amityPost.postedUserId == AmityCoreClient.getUserId())
                         PopupMenuButton(
@@ -98,26 +99,26 @@ class FeedWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Created At - ' + value.createdAt!.format(),
+                          'Created At - ' + snapshot.data!.createdAt!.format(),
                           style: _themeData.textTheme.caption,
                         ),
                         Text(
-                          'Updated At - ' + value.updatedAt!.format(),
+                          'Updated At - ' + snapshot.data!.updatedAt!.format(),
                           style: _themeData.textTheme.caption,
                         ),
-                        if (value.target is UserTarget)
+                        if (snapshot.data!.target is UserTarget)
                           Text(
                             'Posted On : ' +
-                                ((value.target as UserTarget)
+                                ((snapshot.data!.target as UserTarget)
                                         .targetUser
                                         ?.displayName ??
                                     'No name'),
                             style: _themeData.textTheme.caption,
                           ),
-                        if (value.target is CommunityTarget)
+                        if (snapshot.data!.target is CommunityTarget)
                           Text(
                             'Posted On : ' +
-                                ((value.target as CommunityTarget)
+                                ((snapshot.data!.target as CommunityTarget)
                                         .targetCommunity
                                         ?.displayName ??
                                     'No name') +
@@ -132,15 +133,17 @@ class FeedWidget extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        FeedContentWidget(amityPostData: value.data!),
+                        FeedContentWidget(amityPostData: snapshot.data!.data!),
                         const SizedBox(height: 8),
-                        if (value.children != null)
+                        if (snapshot.data!.children != null)
                           Wrap(
                             spacing: 8,
                             runSpacing: 8,
                             children: [
-                              ...List.generate(value.children!.length, (index) {
-                                final amityChildPost = value.children![index];
+                              ...List.generate(snapshot.data!.children!.length,
+                                  (index) {
+                                final amityChildPost =
+                                    snapshot.data!.children![index];
                                 if (amityChildPost.data == null) {
                                   return Container(
                                     padding: const EdgeInsets.all(8),
@@ -168,15 +171,15 @@ class FeedWidget extends StatelessWidget {
                   Container(
                       key: UniqueKey(),
                       margin: const EdgeInsets.symmetric(horizontal: 12),
-                      child: FeedReactionInfoWidget(amityPost: value)),
+                      child: FeedReactionInfoWidget(amityPost: snapshot.data!)),
                   Divider(height: .5, color: Colors.grey.shade300),
                   FeedReactionActionWidget(
                       key: UniqueKey(),
-                      amityPost: value,
+                      amityPost: snapshot.data!,
                       onCommentCallback: onCommentCallback),
                   const SizedBox(height: 12),
                   AddCommentWidget(AmityCoreClient.getCurrentUser(), (text) {
-                    value.comment().create().text(text).send();
+                    snapshot.data!.comment().create().text(text).send();
                   }),
                 ],
               ),

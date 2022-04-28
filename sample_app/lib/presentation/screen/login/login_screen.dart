@@ -22,14 +22,14 @@ class _LoginScreenState extends State<LoginScreen> {
     _displayNameTextController.text = 'Victim Android';
 
     //STAGING Server
-    _apiKeyTextController.text =
-        'b3bee858328ef4344a308e4a5a091688d05fdee2be353a2b';
-    _serverUrlTextController.text = AmityRegionalHttpEndpoint.STAGING.value;
+    // _apiKeyTextController.text =
+    //     'b3bee858328ef4344a308e4a5a091688d05fdee2be353a2b';
+    // _serverUrlTextController.text = AmityRegionalHttpEndpoint.STAGING.value;
 
     //SG Server
-    // _apiKeyTextController.text =
-    //     'b3bee90c39d9a5644831d84e5a0d1688d100ddebef3c6e78';
-    // _serverUrlTextController.text = AmityRegionalHttpEndpoint.SG.value;
+    _apiKeyTextController.text =
+        'b3bee90c39d9a5644831d84e5a0d1688d100ddebef3c6e78';
+    _serverUrlTextController.text = AmityRegionalHttpEndpoint.SG.value;
 
     ThemeData _themeData = Theme.of(context);
     return SafeArea(
