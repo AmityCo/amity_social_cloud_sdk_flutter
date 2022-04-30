@@ -29,6 +29,7 @@ dependencies:
   go_router: ^3.0.6
   firebase_core: ^1.15.0
   firebase_messaging: ^11.2.14
+  get_it: ^7.2.0
 
   amity_sdk:
     # When depending on this package from a real application you should use:

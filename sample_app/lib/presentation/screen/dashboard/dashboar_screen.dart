@@ -3,6 +3,9 @@ import 'package:amity_sdk/public/public.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/route/app_route.dart';
+import 'package:flutter_social_sample_app/core/service_locator/service_locator.dart';
+import 'package:flutter_social_sample_app/core/widget/dialog/error_dialog.dart';
+import 'package:flutter_social_sample_app/core/widget/dialog/positive_dialog.dart';
 import 'package:go_router/go_router.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -90,14 +93,29 @@ class _DashboardScreenState extends State<DashboardScreen> {
                   }
 
                   final token = await messaging.getToken();
-                  AmityCoreClient.registerDeviceNotification(token!);
+                  AmityCoreClient.registerDeviceNotification(token!)
+                      .then((value) {
+                    PositiveDialog.show(context,
+                        title: 'Success',
+                        message: 'Device Register Successfully');
+                  }).onError((error, stackTrace) {
+                    ErrorDialog.show(context,
+                        title: 'Error', message: error.toString());
+                  });
                 },
                 child: const Text('Register notification'),
               ),
               const SizedBox(height: 20),
               TextButton(
                 onPressed: () {
-                  AmityCoreClient.unregisterDeviceNotification();
+                  AmityCoreClient.unregisterDeviceNotification().then((value) {
+                    PositiveDialog.show(context,
+                        title: 'Success',
+                        message: 'Device Unregister Successfully');
+                  }).onError((error, stackTrace) {
+                    ErrorDialog.show(context,
+                        title: 'Error', message: error.toString());
+                  });
                 },
                 child: const Text('Unregister notification'),
               ),
@@ -110,6 +128,17 @@ class _DashboardScreenState extends State<DashboardScreen> {
                 },
                 child: Text(
                   'Logout',
+                  style: _themeData.textTheme.subtitle1!
+                      .copyWith(color: Colors.red),
+                ),
+              ),
+              TextButton(
+                onPressed: () {
+                  sl.reset();
+                  print('Reset Get it instance');
+                },
+                child: Text(
+                  'Reset Get It',
                   style: _themeData.textTheme.subtitle1!
                       .copyWith(color: Colors.red),
                 ),

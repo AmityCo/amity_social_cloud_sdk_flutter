@@ -8,12 +8,23 @@ import 'package:amity_sdk/public/public.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/route/app_router.dart';
+import 'package:flutter_social_sample_app/core/service_locator/service_locator.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  await AppServiceLocator.initServiceLocator();
+
+  //gloabl init
+  // await AmityCoreClient.setup(
+  //   option: AmityCoreClientOption(
+  //       apiKey: 'b3bee858328ef4344a308e4a5a091688d05fdee2be353a2b',
+  //       httpEndpoint: AmityRegionalHttpEndpoint.STAGING,
+  //       showLogs: true),
+  // );
 
   runApp(const MyApp());
 }

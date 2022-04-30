@@ -5,15 +5,18 @@ class AmityCoreClient {
   static Future setup(
       {required AmityCoreClientOption option,
       bool sycInitialization = false}) async {
-    // if (serviceLocator.isRegistered<AmityCoreClientOption>()) {
-    //   serviceLocator.unregister<AmityCoreClientOption>();
-    // }
-    await serviceLocator.reset(dispose: true);
-    serviceLocator.registerLazySingleton<AmityCoreClientOption>(() => option);
+    //Reset config get_it instance
+    await configServiceLocator.reset(dispose: true);
 
-    final voidFuture =
-        await SdkServiceLocator.initServiceLocator(syc: sycInitialization);
-    return voidFuture;
+    //Reset SDK get_it instance
+    await serviceLocator.reset(dispose: true);
+
+    configServiceLocator
+        .registerLazySingleton<AmityCoreClientOption>(() => option);
+
+    await SdkServiceLocator.initServiceLocator(syc: sycInitialization);
+
+    return;
   }
 
   static LoginQueryBuilder login(String userId) {
@@ -22,11 +25,11 @@ class AmityCoreClient {
 
   /// Logout will wipe out all the data [AmityCoreClient] holds.
   static Future<void> logout() async {
-    //Delete the db data
+    //close all the hive boxes and wipe the data
     await serviceLocator<DBClient>().reset();
 
-    //reset all the in memory dependencies
-    await serviceLocator.reset(dispose: true);
+    //Reload the service locator
+    await SdkServiceLocator.reloadServiceLocator();
 
     return;
   }
