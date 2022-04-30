@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:amity_sdk/lib.dart';
+import 'package:amity_sdk/amity.dart';
 
 class AmityPostImageCreation {
   /* begin_sample_code
@@ -18,7 +18,7 @@ class AmityPostImageCreation {
       //check if the upload result is complete
       if (amityUploadResult is AmityUploadComplete) {
         final amityUploadComplete = amityUploadResult as AmityUploadComplete;
-        //cast amityUploadResult to AmityImage 
+        //cast amityUploadResult to AmityImage
         AmityImage uploadedImage = amityUploadComplete.getFile as AmityImage;
         //then create an image post
         createImagePost(uploadedImage);
@@ -35,7 +35,8 @@ class AmityPostImageCreation {
   void createImagePost(AmityImage uploadedImage) {
     AmitySocialClient.newPostRepository()
         .createPost()
-        .targetUser('userId') // or targetMe(), targetCommunity(communityId: String)
+        .targetUser(
+            'userId') // or targetMe(), targetCommunity(communityId: String)
         .image([uploadedImage])
         .text('Hello from flutter with image!')
         .post()

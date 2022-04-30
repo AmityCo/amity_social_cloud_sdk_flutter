@@ -1,5 +1,4 @@
-import 'package:amity_sdk/public/amity_core_client.dart';
-import 'package:amity_sdk/public/public.dart';
+import 'package:amity_sdk/amity.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/route/app_route.dart';

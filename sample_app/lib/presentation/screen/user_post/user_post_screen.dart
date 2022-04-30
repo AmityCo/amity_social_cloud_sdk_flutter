@@ -1,6 +1,4 @@
-import 'package:amity_sdk/core/utils/paging_controller.dart';
-import 'package:amity_sdk/domain/model/amity_post.dart';
-import 'package:amity_sdk/public/public.dart';
+import 'package:amity_sdk/amity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/constant/global_constant.dart';
 import 'package:flutter_social_sample_app/core/widget/feed_widget.dart';

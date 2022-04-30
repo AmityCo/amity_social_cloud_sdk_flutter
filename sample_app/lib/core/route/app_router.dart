@@ -1,4 +1,4 @@
-import 'package:amity_sdk/lib.dart';
+import 'package:amity_sdk/amity.dart';
 import 'package:flutter_social_sample_app/core/route/app_route.dart';
 import 'package:flutter_social_sample_app/presentation/screen/comment_query/comment_query_screen.dart';
 import 'package:flutter_social_sample_app/presentation/screen/community_feed/community_feed_screen.dart';

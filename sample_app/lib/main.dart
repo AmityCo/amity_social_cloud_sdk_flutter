@@ -2,9 +2,7 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/domain/model/amity_file/amity_file.dart';
-import 'package:amity_sdk/public/public.dart';
+import 'package:amity_sdk/amity.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/route/app_router.dart';

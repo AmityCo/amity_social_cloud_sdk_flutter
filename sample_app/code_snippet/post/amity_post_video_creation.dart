@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:amity_sdk/lib.dart';
+import 'package:amity_sdk/amity.dart';
 
 class AmityPostVideoCreation {
   /* begin_sample_code
@@ -18,7 +18,7 @@ class AmityPostVideoCreation {
       //check if the upload result is complete
       if (amityUploadResult is AmityUploadComplete) {
         final amityUploadComplete = amityUploadResult as AmityUploadComplete;
-        //cast amityUploadResult to AmityVideo 
+        //cast amityUploadResult to AmityVideo
         AmityVideo uploadedVideo = amityUploadComplete.getFile as AmityVideo;
         //then create a video post
         createVideoPost(uploadedVideo);
@@ -35,7 +35,8 @@ class AmityPostVideoCreation {
   void createVideoPost(AmityVideo uploadedVideo) {
     AmitySocialClient.newPostRepository()
         .createPost()
-        .targetUser('userId') // or targetMe(), targetCommunity(communityId: String)
+        .targetUser(
+            'userId') // or targetMe(), targetCommunity(communityId: String)
         .video([uploadedVideo])
         .text('Hello from flutter with video!')
         .post()

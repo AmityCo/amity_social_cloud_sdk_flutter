@@ -1,4 +1,4 @@
-import 'package:amity_sdk/lib.dart';
+import 'package:amity_sdk/amity.dart';
 
 class AmityInitializer {
   /* begin_sample_code

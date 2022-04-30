@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:amity_sdk/lib.dart';
+import 'package:amity_sdk/amity.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/widget/dialog/error_dialog.dart';

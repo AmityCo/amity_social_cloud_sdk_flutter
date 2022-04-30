@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:amity_sdk/lib.dart';
+import 'package:amity_sdk/amity.dart';
 
 class AmityFileUpload {
   /* begin_sample_code

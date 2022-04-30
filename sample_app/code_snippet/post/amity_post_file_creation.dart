@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:amity_sdk/lib.dart';
+import 'package:amity_sdk/amity.dart';
 
 class AmityPostFileCreation {
   /* begin_sample_code
@@ -9,7 +9,7 @@ class AmityPostFileCreation {
     asc_page: https://docs.amity.co/social/flutter
     description: Flutter create file post example
     */
- void uploadFile(File uploadinFile) {
+  void uploadFile(File uploadinFile) {
     //first, upload file
     AmityCoreClient.newFileRepository()
         .file(uploadinFile)
@@ -35,7 +35,8 @@ class AmityPostFileCreation {
   void createFilePost(AmityFile uploadedFile) {
     AmitySocialClient.newPostRepository()
         .createPost()
-        .targetUser('userId') // or targetMe(), targetCommunity(communityId: String)
+        .targetUser(
+            'userId') // or targetMe(), targetCommunity(communityId: String)
         .file([uploadedFile])
         .text('Hello from flutter with file!')
         .post()

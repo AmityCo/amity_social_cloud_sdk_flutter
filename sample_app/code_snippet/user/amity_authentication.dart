@@ -1,4 +1,4 @@
-import 'package:amity_sdk/lib.dart';
+import 'package:amity_sdk/amity.dart';
 
 class AmityAuthentication {
   /* begin_sample_code
@@ -8,9 +8,9 @@ class AmityAuthentication {
     description: Flutter login example
     */
   void login() async {
-   await AmityCoreClient.login('userId')
-                      .displayName('userDisplayName')
-                      .submit();
+    await AmityCoreClient.login('userId')
+        .displayName('userDisplayName')
+        .submit();
   }
   /* end_sample_code */
 

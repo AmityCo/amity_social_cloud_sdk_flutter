@@ -1,6 +1,6 @@
 import 'dart:async';
 
-import 'package:amity_sdk/lib.dart';
+import 'package:amity_sdk/amity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/utils/extension/date_extension.dart';
 import 'package:flutter_social_sample_app/core/widget/dialog/edit_comment_dialog.dart';

@@ -1,4 +1,4 @@
-import 'package:amity_sdk/lib.dart';
+import 'package:amity_sdk/amity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/presentation/screen/create_post/create_post_screen.dart';
 import 'package:flutter_social_sample_app/presentation/screen/user_post/user_post_screen.dart';

@@ -1,4 +1,4 @@
-import 'package:amity_sdk/lib.dart';
+import 'package:amity_sdk/amity.dart';
 
 class AmityPostTextCreation {
   /* begin_sample_code
@@ -10,7 +10,8 @@ class AmityPostTextCreation {
   void createTextPost() {
     AmitySocialClient.newPostRepository()
         .createPost()
-        .targetUser('userId') // or targetMe(), targetCommunity(communityId: String)
+        .targetUser(
+            'userId') // or targetMe(), targetCommunity(communityId: String)
         .text('Hello from flutter!')
         .post()
         .then((AmityPost post) => {
