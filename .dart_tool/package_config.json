@@ -200,12 +200,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "get",
-      "rootUri": "file:///Users/saurabhkumar/sorbh/flutter/.pub-cache/hosted/pub.dartlang.org/get-4.6.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "get_it",
       "rootUri": "file:///Users/saurabhkumar/sorbh/flutter/.pub-cache/hosted/pub.dartlang.org/get_it-7.2.0",
       "packageUri": "lib/",
@@ -542,7 +536,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2022-04-26T06:20:00.645661Z",
+  "generated": "2022-04-30T05:15:44.087103Z",
   "generator": "pub",
   "generatorVersion": "2.16.0"
 }
