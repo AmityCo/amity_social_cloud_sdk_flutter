@@ -46,10 +46,4 @@ class GetUserFeedRequest {
   int get hashCode =>
       'USER_FEED_$userId _$sortBy _$isDeleted _${dataTypes?.join(',')}'
           .hashCode;
-
-  @override
-  bool operator ==(Object other) {
-    // TODO: implement ==
-    return super == other;
-  }
 }

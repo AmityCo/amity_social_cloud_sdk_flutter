@@ -1,6 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/usecase/comment/comment_delete_usecase.dart';
 import 'package:amity_sdk/src/public/query_builder/comment/comment_create_query_builder.dart';
 import 'package:amity_sdk/src/public/query_builder/comment/comment_flag_query_builder.dart';
 import 'package:amity_sdk/src/public/query_builder/comment/comment_update_query_builder.dart';

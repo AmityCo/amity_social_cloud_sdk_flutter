@@ -6,6 +6,7 @@ export 'community_repo.dart';
 export 'file_repo.dart';
 export 'follow_repo.dart';
 export 'global_feed_repo.dart';
+export 'notification_repo.dart';
 export 'post_repo.dart';
 export 'reaction_repo.dart';
 export 'user_feed_repo.dart';

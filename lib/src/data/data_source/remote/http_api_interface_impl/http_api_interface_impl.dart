@@ -6,6 +6,7 @@ export 'community_feed_api_interface_impl.dart';
 export 'file_api_interface_impl.dart';
 export 'follow_api_interface_impl.dart';
 export 'global_feed_api_interface_impl.dart';
+export 'notification_api_interface_impl.dart';
 export 'public_post_api_interface_impl.dart';
 export 'reaction_api_interface_impl.dart';
 export 'user_api_interface_impl.dart';
