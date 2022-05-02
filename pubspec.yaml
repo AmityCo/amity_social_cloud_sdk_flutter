@@ -1,7 +1,7 @@
 name: amity_sdk
-description: A new flutter plugin project.
+description: The SDK that enables social features such as Feeds, Groups, Profiles, Content Posts, and Social Media Type Interactions
 version: 0.0.1
-homepage:
+homepage: https://amity.co
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
