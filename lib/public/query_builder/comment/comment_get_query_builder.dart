@@ -105,20 +105,11 @@ class AmityCommentQueryBuilder {
     if (token != null) {
       getCommentRequest.options?.token = token;
     }
-    // if (limit != null) {
-    //   getCommentRequest.options?.limit = limit;
-    // }
+
+    if (limit != null) {
+      getCommentRequest.options?.limit = limit;
+    }
 
     return _useCase.getPagingData(getCommentRequest);
-    // GetGlobalFeedRequest request = GetGlobalFeedRequest();
-
-    // if (token != null) {
-    //   request.token = token;
-    // }
-    // if (limit != null) {
-    //   request.limit = limit;
-    // }
-
-    // return _usecase.listen(request);
   }
 }

@@ -12,6 +12,8 @@ import 'package:amity_sdk/public/public.dart';
 import 'package:amity_sdk/public/repo/notification_repository.dart';
 import 'package:get_it/get_it.dart';
 
+final configServiceLocator = GetIt.asNewInstance();
+
 final serviceLocator =
     GetIt.asNewInstance(); //sl is referred to as Service Locator
 
@@ -26,42 +28,7 @@ class SdkServiceLocator {
 
     ///----------------------------------- Data Layer -----------------------------------///
 
-    // Remote Data Source
-    //-data_source/remote/
-    serviceLocator.registerLazySingleton<HttpApiClient>(
-        () => HttpApiClient(amityCoreClientOption: serviceLocator()));
-
-    //-data_source/remote/api_interface
-    serviceLocator.registerLazySingleton<PublicPostApiInterface>(
-        () => PublicPostApiInterfaceImpl(httpApiClient: serviceLocator()));
-    serviceLocator.registerLazySingleton<AuthenticationApiInterface>(() =>
-        AuthenticationApiInterfaceImpl(
-            httpApiClient: serviceLocator(),
-            amityCoreClientOption: serviceLocator()));
-    serviceLocator.registerLazySingleton<UserApiInterface>(
-        () => UserApiInterfaceImpl(httpApiClient: serviceLocator()));
-    serviceLocator.registerLazySingleton<FollowApiInterface>(
-        () => FollowApiInterfaceImpl(httpApiClient: serviceLocator()));
-    serviceLocator.registerLazySingleton<CommentApiInterface>(
-        () => CommentApiInterfaceImpl(httpApiClient: serviceLocator()));
-    serviceLocator.registerLazySingleton<ReactionApiInterface>(
-        () => ReactionApiInterfaceImpl(httpApiClient: serviceLocator()));
-    serviceLocator.registerLazySingleton<CommunityApiInterface>(
-        () => CommunityApiInterfaceImpl(httpApiClient: serviceLocator()));
-    serviceLocator.registerLazySingleton<GlobalFeedApiInterface>(
-        () => GlobalFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
-    serviceLocator.registerLazySingleton<UserFeedApiInterface>(
-        () => UserFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
-    serviceLocator.registerLazySingleton<FileApiInterface>(
-        () => FileApiInterfaceImpl(httpApiClient: serviceLocator()));
-    serviceLocator.registerLazySingleton<CommunityFeedApiInterface>(
-        () => CommunityFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
-    serviceLocator.registerLazySingleton<NotificationApiInterface>(() =>
-        NotificationApiInterfaceImpl(
-            httpApiClient: serviceLocator(),
-            amityCoreClientOption: serviceLocator()));
-
-    // Local Data Source
+    // Data Source
     //-data_source/local/
     serviceLocator
         .registerSingletonAsync<DBClient>(() async => HiveDbClient().init());
@@ -104,6 +71,42 @@ class SdkServiceLocator {
           fileDbAdapter: serviceLocator(),
           userDbAdapter: serviceLocator(),
         ));
+
+    //-data_source/remote/
+    serviceLocator.registerLazySingleton<HttpApiClient>(
+        () => HttpApiClient(amityCoreClientOption: configServiceLocator()));
+
+    //-data_source/remote/api_interface
+    serviceLocator.registerLazySingleton<PublicPostApiInterface>(
+        () => PublicPostApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<AuthenticationApiInterface>(() =>
+        AuthenticationApiInterfaceImpl(
+            httpApiClient: serviceLocator(),
+            amityCoreClientOption: configServiceLocator()));
+    serviceLocator.registerLazySingleton<UserApiInterface>(
+        () => UserApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<FollowApiInterface>(
+        () => FollowApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentApiInterface>(
+        () => CommentApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<ReactionApiInterface>(
+        () => ReactionApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityApiInterface>(
+        () => CommunityApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<GlobalFeedApiInterface>(
+        () => GlobalFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<UserFeedApiInterface>(
+        () => UserFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<FileApiInterface>(
+        () => FileApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityFeedApiInterface>(
+        () => CommunityFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<NotificationApiInterface>(() =>
+        NotificationApiInterfaceImpl(
+            httpApiClient: serviceLocator(),
+            amityCoreClientOption: configServiceLocator()));
+
+    // Local Data Source
 
     ///----------------------------------- Domain Layer -----------------------------------///
 
@@ -287,8 +290,10 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<RemoveReactionUsecase>(
         () => RemoveReactionUsecase(reactionRepo: serviceLocator()));
 
-    serviceLocator.registerLazySingleton<CommentCreateUseCase>(
-        () => CommentCreateUseCase(commentRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentCreateUseCase>(() =>
+        CommentCreateUseCase(
+            commentRepo: serviceLocator(),
+            commentComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<CommentQueryUsecase>(() =>
         CommentQueryUsecase(
             commentRepo: serviceLocator(),
@@ -355,7 +360,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<AmityMQTT>(
       () => AmityMQTT(
           accountRepo: serviceLocator(),
-          amityCoreClientOption: serviceLocator()),
+          amityCoreClientOption: configServiceLocator()),
     );
 
     DateTime endTime = DateTime.now();
@@ -365,5 +370,10 @@ class SdkServiceLocator {
 
     print(
         '>> Time took to initilize the DI ${endTime.difference(startTime).inMilliseconds} Milis');
+  }
+
+  static Future reloadServiceLocator() async {
+    await serviceLocator.reset(dispose: true);
+    await initServiceLocator(syc: true);
   }
 }

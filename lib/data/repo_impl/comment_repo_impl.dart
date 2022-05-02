@@ -18,6 +18,7 @@ class CommentRepoImpl extends CommentRepo {
       required this.commentApiInterface,
       required this.userDbAdapter,
       required this.fileDbAdapter});
+
   @override
   Future<AmityComment> getCommentByIdFromDb(String commentId) async {
     final commentHiveEntity = commentDbAdapter.getCommentEntity(commentId);
@@ -30,9 +31,16 @@ class CommentRepoImpl extends CommentRepo {
 
     final amityComments = await _saveDetailsToDb(data);
 
-    //Update the post entity
+    //Update the post entity, comment Id and comment count
     postDbAdapter.updateComment(
         request.referenceId, amityComments[0].commentId!);
+
+    // Check if comment have any parent comment
+    // if yes update the parent comment child count
+    if (request.parentId != null) {
+      commentDbAdapter.updateChildComment(
+          amityComments[0].parentId!, amityComments[0].commentId!);
+    }
 
     return Future.value(amityComments[0]);
   }

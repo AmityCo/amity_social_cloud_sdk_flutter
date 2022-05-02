@@ -6,7 +6,7 @@ extension DateExtension on DateTime {
   }
 
   String beforeTime() {
-    Duration duration = toUtc().difference(DateTime.now().toUtc());
+    Duration duration = DateTime.now().toUtc().difference(toUtc());
     if (duration.inDays > 0) {
       return '${duration.inDays}d';
     }

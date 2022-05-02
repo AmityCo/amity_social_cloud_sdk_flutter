@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/constant/global_constant.dart';
 import 'package:flutter_social_sample_app/core/widget/dialog/error_dialog.dart';
 import 'package:flutter_social_sample_app/core/widget/feed_widget.dart';
+import 'package:go_router/go_router.dart';
 
 class UserFeedScreen extends StatefulWidget {
   const UserFeedScreen({Key? key, required this.userId, this.showAppBar = true})
@@ -84,7 +85,16 @@ class _UserFeedScreenState extends State<UserFeedScreen> {
                       itemCount: amityPosts.length,
                       itemBuilder: (context, index) {
                         final amityPost = amityPosts[index];
-                        return FeedWidget(amityPost: amityPost);
+                        return FeedWidget(
+                          amityPost: amityPost,
+                          onCommentCallback: () {
+                            GoRouter.of(context).goNamed('commentUserFeed',
+                                params: {
+                                  'userId': widget.userId,
+                                  'postId': amityPost.postId!
+                                });
+                          },
+                        );
                       },
                     ),
                   )

@@ -8,12 +8,23 @@ import 'package:amity_sdk/public/public.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/route/app_router.dart';
+import 'package:flutter_social_sample_app/core/service_locator/service_locator.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
+
+  await AppServiceLocator.initServiceLocator();
+
+  //gloabl init
+  // await AmityCoreClient.setup(
+  //   option: AmityCoreClientOption(
+  //       apiKey: 'b3bee858328ef4344a308e4a5a091688d05fdee2be353a2b',
+  //       httpEndpoint: AmityRegionalHttpEndpoint.STAGING,
+  //       showLogs: true),
+  // );
 
   runApp(const MyApp());
 }
@@ -96,7 +107,6 @@ class _MyAppState extends State<MyApp> {
                   AmitySocialClient.newPostRepository()
                       .getPostStream('9cf90cd06d874b8e72c7a0057a330de4')
                       .listen((event) {
-                    print('>>>>>>>>>>> Update from Live Object');
                     log(event.toString());
                   }).onError((error, stackTrace) {
                     log('>>>>>' + error.message.toString());
@@ -318,9 +328,8 @@ class _MyAppState extends State<MyApp> {
                     .targetUser('victimiOS')
                     .text('Saurabh')
                     .post()
-                    .then((value) {
-                  print('>>>>>' + value.toString());
-                }).onError<AmityException>((error, stackTrace) {
+                    .then((value) {})
+                    .onError<AmityException>((error, stackTrace) {
                   log('>>>>>' + error.message.toString());
                 });
               },
@@ -334,9 +343,8 @@ class _MyAppState extends State<MyApp> {
                     .create()
                     .text('Comment from Saurabh')
                     .send()
-                    .then((value) {
-                  print('>>>>>' + value.toString());
-                }).onError<AmityException>((error, stackTrace) {
+                    .then((value) {})
+                    .onError<AmityException>((error, stackTrace) {
                   log('>>>>>' + error.message.toString());
                 });
               },
@@ -349,9 +357,8 @@ class _MyAppState extends State<MyApp> {
                     .post('9cf90cd06d874b8e72c7a0057a330de4')
                     .parentId(null)
                     .query()
-                    .then((value) {
-                  print('>>>>>' + value.toString());
-                }).onError<AmityException>((error, stackTrace) {
+                    .then((value) {})
+                    .onError<AmityException>((error, stackTrace) {
                   log('>>>>>' + error.message.toString());
                 });
               },
@@ -367,8 +374,6 @@ class _MyAppState extends State<MyApp> {
                     .image(File(image!.path))
                     .upload()
                     .then((value) {
-                  print('>>>>>' + value.toString());
-                  print('Creating Image Post');
                   if (value is AmityUploadComplete) {
                     AmitySocialClient.newPostRepository()
                         .createPost()
