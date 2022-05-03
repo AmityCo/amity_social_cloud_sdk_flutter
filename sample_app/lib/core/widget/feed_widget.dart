@@ -2,6 +2,7 @@ import 'package:amity_sdk/amity.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_social_sample_app/core/utils/extension/date_extension.dart';
 import 'package:flutter_social_sample_app/core/widget/add_comment_widget.dart';
+import 'package:flutter_social_sample_app/core/widget/reaction_action_widget.dart';
 import 'package:flutter_social_sample_app/core/widget/user_profile_info_row_widget.dart';
 import 'package:flutter_social_sample_app/presentation/screen/update_post/update_post_screen.dart';
 import 'package:flutter_social_sample_app/presentation/screen/video_player/full_screen_video_player.dart';
@@ -316,17 +317,18 @@ class FeedReactionInfoWidget extends StatelessWidget {
       child: Row(
         children: [
           TextButton.icon(
-              onPressed: () {},
-              icon: Image.asset(
-                'packages/amity_sdk/assets/ic_liked.png',
-                height: 18,
-                width: 18,
-              ),
-              label: Text(
-                '${amityPost.reactionCount}',
-                style: _themeData.textTheme.subtitle1!
-                    .copyWith(color: Colors.black54),
-              )),
+            onPressed: () {},
+            icon: Image.asset(
+              'packages/amity_sdk/assets/ic_liked.png',
+              height: 18,
+              width: 18,
+            ),
+            label: Text(
+              '${amityPost.reactionCount}',
+              style: _themeData.textTheme.subtitle1!
+                  .copyWith(color: Colors.black54),
+            ),
+          ),
           const Spacer(),
           Text(
             '${amityPost.commentCount} Comment',
@@ -348,9 +350,10 @@ class FeedReactionInfoWidget extends StatelessWidget {
 class FeedReactionActionWidget extends StatelessWidget {
   final AmityPost amityPost;
   final VoidCallback onCommentCallback;
-  const FeedReactionActionWidget(
+  FeedReactionActionWidget(
       {Key? key, required this.amityPost, required this.onCommentCallback})
       : super(key: key);
+  final LayerLink link = LayerLink();
 
   @override
   Widget build(BuildContext context) {
@@ -361,13 +364,29 @@ class FeedReactionActionWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          TextButton.icon(
+          CompositedTransformTarget(
+            link: link,
+            child: TextButton.icon(
               onPressed: () {
                 if (_isFlagedByMe) {
                   amityPost.react().removeReaction('like');
                 } else {
                   amityPost.react().addReaction('like');
                 }
+              },
+              onLongPress: () {
+                //Show more option to react
+                ReactionActionWidget.showAsOverLay(
+                  context,
+                  link,
+                  (reaction) {
+                    if (_isFlagedByMe) {
+                      amityPost.react().removeReaction(reaction);
+                    } else {
+                      amityPost.react().addReaction(reaction);
+                    }
+                  },
+                );
               },
               icon: Image.asset(
                 _isFlagedByMe
@@ -380,32 +399,36 @@ class FeedReactionActionWidget extends StatelessWidget {
                 'Like',
                 style: _themeData.textTheme.subtitle1!.copyWith(
                     color: Colors.black54, fontWeight: FontWeight.w600),
-              )),
+              ),
+            ),
+          ),
           TextButton.icon(
-              onPressed: onCommentCallback,
-              // onPressed: () {
-              //   GoRouter.of(context).goNamed('commentGlobalFeed',
-              //       params: {'postId': amityPost.postId!});
-              // },
-              icon: const ImageIcon(
-                  AssetImage('packages/amity_sdk/assets/ic_comment.png')),
-              label: Text(
-                'Comment',
-                style: _themeData.textTheme.subtitle1!.copyWith(
-                    color: Colors.black54, fontWeight: FontWeight.w600),
-              )),
+            onPressed: onCommentCallback,
+            // onPressed: () {
+            //   GoRouter.of(context).goNamed('commentGlobalFeed',
+            //       params: {'postId': amityPost.postId!});
+            // },
+            icon: const ImageIcon(
+                AssetImage('packages/amity_sdk/assets/ic_comment.png')),
+            label: Text(
+              'Comment',
+              style: _themeData.textTheme.subtitle1!
+                  .copyWith(color: Colors.black54, fontWeight: FontWeight.w600),
+            ),
+          ),
           Visibility(
             visible: false,
             child: TextButton.icon(
-                onPressed: () {},
-                icon: const ImageIcon(
-                    AssetImage('packages/amity_sdk/assets/ic_flag.png')),
-                // icon: Image.asset('packages/amity_sdk/assets/ic_comment.png'),
-                label: Text(
-                  'Flag',
-                  style: _themeData.textTheme.subtitle1!.copyWith(
-                      color: Colors.black54, fontWeight: FontWeight.w600),
-                )),
+              onPressed: () {},
+              icon: const ImageIcon(
+                  AssetImage('packages/amity_sdk/assets/ic_flag.png')),
+              // icon: Image.asset('packages/amity_sdk/assets/ic_comment.png'),
+              label: Text(
+                'Flag',
+                style: _themeData.textTheme.subtitle1!.copyWith(
+                    color: Colors.black54, fontWeight: FontWeight.w600),
+              ),
+            ),
           )
         ],
       ),

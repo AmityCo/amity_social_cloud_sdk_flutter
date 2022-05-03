@@ -60,6 +60,8 @@ class _CommentWidgetState extends State<CommentWidget> {
     final _themeData = Theme.of(context);
     AmityUser _user = value.user!;
 
+    bool _isFlagedByMe = value.myReactions?.isNotEmpty ?? false;
+
     AmityCommentData data = value.data!;
     if (data is CommentTextData) text = data.text!;
     return Container(
@@ -108,6 +110,20 @@ class _CommentWidgetState extends State<CommentWidget> {
                     Text(
                       value.createdAt!.beforeTime(),
                       style: _themeData.textTheme.caption!.copyWith(),
+                    ),
+                    const SizedBox(width: 12),
+                    InkWell(
+                      onTap: () {
+                        if (_isFlagedByMe) {
+                          value.react().removeReaction('like');
+                        } else {
+                          value.react().addReaction('like');
+                        }
+                      },
+                      child: Text(
+                        '${widget.amityComment.reactionCount} Likes',
+                        style: _themeData.textTheme.caption!.copyWith(),
+                      ),
                     ),
                     const SizedBox(width: 12),
                     InkWell(
