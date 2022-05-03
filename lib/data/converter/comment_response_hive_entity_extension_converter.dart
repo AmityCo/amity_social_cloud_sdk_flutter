@@ -50,6 +50,7 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
       ..childrenNumber = childrenNumber
       ..repliesId = children
       ..flagCount = flagCount
+      ..reactions = AmityReactionMap(reactions: reactions)
       ..myReactions = myReactions
       ..reactionCount = reactionsCount
       ..isDeleted = isDeleted
