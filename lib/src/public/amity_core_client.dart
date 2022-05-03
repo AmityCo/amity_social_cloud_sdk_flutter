@@ -1,17 +1,18 @@
-import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/public/public.dart';
+import 'package:amity_sdk/lib.dart';
+import 'package:amity_sdk/public/repo/notification_repository.dart';
 
+///Amity Core Client to do primary Setup
 class AmityCoreClient {
-  static Future setup(
-      {required AmityCoreClientOption option,
-      bool sycInitialization = false}) async {
+  ///Do the intial set
+  static Future setup({
+    required AmityCoreClientOption option,
+    bool sycInitialization = false,
+  }) async {
     //Reset config get_it instance
-    await configServiceLocator.reset(dispose: true);
+    await configServiceLocator.reset();
 
     //Reset SDK get_it instance
-    await serviceLocator.reset(dispose: true);
+    await serviceLocator.reset();
 
     configServiceLocator
         .registerLazySingleton<AmityCoreClientOption>(() => option);
@@ -21,6 +22,7 @@ class AmityCoreClient {
     return;
   }
 
+  /// Login with userId, this will create user session
   static LoginQueryBuilder login(String userId) {
     return LoginQueryBuilder(useCase: serviceLocator(), userId: userId);
   }
@@ -36,6 +38,7 @@ class AmityCoreClient {
     return;
   }
 
+  ///Check if user is logged in
   static bool isUserLoggedIn() {
     try {
       getCurrentUser();
@@ -45,30 +48,40 @@ class AmityCoreClient {
     }
   }
 
+  ///Get logged in user id
+  ///if user is not logged in this method will Through [AmityException]
   static String getUserId() {
     return getCurrentUser().userId!;
   }
 
+  ///Get logged in user
+  ///if user is not logged in this method will Through [AmityException]
   static AmityUser getCurrentUser() {
     if (serviceLocator.isRegistered<AmityUser>()) {
       return serviceLocator<AmityUser>();
     }
     throw AmityException(
-        message: 'App dont have active user, Please login', code: 401);
+      message: 'App dont have active user, Please login',
+      code: 401,
+    );
   }
 
-  // Exclude them from hedgehog release
-  // static Future registerDeviceNotification(String fcmToken) {
-  //   return serviceLocator<NotificationRepository>()
-  //       .registerDeviceNotification(fcmToken);
-  // }
+  ///Register the devie to receive FCM token
+  static Future registerDeviceNotification(String fcmToken) {
+    return serviceLocator<NotificationRepository>()
+        .registerDeviceNotification(fcmToken);
+  }
 
-  // static Future unregisterDeviceNotification() {
-  //   return serviceLocator<NotificationRepository>()
-  //       .unregisterDeviceNotification();
-  // }
+  ///Unregister the device with FCM
+  static Future unregisterDeviceNotification() {
+    return serviceLocator<NotificationRepository>()
+        .unregisterDeviceNotification();
+  }
 
+  /// Create new User Repository
   static UserRepository newUserRepository() => serviceLocator<UserRepository>();
+
+  /// Create new File Repository
   static FileRepository newFileRepository() => serviceLocator<FileRepository>();
 }
 
