@@ -1,3 +1,9 @@
+## 0.0.2-beta.01
+
+* feat: Comment CRUD and Query 
+* fix: get_it instance issue
+
+
 ## 0.0.1
 
 * docs: updated the README file
