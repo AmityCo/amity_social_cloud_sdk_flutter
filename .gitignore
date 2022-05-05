@@ -132,6 +132,9 @@ app.*.map.json
 # Exclude the sample application
 /sample_app/
 
+# Exclude the Assets for sample application
+/assets/
+
 # Exclude Sample Code gist js
 create-gist.js
 sample-code-project-validator.js
@@ -139,5 +142,7 @@ update-sample-code.js
 package.json
 package-lock.json
 code_scanner.sh
+
+
 
 
