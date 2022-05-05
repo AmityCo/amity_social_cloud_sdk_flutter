@@ -1,4 +1,4 @@
-## 0.0.2-beta.01
+## 0.0.2
 
 * feat: Comment CRUD and Query 
 * fix: get_it instance issue

@@ -1,4 +1,4 @@
-library amity;
+library amity_sdk;
 
 export 'src/core/enum/enum.dart';
 export 'src/core/error/amity_exception.dart';
