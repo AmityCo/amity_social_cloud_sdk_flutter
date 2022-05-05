@@ -5,7 +5,6 @@ import 'package:amity_sdk/src/core/model/api_request/register_notification_reque
 import 'package:amity_sdk/src/core/usercase/usecase.dart';
 import 'package:amity_sdk/src/data/data_source/data_source.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/repo/notification_repo.dart';
 
 class RegisterDeviceNotificationUseCase extends UseCase<void, String> {
   final NotificationRepo notificationRepo;
@@ -24,7 +23,7 @@ class RegisterDeviceNotificationUseCase extends UseCase<void, String> {
     if (Platform.isAndroid) {
       platform = "android";
     } else if (Platform.isIOS) {
-      platform = "iOS";
+      platform = "ios";
     } else {
       throw NullThrownError();
     }
