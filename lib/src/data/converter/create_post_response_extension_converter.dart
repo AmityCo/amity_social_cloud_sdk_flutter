@@ -1,5 +1,4 @@
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter_repo.dart';
 
 extension CreatePostResponseExtension on CreatePostResponse {
   FeedPagingHiveEntity convertToFeedHiveEntity() => FeedPagingHiveEntity()

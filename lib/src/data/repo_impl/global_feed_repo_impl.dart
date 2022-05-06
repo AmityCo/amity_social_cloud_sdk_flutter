@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:amity_sdk/src/core/model/api_request/get_global_feed_request.dart';
 import 'package:amity_sdk/src/core/utils/tuple.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter_repo.dart';
 import 'package:amity_sdk/src/domain/model/amity_post.dart';
 import 'package:amity_sdk/src/domain/repo/global_feed_repo.dart';
 

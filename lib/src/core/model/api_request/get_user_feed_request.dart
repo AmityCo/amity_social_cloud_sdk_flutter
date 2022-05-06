@@ -2,6 +2,8 @@
 //
 //     final userFeedRequest = userFeedRequestFromJson(jsonString);
 
+// ignore_for_file: hash_and_equals
+
 import 'core/option_request.dart';
 
 class GetUserFeedRequest {

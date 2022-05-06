@@ -1,6 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter_repo.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommunityFeedRepoImpl extends CommunityFeedRepo {

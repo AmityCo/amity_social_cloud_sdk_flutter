@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, non_constant_identifier_names, prefer_const_declarations, unused_element
+
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data_source/local/local.dart';
 import 'package:amity_sdk/src/domain/repo/account_repo.dart';
