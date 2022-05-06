@@ -1,3 +1,7 @@
+///Amity Social SDK package
+///
+///This package is a dart wrapper over the Amity Social Media API
+
 library amity_sdk;
 
 export 'src/core/enum/enum.dart';
