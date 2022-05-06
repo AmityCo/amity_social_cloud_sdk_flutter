@@ -1,8 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/model/api_request/register_notification_request.dart';
-import 'package:amity_sdk/src/core/model/api_request/unregister_notification_request.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/remote/api_interface/notification_api_interface.dart';
 import 'package:amity_sdk/src/public/amity_core_client.dart';
 import 'package:dio/dio.dart' as dio;
 

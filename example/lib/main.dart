@@ -1,4 +1,4 @@
-import 'package:amity_sdk/amity.dart';
+import 'package:amity_sdk/amity_sdk.dart';
 import 'package:flutter/material.dart';
 
 void main() async {

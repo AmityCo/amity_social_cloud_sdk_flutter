@@ -10,7 +10,6 @@ class AmityComment extends ChangeNotifier
     serviceLocator<CommentDbAdapter>()
         .listenCommentEntity(commentId!)
         .listen((event) {
-      print('>>> Value Listenable on CommentId - ${event.commentId}');
       final _updateAmityComment = event.convertToAmityComment();
 
       //TOOD: Good idea would be have compose method inside the object itself

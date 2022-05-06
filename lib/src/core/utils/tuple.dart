@@ -1,3 +1,5 @@
+// ignore_for_file: unnecessary_overrides
+
 class Tuple2<T1, T2> {
   /// Returns the first item of the tuple
   final T1 item1;
@@ -38,7 +40,6 @@ class Tuple2<T1, T2> {
       other is Tuple2 && other.item1 == item1 && other.item2 == item2;
 
   @override
-  // TODO: implement hashCode
   int get hashCode => super.hashCode;
 
   // @override

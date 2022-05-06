@@ -143,6 +143,13 @@ package.json
 package-lock.json
 code_scanner.sh
 
+## Custom
+# Google API key and other resources
+GoogleService-Info.plist
+google-services.json
+# Plugins (already resolved through pubspec.yaml)
+.flutter-plugins
+
 
 
 

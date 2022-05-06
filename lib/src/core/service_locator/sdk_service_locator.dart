@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
@@ -12,8 +14,6 @@ class SdkServiceLocator {
 //Dependency injection
   static Future<void> initServiceLocator({bool syc = false}) async {
     DateTime startTime = DateTime.now();
-
-    print('>>>>>> Init all the dependenciies');
 
     ///----------------------------------- Core Layer -----------------------------------///
 
@@ -359,8 +359,7 @@ class SdkServiceLocator {
     //wait to init all the dependency.
     if (syc) await serviceLocator.allReady();
 
-    print(
-        '>> Time took to initilize the DI ${endTime.difference(startTime).inMilliseconds} Milis');
+    log('>> Time took to initilize the DI ${endTime.difference(startTime).inMilliseconds} Milis');
   }
 
   static Future reloadServiceLocator() async {

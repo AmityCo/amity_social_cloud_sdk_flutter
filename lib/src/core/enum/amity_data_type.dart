@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 enum AmityDataType { TEXT, IMAGE, VIDEO, FILE, LIVE_STREAM, POLL, CUSTOM }
 
 extension AmityDataTypeExtension on AmityDataType {

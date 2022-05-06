@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:amity_sdk/src/core/utils/tuple.dart';
 import 'package:flutter/foundation.dart';
 
@@ -86,9 +88,7 @@ class PagingController<T> extends ChangeNotifier {
         page = data.item1;
         _nextPageToken = data.item2;
         _numberOfLoadedPages++;
-      } catch (error, stacktrace) {
-        print(error.toString());
-        print(stacktrace.toString());
+      } catch (error) {
         _error = error;
         _isFetching = false;
         page = [];

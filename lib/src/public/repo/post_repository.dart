@@ -1,6 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/usecase/post/post_delete_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 
 class PostRepository {

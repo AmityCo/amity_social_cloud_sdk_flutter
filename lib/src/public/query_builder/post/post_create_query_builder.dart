@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/model/amity_file/amity_file.dart';
 import 'package:amity_sdk/src/domain/model/amity_mentionee_target.dart';

@@ -1,4 +1,4 @@
-// ignore: constant_identifier_names
+// ignore_for_file: constant_identifier_names
 
 import 'package:amity_sdk/src/core/constant/global_constant.dart';
 

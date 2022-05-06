@@ -4,7 +4,6 @@
 
 import 'dart:convert';
 
-import 'package:amity_sdk/src/data/response/core_response/paging_response.dart';
 import 'package:amity_sdk/src/data/response/response.dart';
 
 UsersResponse usersResponseFromJson(String str) =>

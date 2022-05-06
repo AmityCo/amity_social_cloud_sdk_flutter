@@ -12,7 +12,6 @@ class PostDeleteUseCase extends UseCase<void, String> {
 
   @override
   Stream<void> listen(String params) {
-    // TODO: implement listen
     throw UnimplementedError();
   }
 }

@@ -1,3 +1,13 @@
+## 0.0.2-hedgehog.1
+
+*fix: flutter static analysis
+
+## 0.0.2
+
+* feat: Comment CRUD and Query 
+* fix: get_it instance issue
+
+
 ## 0.0.1
 
 * docs: updated the README file
@@ -13,6 +23,4 @@
 
 * docs: updated the README file
 ## 0.0.1-gazelle.1
-
-* TODO: Describe initial release.
 

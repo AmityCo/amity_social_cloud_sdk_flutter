@@ -57,15 +57,16 @@ class AmityCoreClient {
         message: 'App dont have active user, Please login', code: 401);
   }
 
-  static Future registerDeviceNotification(String fcmToken) {
-    return serviceLocator<NotificationRepository>()
-        .registerDeviceNotification(fcmToken);
-  }
+  // Exclude them from hedgehog release
+  // static Future registerDeviceNotification(String fcmToken) {
+  //   return serviceLocator<NotificationRepository>()
+  //       .registerDeviceNotification(fcmToken);
+  // }
 
-  static Future unregisterDeviceNotification() {
-    return serviceLocator<NotificationRepository>()
-        .unregisterDeviceNotification();
-  }
+  // static Future unregisterDeviceNotification() {
+  //   return serviceLocator<NotificationRepository>()
+  //       .unregisterDeviceNotification();
+  // }
 
   static UserRepository newUserRepository() => serviceLocator<UserRepository>();
   static FileRepository newFileRepository() => serviceLocator<FileRepository>();

@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:amity_sdk/src/core/model/api_request/unregister_notification_request.dart';
 import 'package:amity_sdk/src/core/usercase/usecase.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/domain/repo/notification_repo.dart';
 import 'package:amity_sdk/src/domain/repo/repo.dart';
 
 class UnregisterDeviceNotificationUseCase extends UseCase<void, void> {

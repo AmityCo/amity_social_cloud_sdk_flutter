@@ -1,5 +1,7 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
+// ignore_for_file: avoid_single_cascade_in_expression_statements
+
 part of 'community_hive_entity_9.dart';
 
 // **************************************************************************
