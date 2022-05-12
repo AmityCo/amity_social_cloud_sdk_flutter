@@ -1,7 +1,7 @@
-import 'package:amity_sdk/src/core/model/api_request/get_global_feed_request.dart';
-import 'package:amity_sdk/src/core/utils/tuple.dart';
-import 'package:amity_sdk/src/domain/model/amity_post.dart';
-import 'package:amity_sdk/src/domain/usecase/feed/get_global_feed_usecase.dart';
+
+
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 class AmityGlobalFeedQuery {
   final GetGlobalFeedUsecase _usecase;

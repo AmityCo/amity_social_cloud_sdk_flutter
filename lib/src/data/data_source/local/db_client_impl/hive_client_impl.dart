@@ -1,5 +1,7 @@
 import 'package:amity_sdk/src/data/data_source/local/db_client/abs_db_client.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
+// import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveDbClient extends DBClient {
   @override
@@ -8,7 +10,8 @@ class HiveDbClient extends DBClient {
     // final appDocumentDirectory = await getApplicationDocumentsDirectory();
     // var path = Directory.current.path;
     // print('path >>>>>> $path');
-    await Hive.initFlutter();
+    var appDir = await getApplicationDocumentsDirectory();
+    Hive.init(appDir.path);
 
     return this;
   }

@@ -1,9 +1,5 @@
-import 'package:amity_sdk/src/core/enum/amity_comment_sort_option.dart';
-import 'package:amity_sdk/src/core/enum/amity_comment_target_type.dart';
-import 'package:amity_sdk/src/core/model/api_request/get_comment_request.dart';
-import 'package:amity_sdk/src/core/utils/tuple.dart';
-import 'package:amity_sdk/src/domain/model/amity_comment.dart';
-import 'package:amity_sdk/src/domain/usecase/comment/comment_query_usecase.dart';
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 class AmityCommentQueryTypeSelector {
   late CommentQueryUsecase _useCase;

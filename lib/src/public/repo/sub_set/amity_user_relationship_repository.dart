@@ -1,10 +1,6 @@
-import 'package:amity_sdk/src/core/enum/amity_follow_status.dart';
-import 'package:amity_sdk/src/core/service_locator/service_locator.dart';
-import 'package:amity_sdk/src/domain/model/amity_user_follow_info.dart';
-import 'package:amity_sdk/src/domain/usecase/relationship/get_user_follow_info_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/relationship/user_follow_request_usecase.dart';
-import 'package:amity_sdk/src/public/query_builder/relationship/amity_user_followers_query_builder.dart';
-import 'package:amity_sdk/src/public/query_builder/relationship/amity_user_followings_query_builder.dart';
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/public/public.dart';
 
 class AmityUserRelationshipRepository {
   final String userId;

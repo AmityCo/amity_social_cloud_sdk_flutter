@@ -1,12 +1,6 @@
-import 'package:amity_sdk/src/core/service_locator/service_locator.dart';
-import 'package:amity_sdk/src/domain/model/amity_user_follow_info.dart';
-import 'package:amity_sdk/src/domain/usecase/relationship/accept_follow_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/relationship/decline_follow_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/relationship/get_my_follow_info_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/relationship/remove_follower_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/relationship/unfollow_usecase.dart';
-import 'package:amity_sdk/src/public/query_builder/relationship/amity_my_followers_query_builder.dart';
-import 'package:amity_sdk/src/public/query_builder/relationship/amity_my_followings_query_builder.dart';
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/public/public.dart';
 
 class AmityMyUserRelationshipRepository {
   Future<void> accept(String userId) {

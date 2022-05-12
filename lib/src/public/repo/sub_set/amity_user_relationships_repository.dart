@@ -1,5 +1,4 @@
-import 'package:amity_sdk/src/public/repo/sub_set/amity_my_user_relationship_repository.dart';
-import 'package:amity_sdk/src/public/repo/sub_set/amity_user_relationship_repository.dart';
+import 'package:amity_sdk/src/public/public.dart';
 
 class AmityUserRelationshipsRepository {
   AmityMyUserRelationshipRepository me() {

@@ -1,11 +1,8 @@
 // ignore_for_file: unused_field
 
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/domain/model/amity_file/amity_file.dart';
-import 'package:amity_sdk/src/domain/model/amity_mentionee_target.dart';
-import 'package:amity_sdk/src/domain/model/amity_post.dart';
-import 'package:amity_sdk/src/domain/usecase/post/post_create_usecase.dart';
-import 'package:amity_sdk/src/public/amity_core_client.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/public/public.dart';
 
 class AmityPostCreateTargetSelector {
   late PostCreateUsecase _useCase;
