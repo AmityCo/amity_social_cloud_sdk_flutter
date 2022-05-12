@@ -1,3 +1,6 @@
+## 0.0.2-hedgehog.2
+
+*fix: flutter static analysis
 ## 0.0.2-hedgehog.1
 
 *fix: flutter static analysis
