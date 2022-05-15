@@ -17,7 +17,7 @@ class CommentHiveEntityAdapter extends TypeAdapter<CommentHiveEntity> {
 
   @override
   void write(BinaryWriter writer, CommentHiveEntity obj) {
-    writer.writeByte(0);
+    writer..writeByte(0);
   }
 
   @override

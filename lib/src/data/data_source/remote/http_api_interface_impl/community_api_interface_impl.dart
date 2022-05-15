@@ -19,10 +19,33 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
   }
 
   @override
-  Future<CreateCommunityResponse> getCommunityById(String communityId) async {
+  Future<CreateCommunityResponse> getCommunity(String communityId) async {
     try {
       final data = await httpApiClient().get(COMMUNITY_V3 + '/$communityId');
       return CreateCommunityResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
+  Future<CreateCommunityResponse> updateCommunity(
+      CreateCommunityRequest request) async {
+    try {
+      final data = await httpApiClient().post(COMMUNITY_V3);
+      return CreateCommunityResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
+  Future<bool> deleteCommunity(String communityId) async {
+    try {
+      final data = await httpApiClient().delete(COMMUNITY_V3 + '/$communityId');
+      return true;
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());

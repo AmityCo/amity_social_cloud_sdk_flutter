@@ -11,7 +11,7 @@ class CommunityResponse {
     required this.isPublic,
     required this.onlyAdminCanPost,
     required this.tags,
-    // required this.metadata,
+    required this.metadata,
     required this.postsCount,
     required this.membersCount,
     required this.isJoined,
@@ -35,7 +35,7 @@ class CommunityResponse {
   final bool isPublic;
   final bool onlyAdminCanPost;
   final List<String> tags;
-  // final DataClass metadata;
+  final Map<String, String> metadata;
   final int postsCount;
   final int membersCount;
   final bool isJoined;
@@ -60,7 +60,7 @@ class CommunityResponse {
         isPublic: json["isPublic"],
         onlyAdminCanPost: json["onlyAdminCanPost"],
         tags: List<String>.from(json["tags"].map((x) => x)),
-        // metadata: DataClass.fromJson(json["metadata"]),
+        metadata: json["metadata"],
         postsCount: json["postsCount"],
         membersCount: json["membersCount"],
         isJoined: json["isJoined"],
@@ -84,7 +84,7 @@ class CommunityResponse {
         "isPublic": isPublic,
         "onlyAdminCanPost": onlyAdminCanPost,
         "tags": List<dynamic>.from(tags.map((x) => x)),
-        // "metadata": metadata.toJson(),
+        "metadata": metadata,
         "postsCount": postsCount,
         "membersCount": membersCount,
         "isJoined": isJoined,

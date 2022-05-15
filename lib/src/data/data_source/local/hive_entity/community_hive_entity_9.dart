@@ -14,7 +14,7 @@ class CommunityHiveEntity {
   bool? isOfficial;
   bool isPublic = false;
   bool onlyAdminCanPost = false;
-  //  DataClass metadata;
+  Map<String, String>? metadata;
   int postCount = 0;
   int membersCount = 0;
   bool isJoined = false;

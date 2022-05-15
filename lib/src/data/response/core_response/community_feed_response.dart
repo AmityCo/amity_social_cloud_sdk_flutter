@@ -1,5 +1,5 @@
-class FeedResponse {
-  FeedResponse({
+class CommunityFeedResponse {
+  CommunityFeedResponse({
     required this.targetId,
     required this.targetType,
     required this.postCount,
@@ -17,7 +17,8 @@ class FeedResponse {
   final DateTime createdAt;
   final DateTime updatedAt;
 
-  factory FeedResponse.fromJson(Map<String, dynamic> json) => FeedResponse(
+  factory CommunityFeedResponse.fromJson(Map<String, dynamic> json) =>
+      CommunityFeedResponse(
         targetId: json["targetId"],
         targetType: json["targetType"],
         postCount: json["postCount"],

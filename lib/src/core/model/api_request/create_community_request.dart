@@ -8,8 +8,9 @@ String createPostRequestToJson(CreateCommunityRequest data) =>
 
 class CreateCommunityRequest {
   CreateCommunityRequest({
-    required this.displayName,
-    required this.categoryIds,
+    this.communityId,
+    this.displayName,
+    this.categoryIds,
     this.description,
     this.isPublic,
     this.metadata,
@@ -17,18 +18,19 @@ class CreateCommunityRequest {
     this.avatarFileId,
     this.needApprovalOnPostCreation,
   });
-
-  final String displayName;
-  final List<String>? categoryIds;
+  String? communityId;
+  String? displayName;
+  List<String>? categoryIds;
   String? description;
   bool? isPublic;
-  Metadata? metadata;
+  Map<String, String>? metadata;
   List<String>? userIds;
   String? avatarFileId;
   bool? needApprovalOnPostCreation;
 
   factory CreateCommunityRequest.fromJson(Map<String, dynamic> json) =>
       CreateCommunityRequest(
+        communityId: json["communityId"],
         displayName: json["displayName"],
         categoryIds: List<String>.from(
             json["categoryIds"].map((categoryId) => categoryId.toString())),
@@ -37,16 +39,17 @@ class CreateCommunityRequest {
         userIds: List<String>.from(
             json["userIds"].map((userId) => userId.toString())),
         avatarFileId: json["avatarFileId"],
-        metadata: Metadata.fromJson(json["metadata"]),
+        metadata: json["metadata"],
         needApprovalOnPostCreation: json["needApprovalOnPostCreation"],
       );
 
   Map<String, dynamic> toJson() => {
+        "communityId": communityId,
         "displayName": displayName,
         "categoryIds": categoryIds,
         "description": description,
         "isPublic": isPublic,
-        "metadata": metadata == null ? null : metadata!.toJson(),
+        "metadata": metadata,
         "userIds": userIds,
         "avatarFileId": avatarFileId,
         "needApprovalOnPostCreation": needApprovalOnPostCreation,
@@ -55,20 +58,4 @@ class CreateCommunityRequest {
   String toString() {
     return createPostRequestToJson(this);
   }
-}
-
-class Metadata {
-  Metadata({
-    required this.anything,
-  });
-
-  final String anything;
-
-  factory Metadata.fromJson(Map<String, dynamic> json) => Metadata(
-        anything: json["anything"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "anything": anything,
-      };
 }

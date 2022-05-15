@@ -1,5 +1,4 @@
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/model/amity_tag.dart';
 
 class AmityCommunity {
   String? communityId;

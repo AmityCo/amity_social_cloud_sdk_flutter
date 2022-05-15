@@ -1,6 +1,10 @@
 import 'dart:developer';
 
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_category_db_adater.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_feed_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/community_category_db_adapter_impl.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/community_feed_db_adapter_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
@@ -48,6 +52,12 @@ class SdkServiceLocator {
         dependsOn: [DBClient]);
     serviceLocator.registerSingletonAsync<CommunityDbAdapter>(
         () => CommunityDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<CommunityCategoryDbAdapter>(
+        () => CommunityCategoryDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<CommunityFeedDbAdapter>(
+        () => CommunityFeedDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
     serviceLocator.registerSingletonAsync<FeedPagingDbAdapter>(
         () => FeedPagingDbAdapterImpl(dbClient: serviceLocator()).init(),
@@ -249,6 +259,20 @@ class SdkServiceLocator {
               communityRepo: serviceLocator(),
               communityComposerUsecase: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<CommunityUpdateUseCase>(
+        () => CommunityUpdateUseCase(
+              communityRepo: serviceLocator(),
+              communityComposerUsecase: serviceLocator(),
+            ));
+    serviceLocator
+        .registerLazySingleton<CommunityGetUseCase>(() => CommunityGetUseCase(
+              communityRepo: serviceLocator(),
+              communityComposerUsecase: serviceLocator(),
+            ));
+    serviceLocator.registerLazySingleton<CommunityDeleteUseCase>(
+        () => CommunityDeleteUseCase(
+              communityRepo: serviceLocator(),
+            ));
     serviceLocator
         .registerLazySingleton<PostComposerUsecase>(() => PostComposerUsecase(
               userRepo: serviceLocator(),
@@ -346,6 +370,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => FeedRepository());
     serviceLocator.registerLazySingleton(() => FileRepository());
     serviceLocator.registerLazySingleton(() => NotificationRepository());
+    serviceLocator.registerLazySingleton(() => CommunityRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(

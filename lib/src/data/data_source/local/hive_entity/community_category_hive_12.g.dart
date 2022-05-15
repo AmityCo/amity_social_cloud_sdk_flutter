@@ -1,22 +1,23 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'feed_paging_hive_entity_10.dart';
+part of 'community_category_hive_12.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class FeedPagingHiveEntityAdapter extends TypeAdapter<FeedPagingHiveEntity> {
+class CommunityCategoryHiveEntityAdapter
+    extends TypeAdapter<CommunityCategoryHiveEntity> {
   @override
-  final int typeId = 10;
+  final int typeId = 12;
 
   @override
-  FeedPagingHiveEntity read(BinaryReader reader) {
-    return FeedPagingHiveEntity();
+  CommunityCategoryHiveEntity read(BinaryReader reader) {
+    return CommunityCategoryHiveEntity();
   }
 
   @override
-  void write(BinaryWriter writer, FeedPagingHiveEntity obj) {
+  void write(BinaryWriter writer, CommunityCategoryHiveEntity obj) {
     writer..writeByte(0);
   }
 
@@ -26,7 +27,7 @@ class FeedPagingHiveEntityAdapter extends TypeAdapter<FeedPagingHiveEntity> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FeedPagingHiveEntityAdapter &&
+      other is CommunityCategoryHiveEntityAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }
