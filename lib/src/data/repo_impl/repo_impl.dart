@@ -11,3 +11,4 @@ export 'post_repo_impl.dart';
 export 'reaction_repo_impl.dart';
 export 'user_feed_repo_impl.dart';
 export 'user_repo_impl.dart';
+export 'utils/utils.dart';

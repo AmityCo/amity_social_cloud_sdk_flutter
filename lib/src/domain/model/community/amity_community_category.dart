@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class AmityCommunityCategory {
@@ -9,4 +11,19 @@ class AmityCommunityCategory {
   bool? isDeleted;
   DateTime? createdAt;
   DateTime? updatedAt;
+
+  Map<String, dynamic> toMap() {
+    return {
+      'categoryId': categoryId,
+      'name': name,
+      'avatarId': avatarId,
+      'avatar': avatar?.getUrl(AmityImageSize.MEDIUM),
+      'metadata': metadata,
+      'isDeleted': isDeleted,
+      'createdAt': createdAt?.millisecondsSinceEpoch,
+      'updatedAt': updatedAt?.millisecondsSinceEpoch,
+    };
+  }
+
+  String toJson() => json.encode(toMap());
 }

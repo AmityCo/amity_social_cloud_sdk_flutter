@@ -9,8 +9,11 @@ class CommunityGetUseCase extends UseCase<AmityCommunity, String> {
   CommunityGetUseCase(
       {required this.communityRepo, required this.communityComposerUsecase});
   @override
-  Future<AmityCommunity> get(String params) {
-    return communityRepo.getCommunity(params);
+  Future<AmityCommunity> get(String params) async {
+    final amityCommunity = await communityRepo.getCommunity(params);
+    final amityCommunityComposed =
+        await communityComposerUsecase.get(amityCommunity);
+    return amityCommunityComposed;
   }
 
   @override

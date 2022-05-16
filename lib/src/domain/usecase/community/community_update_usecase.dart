@@ -9,9 +9,11 @@ class CommunityUpdateUseCase
   CommunityUpdateUseCase(
       {required this.communityRepo, required this.communityComposerUsecase});
   @override
-  Future<AmityCommunity> get(CreateCommunityRequest params) {
-    // TODO: implement get
-    throw UnimplementedError();
+  Future<AmityCommunity> get(CreateCommunityRequest params) async {
+    final amityCommunity = await communityRepo.updateCommunity(params);
+    final amityCommunityComposed =
+        await communityComposerUsecase.get(amityCommunity);
+    return amityCommunityComposed;
   }
 
   @override

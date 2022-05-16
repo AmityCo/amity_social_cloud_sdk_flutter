@@ -22,4 +22,5 @@ class CommunityHiveEntity {
   bool needApprovalOnPostCreation = false;
   DateTime? createdAt;
   DateTime? editedAt;
+  List<String>? categoryIds;
 }

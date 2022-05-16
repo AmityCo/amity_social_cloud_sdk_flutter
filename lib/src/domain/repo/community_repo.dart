@@ -1,11 +1,15 @@
-import 'package:amity_sdk/src/core/model/api_request/create_community_request.dart';
-import 'package:amity_sdk/src/domain/model/community/amity_community.dart';
+import 'package:amity_sdk/amity_sdk.dart';
+import 'package:amity_sdk/src/core/core.dart';
 
 abstract class CommunityRepo {
+  Future<Tuple2<List<AmityCommunity>, String>> getCommunityQuery(
+      GetCommunityRequest request);
   Future<AmityCommunity> createCommunity(CreateCommunityRequest request);
   Future<AmityCommunity> getCommunityById(String communityId);
 
   Future<AmityCommunity> getCommunity(String communityId);
   Future deleteCommunity(String communityId);
   Future<AmityCommunity> updateCommunity(CreateCommunityRequest request);
+
+  Future<AmityCommunityCategory> getCommunityCategoryById(String categoryId);
 }

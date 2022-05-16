@@ -2,16 +2,11 @@
 
 import 'dart:async';
 
+import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/model/api_request/create_community_request.dart';
-import 'package:amity_sdk/src/data/converter/community_category_response_extension_converter.dart';
-import 'package:amity_sdk/src/data/converter/community_feed_response_extension_converter.dart';
+import 'package:amity_sdk/src/core/model/api_request/get_community_request.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_category_db_adater.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_feed_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/community_category_hive_12.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/community_feed_hive_13.dart';
-import 'package:amity_sdk/src/domain/model/community/amity_community.dart';
-import 'package:amity_sdk/src/domain/repo/community_repo.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommunityRepoImpl extends CommunityRepo {
   final CommunityApiInterface communityApiInterface;
@@ -126,5 +121,21 @@ class CommunityRepoImpl extends CommunityRepo {
     }
 
     return communityHiveEnties.map((e) => e.convertToAmityCommunity()).toList();
+  }
+
+  @override
+  Future<AmityCommunityCategory> getCommunityCategoryById(
+      String categoryId) async {
+    return communityCategoryDbAdapter
+        .getCommunityCategoryEntity(categoryId)
+        .convertToAmityCommunityCategory();
+  }
+
+  @override
+  Future<Tuple2<List<AmityCommunity>, String>> getCommunityQuery(
+      GetCommunityRequest request) async {
+    final data = await communityApiInterface.getCommunityQuery(request);
+    final amityCommunity = await saveCommunity(data);
+    return Tuple2(amityCommunity, data.paging!.next ?? '');
   }
 }

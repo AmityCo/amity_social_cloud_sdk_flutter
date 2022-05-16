@@ -10,7 +10,8 @@ class CommunityCategoryDbAdapterImpl extends CommunityCategoryDbAdapter {
   late Box box;
   Future<CommunityCategoryDbAdapterImpl> init() async {
     Hive.registerAdapter(CommunityCategoryHiveEntityAdapter(), override: true);
-    box = await Hive.openBox<CommunityCategoryHiveEntity>('community_db');
+    box = await Hive.openBox<CommunityCategoryHiveEntity>(
+        'community_category_db');
     return this;
   }
 

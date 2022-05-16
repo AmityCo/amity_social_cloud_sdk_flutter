@@ -6,6 +6,7 @@ import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_feed_d
 import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/community_category_db_adapter_impl.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/community_feed_db_adapter_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/usecase/community/community_get_query_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -152,12 +153,17 @@ class SdkServiceLocator {
         reactionApiInterface: serviceLocator(),
         commentDbAdapter: serviceLocator(),
         postDbAdapter: serviceLocator()));
-    serviceLocator.registerLazySingleton<CommunityRepo>(() => CommunityRepoImpl(
+    serviceLocator.registerLazySingleton<CommunityRepo>(
+      () => CommunityRepoImpl(
         communityApiInterface: serviceLocator(),
         communityDbAdapter: serviceLocator(),
         commentDbAdapter: serviceLocator(),
         userDbAdapter: serviceLocator(),
-        fileDbAdapter: serviceLocator()));
+        fileDbAdapter: serviceLocator(),
+        communityCategoryDbAdapter: serviceLocator(),
+        communityFeedDbAdapter: serviceLocator(),
+      ),
+    );
 
     serviceLocator
         .registerLazySingleton<GlobalFeedRepo>(() => GlobalFeedRepoImpl(
@@ -272,6 +278,11 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<CommunityDeleteUseCase>(
         () => CommunityDeleteUseCase(
               communityRepo: serviceLocator(),
+            ));
+    serviceLocator.registerLazySingleton<CommunityGetQueryUseCase>(
+        () => CommunityGetQueryUseCase(
+              communityRepo: serviceLocator(),
+              communityComposerUsecase: serviceLocator(),
             ));
     serviceLocator
         .registerLazySingleton<PostComposerUsecase>(() => PostComposerUsecase(

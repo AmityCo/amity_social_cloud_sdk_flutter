@@ -60,7 +60,7 @@ class CommunityResponse {
         isPublic: json["isPublic"],
         onlyAdminCanPost: json["onlyAdminCanPost"],
         tags: List<String>.from(json["tags"].map((x) => x)),
-        metadata: json["metadata"],
+        metadata: Map<String, String>.from(json["metadata"]),
         postsCount: json["postsCount"],
         membersCount: json["membersCount"],
         isJoined: json["isJoined"],

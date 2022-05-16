@@ -10,14 +10,8 @@ extension UserResponseExtension on UserResponse {
       ..avatarFileId = avatarFileId
       ..metadata = metadata
       ..createdAt = createdAt
-      ..updatedAt = updatedAt;
+      ..updatedAt = updatedAt
+      ..permissions = permissions
+      ..roles = roles;
   }
-
-  // AccountHiveEntity convertToAccountHiveEntity() {
-  //   return AccountHiveEntity()
-  //     ..id = id
-  //     ..userId = userId
-  //     ..displayName = displayName
-  //     ..refreshToken = ;
-  // }
 }

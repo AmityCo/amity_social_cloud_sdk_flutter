@@ -1,19 +1,17 @@
-import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
-class CommunityDeleteUseCase extends UseCase<AmityCommunity, String> {
+class CommunityDeleteUseCase extends UseCase<void, String> {
   final CommunityRepo communityRepo;
 
   CommunityDeleteUseCase({required this.communityRepo});
   @override
-  Future<AmityCommunity> get(String params) {
-    // TODO: implement get
-    throw UnimplementedError();
+  Future get(String params) {
+    return communityRepo.deleteCommunity(params);
   }
 
   @override
-  Stream<AmityCommunity> listen(String params) {
+  Stream listen(String params) {
     // TODO: implement listen
     throw UnimplementedError();
   }
