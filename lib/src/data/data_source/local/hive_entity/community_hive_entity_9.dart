@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'community_hive_entity_9.g.dart';
 
 @HiveType(typeId: 9)
-class CommunityHiveEntity {
+class CommunityHiveEntity extends HiveObject {
   String? communityId;
   String? path;
   String? channelId;

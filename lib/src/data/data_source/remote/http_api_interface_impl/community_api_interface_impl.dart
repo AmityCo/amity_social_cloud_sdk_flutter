@@ -1,5 +1,4 @@
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/model/api_request/get_community_request.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:dio/dio.dart';
 
@@ -11,7 +10,7 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
   Future<CreateCommunityResponse> createCommunity(
       CreateCommunityRequest request) async {
     try {
-      final data = await httpApiClient().post(COMMUNITY_V3);
+      final data = await httpApiClient().post(COMMUNITY_V3, data: request);
       return CreateCommunityResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -34,7 +33,8 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
   Future<CreateCommunityResponse> updateCommunity(
       CreateCommunityRequest request) async {
     try {
-      final data = await httpApiClient().post(COMMUNITY_V3);
+      final data = await httpApiClient()
+          .patch(COMMUNITY_V3 + '/${request.communityId}', data: request);
       return CreateCommunityResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

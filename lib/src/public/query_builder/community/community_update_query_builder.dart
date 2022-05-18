@@ -56,7 +56,7 @@ class CommunityUpdateQueryBuilder {
     return this;
   }
 
-  Future<AmityCommunity> create() async {
+  Future<AmityCommunity> update() async {
     CreateCommunityRequest request =
         CreateCommunityRequest(communityId: communityId);
 

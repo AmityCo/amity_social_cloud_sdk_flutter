@@ -3,8 +3,6 @@
 import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/model/api_request/create_community_request.dart';
-import 'package:amity_sdk/src/core/model/api_request/get_community_request.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
@@ -31,7 +29,7 @@ class CommunityRepoImpl extends CommunityRepo {
   @override
   Future<AmityCommunity> createCommunity(CreateCommunityRequest request) async {
     final data = await communityApiInterface.createCommunity(request);
-    return AmityCommunity();
+    return (await saveCommunity(data)).first;
   }
 
   @override
@@ -46,7 +44,7 @@ class CommunityRepoImpl extends CommunityRepo {
     final data = await communityApiInterface.deleteCommunity(communityId);
 
     ///Get the post from DB and update the delete flag to true
-    final amityCommunityDb = commentDbAdapter.getCommentEntity(communityId);
+    final amityCommunityDb = communityDbAdapter.getCommunityEntity(communityId);
     amityCommunityDb
       ..isDeleted = true
       ..save();

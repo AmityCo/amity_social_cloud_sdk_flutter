@@ -15,7 +15,7 @@ class CommunityGetQueryBuilder {
 
   CommunityGetQueryBuilder({required this.useCase});
 
-  CommunityGetQueryBuilder withKeyword(String keyword) {
+  CommunityGetQueryBuilder withKeyword(String? keyword) {
     _keyword = keyword;
     return this;
   }

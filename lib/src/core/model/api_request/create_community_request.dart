@@ -54,6 +54,7 @@ class CreateCommunityRequest {
         "avatarFileId": avatarFileId,
         "needApprovalOnPostCreation": needApprovalOnPostCreation,
       }..removeWhere((key, value) => value == null);
+
   @override
   String toString() {
     return createPostRequestToJson(this);

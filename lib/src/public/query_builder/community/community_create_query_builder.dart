@@ -3,7 +3,7 @@ import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommunityCreateQueryBuilder {
   final CommunityCreateUsecase usecase;
-  final String displayName;
+  final String _displayName;
 
   //Optional Params
   String? _description;
@@ -14,7 +14,7 @@ class CommunityCreateQueryBuilder {
   String? _avatarFileId;
   bool? _needApprovalOnPostCreation;
 
-  CommunityCreateQueryBuilder(this.usecase, this.displayName);
+  CommunityCreateQueryBuilder(this.usecase, this._displayName);
 
   CommunityCreateQueryBuilder description(String description) {
     _description = description;
@@ -52,8 +52,8 @@ class CommunityCreateQueryBuilder {
   }
 
   Future<AmityCommunity> create() async {
-    CreateCommunityRequest request =
-        CreateCommunityRequest(displayName: displayName);
+    CreateCommunityRequest request = CreateCommunityRequest();
+    request.displayName = _displayName;
     request.description = _description;
     request.isPublic = _isPublic;
     request.categoryIds = _categoryIds;
