@@ -30,6 +30,7 @@ const FILE_V3 = 'api/v3/files';
 const VIDEO_FILE_V3 = 'api/v4/videos';
 
 const COMMUNITY_V3 = 'api/v3/communities';
+const COMMUNITY_CATEGORY_V3 = 'api/v3/community-categories';
 
 const ME_FOLLLOWING = 'api/v4/me/following';
 const ME_FOLLLOWERS = 'api/v4/me/followers';
