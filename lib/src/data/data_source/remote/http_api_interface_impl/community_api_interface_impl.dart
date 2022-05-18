@@ -34,7 +34,7 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
       CreateCommunityRequest request) async {
     try {
       final data = await httpApiClient()
-          .patch(COMMUNITY_V3 + '/${request.communityId}', data: request);
+          .put(COMMUNITY_V3 + '/${request.communityId}', data: request);
       return CreateCommunityResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -59,6 +59,32 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
     try {
       final data = await httpApiClient()
           .get(COMMUNITY_V3, queryParameters: request.toJson());
+      return CreateCommunityResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
+  Future<CreateCommunityResponse> getRecommendedCommunity(
+      OptionsRequest request) async {
+    try {
+      final data = await httpApiClient().get(COMMUNITY_V3 + '/recommended',
+          queryParameters: request.toJson());
+      return CreateCommunityResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
+  Future<CreateCommunityResponse> getTopTredningCommunity(
+      OptionsRequest request) async {
+    try {
+      final data = await httpApiClient().get(COMMUNITY_V3 + '/top-tredning',
+          queryParameters: request.toJson());
       return CreateCommunityResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

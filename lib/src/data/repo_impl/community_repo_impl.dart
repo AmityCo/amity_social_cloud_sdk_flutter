@@ -136,4 +136,20 @@ class CommunityRepoImpl extends CommunityRepo {
     final amityCommunity = await saveCommunity(data);
     return Tuple2(amityCommunity, data.paging!.next ?? '');
   }
+
+  @override
+  Future<Tuple2<List<AmityCommunity>, String>> getRecommendedCommunity(
+      OptionsRequest request) async {
+    final data = await communityApiInterface.getRecommendedCommunity(request);
+    final amityCommunity = await saveCommunity(data);
+    return Tuple2(amityCommunity, data.paging!.next ?? '');
+  }
+
+  @override
+  Future<Tuple2<List<AmityCommunity>, String>> getTopTredningCommunity(
+      OptionsRequest request) async {
+    final data = await communityApiInterface.getTopTredningCommunity(request);
+    final amityCommunity = await saveCommunity(data);
+    return Tuple2(amityCommunity, data.paging!.next ?? '');
+  }
 }
