@@ -1,4 +1,3 @@
-import 'dart:ffi';
 
 import 'package:amity_sdk/src/data/data_source/local/interface/permission_object.dart';
 import 'package:hive_flutter/hive_flutter.dart';
