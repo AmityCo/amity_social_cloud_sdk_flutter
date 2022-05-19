@@ -6,7 +6,7 @@ class AmityCommunityMember {
   String? communityId;
   String? userId;
   String? channelId;
-  bool? isBanned;
+  // bool? isBanned;
   AmityRoles? roles;
   AmityPermissions? permissions;
   AmityUser? user;

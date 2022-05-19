@@ -37,6 +37,7 @@ const ME_FOLLLOW_INFO = 'api/v4/me/followInfo';
 
 // const ME_FOLLLOWING = 'api/v4/me/following';
 // const ME_FOLLLOWERS = 'api/v4/me/followers';
+const USERS = 'users';
 const USERS_V4_URL = 'api/v4/users/';
 
 const GLOBAL_FEED_V3_URL = 'api/v4/me/global-feeds';
