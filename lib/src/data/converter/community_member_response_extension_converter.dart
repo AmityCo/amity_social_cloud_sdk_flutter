@@ -4,6 +4,8 @@ import '../data_source/local/hive_entity/community_member_hive_entity_14.dart';
 extension CommunityMemberResponseExtension on CommunityUserResponse {
   CommnityMemberHiveEntity convertToCommnityMemberHiveEntity() {
     return CommnityMemberHiveEntity()
+      ..id = communityId + userId
+      ..userId = userId
       ..communityId = communityId
       ..channelId = channelId
       ..communityMembership = communityMembership
