@@ -14,8 +14,8 @@ class GetCommunityMembersResponse {
   final List<CommunityUserResponse> communityUsers;
   final List<FileResponse> files;
   final List<UserResponse> users;
-  final List<CategoryResponse> categories;
-  final List<FeedResponse> feeds;
+  final List<CommunityCategoryResponse> categories;
+  final List<CommunityFeedResponse> feeds;
   final PagingResponse? paging;
 
   factory GetCommunityMembersResponse.fromJson(Map<String, dynamic> json) => GetCommunityMembersResponse(
@@ -37,11 +37,11 @@ class GetCommunityMembersResponse {
               json["users"].map((x) => UserResponse.fromJson(x))),
       categories: json["categories"] == null
           ? []
-          : List<CategoryResponse>.from(
-              json["categories"].map((x) => CategoryResponse.fromJson(x))),
+          : List<CommunityCategoryResponse>.from(
+              json["categories"].map((x) => CommunityCategoryResponse.fromJson(x))),
       feeds: json["feeds"] == null
           ? []
-          : List<FeedResponse>.from(json["feeds"].map((x) => FeedResponse.fromJson(x))),
+          : List<CommunityFeedResponse>.from(json["feeds"].map((x) => CommunityFeedResponse.fromJson(x))),
       paging: json["paging"] == null ? null : PagingResponse.fromJson(json['paging']));
 
   Map<String, dynamic> toJson() => {

@@ -1,5 +1,6 @@
-import 'package:amity_sdk/lib.dart';
-import 'package:amity_sdk/public/repo/notification_repository.dart';
+import '../../amity_sdk.dart';
+import '../core/core.dart';
+import '../data/data.dart';
 
 ///Amity Core Client to do primary Setup
 class AmityCoreClient {
