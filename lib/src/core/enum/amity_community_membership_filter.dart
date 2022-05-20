@@ -12,7 +12,7 @@ extension AmityCommnunityMembershipFilterExtension
     ][index];
   }
 
-  List<String> get statuses {
+  List<String> get memberships {
     return [
       [AmityMembershipType.MEMBER.value, AmityMembershipType.BANNED.value],
       [AmityMembershipType.MEMBER.value],

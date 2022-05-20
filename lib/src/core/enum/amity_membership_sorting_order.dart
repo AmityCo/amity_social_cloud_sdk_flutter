@@ -2,11 +2,11 @@
 
 enum AmityMembershipSortOption { FIRST_CREATED, LAST_CREATED }
 
-extension AmityMembershipSortOptionExtension on AmityMembershipSortOption {
+extension AmityMembershipSortingOrderExtension on AmityMembershipSortOption {
   String get value {
     return [
-      'ASC',
-      'DESC',
+      'firstCreated',
+      'lastCreated',
     ][index];
   }
 }

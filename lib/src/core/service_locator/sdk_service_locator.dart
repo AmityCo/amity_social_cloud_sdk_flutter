@@ -1,6 +1,9 @@
 import 'dart:developer';
 
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/community_member_dp_adapter_impl.dart';
+import 'package:amity_sdk/src/domain/composer_usecase/community_member_composer_usecase.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/usecase/community/community_get_query_usecase.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_paging_db_adapter.dart';
@@ -9,6 +12,7 @@ import 'package:amity_sdk/src/data/data_source/remote/api_interface/community_me
 import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/community_member_api_interface_impl.dart';
 import 'package:amity_sdk/src/data/repo_impl/community_member_repo_impl.dart';
 import 'package:amity_sdk/src/domain/repo/community_member_repo.dart';
+import 'package:amity_sdk/src/domain/usecase/community/member/community_member_query_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -61,7 +65,10 @@ class SdkServiceLocator {
         dependsOn: [DBClient]);
     serviceLocator.registerSingletonAsync<CommunityFeedDbAdapter>(
         () => CommunityFeedDbAdapterImpl(dbClient: serviceLocator()).init(),
-                dependsOn: [DBClient]);
+        dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<CommunityMemberDbAdapter>(
+        () => CommunityMemberDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
     serviceLocator.registerSingletonAsync<CommunityMemberPagingDbAdapter>(
         () => CommunityMemberPagingDbAdapterImpl(dbClient: serviceLocator())
             .init(),
@@ -301,6 +308,13 @@ class SdkServiceLocator {
               communityRepo: serviceLocator(),
               communityComposerUsecase: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<CommunityMemberQueryUsecase>(() =>
+        CommunityMemberQueryUsecase(
+            communityMemberRepo: serviceLocator(),
+            communityMemberComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberComposerUsecase>(() =>
+        CommunityMemberComposerUsecase(
+            userComposerUsecase: serviceLocator(), userRepo: serviceLocator()));
     serviceLocator
         .registerLazySingleton<PostComposerUsecase>(() => PostComposerUsecase(
               userRepo: serviceLocator(),
