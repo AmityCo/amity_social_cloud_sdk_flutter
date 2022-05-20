@@ -12,6 +12,8 @@ extension UserHiveEntityExtension on UserHiveEntity {
       ..avatarFileId = avatarFileId
       ..metadata = metadata
       ..createdAt = createdAt
-      ..updatedAt = updatedAt;
+      ..updatedAt = updatedAt
+      ..permissions = permissions
+      ..roles = roles;
   }
 }

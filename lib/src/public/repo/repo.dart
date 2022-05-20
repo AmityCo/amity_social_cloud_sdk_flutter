@@ -1,4 +1,5 @@
 export 'comment_repository.dart';
+export 'community_repository.dart';
 export 'feed_repository.dart';
 export 'file_repository.dart';
 export 'notification_repository.dart';

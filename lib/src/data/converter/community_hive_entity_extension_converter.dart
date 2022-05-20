@@ -19,6 +19,7 @@ extension CommunityHiveEntityExtension on CommunityHiveEntity {
       ..isJoined = isJoined
       ..isDeleted = isDeleted
       ..createdAt = createdAt
-      ..updatedAt = editedAt;
+      ..updatedAt = editedAt
+      ..categoryIds = categoryIds;
   }
 }

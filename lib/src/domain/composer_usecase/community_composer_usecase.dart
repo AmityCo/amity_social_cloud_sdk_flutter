@@ -22,11 +22,20 @@ class CommunityComposerUsecase extends UseCase<AmityCommunity, AmityCommunity> {
       params.user = await userComposerUsecase.get(params.user!);
     }
 
+    //Fill in the avatar fields
     if (params.avatarFileId != null) {
       final _fileProperties =
           await fileRepo.getFileByIdFromDb(params.avatarFileId!);
       params.avatarImage = AmityImage(_fileProperties);
     }
+
+    //Fill in the category
+    if (params.categoryIds != null) {
+      params.categories = await Stream.fromIterable(params.categoryIds!)
+          .asyncMap((event) => communityRepo.getCommunityCategoryById(event))
+          .toList();
+    }
+
     return params;
   }
 
