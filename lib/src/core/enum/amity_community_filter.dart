@@ -7,7 +7,7 @@ extension AmityCommunityFilterExtension on AmityCommunityFilter {
     return AmityCommunityFilter.values[index].name.toLowerCase();
   }
 
-  //TODO: - this method need to acceesable with AmityCommentReferenceType
+  //TODO: - this method need to acceesable with AmityCommentReferenceType :)
   static AmityCommunityFilter enumOf(String value) {
     return AmityCommunityFilter.values.firstWhere(
       (element) => element.name.toLowerCase() == value.toLowerCase(),
