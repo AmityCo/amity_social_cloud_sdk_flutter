@@ -10,7 +10,7 @@ class CommunityMemberLeaveUsecase extends UseCase<void, String> {
 
   @override
   Future get(String communityId) async {
-    await communityMemberRepo.leaveCommunity(communityId);
+    return await communityMemberRepo.leaveCommunity(communityId);
   }
 
   @override

@@ -12,7 +12,7 @@ class CommunityMemberAddUsecase
 
   @override
   Future get(UpdateCommunityMembersRequest params) async {
-    await communityMemberRepo.addMember(params);
+    return await communityMemberRepo.addMember(params);
   }
 
   @override

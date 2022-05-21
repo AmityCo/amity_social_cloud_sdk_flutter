@@ -12,7 +12,7 @@ class CommunityMemberRemoveUsecase
 
   @override
   Future get(UpdateCommunityMembersRequest params) async {
-    await communityMemberRepo.removeMember(params);
+    return await communityMemberRepo.removeMember(params);
   }
 
   @override

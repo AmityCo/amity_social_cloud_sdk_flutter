@@ -44,25 +44,25 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
   @override
   Future joinCommunity(String communityId) async {
     final data = await communityMemmberApiInterface.joinCommunity(communityId);
-    await _saveDataToDb(data);
+    return await _saveDataToDb(data);
   }
 
   @override
   Future leaveCommunity(String communityId) async {
     final data = await communityMemmberApiInterface.leaveCommunity(communityId);
-    await _saveDataToDb(data);
+    return await _saveDataToDb(data);
   }
 
   @override
   Future addMember(UpdateCommunityMembersRequest request) async {
     final data = await communityMemmberApiInterface.addMember(request);
-    await _saveDataToDb(data);
+    return await _saveDataToDb(data);
   }
 
   @override
   Future removeMember(UpdateCommunityMembersRequest request) async {
     final data = await communityMemmberApiInterface.removeMember(request);
-    await _saveDataToDb(data);
+    return await _saveDataToDb(data);
   }
 
   Future<List<AmityCommunityMember>> _saveDataToDb(

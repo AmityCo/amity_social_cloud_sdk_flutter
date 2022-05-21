@@ -10,7 +10,7 @@ class CommunityMemberJoinUsecase extends UseCase<void, String> {
 
   @override
   Future get(String communityId) async {
-    await communityMemberRepo.joinCommunity(communityId);
+    return await communityMemberRepo.joinCommunity(communityId);
   }
 
   @override
