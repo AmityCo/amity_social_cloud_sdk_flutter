@@ -4,4 +4,6 @@ import 'package:amity_sdk/src/data/response/get_community_members_response.dart'
 abstract class CommunityMemmberApiInterface {
   Future<GetCommunityMembersResponse> getCommunityMembers(
       GetCommunityMembersRequest request);
+  Future<GetCommunityMembersResponse> joinCommunity(String communityId);
+  Future<GetCommunityMembersResponse> leaveCommunity(String communityId);
 }

@@ -9,7 +9,6 @@ abstract class CommunityMemberRepo {
   //TODO: move to community?
   // Future<AmityCommunityMember> addMember();
   // Future removeMember();
-  // Future joinCommunity(String communityId);
-  // Future leaveCommunity(String communityId);
-
+  Future joinCommunity(String communityId);
+  Future leaveCommunity(String communityId);
 }

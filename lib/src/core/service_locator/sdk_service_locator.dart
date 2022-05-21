@@ -12,6 +12,8 @@ import 'package:amity_sdk/src/data/data_source/remote/api_interface/community_me
 import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/community_member_api_interface_impl.dart';
 import 'package:amity_sdk/src/data/repo_impl/community_member_repo_impl.dart';
 import 'package:amity_sdk/src/domain/repo/community_member_repo.dart';
+import 'package:amity_sdk/src/domain/usecase/community/member/community_member_join_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/community/member/community_member_leave_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_query_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
@@ -308,6 +310,10 @@ class SdkServiceLocator {
               communityRepo: serviceLocator(),
               communityComposerUsecase: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<CommunityMemberJoinUsecase>(() =>
+        CommunityMemberJoinUsecase(communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberLeaveUsecase>(() =>
+        CommunityMemberLeaveUsecase(communityMemberRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityMemberQueryUsecase>(() =>
         CommunityMemberQueryUsecase(
             communityMemberRepo: serviceLocator(),

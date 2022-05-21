@@ -48,3 +48,7 @@ const REACTION_V2_URL = 'api/v2/reactions';
 
 const REGISTER_NOTIFICATION_V1_URL = 'v1/notification';
 const UNREGISTER_NOTIFICATION_V1_URL = 'v1/notification';
+
+const JOIN = 'join';
+const LEAVE = 'leave';
+

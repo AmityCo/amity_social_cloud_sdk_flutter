@@ -23,4 +23,35 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
       return Future.error(amityError.amityException());
     }
   }
+
+  @override
+  Future<GetCommunityMembersResponse> joinCommunity(String communityId) async {
+    try {
+      final param = <String, String>{
+        "communityId": communityId,
+      };
+      final data = await httpApiClient()
+          .post(COMMUNITY_V3 + '/$communityId/' + JOIN, queryParameters: param);
+      return GetCommunityMembersResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
+  Future<GetCommunityMembersResponse> leaveCommunity(String communityId) async {
+    try {
+      final param = <String, String>{
+        "communityId": communityId,
+      };
+      final data = await httpApiClient().delete(
+          COMMUNITY_V3 + '/$communityId/' + LEAVE,
+          queryParameters: param);
+      return GetCommunityMembersResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
 }

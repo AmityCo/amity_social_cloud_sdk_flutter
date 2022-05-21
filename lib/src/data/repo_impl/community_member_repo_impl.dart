@@ -40,6 +40,18 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
     return Tuple2(amityCommunityMembers, data.paging!.next ?? '');
   }
 
+  @override
+  Future joinCommunity(String communityId) async {
+    final data = await communityMemmberApiInterface.joinCommunity(communityId);
+    await _saveDataToDb(data);
+  }
+
+  @override
+  Future leaveCommunity(String communityId) async {
+    final data = await communityMemmberApiInterface.leaveCommunity(communityId);
+    await _saveDataToDb(data);
+  }
+
   Future<List<AmityCommunityMember>> _saveDataToDb(
       GetCommunityMembersResponse data) async {
     //Convert to File Hive Entity
