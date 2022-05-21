@@ -1,7 +1,6 @@
-import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/public/public.dart';
+import '../../amity_sdk.dart';
+import '../core/core.dart';
+import '../data/data.dart';
 
 ///Amity Core Client to do primary Setup
 class AmityCoreClient {
@@ -68,16 +67,17 @@ class AmityCoreClient {
     );
   }
 
-  // Exclude them from hedgehog release
-  // static Future registerDeviceNotification(String fcmToken) {
-  //   return serviceLocator<NotificationRepository>()
-  //       .registerDeviceNotification(fcmToken);
-  // }
+  ///Register the devie to receive FCM token
+  static Future registerDeviceNotification(String fcmToken) {
+    return serviceLocator<NotificationRepository>()
+        .registerDeviceNotification(fcmToken);
+  }
 
-  // static Future unregisterDeviceNotification() {
-  //   return serviceLocator<NotificationRepository>()
-  //       .unregisterDeviceNotification();
-  // }
+  ///Unregister the device with FCM
+  static Future unregisterDeviceNotification() {
+    return serviceLocator<NotificationRepository>()
+        .unregisterDeviceNotification();
+  }
 
   /// Create new User Repository
   static UserRepository newUserRepository() => serviceLocator<UserRepository>();

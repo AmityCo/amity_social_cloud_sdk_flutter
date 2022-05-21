@@ -1,7 +1,7 @@
 import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/enum/amity_community_filter.dart';
-import 'package:amity_sdk/src/core/enum/amity_community_sort_option.dart';
+import 'package:amity_sdk/src/core/enum/amity_community_sorting_order.dart';
 import 'package:amity_sdk/src/domain/usecase/community/community_get_query_usecase.dart';
 
 class CommunityGetQueryBuilder {

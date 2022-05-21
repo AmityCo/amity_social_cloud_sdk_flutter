@@ -1,12 +1,18 @@
 import 'dart:developer';
 
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_category_db_adater.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_feed_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/community_category_db_adapter_impl.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/community_feed_db_adapter_impl.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/community_member_dp_adapter_impl.dart';
+import 'package:amity_sdk/src/domain/composer_usecase/community_member_composer_usecase.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/usecase/community/community_get_query_usecase.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_paging_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/commnunity_member_paging_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/remote/api_interface/community_member_api_interface.dart';
+import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/community_member_api_interface_impl.dart';
+import 'package:amity_sdk/src/data/repo_impl/community_member_repo_impl.dart';
+import 'package:amity_sdk/src/domain/repo/community_member_repo.dart';
+import 'package:amity_sdk/src/domain/usecase/community/member/community_member_query_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -60,6 +66,13 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<CommunityFeedDbAdapter>(
         () => CommunityFeedDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<CommunityMemberDbAdapter>(
+        () => CommunityMemberDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<CommunityMemberPagingDbAdapter>(
+        () => CommunityMemberPagingDbAdapterImpl(dbClient: serviceLocator())
+            .init(),
+        dependsOn: [DBClient]);
     serviceLocator.registerSingletonAsync<FeedPagingDbAdapter>(
         () => FeedPagingDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
@@ -69,6 +82,7 @@ class SdkServiceLocator {
           postDbAdapter: serviceLocator(),
           commentDbAdapter: serviceLocator(),
           communityDbAdapter: serviceLocator(),
+          communityMemberDbAdapter: serviceLocator(),
           feedDbAdapter: serviceLocator(),
           fileDbAdapter: serviceLocator(),
           userDbAdapter: serviceLocator(),
@@ -103,6 +117,8 @@ class SdkServiceLocator {
         () => FileApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityFeedApiInterface>(
         () => CommunityFeedApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemmberApiInterface>(
+        () => CommunityMemberApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<NotificationApiInterface>(() =>
         NotificationApiInterfaceImpl(
             httpApiClient: serviceLocator(),
@@ -164,6 +180,14 @@ class SdkServiceLocator {
         communityFeedDbAdapter: serviceLocator(),
       ),
     );
+    serviceLocator.registerLazySingleton<CommunityMemberRepo>(() =>
+        CommunityMemberRepoImpl(
+            communityMemmberApiInterface: serviceLocator(),
+            communityDbAdapter: serviceLocator(),
+            communityMemberDbAdapter: serviceLocator(),
+            communityMemberPagingDbAdapter: serviceLocator(),
+            userDbAdapter: serviceLocator(),
+            fileDbAdapter: serviceLocator()));
 
     serviceLocator
         .registerLazySingleton<GlobalFeedRepo>(() => GlobalFeedRepoImpl(
@@ -284,6 +308,13 @@ class SdkServiceLocator {
               communityRepo: serviceLocator(),
               communityComposerUsecase: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<CommunityMemberQueryUsecase>(() =>
+        CommunityMemberQueryUsecase(
+            communityMemberRepo: serviceLocator(),
+            communityMemberComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberComposerUsecase>(() =>
+        CommunityMemberComposerUsecase(
+            userComposerUsecase: serviceLocator(), userRepo: serviceLocator()));
     serviceLocator
         .registerLazySingleton<PostComposerUsecase>(() => PostComposerUsecase(
               userRepo: serviceLocator(),
