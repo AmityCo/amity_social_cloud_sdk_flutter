@@ -5,6 +5,7 @@ export 'create_community_request.dart';
 export 'create_post_request.dart';
 export 'get_comment_request.dart';
 export 'get_community_feed_request.dart';
+export 'get_community_request.dart';
 export 'get_global_feed_request.dart';
 export 'get_post_request.dart';
 export 'get_user_feed_request.dart';

@@ -1,8 +1,8 @@
-class CategoryResponse {
-  CategoryResponse({
+class CommunityCategoryResponse {
+  CommunityCategoryResponse({
     required this.categoryId,
     required this.name,
-    // required this.metadata,
+    required this.metadata,
     required this.avatarFileId,
     required this.isDeleted,
     required this.createdAt,
@@ -11,17 +11,17 @@ class CategoryResponse {
 
   final String? categoryId;
   final String? name;
-  // final DataClass metadata;
+  final Map<String, String>? metadata;
   final String? avatarFileId;
   final bool? isDeleted;
   final DateTime? createdAt;
   final DateTime? updatedAt;
 
-  factory CategoryResponse.fromJson(Map<String, dynamic> json) =>
-      CategoryResponse(
+  factory CommunityCategoryResponse.fromJson(Map<String, dynamic> json) =>
+      CommunityCategoryResponse(
         categoryId: json["categoryId"],
         name: json["name"],
-        // metadata: DataClass.fromJson(json["metadata"]),
+        metadata: json["metadata"],
         avatarFileId: json["avatarFileId"],
         isDeleted: json["isDeleted"],
         createdAt: json["createdAt"] == null
@@ -35,7 +35,7 @@ class CategoryResponse {
   Map<String, dynamic> toJson() => {
         "categoryId": categoryId,
         "name": name,
-        // "metadata": metadata.toJson(),
+        "metadata": metadata,
         "avatarFileId": avatarFileId,
         "isDeleted": isDeleted,
         "createdAt": createdAt?.toIso8601String(),

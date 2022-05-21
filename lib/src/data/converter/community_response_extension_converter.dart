@@ -18,6 +18,7 @@ extension CommunityResponsseExtension on CommunityResponse {
       ..isJoined = isJoined
       ..isDeleted = isDeleted
       ..createdAt = createdAt
-      ..editedAt = updatedAt;
+      ..editedAt = updatedAt
+      ..categoryIds = categoryIds;
   }
 }

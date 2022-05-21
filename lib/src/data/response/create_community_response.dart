@@ -1,32 +1,28 @@
 import 'package:amity_sdk/src/data/data.dart';
 
 class CreateCommunityResponse {
-  CreateCommunityResponse(
-      {required this.communities,
-      required this.communityUsers,
-      required this.files,
-      required this.users,
-      required this.categories,
-      required this.feeds,
-      required this.paging});
+  CreateCommunityResponse({
+    required this.communities,
+    required this.communityUsers,
+    required this.files,
+    required this.users,
+    required this.categories,
+    required this.feeds,
+    this.paging,
+  });
 
   final List<CommunityResponse> communities;
   final List<CommunityUserResponse> communityUsers;
   final List<FileResponse> files;
   final List<UserResponse> users;
-  final List<CategoryResponse> categories;
-  final List<FeedResponse> feeds;
+  final List<CommunityCategoryResponse> categories;
+  final List<CommunityFeedResponse> feeds;
   final PagingResponse? paging;
 
   factory CreateCommunityResponse.fromJson(Map<String, dynamic> json) =>
       CreateCommunityResponse(
-        communities: json["communities"] == null
-            ? []
-            : List<CommunityResponse>.from(
-                json["communities"].map((x) => CommunityResponse.fromJson(x))),
         communityUsers: json["communityUsers"] == null
             ? []
-            : List<CommunityUserResponse>.from(json["communityUsers"]
                 .map((x) => CommunityUserResponse.fromJson(x))),
         files: json["files"] == null
             ? []
@@ -38,12 +34,13 @@ class CreateCommunityResponse {
                 json["users"].map((x) => UserResponse.fromJson(x))),
         categories: json["categories"] == null
             ? []
-            : List<CategoryResponse>.from(
-                json["categories"].map((x) => CategoryResponse.fromJson(x))),
+            : List<CommunityCategoryResponse>.from(json["categories"]
+                .map((x) => CommunityCategoryResponse.fromJson(x))),
         feeds: json["feeds"] == null
             ? []
-            : List<FeedResponse>.from(
-                json["feeds"].map((x) => FeedResponse.fromJson(x))),
+            : List<CommunityFeedResponse>.from(json["feeds"].map(
+                (x) => CommunityFeedResponse.fromJson(x),
+              )),
         paging: json["paging"] == null
             ? null
             : PagingResponse.fromJson(json['paging']),
@@ -57,6 +54,6 @@ class CreateCommunityResponse {
         "users": List<dynamic>.from(users.map((x) => x.toJson())),
         "categories": List<dynamic>.from(categories.map((x) => x.toJson())),
         "feeds": List<dynamic>.from(feeds.map((x) => x.toJson())),
-        "paging": paging?.toJson(),
+        "paging": paging,
       };
 }
