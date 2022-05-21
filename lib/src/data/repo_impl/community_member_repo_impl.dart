@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/model/api_request/get_community_members_request.dart';
+import 'package:amity_sdk/src/core/model/api_request/update_community_members_request.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_paging_db_adapter.dart';
@@ -49,6 +50,18 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
   @override
   Future leaveCommunity(String communityId) async {
     final data = await communityMemmberApiInterface.leaveCommunity(communityId);
+    await _saveDataToDb(data);
+  }
+
+  @override
+  Future addMember(UpdateCommunityMembersRequest request) async {
+    final data = await communityMemmberApiInterface.addMember(request);
+    await _saveDataToDb(data);
+  }
+
+  @override
+  Future removeMember(UpdateCommunityMembersRequest request) async {
+    final data = await communityMemmberApiInterface.removeMember(request);
     await _saveDataToDb(data);
   }
 
