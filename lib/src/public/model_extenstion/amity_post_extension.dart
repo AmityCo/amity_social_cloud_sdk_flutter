@@ -2,7 +2,7 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/query_builder/comment/comment_create_query_builder.dart';
 import 'package:amity_sdk/src/public/query_builder/post/post_flag_query_builder.dart';
-import 'package:amity_sdk/src/public/query_builder/post/post_update_query_builder.dart';
+import 'package:amity_sdk/src/public/query_builder/post/post_text_editor.dart';
 import 'package:amity_sdk/src/public/query_builder/reaction/reaction_query_builder.dart';
 
 extension AmityPostExtension on AmityPost {
@@ -27,8 +27,8 @@ extension AmityPostExtension on AmityPost {
         postId: postId!);
   }
 
-  AmityTextPostUpdator edit() {
-    return AmityTextPostUpdator(useCase: serviceLocator(), targetId: postId!);
+  AmityTextPostEditorBuilder edit() {
+    return AmityTextPostEditorBuilder(postId: postId!);
   }
 
   Future delete({bool hardDelete = false}) {
