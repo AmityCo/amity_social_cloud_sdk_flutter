@@ -34,6 +34,7 @@ class AmityComment extends ChangeNotifier
   List<String>? myReactions;
   int? reactionCount;
   AmityReactionMap? reactions; //composer
+  Map<String, dynamic>? metadata;
   bool? isDeleted;
   DateTime? createdAt;
   DateTime? editedAt;
@@ -57,6 +58,12 @@ class AmityComment extends ChangeNotifier
 
     //data
     data = amityComment.data;
+
+    //metadata
+    metadata = amityComment.metadata;
+
+    //updatedAt
+    updatedAt = amityComment.updatedAt;
 
     //Update the child update
     childrenNumber = amityComment.childrenNumber;
