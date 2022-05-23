@@ -27,8 +27,8 @@ extension AmityPostExtension on AmityPost {
         postId: postId!);
   }
 
-  AmityTextPostEditorBuilder edit() {
-    return AmityTextPostEditorBuilder(postId: postId!);
+  AmityTextPostEditor edit() {
+    return AmityTextPostEditor(useCase: serviceLocator(), targetId: postId!);
   }
 
   Future delete({bool hardDelete = false}) {
