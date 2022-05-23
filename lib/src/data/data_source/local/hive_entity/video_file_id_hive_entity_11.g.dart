@@ -17,7 +17,7 @@ class VideoFileIdHiveEntityAdapter extends TypeAdapter<VideoFileIdHiveEntity> {
 
   @override
   void write(BinaryWriter writer, VideoFileIdHiveEntity obj) {
-    writer..writeByte(0);
+    writer.writeByte(0);
   }
 
   @override

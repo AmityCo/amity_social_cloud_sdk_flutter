@@ -28,7 +28,8 @@ extension PostResponseExtension on PostResponse {
       ..require = require
       ..createdAt = createdAt
       ..updatedAt = updatedAt
-      ..editedAt = editedAt;
+      ..editedAt = editedAt
+      ..metadata = metadata;
   }
 }
 

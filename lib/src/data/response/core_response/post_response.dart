@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:amity_sdk/src/data/response/core_response/post_data_response.dart';
 
 class PostResponse {
@@ -13,7 +15,7 @@ class PostResponse {
     required this.targetType,
     required this.dataType,
     required this.data,
-    // required this.metadata,
+    required this.metadata,
     required this.flagCount,
     required this.hashFlag,
     required this.editedAt,
@@ -42,7 +44,7 @@ class PostResponse {
   final String targetType;
   final String dataType;
   final PostDataResponse data;
-  // final DataClass metadata;
+  final Map<String, dynamic>? metadata;
   final int flagCount;
   final HashFlag? hashFlag;
   final DateTime? editedAt;
@@ -96,6 +98,7 @@ class PostResponse {
         hasFlaggedChildren: json["hasFlaggedChildren"],
         feedId: json["feedId"],
         require: json["required"],
+        metadata: json["metadata"]
       );
 
   Map<String, dynamic> toJson() => {
@@ -110,7 +113,7 @@ class PostResponse {
         "targetType": targetType,
         "dataType": dataType,
         "data": data.toJson(),
-        // "metadata": metadata.toJson(),
+        "metadata": jsonEncode(metadata),
         "flagCount": flagCount,
         "hashFlag": hashFlag == null ? null : hashFlag!.toJson(),
         "editedAt": editedAt?.toIso8601String(),
