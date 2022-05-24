@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/model/api_request/get_community_members_request.dart';
 import 'package:amity_sdk/src/core/model/api_request/update_community_members_request.dart';
+import 'package:amity_sdk/src/core/model/api_request/update_community_role_request.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_paging_db_adapter.dart';
@@ -72,6 +73,18 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
         .getCommunityMemberEntity(communityId + userId)
         .convertToAmityCommunityMember();
     return member;
+  }
+
+  @override
+  Future addRole(UpdateCommunityRoleRequest request) async {
+    final data = await communityMemmberApiInterface.addRole(request);
+    return await _saveDataToDb(data);
+  }
+
+  @override
+  Future removeRole(UpdateCommunityRoleRequest request) async {
+    final data = await communityMemmberApiInterface.removeRole(request);
+    return await _saveDataToDb(data);
   }
 
   @override
