@@ -65,6 +65,22 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
     return await _saveDataToDb(data);
   }
 
+  @override
+  Future<AmityCommunityMember> getMember(
+      String communityId, String userId) async {
+    final member = communityMemberDbAdapter
+        .getCommunityMemberEntity(communityId + userId)
+        .convertToAmityCommunityMember();
+    return member;
+  }
+
+  @override
+  List<String>? getMemberPermission(String communityId, String userId) {
+    final member =
+        communityMemberDbAdapter.getCommunityMemberEntity(communityId + userId);
+    return member.permissions;
+  }
+
   Future<List<AmityCommunityMember>> _saveDataToDb(
       GetCommunityMembersResponse data) async {
     //Convert to File Hive Entity

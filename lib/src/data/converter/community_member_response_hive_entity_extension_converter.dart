@@ -3,13 +3,12 @@ import 'package:amity_sdk/src/domain/domain.dart';
 
 extension CommunityMemberHiveEntityExtension on CommnityMemberHiveEntity {
   AmityCommunityMember convertToAmityCommunityMember() {
+    final amityRoles = AmityRoles();
+    amityRoles.roles = roles;
     return AmityCommunityMember()
       ..communityId = communityId
       ..channelId = channelId
       ..userId = userId
-      ..roles = AmityRoles()
-      ..roles
-      ..permissions = AmityPermissions()
-      ..permissions;
+      ..roles = amityRoles;
   }
 }

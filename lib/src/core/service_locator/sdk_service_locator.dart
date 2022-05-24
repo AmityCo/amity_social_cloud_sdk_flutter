@@ -17,6 +17,7 @@ import 'package:amity_sdk/src/domain/usecase/community/member/community_member_j
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_leave_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_query_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_remove_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/community/permission/community_member_permission_check_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -312,6 +313,9 @@ class SdkServiceLocator {
               communityRepo: serviceLocator(),
               communityComposerUsecase: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<CommunityMemberPermissionCheckUsecase>(
+        () => CommunityMemberPermissionCheckUsecase(
+            communityMemberRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityMemberJoinUsecase>(() =>
         CommunityMemberJoinUsecase(communityMemberRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityMemberLeaveUsecase>(() =>

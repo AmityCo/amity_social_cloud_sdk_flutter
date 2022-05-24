@@ -10,4 +10,5 @@ abstract class CommunityMemberRepo {
   Future removeMember(UpdateCommunityMembersRequest request);
   Future joinCommunity(String communityId);
   Future leaveCommunity(String communityId);
+  List<String>? getMemberPermission(String communityId, String userId);
 }
