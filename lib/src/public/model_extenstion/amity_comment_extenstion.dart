@@ -31,8 +31,8 @@ extension AmityCommentExtension on AmityComment {
     return serviceLocator<CommentDeleteUseCase>().get(commentId!);
   }
 
-  AmityTextCommentEditor edit() {
-    return AmityTextCommentEditor(
+  AmityTextCommentEditorBuilder edit() {
+    return AmityTextCommentEditorBuilder(
         useCase: serviceLocator(), targetId: commentId!);
   }
 }
