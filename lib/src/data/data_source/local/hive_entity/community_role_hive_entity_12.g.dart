@@ -18,7 +18,7 @@ class CommunityRoleHiveEntityAdapter
 
   @override
   void write(BinaryWriter writer, CommunityRoleHiveEntity obj) {
-    writer..writeByte(0);
+    writer.writeByte(0);
   }
 
   @override

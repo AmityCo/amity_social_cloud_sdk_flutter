@@ -18,7 +18,7 @@ class CommunityCategoryHiveEntityAdapter
 
   @override
   void write(BinaryWriter writer, CommunityCategoryHiveEntity obj) {
-    writer..writeByte(0);
+    writer.writeByte(0);
   }
 
   @override

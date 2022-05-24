@@ -61,6 +61,12 @@ class AmityPost extends ChangeNotifier implements ValueListenable<AmityPost> {
     //data
     data = amityPost.data;
 
+    //metadata
+    metadata = amityPost.metadata;
+
+    //updatedAt
+    updatedAt = amityPost.updatedAt;
+
     //Comment
     commentCount = amityPost.commentCount;
 

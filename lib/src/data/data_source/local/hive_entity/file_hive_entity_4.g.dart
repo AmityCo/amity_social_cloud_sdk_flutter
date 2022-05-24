@@ -17,7 +17,7 @@ class FileHiveEntityAdapter extends TypeAdapter<FileHiveEntity> {
 
   @override
   void write(BinaryWriter writer, FileHiveEntity obj) {
-    writer..writeByte(0);
+    writer.writeByte(0);
   }
 
   @override

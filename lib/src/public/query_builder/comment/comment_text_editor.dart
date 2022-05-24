@@ -1,19 +1,42 @@
 import 'package:amity_sdk/src/core/model/api_request/update_comment_request.dart';
 import 'package:amity_sdk/src/domain/usecase/comment/comment_update_usecase.dart';
 
-class AmityTextCommentUpdator {
+class AmityTextCommentEditorBuilder {
   late CommentUpdateUsecase _useCase;
   late String _targetId;
-  AmityTextCommentUpdator({
+  late AmityCommentUpdater updater;
+
+  AmityTextCommentEditorBuilder({
     required CommentUpdateUsecase useCase,
     required String targetId,
   }) {
     _useCase = useCase;
     _targetId = targetId;
+    updater = AmityCommentUpdater(_useCase, _targetId);
   }
 
-  AmityCommentUpdater text(String text) {
-    return AmityCommentUpdater.textUpate(_useCase, _targetId, text);
+  AmityTextCommentEditorBuilder text(String text) {
+    updater._text = text;
+    return this;
+  }
+
+  AmityTextCommentEditorBuilder metadata(Map<String, dynamic> metadata) {
+    updater._metadata = metadata;
+    return this;
+  }
+
+  AmityTextCommentEditor build() {
+    return AmityTextCommentEditor(updater: updater);
+  }
+}
+
+class AmityTextCommentEditor {
+  late AmityCommentUpdater updater;
+
+  AmityTextCommentEditor({required this.updater});
+
+  Future update() {
+    return updater.update();
   }
 }
 
@@ -21,9 +44,7 @@ class AmityCommentUpdater {
   final CommentUpdateUsecase _usecase;
   final String _targetId;
   String? _text;
-
-  factory AmityCommentUpdater.textUpate(usecase, targetId, text) =>
-      AmityCommentUpdater(usecase, targetId).._text = text;
+  Map<String, dynamic>? _metadata;
 
   AmityCommentUpdater(this._usecase, this._targetId);
 
@@ -35,6 +56,7 @@ class AmityCommentUpdater {
     if (_text != null) updateData.text = _text;
 
     updateCommentRequest.data = updateData;
+    updateCommentRequest.metadata = _metadata;
 
     return _usecase.get(updateCommentRequest);
   }
