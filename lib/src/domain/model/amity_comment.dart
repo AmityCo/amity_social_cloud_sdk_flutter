@@ -5,20 +5,7 @@ import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class AmityComment {
-  AmityComment({required this.commentId}) {
-    // _streamSubscription = serviceLocator<CommentDbAdapter>()
-    //     .listenCommentEntity(commentId!)
-    //     .listen((event) {
-    //   print('Comment Stream');
-    //   // print('>>> Value Listenable on CommentId - ${event.commentId}');
-    //   final _updateAmityComment = event.convertToAmityComment();
-
-    //   //TOOD: Good idea would be have compose method inside the object itself
-    //   serviceLocator<CommentComposerUsecase>().get(_updateAmityComment).then(
-    //         (value) => apply(value),
-    //       );
-    // });
-  }
+  AmityComment({required this.commentId});
 
   String? commentId;
   AmityCommentReferenceType? referenceType; //TODO: should be enum
@@ -45,35 +32,6 @@ class AmityComment {
   AmityUser? user; //composer
   String? path;
 
-  void apply(AmityComment amityComment) {
-    //reaction update
-    myReactions = amityComment.myReactions;
-    reactionCount = amityComment.reactionCount;
-    reactions = amityComment.reactions;
-
-    //flag
-    flagCount = amityComment.flagCount;
-
-    //Delete
-    isDeleted = amityComment.isDeleted;
-
-    //data
-    data = amityComment.data;
-
-    //metadata
-    metadata = amityComment.metadata;
-
-    //updatedAt
-    updatedAt = amityComment.updatedAt;
-
-    //Update the child update
-    childrenNumber = amityComment.childrenNumber;
-    repliesId = amityComment.repliesId;
-    latestReplies = amityComment.latestReplies;
-
-    // notifyListeners();
-  }
-
   Stream<AmityComment> get listen {
     StreamController<AmityComment> controller =
         StreamController<AmityComment>();
@@ -81,7 +39,6 @@ class AmityComment {
     serviceLocator<CommentDbAdapter>()
         .listenCommentEntity(commentId!)
         .listen((event) {
-      // print('>>> Value Listenable on CommentId - ${event.commentId}');
       final _updateAmityComment = event.convertToAmityComment();
 
       //TOOD: Good idea would be have compose method inside the object itself

@@ -5,16 +5,7 @@ import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class AmityPost {
-  AmityPost({required this.postId}) {
-    // serviceLocator<PostDbAdapter>().listenPostEntity(postId!).listen((event) {
-    //   final _updateAmityPost = event.convertToAmityPost();
-
-    //   //TOOD: Good idea would be have compose method inside the object itself
-    //   serviceLocator<PostComposerUsecase>().get(_updateAmityPost).then(
-    //         (value) => apply(value),
-    //       );
-    // });
-  }
+  AmityPost({required this.postId});
 
   String? postId;
   AmityPostTargetType? targetType;
@@ -46,47 +37,15 @@ class AmityPost {
   DateTime? updatedAt;
   String? path;
 
-  void apply(AmityPost amityPost) {
-    //reaction update
-    myReactions = amityPost.myReactions;
-    reactionCount = amityPost.reactionCount;
-    reactions = amityPost.reactions;
-
-    //flag
-    isFlaggedByMe = amityPost.isFlaggedByMe;
-    flagCount = amityPost.flagCount;
-
-    //Delete
-    isDeleted = amityPost.isDeleted;
-
-    //data
-    data = amityPost.data;
-
-    //metadata
-    metadata = amityPost.metadata;
-
-    //updatedAt
-    updatedAt = amityPost.updatedAt;
-
-    //Comment
-    commentCount = amityPost.commentCount;
-
-    // notifyListeners();
-  }
-
   @override
   String toString() {
     return 'AmityPost(postId: $postId, parentPostId: $parentPostId, postedUserId: $postedUserId, sharedUserId: $sharedUserId, type: $type, metadata: $metadata, sharedCount: $sharedCount, isFlaggedByMe: $isFlaggedByMe, myReactions: $myReactions, reactions: $reactions, reactionCount: $reactionCount, commentCount: $commentCount, flagCount: $flagCount, latestCommentIds: $latestCommentIds, latestComments: $latestComments, childrenPostIds: $childrenPostIds, children: $children, postedUser: $postedUser, sharedUser: $sharedUser, isDeleted: $isDeleted, feedType: $feedType, mentionees: $mentionees, createdAt: $createdAt, editedAt: $editedAt, updatedAt: $updatedAt, path: $path, type: $type,data: $data,comment: $latestComments,children: $children)';
   }
 
-  // @override
-  // get value => this;
-
   Stream<AmityPost> get listen {
     StreamController<AmityPost> controller = StreamController<AmityPost>();
 
     serviceLocator<PostDbAdapter>().listenPostEntity(postId!).listen((event) {
-      // print('>>> Value Listenable on CommentId - ${event.commentId}');
       final _updateAmityPost = event.convertToAmityPost();
 
       //TOOD: Good idea would be have compose method inside the object itself
