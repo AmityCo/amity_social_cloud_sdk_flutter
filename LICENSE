@@ -1,1 +1,64 @@
-TODO: Add your license here.
+SOURCE CODE LICENSE AGREEMENT
+
+BY DOWNLOADING, INSTALLING, OR OTHERWISE ACCESSING OR USING THE FLUTTER SDK OPEN SOURCE OR DOCUMENTATION (THE “SOFTWARE”). 
+The Software also includes any updates or upgrades to or new versions of the original Software, if and when made available to you by Amity.
+
+YOU AGREE THAT YOU HAVE READ AND UNDERSTOOD, AND, AS A CONDITION TO YOUR USE OF THE SERVICE, YOU AGREE TO BE LEGALLY BOUND BY THE FOLLOWING TERMS AND CONDITIONS (“THE AGREEMENT”).
+IF YOU ARE ENTERING INTO THESE TERMS ON BEHALF OF A COMPANY OR OTHER LEGAL ENTITY, YOU REPRESENT THAT YOU HAVE THE AUTHORITY TO BIND SUCH ENTITY AND ITS AFFILIATES TO THESE TERMS AND CONDITIONS. IF YOU DO NOT HAVE SUCH AUTHORITY, OR IF YOU DO NOT AGREE WITH THESE TERMS, YOU MUST NOT ACCEPT THESE TERMS AND YOU SHALL NOT USE THE SOFTWARE.
+“Amity”, “we”, “us”, “our”, and similar means Amity Corporation Ltd., a UK company registered under the UK Companies House with no. 12027031 and its affiliates.
+“You” or “your” or “Customer” means you, the person who has accessed or has downloaded the Software.  
+First thing first
+AMITY IS WILLING TO LICENSE THE SOFTWARE TO CUSTOMERS ONLY ON THE FOLLOWING
+CONDITIONS: 
+
+(A) YOU MUST BE AT LEAST 18 YEARS OLD (B) YOU ARE A CURRENT CUSTOMER OF AMITY; (C) THAT YOU ACCEPT ALL THE TERMS IN THIS AGREEMENT. 
+
+1. LICENSE GRANT. Subject to the terms and conditions of this Agreement, in consideration for the representations, warranties, and covenants made by Customer in this Agreement, Amity grants to Customer, during the term of this Agreement, a personal, non-exclusive, non-transferable, non-sublicensable license to:
+
+a. install and use Software;
+
+b. create derivative works, improvements (whether or not patentable), extensions
+and other modifications to the Software (“Modifications”) via Amity’s application program interface (“API”);
+
+c. install, execute and use such Software solely for Customer’s internal business use;
+
+d. make electronic copies of the Software and/or Modifications as required for backup
+or archival purposes only.
+
+2. RESTRICTIONS. Customer is responsible for all activities that occur in connection with the Software. Customer will not, and will not attempt to: (a) sublicense or transfer the Software under this Agreement, except as otherwise provided in this Agreement, (b) allow any third party to access or use the Software; (c) sublicense or distribute the Software or any Modifications; (d) use the Software in any manner that competes with Amity or its business; or (e) otherwise use the Software in any manner that exceeds the scope of use permitted in this Agreement. 
+
+3. OPEN SOURCE. Customer shall not use any software or software components that are open source in conjunction with the Software or Modifications in any way that could subject the Software to any open source licenses.
+
+4. COMPETITIVE PRODUCT DEVELOPMENT. Customer shall not use the Software in any way to engage in the development of products or services which could be reasonably construed to provide a complete or partial functional or commercial alternative to Amity’s products or services (a “Competitive Product”). Customer shall ensure that there is no direct or indirect use of, or sharing of, Software source code, or other information based upon or derived from the Software to develop such products or services. Without derogating from the generality of the foregoing, development of Competitive Products shall include having direct or indirect access to, supervising, consulting or assisting in the development of, or producing any specifications, documentation, object code or source code for, all or part of a Competitive Product.
+
+5. LIMITATION ON MODIFICATIONS. Notwithstanding any provision in this Agreement, Modifications may only be created and used by the Customer as permitted by this Agreement and Modification may not be distributed to third parties. Customer will not assert against Amity, its affiliates, or their customers, direct or indirect, agents and contractors, in any way, any patent rights that Customer may obtain relating to any Modifications for Amity, its affiliates, or their customers’, direct or indirect, agents’ and contractors’ manufacture, use, import, offer for sale or sale of any Amity products or services.
+
+6. DELIVERY AND ACCEPTANCE. The Software will be delivered electronically pursuant
+to Amity standard download procedures. The Software is deemed accepted upon
+delivery.
+
+7. IMPLEMENTATION AND SUPPORT. Amity has no obligation under this Agreement to
+provide any support or consultation concerning the Software.
+
+8. TERM AND TERMINATION. The term of this Agreement begins when the Software is downloaded or accessed and shall continue until terminated. Either party may terminate this Agreement upon written notice. This Agreement shall automatically terminate if Customer is or becomes a competitor of Amity or makes or sells any Competitive Products. Upon termination of this Agreement for any reason, (a) all rights granted to Customer in this Agreement immediately cease to exist, (b) Customer must promptly discontinue all use of the Software and return to Amity or destroy all copies of the Software in Customer’s possession or control. Any continued use of the Software by Customer or attempt by Customer to exercise any rights under this Agreement after this Agreement has terminated shall be considered copyright infringement and subject Customer to applicable remedies for copyright infringement. 
+
+9. OWNERSHIP. As between the parties, the Software and all worldwide intellectual property rights and proprietary rights relating thereto or embodied therein, are the exclusive property of Amity and its suppliers. Amity and its suppliers reserve all rights in and to the Software not expressly granted to Customer in this Agreement, and no other licenses or rights are granted by
+implication, estoppel or otherwise.
+
+10. WARRANTY DISCLAIMER. USE OF THIS SOFTWARE IS ENTIRELY AT YOURS AND CUSTOMER’S OWN RISK. THE SOFTWARE IS PROVIDED “AS IS” WITHOUT ANY WARRANTY OF ANY KIND WARRATY WHATSOEVER. AMITY DOES NOT MAKE, AND HEREBY DISCLAIMS, ANY WARRANTY OF ANY KIND, WHETHER EXPRESS, IMPLIED, STATUTORY OR OTHERWISE, INCLUDING WITHOUT LIMITATION, THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, NON-INFRINGEMENT OF THIRD-PARTY RIGHTS, RESULTS, EFFORTS, QUALITY OR QUIET ENJOYMENT. AMITY DOES NOT WARRANT THAT THE SOFTWARE IS ERROR-FREE, WILL FUNCTION WITHOUT INTERRUPTION, WILL MEET ANY SPECIFIC NEED THAT CUSTOMER HAS, THAT ALL DEFECTS WILL BE CORRECTED OR THAT IT IS SUFFICIENTLY DOCUMENTED TO BE USABLE BY CUSTOMER. 
+
+11. LIMITATION OF LIABILITY. TO THE FULLEST EXTENT PERMISSIBLE BY LAW, AMITY’S TOTAL LIABILITY FOR ALL DAMAGES ARISING OUT OF OR RELATED TO THE SOFTWARE OR THIS AGREEMENT, WHETHER IN CONTRACT, TORT (INCLUDING NEGLIGENCE) OR OTHERWISE, SHALL NOT EXCEED $100. IN NO EVENT WILL AMITY BE LIABLE FOR ANY INDIRECT, CONSEQUENTIAL, EXEMPLARY, PUNITIVE, SPECIAL OR INCIDENTAL DAMAGES OF ANY KIND
+WHATSOEVER, INCLUDING ANY LOST DATA AND LOST PROFITS, ARISING FROM OR RELATING
+TO THE SOFTWARE.
+
+12. General. Customer may not assign or transfer this Agreement, by operation of law or otherwise, or any of its rights under this Agreement (including the license rights granted to Customer) to any third party without Amity’s prior written consent, which consent will not be unreasonably withheld or delayed. Amity may assign this Agreement, without consent. Any attempted assignment or transfer in violation of the foregoing will be null and void. 
+
+This Agreement will be governed by and interpreted in accordance with the laws of the Wales and England, without reference to its choice of laws rules and each party irrevocably submits to the jurisdiction and venue of the London court in any such action or proceeding. 
+
+Any waiver or failure to enforce any provision of this Agreement on one occasion will not be
+deemed a waiver of any other provision or of such provision on any other occasion. If any provision of this Agreement is unenforceable, such provision will be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law and the remaining provisions will continue in full force and effect.  
+
+This Agreement (including all exhibits and attachments) constitutes the entire agreement between the parties regarding the subject hereof and supersedes all prior or contemporaneous agreements, understandings and communication, whether written or oral. 
+
+This Agreement may be amended only by a written document signed by both parties. The terms of any purchase order or similar document submitted by the Customer to Amity will have no effect.
+
