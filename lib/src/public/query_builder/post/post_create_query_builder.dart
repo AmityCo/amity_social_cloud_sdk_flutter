@@ -27,31 +27,15 @@ class AmityPostCreateTargetSelector {
         targetType: AmityPostTargetType.USER);
   }
 
-  AmityCommunityFeedPostCreator targetCommunity(String communityId) {
-    return AmityCommunityFeedPostCreator();
+  AmityPostCreateDataTypeSelector targetCommunity(String communityId) {
+    return AmityPostCreateDataTypeSelector(
+        useCase: _useCase,
+        userId: communityId,
+        targetType: AmityPostTargetType.COMMUNITY);
   }
-
-  // PostCreateQueryBuilder text(String text) {
-  //   _text = text;
-  //   return this;
-  // }
-
-  // Future post() {
-  //   throw UnimplementedError();
-  // }
 }
 
-//Target
-// class AmityMyFeedPostCreator {}
-
-// class AmityUserFeedPostCreator {
-//   late String _userId;
-//   AmityUserFeedPostCreator({required String userId}) {
-//     _userId = userId;
-//   }
-// }
-
-class AmityCommunityFeedPostCreator {}
+class AmityCommunityPostCreateDataTypeSelector {}
 
 class AmityPostCreateDataTypeSelector {
   late PostCreateUsecase _useCase;
