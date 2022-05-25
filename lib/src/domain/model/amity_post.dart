@@ -1,8 +1,8 @@
 import 'dart:async';
 
-import 'package:amity_sdk/core/core.dart';
-import 'package:amity_sdk/data/data.dart';
-import 'package:amity_sdk/domain/domain.dart';
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 class AmityPost {
   AmityPost({required this.postId}) {
