@@ -94,6 +94,18 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
     return member.permissions;
   }
 
+  @override
+  Future banMember(UpdateCommunityMembersRequest request) async {
+    final data = await communityMemmberApiInterface.banMember(request);
+    return await _saveDataToDb(data);
+  }
+
+  @override
+  Future unbanMember(UpdateCommunityMembersRequest request) async {
+    final data = await communityMemmberApiInterface.unbanMember(request);
+    return await _saveDataToDb(data);
+  }
+
   Future<List<AmityCommunityMember>> _saveDataToDb(
       GetCommunityMembersResponse data) async {
     //Convert to File Hive Entity

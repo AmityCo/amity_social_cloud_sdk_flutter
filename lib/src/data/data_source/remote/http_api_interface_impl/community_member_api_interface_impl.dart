@@ -112,4 +112,32 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
       return Future.error(amityError.amityException());
     }
   }
+
+  @override
+  Future<GetCommunityMembersResponse> banMember(
+      UpdateCommunityRoleRequest request) async {
+    try {
+      final data = await httpApiClient().put(
+          '$COMMUNITY_V3/${request.communityId}/$USERS/$BAN',
+          data: request.toJson());
+      return GetCommunityMembersResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
+  Future<GetCommunityMembersResponse> unbanMember(
+      UpdateCommunityRoleRequest request) async {
+    try {
+      final data = await httpApiClient().put(
+          '$COMMUNITY_V3/${request.communityId}/$USERS/$UNBAN',
+          data: request.toJson());
+      return GetCommunityMembersResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
 }

@@ -2,7 +2,6 @@ import 'package:amity_sdk/src/core/model/api_request/get_community_members_reque
 import 'package:amity_sdk/src/core/model/api_request/update_community_members_request.dart';
 import 'package:amity_sdk/src/core/model/api_request/update_community_role_request.dart';
 import 'package:amity_sdk/src/data/response/get_community_members_response.dart';
-import 'package:amity_sdk/src/data/response/response.dart';
 
 abstract class CommunityMemmberApiInterface {
   Future<GetCommunityMembersResponse> getCommunityMembers(
@@ -17,4 +16,8 @@ abstract class CommunityMemmberApiInterface {
       UpdateCommunityRoleRequest request);
   Future<GetCommunityMembersResponse> removeRole(
       UpdateCommunityRoleRequest request);
+  Future<GetCommunityMembersResponse> banMember(
+      UpdateCommunityMembersRequest request);
+  Future<GetCommunityMembersResponse> unbanMember(
+      UpdateCommunityMembersRequest request);
 }
