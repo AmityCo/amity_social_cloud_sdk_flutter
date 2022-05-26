@@ -185,6 +185,7 @@ class SdkServiceLocator {
         fileDbAdapter: serviceLocator(),
         communityCategoryDbAdapter: serviceLocator(),
         communityFeedDbAdapter: serviceLocator(),
+        communityMemberDbAdapter: serviceLocator()
       ),
     );
     serviceLocator.registerLazySingleton<CommunityMemberRepo>(() =>
