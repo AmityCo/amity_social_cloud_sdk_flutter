@@ -1,5 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/data_source/data_source.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class AmityCommunity {
@@ -53,6 +57,26 @@ class AmityCommunity {
       'updatedAt': updatedAt?.millisecondsSinceEpoch,
       'path': path,
     };
+  }
+
+  Stream<AmityCommunity> get listen {
+    StreamController<AmityCommunity> controller =
+        StreamController<AmityCommunity>();
+
+    serviceLocator<CommunityDbAdapter>()
+        .listenPostEntity(communityId!)
+        .listen((event) {
+      final _updateAmityCommunity = event.convertToAmityCommunity();
+
+      //TOOD: Good idea would be have compose method inside the object itself
+      serviceLocator<CommunityComposerUsecase>()
+          .get(_updateAmityCommunity)
+          .then(
+            (value) => controller.add(value),
+          );
+    });
+
+    return controller.stream;
   }
 
   String toJson() => json.encode(toMap());
