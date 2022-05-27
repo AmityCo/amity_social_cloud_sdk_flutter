@@ -40,4 +40,10 @@ class UserRepoImpl extends UserRepo {
     final userHiveEntity = userDbAdapter.getUserEntity(userId);
     return userHiveEntity.convertToAmityUser();
   }
+
+  @override
+  List<String> getPermissions(String userId) {
+    final userHiveEntity = userDbAdapter.getUserEntity(userId);
+    return userHiveEntity.permissions ?? [];
+  }
 }

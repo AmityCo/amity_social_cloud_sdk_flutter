@@ -22,6 +22,7 @@ import 'package:amity_sdk/src/domain/usecase/community/member/community_member_r
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_remove_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_unban_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/permission/community_member_permission_check_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/community/permission/user_global_permission_check_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -237,6 +238,8 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<GetUserByIdUseCase>(() =>
         GetUserByIdUseCase(
             userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<UserGlobalPermissionCheckUsecase>(
+        () => UserGlobalPermissionCheckUsecase(userRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<AcceptFollowUsecase>(
         () => AcceptFollowUsecase(followRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<DeclineFollowUsecase>(

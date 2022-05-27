@@ -115,7 +115,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
 
   @override
   Future<GetCommunityMembersResponse> banMember(
-      UpdateCommunityRoleRequest request) async {
+      UpdateCommunityMembersRequest request) async {
     try {
       final data = await httpApiClient().put(
           '$COMMUNITY_V3/${request.communityId}/$USERS/$BAN',
@@ -129,7 +129,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
 
   @override
   Future<GetCommunityMembersResponse> unbanMember(
-      UpdateCommunityRoleRequest request) async {
+      UpdateCommunityMembersRequest request) async {
     try {
       final data = await httpApiClient().put(
           '$COMMUNITY_V3/${request.communityId}/$USERS/$UNBAN',
