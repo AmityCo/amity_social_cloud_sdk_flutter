@@ -50,7 +50,7 @@ class CommunityResponse {
   factory CommunityResponse.fromJson(Map<String, dynamic> json) =>
       CommunityResponse(
         communityId: json["communityId"],
-        path: json["path"],
+        path: json["path"] ?? "",
         channelId: json["channelId"],
         userId: json["userId"],
         displayName: json["displayName"],

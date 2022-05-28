@@ -12,9 +12,14 @@ class CommunityMemberPermissionCheckUsecase
 
   @override
   Future<bool> get(CommunityMemberPermissionCheckRequest params) {
-    final permissions = communityMemberRepo.getMemberPermission(
-        params.communityId, params.userId);
-    final hasPermission = permissions?.contains(params.permission.value);
+    var hasPermission = false;
+    try {
+      final permissions = communityMemberRepo.getMemberPermission(
+          params.communityId, params.userId);
+      hasPermission = permissions?.contains(params.permission.value) ?? false;
+    } catch (exception) {
+      hasPermission = false;
+    }
     return Future.value(hasPermission);
   }
 

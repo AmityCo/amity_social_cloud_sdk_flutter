@@ -77,7 +77,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
     try {
       final data = await httpApiClient().delete(
           COMMUNITY_V3 + '/${request.communityId}/' + USERS,
-          queryParameters: request.toJson());
+          data: request.toJson());
       return GetCommunityMembersResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -105,7 +105,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
     try {
       final data = await httpApiClient().delete(
           '$COMMUNITY_V3/${request.communityId}/$USERS/$ROLES',
-          queryParameters: request.toJson());
+          data: request.toJson());
       return GetCommunityMembersResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
