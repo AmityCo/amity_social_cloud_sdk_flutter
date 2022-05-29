@@ -12,7 +12,7 @@ class AmityPermissionValidator {
         _permission, communityId, AmityCoreClient.getUserId());
   }
 
-  AmityGlobalPermissionValidator atGlobaal() {
+  AmityGlobalPermissionValidator atGlobal() {
     return AmityGlobalPermissionValidator(
         _permission, AmityCoreClient.getUserId());
   }
