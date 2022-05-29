@@ -1,7 +1,8 @@
 enum AmityPermission {
   BAN_USER,
   EDIT_USER,
-  ASSIGN_USER_ROLE,
+  CREATE_ROLE,
+  DELETE_ROLE,
   EDIT_USER_FEED_POST,
   DELETE_USER_FEED_POST,
   EDIT_USER_FEED_COMMENT,
@@ -25,7 +26,8 @@ extension AmityPermissionExtension on AmityPermission {
     return [
       'BAN_USER',
       'EDIT_USER',
-      'ASSIGN_USER_ROLE',
+      'CREATE_ROLE',
+      'DELETE_ROLE',
       'EDIT_USER_FEED_POST',
       'DELETE_USER_FEED_POST',
       'EDIT_USER_FEED_COMMENT',

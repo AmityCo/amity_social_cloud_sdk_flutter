@@ -11,7 +11,7 @@ class AmityCommunityPermissionValidator {
   AmityCommunityPermissionValidator(
       this._permission, this._communityId, this._userId);
 
-  Future<bool> check() {
+  bool check() {
     return serviceLocator<CommunityMemberPermissionCheckUsecase>().get(
         CommunityMemberPermissionCheckRequest(
             communityId: _communityId,

@@ -5,13 +5,13 @@ import 'package:amity_sdk/src/core/model/api_request/community_member_check_requ
 import 'package:amity_sdk/src/domain/repo/community_member_repo.dart';
 
 class CommunityMemberPermissionCheckUsecase
-    extends UseCase<bool, CommunityMemberPermissionCheckRequest> {
+    extends SynchronousUseCase<bool, CommunityMemberPermissionCheckRequest> {
   final CommunityMemberRepo communityMemberRepo;
 
   CommunityMemberPermissionCheckUsecase({required this.communityMemberRepo});
 
   @override
-  Future<bool> get(CommunityMemberPermissionCheckRequest params) {
+  bool get(CommunityMemberPermissionCheckRequest params) {
     var hasPermission = false;
     try {
       final permissions = communityMemberRepo.getMemberPermission(
@@ -20,12 +20,6 @@ class CommunityMemberPermissionCheckUsecase
     } catch (exception) {
       hasPermission = false;
     }
-    return Future.value(hasPermission);
-  }
-
-  @override
-  Stream<bool> listen(CommunityMemberPermissionCheckRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
+    return hasPermission;
   }
 }

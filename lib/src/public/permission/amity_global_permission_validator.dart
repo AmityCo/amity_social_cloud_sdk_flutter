@@ -9,7 +9,7 @@ class AmityGlobalPermissionValidator {
 
   AmityGlobalPermissionValidator(this._permission, this._userId);
 
-  Future<bool> check() {
+  bool check() {
     return serviceLocator<UserGlobalPermissionCheckUsecase>().get(
         UserGlobalPermissionCheckRequest(
             userId: _userId, permission: _permission));

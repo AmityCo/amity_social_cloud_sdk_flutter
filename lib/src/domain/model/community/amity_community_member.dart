@@ -1,8 +1,8 @@
-import 'package:amity_sdk/src/domain/model/amity_roles.dart';
 import 'package:amity_sdk/src/domain/model/amity_user.dart';
 import 'package:flutter/foundation.dart';
 
-class AmityCommunityMember extends ChangeNotifier implements ValueListenable<AmityCommunityMember> {
+class AmityCommunityMember extends ChangeNotifier
+    implements ValueListenable<AmityCommunityMember> {
   String? communityId;
   String? userId;
   String? channelId;
