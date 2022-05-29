@@ -9,7 +9,7 @@ class CommunityCreatorBuilder {
   String? _description;
   bool? _isPublic = false;
   List<String>? _categoryIds;
-  Map<String, String>? _metadata;
+  Map<String, dynamic>? _metadata;
   List<String>? _userIds;
   String? _avatarFileId;
   bool? _needApprovalOnPostCreation;
@@ -31,7 +31,7 @@ class CommunityCreatorBuilder {
     return this;
   }
 
-  CommunityCreatorBuilder metadata(Map<String, String> metadata) {
+  CommunityCreatorBuilder metadata(Map<String, dynamic> metadata) {
     _metadata = metadata;
     return this;
   }

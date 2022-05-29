@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/data_source.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class AmityCommunity {
@@ -17,7 +16,7 @@ class AmityCommunity {
   bool? isPublic;
   bool? onlyAdminCanPost;
   AmityTags? tags;
-  Map<String, String>? metadata;
+  Map<String, dynamic>? metadata;
   int? postsCount;
   int? membersCount;
   bool? isJoined;

@@ -14,7 +14,7 @@ class CommunityHiveEntity extends HiveObject {
   bool? isOfficial;
   bool? isPublic = false;
   bool? onlyAdminCanPost = false;
-  Map<String, String>? metadata;
+  Map<String, dynamic>? metadata;
   int? postCount = 0;
   int? membersCount = 0;
   bool? isJoined = false;
