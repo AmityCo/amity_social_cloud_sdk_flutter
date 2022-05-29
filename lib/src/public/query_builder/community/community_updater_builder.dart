@@ -1,11 +1,11 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
-class CommunityCreateQueryBuilder {
-  final CommunityCreateUsecase usecase;
-  final String _displayName;
-
+class CommunityUpdaterBuilder {
+  final CommunityUpdateUseCase usecase;
+  final String communityId;
   //Optional Params
+  String? _displayName;
   String? _description;
   bool? _isPublic = false;
   List<String>? _categoryIds;
@@ -14,45 +14,52 @@ class CommunityCreateQueryBuilder {
   String? _avatarFileId;
   bool? _needApprovalOnPostCreation;
 
-  CommunityCreateQueryBuilder(this.usecase, this._displayName);
+  CommunityUpdaterBuilder(this.usecase, this.communityId);
 
-  CommunityCreateQueryBuilder description(String description) {
+  CommunityUpdaterBuilder displayName(String displayName) {
+    _displayName = displayName;
+    return this;
+  }
+
+  CommunityUpdaterBuilder description(String description) {
     _description = description;
     return this;
   }
 
-  CommunityCreateQueryBuilder isPublic(bool isPublic) {
+  CommunityUpdaterBuilder isPublic(bool isPublic) {
     _isPublic = isPublic;
     return this;
   }
 
-  CommunityCreateQueryBuilder categoryIds(List<String> categoryIds) {
+  CommunityUpdaterBuilder categoryIds(List<String> categoryIds) {
     _categoryIds = categoryIds;
     return this;
   }
 
-  CommunityCreateQueryBuilder metadata(Map<String, String> metadata) {
+  CommunityUpdaterBuilder metadata(Map<String, String> metadata) {
     _metadata = metadata;
     return this;
   }
 
-  CommunityCreateQueryBuilder userIds(List<String> userIds) {
+  CommunityUpdaterBuilder userIds(List<String> userIds) {
     _userIds = userIds;
     return this;
   }
 
-  CommunityCreateQueryBuilder avatar(AmityImage avatar) {
+  CommunityUpdaterBuilder avatar(AmityImage avatar) {
     _avatarFileId = avatar.fileId;
     return this;
   }
 
-  CommunityCreateQueryBuilder isPostReviewEnabled(bool isPostReviewEnabled) {
+  CommunityUpdaterBuilder isPostReviewEnabled(bool isPostReviewEnabled) {
     _needApprovalOnPostCreation = isPostReviewEnabled;
     return this;
   }
 
-  Future<AmityCommunity> create() async {
-    CreateCommunityRequest request = CreateCommunityRequest();
+  Future<AmityCommunity> update() async {
+    CreateCommunityRequest request =
+        CreateCommunityRequest(communityId: communityId);
+
     request.displayName = _displayName;
     request.description = _description;
     request.isPublic = _isPublic;
