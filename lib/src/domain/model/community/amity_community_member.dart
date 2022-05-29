@@ -6,8 +6,8 @@ class AmityCommunityMember extends ChangeNotifier implements ValueListenable<Ami
   String? communityId;
   String? userId;
   String? channelId;
-  // bool? isBanned;
-  AmityRoles? roles;
+  bool? isBanned;
+  List<String>? roles;
   AmityUser? user;
 
   @override
