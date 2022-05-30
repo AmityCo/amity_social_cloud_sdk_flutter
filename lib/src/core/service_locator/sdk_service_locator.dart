@@ -12,11 +12,17 @@ import 'package:amity_sdk/src/data/data_source/remote/api_interface/community_me
 import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/community_member_api_interface_impl.dart';
 import 'package:amity_sdk/src/data/repo_impl/community_member_repo_impl.dart';
 import 'package:amity_sdk/src/domain/repo/community_member_repo.dart';
+import 'package:amity_sdk/src/domain/usecase/community/member/community_member_add_role_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_add_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/community/member/community_member_ban_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_join_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_leave_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_query_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/community/member/community_member_remove_role_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_remove_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/community/member/community_member_unban_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/community/permission/community_member_permission_check_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/community/permission/user_global_permission_check_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -182,6 +188,7 @@ class SdkServiceLocator {
         fileDbAdapter: serviceLocator(),
         communityCategoryDbAdapter: serviceLocator(),
         communityFeedDbAdapter: serviceLocator(),
+        communityMemberDbAdapter: serviceLocator()
       ),
     );
     serviceLocator.registerLazySingleton<CommunityMemberRepo>(() =>
@@ -231,6 +238,8 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<GetUserByIdUseCase>(() =>
         GetUserByIdUseCase(
             userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<UserGlobalPermissionCheckUsecase>(
+        () => UserGlobalPermissionCheckUsecase(userRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<AcceptFollowUsecase>(
         () => AcceptFollowUsecase(followRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<DeclineFollowUsecase>(
@@ -312,14 +321,26 @@ class SdkServiceLocator {
               communityRepo: serviceLocator(),
               communityComposerUsecase: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<CommunityMemberPermissionCheckUsecase>(
+        () => CommunityMemberPermissionCheckUsecase(
+            communityMemberRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityMemberJoinUsecase>(() =>
         CommunityMemberJoinUsecase(communityMemberRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityMemberLeaveUsecase>(() =>
         CommunityMemberLeaveUsecase(communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberAddRoleUsecase>(() =>
+        CommunityMemberAddRoleUsecase(communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberRemoveRoleUsecase>(() =>
+        CommunityMemberRemoveRoleUsecase(
+            communityMemberRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityMemberAddUsecase>(
         () => CommunityMemberAddUsecase(communityMemberRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityMemberRemoveUsecase>(() =>
         CommunityMemberRemoveUsecase(communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberBanUsecase>(
+        () => CommunityMemberBanUsecase(communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberUnbanUsecase>(() =>
+        CommunityMemberUnbanUsecase(communityMemberRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityMemberQueryUsecase>(() =>
         CommunityMemberQueryUsecase(
             communityMemberRepo: serviceLocator(),

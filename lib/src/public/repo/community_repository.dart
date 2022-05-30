@@ -3,16 +3,17 @@ import 'package:amity_sdk/src/core/service_locator/service_locator.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_join_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_leave_usecase.dart';
+import 'package:amity_sdk/src/public/community/amity_community_moderation.dart';
 import 'package:amity_sdk/src/public/community/amity_community_participation.dart';
 import 'package:amity_sdk/src/public/query_builder/community/community_get_query_builder.dart';
 
 class CommunityRepository {
-  CommunityCreateQueryBuilder createCommunity(String displayName) {
-    return CommunityCreateQueryBuilder(serviceLocator(), displayName);
+  CommunityCreatorBuilder createCommunity(String displayName) {
+    return CommunityCreatorBuilder(serviceLocator(), displayName);
   }
 
-  CommunityUpdateQueryBuilder updateCommunity(String communityId) {
-    return CommunityUpdateQueryBuilder(serviceLocator(), communityId);
+  CommunityUpdaterBuilder updateCommunity(String communityId) {
+    return CommunityUpdaterBuilder(serviceLocator(), communityId);
   }
 
   CommunityGetQueryBuilder getCommunities() {
@@ -36,6 +37,10 @@ class CommunityRepository {
   }
 
   AmityCommunityParticipation membership(String communityId) {
-    return AmityCommunityParticipation(communityId: communityId);
+    return AmityCommunityParticipation(communityId);
+  }
+
+  AmityCommunityModeration moderation(String communityId) {
+    return AmityCommunityModeration(communityId);
   }
 }

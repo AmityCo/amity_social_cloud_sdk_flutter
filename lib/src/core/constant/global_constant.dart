@@ -51,4 +51,9 @@ const UNREGISTER_NOTIFICATION_V1_URL = 'v1/notification';
 
 const JOIN = 'join';
 const LEAVE = 'leave';
+const ROLES = 'roles';
+const BAN = 'ban';
+const UNBAN = 'unban';
+
+
 

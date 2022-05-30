@@ -10,6 +10,7 @@ extension CommunityMemberResponseExtension on CommunityUserResponse {
       ..channelId = channelId
       ..communityMembership = communityMembership
       ..permissions = permissions
-      ..roles = roles;
+      ..roles = roles
+      ..isBanned = isBanned;
   }
 }

@@ -1,3 +1,6 @@
+import 'package:amity_sdk/src/core/enum/amity_permission_type.dart';
+import 'package:amity_sdk/src/public/permission/amity_permission_validator.dart';
+
 import '../../amity_sdk.dart';
 import '../core/core.dart';
 import '../data/data.dart';
@@ -77,6 +80,10 @@ class AmityCoreClient {
   static Future unregisterDeviceNotification() {
     return serviceLocator<NotificationRepository>()
         .unregisterDeviceNotification();
+  }
+
+  static AmityPermissionValidator hasPermission(AmityPermission permission) {
+    return AmityPermissionValidator(permission);
   }
 
   /// Create new User Repository

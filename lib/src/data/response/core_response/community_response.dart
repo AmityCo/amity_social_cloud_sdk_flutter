@@ -35,7 +35,7 @@ class CommunityResponse {
   final bool? isPublic;
   final bool? onlyAdminCanPost;
   final List<String>? tags;
-  final Map<String, String>? metadata;
+  final Map<String, dynamic>? metadata;
   final int? postsCount;
   final int? membersCount;
   final bool? isJoined;
@@ -50,7 +50,7 @@ class CommunityResponse {
   factory CommunityResponse.fromJson(Map<String, dynamic> json) =>
       CommunityResponse(
         communityId: json["communityId"],
-        path: json["path"],
+        path: json["path"] ?? "",
         channelId: json["channelId"],
         userId: json["userId"],
         displayName: json["displayName"],
@@ -60,7 +60,7 @@ class CommunityResponse {
         isPublic: json["isPublic"],
         onlyAdminCanPost: json["onlyAdminCanPost"],
         tags: List<String>.from(json["tags"].map((x) => x)),
-        metadata: Map<String, String>.from(json["metadata"]),
+        metadata: json["metadata"],
         postsCount: json["postsCount"],
         membersCount: json["membersCount"],
         isJoined: json["isJoined"],

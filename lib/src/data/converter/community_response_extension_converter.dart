@@ -20,6 +20,7 @@ extension CommunityResponsseExtension on CommunityResponse {
       ..isDeleted = isDeleted
       ..createdAt = createdAt
       ..editedAt = updatedAt
+      ..metadata = metadata
       ..categoryIds = categoryIds;
   }
 }
