@@ -23,7 +23,7 @@ class CreateCommunityRequest {
   List<String>? categoryIds;
   String? description;
   bool? isPublic;
-  Map<String, String>? metadata;
+  Map<String, dynamic>? metadata;
   List<String>? userIds;
   String? avatarFileId;
   bool? needApprovalOnPostCreation;
