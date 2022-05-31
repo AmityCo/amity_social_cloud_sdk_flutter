@@ -11,7 +11,6 @@ import 'package:amity_sdk/src/data/data_source/local/hive_entity/community_membe
 import 'package:amity_sdk/src/data/data_source/remote/api_interface/community_member_api_interface.dart';
 import 'package:amity_sdk/src/data/response/get_community_members_response.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/repo/community_member_repo.dart';
 
 class CommunityMemberRepoImpl extends CommunityMemberRepo {
   final CommunityMemmberApiInterface communityMemmberApiInterface;

@@ -64,6 +64,11 @@ class PagingController<T> extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addAll(List<T> items) {
+    _loadedItems.addAll(items);
+    notifyListeners();
+  }
+
   void add(T item) {
     _loadedItems.add(item);
     notifyListeners();
@@ -76,6 +81,11 @@ class PagingController<T> extends ChangeNotifier {
 
   void remove(T item) {
     _loadedItems.remove(item);
+    notifyListeners();
+  }
+
+  void removeWhere(bool Function(T) condition) {
+    _loadedItems.removeWhere(condition);
     notifyListeners();
   }
 

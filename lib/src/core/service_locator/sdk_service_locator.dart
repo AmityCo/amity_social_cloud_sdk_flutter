@@ -318,8 +318,10 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<CommunityMemberRemoveRoleUsecase>(() =>
         CommunityMemberRemoveRoleUsecase(
             communityMemberRepo: serviceLocator()));
-    serviceLocator.registerLazySingleton<CommunityMemberAddUsecase>(
-        () => CommunityMemberAddUsecase(communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberAddUsecase>(() =>
+        CommunityMemberAddUsecase(
+            communityMemberComposerUsecase: serviceLocator(),
+            communityMemberRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityMemberRemoveUsecase>(() =>
         CommunityMemberRemoveUsecase(communityMemberRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityMemberBanUsecase>(

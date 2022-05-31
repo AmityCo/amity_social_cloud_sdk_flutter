@@ -2,21 +2,32 @@ import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/model/api_request/update_community_members_request.dart';
-import 'package:amity_sdk/src/domain/repo/community_member_repo.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommunityMemberAddUsecase
-    extends UseCase<void, UpdateCommunityMembersRequest> {
+    extends UseCase<List<AmityCommunityMember>, UpdateCommunityMembersRequest> {
   final CommunityMemberRepo communityMemberRepo;
+  final CommunityMemberComposerUsecase communityMemberComposerUsecase;
 
-  CommunityMemberAddUsecase({required this.communityMemberRepo});
+  CommunityMemberAddUsecase(
+      {required this.communityMemberRepo,
+      required this.communityMemberComposerUsecase});
 
   @override
-  Future get(UpdateCommunityMembersRequest params) async {
-    return await communityMemberRepo.addMember(params);
+  Future<List<AmityCommunityMember>> get(
+      UpdateCommunityMembersRequest params) async {
+    await communityMemberRepo.addMember(params);
+    final communityMembers = await Stream.fromIterable(params.userIds)
+        .asyncMap(
+            (event) => communityMemberRepo.getMember(params.communityId, event))
+        .asyncMap((event) => communityMemberComposerUsecase.get(event))
+        .toList();
+    return communityMembers;
   }
 
   @override
-  Stream listen(UpdateCommunityMembersRequest params) {
+  Stream<List<AmityCommunityMember>> listen(
+      UpdateCommunityMembersRequest params) {
     // TODO: implement listen
     throw UnimplementedError();
   }
