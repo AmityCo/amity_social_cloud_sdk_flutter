@@ -16,4 +16,5 @@ abstract class CommunityMemberRepo {
   List<String>? getMemberPermission(String communityId, String userId);
   Future banMember(UpdateCommunityMembersRequest request);
   Future unbanMember(UpdateCommunityMembersRequest request);
+  Future<AmityCommunityMember> getMember(String communityId, String userId);
 }
