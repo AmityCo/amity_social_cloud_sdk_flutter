@@ -9,6 +9,7 @@ import 'package:amity_sdk/src/data/data_source/remote/api_interface/community_me
 import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/community_member_api_interface_impl.dart';
 import 'package:amity_sdk/src/data/repo_impl/community_member_repo_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/usecase/community/member/community_member_get_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -426,6 +427,8 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<UpdateUserUsecase>(() =>
         UpdateUserUsecase(
             userComposerUsecase: serviceLocator(), userRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberGetUsecase>(
+        () => CommunityMemberGetUsecase(communityMemberRepo: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo

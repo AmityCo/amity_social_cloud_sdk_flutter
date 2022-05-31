@@ -49,21 +49,6 @@ class AmityComment {
 
     return controller.stream;
   }
-
-  @override
-  String toString() {
-    return 'AmityComment(commentId: $commentId, referenceType: $referenceType, referenceId: $referenceId, userId: $userId, parentId: $parentId, rootId: $rootId, dataType: $dataType, data: $data, childrenNumber: $childrenNumber, repliesId: $repliesId, latestReplies: $latestReplies, flagCount: $flagCount, myReactions: $myReactions, reactionCount: $reactionCount, reactions: $reactions, isDeleted: $isDeleted, createdAt: $createdAt, editedAt: $editedAt, updatedAt: $updatedAt, syncState: $syncState, mentionees: $mentionees, user: $user, path: $path)';
-  }
-
-  @override
-  get value => this;
-
-  // @override
-  // void dispose() {
-  //   print('##### Disposing the stream subscription');
-  //   _streamSubscription.cancel();
-  //   super.dispose();
-  // }
 }
 
 abstract class AmityCommentData {
