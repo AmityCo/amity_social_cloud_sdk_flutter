@@ -3,7 +3,6 @@ import 'package:amity_sdk/src/core/model/api_request/get_comment_request.dart';
 import 'package:amity_sdk/src/core/model/api_request/update_comment_request.dart';
 import 'package:amity_sdk/src/core/utils/tuple.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/response/create_comment_response.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommentRepoImpl extends CommentRepo {

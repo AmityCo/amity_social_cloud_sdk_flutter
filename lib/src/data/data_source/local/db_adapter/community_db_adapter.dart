@@ -4,5 +4,5 @@ abstract class CommunityDbAdapter {
   Future saveCommunityEntity(CommunityHiveEntity entity);
   CommunityHiveEntity getCommunityEntity(String id);
 
-  Stream<CommunityHiveEntity> listenPostEntity(String communityId);
+  Stream<CommunityHiveEntity> listenCommunityEntity(String communityId);
 }

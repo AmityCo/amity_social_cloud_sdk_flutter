@@ -2,27 +2,13 @@ import 'dart:developer';
 
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/community_member_dp_adapter_impl.dart';
-import 'package:amity_sdk/src/domain/composer_usecase/community_member_composer_usecase.dart';
-import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/usecase/community/community_get_query_usecase.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_paging_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/commnunity_member_paging_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/community_member_dp_adapter_impl.dart';
 import 'package:amity_sdk/src/data/data_source/remote/api_interface/community_member_api_interface.dart';
 import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/community_member_api_interface_impl.dart';
 import 'package:amity_sdk/src/data/repo_impl/community_member_repo_impl.dart';
-import 'package:amity_sdk/src/domain/repo/community_member_repo.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_add_role_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_add_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_ban_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_join_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_leave_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_query_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_remove_role_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_remove_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_unban_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/community/permission/community_member_permission_check_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/community/permission/user_global_permission_check_usecase.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -147,9 +133,9 @@ class SdkServiceLocator {
               fileDbAdapter: serviceLocator(),
             ));
     serviceLocator.registerLazySingleton<UserRepo>(() => UserRepoImpl(
-          userApiInterface: serviceLocator(),
-          userDbAdapter: serviceLocator(),
-        ));
+        userApiInterface: serviceLocator(),
+        userDbAdapter: serviceLocator(),
+        fileDbAdapter: serviceLocator()));
     serviceLocator.registerLazySingleton<FollowRepo>(() => FollowRepoImpl(
           followWApiInterface: serviceLocator(),
           followInfoDbAdapter: serviceLocator(),
@@ -181,15 +167,14 @@ class SdkServiceLocator {
         postDbAdapter: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityRepo>(
       () => CommunityRepoImpl(
-        communityApiInterface: serviceLocator(),
-        communityDbAdapter: serviceLocator(),
-        commentDbAdapter: serviceLocator(),
-        userDbAdapter: serviceLocator(),
-        fileDbAdapter: serviceLocator(),
-        communityCategoryDbAdapter: serviceLocator(),
-        communityFeedDbAdapter: serviceLocator(),
-        communityMemberDbAdapter: serviceLocator()
-      ),
+          communityApiInterface: serviceLocator(),
+          communityDbAdapter: serviceLocator(),
+          commentDbAdapter: serviceLocator(),
+          userDbAdapter: serviceLocator(),
+          fileDbAdapter: serviceLocator(),
+          communityCategoryDbAdapter: serviceLocator(),
+          communityFeedDbAdapter: serviceLocator(),
+          communityMemberDbAdapter: serviceLocator()),
     );
     serviceLocator.registerLazySingleton<CommunityMemberRepo>(() =>
         CommunityMemberRepoImpl(
@@ -436,6 +421,9 @@ class SdkServiceLocator {
         CommentUpdateUsecase(
             commentRepo: serviceLocator(),
             postComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<UpdateUserUsecase>(() =>
+        UpdateUserUsecase(
+            userComposerUsecase: serviceLocator(), userRepo: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo

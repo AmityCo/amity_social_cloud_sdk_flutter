@@ -33,7 +33,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
         "communityId": communityId,
       };
       final data = await httpApiClient()
-          .post(COMMUNITY_V3 + '/$communityId/' + JOIN, queryParameters: param);
+          .post(COMMUNITY_V3 + '/$communityId/' + JOIN, data: param);
       return GetCommunityMembersResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -47,9 +47,8 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
       final param = <String, String>{
         "communityId": communityId,
       };
-      final data = await httpApiClient().delete(
-          COMMUNITY_V3 + '/$communityId/' + LEAVE,
-          queryParameters: param);
+      final data = await httpApiClient()
+          .delete(COMMUNITY_V3 + '/$communityId/' + LEAVE, data: param);
       return GetCommunityMembersResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
