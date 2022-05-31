@@ -94,14 +94,6 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
   }
 
   @override
-  Future<AmityCommunityMember> getCommunityMember(
-      String communityId, String userId) async {
-    final member =
-        communityMemberDbAdapter.getCommunityMemberEntity(communityId + userId);
-    return Future.value(member.convertToAmityCommunityMember());
-  }
-
-  @override
   Future banMember(UpdateCommunityMembersRequest request) async {
     final data = await communityMemmberApiInterface.banMember(request);
     return await _saveDataToDb(data);

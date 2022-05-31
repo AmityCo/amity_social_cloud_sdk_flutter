@@ -13,8 +13,8 @@ class CommunityMemberGetUsecase extends UseCase<AmityCommunityMember,
   @override
   Future<AmityCommunityMember> get(
       CommunityMemberPermissionCheckRequest params) async {
-    final amityMember = await communityMemberRepo.getCommunityMember(
-        params.communityId, params.userId);
+    final amityMember =
+        await communityMemberRepo.getMember(params.communityId, params.userId);
     return amityMember;
   }
 

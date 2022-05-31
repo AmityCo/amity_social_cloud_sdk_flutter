@@ -14,8 +14,6 @@ abstract class CommunityMemberRepo {
   Future addRole(UpdateCommunityRoleRequest request);
   Future removeRole(UpdateCommunityRoleRequest request);
   List<String>? getMemberPermission(String communityId, String userId);
-  Future<AmityCommunityMember> getCommunityMember(
-      String communityId, String userId);
   Future banMember(UpdateCommunityMembersRequest request);
   Future unbanMember(UpdateCommunityMembersRequest request);
   Future<AmityCommunityMember> getMember(String communityId, String userId);
