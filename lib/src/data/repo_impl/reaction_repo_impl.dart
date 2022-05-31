@@ -49,7 +49,7 @@ class ReactionRepoImpl extends ReactionRepo {
       amityComment.reactions![request.reactionName] =
           (amityComment.reactions![request.reactionName] ?? 0) + 1;
 
-      commentDbAdapter.saveCommentEntity(amityComment);
+      amityComment.save();
     }
   }
 

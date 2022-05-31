@@ -10,6 +10,7 @@ class AmityUserSearchDisplayNameQueryBuilder {
     _useCase = useCase;
     _keywoard = keyword;
   }
+
   AmityUserSearchDisplayNameQueryBuilder keyword(String keyword) {
     _keywoard = keyword;
     return this;

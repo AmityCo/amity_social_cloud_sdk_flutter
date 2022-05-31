@@ -23,7 +23,7 @@ class CommunityDbAdapterImpl extends CommunityDbAdapter {
   }
 
   @override
-  Stream<CommunityHiveEntity> listenPostEntity(String communityId) {
+  Stream<CommunityHiveEntity> listenCommunityEntity(String communityId) {
     return box.watch(key: communityId).map((event) => event.value);
   }
 }

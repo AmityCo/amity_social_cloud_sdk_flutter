@@ -1,4 +1,3 @@
-import 'package:amity_sdk/src/core/enum/amity_permission_type.dart';
 import 'package:amity_sdk/src/public/permission/amity_permission_validator.dart';
 
 import '../../amity_sdk.dart';

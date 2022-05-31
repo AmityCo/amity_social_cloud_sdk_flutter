@@ -16,11 +16,6 @@ class CommunityMemberDbAdapterImpl extends CommunityMemberDbAdapter {
   }
 
   @override
-  Future deleteCommunityMemberEntity(CommnityMemberHiveEntity entity) async {
-    await box.delete(entity.id);
-  }
-
-  @override
   CommnityMemberHiveEntity getCommunityMemberEntities(
       String communityId,
       List<String> roles,
@@ -30,7 +25,10 @@ class CommunityMemberDbAdapterImpl extends CommunityMemberDbAdapter {
     throw UnimplementedError();
   }
 
-  
+  @override
+  Future saveCommunityMemberEntity(CommnityMemberHiveEntity entity) async {
+    await box.put(entity.communityId! + entity.userId!, entity);
+  }
 
   @override
   CommnityMemberHiveEntity getCommunityMemberEntity(String id) {
@@ -38,12 +36,12 @@ class CommunityMemberDbAdapterImpl extends CommunityMemberDbAdapter {
   }
 
   @override
-  Stream<CommnityMemberHiveEntity> listenCommnunityMemberEntity(String id) {
-    return box.watch(key: id).map((event) => event.value);
+  Future deleteCommunityMemberEntity(CommnityMemberHiveEntity entity) async {
+    await box.delete(entity.communityId! + entity.userId!);
   }
 
   @override
-  Future saveCommunityMemberEntity(CommnityMemberHiveEntity entity) async {
-    await box.put(entity.id, entity);
+  Stream<CommnityMemberHiveEntity> listenCommnunityMemberEntity(String id) {
+    return box.watch(key: id).map((event) => event.value);
   }
 }

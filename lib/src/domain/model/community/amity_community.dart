@@ -63,7 +63,7 @@ class AmityCommunity {
         StreamController<AmityCommunity>();
 
     serviceLocator<CommunityDbAdapter>()
-        .listenPostEntity(communityId!)
+        .listenCommunityEntity(communityId!)
         .listen((event) {
       final _updateAmityCommunity = event.convertToAmityCommunity();
 
@@ -79,4 +79,7 @@ class AmityCommunity {
   }
 
   String toJson() => json.encode(toMap());
+
+  @override
+  String toString() => toJson();
 }

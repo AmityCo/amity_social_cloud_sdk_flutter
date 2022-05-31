@@ -23,4 +23,9 @@ class CommnityMemberHiveEntity extends HiveObject {
   bool operator ==(Object other) {
     return super.hashCode == other.hashCode;
   }
+
+  @override
+  String toString() {
+    return 'CommnityMemberHiveEntity(id: $id, communityId: $communityId, channelId: $channelId, userId: $userId, communityMembership: $communityMembership, roles: $roles, permissions: $permissions, isBanned: $isBanned)';
+  }
 }
