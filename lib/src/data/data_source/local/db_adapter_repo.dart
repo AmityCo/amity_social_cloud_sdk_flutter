@@ -11,6 +11,7 @@ class DbAdapterRepo {
   final FeedPagingDbAdapter feedDbAdapter;
   final CommunityDbAdapter communityDbAdapter;
   final CommunityMemberDbAdapter communityMemberDbAdapter;
+  final CommunityCategoryDbAdapter communityCategoryDbAdapter;
 
   DbAdapterRepo(
       {required this.postDbAdapter,
@@ -19,5 +20,6 @@ class DbAdapterRepo {
       required this.fileDbAdapter,
       required this.feedDbAdapter,
       required this.communityDbAdapter,
-      required this.communityMemberDbAdapter});
+      required this.communityMemberDbAdapter,
+      required this.communityCategoryDbAdapter});
 }

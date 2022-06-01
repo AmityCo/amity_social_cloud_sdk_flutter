@@ -7,7 +7,7 @@ class CommunityCategoryHiveEntity extends HiveObject {
   String? categoryId;
   String? name;
   String? avatarFileId;
-  Map<String, String>? metadata;
+  Map<String, dynamic>? metadata;
   bool? isDeleted;
   DateTime? createdAt;
   DateTime? updatedAt;

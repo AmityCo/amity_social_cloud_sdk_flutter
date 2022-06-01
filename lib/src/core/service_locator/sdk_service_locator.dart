@@ -76,14 +76,14 @@ class SdkServiceLocator {
 
     //Register Db adapter Repo which hold all the Db Adapters
     serviceLocator.registerLazySingleton<DbAdapterRepo>(() => DbAdapterRepo(
-          postDbAdapter: serviceLocator(),
-          commentDbAdapter: serviceLocator(),
-          communityDbAdapter: serviceLocator(),
-          communityMemberDbAdapter: serviceLocator(),
-          feedDbAdapter: serviceLocator(),
-          fileDbAdapter: serviceLocator(),
-          userDbAdapter: serviceLocator(),
-        ));
+        postDbAdapter: serviceLocator(),
+        commentDbAdapter: serviceLocator(),
+        communityDbAdapter: serviceLocator(),
+        communityMemberDbAdapter: serviceLocator(),
+        feedDbAdapter: serviceLocator(),
+        fileDbAdapter: serviceLocator(),
+        userDbAdapter: serviceLocator(),
+        communityCategoryDbAdapter: serviceLocator()));
 
     //-data_source/remote/
     serviceLocator.registerLazySingleton<HttpApiClient>(
