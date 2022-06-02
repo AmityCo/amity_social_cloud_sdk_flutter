@@ -45,7 +45,7 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
   @override
   Future<bool> deleteCommunity(String communityId) async {
     try {
-      final data = await httpApiClient().delete(COMMUNITY_V3 + '/$communityId');
+      await httpApiClient().delete(COMMUNITY_V3 + '/$communityId');
       return true;
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

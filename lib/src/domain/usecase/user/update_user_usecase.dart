@@ -9,17 +9,17 @@ class UpdateUserUsecase extends UseCase<AmityUser, UpdateUserRequest> {
   final UserComposerUsecase userComposerUsecase;
 
   @override
-  Future<AmityUser> get(UpdateUserRequest request) async {
+  Future<AmityUser> get(UpdateUserRequest params) async {
     //1. Get the public model (AmityUser) from data layer
     //2. Use the composer usecase to compose the public model (fill the detail)
 
-    final amityUser = await userRepo.updateUser(request);
+    final amityUser = await userRepo.updateUser(params);
     final amityComposedUser = await userComposerUsecase.get(amityUser.first);
     return amityComposedUser;
   }
 
   @override
-  Stream<AmityUser> listen(UpdateUserRequest request) {
+  Stream<AmityUser> listen(UpdateUserRequest params) {
     // TODO: implement listen
     throw UnimplementedError();
   }

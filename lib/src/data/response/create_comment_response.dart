@@ -1,7 +1,3 @@
-// To parse this JSON data, do
-//
-//     final createCommentResponse = createCommentResponseFromJson(jsonString);
-
 import 'dart:convert';
 
 import 'package:amity_sdk/src/data/response/core_response/core_response.dart';
