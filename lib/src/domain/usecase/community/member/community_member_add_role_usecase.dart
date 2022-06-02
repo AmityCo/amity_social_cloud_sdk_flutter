@@ -16,7 +16,7 @@ class CommunityMemberAddRoleUsecase
   }
 
   @override
-  Stream listen(UpdateCommunityRoleRequest request) {
+  Stream listen(UpdateCommunityRoleRequest params) {
     // TODO: implement listen
     throw UnimplementedError();
   }

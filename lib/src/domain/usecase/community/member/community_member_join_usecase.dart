@@ -9,12 +9,12 @@ class CommunityMemberJoinUsecase extends UseCase<void, String> {
   CommunityMemberJoinUsecase({required this.communityMemberRepo});
 
   @override
-  Future get(String communityId) async {
-    return await communityMemberRepo.joinCommunity(communityId);
+  Future get(String params) async {
+    return await communityMemberRepo.joinCommunity(params);
   }
 
   @override
-  Stream listen(String communityId) {
+  Stream listen(String params) {
     // TODO: implement listen
     throw UnimplementedError();
   }

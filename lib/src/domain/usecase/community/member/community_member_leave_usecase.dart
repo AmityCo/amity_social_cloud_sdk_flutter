@@ -9,12 +9,12 @@ class CommunityMemberLeaveUsecase extends UseCase<void, String> {
   CommunityMemberLeaveUsecase({required this.communityMemberRepo});
 
   @override
-  Future get(String communityId) async {
-    return await communityMemberRepo.leaveCommunity(communityId);
+  Future get(String params) async {
+    return await communityMemberRepo.leaveCommunity(params);
   }
 
   @override
-  Stream listen(String communityId) {
+  Stream listen(String params) {
     // TODO: implement listen
     throw UnimplementedError();
   }

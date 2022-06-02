@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:amity_sdk/src/core/enum/enum.dart';
 
 enum AmityCommunityMembershipFilter { ALL, MEMBER, BANNED }

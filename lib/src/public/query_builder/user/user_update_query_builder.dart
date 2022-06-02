@@ -1,6 +1,5 @@
 import 'package:amity_sdk/src/core/model/api_request/update_user_request.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/usecase/user/update_user_usecase.dart';
 
 class UserUpdateQueryBuilder {
   final UpdateUserUsecase _useCase;
