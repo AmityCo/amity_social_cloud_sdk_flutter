@@ -11,7 +11,7 @@ class CommunityCategoryResponse {
 
   final String? categoryId;
   final String? name;
-  final Map<String, String>? metadata;
+  final Map<String, dynamic>? metadata;
   final String? avatarFileId;
   final bool? isDeleted;
   final DateTime? createdAt;
