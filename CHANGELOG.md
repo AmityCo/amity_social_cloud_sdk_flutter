@@ -4,6 +4,9 @@
 * feat: Streams for Post, Comment, Community and Community Member
 * feat: Community CRUD and Query
 * feat: Community Member CRUD and Query
+* feat: Community Member Roles & Permissions
+* feat: Community feed query
+* feat: Add/Remove Post and Comment reactions
 * fix: resolve memory leak issue in post and comment object
 
 
