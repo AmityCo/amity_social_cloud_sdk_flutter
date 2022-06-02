@@ -1,6 +1,9 @@
+## 0.1.2
+* chore: enable the lint core and analyze the code
 ## 0.1.1
+* fix: community category causes data corruption
+* fix: post metadata is unable to update
 
-* fix: resolve the metadata issue with post & community category
 
 ## 0.1.0
 
