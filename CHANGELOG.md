@@ -1,3 +1,7 @@
+## 0.1.1
+
+* fix: resolve the metadata issue with post & community category
+
 ## 0.1.0
 
 * feat: Add Metadata in post, comment and community
