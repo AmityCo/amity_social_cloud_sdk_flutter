@@ -17,7 +17,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
       GetCommunityMembersRequest request) async {
     try {
       final data = await httpApiClient().get(
-          COMMUNITY_V3 + '/${request.communityId}/' + USERS,
+          '$COMMUNITY_V3/${request.communityId}/$USERS',
           queryParameters: request.toJson());
       return GetCommunityMembersResponse.fromJson(data.data);
     } on DioError catch (error) {
@@ -33,7 +33,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
         "communityId": communityId,
       };
       final data = await httpApiClient()
-          .post(COMMUNITY_V3 + '/$communityId/' + JOIN, data: param);
+          .post('$COMMUNITY_V3/$communityId/$JOIN', data: param);
       return GetCommunityMembersResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -48,7 +48,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
         "communityId": communityId,
       };
       final data = await httpApiClient()
-          .delete(COMMUNITY_V3 + '/$communityId/' + LEAVE, data: param);
+          .delete('$COMMUNITY_V3/$communityId/$LEAVE', data: param);
       return GetCommunityMembersResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -61,7 +61,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
       UpdateCommunityMembersRequest request) async {
     try {
       final data = await httpApiClient().post(
-          COMMUNITY_V3 + '/${request.communityId}/' + USERS,
+          '$COMMUNITY_V3/${request.communityId}/$USERS',
           data: request.toJson());
       return GetCommunityMembersResponse.fromJson(data.data);
     } on DioError catch (error) {
@@ -75,7 +75,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
       UpdateCommunityMembersRequest request) async {
     try {
       final data = await httpApiClient().delete(
-          COMMUNITY_V3 + '/${request.communityId}/' + USERS,
+          '$COMMUNITY_V3/${request.communityId}/$USERS',
           data: request.toJson());
       return GetCommunityMembersResponse.fromJson(data.data);
     } on DioError catch (error) {

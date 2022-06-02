@@ -24,9 +24,9 @@ class CommunityComposerUsecase extends UseCase<AmityCommunity, AmityCommunity> {
 
     //Fill in the avatar fields
     if (params.avatarFileId != null) {
-      final _fileProperties =
+      final fileProperties =
           await fileRepo.getFileByIdFromDb(params.avatarFileId!);
-      params.avatarImage = AmityImage(_fileProperties);
+      params.avatarImage = AmityImage(fileProperties);
     }
 
     //Fill in the category
