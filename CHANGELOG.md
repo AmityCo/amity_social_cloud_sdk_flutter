@@ -1,3 +1,8 @@
+## 0.1.1
+* fix: community category causes data corruption
+* fix: post metadata is unable to update
+
+
 ## 0.1.0
 
 * feat: Add Metadata in post, comment and community
