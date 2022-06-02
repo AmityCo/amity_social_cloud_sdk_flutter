@@ -1,6 +1,11 @@
-## 0.0.2-hedgehog.1
+## 0.1.0
 
-*fix: flutter static analysis
+* feat: Add Metadata in post, comment and community
+* feat: Streams for Post, Comment, Community and Community Member
+* feat: Community CRUD and Query
+* feat: Community Member CRUD and Query
+* fix: resolve memory leak issue in post and comment object
+
 
 ## 0.0.2
 

@@ -10,7 +10,6 @@ extension AmityRegionalMqttEndpointExtension on AmityRegionalMqttEndpoint {
       SG_MQTT_ENDPOINT,
       EU_MQTT_ENDPOINT,
       US_MQTT_ENDPOINT,
-      STAGING_MQTT_ENDPOINT
     ][index];
   }
 }
