@@ -90,7 +90,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   Future<CreatePostResponse> updatePostById(UpdatePostRequest request) async {
     try {
       final data = await httpApiClient()
-          .put(POST_V3 + '/${request.postId}', data: request);
+          .put(POST_V4 + '/${request.postId}', data: request);
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
