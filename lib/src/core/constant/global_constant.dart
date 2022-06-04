@@ -44,8 +44,15 @@ const USERS_V4_URL = 'api/v4/users/';
 const GLOBAL_FEED_V3_URL = 'api/v4/me/global-feeds';
 const USER_FEED_V3_URL = 'api/v3/user-feeds';
 const COMMUNITY_FEED_V3_URL = 'api/v3/community-feeds';
+const COMMUNITY_CATEGORY_V3_URL = 'api/v3/community-categories';
 
 const REACTION_V2_URL = 'api/v2/reactions';
 
 const REGISTER_NOTIFICATION_V1_URL = 'v1/notification';
 const UNREGISTER_NOTIFICATION_V1_URL = 'v1/notification';
+
+const JOIN = 'join';
+const LEAVE = 'leave';
+const ROLES = 'roles';
+const BAN = 'ban';
+const UNBAN = 'unban';

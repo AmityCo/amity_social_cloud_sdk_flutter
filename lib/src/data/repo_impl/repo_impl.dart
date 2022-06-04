@@ -1,7 +1,9 @@
 export 'account_repo_impl.dart';
 export 'authentication_repo_impl.dart';
 export 'comment_repo_impl.dart';
+export 'community_category_repo_impl.dart';
 export 'community_feed_repo_impl.dart';
+export 'community_member_repo_impl.dart';
 export 'community_repo_impl.dart';
 export 'file_repo_impl.dart';
 export 'follow_repo_impl.dart';

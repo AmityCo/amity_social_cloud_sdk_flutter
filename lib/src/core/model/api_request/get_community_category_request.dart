@@ -14,25 +14,27 @@ String getCommunityCategoryRequestToJson(GetCommunityCategoryRequest data) =>
 
 class GetCommunityCategoryRequest {
   GetCommunityCategoryRequest({
-    required this.sortBy,
-    required this.isDeleted,
-    required this.options,
+    this.sortBy,
+    this.isDeleted,
+    this.options,
   });
 
-  final String sortBy;
-  final bool isDeleted;
-  final OptionsRequest options;
+  String? sortBy;
+  bool? isDeleted;
+  OptionsRequest? options;
 
   factory GetCommunityCategoryRequest.fromJson(Map<String, dynamic> json) =>
       GetCommunityCategoryRequest(
         sortBy: json["sortBy"],
         isDeleted: json["isDeleted"],
-        options: OptionsRequest.fromJson(json["options"]),
+        options: json["options"] == null
+            ? null
+            : OptionsRequest.fromJson(json["options"]),
       );
 
   Map<String, dynamic> toJson() => {
         "sortBy": sortBy,
         "isDeleted": isDeleted,
-        "options": options.toJson(),
+        "options": options?.toJson(),
       };
 }

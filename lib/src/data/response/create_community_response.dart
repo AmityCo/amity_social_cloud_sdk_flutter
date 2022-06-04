@@ -21,8 +21,13 @@ class CreateCommunityResponse {
 
   factory CreateCommunityResponse.fromJson(Map<String, dynamic> json) =>
       CreateCommunityResponse(
+        communities: json["communities"] == null
+            ? []
+            : List<CommunityResponse>.from(
+                json["communities"].map((x) => CommunityResponse.fromJson(x))),
         communityUsers: json["communityUsers"] == null
             ? []
+            : List<CommunityUserResponse>.from(json["communityUsers"]
                 .map((x) => CommunityUserResponse.fromJson(x))),
         files: json["files"] == null
             ? []
