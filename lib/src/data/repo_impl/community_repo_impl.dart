@@ -4,6 +4,8 @@ import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_entity/community_member_hive_entity_14.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommunityRepoImpl extends CommunityRepo {
@@ -16,8 +18,8 @@ class CommunityRepoImpl extends CommunityRepo {
   final FileDbAdapter fileDbAdapter;
   final CommunityCategoryDbAdapter communityCategoryDbAdapter;
   final CommunityFeedDbAdapter communityFeedDbAdapter;
+  final CommunityMemberDbAdapter communityMemberDbAdapter;
 
-  //TODO: missing  communityUser
   CommunityRepoImpl({
     required this.communityApiInterface,
     required this.communityDbAdapter,
@@ -26,6 +28,7 @@ class CommunityRepoImpl extends CommunityRepo {
     required this.fileDbAdapter,
     required this.communityCategoryDbAdapter,
     required this.communityFeedDbAdapter,
+    required this.communityMemberDbAdapter,
   });
 
   @override
@@ -79,8 +82,6 @@ class CommunityRepoImpl extends CommunityRepo {
     List<UserHiveEntity> userHiveEntities =
         data.users.map((e) => e.convertToUserHiveEntity()).toList();
 
-    //Conver to community hive member
-
     //Conver to category hive entity
     List<CommunityCategoryHiveEntity> communityCategoryHiveEnties = data
         .categories
@@ -94,6 +95,12 @@ class CommunityRepoImpl extends CommunityRepo {
     //Conver to Feed hive entity
     List<CommunityHiveEntity> communityHiveEnties =
         data.communities.map((e) => e.convertToCommunityHiveEntity()).toList();
+
+    //Convert to Community Member Hive Entity
+    List<CommnityMemberHiveEntity> communityMemberHiveEntities = data
+        .communityUsers
+        .map((e) => e.convertToCommnityMemberHiveEntity())
+        .toList();
 
     //Save the File Entity
     for (var e in fileHiveEntities) {
@@ -118,6 +125,11 @@ class CommunityRepoImpl extends CommunityRepo {
     //Save the Community  Entity
     for (var e in communityHiveEnties) {
       await communityDbAdapter.saveCommunityEntity(e);
+    }
+
+    //Save the Community Member Entity
+    for (var e in communityMemberHiveEntities) {
+      await communityMemberDbAdapter.saveCommunityMemberEntity(e);
     }
 
     return communityHiveEnties.map((e) => e.convertToAmityCommunity()).toList();

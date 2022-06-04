@@ -1,5 +1,8 @@
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class AmityCommunity {
@@ -13,7 +16,7 @@ class AmityCommunity {
   bool? isPublic;
   bool? onlyAdminCanPost;
   AmityTags? tags;
-  Map<String, String>? metadata;
+  Map<String, dynamic>? metadata;
   int? postsCount;
   int? membersCount;
   bool? isJoined;
@@ -55,5 +58,28 @@ class AmityCommunity {
     };
   }
 
+  Stream<AmityCommunity> get listen {
+    StreamController<AmityCommunity> controller =
+        StreamController<AmityCommunity>();
+
+    serviceLocator<CommunityDbAdapter>()
+        .listenCommunityEntity(communityId!)
+        .listen((event) {
+      final _updateAmityCommunity = event.convertToAmityCommunity();
+
+      //TOOD: Good idea would be have compose method inside the object itself
+      serviceLocator<CommunityComposerUsecase>()
+          .get(_updateAmityCommunity)
+          .then(
+            (value) => controller.add(value),
+          );
+    });
+
+    return controller.stream;
+  }
+
   String toJson() => json.encode(toMap());
+
+  @override
+  String toString() => toJson();
 }

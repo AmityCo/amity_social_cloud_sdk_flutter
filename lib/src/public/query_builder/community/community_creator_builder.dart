@@ -1,7 +1,7 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
-class CommunityCreateQueryBuilder {
+class CommunityCreatorBuilder {
   final CommunityCreateUsecase usecase;
   final String _displayName;
 
@@ -9,44 +9,44 @@ class CommunityCreateQueryBuilder {
   String? _description;
   bool? _isPublic = false;
   List<String>? _categoryIds;
-  Map<String, String>? _metadata;
+  Map<String, dynamic>? _metadata;
   List<String>? _userIds;
   String? _avatarFileId;
   bool? _needApprovalOnPostCreation;
 
-  CommunityCreateQueryBuilder(this.usecase, this._displayName);
+  CommunityCreatorBuilder(this.usecase, this._displayName);
 
-  CommunityCreateQueryBuilder description(String description) {
+  CommunityCreatorBuilder description(String description) {
     _description = description;
     return this;
   }
 
-  CommunityCreateQueryBuilder isPublic(bool isPublic) {
+  CommunityCreatorBuilder isPublic(bool isPublic) {
     _isPublic = isPublic;
     return this;
   }
 
-  CommunityCreateQueryBuilder categoryIds(List<String> categoryIds) {
+  CommunityCreatorBuilder categoryIds(List<String> categoryIds) {
     _categoryIds = categoryIds;
     return this;
   }
 
-  CommunityCreateQueryBuilder metadata(Map<String, String> metadata) {
+  CommunityCreatorBuilder metadata(Map<String, dynamic> metadata) {
     _metadata = metadata;
     return this;
   }
 
-  CommunityCreateQueryBuilder userIds(List<String> userIds) {
+  CommunityCreatorBuilder userIds(List<String> userIds) {
     _userIds = userIds;
     return this;
   }
 
-  CommunityCreateQueryBuilder avatar(AmityImage avatar) {
+  CommunityCreatorBuilder avatar(AmityImage avatar) {
     _avatarFileId = avatar.fileId;
     return this;
   }
 
-  CommunityCreateQueryBuilder isPostReviewEnabled(bool isPostReviewEnabled) {
+  CommunityCreatorBuilder isPostReviewEnabled(bool isPostReviewEnabled) {
     _needApprovalOnPostCreation = isPostReviewEnabled;
     return this;
   }

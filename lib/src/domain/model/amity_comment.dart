@@ -1,23 +1,11 @@
+import 'dart:async';
+
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/data/converter/comment_response_hive_entity_extension_converter.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/comment_db_adapter.dart';
+import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:flutter/foundation.dart';
 
-class AmityComment extends ChangeNotifier
-    implements ValueListenable<AmityComment> {
-  AmityComment({required this.commentId}) {
-    serviceLocator<CommentDbAdapter>()
-        .listenCommentEntity(commentId!)
-        .listen((event) {
-      final _updateAmityComment = event.convertToAmityComment();
-
-      //TOOD: Good idea would be have compose method inside the object itself
-      serviceLocator<CommentComposerUsecase>().get(_updateAmityComment).then(
-            (value) => apply(value),
-          );
-    });
-  }
+class AmityComment {
+  AmityComment({required this.commentId});
 
   String? commentId;
   AmityCommentReferenceType? referenceType; //TODO: should be enum
@@ -34,6 +22,7 @@ class AmityComment extends ChangeNotifier
   List<String>? myReactions;
   int? reactionCount;
   AmityReactionMap? reactions; //composer
+  Map<String, dynamic>? metadata;
   bool? isDeleted;
   DateTime? createdAt;
   DateTime? editedAt;
@@ -43,36 +32,23 @@ class AmityComment extends ChangeNotifier
   AmityUser? user; //composer
   String? path;
 
-  void apply(AmityComment amityComment) {
-    //reaction update
-    myReactions = amityComment.myReactions;
-    reactionCount = amityComment.reactionCount;
-    reactions = amityComment.reactions;
+  Stream<AmityComment> get listen {
+    StreamController<AmityComment> controller =
+        StreamController<AmityComment>();
 
-    //flag
-    flagCount = amityComment.flagCount;
+    serviceLocator<CommentDbAdapter>()
+        .listenCommentEntity(commentId!)
+        .listen((event) {
+      final _updateAmityComment = event.convertToAmityComment();
 
-    //Delete
-    isDeleted = amityComment.isDeleted;
+      //TOOD: Good idea would be have compose method inside the object itself
+      serviceLocator<CommentComposerUsecase>().get(_updateAmityComment).then(
+            (value) => controller.add(value),
+          );
+    });
 
-    //data
-    data = amityComment.data;
-
-    //Update the child update
-    childrenNumber = amityComment.childrenNumber;
-    repliesId = amityComment.repliesId;
-    latestReplies = amityComment.latestReplies;
-
-    notifyListeners();
+    return controller.stream;
   }
-
-  @override
-  String toString() {
-    return 'AmityComment(commentId: $commentId, referenceType: $referenceType, referenceId: $referenceId, userId: $userId, parentId: $parentId, rootId: $rootId, dataType: $dataType, data: $data, childrenNumber: $childrenNumber, repliesId: $repliesId, latestReplies: $latestReplies, flagCount: $flagCount, myReactions: $myReactions, reactionCount: $reactionCount, reactions: $reactions, isDeleted: $isDeleted, createdAt: $createdAt, editedAt: $editedAt, updatedAt: $updatedAt, syncState: $syncState, mentionees: $mentionees, user: $user, path: $path)';
-  }
-
-  @override
-  get value => this;
 }
 
 abstract class AmityCommentData {

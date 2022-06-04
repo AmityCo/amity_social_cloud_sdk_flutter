@@ -1,19 +1,41 @@
 import 'package:amity_sdk/src/core/model/api_request/update_post_request.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
-class AmityTextPostUpdator {
+class AmityTextPostEditorBuilder {
   late PostUpdateUsecase _useCase;
   late String _targetId;
-  AmityTextPostUpdator({
+  late AmityPostUpdater _updater;
+  AmityTextPostEditorBuilder({
     required PostUpdateUsecase useCase,
     required String targetId,
   }) {
     _useCase = useCase;
     _targetId = targetId;
+    _updater = AmityPostUpdater(_useCase, _targetId);
   }
 
-  AmityPostUpdater text(String text) {
-    return AmityPostUpdater.textUpate(_useCase, _targetId, text);
+  AmityTextPostEditorBuilder text(String text) {
+    _updater._text = text;
+    return this;
+  }
+
+  AmityTextPostEditorBuilder metadata(Map<String, dynamic>? metadata) {
+    _updater._metadata = metadata;
+    return this;
+  }
+
+  AmityTextPostEditor build() {
+    return AmityTextPostEditor(updater: _updater);
+  }
+}
+
+class AmityTextPostEditor {
+  late AmityPostUpdater updater;
+
+  AmityTextPostEditor({required this.updater});
+
+  Future update() {
+    return updater.update();
   }
 }
 
@@ -21,9 +43,7 @@ class AmityPostUpdater {
   final PostUpdateUsecase _usecase;
   final String _targetId;
   String? _text;
-
-  factory AmityPostUpdater.textUpate(usecase, targetId, text) =>
-      AmityPostUpdater(usecase, targetId).._text = text;
+  Map<String, dynamic>? _metadata;
 
   AmityPostUpdater(this._usecase, this._targetId);
 
@@ -34,6 +54,7 @@ class AmityPostUpdater {
     if (_text != null) updateData.text = _text;
 
     updatePostRequest.data = updateData;
+    updatePostRequest.metadata = _metadata;
 
     return _usecase.get(updatePostRequest);
   }

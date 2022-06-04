@@ -12,15 +12,16 @@ class CommunityHiveEntity extends HiveObject {
   String? description;
   String? avatarFileId;
   bool? isOfficial;
-  bool isPublic = false;
-  bool onlyAdminCanPost = false;
-  Map<String, String>? metadata;
-  int postCount = 0;
-  int membersCount = 0;
-  bool isJoined = false;
-  bool isDeleted = false;
-  bool needApprovalOnPostCreation = false;
+  bool? isPublic = false;
+  bool? onlyAdminCanPost = false;
+  Map<String, dynamic>? metadata;
+  int? postCount = 0;
+  int? membersCount = 0;
+  bool? isJoined = false;
+  bool? isDeleted = false;
+  bool? needApprovalOnPostCreation = false;
   DateTime? createdAt;
   DateTime? editedAt;
   List<String>? categoryIds;
+
 }

@@ -183,9 +183,9 @@
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///Users/saurabhkumar/sorbh/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-1.0.4",
+      "rootUri": "file:///Users/saurabhkumar/sorbh/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_lints-2.0.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "flutter_test",
@@ -273,9 +273,9 @@
     },
     {
       "name": "lints",
-      "rootUri": "file:///Users/saurabhkumar/sorbh/flutter/.pub-cache/hosted/pub.dartlang.org/lints-1.0.1",
+      "rootUri": "file:///Users/saurabhkumar/sorbh/flutter/.pub-cache/hosted/pub.dartlang.org/lints-2.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.17"
     },
     {
       "name": "logging",
@@ -590,7 +590,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2022-06-04T12:23:15.227373Z",
+  "generated": "2022-06-04T12:44:21.081229Z",
   "generator": "pub",
   "generatorVersion": "2.17.1"
 }

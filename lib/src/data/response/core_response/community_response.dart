@@ -31,26 +31,26 @@ class CommunityResponse {
   final String displayName;
   final String? avatarFileId;
   final String? description;
-  final bool isOfficial;
-  final bool isPublic;
-  final bool onlyAdminCanPost;
-  final List<String> tags;
-  final Map<String, String> metadata;
-  final int postsCount;
-  final int membersCount;
-  final bool isJoined;
-  final List<String> categoryIds;
-  final bool isDeleted;
-  final DateTime createdAt;
-  final DateTime updatedAt;
-  final bool hasFlaggedComment;
-  final bool hasFlaggedPost;
-  final bool needApprovalOnPostCreation;
+  final bool? isOfficial;
+  final bool? isPublic;
+  final bool? onlyAdminCanPost;
+  final List<String>? tags;
+  final Map<String, dynamic>? metadata;
+  final int? postsCount;
+  final int? membersCount;
+  final bool? isJoined;
+  final List<String>? categoryIds;
+  final bool? isDeleted;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
+  final bool? hasFlaggedComment;
+  final bool? hasFlaggedPost;
+  final bool? needApprovalOnPostCreation;
 
   factory CommunityResponse.fromJson(Map<String, dynamic> json) =>
       CommunityResponse(
         communityId: json["communityId"],
-        path: json["path"],
+        path: json["path"] ?? "",
         channelId: json["channelId"],
         userId: json["userId"],
         displayName: json["displayName"],
@@ -60,7 +60,7 @@ class CommunityResponse {
         isPublic: json["isPublic"],
         onlyAdminCanPost: json["onlyAdminCanPost"],
         tags: List<String>.from(json["tags"].map((x) => x)),
-        metadata: Map<String, String>.from(json["metadata"]),
+        metadata: json["metadata"],
         postsCount: json["postsCount"],
         membersCount: json["membersCount"],
         isJoined: json["isJoined"],
@@ -83,15 +83,17 @@ class CommunityResponse {
         "isOfficial": isOfficial,
         "isPublic": isPublic,
         "onlyAdminCanPost": onlyAdminCanPost,
-        "tags": List<dynamic>.from(tags.map((x) => x)),
+        "tags": tags == null ? null : List<dynamic>.from(tags!.map((x) => x)),
         "metadata": metadata,
         "postsCount": postsCount,
         "membersCount": membersCount,
         "isJoined": isJoined,
-        "categoryIds": List<dynamic>.from(categoryIds.map((x) => x)),
+        "categoryIds": categoryIds == null
+            ? null
+            : List<dynamic>.from(categoryIds!.map((x) => x)),
         "isDeleted": isDeleted,
-        "createdAt": createdAt.toIso8601String(),
-        "updatedAt": updatedAt.toIso8601String(),
+        "createdAt": createdAt == null ? null : createdAt!.toIso8601String(),
+        "updatedAt": updatedAt == null ? null : updatedAt!.toIso8601String(),
         "hasFlaggedComment": hasFlaggedComment,
         "hasFlaggedPost": hasFlaggedPost,
         "needApprovalOnPostCreation": needApprovalOnPostCreation,

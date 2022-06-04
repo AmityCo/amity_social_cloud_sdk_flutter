@@ -7,9 +7,7 @@ extension CommunityMemberHiveEntityExtension on CommnityMemberHiveEntity {
       ..communityId = communityId
       ..channelId = channelId
       ..userId = userId
-      ..roles = AmityRoles()
-      ..roles
-      ..permissions = AmityPermissions()
-      ..permissions;
+      ..roles = roles
+      ..isBanned = isBanned;
   }
 }

@@ -16,6 +16,7 @@ class PagingController<T> extends ChangeNotifier {
 
   bool _hasMoreItems = true;
   Object? _error;
+  Object? _stacktrace;
   bool _isFetching = false;
 
   /// Called whenever a new page (or batch) is to be fetched
@@ -39,6 +40,7 @@ class PagingController<T> extends ChangeNotifier {
 
   /// The latest error that has been faced when trying to load a page
   Object? get error => _error;
+  Object? get stacktrace => _stacktrace;
 
   /// set to true if no data was found
   bool? get noItemsFound => _loadedItems.isEmpty && hasMoreItems == false;
@@ -62,6 +64,11 @@ class PagingController<T> extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addAll(List<T> items) {
+    _loadedItems.addAll(items);
+    notifyListeners();
+  }
+
   void add(T item) {
     _loadedItems.add(item);
     notifyListeners();
@@ -77,6 +84,11 @@ class PagingController<T> extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removeWhere(bool Function(T) condition) {
+    _loadedItems.removeWhere(condition);
+    notifyListeners();
+  }
+
   /// Fetches a new page by calling [pageFuture]
   Future<void> fetchNextPage() async {
     if (!_isFetching) {
@@ -88,7 +100,8 @@ class PagingController<T> extends ChangeNotifier {
         page = data.item1;
         _nextPageToken = data.item2;
         _numberOfLoadedPages++;
-      } catch (error) {
+      } catch (error, stacktrace) {
+        _stacktrace = stacktrace;
         _error = error;
         _isFetching = false;
         page = [];

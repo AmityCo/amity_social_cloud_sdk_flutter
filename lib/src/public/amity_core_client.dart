@@ -1,6 +1,7 @@
-import '../../amity_sdk.dart';
-import '../core/core.dart';
-import '../data/data.dart';
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/public/public.dart';
 
 ///Amity Core Client to do primary Setup
 class AmityCoreClient {
@@ -77,6 +78,10 @@ class AmityCoreClient {
   static Future unregisterDeviceNotification() {
     return serviceLocator<NotificationRepository>()
         .unregisterDeviceNotification();
+  }
+
+  static AmityPermissionValidator hasPermission(AmityPermission permission) {
+    return AmityPermissionValidator(permission);
   }
 
   /// Create new User Repository

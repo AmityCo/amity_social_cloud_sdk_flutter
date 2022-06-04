@@ -13,7 +13,6 @@ extension UserHiveEntityExtension on UserHiveEntity {
       ..metadata = metadata
       ..createdAt = createdAt
       ..updatedAt = updatedAt
-      ..permissions = permissions
       ..roles = roles;
   }
 }

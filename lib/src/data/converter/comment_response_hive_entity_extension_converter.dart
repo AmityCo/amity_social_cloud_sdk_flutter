@@ -57,6 +57,7 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
       ..createdAt = createdAt
       ..editedAt = editedAt
       ..updatedAt = updatedAt
-      ..path = path;
+      ..path = path
+      ..metadata = metadata;
   }
 }

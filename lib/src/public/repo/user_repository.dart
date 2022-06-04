@@ -18,6 +18,10 @@ class UserRepository {
     return serviceLocator<GetUserByIdUseCase>().get(userId);
   }
 
+  UserUpdateQueryBuilder updateUser(String userId) {
+    return UserUpdateQueryBuilder(serviceLocator<UpdateUserUsecase>(), userId);
+  }
+
   AmityUserFlagRepository report(String userId) {
     return AmityUserFlagRepository(userId: userId);
   }

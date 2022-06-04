@@ -1,6 +1,4 @@
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_category_db_adater.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/community_category_hive_12.dart';
 import 'package:hive/hive.dart';
 
 class CommunityCategoryDbAdapterImpl extends CommunityCategoryDbAdapter {

@@ -2,10 +2,11 @@ import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/model/api_request/get_community_members_request.dart';
+import 'package:amity_sdk/src/core/model/api_request/update_community_members_request.dart';
+import 'package:amity_sdk/src/core/model/api_request/update_community_role_request.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/data/response/get_community_members_response.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/repo/community_member_repo.dart';
 
 class CommunityMemberRepoImpl extends CommunityMemberRepo {
   final CommunityMemmberApiInterface communityMemmberApiInterface;
@@ -34,6 +35,70 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
         data.convertToCommunityMemberPagingHiveEntity());
     final amityCommunityMembers = await _saveDataToDb(data);
     return Tuple2(amityCommunityMembers, data.paging!.next ?? '');
+  }
+
+  @override
+  Future joinCommunity(String communityId) async {
+    final data = await communityMemmberApiInterface.joinCommunity(communityId);
+    return await _saveDataToDb(data);
+  }
+
+  @override
+  Future leaveCommunity(String communityId) async {
+    final data = await communityMemmberApiInterface.leaveCommunity(communityId);
+    return await _saveDataToDb(data);
+  }
+
+  @override
+  Future addMember(UpdateCommunityMembersRequest request) async {
+    final data = await communityMemmberApiInterface.addMember(request);
+    return await _saveDataToDb(data);
+  }
+
+  @override
+  Future removeMember(UpdateCommunityMembersRequest request) async {
+    final data = await communityMemmberApiInterface.removeMember(request);
+    return await _saveDataToDb(data);
+  }
+
+  @override
+  Future<AmityCommunityMember> getMember(
+      String communityId, String userId) async {
+    final member = communityMemberDbAdapter
+        .getCommunityMemberEntity(communityId + userId)
+        .convertToAmityCommunityMember();
+    return member;
+  }
+
+  @override
+  Future addRole(UpdateCommunityRoleRequest request) async {
+    final data = await communityMemmberApiInterface.addRole(request);
+    return await _saveDataToDb(data);
+  }
+
+  @override
+  Future removeRole(UpdateCommunityRoleRequest request) async {
+    final data = await communityMemmberApiInterface.removeRole(request);
+    return await _saveDataToDb(data);
+  }
+
+  @override
+  List<String>? getMemberPermission(String communityId, String userId) {
+    final member =
+        communityMemberDbAdapter.getCommunityMemberEntity(communityId + userId);
+    return member.permissions;
+  }
+
+  @override
+  Future banMember(UpdateCommunityMembersRequest request) async {
+    final data = await communityMemmberApiInterface.banMember(request);
+    return await _saveDataToDb(data);
+  }
+
+  @override
+  Future unbanMember(UpdateCommunityMembersRequest request) async {
+    final data = await communityMemmberApiInterface.unbanMember(request);
+    return await _saveDataToDb(data);
   }
 
   Future<List<AmityCommunityMember>> _saveDataToDb(

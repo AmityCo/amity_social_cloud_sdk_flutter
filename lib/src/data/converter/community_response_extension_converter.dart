@@ -13,12 +13,14 @@ extension CommunityResponsseExtension on CommunityResponse {
       ..isOfficial = isOfficial
       ..isPublic = isPublic
       ..onlyAdminCanPost = onlyAdminCanPost
-      ..postCount = postsCount
-      ..membersCount = membersCount
+      ..postCount = postsCount ?? 0 //incase post count is null, keep it zero
+      ..membersCount =
+          membersCount ?? 0 // incase member count is null, keep it zero
       ..isJoined = isJoined
       ..isDeleted = isDeleted
       ..createdAt = createdAt
       ..editedAt = updatedAt
+      ..metadata = metadata
       ..categoryIds = categoryIds;
   }
 }

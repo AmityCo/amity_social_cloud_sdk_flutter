@@ -6,4 +6,8 @@ extension AmityUserExtenstion on AmityUser {
   UserFeedQueryBuilder getFeed() {
     return UserFeedQueryBuilder(serviceLocator(), userId!);
   }
+
+  UserUpdateQueryBuilder update() {
+    return UserUpdateQueryBuilder(serviceLocator<UpdateUserUsecase>(), userId!);
+  }
 }

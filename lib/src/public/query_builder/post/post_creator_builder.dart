@@ -27,31 +27,13 @@ class AmityPostCreateTargetSelector {
         targetType: AmityPostTargetType.USER);
   }
 
-  AmityCommunityFeedPostCreator targetCommunity(String communityId) {
-    return AmityCommunityFeedPostCreator();
+  AmityPostCreateDataTypeSelector targetCommunity(String communityId) {
+    return AmityPostCreateDataTypeSelector(
+        useCase: _useCase,
+        userId: communityId,
+        targetType: AmityPostTargetType.COMMUNITY);
   }
-
-  // PostCreateQueryBuilder text(String text) {
-  //   _text = text;
-  //   return this;
-  // }
-
-  // Future post() {
-  //   throw UnimplementedError();
-  // }
 }
-
-//Target
-// class AmityMyFeedPostCreator {}
-
-// class AmityUserFeedPostCreator {
-//   late String _userId;
-//   AmityUserFeedPostCreator({required String userId}) {
-//     _userId = userId;
-//   }
-// }
-
-class AmityCommunityFeedPostCreator {}
 
 class AmityPostCreateDataTypeSelector {
   late PostCreateUsecase _useCase;
@@ -87,7 +69,7 @@ class AmityPostCreateDataTypeSelector {
         useCase: _useCase,
         targetId: _userId,
         targetType: _targetType.value,
-        video: videos);
+        videos: videos);
   }
 
   AmityFilePostCreator file(List<AmityFile> files) {
@@ -99,111 +81,115 @@ class AmityPostCreateDataTypeSelector {
   }
 }
 
-class AmityTextPostCreator {
-  late PostCreateUsecase _useCase;
-  late String _targetId;
-  late String _targetType;
-  late String _text;
-  Map<String, dynamic>? _metadata;
-  List<AmityMentioneeTarget>? _mentionees;
+class AmityTextPostCreator extends PostCreator {
   AmityTextPostCreator(
       {required PostCreateUsecase useCase,
       required String targetId,
       required String targetType,
-      required String text}) {
-    _useCase = useCase;
-    _targetId = targetId;
-    _targetType = targetType;
+      required String text})
+      : super(useCase: useCase, targetId: targetId, targetType: targetType) {
     _text = text;
-  }
-
-  Future<AmityPost> post() {
-    CreatePostRequest request = CreatePostRequest(
-        targetType: _targetType, targetId: _targetId, dataType: null);
-
-    CreatePostData data = CreatePostData();
-    data.text = _text;
-
-    request.data = data;
-
-    return _useCase.get(request);
   }
 }
 
-class AmityImagePostCreator {
-  late PostCreateUsecase _useCase;
-  late String _targetId;
-  late String _targetType;
-  String? _text;
-  late List<AmityImage> _images;
-  Map<String, dynamic>? _metadata;
-  List<AmityMentioneeTarget>? _mentionees;
+class AmityImagePostCreator extends PostCreator {
+  late final List<AmityImage> _images;
+
   AmityImagePostCreator(
-      {required PostCreateUsecase useCase,
+      {required List<AmityImage> images,
+      required PostCreateUsecase useCase,
       required String targetId,
-      required String targetType,
-      required List<AmityImage> images}) {
-    _useCase = useCase;
-    _targetId = targetId;
-    _targetType = targetType;
+      required String targetType})
+      : super(useCase: useCase, targetId: targetId, targetType: targetType) {
     _images = images;
   }
 
-  AmityImagePostCreator text(String text) {
-    _text = text;
-    return this;
-  }
-
-  Future<AmityPost> post() {
-    CreatePostRequest request = CreatePostRequest(
-        targetType: _targetType, targetId: _targetId, dataType: null);
-
+  @override
+  void _attachRequest(CreatePostRequest request) {
     request.attachments = _images
         .map((e) =>
             Attachment(fileId: e.fileId, type: AmityDataType.IMAGE.value))
         .toList();
-
-    if (_text != null) {
-      CreatePostData data = CreatePostData();
-      data.text = _text;
-      request.data = data;
-    }
-
-    return _useCase.get(request);
   }
 }
 
-class AmityFilePostCreator {
-  late final PostCreateUsecase _useCase;
-  late final String _targetId;
-  late final String _targetType;
-  String? _text;
+class AmityFilePostCreator extends PostCreator {
   late final List<AmityFile> _files;
-  Map<String, dynamic>? _metadata;
-  List<AmityMentioneeTarget>? _mentionees;
-  AmityFilePostCreator(
-      {required PostCreateUsecase useCase,
-      required String targetId,
-      required String targetType,
-      required List<AmityFile> files})
-      : _useCase = useCase,
-        _targetId = targetId,
-        _targetType = targetType,
-        _files = files;
 
-  AmityFilePostCreator text(String text) {
-    _text = text;
-    return this;
+  AmityFilePostCreator(
+      {required List<AmityFile> files,
+      required PostCreateUsecase useCase,
+      required String targetId,
+      required String targetType})
+      : super(useCase: useCase, targetId: targetId, targetType: targetType) {
+    _files = files;
   }
 
-  Future<AmityPost> post() {
-    CreatePostRequest request = CreatePostRequest(
-        targetType: _targetType, targetId: _targetId, dataType: null);
-
+  @override
+  void _attachRequest(CreatePostRequest request) {
     request.attachments = _files
         .map(
             (e) => Attachment(fileId: e.fileId, type: AmityDataType.FILE.value))
         .toList();
+  }
+}
+
+class AmityVideoPostCreator extends PostCreator {
+  late final List<AmityVideo> _videos;
+
+  AmityVideoPostCreator(
+      {required List<AmityVideo> videos,
+      required PostCreateUsecase useCase,
+      required String targetId,
+      required String targetType})
+      : super(useCase: useCase, targetId: targetId, targetType: targetType) {
+    _videos = videos;
+  }
+
+  @override
+  void _attachRequest(CreatePostRequest request) {
+    request.attachments = _videos
+        .map((e) =>
+            Attachment(fileId: e.fileId, type: AmityDataType.VIDEO.value))
+        .toList();
+  }
+}
+
+abstract class PostCreator {
+  late PostCreateUsecase _useCase;
+  late String _targetId;
+  late String _targetType;
+  String? _text;
+  Map<String, dynamic>? _metadata;
+  List<AmityMentioneeTarget>? _mentionees;
+
+  PostCreator({
+    required PostCreateUsecase useCase,
+    required String targetId,
+    required String targetType,
+  }) {
+    _useCase = useCase;
+    _targetId = targetId;
+    _targetType = targetType;
+  }
+
+  PostCreator text(String text) {
+    _text = text;
+    return this;
+  }
+
+  PostCreator metadata(Map<String, dynamic> metadata) {
+    _metadata = metadata;
+    return this;
+  }
+
+  void _attachRequest(CreatePostRequest request) {}
+
+  Future<AmityPost> post() {
+    CreatePostRequest request = CreatePostRequest(
+        targetType: _targetType, targetId: _targetId, dataType: null);
+
+    _attachRequest(request);
 
     if (_text != null) {
       CreatePostData data = CreatePostData();
@@ -211,47 +197,8 @@ class AmityFilePostCreator {
       request.data = data;
     }
 
-    return _useCase.get(request);
-  }
-}
-
-class AmityVideoPostCreator {
-  late PostCreateUsecase _useCase;
-  late String _targetId;
-  late String _targetType;
-  String? _text;
-  late List<AmityVideo> _videos;
-  Map<String, dynamic>? _metadata;
-  List<AmityMentioneeTarget>? _mentionees;
-  AmityVideoPostCreator(
-      {required PostCreateUsecase useCase,
-      required String targetId,
-      required String targetType,
-      required List<AmityVideo> video}) {
-    _useCase = useCase;
-    _targetId = targetId;
-    _targetType = targetType;
-    _videos = video;
-  }
-
-  AmityVideoPostCreator text(String text) {
-    _text = text;
-    return this;
-  }
-
-  Future<AmityPost> post() {
-    CreatePostRequest request = CreatePostRequest(
-        targetType: _targetType, targetId: _targetId, dataType: null);
-
-    request.attachments = _videos
-        .map((e) =>
-            Attachment(fileId: e.fileId, type: AmityDataType.VIDEO.value))
-        .toList();
-
-    if (_text != null) {
-      CreatePostData data = CreatePostData();
-      data.text = _text;
-      request.data = data;
+    if (_metadata != null) {
+      request.metadata = _metadata;
     }
 
     return _useCase.get(request);

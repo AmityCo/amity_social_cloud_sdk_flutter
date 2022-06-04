@@ -1,7 +1,16 @@
 import 'dart:developer';
 
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_paging_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/commnunity_member_paging_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/community_member_dp_adapter_impl.dart';
+import 'package:amity_sdk/src/data/data_source/remote/api_interface/community_member_api_interface.dart';
+import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/community_member_api_interface_impl.dart';
+import 'package:amity_sdk/src/data/repo_impl/community_member_repo_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/usecase/community/member/community_member_get_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -68,14 +77,14 @@ class SdkServiceLocator {
 
     //Register Db adapter Repo which hold all the Db Adapters
     serviceLocator.registerLazySingleton<DbAdapterRepo>(() => DbAdapterRepo(
-          postDbAdapter: serviceLocator(),
-          commentDbAdapter: serviceLocator(),
-          communityDbAdapter: serviceLocator(),
-          communityMemberDbAdapter: serviceLocator(),
-          feedDbAdapter: serviceLocator(),
-          fileDbAdapter: serviceLocator(),
-          userDbAdapter: serviceLocator(),
-        ));
+        postDbAdapter: serviceLocator(),
+        commentDbAdapter: serviceLocator(),
+        communityDbAdapter: serviceLocator(),
+        communityMemberDbAdapter: serviceLocator(),
+        feedDbAdapter: serviceLocator(),
+        fileDbAdapter: serviceLocator(),
+        userDbAdapter: serviceLocator(),
+        communityCategoryDbAdapter: serviceLocator()));
 
     //-data_source/remote/
     serviceLocator.registerLazySingleton<HttpApiClient>(
@@ -128,9 +137,9 @@ class SdkServiceLocator {
               fileDbAdapter: serviceLocator(),
             ));
     serviceLocator.registerLazySingleton<UserRepo>(() => UserRepoImpl(
-          userApiInterface: serviceLocator(),
-          userDbAdapter: serviceLocator(),
-        ));
+        userApiInterface: serviceLocator(),
+        userDbAdapter: serviceLocator(),
+        fileDbAdapter: serviceLocator()));
     serviceLocator.registerLazySingleton<FollowRepo>(() => FollowRepoImpl(
           followWApiInterface: serviceLocator(),
           followInfoDbAdapter: serviceLocator(),
@@ -162,14 +171,14 @@ class SdkServiceLocator {
         postDbAdapter: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityRepo>(
       () => CommunityRepoImpl(
-        communityApiInterface: serviceLocator(),
-        communityDbAdapter: serviceLocator(),
-        commentDbAdapter: serviceLocator(),
-        userDbAdapter: serviceLocator(),
-        fileDbAdapter: serviceLocator(),
-        communityCategoryDbAdapter: serviceLocator(),
-        communityFeedDbAdapter: serviceLocator(),
-      ),
+          communityApiInterface: serviceLocator(),
+          communityDbAdapter: serviceLocator(),
+          commentDbAdapter: serviceLocator(),
+          userDbAdapter: serviceLocator(),
+          fileDbAdapter: serviceLocator(),
+          communityCategoryDbAdapter: serviceLocator(),
+          communityFeedDbAdapter: serviceLocator(),
+          communityMemberDbAdapter: serviceLocator()),
     );
     serviceLocator.registerLazySingleton<CommunityMemberRepo>(() =>
         CommunityMemberRepoImpl(
@@ -227,6 +236,8 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<GetUserByIdUseCase>(() =>
         GetUserByIdUseCase(
             userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<UserGlobalPermissionCheckUsecase>(
+        () => UserGlobalPermissionCheckUsecase(userRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<AcceptFollowUsecase>(
         () => AcceptFollowUsecase(followRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<DeclineFollowUsecase>(
@@ -308,6 +319,28 @@ class SdkServiceLocator {
               communityRepo: serviceLocator(),
               communityComposerUsecase: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<CommunityMemberPermissionCheckUsecase>(
+        () => CommunityMemberPermissionCheckUsecase(
+            communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberJoinUsecase>(() =>
+        CommunityMemberJoinUsecase(communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberLeaveUsecase>(() =>
+        CommunityMemberLeaveUsecase(communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberAddRoleUsecase>(() =>
+        CommunityMemberAddRoleUsecase(communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberRemoveRoleUsecase>(() =>
+        CommunityMemberRemoveRoleUsecase(
+            communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberAddUsecase>(() =>
+        CommunityMemberAddUsecase(
+            communityMemberComposerUsecase: serviceLocator(),
+            communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberRemoveUsecase>(() =>
+        CommunityMemberRemoveUsecase(communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberBanUsecase>(
+        () => CommunityMemberBanUsecase(communityMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberUnbanUsecase>(() =>
+        CommunityMemberUnbanUsecase(communityMemberRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityMemberQueryUsecase>(() =>
         CommunityMemberQueryUsecase(
             communityMemberRepo: serviceLocator(),
@@ -403,6 +436,11 @@ class SdkServiceLocator {
         CommentUpdateUsecase(
             commentRepo: serviceLocator(),
             postComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<UpdateUserUsecase>(() =>
+        UpdateUserUsecase(
+            userComposerUsecase: serviceLocator(), userRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberGetUsecase>(
+        () => CommunityMemberGetUsecase(communityMemberRepo: serviceLocator()));
 
     serviceLocator.registerLazySingleton<CommunityCategoryComposerUsecase>(
         () => CommunityCategoryComposerUsecase(fileRepo: serviceLocator()));

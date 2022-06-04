@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:amity_sdk/src/core/model/api_request/core/option_request.dart';
 
 class GetCommunityMembersRequest {

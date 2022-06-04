@@ -11,15 +11,21 @@ class CommnityMemberHiveEntity extends HiveObject {
   String? communityMembership;
   List<String>? roles;
   List<String>? permissions;
+  bool? isBanned;
 
   // Map<> metaData;
 
   @override
   int get hashCode => Object.hash(id, communityId, channelId, userId,
-      communityMembership, roles, permissions);
+      communityMembership, roles, permissions, isBanned);
 
   @override
   bool operator ==(Object other) {
     return super.hashCode == other.hashCode;
+  }
+
+  @override
+  String toString() {
+    return 'CommnityMemberHiveEntity(id: $id, communityId: $communityId, channelId: $channelId, userId: $userId, communityMembership: $communityMembership, roles: $roles, permissions: $permissions, isBanned: $isBanned)';
   }
 }

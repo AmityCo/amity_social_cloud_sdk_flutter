@@ -7,3 +7,7 @@ abstract class UseCaseWithoutParam<Type> {
   Future<Type> get();
   Stream<Type> listen();
 }
+
+abstract class SynchronousUseCase<Type, Params> {
+  Type get(Params params);
+}

@@ -17,7 +17,7 @@ class FeedPagingHiveEntityAdapter extends TypeAdapter<FeedPagingHiveEntity> {
 
   @override
   void write(BinaryWriter writer, FeedPagingHiveEntity obj) {
-    writer..writeByte(0);
+    writer.writeByte(0);
   }
 
   @override

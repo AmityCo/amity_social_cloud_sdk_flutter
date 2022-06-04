@@ -41,7 +41,9 @@ class GetUserFeedRequest {
         "isDeleted": isDeleted,
         "hasFlag": hasFlag,
         "options": options?.toJson(),
-        "dataTypes": dataTypes?.join(','),
+        "dataTypes": dataTypes == null
+            ? null
+            : List<String>.from(dataTypes!.map((x) => x)),
       }..removeWhere((key, value) => value == null);
 
   @override
