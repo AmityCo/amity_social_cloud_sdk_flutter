@@ -14,4 +14,7 @@ abstract class PublicPostApiInterface {
   Future<bool> flagPost(String postId);
   Future<bool> unflagPost(String postId);
   Future<bool> isPostFlagByMe(String postId);
+
+  Future<bool> approvePost(String postId);
+  Future<bool> declinePost(String postId);
 }

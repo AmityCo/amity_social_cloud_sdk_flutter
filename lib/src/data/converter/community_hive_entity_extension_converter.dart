@@ -20,6 +20,7 @@ extension CommunityHiveEntityExtension on CommunityHiveEntity {
       ..isDeleted = isDeleted
       ..createdAt = createdAt
       ..updatedAt = editedAt
-      ..categoryIds = categoryIds;
+      ..categoryIds = categoryIds
+      ..isPostReviewEnabled = needApprovalOnPostCreation;
   }
 }

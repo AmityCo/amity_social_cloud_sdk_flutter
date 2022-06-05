@@ -430,6 +430,12 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<CommunityMemberGetUsecase>(
         () => CommunityMemberGetUsecase(communityMemberRepo: serviceLocator()));
 
+    serviceLocator.registerLazySingleton<PostApproveUsecase>(
+        () => PostApproveUsecase(postRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<PostDeclineUsecase>(
+        () => PostDeclineUsecase(postRepo: serviceLocator()));
+
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
     serviceLocator.registerLazySingleton(() => PostRepository());

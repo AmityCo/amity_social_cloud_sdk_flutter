@@ -21,6 +21,7 @@ extension CommunityResponsseExtension on CommunityResponse {
       ..createdAt = createdAt
       ..editedAt = updatedAt
       ..metadata = metadata
-      ..categoryIds = categoryIds;
+      ..categoryIds = categoryIds
+      ..needApprovalOnPostCreation = needApprovalOnPostCreation;
   }
 }

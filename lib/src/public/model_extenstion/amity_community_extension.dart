@@ -24,4 +24,13 @@ extension AmityCommunityExtension on AmityCommunity {
   Future<List<String>> getCurentUserRoles() async {
     return _getUserRoles(AmityCoreClient.getUserId());
   }
+
+  /// Check if the current user have the permisson for the community
+  bool hasPermission(AmityPermission permission) {
+    return serviceLocator<CommunityMemberPermissionCheckUsecase>().get(
+        CommunityMemberPermissionCheckRequest(
+            communityId: communityId!,
+            userId: AmityCoreClient.getUserId(),
+            permission: permission));
+  }
 }
