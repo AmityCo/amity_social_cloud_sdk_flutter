@@ -35,11 +35,11 @@ abstract class AmityFileInfo {
 }
 
 class AmityFile extends AmityFileInfo {
-  AmityFile(AmityFileProperties _fileProperties) : super(_fileProperties);
+  AmityFile(AmityFileProperties fileProperties) : super(fileProperties);
 }
 
 class AmityImage extends AmityFileInfo {
-  AmityImage(AmityFileProperties _fileProperties) : super(_fileProperties);
+  AmityImage(AmityFileProperties fileProperties) : super(fileProperties);
 
   String getUrl(AmityImageSize size) {
     return '$fileUrl?size=${size.value}';
@@ -80,7 +80,7 @@ extension AmityImageSizeExtension on AmityImageSize {
 
 ///Amity Video
 class AmityVideo extends AmityFileInfo {
-  AmityVideo(AmityFileProperties _fileProperties) : super(_fileProperties);
+  AmityVideo(AmityFileProperties fileProperties) : super(fileProperties);
 }
 
 enum AmityVideoQuality { ORIGINAL, HIGH, MEDIUM, LOW }

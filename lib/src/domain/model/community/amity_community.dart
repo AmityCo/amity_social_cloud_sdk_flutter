@@ -65,12 +65,10 @@ class AmityCommunity {
     serviceLocator<CommunityDbAdapter>()
         .listenCommunityEntity(communityId!)
         .listen((event) {
-      final _updateAmityCommunity = event.convertToAmityCommunity();
+      final updateAmityCommunity = event.convertToAmityCommunity();
 
       //TOOD: Good idea would be have compose method inside the object itself
-      serviceLocator<CommunityComposerUsecase>()
-          .get(_updateAmityCommunity)
-          .then(
+      serviceLocator<CommunityComposerUsecase>().get(updateAmityCommunity).then(
             (value) => controller.add(value),
           );
     });

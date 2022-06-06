@@ -38,8 +38,8 @@ class CommunityMemberQueryBuilder {
       _request.options!.limit = limit;
     }
 
-    final _data = await usecase.get(_request);
+    final data = await usecase.get(_request);
 
-    return _data;
+    return data;
   }
 }
