@@ -13,14 +13,14 @@ String userFeedRequestToJson(GetCommunityFeedRequest data) =>
     json.encode(data.toJson());
 
 class GetCommunityFeedRequest {
-  GetCommunityFeedRequest({
-    required this.communityId,
-    this.sortBy,
-    this.isDeleted,
-    this.hasFlag,
-    this.options,
-    this.dataTypes,
-  });
+  GetCommunityFeedRequest(
+      {required this.communityId,
+      this.sortBy,
+      this.isDeleted,
+      this.hasFlag,
+      this.options,
+      this.dataTypes,
+      this.matchingOnlyParentPost});
 
   final String communityId;
   String? sortBy;
@@ -28,6 +28,7 @@ class GetCommunityFeedRequest {
   bool? hasFlag;
   OptionsRequest? options;
   List<String>? dataTypes;
+  bool? matchingOnlyParentPost;
 
   factory GetCommunityFeedRequest.fromJson(Map<String, dynamic> json) =>
       GetCommunityFeedRequest(
@@ -39,6 +40,7 @@ class GetCommunityFeedRequest {
             ? null
             : OptionsRequest.fromJson(json["options"]),
         dataTypes: List<String>.from(json["dataTypes"].map((x) => x)),
+        matchingOnlyParentPost: json["matchingOnlyParentPost"],
       );
 
   Map<String, dynamic> toJson() => {
@@ -50,5 +52,6 @@ class GetCommunityFeedRequest {
         "dataTypes": dataTypes == null
             ? null
             : List<dynamic>.from(dataTypes!.map((x) => x)),
+        "matchingOnlyParentPost": false,
       }..removeWhere((key, value) => value == null);
 }

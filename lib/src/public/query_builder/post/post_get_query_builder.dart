@@ -41,29 +41,33 @@ class AmityPostGetQueryBuilder {
   AmityPostGetQueryBuilder(this._useCase, this._targetId, this._targetType)
       : _request = GetPostRequest(targetId: _targetId, targetType: _targetType);
 
-  AmityPostGetQueryBuilder sortBy(
-      {required AmityCommentSortOption sortOption}) {
+  AmityPostGetQueryBuilder sortBy(AmityCommentSortOption sortOption) {
     _sortOption = sortOption.apiKey;
     return this;
   }
 
-  AmityPostGetQueryBuilder includeDeleted({required bool includeDeleted}) {
+  AmityPostGetQueryBuilder includeDeleted(bool includeDeleted) {
     _isDeleted = includeDeleted;
     return this;
   }
 
-  AmityPostGetQueryBuilder hasFlag({required bool hasFlag}) {
+  AmityPostGetQueryBuilder hasFlag(bool hasFlag) {
     _hasFlag = hasFlag;
     return this;
   }
 
-  AmityPostGetQueryBuilder feedType({required AmityFeedType feedType}) {
+  AmityPostGetQueryBuilder feedType(AmityFeedType feedType) {
     _amityFeedType = feedType.value;
     return this;
   }
 
-  AmityPostGetQueryBuilder types({required List<AmityDataType> postTypes}) {
+  AmityPostGetQueryBuilder types(List<AmityDataType> postTypes) {
     _dataTypes = postTypes.map((e) => e.value).toList();
+    return this;
+  }
+
+  AmityPostGetQueryBuilder onlyParent(bool onlyParent) {
+    _request.matchingOnlyParentPost = onlyParent;
     return this;
   }
 
@@ -73,7 +77,12 @@ class AmityPostGetQueryBuilder {
     if (_hasFlag != null) _request.hasFlag = _hasFlag;
     if (_isDeleted != null) _request.isDeleted = _isDeleted;
     if (_amityFeedType != null) _request.feedType = _amityFeedType;
-    if (_dataTypes != null) _request.dataTypes = _dataTypes;
+    if (_dataTypes != null) {
+      _request.dataTypes = _dataTypes;
+
+      //Disable matchOnlyParent filtering, because all parent post is text only.
+      _request.matchingOnlyParentPost = false;
+    }
 
     _request.options = OptionsRequest();
 
