@@ -53,7 +53,6 @@ class CommunityGetQueryBuilder {
     request.filter = _filter.value;
     request.sortBy = _sortBy.apiKey;
     request.isDeleted = _isDeleted;
-    request.tags = _tags;
 
     request.options = OptionsRequest();
     if (token != null) {
@@ -61,6 +60,10 @@ class CommunityGetQueryBuilder {
     }
     if (limit != null) {
       request.options!.limit = limit;
+    }
+
+    if (_tags != null && _tags!.isNotEmpty) {
+      request.tags = _tags;
     }
 
     final data = await useCase.get(request);
