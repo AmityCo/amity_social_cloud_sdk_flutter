@@ -1,7 +1,9 @@
 import 'package:amity_sdk/amity_sdk.dart';
+import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/model/api_request/community_member_check_request.dart';
-import 'package:amity_sdk/src/core/service_locator/service_locator.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/usecase/community/community_get_recommend.dart';
+import 'package:amity_sdk/src/domain/usecase/community/community_get_trending.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_get_usecase.dart';
 
 class CommunityRepository {
@@ -31,6 +33,17 @@ class CommunityRepository {
 
   Future leaveCommunity(String communityId) {
     return serviceLocator<CommunityMemberLeaveUsecase>().get(communityId);
+  }
+
+  Future<List<AmityCommunity>> getTrendingCommunities() {
+    final optionsRequest = OptionsRequest(limit: 5);
+    return serviceLocator<CommunityGetTrendingUseCase>().get(optionsRequest);
+  }
+
+  Future<List<AmityCommunity>> getRecommendedCommunities(
+      {String? token, int? limit}) {
+    final optionsRequest = OptionsRequest(limit: 5);
+    return serviceLocator<CommunityGetRecommendedUseCase>().get(optionsRequest);
   }
 
   AmityCommunityParticipation membership(String communityId) {
