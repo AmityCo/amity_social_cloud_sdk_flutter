@@ -23,5 +23,6 @@ class CommunityHiveEntity extends HiveObject {
   DateTime? createdAt;
   DateTime? editedAt;
   List<String>? categoryIds;
+  List<String>? tags;
 
 }

@@ -15,13 +15,13 @@ class AmityCommunity {
   bool? isOfficial;
   bool? isPublic;
   bool? onlyAdminCanPost;
-  AmityTags? tags;
   Map<String, dynamic>? metadata;
   int? postsCount;
   int? membersCount;
   bool? isJoined;
   bool? isDeleted;
   List<String>? categoryIds;
+  List<String>? tags;
   List<AmityCommunityCategory>? categories; //compose
   AmityUser? user; //Compose
   AmityImage? avatarImage; //Compose
@@ -41,7 +41,6 @@ class AmityCommunity {
       'isOfficial': isOfficial,
       'isPublic': isPublic,
       'onlyAdminCanPost': onlyAdminCanPost,
-      'tags': tags?.toMap(),
       'metadata': metadata,
       'postsCount': postsCount,
       'membersCount': membersCount,
@@ -49,6 +48,7 @@ class AmityCommunity {
       'isDeleted': isDeleted,
       'categoryIds': categoryIds,
       'categories': categories?.map((x) => x.toMap()).toList(),
+      'tags': tags,
       'user': user?.toMap(),
       'avatarImage': avatarImage?.getUrl(AmityImageSize.MEDIUM),
       'isPostReviewEnabled': isPostReviewEnabled,
