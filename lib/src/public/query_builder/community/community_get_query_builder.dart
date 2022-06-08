@@ -10,6 +10,7 @@ class CommunityGetQueryBuilder {
   AmityCommunityFilter _filter = AmityCommunityFilter.ALL;
   AmityCommunitySortOption _sortBy = AmityCommunitySortOption.DISPLAY_NAME;
   bool? _isDeleted;
+  List<String>? _tags;
 
   CommunityGetQueryBuilder({required this.useCase});
 
@@ -38,6 +39,11 @@ class CommunityGetQueryBuilder {
     return this;
   }
 
+  CommunityGetQueryBuilder tags(List<String> tags) {
+    _tags = tags;
+    return this;
+  }
+
   Future<Tuple2<List<AmityCommunity>, String>> getPagingData(
       {String? token, int? limit}) async {
     GetCommunityRequest request = GetCommunityRequest();
@@ -47,6 +53,7 @@ class CommunityGetQueryBuilder {
     request.filter = _filter.value;
     request.sortBy = _sortBy.apiKey;
     request.isDeleted = _isDeleted;
+    request.tags = _tags;
 
     request.options = OptionsRequest();
     if (token != null) {
