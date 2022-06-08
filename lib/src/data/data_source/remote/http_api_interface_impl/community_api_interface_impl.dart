@@ -84,7 +84,7 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
       OptionsRequest request) async {
     try {
       final data = await httpApiClient()
-          .get('$COMMUNITY_V3/top-tredning', queryParameters: request.toJson());
+          .get('$COMMUNITY_V3/top-trending', queryParameters: request.toJson());
       return CreateCommunityResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
