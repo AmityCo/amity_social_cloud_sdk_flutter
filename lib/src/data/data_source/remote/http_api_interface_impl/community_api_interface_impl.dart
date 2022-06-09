@@ -57,8 +57,10 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
   Future<CreateCommunityResponse> getCommunityQuery(
       GetCommunityRequest request) async {
     try {
-      final data = await httpApiClient()
-          .get(COMMUNITY_V3, queryParameters: request.toJson());
+      final client = httpApiClient();
+      client.options.listFormat = ListFormat.multiCompatible;
+      final data =
+          await client.get(COMMUNITY_V3, queryParameters: request.toJson());
       return CreateCommunityResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

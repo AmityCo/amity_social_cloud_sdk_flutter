@@ -11,6 +11,7 @@ class CommunityCreatorBuilder {
   List<String>? _categoryIds;
   Map<String, dynamic>? _metadata;
   List<String>? _userIds;
+  List<String>? _tags;
   String? _avatarFileId;
   bool? _needApprovalOnPostCreation;
 
@@ -41,6 +42,11 @@ class CommunityCreatorBuilder {
     return this;
   }
 
+  CommunityCreatorBuilder tags(List<String> tags) {
+    _tags = tags;
+    return this;
+  }
+
   CommunityCreatorBuilder avatar(AmityImage avatar) {
     _avatarFileId = avatar.fileId;
     return this;
@@ -59,6 +65,7 @@ class CommunityCreatorBuilder {
     request.categoryIds = _categoryIds;
     request.metadata = _metadata;
     request.userIds = _userIds;
+    request.tags = _tags;
     request.avatarFileId = _avatarFileId;
     request.needApprovalOnPostCreation = _needApprovalOnPostCreation;
 
