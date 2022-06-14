@@ -13,5 +13,5 @@ abstract class CommunityRepo {
   Future deleteCommunity(String communityId);
   Future<AmityCommunity> updateCommunity(CreateCommunityRequest request);
 
-  Future<AmityCommunityCategory> getCommunityCategoryById(String categoryId);
+  Future<AmityCommunityCategory?> getCommunityCategoryById(String categoryId);
 }
