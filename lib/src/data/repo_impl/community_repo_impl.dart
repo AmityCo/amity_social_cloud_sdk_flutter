@@ -134,11 +134,11 @@ class CommunityRepoImpl extends CommunityRepo {
   }
 
   @override
-  Future<AmityCommunityCategory> getCommunityCategoryById(
+  Future<AmityCommunityCategory?> getCommunityCategoryById(
       String categoryId) async {
     return communityCategoryDbAdapter
         .getCommunityCategoryEntity(categoryId)
-        .convertToAmityCommunityCategory();
+        ?.convertToAmityCommunityCategory();
   }
 
   @override

@@ -22,7 +22,7 @@ class AmityCommunity {
   bool? isDeleted;
   List<String>? categoryIds;
   List<String>? tags;
-  List<AmityCommunityCategory>? categories; //compose
+  List<AmityCommunityCategory?>? categories; //compose
   AmityUser? user; //Compose
   AmityImage? avatarImage; //Compose
   bool? isPostReviewEnabled;
@@ -47,7 +47,7 @@ class AmityCommunity {
       'isJoined': isJoined,
       'isDeleted': isDeleted,
       'categoryIds': categoryIds,
-      'categories': categories?.map((x) => x.toMap()).toList(),
+      'categories': categories?.map((x) => x?.toMap()).toList(),
       'tags': tags,
       'user': user?.toMap(),
       'avatarImage': avatarImage?.getUrl(AmityImageSize.MEDIUM),
