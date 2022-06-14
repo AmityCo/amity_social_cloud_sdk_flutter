@@ -118,7 +118,7 @@ class PagingController<T> extends ChangeNotifier {
             'Page length ($length) is greater than the maximum size ($pageSize)');
       }
 
-      if (length > 0 && length < pageSize) {
+      if ((length > 0 && length < pageSize) || _nextPageToken!.isEmpty) {
         //   // This should only happen when loading the last page.
         //   // In that case, we append the last page with a few items to make its size
         //   // similar to normal pages. This is useful especially with GridView,
