@@ -10,23 +10,23 @@ class AmityPostGetTargetSelector {
     _useCase = useCase;
   }
 
-  _AmityPostGetQueryBuilder targetMe() {
-    return _AmityPostGetQueryBuilder(
+  AmityPostGetQueryBuilder targetMe() {
+    return AmityPostGetQueryBuilder(
         _useCase, AmityCoreClient.getUserId(), AmityPostTargetType.USER.value);
   }
 
-  _AmityPostGetQueryBuilder targetUser(String targetUser) {
-    return _AmityPostGetQueryBuilder(
+  AmityPostGetQueryBuilder targetUser(String targetUser) {
+    return AmityPostGetQueryBuilder(
         _useCase, targetUser, AmityPostTargetType.USER.value);
   }
 
-  _AmityPostGetQueryBuilder targetCommunity(String communityId) {
-    return _AmityPostGetQueryBuilder(
+  AmityPostGetQueryBuilder targetCommunity(String communityId) {
+    return AmityPostGetQueryBuilder(
         _useCase, communityId, AmityPostTargetType.COMMUNITY.value);
   }
 }
 
-class _AmityPostGetQueryBuilder {
+class AmityPostGetQueryBuilder {
   final PostGetUsecase _useCase;
   final String _targetId;
   final String _targetType;
@@ -38,32 +38,36 @@ class _AmityPostGetQueryBuilder {
   String? _amityFeedType;
   List<String>? _dataTypes;
 
-  _AmityPostGetQueryBuilder(this._useCase, this._targetId, this._targetType)
+  AmityPostGetQueryBuilder(this._useCase, this._targetId, this._targetType)
       : _request = GetPostRequest(targetId: _targetId, targetType: _targetType);
 
-  _AmityPostGetQueryBuilder sortBy(
-      {required AmityCommentSortOption sortOption}) {
+  AmityPostGetQueryBuilder sortBy(AmityCommentSortOption sortOption) {
     _sortOption = sortOption.apiKey;
     return this;
   }
 
-  _AmityPostGetQueryBuilder includeDeleted({required bool includeDeleted}) {
+  AmityPostGetQueryBuilder includeDeleted(bool includeDeleted) {
     _isDeleted = includeDeleted;
     return this;
   }
 
-  _AmityPostGetQueryBuilder hasFlag({required bool hasFlag}) {
+  AmityPostGetQueryBuilder hasFlag(bool hasFlag) {
     _hasFlag = hasFlag;
     return this;
   }
 
-  _AmityPostGetQueryBuilder feedType({required AmityFeedType feedType}) {
+  AmityPostGetQueryBuilder feedType(AmityFeedType feedType) {
     _amityFeedType = feedType.value;
     return this;
   }
 
-  _AmityPostGetQueryBuilder types({required List<AmityDataType> postTypes}) {
+  AmityPostGetQueryBuilder types(List<AmityDataType> postTypes) {
     _dataTypes = postTypes.map((e) => e.value).toList();
+    return this;
+  }
+
+  AmityPostGetQueryBuilder onlyParent(bool onlyParent) {
+    _request.matchingOnlyParentPost = onlyParent;
     return this;
   }
 
@@ -73,7 +77,12 @@ class _AmityPostGetQueryBuilder {
     if (_hasFlag != null) _request.hasFlag = _hasFlag;
     if (_isDeleted != null) _request.isDeleted = _isDeleted;
     if (_amityFeedType != null) _request.feedType = _amityFeedType;
-    if (_dataTypes != null) _request.dataTypes = _dataTypes;
+    if (_dataTypes != null) {
+      _request.dataTypes = _dataTypes;
+
+      //Disable matchOnlyParent filtering, because all parent post is text only.
+      _request.matchingOnlyParentPost = false;
+    }
 
     _request.options = OptionsRequest();
 
@@ -84,8 +93,8 @@ class _AmityPostGetQueryBuilder {
       _request.options!.limit = limit;
     }
 
-    final _data = await _useCase.get(_request);
+    final data = await _useCase.get(_request);
 
-    return _data;
+    return data;
   }
 }

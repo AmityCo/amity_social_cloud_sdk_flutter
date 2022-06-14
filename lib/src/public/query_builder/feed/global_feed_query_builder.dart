@@ -18,9 +18,9 @@ class AmityGlobalFeedQuery {
       request.limit = limit;
     }
 
-    final _data = await _usecase.get(request);
+    final data = await _usecase.get(request);
 
-    return _data;
+    return data;
   }
 
   Stream<Tuple2<List<AmityPost>, String>> getPagingDataStream(

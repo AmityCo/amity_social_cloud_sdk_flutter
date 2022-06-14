@@ -12,7 +12,7 @@ class FileApiInterfaceImpl extends FileApiInterface {
   @override
   Future<bool> deleteFile(String fileId) async {
     try {
-      final data = await httpApiClient().delete(FILE_V3 + '/$fileId');
+      final data = await httpApiClient().delete('$FILE_V3/$fileId');
       return true;
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -23,7 +23,7 @@ class FileApiInterfaceImpl extends FileApiInterface {
   @override
   Future<CreatePostResponse> getFile(String fileId) async {
     try {
-      final data = await httpApiClient().get(FILE_V3 + '/$fileId');
+      final data = await httpApiClient().get('$FILE_V3/$fileId');
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -45,7 +45,7 @@ class FileApiInterfaceImpl extends FileApiInterface {
         'file': await MultipartFile.fromFile(request.files[0].path,
             filename: request.files[0].path.split('/').last),
       }..addAll(request.toJson()));
-      final data = await httpApiClient().post(FILE_V3 + '/', data: formData);
+      final data = await httpApiClient().post('$FILE_V3/', data: formData);
       return fileResponseFromList(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -70,7 +70,7 @@ class FileApiInterfaceImpl extends FileApiInterface {
             filename: request.files[0].path.split('/').last),
       }..addAll(request.toJson()));
       final data =
-          await httpApiClient().post(VIDEO_FILE_V3 + '/', data: formData);
+          await httpApiClient().post('$VIDEO_FILE_V3/', data: formData);
       return fileResponseFromList(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

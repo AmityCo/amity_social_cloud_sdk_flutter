@@ -134,11 +134,11 @@ class CommunityRepoImpl extends CommunityRepo {
   }
 
   @override
-  Future<AmityCommunityCategory> getCommunityCategoryById(
+  Future<AmityCommunityCategory?> getCommunityCategoryById(
       String categoryId) async {
     return communityCategoryDbAdapter
         .getCommunityCategoryEntity(categoryId)
-        .convertToAmityCommunityCategory();
+        ?.convertToAmityCommunityCategory();
   }
 
   @override
@@ -146,22 +146,22 @@ class CommunityRepoImpl extends CommunityRepo {
       GetCommunityRequest request) async {
     final data = await communityApiInterface.getCommunityQuery(request);
     final amityCommunity = await saveCommunity(data);
-    return Tuple2(amityCommunity, data.paging!.next ?? '');
+    return Tuple2(amityCommunity, data.paging?.next ?? '');
   }
 
   @override
-  Future<Tuple2<List<AmityCommunity>, String>> getRecommendedCommunity(
+  Future<List<AmityCommunity>> getRecommendedCommunity(
       OptionsRequest request) async {
     final data = await communityApiInterface.getRecommendedCommunity(request);
     final amityCommunity = await saveCommunity(data);
-    return Tuple2(amityCommunity, data.paging!.next ?? '');
+    return amityCommunity;
   }
 
   @override
-  Future<Tuple2<List<AmityCommunity>, String>> getTopTredningCommunity(
+  Future<List<AmityCommunity>> getTopTrendingCommunity(
       OptionsRequest request) async {
     final data = await communityApiInterface.getTopTredningCommunity(request);
     final amityCommunity = await saveCommunity(data);
-    return Tuple2(amityCommunity, data.paging!.next ?? '');
+    return amityCommunity;
   }
 }

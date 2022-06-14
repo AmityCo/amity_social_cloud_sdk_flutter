@@ -2,5 +2,5 @@ import 'package:amity_sdk/src/data/data_source/local/hive_entity/community_categ
 
 abstract class CommunityCategoryDbAdapter {
   Future saveCommunityCategoryEntity(CommunityCategoryHiveEntity entity);
-  CommunityCategoryHiveEntity getCommunityCategoryEntity(String id);
+  CommunityCategoryHiveEntity? getCommunityCategoryEntity(String id);
 }
