@@ -96,4 +96,26 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
       return Future.error(amityError.amityException());
     }
   }
+
+  @override
+  Future<bool> approvePost(String postId) async {
+    try {
+      final data = await httpApiClient().post('$POST_V3/$postId/approve');
+      return true;
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
+  Future<bool> declinePost(String postId) async {
+    try {
+      final data = await httpApiClient().post('$POST_V3/$postId/approve');
+      return true;
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
 }

@@ -22,4 +22,11 @@ class PostRepository {
   Future deletePost({required String postId, bool hardDelete = false}) {
     return serviceLocator<PostDeleteUseCase>().get(postId);
   }
+
+  PostReviewQueryBuilder reviewPost({required String postId}) {
+    return PostReviewQueryBuilder(
+        postApproveUsecase: serviceLocator(),
+        postDeclineUsecase: serviceLocator(),
+        postId: postId);
+  }
 }

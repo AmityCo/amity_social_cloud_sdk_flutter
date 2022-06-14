@@ -177,4 +177,16 @@ class PostRepoImpl extends PostRepo {
 
     return controller.stream;
   }
+
+  @override
+  Future<bool> approvePost(String postId) async {
+    final data = await publicPostApiInterface.approvePost(postId);
+    return data;
+  }
+
+  @override
+  Future<bool> declinePost(String postId) async {
+    final data = await publicPostApiInterface.declinePost(postId);
+    return data;
+  }
 }
