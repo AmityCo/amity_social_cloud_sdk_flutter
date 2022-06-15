@@ -111,7 +111,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   @override
   Future<bool> declinePost(String postId) async {
     try {
-      final data = await httpApiClient().post('$POST_V3/$postId/approve');
+      final data = await httpApiClient().post('$POST_V3/$postId/decline');
       return true;
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
