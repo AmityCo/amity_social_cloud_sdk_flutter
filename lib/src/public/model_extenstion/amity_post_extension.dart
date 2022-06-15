@@ -1,9 +1,6 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/public/query_builder/comment/comment_creator_builder.dart';
-import 'package:amity_sdk/src/public/query_builder/post/post_flag_query_builder.dart';
-import 'package:amity_sdk/src/public/query_builder/post/post_text_editor.dart';
-import 'package:amity_sdk/src/public/query_builder/reaction/reaction_query_builder.dart';
+import 'package:amity_sdk/src/public/public.dart';
 
 extension AmityPostExtension on AmityPost {
   AddReactionQueryBuilder react() {
@@ -28,10 +25,27 @@ extension AmityPostExtension on AmityPost {
   }
 
   AmityTextPostEditorBuilder edit() {
-    return AmityTextPostEditorBuilder(useCase: serviceLocator(), targetId: postId!);
+    return AmityTextPostEditorBuilder(
+        useCase: serviceLocator(), targetId: postId!);
   }
 
   Future delete({bool hardDelete = false}) {
     return serviceLocator<PostDeleteUseCase>().get(postId!);
+  }
+
+  Future<bool> approve() {
+    return PostReviewQueryBuilder(
+            postApproveUsecase: serviceLocator(),
+            postDeclineUsecase: serviceLocator(),
+            postId: postId!)
+        .approve();
+  }
+
+  Future<bool> decline() {
+    return PostReviewQueryBuilder(
+            postApproveUsecase: serviceLocator(),
+            postDeclineUsecase: serviceLocator(),
+            postId: postId!)
+        .decline();
   }
 }

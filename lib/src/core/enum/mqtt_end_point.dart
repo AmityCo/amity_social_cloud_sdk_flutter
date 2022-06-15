@@ -2,7 +2,7 @@
 
 import 'package:amity_sdk/src/core/constant/global_constant.dart';
 
-enum AmityRegionalMqttEndpoint { SG, EU, US, STAGING }
+enum AmityRegionalMqttEndpoint { SG, EU, US }
 
 extension AmityRegionalMqttEndpointExtension on AmityRegionalMqttEndpoint {
   String get value {

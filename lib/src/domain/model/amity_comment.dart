@@ -39,10 +39,10 @@ class AmityComment {
     serviceLocator<CommentDbAdapter>()
         .listenCommentEntity(commentId!)
         .listen((event) {
-      final _updateAmityComment = event.convertToAmityComment();
+      final updateAmityComment = event.convertToAmityComment();
 
       //TOOD: Good idea would be have compose method inside the object itself
-      serviceLocator<CommentComposerUsecase>().get(_updateAmityComment).then(
+      serviceLocator<CommentComposerUsecase>().get(updateAmityComment).then(
             (value) => controller.add(value),
           );
     });

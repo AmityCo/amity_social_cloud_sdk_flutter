@@ -46,10 +46,10 @@ class AmityPost {
     StreamController<AmityPost> controller = StreamController<AmityPost>();
 
     serviceLocator<PostDbAdapter>().listenPostEntity(postId!).listen((event) {
-      final _updateAmityPost = event.convertToAmityPost();
+      final updateAmityPost = event.convertToAmityPost();
 
       //TOOD: Good idea would be have compose method inside the object itself
-      serviceLocator<PostComposerUsecase>().get(_updateAmityPost).then(
+      serviceLocator<PostComposerUsecase>().get(updateAmityPost).then(
             (value) => controller.add(value),
           );
     });

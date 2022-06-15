@@ -2,6 +2,8 @@
 //
 //     final createPostRequest = createPostRequestFromJson(jsonString);
 
+import 'dart:convert';
+
 class CreatePostRequest {
   CreatePostRequest({
     this.data,
@@ -47,7 +49,7 @@ class CreatePostRequest {
 
   @override
   String toString() {
-    return toJson().toString();
+    return json.encode(toJson());
   }
 }
 

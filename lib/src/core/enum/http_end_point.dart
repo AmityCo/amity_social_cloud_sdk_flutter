@@ -2,7 +2,11 @@
 
 import 'package:amity_sdk/src/core/constant/global_constant.dart';
 
-enum AmityRegionalHttpEndpoint { SG, EU, US, STAGING }
+enum AmityRegionalHttpEndpoint {
+  SG,
+  EU,
+  US,
+}
 
 extension AmityRegionalHttpEndpointExtension on AmityRegionalHttpEndpoint {
   String get value {

@@ -15,14 +15,14 @@ class AmityCommunity {
   bool? isOfficial;
   bool? isPublic;
   bool? onlyAdminCanPost;
-  AmityTags? tags;
   Map<String, dynamic>? metadata;
   int? postsCount;
   int? membersCount;
   bool? isJoined;
   bool? isDeleted;
   List<String>? categoryIds;
-  List<AmityCommunityCategory>? categories; //compose
+  List<String>? tags;
+  List<AmityCommunityCategory?>? categories; //compose
   AmityUser? user; //Compose
   AmityImage? avatarImage; //Compose
   bool? isPostReviewEnabled;
@@ -41,14 +41,14 @@ class AmityCommunity {
       'isOfficial': isOfficial,
       'isPublic': isPublic,
       'onlyAdminCanPost': onlyAdminCanPost,
-      'tags': tags?.toMap(),
       'metadata': metadata,
       'postsCount': postsCount,
       'membersCount': membersCount,
       'isJoined': isJoined,
       'isDeleted': isDeleted,
       'categoryIds': categoryIds,
-      'categories': categories?.map((x) => x.toMap()).toList(),
+      'categories': categories?.map((x) => x?.toMap()).toList(),
+      'tags': tags,
       'user': user?.toMap(),
       'avatarImage': avatarImage?.getUrl(AmityImageSize.MEDIUM),
       'isPostReviewEnabled': isPostReviewEnabled,
@@ -65,12 +65,10 @@ class AmityCommunity {
     serviceLocator<CommunityDbAdapter>()
         .listenCommunityEntity(communityId!)
         .listen((event) {
-      final _updateAmityCommunity = event.convertToAmityCommunity();
+      final updateAmityCommunity = event.convertToAmityCommunity();
 
       //TOOD: Good idea would be have compose method inside the object itself
-      serviceLocator<CommunityComposerUsecase>()
-          .get(_updateAmityCommunity)
-          .then(
+      serviceLocator<CommunityComposerUsecase>().get(updateAmityCommunity).then(
             (value) => controller.add(value),
           );
     });

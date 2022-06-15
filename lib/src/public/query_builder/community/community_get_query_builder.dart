@@ -10,6 +10,7 @@ class CommunityGetQueryBuilder {
   AmityCommunityFilter _filter = AmityCommunityFilter.ALL;
   AmityCommunitySortOption _sortBy = AmityCommunitySortOption.DISPLAY_NAME;
   bool? _isDeleted;
+  List<String>? _tags;
 
   CommunityGetQueryBuilder({required this.useCase});
 
@@ -38,26 +39,35 @@ class CommunityGetQueryBuilder {
     return this;
   }
 
+  CommunityGetQueryBuilder tags(List<String> tags) {
+    _tags = tags;
+    return this;
+  }
+
   Future<Tuple2<List<AmityCommunity>, String>> getPagingData(
       {String? token, int? limit}) async {
-    GetCommunityRequest _request = GetCommunityRequest();
+    GetCommunityRequest request = GetCommunityRequest();
 
-    _request.keyword = _keyword;
-    _request.categoryId = _categoryId;
-    _request.filter = _filter.value;
-    _request.sortBy = _sortBy.apiKey;
-    _request.isDeleted = _isDeleted;
+    request.keyword = _keyword;
+    request.categoryId = _categoryId;
+    request.filter = _filter.value;
+    request.sortBy = _sortBy.apiKey;
+    request.isDeleted = _isDeleted;
 
-    _request.options = OptionsRequest();
+    request.options = OptionsRequest();
     if (token != null) {
-      _request.options!.token = token;
+      request.options!.token = token;
     }
     if (limit != null) {
-      _request.options!.limit = limit;
+      request.options!.limit = limit;
     }
 
-    final _data = await useCase.get(_request);
+    if (_tags != null && _tags!.isNotEmpty) {
+      request.tags = _tags;
+    }
 
-    return _data;
+    final data = await useCase.get(request);
+
+    return data;
   }
 }

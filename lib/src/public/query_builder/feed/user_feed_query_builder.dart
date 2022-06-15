@@ -34,9 +34,9 @@ class UserFeedQueryBuilder {
       _request.options!.limit = limit;
     }
 
-    final _data = await _usecase.get(_request);
+    final data = await _usecase.get(_request);
 
-    return _data;
+    return data;
   }
 
   Stream<Tuple2<List<AmityPost>, String>> getPagingDataStream(

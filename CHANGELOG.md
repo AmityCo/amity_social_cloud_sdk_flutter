@@ -1,9 +1,23 @@
+## 0.1.3
+* fix: null category ID in Community Category hive entiry
+* fix: resolve edge case with page controller blank token
+
+## 0.1.2
+* chore: enable the lint core and analyze the code
+## 0.1.1
+* fix: community category causes data corruption
+* fix: post metadata is unable to update
+
+
 ## 0.1.0
 
 * feat: Add Metadata in post, comment and community
 * feat: Streams for Post, Comment, Community and Community Member
 * feat: Community CRUD and Query
 * feat: Community Member CRUD and Query
+* feat: Community Member Roles & Permissions
+* feat: Community feed query
+* feat: Add/Remove Post and Comment reactions
 * fix: resolve memory leak issue in post and comment object
 
 

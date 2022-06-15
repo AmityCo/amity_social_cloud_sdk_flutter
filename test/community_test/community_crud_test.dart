@@ -7,8 +7,7 @@ void main() {
     setUp(() async {
       await AmityCoreClient.setup(
           option: AmityCoreClientOption(
-              apiKey: 'apiKey',
-              httpEndpoint: AmityRegionalHttpEndpoint.STAGING),
+              apiKey: 'apiKey', httpEndpoint: AmityRegionalHttpEndpoint.SG),
           sycInitialization: true);
       await AmityCoreClient.login('victimAndroid').submit();
       communityRepository = AmitySocialClient.newCommunityRepository();
