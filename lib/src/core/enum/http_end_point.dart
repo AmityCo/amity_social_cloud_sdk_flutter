@@ -14,7 +14,6 @@ extension AmityRegionalHttpEndpointExtension on AmityRegionalHttpEndpoint {
       SG_HTTP_ENDPOINT,
       EU_HTTP_ENDPOINT,
       US_HTTP_ENDPOINT,
-      STAGING_HTTP_ENDPOINT
     ][index];
   }
 }
