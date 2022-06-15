@@ -1,4 +1,3 @@
-export 'community_member_query_usecase.dart';
 export 'community_member_add_role_usecase.dart';
 export 'community_member_add_usecase.dart';
 export 'community_member_ban_usecase.dart';
