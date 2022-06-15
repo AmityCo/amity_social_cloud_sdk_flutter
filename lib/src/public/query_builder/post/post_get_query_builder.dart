@@ -77,7 +77,7 @@ class AmityPostGetQueryBuilder {
     if (_hasFlag != null) _request.hasFlag = _hasFlag;
     if (_isDeleted != null) _request.isDeleted = _isDeleted;
     if (_amityFeedType != null) _request.feedType = _amityFeedType;
-    if (_dataTypes != null) {
+    if (_dataTypes != null && _dataTypes!.isNotEmpty) {
       _request.dataTypes = _dataTypes;
 
       //Disable matchOnlyParent filtering, because all parent post is text only.
