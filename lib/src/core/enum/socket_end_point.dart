@@ -1,7 +1,12 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:amity_sdk/src/core/constant/global_constant.dart';
 
-// ignore: constant_identifier_names
-enum AmityRegionalSocketEndpoint { SG, EU, US, STAGING }
+enum AmityRegionalSocketEndpoint {
+  SG,
+  EU,
+  US,
+}
 
 extension AmityRegionalSocketEndpointExtension on AmityRegionalSocketEndpoint {
   String get value {
@@ -9,7 +14,6 @@ extension AmityRegionalSocketEndpointExtension on AmityRegionalSocketEndpoint {
       SG_SOCKET_ENDPOINT,
       EU_SOCKET_ENDPOINT,
       US_SOCKET_ENDPOINT,
-      STAGING_SOCKET_ENDPOINT
     ][index];
   }
 }
