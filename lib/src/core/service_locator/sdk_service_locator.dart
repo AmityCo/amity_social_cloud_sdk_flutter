@@ -1,17 +1,7 @@
 import 'dart:developer';
 
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_paging_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/commnunity_member_paging_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/community_member_dp_adapter_impl.dart';
-import 'package:amity_sdk/src/data/data_source/remote/api_interface/community_member_api_interface.dart';
-import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/community_member_api_interface_impl.dart';
-import 'package:amity_sdk/src/data/repo_impl/community_member_repo_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/usecase/community/community_get_recommend.dart';
-import 'package:amity_sdk/src/domain/usecase/community/community_get_trending.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_get_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -122,6 +112,8 @@ class SdkServiceLocator {
         NotificationApiInterfaceImpl(
             httpApiClient: serviceLocator(),
             amityCoreClientOption: configServiceLocator()));
+    serviceLocator.registerLazySingleton<CommunityCategoryApiInterface>(() =>
+        CommunityCategoryApiInterfaceImpl(httpApiClient: serviceLocator()));
 
     // Local Data Source
 
@@ -187,6 +179,15 @@ class SdkServiceLocator {
             communityMemberPagingDbAdapter: serviceLocator(),
             userDbAdapter: serviceLocator(),
             fileDbAdapter: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityCategoryRepo>(() =>
+        CommunityCategoryRepoImpl(
+            communityCategoryApiInterface: serviceLocator(),
+            communityDbAdapter: serviceLocator(),
+            commentDbAdapter: serviceLocator(),
+            userDbAdapter: serviceLocator(),
+            fileDbAdapter: serviceLocator(),
+            communityCategoryDbAdapter: serviceLocator(),
+            communityFeedDbAdapter: serviceLocator()));
 
     serviceLocator
         .registerLazySingleton<GlobalFeedRepo>(() => GlobalFeedRepoImpl(
@@ -442,6 +443,13 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<CommunityMemberGetUsecase>(
         () => CommunityMemberGetUsecase(communityMemberRepo: serviceLocator()));
 
+    serviceLocator.registerLazySingleton<CommunityCategoryComposerUsecase>(
+        () => CommunityCategoryComposerUsecase(fileRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<CommunityCategoryQueryUsecase>(() =>
+        CommunityCategoryQueryUsecase(
+            communityCategoryRepo: serviceLocator(),
+            communityCategoryComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<PostApproveUsecase>(
         () => PostApproveUsecase(postRepo: serviceLocator()));
 

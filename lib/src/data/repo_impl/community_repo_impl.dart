@@ -10,6 +10,8 @@ import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommunityRepoImpl extends CommunityRepo {
   final CommunityApiInterface communityApiInterface;
+
+  //Db Adapter
   final CommunityDbAdapter communityDbAdapter;
   final CommentDbAdapter commentDbAdapter;
   final UserDbAdapter userDbAdapter;

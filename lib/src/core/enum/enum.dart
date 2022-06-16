@@ -1,6 +1,7 @@
 export 'amity_comment_reference_type.dart';
 export 'amity_comment_sort_option.dart';
 export 'amity_comment_target_type.dart';
+export 'amity_community_category_sort_option.dart';
 export 'amity_community_filter.dart';
 export 'amity_community_membership_filter.dart';
 export 'amity_community_sorting_order.dart';

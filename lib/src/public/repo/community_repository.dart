@@ -19,6 +19,10 @@ class CommunityRepository {
     return CommunityGetQueryBuilder(useCase: serviceLocator());
   }
 
+  CommunityCategoryGetQueryBuilder getCategories() {
+    return CommunityCategoryGetQueryBuilder(usecase: serviceLocator());
+  }
+
   Future<AmityCommunity> getCommunity(String communityId) {
     return serviceLocator<CommunityGetUseCase>().get(communityId);
   }
