@@ -14,6 +14,7 @@ export 'amity_membership_sorting_order.dart';
 export 'amity_membership_type.dart';
 export 'amity_mention_type.dart';
 export 'amity_permission_type.dart';
+export 'amity_post_sort_option.dart';
 export 'amity_post_target_type.dart';
 export 'amity_query_sorting_order.dart';
 export 'amity_user_feed_sort_option.dart';
