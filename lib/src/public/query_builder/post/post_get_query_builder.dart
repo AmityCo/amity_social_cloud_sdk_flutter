@@ -32,7 +32,7 @@ class AmityPostGetQueryBuilder {
   final String _targetType;
   final GetPostRequest _request;
 
-  String? _sortOption = AmityCommentSortOption.LAST_CREATED.apiKey;
+  String? _sortOption = AmityPostSortOption.LAST_CREATED.apiKey;
   bool? _hasFlag;
   bool? _isDeleted = false; //Default Value false
   String? _amityFeedType;
@@ -41,7 +41,7 @@ class AmityPostGetQueryBuilder {
   AmityPostGetQueryBuilder(this._useCase, this._targetId, this._targetType)
       : _request = GetPostRequest(targetId: _targetId, targetType: _targetType);
 
-  AmityPostGetQueryBuilder sortBy(AmityCommentSortOption sortOption) {
+  AmityPostGetQueryBuilder sortBy(AmityPostSortOption sortOption) {
     _sortOption = sortOption.apiKey;
     return this;
   }

@@ -22,6 +22,7 @@ extension CommunityHiveEntityExtension on CommunityHiveEntity {
       ..updatedAt = editedAt
       ..categoryIds = categoryIds
       ..isPostReviewEnabled = needApprovalOnPostCreation
-      ..tags = tags;
+      ..tags = tags
+      ..metadata = metadata;
   }
 }
