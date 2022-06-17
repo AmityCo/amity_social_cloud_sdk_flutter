@@ -1,7 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/model/api_request/update_community_members_request.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_add_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_remove_usecase.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 
 class AmityCommunityParticipation {

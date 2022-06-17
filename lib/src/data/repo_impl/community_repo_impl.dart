@@ -4,8 +4,6 @@ import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/community_member_hive_entity_14.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommunityRepoImpl extends CommunityRepo {

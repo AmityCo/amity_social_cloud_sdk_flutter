@@ -1,5 +1,4 @@
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/model/api_request/community_member_check_request.dart';
 import 'package:amity_sdk/src/domain/repo/community_member_repo.dart';
 
 class CommunityMemberPermissionCheckUsecase

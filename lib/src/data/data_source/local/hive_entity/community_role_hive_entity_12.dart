@@ -1,7 +1,7 @@
 // ignore_for_file: hash_and_equals
 
 import 'package:amity_sdk/src/data/data_source/local/interface/role_object.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 
 part 'community_role_hive_entity_12.g.dart';
 

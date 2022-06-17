@@ -1,4 +1,5 @@
 export 'authentication_request.dart';
+export 'community_member_check_request.dart';
 export 'core/core.dart';
 export 'create_comment_request.dart';
 export 'create_community_request.dart';
@@ -16,6 +17,10 @@ export 'reaction_request.dart';
 export 'register_notification_request.dart';
 export 'unregister_notification_request.dart';
 export 'update_comment_request.dart';
+export 'update_community_members_request.dart';
+export 'update_community_role_request.dart';
 export 'update_post_request.dart';
+export 'update_user_request.dart';
 export 'upload_file_request.dart';
+export 'user_global_permission_check_request.dart';
 export 'users_request.dart';

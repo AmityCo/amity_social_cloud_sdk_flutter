@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/model/api_request/update_community_role_request.dart';
 import 'package:amity_sdk/src/domain/repo/community_member_repo.dart';
 
 class CommunityMemberAddRoleUsecase
