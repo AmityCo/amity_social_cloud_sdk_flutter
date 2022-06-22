@@ -1,8 +1,7 @@
 // ignore_for_file: unused_field
 
-import 'package:amity_sdk/src/core/enum/amity_follow_status_filter.dart';
-import 'package:amity_sdk/src/domain/model/amity_follow_relationship.dart';
-import 'package:amity_sdk/src/domain/usecase/relationship/get_my_followers_usecase.dart';
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 class AmityMyFollowersQueryBuilder {
   late GetMyFollowersUsecase _useCase;
@@ -17,7 +16,20 @@ class AmityMyFollowersQueryBuilder {
     return this;
   }
 
-  Future<List<AmityFollowRelationship>> query() {
-    return _useCase.get();
+  Future<Tuple2<List<AmityFollowRelationship>, String>> getPagingData(
+      {String? token, int? limit}) async {
+    final request = FollowRequest();
+    request.status = _status.value;
+
+    if (token != null) {
+      request.token = token;
+    }
+    if (limit != null) {
+      request.limit = limit;
+    }
+
+    final data = await _useCase.get(request);
+
+    return data;
   }
 }

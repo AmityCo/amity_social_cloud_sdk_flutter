@@ -53,25 +53,36 @@ class FollowResponse {
 }
 
 class Follow {
-  Follow({
-    required this.from,
-    required this.to,
-    required this.status,
-  });
+  Follow(
+      {required this.from,
+      required this.to,
+      required this.status,
+      this.createdAt,
+      this.updatedAt});
 
   final String from;
   final String to;
   final String status;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
 
   factory Follow.fromJson(Map<String, dynamic> json) => Follow(
         from: json["from"],
         to: json["to"],
         status: json["status"],
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
       );
 
   Map<String, dynamic> toJson() => {
         "from": from,
         "to": to,
         "status": status,
+        "createdAt": createdAt?.toIso8601String(),
+        "updatedAt": updatedAt?.toIso8601String(),
       };
 }

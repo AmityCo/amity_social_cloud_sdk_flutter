@@ -14,4 +14,11 @@ extension AmityFollowStatusExtension on AmityFollowStatus {
       'none',
     ][index];
   }
+
+  static AmityFollowStatus enumOf(String value) {
+    return AmityFollowStatus.values.firstWhere(
+      (element) => element.name.toLowerCase() == value.toLowerCase(),
+      orElse: () => AmityFollowStatus.NONE,
+    );
+  }
 }

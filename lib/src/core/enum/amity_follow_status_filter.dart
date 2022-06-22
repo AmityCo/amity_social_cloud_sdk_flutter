@@ -5,7 +5,7 @@ import 'package:amity_sdk/src/core/enum/enum.dart';
 enum AmityFollowStatusFilter { ALL, ACCEPTED, PENDING }
 
 extension AmityFollowStatusFilterExtension on AmityFollowStatusFilter {
-  String get apiKey {
+  String get value {
     return [
       'all',
       'accepted',
