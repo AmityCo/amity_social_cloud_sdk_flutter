@@ -71,11 +71,11 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   }
 
   @override
-  Future<FollowResponse> getFollower(String userId) async {
+  Future<FollowResponse> getFollower(FollowRequest request) async {
     try {
       final data = await httpApiClient().get(
-        '$USER_V4_URL/$userId/followers',
-      );
+          '$USER_V4_URL/${request.userId}/followers',
+          queryParameters: request.toJson());
       return FollowResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -84,11 +84,11 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   }
 
   @override
-  Future<FollowResponse> getFollowing(String userId) async {
+  Future<FollowResponse> getFollowing(FollowRequest request) async {
     try {
       final data = await httpApiClient().get(
-        '$USER_V4_URL/$userId/following',
-      );
+          '$USER_V4_URL/${request.userId}/following',
+          queryParameters: request.toJson());
       return FollowResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -110,11 +110,10 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   }
 
   @override
-  Future<FollowResponse> getMyFollower() async {
+  Future<FollowResponse> getMyFollower(FollowRequest request) async {
     try {
-      final data = await httpApiClient().get(
-        ME_FOLLLOWERS,
-      );
+      final data = await httpApiClient()
+          .get(ME_FOLLLOWERS, queryParameters: request.toJson());
       return FollowResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -123,11 +122,10 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   }
 
   @override
-  Future<FollowResponse> getMyFollowing() async {
+  Future<FollowResponse> getMyFollowing(FollowRequest request) async {
     try {
-      final data = await httpApiClient().get(
-        ME_FOLLLOWING,
-      );
+      final data = await httpApiClient()
+          .get(ME_FOLLLOWING, queryParameters: request.toJson());
       return FollowResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

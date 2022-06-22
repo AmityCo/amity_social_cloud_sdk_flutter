@@ -1,3 +1,4 @@
+import 'package:amity_sdk/src/core/model/api_request/follow_request.dart';
 import 'package:amity_sdk/src/data/data.dart';
 
 abstract class FollowApiInterface {
@@ -7,11 +8,11 @@ abstract class FollowApiInterface {
   Future<FollowResponse> follow(String userId);
   Future<FollowResponse> unfollow(String userId);
 
-  Future<FollowResponse> getMyFollower();
-  Future<FollowResponse> getMyFollowing();
+  Future<FollowResponse> getMyFollower(FollowRequest request);
+  Future<FollowResponse> getMyFollowing(FollowRequest request);
   Future<FollowInfoResponse> getMyFollowInfo();
 
-  Future<FollowResponse> getFollower(String userId);
-  Future<FollowResponse> getFollowing(String userId);
+  Future<FollowResponse> getFollower(FollowRequest request);
+  Future<FollowResponse> getFollowing(FollowRequest request);
   Future<FollowInfoResponse> getFollowInfo(String userId);
 }

@@ -10,4 +10,12 @@ extension AmityUserExtenstion on AmityUser {
   UserUpdateQueryBuilder update() {
     return UserUpdateQueryBuilder(serviceLocator<UpdateUserUsecase>(), userId!);
   }
+
+  AmityMyUserRelationshipRepository me() {
+    return AmityMyUserRelationshipRepository();
+  }
+
+  AmityUserRelationshipRepository relationship() {
+    return AmityUserRelationshipRepository(userId: userId!);
+  }
 }

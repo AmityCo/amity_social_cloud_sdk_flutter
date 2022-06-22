@@ -6,7 +6,7 @@ class RemoveFollowerUsecase extends UseCase<void, String> {
   RemoveFollowerUsecase({required this.followRepo});
   @override
   Future<void> get(String params) {
-    return followRepo.unfollow(params);
+    return followRepo.decline(params);
   }
 
   @override
