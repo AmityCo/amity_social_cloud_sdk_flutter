@@ -54,17 +54,20 @@ class AmityCommentQueryBuilder {
     return this;
   }
 
+  /// Get the comment with parent ID
   AmityCommentQueryBuilder parentId(String? parentId) {
     _parentId = parentId;
     _isFilterByParentId = true;
     return this;
   }
 
+  /// Sort the comment by [AmityCommentSortOption]
   AmityCommentQueryBuilder sortBy(AmityCommentSortOption sortOption) {
     _sortOption = sortOption;
     return this;
   }
 
+  /// Query the comment list
   Future<List<AmityComment>> query() {
     GetCommentRequest getCommentRequest = GetCommentRequest(
         referenceId: _referenceId, referenceType: _referenceType);
