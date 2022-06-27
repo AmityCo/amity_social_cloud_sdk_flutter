@@ -72,13 +72,24 @@ class FollowRepoImpl extends FollowRepo {
     final followHiveEntity = follow.convertFollowHiveEntity();
     await followDbAdapter.saveFollowEntity(followHiveEntity);
 
-    //Update the follow info
-    final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
-    if (followInfoHiveEntity != null) {
-      followInfoHiveEntity.followerCount =
-          (followInfoHiveEntity.followerCount ?? 0) + 1;
-      followInfoHiveEntity.status = AmityFollowStatus.ACCEPTED.value;
-      await followInfoHiveEntity.save();
+    if (follow.status == AmityFollowStatus.ACCEPTED.value) {
+      //Update the follow info
+      final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
+      if (followInfoHiveEntity != null) {
+        followInfoHiveEntity.followerCount =
+            (followInfoHiveEntity.followerCount ?? 0) + 1;
+        followInfoHiveEntity.status = AmityFollowStatus.ACCEPTED.value;
+        await followInfoHiveEntity.save();
+      }
+    }
+
+    if (follow.status == AmityFollowStatus.PENDING.value) {
+      //Update the follow info
+      final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
+      if (followInfoHiveEntity != null) {
+        followInfoHiveEntity.status = AmityFollowStatus.PENDING.value;
+        await followInfoHiveEntity.save();
+      }
     }
 
     return AmityFollowStatus.values.firstWhere(
@@ -91,17 +102,19 @@ class FollowRepoImpl extends FollowRepo {
     final data = await followWApiInterface.unfollow(userId);
     final follow = data.follows[0];
 
-    //Update the follow
-    final followHiveEntity = follow.convertFollowHiveEntity();
-    await followDbAdapter.saveFollowEntity(followHiveEntity);
+    if (follow.status == AmityFollowStatus.NONE.value) {
+      //Update the follow
+      final followHiveEntity = follow.convertFollowHiveEntity();
+      await followDbAdapter.saveFollowEntity(followHiveEntity);
 
-    //Update the follow info
-    final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
-    if (followInfoHiveEntity != null) {
-      followInfoHiveEntity.followerCount =
-          (followInfoHiveEntity.followerCount ?? 0) - 1;
-      followInfoHiveEntity.status = AmityFollowStatus.NONE.value;
-      followInfoHiveEntity.save();
+      //Update the follow info
+      final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
+      if (followInfoHiveEntity != null) {
+        followInfoHiveEntity.followerCount =
+            (followInfoHiveEntity.followerCount ?? 0) - 1;
+        followInfoHiveEntity.status = AmityFollowStatus.NONE.value;
+        followInfoHiveEntity.save();
+      }
     }
 
     return;

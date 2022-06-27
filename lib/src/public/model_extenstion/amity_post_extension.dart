@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 
@@ -47,5 +50,20 @@ extension AmityPostExtension on AmityPost {
             postDeclineUsecase: serviceLocator(),
             postId: postId!)
         .decline();
+  }
+
+  Stream<AmityPost> get listen {
+    StreamController<AmityPost> controller = StreamController<AmityPost>();
+
+    serviceLocator<PostDbAdapter>().listenPostEntity(postId!).listen((event) {
+      final updateAmityPost = event.convertToAmityPost();
+
+      //TOOD: Good idea would be have compose method inside the object itself
+      serviceLocator<PostComposerUsecase>().get(updateAmityPost).then(
+            (value) => controller.add(value),
+          );
+    });
+
+    return controller.stream;
   }
 }
