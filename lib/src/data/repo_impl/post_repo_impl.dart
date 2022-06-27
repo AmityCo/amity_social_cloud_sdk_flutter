@@ -86,11 +86,11 @@ class PostRepoImpl extends PostRepo {
   }
 
   @override
-  Future<Tuple2<List<AmityPost>, String>> queryPost(
+  Future<PageListData<List<AmityPost>, String>> queryPost(
       GetPostRequest request) async {
     final data = await publicPostApiInterface.queryPost(request);
     final amitPosts = await _saveDataToDb(data);
-    return Tuple2(amitPosts, data.paging!.next ?? '');
+    return PageListData(amitPosts, data.paging!.next ?? '');
   }
 
   Future<List<AmityPost>> _saveDataToDb(CreatePostResponse data) async {

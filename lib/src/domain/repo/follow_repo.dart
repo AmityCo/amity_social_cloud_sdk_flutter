@@ -19,21 +19,21 @@ abstract class FollowRepo {
   Future<AmityUserFollowInfo> getFollowInfo(String userId);
 
   /// Get user folllowers list
-  Future<Tuple2<List<AmityFollowRelationship>, String>> getFollower(
+  Future<PageListData<List<AmityFollowRelationship>, String>> getFollower(
       FollowRequest request);
 
   /// Get user folllowing list
-  Future<Tuple2<List<AmityFollowRelationship>, String>> getFollowing(
+  Future<PageListData<List<AmityFollowRelationship>, String>> getFollowing(
       FollowRequest request);
 
   /// Get current logged user follow info
   Future<AmityMyFollowInfo> getMyFollowInfo();
 
   /// Get my follower list
-  Future<Tuple2<List<AmityFollowRelationship>, String>> getMyFollower(
+  Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollower(
       FollowRequest request);
 
   /// Get my following list
-  Future<Tuple2<List<AmityFollowRelationship>, String>> getMyFollowing(
+  Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollowing(
       FollowRequest request);
 }

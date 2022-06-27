@@ -3,7 +3,8 @@ import 'package:amity_sdk/src/domain/domain.dart';
 
 abstract class PostRepo {
   //Future Method
-  Future<Tuple2<List<AmityPost>, String>> queryPost(GetPostRequest request);
+  Future<PageListData<List<AmityPost>, String>> queryPost(
+      GetPostRequest request);
   Future<AmityPost> getPostById(String postId);
   Future<AmityPost> createPost(CreatePostRequest request);
   Future<AmityPost> getPostByIdFromDb(String id);

@@ -21,12 +21,12 @@ class CommunityCategoryRepoImpl extends CommunityCategoryRepo {
       required this.communityFeedDbAdapter,
       required this.communityCategoryApiInterface});
   @override
-  Future<Tuple2<List<AmityCommunityCategory>, String>>
+  Future<PageListData<List<AmityCommunityCategory>, String>>
       getCommunityCategoryQuery(GetCommunityCategoryRequest request) async {
     final data =
         await communityCategoryApiInterface.communityCategoryQuery(request);
     final amityCommunityCategory = await saveCommunity(data);
-    return Tuple2(amityCommunityCategory, data.paging?.next ?? '');
+    return PageListData(amityCommunityCategory, data.paging?.next ?? '');
   }
 
   Future<List<AmityCommunityCategory>> saveCommunity(

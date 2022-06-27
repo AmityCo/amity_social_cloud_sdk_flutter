@@ -6,7 +6,7 @@ abstract class CommentRepo {
 
   Future<AmityComment> createComment(CreateCommentRequest request);
   Future<List<AmityComment>> queryComment(GetCommentRequest request);
-  Future<Tuple2<List<AmityComment>, String>> queryCommentPagingData(
+  Future<PageListData<List<AmityComment>, String>> queryCommentPagingData(
       GetCommentRequest request);
 
   Future<AmityComment> getComment(String commentId);

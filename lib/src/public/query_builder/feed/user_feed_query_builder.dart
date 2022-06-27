@@ -23,7 +23,7 @@ class UserFeedQueryBuilder {
     return this;
   }
 
-  Future<Tuple2<List<AmityPost>, String>> getPagingData(
+  Future<PageListData<List<AmityPost>, String>> getPagingData(
       {String? token, int? limit}) async {
     _request.options = OptionsRequest();
 
@@ -39,7 +39,7 @@ class UserFeedQueryBuilder {
     return data;
   }
 
-  Stream<Tuple2<List<AmityPost>, String>> getPagingDataStream(
+  Stream<PageListData<List<AmityPost>, String>> getPagingDataStream(
       {String? token, int? limit}) {
     _request.options = OptionsRequest();
     if (token != null) {
