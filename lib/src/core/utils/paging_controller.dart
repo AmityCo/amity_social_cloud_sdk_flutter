@@ -1,9 +1,10 @@
 // ignore_for_file: unused_field
 
-import 'package:amity_sdk/src/core/utils/tuple.dart';
+import 'package:amity_sdk/src/core/utils/page_list_data.dart';
 import 'package:flutter/foundation.dart';
 
-typedef PageFuture<T> = Future<Tuple2<List<T>, String>> Function(String? token);
+typedef PageFuture<T> = Future<PageListData<List<T>, String>> Function(
+    String? token);
 
 class PagingController<T> extends ChangeNotifier {
   PagingController({required this.pageFuture, this.pageSize = 10});
@@ -97,8 +98,8 @@ class PagingController<T> extends ChangeNotifier {
       List<T>? page;
       try {
         final data = await pageFuture(_nextPageToken);
-        page = data.item1;
-        _nextPageToken = data.item2;
+        page = data.data;
+        _nextPageToken = data.token;
         _numberOfLoadedPages++;
       } catch (error, stacktrace) {
         _stacktrace = stacktrace;

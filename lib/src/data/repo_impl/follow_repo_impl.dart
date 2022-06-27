@@ -134,23 +134,23 @@ class FollowRepoImpl extends FollowRepo {
   }
 
   @override
-  Future<Tuple2<List<AmityFollowRelationship>, String>> getFollower(
+  Future<PageListData<List<AmityFollowRelationship>, String>> getFollower(
       FollowRequest request) async {
     final data = await followWApiInterface.getFollower(request);
 
     final followRelationships = await saveFollowResponse(data);
 
-    return Tuple2(followRelationships, data.paging!.next ?? '');
+    return PageListData(followRelationships, data.paging!.next ?? '');
   }
 
   @override
-  Future<Tuple2<List<AmityFollowRelationship>, String>> getFollowing(
+  Future<PageListData<List<AmityFollowRelationship>, String>> getFollowing(
       FollowRequest request) async {
     final data = await followWApiInterface.getFollowing(request);
 
     final followRelationships = await saveFollowResponse(data);
 
-    return Tuple2(followRelationships, data.paging!.next ?? '');
+    return PageListData(followRelationships, data.paging!.next ?? '');
   }
 
   @override
@@ -167,23 +167,23 @@ class FollowRepoImpl extends FollowRepo {
   }
 
   @override
-  Future<Tuple2<List<AmityFollowRelationship>, String>> getMyFollower(
+  Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollower(
       FollowRequest request) async {
     final data = await followWApiInterface.getMyFollower(request);
 
     final followRelationships = await saveFollowResponse(data);
 
-    return Tuple2(followRelationships, data.paging!.next ?? '');
+    return PageListData(followRelationships, data.paging!.next ?? '');
   }
 
   @override
-  Future<Tuple2<List<AmityFollowRelationship>, String>> getMyFollowing(
+  Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollowing(
       FollowRequest request) async {
     final data = await followWApiInterface.getMyFollowing(request);
 
     final followRelationships = await saveFollowResponse(data);
 
-    return Tuple2(followRelationships, data.paging!.next ?? '');
+    return PageListData(followRelationships, data.paging!.next ?? '');
   }
 
   Future<List<AmityFollowRelationship>> saveFollowResponse(

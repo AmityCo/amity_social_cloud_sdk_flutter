@@ -71,7 +71,7 @@ class AmityPostGetQueryBuilder {
     return this;
   }
 
-  Future<Tuple2<List<AmityPost>, String>> getPagingData(
+  Future<PageListData<List<AmityPost>, String>> getPagingData(
       {String? token, int? limit}) async {
     if (_sortOption != null) _request.sortBy = _sortOption;
     if (_hasFlag != null) _request.hasFlag = _hasFlag;

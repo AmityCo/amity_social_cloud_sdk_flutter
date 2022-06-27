@@ -2,7 +2,7 @@ import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/core.dart';
 
 abstract class CommunityRepo {
-  Future<Tuple2<List<AmityCommunity>, String>> getCommunityQuery(
+  Future<PageListData<List<AmityCommunity>, String>> getCommunityQuery(
       GetCommunityRequest request);
   Future<List<AmityCommunity>> getRecommendedCommunity(OptionsRequest request);
   Future<List<AmityCommunity>> getTopTrendingCommunity(OptionsRequest request);

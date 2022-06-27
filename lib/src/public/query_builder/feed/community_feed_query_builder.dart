@@ -27,7 +27,7 @@ class CommunityFeedQueryBuilder {
     return this;
   }
 
-  Future<Tuple2<List<AmityPost>, String>> getPagingData(
+  Future<PageListData<List<AmityPost>, String>> getPagingData(
       {String? token, int? limit}) async {
     _request.options = OptionsRequest();
     if (token != null) {

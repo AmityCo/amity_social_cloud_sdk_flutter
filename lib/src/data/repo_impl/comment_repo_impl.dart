@@ -1,7 +1,7 @@
 import 'package:amity_sdk/src/core/model/api_request/create_comment_request.dart';
 import 'package:amity_sdk/src/core/model/api_request/get_comment_request.dart';
 import 'package:amity_sdk/src/core/model/api_request/update_comment_request.dart';
-import 'package:amity_sdk/src/core/utils/tuple.dart';
+import 'package:amity_sdk/src/core/utils/page_list_data.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
@@ -146,12 +146,12 @@ class CommentRepoImpl extends CommentRepo {
   }
 
   @override
-  Future<Tuple2<List<AmityComment>, String>> queryCommentPagingData(
+  Future<PageListData<List<AmityComment>, String>> queryCommentPagingData(
       GetCommentRequest request) async {
     final data = await commentApiInterface.queryComment(request);
 
     final amityComments = await _saveDetailsToDb(data);
 
-    return Tuple2(amityComments, data.paging!.next ?? '');
+    return PageListData(amityComments, data.paging!.next ?? '');
   }
 }

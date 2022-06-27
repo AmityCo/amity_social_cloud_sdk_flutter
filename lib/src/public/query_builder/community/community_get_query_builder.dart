@@ -44,7 +44,7 @@ class CommunityGetQueryBuilder {
     return this;
   }
 
-  Future<Tuple2<List<AmityCommunity>, String>> getPagingData(
+  Future<PageListData<List<AmityCommunity>, String>> getPagingData(
       {String? token, int? limit}) async {
     GetCommunityRequest request = GetCommunityRequest();
 

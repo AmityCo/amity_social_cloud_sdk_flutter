@@ -4,7 +4,8 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommunityCategoryQueryUsecase extends UseCase<
-    Tuple2<List<AmityCommunityCategory>, String>, GetCommunityCategoryRequest> {
+    PageListData<List<AmityCommunityCategory>, String>,
+    GetCommunityCategoryRequest> {
   final CommunityCategoryRepo communityCategoryRepo;
   final CommunityCategoryComposerUsecase communityCategoryComposerUsecase;
 
@@ -13,12 +14,12 @@ class CommunityCategoryQueryUsecase extends UseCase<
       required this.communityCategoryComposerUsecase});
 
   @override
-  Future<Tuple2<List<AmityCommunityCategory>, String>> get(
+  Future<PageListData<List<AmityCommunityCategory>, String>> get(
       GetCommunityCategoryRequest params) async {
     final amityCommunityCategoryTuple =
         await communityCategoryRepo.getCommunityCategoryQuery(params);
     final amityComposedCommunityCategory =
-        await Stream.fromIterable(amityCommunityCategoryTuple.item1)
+        await Stream.fromIterable(amityCommunityCategoryTuple.data)
             .asyncMap((event) => communityCategoryComposerUsecase.get(event))
             .toList();
     return amityCommunityCategoryTuple
@@ -26,7 +27,7 @@ class CommunityCategoryQueryUsecase extends UseCase<
   }
 
   @override
-  Stream<Tuple2<List<AmityCommunityCategory>, String>> listen(
+  Stream<PageListData<List<AmityCommunityCategory>, String>> listen(
       GetCommunityCategoryRequest params) {
     // TODO: implement listen
     throw UnimplementedError();

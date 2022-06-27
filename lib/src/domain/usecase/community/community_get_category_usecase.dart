@@ -1,8 +1,8 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
-class CommunityGetCategoryUsecase
-    extends UseCase<Tuple2<AmityCommunityCategory, String>, OptionsRequest> {
+class CommunityGetCategoryUsecase extends UseCase<
+    PageListData<AmityCommunityCategory, String>, OptionsRequest> {
   final CommunityRepo communityRepo;
   final CommunityComposerUsecase communityComposerUsecase;
 
@@ -10,7 +10,7 @@ class CommunityGetCategoryUsecase
       {required this.communityRepo, required this.communityComposerUsecase});
 
   @override
-  Future<Tuple2<AmityCommunityCategory, String>> get(
+  Future<PageListData<AmityCommunityCategory, String>> get(
       OptionsRequest params) async {
     // final amityCommunity = await communityRepo.createCommunity(params);
     // final amityCreatedCommunity =
@@ -21,7 +21,8 @@ class CommunityGetCategoryUsecase
   }
 
   @override
-  Stream<Tuple2<AmityCommunityCategory, String>> listen(OptionsRequest params) {
+  Stream<PageListData<AmityCommunityCategory, String>> listen(
+      OptionsRequest params) {
     // TODO: implement listen
     throw UnimplementedError();
   }

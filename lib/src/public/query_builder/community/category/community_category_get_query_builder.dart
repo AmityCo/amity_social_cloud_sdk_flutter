@@ -20,7 +20,7 @@ class CommunityCategoryGetQueryBuilder {
     return this;
   }
 
-  Future<Tuple2<List<AmityCommunityCategory>, String>> getPagingData(
+  Future<PageListData<List<AmityCommunityCategory>, String>> getPagingData(
       {String? token, int? limit}) async {
     _request.options = OptionsRequest();
 
