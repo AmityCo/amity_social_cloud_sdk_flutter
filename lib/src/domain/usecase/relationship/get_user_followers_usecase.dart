@@ -2,7 +2,7 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class GetUserFollowersUsecase extends UseCase<
-    Tuple2<List<AmityFollowRelationship>, String>, FollowRequest> {
+    PageListData<List<AmityFollowRelationship>, String>, FollowRequest> {
   final FollowRepo followRepo;
   final AmityFollowRelationshipComposerUsecase
       amityFollowRelationshipComposerUsecase;
@@ -11,10 +11,10 @@ class GetUserFollowersUsecase extends UseCase<
       required this.amityFollowRelationshipComposerUsecase});
 
   @override
-  Future<Tuple2<List<AmityFollowRelationship>, String>> get(
+  Future<PageListData<List<AmityFollowRelationship>, String>> get(
       FollowRequest params) async {
     final followers = await followRepo.getFollower(params);
-    final followersComposed = await Stream.fromIterable(followers.item1)
+    final followersComposed = await Stream.fromIterable(followers.data)
         .asyncMap((element) async =>
             await amityFollowRelationshipComposerUsecase.get(element))
         .toList();
@@ -22,7 +22,7 @@ class GetUserFollowersUsecase extends UseCase<
   }
 
   @override
-  Stream<Tuple2<List<AmityFollowRelationship>, String>> listen(
+  Stream<PageListData<List<AmityFollowRelationship>, String>> listen(
       FollowRequest params) {
     throw UnimplementedError();
   }

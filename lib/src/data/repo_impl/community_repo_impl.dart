@@ -144,11 +144,11 @@ class CommunityRepoImpl extends CommunityRepo {
   }
 
   @override
-  Future<Tuple2<List<AmityCommunity>, String>> getCommunityQuery(
+  Future<PageListData<List<AmityCommunity>, String>> getCommunityQuery(
       GetCommunityRequest request) async {
     final data = await communityApiInterface.getCommunityQuery(request);
     final amityCommunity = await saveCommunity(data);
-    return Tuple2(amityCommunity, data.paging?.next ?? '');
+    return PageListData(amityCommunity, data.paging?.next ?? '');
   }
 
   @override

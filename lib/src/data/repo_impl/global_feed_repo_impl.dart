@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:amity_sdk/src/core/model/api_request/get_global_feed_request.dart';
-import 'package:amity_sdk/src/core/utils/tuple.dart';
+import 'package:amity_sdk/src/core/utils/page_list_data.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/model/amity_post.dart';
 import 'package:amity_sdk/src/domain/repo/global_feed_repo.dart';
@@ -14,7 +14,7 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
       {required this.feedApiInterface, required this.dbAdapterRepo});
 
   @override
-  Future<Tuple2<List<AmityPost>, String>> getGlobalFeed(
+  Future<PageListData<List<AmityPost>, String>> getGlobalFeed(
       GetGlobalFeedRequest request) async {
     final data = await feedApiInterface.getGlobalFeed(request);
 
@@ -24,14 +24,14 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
 
     final amitPosts = await _saveDataToDb(data);
 
-    return Tuple2(amitPosts, data.paging!.next ?? '');
+    return PageListData(amitPosts, data.paging!.next ?? '');
   }
 
   @override
-  Stream<Tuple2<List<AmityPost>, String>> getGlobalFeedStream(
+  Stream<PageListData<List<AmityPost>, String>> getGlobalFeedStream(
       GetGlobalFeedRequest request) {
-    StreamController<Tuple2<List<AmityPost>, String>> controller =
-        StreamController<Tuple2<List<AmityPost>, String>>();
+    StreamController<PageListData<List<AmityPost>, String>> controller =
+        StreamController<PageListData<List<AmityPost>, String>>();
 
     ///1. Get Feed Collection from the DB
     _getGlobalFeedCollectionFromDb('${request.hashCode}').then((value) {
@@ -119,7 +119,7 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
     return postHiveEntities.map((e) => e.convertToAmityPost()).toList();
   }
 
-  Future<Tuple2<List<AmityPost>, String>?> _getGlobalFeedCollectionFromDb(
+  Future<PageListData<List<AmityPost>, String>?> _getGlobalFeedCollectionFromDb(
       String collectionId) async {
     //Get feed collection from the db
     final data = dbAdapterRepo.feedDbAdapter.getFeedEntity(collectionId);
@@ -133,7 +133,7 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
           .toList();
 
       //return tuple for token and amitypost list
-      return Tuple2(amitPosts, data.nextToken!);
+      return PageListData(amitPosts, data.nextToken!);
     }
 
     return Future.value();

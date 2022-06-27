@@ -25,7 +25,7 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
       required this.fileDbAdapter});
 
   @override
-  Future<Tuple2<List<AmityCommunityMember>, String>> queryMembers(
+  Future<PageListData<List<AmityCommunityMember>, String>> queryMembers(
       GetCommunityMembersRequest request) async {
     final data =
         await communityMemmberApiInterface.getCommunityMembers(request);
@@ -34,7 +34,7 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
     await communityMemberPagingDbAdapter.updateCommunityMemmberCollection(
         data.convertToCommunityMemberPagingHiveEntity());
     final amityCommunityMembers = await _saveDataToDb(data);
-    return Tuple2(amityCommunityMembers, data.paging!.next ?? '');
+    return PageListData(amityCommunityMembers, data.paging!.next ?? '');
   }
 
   @override

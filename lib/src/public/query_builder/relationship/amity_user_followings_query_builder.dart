@@ -16,7 +16,7 @@ class AmityUserFollowingsQueryBuilder {
     return this;
   }
 
-  Future<Tuple2<List<AmityFollowRelationship>, String>> getPagingData(
+  Future<PageListData<List<AmityFollowRelationship>, String>> getPagingData(
       {String? token, int? limit}) async {
     final request = FollowRequest();
     request.userId = _userId;
