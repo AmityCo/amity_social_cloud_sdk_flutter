@@ -57,7 +57,11 @@ class AmityCommentQueryBuilder {
   /// Get the comment with parent ID
   AmityCommentQueryBuilder parentId(String? parentId) {
     _parentId = parentId;
-    _isFilterByParentId = true;
+    return this;
+  }
+
+  AmityCommentQueryBuilder filterById(bool isFilterByParentId) {
+    _isFilterByParentId = isFilterByParentId;
     return this;
   }
 
@@ -74,7 +78,6 @@ class AmityCommentQueryBuilder {
 
     if (_parentId != null) {
       getCommentRequest.parentId = _parentId;
-      getCommentRequest.filterByParentId = _isFilterByParentId;
     }
 
     if (_isDeleted != null) {
@@ -93,7 +96,6 @@ class AmityCommentQueryBuilder {
 
     if (_parentId != null) {
       getCommentRequest.parentId = _parentId;
-      getCommentRequest.filterByParentId = _isFilterByParentId;
     }
 
     if (_isDeleted != null) {
@@ -111,6 +113,7 @@ class AmityCommentQueryBuilder {
 
     if (limit != null) {
       getCommentRequest.options?.limit = limit;
+      // getCommentRequest.options?.skip = 0;
     }
 
     return _useCase.getPagingData(getCommentRequest);
