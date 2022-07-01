@@ -23,7 +23,7 @@ class RegisterDeviceNotificationUseCase extends UseCase<void, String> {
     if (Platform.isAndroid) {
       platform = "android";
     } else if (Platform.isIOS) {
-      platform = "ios";
+      platform = "android";
     } else {
       throw NullThrownError();
     }
