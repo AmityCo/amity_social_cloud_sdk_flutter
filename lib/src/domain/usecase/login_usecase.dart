@@ -16,16 +16,6 @@ class LoginUsecase extends UseCase<AmityUser, AuthenticationRequest> {
     //1. Get the public model (AmityUser) from data layer
     //2. Use the composer usecase to compose the public model (fill the detail)
 
-    //if display name is blank. check if we have previous save userId and display name
-    if (params.displayName == null || params.displayName!.isEmpty) {
-      final accountHiveEntity =
-          accountDbAdapter.getAccountEntity(params.userId);
-      if (accountHiveEntity != null &&
-          accountHiveEntity.displayName!.isNotEmpty) {
-        params.displayName = accountHiveEntity.displayName;
-      }
-    }
-
     final amityUser = await authenticationRepo.login(params);
     final amityComposedUser = await userComposerUsecase.get(amityUser);
     return amityComposedUser;
