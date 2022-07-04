@@ -1,16 +1,30 @@
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data_source/data_source.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class LoginUsecase extends UseCase<AmityUser, AuthenticationRequest> {
+  final AccountDbAdapter accountDbAdapter;
   final AuthenticationRepo authenticationRepo;
   final UserComposerUsecase userComposerUsecase;
   LoginUsecase(
-      {required this.authenticationRepo, required this.userComposerUsecase});
+      {required this.authenticationRepo,
+      required this.userComposerUsecase,
+      required this.accountDbAdapter});
 
   @override
   Future<AmityUser> get(AuthenticationRequest params) async {
     //1. Get the public model (AmityUser) from data layer
     //2. Use the composer usecase to compose the public model (fill the detail)
+
+    //if display name is blank. check if we have previous save userId and display name
+    if (params.displayName == null || params.displayName!.isEmpty) {
+      final accountHiveEntity =
+          accountDbAdapter.getAccountEntity(params.userId);
+      if (accountHiveEntity != null &&
+          accountHiveEntity.displayName!.isNotEmpty) {
+        params.displayName = accountHiveEntity.displayName;
+      }
+    }
 
     final amityUser = await authenticationRepo.login(params);
     final amityComposedUser = await userComposerUsecase.get(amityUser);

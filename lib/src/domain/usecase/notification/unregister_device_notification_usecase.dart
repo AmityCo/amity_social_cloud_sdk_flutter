@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:amity_sdk/src/core/model/api_request/unregister_notification_request.dart';
 import 'package:amity_sdk/src/core/usercase/usecase.dart';
-import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/repo/repo.dart';
+import 'package:amity_sdk/src/public/public.dart';
 
 class UnregisterDeviceNotificationUseCase extends UseCase<void, void> {
   final NotificationRepo notificationRepo;
@@ -14,12 +14,13 @@ class UnregisterDeviceNotificationUseCase extends UseCase<void, void> {
 
   @override
   Future<void> get(void params) async {
-    final AccountHiveEntity account = accountRepo.getAccount();
-    if (account.userId == null || account.deviceId == null) {
+    final currentUser = AmityCoreClient.getCurrentUser();
+    final account = accountRepo.getAccount(currentUser.userId!);
+    if (account?.userId == null || account?.deviceId == null) {
       throw NullThrownError();
     }
     final UnregisterNotificationRequest request = UnregisterNotificationRequest(
-        userId: account.userId!, deviceId: account.deviceId!);
+        userId: account!.userId!, deviceId: account.deviceId!);
     return notificationRepo.unregisterNotification(request);
   }
 
