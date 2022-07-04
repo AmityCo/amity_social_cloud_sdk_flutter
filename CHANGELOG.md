@@ -1,3 +1,10 @@
+## 0.3.0-beta.1
+* feat: follow/unfollow functionlity
+* feat: accept/denied pending follow request functionlity
+* feat: Query user follower/following
+* fix: login issue without display name
+* fix: nested comment loading issue
+
 ## 0.2.0
 * feat: Community Post Review feature
 * feat: Query community by tag
