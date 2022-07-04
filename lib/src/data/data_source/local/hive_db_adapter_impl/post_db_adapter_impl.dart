@@ -1,5 +1,5 @@
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 
 class PostDbAdapterImpl extends PostDbAdapter {
   PostDbAdapterImpl({required this.dbClient});

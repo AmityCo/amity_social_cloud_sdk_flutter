@@ -1,5 +1,4 @@
-import 'package:amity_sdk/src/domain/usecase/post/post_flag_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/post/post_unflag_usecase.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 class PostFlagQueryBuilder {
   final PostFlagUsecase _postFlagUsecase;

@@ -1,3 +1,14 @@
+## 0.2.0
+* feat: Community Post Review feature
+* feat: Query community by tag
+* feat: add tags in community
+* feat: add recommend and trending communities in public repo
+* feat: Add Community Category in Create & Update Community
+* fix: data type filtering in get post API
+* fix: resolve edge case with page controller blank token
+* fix: resolve issue with multiple post in community feed
+* fix: updated post query for v4 api
+
 ## 0.1.3
 * fix: null category ID in Community Category hive entiry
 * fix: resolve edge case with page controller blank token
