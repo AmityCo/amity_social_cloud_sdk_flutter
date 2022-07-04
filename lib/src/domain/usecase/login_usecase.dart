@@ -1,11 +1,15 @@
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data_source/data_source.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class LoginUsecase extends UseCase<AmityUser, AuthenticationRequest> {
+  final AccountDbAdapter accountDbAdapter;
   final AuthenticationRepo authenticationRepo;
   final UserComposerUsecase userComposerUsecase;
   LoginUsecase(
-      {required this.authenticationRepo, required this.userComposerUsecase});
+      {required this.authenticationRepo,
+      required this.userComposerUsecase,
+      required this.accountDbAdapter});
 
   @override
   Future<AmityUser> get(AuthenticationRequest params) async {
