@@ -22,162 +22,185 @@ class FollowRepoImpl extends FollowRepo {
   @override
   Future<void> accpet(String userId) async {
     final data = await followWApiInterface.accpet(userId);
+
+    final follow = data.follows[0];
+
+    //Update the follow
+    final followHiveEntity = follow.convertFollowHiveEntity();
+    await followDbAdapter.saveFollowEntity(followHiveEntity);
+
+    //Update the follow info
+    final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
+    if (followInfoHiveEntity != null) {
+      followInfoHiveEntity.followerCount =
+          (followInfoHiveEntity.followerCount ?? 0) + 1;
+      followInfoHiveEntity.status = AmityFollowStatus.ACCEPTED.value;
+      await followInfoHiveEntity.save();
+    }
+
     return;
   }
 
   @override
   Future<void> decline(String userId) async {
     final data = await followWApiInterface.decline(userId);
+
+    final follow = data.follows[0];
+
+    //Update the follow
+    final followHiveEntity = follow.convertFollowHiveEntity();
+    await followDbAdapter.saveFollowEntity(followHiveEntity);
+
+    //Update the follow info
+    final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
+    if (followInfoHiveEntity != null) {
+      followInfoHiveEntity.followerCount =
+          (followInfoHiveEntity.followerCount ?? 0) - 1;
+      followInfoHiveEntity.status = AmityFollowStatus.NONE.value;
+      await followInfoHiveEntity.save();
+    }
+
     return;
   }
 
   @override
   Future<AmityFollowStatus> follow(String userId) async {
     final data = await followWApiInterface.follow(userId);
-    final followStatus = data.follows[0].status;
+    final follow = data.follows[0];
+
+    //Update the follow
+    final followHiveEntity = follow.convertFollowHiveEntity();
+    await followDbAdapter.saveFollowEntity(followHiveEntity);
+
+    if (follow.status == AmityFollowStatus.ACCEPTED.value) {
+      //Update the follow info
+      final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
+      if (followInfoHiveEntity != null) {
+        followInfoHiveEntity.followerCount =
+            (followInfoHiveEntity.followerCount ?? 0) + 1;
+        followInfoHiveEntity.status = AmityFollowStatus.ACCEPTED.value;
+        await followInfoHiveEntity.save();
+      }
+    }
+
+    if (follow.status == AmityFollowStatus.PENDING.value) {
+      //Update the follow info
+      final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
+      if (followInfoHiveEntity != null) {
+        followInfoHiveEntity.status = AmityFollowStatus.PENDING.value;
+        await followInfoHiveEntity.save();
+      }
+    }
+
     return AmityFollowStatus.values.firstWhere(
-        (element) => element.value == followStatus,
+        (element) => element.value == follow.status,
         orElse: (() => AmityFollowStatus.NONE));
   }
 
   @override
   Future<void> unfollow(String userId) async {
     final data = await followWApiInterface.unfollow(userId);
+    final follow = data.follows[0];
+
+    if (follow.status == AmityFollowStatus.NONE.value) {
+      //Update the follow
+      final followHiveEntity = follow.convertFollowHiveEntity();
+      await followDbAdapter.saveFollowEntity(followHiveEntity);
+
+      //Update the follow info
+      final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
+      if (followInfoHiveEntity != null) {
+        followInfoHiveEntity.followerCount =
+            (followInfoHiveEntity.followerCount ?? 0) - 1;
+        followInfoHiveEntity.status = AmityFollowStatus.NONE.value;
+        followInfoHiveEntity.save();
+      }
+    }
+
     return;
   }
 
   @override
   Future<AmityUserFollowInfo> getFollowInfo(String userId) async {
     final data = await followWApiInterface.getFollowInfo(userId);
-    final followInfoHiveEntiry = data.convertToFollowInfoHiveEntity();
-    await followInfoDbAdapter.saveFollowInfo(followInfoHiveEntiry);
+
+    AmityFollowStatus status = AmityFollowStatus.NONE;
+
+    //Save the follow information
+    if (data.follows != null && data.follows!.isNotEmpty) {
+      final followHiveEntity = data.follows![0].convertFollowHiveEntity();
+      await followDbAdapter.saveFollowEntity(followHiveEntity);
+
+      status = AmityFollowStatusExtension.enumOf(followHiveEntity.status!);
+    }
+
+    //Save the following info information
+    final followInfoHiveEntity = data.convertToFollowInfoHiveEntity();
+    followInfoHiveEntity.status = status.value;
+    await followInfoDbAdapter.saveFollowInfo(followInfoHiveEntity);
+
+    //Convert the hive entity to public model
     final amityUserFollowInfo =
-        followInfoHiveEntiry.convertToAmityUserFollowInfo();
+        followInfoHiveEntity.convertToAmityUserFollowInfo();
+
     return amityUserFollowInfo;
   }
 
   @override
-  Future<List<AmityFollowRelationship>> getFollower(String userId) async {
-    final data = await followWApiInterface.getFollower(userId);
+  Future<PageListData<List<AmityFollowRelationship>, String>> getFollower(
+      FollowRequest request) async {
+    final data = await followWApiInterface.getFollower(request);
 
-    //Covert to Follow Hive Entity
-    List<FollowHiveEntity> followHiveEntitys =
-        data.follows.map((e) => e.convertFollowHiveEntity()).toList();
+    final followRelationships = await saveFollowResponse(data);
 
-    //Covert to User Hive Entity
-    List<UserHiveEntity> userHiveEntitys =
-        data.users!.map((e) => e.convertToUserHiveEntity()).toList();
-
-    //Covert to File Hive Entity
-    List<FileHiveEntity> fileHiveEntitys =
-        data.files!.map((e) => e.convertToFileHiveEntity()).toList();
-
-    //Save Follow Hive Entity
-    for (var e in followHiveEntitys) {
-      await followDbAdapter.saveFollowEntity(e);
-    }
-
-    //Save User Hive Entity
-    for (var e in userHiveEntitys) {
-      await userDbAdapter.saveUserEntity(e);
-    }
-
-    //Save File Hive Entity
-    for (var e in fileHiveEntitys) {
-      await fileDbAdapter.saveFileEntity(e);
-    }
-
-    return followHiveEntitys
-        .map((e) => e.convertToAmityFollowRelationship())
-        .toList();
+    return PageListData(followRelationships, data.paging!.next ?? '');
   }
 
   @override
-  Future<List<AmityFollowRelationship>> getFollowing(String userId) async {
-    final data = await followWApiInterface.getFollowing(userId);
+  Future<PageListData<List<AmityFollowRelationship>, String>> getFollowing(
+      FollowRequest request) async {
+    final data = await followWApiInterface.getFollowing(request);
 
-    //Covert to Follow Hive Entity
-    List<FollowHiveEntity> followHiveEntitys =
-        data.follows.map((e) => e.convertFollowHiveEntity()).toList();
+    final followRelationships = await saveFollowResponse(data);
 
-    //Covert to User Hive Entity
-    List<UserHiveEntity> userHiveEntitys =
-        data.users!.map((e) => e.convertToUserHiveEntity()).toList();
-
-    //Covert to File Hive Entity
-    List<FileHiveEntity> fileHiveEntitys =
-        data.files!.map((e) => e.convertToFileHiveEntity()).toList();
-
-    //Save Follow Hive Entity
-    for (var e in followHiveEntitys) {
-      await followDbAdapter.saveFollowEntity(e);
-    }
-
-    //Save User Hive Entity
-    for (var e in userHiveEntitys) {
-      await userDbAdapter.saveUserEntity(e);
-    }
-
-    //Save File Hive Entity
-    for (var e in fileHiveEntitys) {
-      await fileDbAdapter.saveFileEntity(e);
-    }
-
-    return followHiveEntitys
-        .map((e) => e.convertToAmityFollowRelationship())
-        .toList();
+    return PageListData(followRelationships, data.paging!.next ?? '');
   }
 
   @override
-  Future<AmityUserFollowInfo> getMyFollowInfo() async {
+  Future<AmityMyFollowInfo> getMyFollowInfo() async {
     final data = await followWApiInterface.getMyFollowInfo();
-    final followInfoHiveEntiry = data.convertToFollowInfoHiveEntity();
-    await followInfoDbAdapter.saveFollowInfo(followInfoHiveEntiry);
+
+    final followInfoHiveEntity = data.convertToFollowInfoHiveEntity();
+    await followInfoDbAdapter.saveFollowInfo(followInfoHiveEntity);
+
     final amityUserFollowInfo =
-        followInfoHiveEntiry.convertToAmityUserFollowInfo();
+        followInfoHiveEntity.convertToAmityMyFollowInfo();
+
     return amityUserFollowInfo;
   }
 
   @override
-  Future<List<AmityFollowRelationship>> getMyFollower() async {
-    final data = await followWApiInterface.getMyFollower();
+  Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollower(
+      FollowRequest request) async {
+    final data = await followWApiInterface.getMyFollower(request);
 
-    //Covert to Follow Hive Entity
-    List<FollowHiveEntity> followHiveEntitys =
-        data.follows.map((e) => e.convertFollowHiveEntity()).toList();
+    final followRelationships = await saveFollowResponse(data);
 
-    //Covert to User Hive Entity
-    List<UserHiveEntity> userHiveEntitys =
-        data.users!.map((e) => e.convertToUserHiveEntity()).toList();
-
-    //Covert to File Hive Entity
-    List<FileHiveEntity> fileHiveEntitys =
-        data.files!.map((e) => e.convertToFileHiveEntity()).toList();
-
-    //Save Follow Hive Entity
-    for (var e in followHiveEntitys) {
-      await followDbAdapter.saveFollowEntity(e);
-    }
-
-    //Save User Hive Entity
-    for (var e in userHiveEntitys) {
-      await userDbAdapter.saveUserEntity(e);
-    }
-
-    //Save File Hive Entity
-    for (var e in fileHiveEntitys) {
-      await fileDbAdapter.saveFileEntity(e);
-    }
-
-    return followHiveEntitys
-        .map((e) => e.convertToAmityFollowRelationship())
-        .toList();
+    return PageListData(followRelationships, data.paging!.next ?? '');
   }
 
   @override
-  Future<List<AmityFollowRelationship>> getMyFollowing() async {
-    final data = await followWApiInterface.getMyFollowing();
+  Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollowing(
+      FollowRequest request) async {
+    final data = await followWApiInterface.getMyFollowing(request);
 
+    final followRelationships = await saveFollowResponse(data);
+
+    return PageListData(followRelationships, data.paging!.next ?? '');
+  }
+
+  Future<List<AmityFollowRelationship>> saveFollowResponse(
+      FollowResponse data) async {
     //Covert to Follow Hive Entity
     List<FollowHiveEntity> followHiveEntitys =
         data.follows.map((e) => e.convertFollowHiveEntity()).toList();
@@ -204,7 +227,6 @@ class FollowRepoImpl extends FollowRepo {
     for (var e in fileHiveEntitys) {
       await fileDbAdapter.saveFileEntity(e);
     }
-
     return followHiveEntitys
         .map((e) => e.convertToAmityFollowRelationship())
         .toList();

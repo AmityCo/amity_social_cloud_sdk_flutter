@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/model/api_request/update_user_request.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:dio/dio.dart';
 
@@ -26,6 +29,17 @@ class UserApiInterfaceImpl extends UserApiInterface {
       final data = await httpApiClient().get(
         USERS_URL + '/$userId',
       );
+      return UsersResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
+  Future<UsersResponse> updateUser(UpdateUserRequest request) async {
+    try {
+      final data = await httpApiClient().put(USERS_URL, data: request);
       return UsersResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

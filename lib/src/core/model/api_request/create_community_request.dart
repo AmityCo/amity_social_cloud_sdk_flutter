@@ -8,27 +8,31 @@ String createPostRequestToJson(CreateCommunityRequest data) =>
 
 class CreateCommunityRequest {
   CreateCommunityRequest({
-    required this.displayName,
-    required this.categoryIds,
+    this.communityId,
+    this.displayName,
+    this.categoryIds,
     this.description,
     this.isPublic,
     this.metadata,
     this.userIds,
+    this.tags,
     this.avatarFileId,
     this.needApprovalOnPostCreation,
   });
-
-  final String displayName;
-  final List<String>? categoryIds;
+  String? communityId;
+  String? displayName;
+  List<String>? categoryIds;
   String? description;
   bool? isPublic;
-  Metadata? metadata;
+  Map<String, dynamic>? metadata;
   List<String>? userIds;
+  List<String>? tags;
   String? avatarFileId;
   bool? needApprovalOnPostCreation;
 
   factory CreateCommunityRequest.fromJson(Map<String, dynamic> json) =>
       CreateCommunityRequest(
+        communityId: json["communityId"],
         displayName: json["displayName"],
         categoryIds: List<String>.from(
             json["categoryIds"].map((categoryId) => categoryId.toString())),
@@ -36,39 +40,27 @@ class CreateCommunityRequest {
         isPublic: json["isPublic"],
         userIds: List<String>.from(
             json["userIds"].map((userId) => userId.toString())),
+        tags: List<String>.from(json["tags"].map((tag) => tag.toString())),
         avatarFileId: json["avatarFileId"],
-        metadata: Metadata.fromJson(json["metadata"]),
+        metadata: json["metadata"],
         needApprovalOnPostCreation: json["needApprovalOnPostCreation"],
       );
 
   Map<String, dynamic> toJson() => {
+        "communityId": communityId,
         "displayName": displayName,
         "categoryIds": categoryIds,
         "description": description,
         "isPublic": isPublic,
-        "metadata": metadata == null ? null : metadata!.toJson(),
+        "metadata": metadata,
         "userIds": userIds,
+        "tags": tags,
         "avatarFileId": avatarFileId,
         "needApprovalOnPostCreation": needApprovalOnPostCreation,
       }..removeWhere((key, value) => value == null);
+
   @override
   String toString() {
     return createPostRequestToJson(this);
   }
-}
-
-class Metadata {
-  Metadata({
-    required this.anything,
-  });
-
-  final String anything;
-
-  factory Metadata.fromJson(Map<String, dynamic> json) => Metadata(
-        anything: json["anything"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "anything": anything,
-      };
 }

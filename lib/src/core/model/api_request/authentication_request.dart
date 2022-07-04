@@ -40,7 +40,7 @@ class AuthenticationRequest {
         "deviceInfo": deviceInfo?.toJson(),
         "displayName": displayName,
         "authToken": authToken,
-      };
+      }..removeWhere((key, value) => value == null);
 
   @override
   String toString() {
@@ -69,5 +69,5 @@ class DeviceInfo {
         "kind": kind,
         "model": model,
         "sdkVersion": sdkVersion,
-      };
+      }..removeWhere((key, value) => value == null);
 }

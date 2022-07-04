@@ -21,7 +21,6 @@ class HiveDbClient extends DBClient {
     //initialized Hive
     // final appDocumentDirectory = await getApplicationDocumentsDirectory();
     // var path = Directory.current.path;
-    // print('path >>>>>> $path');
     await Hive.deleteFromDisk();
 
     return;

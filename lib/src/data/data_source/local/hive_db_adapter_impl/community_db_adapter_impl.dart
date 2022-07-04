@@ -21,4 +21,9 @@ class CommunityDbAdapterImpl extends CommunityDbAdapter {
   Future saveCommunityEntity(CommunityHiveEntity entity) async {
     await box.put(entity.communityId, entity);
   }
+
+  @override
+  Stream<CommunityHiveEntity> listenCommunityEntity(String communityId) {
+    return box.watch(key: communityId).map((event) => event.value);
+  }
 }

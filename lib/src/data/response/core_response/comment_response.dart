@@ -12,7 +12,7 @@ class CommentResponse {
     required this.referenceType,
     required this.dataType,
     required this.data,
-    // required this.metadata,
+    required this.metadata,
     required this.childrenNumber,
     required this.flagCount,
     required this.hashFlag,
@@ -37,7 +37,7 @@ class CommentResponse {
   final String referenceType;
   final String dataType;
   final PostDataResponse data;
-  // final DataClass metadata;
+  final Map<String, dynamic>? metadata;
   final int childrenNumber;
   final int flagCount;
   final HashFlag? hashFlag;
@@ -86,6 +86,7 @@ class CommentResponse {
             : DateTime.parse(json["updatedAt"]),
         children: List<String>.from(json["children"].map((x) => x)),
         segmentNumber: json["segmentNumber"],
+        metadata: json["metadata"],
         required: json["required"],
       );
 
@@ -115,6 +116,7 @@ class CommentResponse {
         "updatedAt": updatedAt?.toIso8601String(),
         "children": List<dynamic>.from(children.map((x) => x)),
         "segmentNumber": segmentNumber,
+        "metadata": metadata,
         "required": required,
       };
 }

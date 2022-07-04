@@ -1,7 +1,5 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-// ignore_for_file: avoid_single_cascade_in_expression_statements
-
 part of 'community_hive_entity_9.dart';
 
 // **************************************************************************
@@ -19,7 +17,7 @@ class CommunityHiveEntityAdapter extends TypeAdapter<CommunityHiveEntity> {
 
   @override
   void write(BinaryWriter writer, CommunityHiveEntity obj) {
-    writer..writeByte(0);
+    writer.writeByte(0);
   }
 
   @override

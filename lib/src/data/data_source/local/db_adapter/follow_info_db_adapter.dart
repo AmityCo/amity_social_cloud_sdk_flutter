@@ -2,5 +2,7 @@ import 'package:amity_sdk/src/data/data_source/local/hive_entity/follow_info_hiv
 
 abstract class FollowInfoDbAdapter {
   Future saveFollowInfo(FollowInfoHiveEntity entity);
-  FollowInfoHiveEntity getFollowInfo(String userId);
+  FollowInfoHiveEntity? getFollowInfo(String id);
+
+  Stream<FollowInfoHiveEntity> stream(String id);
 }

@@ -13,6 +13,7 @@ extension CommentResponseExtension on CommentResponse {
       ..data = data.convertToPostDataHiveEntity()
       ..childrenNumber = childrenNumber
       ..flagCount = flagCount
+      ..reactions = reactions
       ..reactionsCount = reactionsCount
       ..myReactions = myReactions
       ..isDeleted = isDeleted
@@ -21,6 +22,7 @@ extension CommentResponseExtension on CommentResponse {
       ..updatedAt = updatedAt
       ..children = children
       ..segmentNumber = segmentNumber
+      ..metadata = metadata
       ..required = required;
   }
 }

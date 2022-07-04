@@ -3,7 +3,7 @@ import 'package:amity_sdk/src/data/data_source/local/hive_entity/account_hive_en
 abstract class AccountDbAdapter {
   void saveAccountEntity(AccountHiveEntity entity);
 
-  AccountHiveEntity getAccountEntity();
+  AccountHiveEntity? getAccountEntity(String userId);
 
   Stream<AccountHiveEntity> listenAccountEntity();
 }

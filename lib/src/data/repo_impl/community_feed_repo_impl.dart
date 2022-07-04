@@ -15,7 +15,7 @@ class CommunityFeedRepoImpl extends CommunityFeedRepo {
   });
 
   @override
-  Future<Tuple2<List<AmityPost>, String>> getCommunityFeed(
+  Future<PageListData<List<AmityPost>, String>> getCommunityFeed(
       GetCommunityFeedRequest request) async {
     final data = await communiytFeedApiInterface.getCommunityFeed(request);
 
@@ -31,6 +31,6 @@ class CommunityFeedRepoImpl extends CommunityFeedRepo {
         .asyncMap((postId) => postRepo.getPostByIdFromDb(postId))
         .toList();
 
-    return Tuple2(amitPosts, data.paging!.next ?? '');
+    return PageListData(amitPosts, data.paging!.next ?? '');
   }
 }

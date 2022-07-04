@@ -6,12 +6,12 @@ class AccountRepoImpl extends AccountRepo {
   AccountRepoImpl({required this.accountDbAdapter});
 
   @override
-  AccountHiveEntity getAccount() {
-    return accountDbAdapter.getAccountEntity();
+  AccountHiveEntity? getAccount(String userId) {
+    return accountDbAdapter.getAccountEntity(userId);
   }
 
   @override
-  Stream<AccountHiveEntity> listenAccount() {
+  Stream<AccountHiveEntity> listenAccount(String userId) {
     throw accountDbAdapter.listenAccountEntity();
   }
 }

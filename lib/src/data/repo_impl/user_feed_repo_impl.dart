@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:amity_sdk/src/core/model/api_request/get_user_feed_request.dart';
-import 'package:amity_sdk/src/core/utils/tuple.dart';
+import 'package:amity_sdk/src/core/utils/page_list_data.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/model/amity_post.dart';
 import 'package:amity_sdk/src/domain/repo/user_feed_repo.dart';
@@ -22,7 +22,7 @@ class UserFeedRepoImpl extends UserFeedRepo {
       required this.feedDbAdapter});
 
   @override
-  Future<Tuple2<List<AmityPost>, String>> getUserFeed(
+  Future<PageListData<List<AmityPost>, String>> getUserFeed(
       GetUserFeedRequest request) async {
     final data = await userFeedApiInterface.getUserFeed(request);
 
@@ -31,14 +31,14 @@ class UserFeedRepoImpl extends UserFeedRepo {
 
     final amitPosts = await _saveDataToDb(data);
 
-    return Tuple2(amitPosts, data.paging!.next ?? '');
+    return PageListData(amitPosts, data.paging!.next ?? '');
   }
 
   @override
-  Stream<Tuple2<List<AmityPost>, String>> getUserFeedStream(
+  Stream<PageListData<List<AmityPost>, String>> getUserFeedStream(
       GetUserFeedRequest request) {
-    StreamController<Tuple2<List<AmityPost>, String>> controller =
-        StreamController<Tuple2<List<AmityPost>, String>>();
+    StreamController<PageListData<List<AmityPost>, String>> controller =
+        StreamController<PageListData<List<AmityPost>, String>>();
 
     ///1. Get Feed Collection from the DB
     _getUserFeedCollectionFromDb('${request.hashCode}').then((value) {
@@ -65,7 +65,7 @@ class UserFeedRepoImpl extends UserFeedRepo {
     return controller.stream;
   }
 
-  Future<Tuple2<List<AmityPost>, String>?> _getUserFeedCollectionFromDb(
+  Future<PageListData<List<AmityPost>, String>?> _getUserFeedCollectionFromDb(
       String collectionId) async {
     //Get feed collection from the db
     final data = feedDbAdapter.getFeedEntity(collectionId);
@@ -78,7 +78,7 @@ class UserFeedRepoImpl extends UserFeedRepo {
           .toList();
 
       //return tuple for token and amitypost list
-      return Tuple2(amitPosts, data.nextToken!);
+      return PageListData(amitPosts, data.nextToken!);
     }
 
     return Future.value();

@@ -7,16 +7,16 @@ class PostFileComposerUsecase extends UseCase<AmityPostData, AmityPostData> {
   @override
   Future<AmityPostData> get(AmityPostData params) async {
     if (params.fileId != null) {
-      final _fileProperties = await fileRepo.getFileByIdFromDb(params.fileId!);
+      final fileProperties = await fileRepo.getFileByIdFromDb(params.fileId!);
 
       if (params is ImageData) {
-        final image = AmityImage(_fileProperties);
+        final image = AmityImage(fileProperties);
         params.image = image;
         params.fileInfo = image;
       }
 
       if (params is VideoData) {
-        final thumbnailFile = AmityImage(_fileProperties);
+        final thumbnailFile = AmityImage(fileProperties);
         params.thumbnail = thumbnailFile;
 
         // final videoFile = AmityVideo(_fileProperties);
@@ -24,7 +24,7 @@ class PostFileComposerUsecase extends UseCase<AmityPostData, AmityPostData> {
       }
 
       if (params is FileData) {
-        final file = AmityFile(_fileProperties);
+        final file = AmityFile(fileProperties);
         params.fileInfo = file;
       }
     }

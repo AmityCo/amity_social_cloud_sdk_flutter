@@ -17,8 +17,9 @@ class AmityMQTT {
   final AmityCoreClientOption amityCoreClientOption;
 
   AmityMQTT({required this.accountRepo, required this.amityCoreClientOption}) {
+    final currentUser = AmityCoreClient.getCurrentUser();
     accountRepo
-        .listenAccount()
+        .listenAccount(currentUser.userId!)
         .takeWhile((account) => account.accessToken?.isNotEmpty ?? false)
         .distinct()
         .listen((account) {
@@ -85,8 +86,9 @@ class AmityMQTT {
   }
 
   void _addClientListeners() {
+    final currentUser = AmityCoreClient.getCurrentUser();
     accountRepo
-        .listenAccount()
+        .listenAccount(currentUser.userId!)
         .takeWhile((account) => account.isActive == false)
         .distinct()
         .listen((account) {

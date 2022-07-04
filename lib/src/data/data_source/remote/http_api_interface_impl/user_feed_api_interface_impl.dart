@@ -9,7 +9,7 @@ class UserFeedApiInterfaceImpl extends UserFeedApiInterface {
   Future<CreatePostResponse> getUserFeed(GetUserFeedRequest request) async {
     try {
       final data = await httpApiClient().get(
-          USER_FEED_V3_URL + '/${request.userId}',
+          '$USER_FEED_V3_URL/${request.userId}',
           queryParameters: request.toJson());
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {

@@ -16,7 +16,7 @@ class CommentHiveEntity extends HiveObject {
   String? referenceType;
   String? dataType;
   PostChildDataHiveEntity? data;
-  //  DataClass metadata;
+  Map<String, dynamic>? metadata;
   int? childrenNumber;
   int? flagCount;
   // HashFlag? hashFlag;

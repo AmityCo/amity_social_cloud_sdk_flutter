@@ -1,9 +1,10 @@
 // ignore_for_file: unused_field
 
-import 'package:amity_sdk/src/core/utils/tuple.dart';
+import 'package:amity_sdk/src/core/utils/page_list_data.dart';
 import 'package:flutter/foundation.dart';
 
-typedef PageFuture<T> = Future<Tuple2<List<T>, String>> Function(String? token);
+typedef PageFuture<T> = Future<PageListData<List<T>, String>> Function(
+    String? token);
 
 class PagingController<T> extends ChangeNotifier {
   PagingController({required this.pageFuture, this.pageSize = 10});
@@ -16,6 +17,7 @@ class PagingController<T> extends ChangeNotifier {
 
   bool _hasMoreItems = true;
   Object? _error;
+  Object? _stacktrace;
   bool _isFetching = false;
 
   /// Called whenever a new page (or batch) is to be fetched
@@ -39,6 +41,7 @@ class PagingController<T> extends ChangeNotifier {
 
   /// The latest error that has been faced when trying to load a page
   Object? get error => _error;
+  Object? get stacktrace => _stacktrace;
 
   /// set to true if no data was found
   bool? get noItemsFound => _loadedItems.isEmpty && hasMoreItems == false;
@@ -62,6 +65,11 @@ class PagingController<T> extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addAll(List<T> items) {
+    _loadedItems.addAll(items);
+    notifyListeners();
+  }
+
   void add(T item) {
     _loadedItems.add(item);
     notifyListeners();
@@ -77,6 +85,11 @@ class PagingController<T> extends ChangeNotifier {
     notifyListeners();
   }
 
+  void removeWhere(bool Function(T) condition) {
+    _loadedItems.removeWhere(condition);
+    notifyListeners();
+  }
+
   /// Fetches a new page by calling [pageFuture]
   Future<void> fetchNextPage() async {
     if (!_isFetching) {
@@ -85,10 +98,11 @@ class PagingController<T> extends ChangeNotifier {
       List<T>? page;
       try {
         final data = await pageFuture(_nextPageToken);
-        page = data.item1;
-        _nextPageToken = data.item2;
+        page = data.data;
+        _nextPageToken = data.token;
         _numberOfLoadedPages++;
-      } catch (error) {
+      } catch (error, stacktrace) {
+        _stacktrace = stacktrace;
         _error = error;
         _isFetching = false;
         page = [];
@@ -105,7 +119,7 @@ class PagingController<T> extends ChangeNotifier {
             'Page length ($length) is greater than the maximum size ($pageSize)');
       }
 
-      if (length > 0 && length < pageSize) {
+      if ((length > 0 && length < pageSize) || _nextPageToken!.isEmpty) {
         //   // This should only happen when loading the last page.
         //   // In that case, we append the last page with a few items to make its size
         //   // similar to normal pages. This is useful especially with GridView,

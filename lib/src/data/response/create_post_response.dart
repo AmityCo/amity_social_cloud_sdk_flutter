@@ -35,8 +35,8 @@ class CreatePostResponse {
   final List<FileResponse> files;
   final List<CommunityResponse> communities;
   final List<CommunityUserResponse> communityUsers;
-  final List<CategoryResponse> categories;
-  final List<FeedResponse> feeds;
+  final List<CommunityCategoryResponse> categories;
+  final List<CommunityFeedResponse> feeds;
   final List<VideoStreamingResponse> videoStreamings;
   final List<PollResponse> polls;
   final PagingResponse? paging;
@@ -73,12 +73,12 @@ class CreatePostResponse {
                 .map((x) => CommunityUserResponse.fromJson(x))),
         categories: json["categories"] == null
             ? []
-            : List<CategoryResponse>.from(
-                json["categories"].map((x) => CategoryResponse.fromJson(x))),
+            : List<CommunityCategoryResponse>.from(json["categories"]
+                .map((x) => CommunityCategoryResponse.fromJson(x))),
         feeds: json["feeds"] == null
             ? []
-            : List<FeedResponse>.from(
-                json["feeds"].map((x) => FeedResponse.fromJson(x))),
+            : List<CommunityFeedResponse>.from(
+                json["feeds"].map((x) => CommunityFeedResponse.fromJson(x))),
         videoStreamings: json["videoStreamings"] == null
             ? []
             : List<VideoStreamingResponse>.from(json["videoStreamings"]

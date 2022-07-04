@@ -8,9 +8,15 @@ extension CreatePostResponseExtension on CreatePostResponse {
 
   Future saveToDb(DbAdapterRepo dbRepo) async {
     //Convert to File Hive Entity
+
     //we have save the file first, since every object depends on file
     List<FileHiveEntity> fileHiveEntities =
         files.map((e) => e.convertToFileHiveEntity()).toList();
+
+    //Conver the community category to CommunityCategoryHiveEntity
+    List<CommunityCategoryHiveEntity> communityCategoryHiveEntities = categories
+        .map((e) => e.convertToCommunityCategoryHiveEntity())
+        .toList();
 
     //Convert to Community Hive Entity
     List<CommunityHiveEntity> communityHiveEntities =
@@ -37,14 +43,9 @@ extension CreatePostResponseExtension on CreatePostResponse {
       await dbRepo.fileDbAdapter.saveFileEntity(e);
     }
 
-    //Save the Community Entity
-    for (var e in communityHiveEntities) {
-      await dbRepo.communityDbAdapter.saveCommunityEntity(e);
-    }
-
-    //Save Child Post Entity
-    for (var e in postChildHiveEntities) {
-      await dbRepo.postDbAdapter.savePostEntity(e);
+    //Save the community Category
+    for (var e in communityCategoryHiveEntities) {
+      await dbRepo.communityCategoryDbAdapter.saveCommunityCategoryEntity(e);
     }
 
     //Save the User Entity
@@ -55,6 +56,16 @@ extension CreatePostResponseExtension on CreatePostResponse {
     //Save the Comment Entity
     for (var e in commentHiveEntities) {
       await dbRepo.commentDbAdapter.saveCommentEntity(e);
+    }
+
+    //Save the Community Entity
+    for (var e in communityHiveEntities) {
+      await dbRepo.communityDbAdapter.saveCommunityEntity(e);
+    }
+
+    //Save Child Post Entity
+    for (var e in postChildHiveEntities) {
+      await dbRepo.postDbAdapter.savePostEntity(e);
     }
 
     //Save Post Entity

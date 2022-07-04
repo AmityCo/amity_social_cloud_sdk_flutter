@@ -1,9 +1,36 @@
-## 0.0.2-hedgehog.2
+## 0.2.0
+* feat: Community Post Review feature
+* feat: Query community by tag
+* feat: add tags in community
+* feat: add recommend and trending communities in public repo
+* feat: Add Community Category in Create & Update Community
+* fix: data type filtering in get post API
+* fix: resolve edge case with page controller blank token
+* fix: resolve issue with multiple post in community feed
+* fix: updated post query for v4 api
 
-*fix: flutter static analysis
-## 0.0.2-hedgehog.1
+## 0.1.3
+* fix: null category ID in Community Category hive entiry
+* fix: resolve edge case with page controller blank token
 
-*fix: flutter static analysis
+## 0.1.2
+* chore: enable the lint core and analyze the code
+## 0.1.1
+* fix: community category causes data corruption
+* fix: post metadata is unable to update
+
+
+## 0.1.0
+
+* feat: Add Metadata in post, comment and community
+* feat: Streams for Post, Comment, Community and Community Member
+* feat: Community CRUD and Query
+* feat: Community Member CRUD and Query
+* feat: Community Member Roles & Permissions
+* feat: Community feed query
+* feat: Add/Remove Post and Comment reactions
+* fix: resolve memory leak issue in post and comment object
+
 
 ## 0.0.2
 

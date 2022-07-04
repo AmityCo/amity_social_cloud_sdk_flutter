@@ -16,7 +16,7 @@ class PostHiveEntity extends HiveObject {
   String? targetType;
   String? dataType;
   PostChildDataHiveEntity? data;
-  //  DataClass metadata;
+  Map<String, dynamic>? metadata;
   int? flagCount;
   //  HashFlag hashFlag;
   DateTime? editedAt;

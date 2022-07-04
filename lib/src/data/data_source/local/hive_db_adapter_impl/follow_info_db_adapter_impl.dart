@@ -13,12 +13,17 @@ class FollowInfoDbAdapterImpl extends FollowInfoDbAdapter {
   }
 
   @override
-  FollowInfoHiveEntity getFollowInfo(String userId) {
-    return box.get(userId);
+  FollowInfoHiveEntity? getFollowInfo(String id) {
+    return box.get(id);
   }
 
   @override
   Future saveFollowInfo(FollowInfoHiveEntity entity) async {
     await box.put(entity.userId, entity);
+  }
+
+  @override
+  Stream<FollowInfoHiveEntity> stream(String id) {
+    return box.watch(key: id).map((event) => event.value);
   }
 }

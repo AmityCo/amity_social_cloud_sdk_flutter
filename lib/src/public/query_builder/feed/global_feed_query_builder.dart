@@ -1,13 +1,13 @@
-
-
-import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/core/model/api_request/get_global_feed_request.dart';
+import 'package:amity_sdk/src/core/utils/page_list_data.dart';
+import 'package:amity_sdk/src/domain/model/amity_post.dart';
+import 'package:amity_sdk/src/domain/usecase/feed/get_global_feed_usecase.dart';
 
 class AmityGlobalFeedQuery {
   final GetGlobalFeedUsecase _usecase;
   AmityGlobalFeedQuery(this._usecase);
 
-  Future<Tuple2<List<AmityPost>, String>> getPagingData(
+  Future<PageListData<List<AmityPost>, String>> getPagingData(
       {String? token, int? limit}) async {
     GetGlobalFeedRequest request = GetGlobalFeedRequest();
 
@@ -18,12 +18,12 @@ class AmityGlobalFeedQuery {
       request.limit = limit;
     }
 
-    final _data = await _usecase.get(request);
+    final data = await _usecase.get(request);
 
-    return _data;
+    return data;
   }
 
-  Stream<Tuple2<List<AmityPost>, String>> getPagingDataStream(
+  Stream<PageListData<List<AmityPost>, String>> getPagingDataStream(
       {String? token, int? limit}) {
     GetGlobalFeedRequest request = GetGlobalFeedRequest();
 

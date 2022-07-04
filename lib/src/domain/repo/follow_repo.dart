@@ -1,24 +1,39 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// Follow Abs Repo for all follow/unfollow operation
 abstract class FollowRepo {
+  /// Accept the follow request from [userId] (POST Follower)
   Future<void> accpet(String userId);
 
+  /// Decline the [userId]follow request or delete the [userId] follower (DELETE follower)
   Future<void> decline(String userId);
 
+  /// Follow user (POST Following)
   Future<AmityFollowStatus> follow(String userId);
 
+  /// Unfollow or Cancel follow requst to [userId] (DELETE Following)
   Future<void> unfollow(String userId);
 
+  /// Get user [userID] follow info
   Future<AmityUserFollowInfo> getFollowInfo(String userId);
 
-  Future<List<AmityFollowRelationship>> getFollower(String userId);
+  /// Get user folllowers list
+  Future<PageListData<List<AmityFollowRelationship>, String>> getFollower(
+      FollowRequest request);
 
-  Future<List<AmityFollowRelationship>> getFollowing(String userId);
+  /// Get user folllowing list
+  Future<PageListData<List<AmityFollowRelationship>, String>> getFollowing(
+      FollowRequest request);
 
-  Future<AmityUserFollowInfo> getMyFollowInfo();
+  /// Get current logged user follow info
+  Future<AmityMyFollowInfo> getMyFollowInfo();
 
-  Future<List<AmityFollowRelationship>> getMyFollower();
+  /// Get my follower list
+  Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollower(
+      FollowRequest request);
 
-  Future<List<AmityFollowRelationship>> getMyFollowing();
+  /// Get my following list
+  Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollowing(
+      FollowRequest request);
 }

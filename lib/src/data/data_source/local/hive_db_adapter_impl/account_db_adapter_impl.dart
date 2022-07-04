@@ -18,13 +18,13 @@ class AccountDbAdapterImpl extends AccountDbAdapter {
   }
 
   @override
-  AccountHiveEntity getAccountEntity() {
-    return box.getAt(0);
+  AccountHiveEntity? getAccountEntity(String userId) {
+    return box.get(userId);
   }
 
   @override
   void saveAccountEntity(AccountHiveEntity entity) async {
     await box.clear();
-    await box.add(entity);
+    await box.put(entity.userId, entity);
   }
 }
