@@ -4,11 +4,11 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data_source/local/local.dart';
 import 'package:amity_sdk/src/domain/repo/account_repo.dart';
 import 'package:amity_sdk/src/public/amity_core_client.dart';
-import 'package:mqtt_client/mqtt_client.dart';
-import 'package:mqtt_client/mqtt_server_client.dart';
+import 'package:mqtt_client/mqtt_client.dart'
+    if (dart.library.html) 'package:mqtt_client/mqtt_browser_client.dart';
 
 class AmityMQTT {
-  MqttServerClient? activeClient;
+  MqttClient? activeClient;
 
   static final MQTT_CONNECTED = 0;
   static final MQTT_DISCONNECTED = -1;
@@ -32,7 +32,7 @@ class AmityMQTT {
 
   Future<int> _connect(AccountHiveEntity accountEntity) async {
     //TODO dynamic server url
-    activeClient = MqttServerClient(
+    activeClient = MqttClient(
         amityCoreClientOption.mqttEndpoint.value, accountEntity.deviceId!);
 
     activeClient?.setProtocolV311();
@@ -44,7 +44,7 @@ class AmityMQTT {
     activeClient?.pongCallback = _pong;
     activeClient?.websocketProtocols =
         MqttClientConstants.protocolsSingleDefault;
-    activeClient?.secure = true;
+    // activeClient?.secure = true;
 
     /// Create a connection message to use or use the default one. The default one sets the
     /// client identifier, any supplied username/password and clean session,

@@ -1,6 +1,6 @@
 import 'package:amity_sdk/src/core/enum/amity_membership_sorting_order.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 
 class CommunityMemberDbAdapterImpl extends CommunityMemberDbAdapter {
   final DBClient dbClient;

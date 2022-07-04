@@ -1,7 +1,8 @@
 // ignore_for_file: unused_local_variable
 
 import 'dart:developer';
-import 'dart:io';
+
+// import 'dart:io';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
@@ -26,7 +27,7 @@ class HttpApiClient {
     dio.interceptors
         .add(QueuedInterceptorsWrapper(onRequest: (options, handler) {
       if (serviceLocator.isRegistered<SessionResponse>()) {
-        options.headers[HttpHeaders.authorizationHeader] =
+        options.headers['authorization'] =
             'Bearer ${serviceLocator<SessionResponse>().accessToken}';
       }
       handler.next(options);
