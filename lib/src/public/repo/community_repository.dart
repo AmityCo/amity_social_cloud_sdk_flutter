@@ -1,10 +1,6 @@
 import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/model/api_request/community_member_check_request.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/usecase/community/community_get_recommend.dart';
-import 'package:amity_sdk/src/domain/usecase/community/community_get_trending.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_get_usecase.dart';
 
 class CommunityRepository {
   CommunityCreatorBuilder createCommunity(String displayName) {
