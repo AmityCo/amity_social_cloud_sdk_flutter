@@ -1,8 +1,4 @@
-// To parse this JSON data, do
-//
-//     final reactionRequest = reactionRequestFromJson(jsonString);
-
-import 'dart:io';
+import 'dart:io' if (dart.library.html) 'dart:html';
 
 class UploadFileRequest {
   UploadFileRequest({

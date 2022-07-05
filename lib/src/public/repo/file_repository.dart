@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:io' if (dart.library.html) 'dart:html';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/public/public.dart';

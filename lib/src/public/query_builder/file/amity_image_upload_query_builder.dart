@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:io' if (dart.library.html) 'dart:html';
 
 import 'package:amity_sdk/src/core/model/api_request/upload_file_request.dart';
 import 'package:amity_sdk/src/domain/model/amity_file/amity_file_info.dart';

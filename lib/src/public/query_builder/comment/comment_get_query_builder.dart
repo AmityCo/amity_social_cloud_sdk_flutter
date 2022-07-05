@@ -94,6 +94,10 @@ class AmityCommentQueryBuilder {
       getCommentRequest.parentId = _parentId;
     }
 
+    if (_isFilterByParentId != null) {
+      getCommentRequest.filterByParentId = _isFilterByParentId;
+    }
+
     if (_isDeleted != null) {
       getCommentRequest.isDeleted = _isDeleted;
     }
