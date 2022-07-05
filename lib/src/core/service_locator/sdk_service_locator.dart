@@ -65,6 +65,9 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<FeedPagingDbAdapter>(
         () => FeedPagingDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<ReactionDbAdapter>(
+        () => ReactionDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
 
     //Register Db adapter Repo which hold all the Db Adapters
     serviceLocator.registerLazySingleton<DbAdapterRepo>(() => DbAdapterRepo(
@@ -157,9 +160,12 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<FileRepo>(() => FileRepoImpl(
         fileDbAdapter: serviceLocator(), fileApiInterface: serviceLocator()));
     serviceLocator.registerLazySingleton<ReactionRepo>(() => ReactionRepoImpl(
-        reactionApiInterface: serviceLocator(),
-        commentDbAdapter: serviceLocator(),
-        postDbAdapter: serviceLocator()));
+          reactionApiInterface: serviceLocator(),
+          commentDbAdapter: serviceLocator(),
+          postDbAdapter: serviceLocator(),
+          userDbAdapter: serviceLocator(),
+          reactionDbAdapter: serviceLocator(),
+        ));
     serviceLocator.registerLazySingleton<CommunityRepo>(
       () => CommunityRepoImpl(
           communityApiInterface: serviceLocator(),
@@ -381,6 +387,11 @@ class SdkServiceLocator {
         () => AddReactionUsecase(reactionRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<RemoveReactionUsecase>(
         () => RemoveReactionUsecase(reactionRepo: serviceLocator()));
+    serviceLocator
+        .registerLazySingleton<GetReactionUsecase>(() => GetReactionUsecase(
+              reactionRepo: serviceLocator(),
+              userRepo: serviceLocator(),
+            ));
 
     serviceLocator.registerLazySingleton<CommentCreateUseCase>(() =>
         CommentCreateUseCase(

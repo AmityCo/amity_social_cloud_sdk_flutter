@@ -6,8 +6,9 @@ extension ReactionHiveEntityExtension on ReactionHiveEntity {
   AmityReaction convertToAmityReaction() {
     return AmityReaction()
       ..reactionId = reactionId
-      ..referenceType = referenceType
       ..reactionName = reactionName
+      ..referenceId = referenceId
+      ..referenceType = referenceType
       ..userId = userId
       ..userDisplayName = userDisplayName
       ..createdAt = createdAt;

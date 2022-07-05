@@ -10,8 +10,12 @@ extension AmityPostExtension on AmityPost {
     return AddReactionQueryBuilder(
         addReactionUsecase: serviceLocator(),
         removeReactionUsecase: serviceLocator(),
-        referenceType: ReactionReferenceType.POST.value,
+        referenceType: AmityReactionReferenceType.POST.value,
         referenceId: postId!);
+  }
+
+  GetReactionQueryBuilder getReaction() {
+    return GetReactionQueryBuilder.post(postId: postId!);
   }
 
   AmityCommentCreateTargetSelector comment() {

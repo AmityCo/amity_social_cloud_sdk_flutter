@@ -29,4 +29,8 @@ class PostRepository {
         postDeclineUsecase: serviceLocator(),
         postId: postId);
   }
+
+  GetReactionQueryBuilder getReaction({required String postId}) {
+    return GetReactionQueryBuilder.post(postId: postId);
+  }
 }
