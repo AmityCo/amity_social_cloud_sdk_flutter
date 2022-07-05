@@ -1,4 +1,4 @@
-## 0.3.0-beta.1
+## 0.3.0
 * feat: follow/unfollow functionlity
 * feat: accept/denied pending follow request functionlity
 * feat: Query user follower/following
