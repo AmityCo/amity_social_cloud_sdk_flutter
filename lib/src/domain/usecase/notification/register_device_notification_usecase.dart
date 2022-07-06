@@ -1,10 +1,10 @@
 import 'dart:async';
 import 'dart:io' if (dart.library.html) 'dart:html' show Platform;
 
-import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/model/api_request/register_notification_request.dart';
 import 'package:amity_sdk/src/core/usercase/usecase.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/public/public.dart';
 
 class RegisterDeviceNotificationUseCase extends UseCase<void, String> {
   final NotificationRepo notificationRepo;

@@ -32,7 +32,8 @@ class CommunityComposerUsecase extends UseCase<AmityCommunity, AmityCommunity> {
     //Fill in the category
     if (params.categoryIds != null) {
       params.categories = await Stream.fromIterable(params.categoryIds!)
-          .asyncMap((event) => communityRepo.getCommunityCategoryById(event))
+          .asyncMap<AmityCommunityCategory?>((event) async =>
+              await communityRepo.getCommunityCategoryById(event))
           .toList();
     }
 

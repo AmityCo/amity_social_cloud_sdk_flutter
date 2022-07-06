@@ -1,5 +1,5 @@
-import 'package:amity_sdk/amity_sdk.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/community_category_hive_12.dart';
+import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 extension CommunityCategoryHiveExtension on CommunityCategoryHiveEntity {
   AmityCommunityCategory convertToAmityCommunityCategory() {

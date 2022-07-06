@@ -14,7 +14,8 @@ class CommunityGetQueryUseCase extends UseCase<
     final amityCommunities = await communityRepo.getCommunityQuery(params);
     final amityComposedCommunity =
         await Stream.fromIterable(amityCommunities.data)
-            .asyncMap((event) => communityComposerUsecase.get(event))
+            .asyncMap<AmityCommunity>(
+                (event) async => await communityComposerUsecase.get(event))
             .toList();
     return amityCommunities.withItem1(amityComposedCommunity);
   }
