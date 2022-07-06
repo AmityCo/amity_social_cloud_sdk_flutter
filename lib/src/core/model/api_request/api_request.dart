@@ -12,6 +12,7 @@ export 'get_community_members_request.dart';
 export 'get_community_request.dart';
 export 'get_global_feed_request.dart';
 export 'get_post_request.dart';
+export 'get_reaction_request.dart';
 export 'get_user_feed_request.dart';
 export 'paginated_api_request.dart';
 export 'reaction_request.dart';

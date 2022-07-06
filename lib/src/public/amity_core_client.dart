@@ -91,13 +91,24 @@ class AmityCoreClient {
   static FileRepository newFileRepository() => serviceLocator<FileRepository>();
 }
 
+/// This class is AmityCore option to do initial setup Amity
 class AmityCoreClientOption {
+  /// network Apikey
   final String apiKey;
+
+  /// Http endpoint for amity client
   final AmityRegionalHttpEndpoint httpEndpoint;
+
+  /// Socket endpoint for amity client
   final AmityRegionalSocketEndpoint socketEndpoint;
+
+  /// MQTT endpoint for amity client
   final AmityRegionalMqttEndpoint mqttEndpoint;
+
+  /// flag to show logs for debug, by default it false
   final bool showLogs;
 
+  /// Amity Core Client Options to do initial Amity Client
   AmityCoreClientOption({
     required this.apiKey,
     this.httpEndpoint = AmityRegionalHttpEndpoint.SG,

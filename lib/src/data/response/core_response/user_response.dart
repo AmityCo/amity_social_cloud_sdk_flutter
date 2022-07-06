@@ -34,8 +34,8 @@ class UserResponse {
   factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
         id: json["_id"],
         userId: json["userId"],
-        roles: List<String>.from(json["roles"].map((x) => x)),
-        permissions: List<String>.from(json["permissions"].map((x) => x)),
+        roles: List<String>.from(json["roles"] ?? [].map((x) => x)),
+        permissions: List<String>.from(json["permissions"] ?? [].map((x) => x)),
         displayName: json["displayName"],
         description: json["description"],
         avatarFileId: json["avatarFileId"],
@@ -44,8 +44,12 @@ class UserResponse {
         // hashFlag: HashFlag.fromJson(json["hashFlag"]),
         metadata: json["metadata"],
         isGlobalBan: json["isGlobalBan"],
-        createdAt: DateTime.parse(json["createdAt"]),
-        updatedAt: DateTime.parse(json["updatedAt"]),
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.parse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.parse(json["updatedAt"]),
       );
 
   Map<String, dynamic> toJson() => {

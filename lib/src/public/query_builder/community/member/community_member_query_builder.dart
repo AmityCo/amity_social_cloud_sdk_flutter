@@ -1,6 +1,5 @@
-import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_query_usecase.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommunityMemberQueryBuilder {
   final CommunityMemberQueryUsecase usecase;

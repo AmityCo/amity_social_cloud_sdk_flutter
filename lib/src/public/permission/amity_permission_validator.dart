@@ -1,4 +1,5 @@
-import 'package:amity_sdk/amity_sdk.dart';
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/public/public.dart';
 
 class AmityPermissionValidator {
   final AmityPermission _permission;
