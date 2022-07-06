@@ -82,7 +82,7 @@ class CommunityCategoryRepoImpl extends CommunityCategoryRepo {
     }
 
     return communityCategoryHiveEnties
-        .map((e) => e.convertToAmityCommunityCategory())
+        .map<AmityCommunityCategory>((e) => e.convertToAmityCommunityCategory())
         .toList();
   }
 }

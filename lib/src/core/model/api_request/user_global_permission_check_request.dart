@@ -1,4 +1,4 @@
-import 'package:amity_sdk/amity_sdk.dart';
+import 'package:amity_sdk/src/core/core.dart';
 
 class UserGlobalPermissionCheckRequest {
   final String userId;
