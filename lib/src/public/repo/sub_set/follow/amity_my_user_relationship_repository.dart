@@ -1,26 +1,26 @@
-import 'package:amity_sdk/src/core/service_locator/service_locator.dart';
+import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/public/query_builder/relationship/amity_my_followers_query_builder.dart';
-import 'package:amity_sdk/src/public/query_builder/relationship/amity_my_followings_query_builder.dart';
+import 'package:amity_sdk/src/public/public.dart';
 
+/// Amity Relation Repo for Current User
 class AmityMyUserRelationshipRepository {
   /// Accept the pending follow request
-  Future<void> accept(String userId) {
+  Future<AmityFollowStatus> accept(String userId) {
     return serviceLocator<AcceptFollowUsecase>().get(userId);
   }
 
   /// Decline the pending follow request
-  Future<void> decline(String userId) {
+  Future<AmityFollowStatus> decline(String userId) {
     return serviceLocator<DeclineFollowUsecase>().get(userId);
   }
 
   /// Remove the user from the followers list
-  Future removeFollower(String userId) {
+  Future<AmityFollowStatus> removeFollower(String userId) {
     return serviceLocator<RemoveFollowerUsecase>().get(userId);
   }
 
   /// Unfollow the user from the following list
-  Future unfollow(String userId) {
+  Future<AmityFollowStatus> unfollow(String userId) {
     return serviceLocator<UnfollowUsecase>().get(userId);
   }
 
