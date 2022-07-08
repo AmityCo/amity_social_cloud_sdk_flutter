@@ -9,7 +9,13 @@ class AmityUserTokenManager {
   AmityUserTokenManager({required this.endpoint, required this.apiKey});
 
   Future<AmityUserToken> createAuthToken(String userId,
-      {String? displayname = null, String? secureToken = null}) async {
+      {String? displayname = '', String? secureToken = ''}) async {
+    if ((displayname ?? '').isEmpty) {
+      displayname = null;
+    }
+    if ((secureToken ?? '').isEmpty) {
+      secureToken = null;
+    } 
     final request = AuthenticationRequest(
         userId: userId,
         displayName: displayname,
