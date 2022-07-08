@@ -1,3 +1,5 @@
+## 0.3.1
+* fix: GET post api issue
 ## 0.3.0
 * feat: follow/unfollow functionlity
 * feat: accept/denied pending follow request functionlity
