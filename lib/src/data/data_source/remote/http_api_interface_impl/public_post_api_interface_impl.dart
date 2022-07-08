@@ -10,7 +10,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   @override
   Future<CreatePostResponse> getPostById(String postId) async {
     try {
-      final data = await httpApiClient().get('$POST_V4/$postId');
+      final data = await httpApiClient().get('$POST_V3/$postId');
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
