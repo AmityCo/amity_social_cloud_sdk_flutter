@@ -228,6 +228,8 @@ class SdkServiceLocator {
         authenticationRepo: serviceLocator(),
         userComposerUsecase: serviceLocator(),
         accountDbAdapter: serviceLocator()));
+  serviceLocator.registerLazySingleton<GetUserTokenUsecase>(
+        () => GetUserTokenUsecase(authenticationRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<GetAllUserUseCase>(() =>
         GetAllUserUseCase(
             userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
