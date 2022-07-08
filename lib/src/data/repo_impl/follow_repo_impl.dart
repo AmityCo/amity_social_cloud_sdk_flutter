@@ -20,7 +20,7 @@ class FollowRepoImpl extends FollowRepo {
   });
 
   @override
-  Future<void> accpet(String userId) async {
+  Future<AmityFollowStatus> accpet(String userId) async {
     final data = await followWApiInterface.accpet(userId);
 
     final follow = data.follows[0];
@@ -38,11 +38,13 @@ class FollowRepoImpl extends FollowRepo {
       await followInfoHiveEntity.save();
     }
 
-    return;
+    return AmityFollowStatus.values.firstWhere(
+        (element) => element.value == follow.status,
+        orElse: (() => AmityFollowStatus.NONE));
   }
 
   @override
-  Future<void> decline(String userId) async {
+  Future<AmityFollowStatus> decline(String userId) async {
     final data = await followWApiInterface.decline(userId);
 
     final follow = data.follows[0];
@@ -60,7 +62,9 @@ class FollowRepoImpl extends FollowRepo {
       await followInfoHiveEntity.save();
     }
 
-    return;
+    return AmityFollowStatus.values.firstWhere(
+        (element) => element.value == follow.status,
+        orElse: (() => AmityFollowStatus.NONE));
   }
 
   @override
@@ -98,15 +102,15 @@ class FollowRepoImpl extends FollowRepo {
   }
 
   @override
-  Future<void> unfollow(String userId) async {
+  Future<AmityFollowStatus> unfollow(String userId) async {
     final data = await followWApiInterface.unfollow(userId);
     final follow = data.follows[0];
 
-    if (follow.status == AmityFollowStatus.NONE.value) {
-      //Update the follow
-      final followHiveEntity = follow.convertFollowHiveEntity();
-      await followDbAdapter.saveFollowEntity(followHiveEntity);
+    //Update the follow
+    final followHiveEntity = follow.convertFollowHiveEntity();
+    await followDbAdapter.saveFollowEntity(followHiveEntity);
 
+    if (follow.status == AmityFollowStatus.NONE.value) {
       //Update the follow info
       final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
       if (followInfoHiveEntity != null) {
@@ -117,7 +121,9 @@ class FollowRepoImpl extends FollowRepo {
       }
     }
 
-    return;
+    return AmityFollowStatus.values.firstWhere(
+        (element) => element.value == follow.status,
+        orElse: (() => AmityFollowStatus.NONE));
   }
 
   @override

@@ -4,9 +4,12 @@ import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/query_builder/relationship/amity_user_followers_query_builder.dart';
 import 'package:amity_sdk/src/public/query_builder/relationship/amity_user_followings_query_builder.dart';
 
+/// Amity Relationship Repo for userId
 class AmityUserRelationshipRepository {
+  /// AmityUser userId
   final String userId;
 
+  /// Init AmityUserRelationshipRepository
   AmityUserRelationshipRepository({required this.userId});
 
   ///Follow this Amity User by Current logged in user
@@ -15,7 +18,7 @@ class AmityUserRelationshipRepository {
   }
 
   ///Unfollow this Amity User by Current logged in user
-  Future unfollow() {
+  Future<AmityFollowStatus> unfollow() {
     return serviceLocator<UnfollowUsecase>().get(userId);
   }
 
