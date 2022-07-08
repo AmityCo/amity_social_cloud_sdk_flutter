@@ -10,5 +10,6 @@ export 'amity_reaction_map.dart';
 export 'amity_roles.dart';
 export 'amity_tag.dart';
 export 'amity_user.dart';
+export 'amity_user_token.dart';
 export 'community/community.dart';
 export 'follow/follow.dart';
