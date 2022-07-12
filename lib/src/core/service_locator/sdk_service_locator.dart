@@ -1,7 +1,10 @@
 import 'dart:developer';
 
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/repo_impl/poll_repo_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/repo/poll_repo.dart';
+import 'package:amity_sdk/src/domain/usecase/poll/get_poll_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -68,6 +71,9 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<ReactionDbAdapter>(
         () => ReactionDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<PollDbAdapter>(
+        () => PollDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
 
     //Register Db adapter Repo which hold all the Db Adapters
     serviceLocator.registerLazySingleton<DbAdapterRepo>(() => DbAdapterRepo(
@@ -78,7 +84,8 @@ class SdkServiceLocator {
         feedDbAdapter: serviceLocator(),
         fileDbAdapter: serviceLocator(),
         userDbAdapter: serviceLocator(),
-        communityCategoryDbAdapter: serviceLocator()));
+        communityCategoryDbAdapter: serviceLocator(),
+        pollDbAdapter: serviceLocator()));
 
     //-data_source/remote/
     serviceLocator.registerLazySingleton<HttpApiClient>(
@@ -219,6 +226,9 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<NotificationRepo>(
       () => NotificationRepoImpl(notificationApiInterface: serviceLocator()),
     );
+    serviceLocator.registerLazySingleton<PollRepo>(
+      () => PollRepoImpl(dbAdapterRepo: serviceLocator()),
+    );
 
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
@@ -228,7 +238,7 @@ class SdkServiceLocator {
         authenticationRepo: serviceLocator(),
         userComposerUsecase: serviceLocator(),
         accountDbAdapter: serviceLocator()));
-  serviceLocator.registerLazySingleton<GetUserTokenUsecase>(
+    serviceLocator.registerLazySingleton<GetUserTokenUsecase>(
         () => GetUserTokenUsecase(authenticationRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<GetAllUserUseCase>(() =>
         GetAllUserUseCase(
@@ -469,6 +479,8 @@ class SdkServiceLocator {
 
     serviceLocator.registerLazySingleton<PostDeclineUsecase>(
         () => PostDeclineUsecase(postRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<GetPollUseCase>(
+        () => GetPollUseCase(pollRepo: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo

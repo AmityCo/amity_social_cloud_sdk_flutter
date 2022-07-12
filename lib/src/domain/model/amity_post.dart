@@ -40,21 +40,34 @@ class AmityPost {
   }
 }
 
+/// Amity Post Data
 abstract class AmityPostData {
+  /// Post Id
   final String postId;
+
+  /// File id
   final String? fileId;
+
+  /// Raw Data
   final Map<String, dynamic>? rawData;
+
+  /// File info
   late AmityFileInfo
       fileInfo; //Composer, Incase of Text post we dont have fileId, File Info or Raw Data
 
+  /// Init Amity Post Data
   AmityPostData({required this.postId, this.fileId, this.rawData});
 
   @override
   String toString() => 'AmityPostData()';
 }
 
+/// Text Post Data
 class TextData extends AmityPostData {
+  /// Text Data
   String? text;
+
+  /// Init Text Data
   TextData({
     required String postId,
     this.text,
@@ -64,8 +77,12 @@ class TextData extends AmityPostData {
   String toString() => 'TextData(postId: $postId, text: $text)';
 }
 
+/// Image Post Data
 class ImageData extends AmityPostData {
+  /// Amity Image
   late AmityImage image; //composer
+
+  /// Init Image Data
   ImageData({
     required String postId,
     String? fileId,
@@ -78,8 +95,12 @@ class ImageData extends AmityPostData {
   }
 }
 
+/// File Post dataa
 class FileData extends AmityPostData {
+  /// Amity File
   late AmityFile file; //composer
+
+  /// Init File Data
   FileData({
     required String postId,
     String? fileId,
@@ -87,9 +108,13 @@ class FileData extends AmityPostData {
   }) : super(postId: postId, fileId: fileId, rawData: rawData);
 }
 
+/// Video Post Data
 class VideoData extends AmityPostData {
+  /// Video Thumbnail
   //FIXME: - some vidoe post dont have thubnail, we have to keep thubnail nullable instead of late.
   AmityImage? thumbnail; //composer
+
+  /// Init Video Data
   VideoData({
     required String postId,
     String? fileId,
@@ -101,8 +126,12 @@ class VideoData extends AmityPostData {
         );
 }
 
+/// Live Stream Post Data
 class LiveStreamData extends AmityPostData {
+  /// Steam Id
   String? streamId;
+
+  /// Init Live Stream Data
   LiveStreamData({
     required String postId,
     required this.streamId,
@@ -110,16 +139,18 @@ class LiveStreamData extends AmityPostData {
   }) : super(postId: postId, fileId: streamId, rawData: rawData);
 }
 
-// class PollData extends AmityPostData {
-//   String? postId;
-//   String? pollId;
-//   Map<String, dynamic>? rawData;
-//   PollData({
-//     this.postId,
-//     this.pollId,
-//     this.rawData,
-//   });
-// }
+/// Poll Post Data
+class PollData extends AmityPostData {
+  /// Poll id
+  String pollId;
+
+  /// init Poll Data
+  PollData({
+    required String postId,
+    required this.pollId,
+    Map<String, dynamic>? rawData,
+  }) : super(postId: postId, rawData: rawData);
+}
 
 // class CustomData extends AmityPostData {
 //   String? postId;

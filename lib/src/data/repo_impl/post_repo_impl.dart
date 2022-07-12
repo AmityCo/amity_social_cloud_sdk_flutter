@@ -4,13 +4,27 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// Post Repo
 class PostRepoImpl extends PostRepo {
+  /// Public post API interface
   final PublicPostApiInterface publicPostApiInterface;
+
+  /// Post Db Adater
   final PostDbAdapter postDbAdapter;
+
+  /// Comment Db Adapter
   final CommentDbAdapter commentDbAdapter;
+
+  /// User Db Apater
   final UserDbAdapter userDbAdapter;
+
+  /// File Db Adapter
   final FileDbAdapter fileDbAdapter;
+
+  /// Community Db Apater
   final CommunityDbAdapter communityDbAdapter;
+
+  /// Init Post Repo Impl
   PostRepoImpl(
       {required this.publicPostApiInterface,
       required this.postDbAdapter,

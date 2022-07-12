@@ -1,12 +1,15 @@
 import 'package:amity_sdk/src/data/data.dart';
 
+/// Create Post Response Extension
 extension CreatePostResponseExtension on CreatePostResponse {
+  /// Extension method
   FeedPagingHiveEntity convertToFeedHiveEntity() => FeedPagingHiveEntity()
     ..id = '$hashCode'
     ..postIds = posts.map((e) => e.postId).toList()
     ..nextToken = paging?.next;
 
-  Future saveToDb(DbAdapterRepo dbRepo) async {
+  /// Utils Method to save the Post Response to Db
+  Future saveToDb<T>(DbAdapterRepo dbRepo) async {
     //Convert to File Hive Entity
 
     //we have save the file first, since every object depends on file
@@ -37,6 +40,10 @@ extension CreatePostResponseExtension on CreatePostResponse {
     //Conver Post to Post Hive Entity
     List<PostHiveEntity> postHiveEntities =
         posts.map((e) => e.convertToPostHiveEntity()).toList();
+
+    //Conver Post to Poll Hive Entity
+    List<PollHiveEntity> pollHiveEntities =
+        polls.map((e) => e.convertToPollHiveEntity()).toList();
 
     //Save the File Entity
     for (var e in fileHiveEntities) {
@@ -71,6 +78,21 @@ extension CreatePostResponseExtension on CreatePostResponse {
     //Save Post Entity
     for (var e in postHiveEntities) {
       await dbRepo.postDbAdapter.savePostEntity(e);
+    }
+
+    //Save Post Entity
+    for (var e in pollHiveEntities) {
+      await dbRepo.pollDbAdapter.savePollEntity(e);
+    }
+
+    // FIXME: right logic for type checking
+    if (T.toString() == 'AmityPost') {
+      return postHiveEntities.map((e) => e.convertToAmityPost()).toList();
+    }
+
+    // FIXME: right logic for type checking
+    if (T.toString() == 'AmityPoll') {
+      return pollHiveEntities.map((e) => e.convertToAmityPoll()).toList();
     }
   }
 }
