@@ -2,6 +2,7 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 
+/// Post Repo to get [AmityPost]
 class PostRepository {
   /// get composed [AmityPost] for the psot
   Future<AmityPost> getPost(String postId) {
