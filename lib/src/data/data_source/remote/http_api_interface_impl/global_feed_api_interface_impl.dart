@@ -18,8 +18,8 @@ class GlobalFeedApiInterfaceImpl extends GlobalFeedApiInterface {
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
-    } catch (error, stackTrace) {
-      return Future.error(error.toString(), stackTrace);
+    } catch (error) {
+      rethrow;
     }
   }
 }

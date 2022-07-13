@@ -227,7 +227,8 @@ class SdkServiceLocator {
       () => NotificationRepoImpl(notificationApiInterface: serviceLocator()),
     );
     serviceLocator.registerLazySingleton<PollRepo>(
-      () => PollRepoImpl(dbAdapterRepo: serviceLocator()),
+      () => PollRepoImpl(
+          dbAdapterRepo: serviceLocator(), pollApiInterface: serviceLocator()),
     );
 
     //-UserCase
@@ -481,6 +482,10 @@ class SdkServiceLocator {
         () => PostDeclineUsecase(postRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<GetPollUseCase>(
         () => GetPollUseCase(pollRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CreatePollUseCase>(
+        () => CreatePollUseCase(pollRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<PollVoteUseCase>(
+        () => PollVoteUseCase(pollRepo: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
@@ -491,6 +496,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => FileRepository());
     serviceLocator.registerLazySingleton(() => NotificationRepository());
     serviceLocator.registerLazySingleton(() => CommunityRepository());
+    serviceLocator.registerLazySingleton(() => PollRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(
@@ -507,6 +513,7 @@ class SdkServiceLocator {
     log('>> Time took to initilize the DI ${endTime.difference(startTime).inMilliseconds} Milis');
   }
 
+  /// Refresh the service locator
   static Future reloadServiceLocator() async {
     await serviceLocator.reset(dispose: true);
     await initServiceLocator(syc: true);

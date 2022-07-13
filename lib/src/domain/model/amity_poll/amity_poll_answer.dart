@@ -2,6 +2,9 @@ import 'package:amity_sdk/src/core/enum/enum.dart';
 
 /// Amity Poll Answer
 class AmityPollAnswer {
+  /// Init [AmityPollAnswer]
+  AmityPollAnswer();
+
   /// Answer Id
   String? id;
 
@@ -16,6 +19,13 @@ class AmityPollAnswer {
 
   /// Flag to check if user have voted for this answer
   bool? isVotedByUser = false;
+
+  /// factory method to create [AmityPollAnswer] text
+  factory AmityPollAnswer.text(String answer) {
+    return AmityPollAnswer()
+      ..data = answer
+      ..dataType = AmityPollAnswerDataType.TEXT.value;
+  }
 
   @override
   String toString() {
