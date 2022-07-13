@@ -2,8 +2,12 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:dio/dio.dart';
 
+/// Global Feed API Interface Impl
 class GlobalFeedApiInterfaceImpl extends GlobalFeedApiInterface {
+  /// Init Global Feed API Interface Impl
   GlobalFeedApiInterfaceImpl({required this.httpApiClient});
+
+  /// API Http Api Client
   final HttpApiClient httpApiClient;
   @override
   Future<CreatePostResponse> getGlobalFeed(GetGlobalFeedRequest request) async {
