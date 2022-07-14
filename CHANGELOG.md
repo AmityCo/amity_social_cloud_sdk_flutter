@@ -1,3 +1,10 @@
+## 0.4.0-beta.1
+* feat: Post Query Reaction
+* feat: Comment/Nested Comment Query Reaction
+* fix: Blank Custom Avatar Url
+* fix: Blank Unfollow Response
+* refactor: Optimize import & public api doc
+
 ## 0.3.1
 * fix: GET post api issue
 ## 0.3.0
