@@ -2,12 +2,12 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:dio/dio.dart';
 
-/// Global Feed API Interface Impl
+/// Global Feed API Impl
 class GlobalFeedApiInterfaceImpl extends GlobalFeedApiInterface {
-  /// Init Global Feed API Interface Impl
+  /// Init Global Feed API
   GlobalFeedApiInterfaceImpl({required this.httpApiClient});
 
-  /// API Http Api Client
+  /// Http Api Client
   final HttpApiClient httpApiClient;
   @override
   Future<CreatePostResponse> getGlobalFeed(GetGlobalFeedRequest request) async {
@@ -19,7 +19,7 @@ class GlobalFeedApiInterfaceImpl extends GlobalFeedApiInterface {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     } catch (error) {
-      return Future.error(error.toString());
+      rethrow;
     }
   }
 }

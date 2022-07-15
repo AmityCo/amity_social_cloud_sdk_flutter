@@ -2,12 +2,18 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// Community Feed Repo Impl
 class CommunityFeedRepoImpl extends CommunityFeedRepo {
+  /// Community Feed API Interface
   final CommunityFeedApiInterface communiytFeedApiInterface;
 
+  /// Common Db Adapter Repo
   final DbAdapterRepo dbAdapterRepo;
+
+  /// Post Repo
   final PostRepo postRepo;
 
+  /// Init Community Feed Repo Impl
   CommunityFeedRepoImpl({
     required this.communiytFeedApiInterface,
     required this.dbAdapterRepo,

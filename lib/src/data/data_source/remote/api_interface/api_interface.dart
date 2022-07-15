@@ -8,6 +8,7 @@ export 'file_api_interface.dart';
 export 'follow_api_interface.dart';
 export 'global_feed_api_interface.dart';
 export 'notification_api_interface.dart';
+export 'poll_api_interface.dart';
 export 'public_post_api_interface.dart';
 export 'reaction_api_interface.dart';
 export 'user_api_interface.dart';

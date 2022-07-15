@@ -2,7 +2,9 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/post_hive_entity_5.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// Post Response Hive Entity Extension
 extension PostResponseHiveEntityExtension on PostHiveEntity {
+  /// Convert Hive Entity to Amity Post
   AmityPost convertToAmityPost() {
     //Target type
     AmityPostTargetType amityPostTargetType =
@@ -41,7 +43,8 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
         // TODO: Handle this case.
         break;
       case AmityDataType.POLL:
-        // TODO: Handle this case.
+        amityPostData = PollData(
+            postId: postId, pollId: data!.pollId!, rawData: data!.toMap());
         break;
       case AmityDataType.CUSTOM:
         // TODO: Handle this case.

@@ -33,6 +33,9 @@ const ME_FOLLLOWING = 'api/v4/me/following';
 const ME_FOLLLOWERS = 'api/v4/me/followers';
 const ME_FOLLLOW_INFO = 'api/v4/me/followInfo';
 
+/// Poll API v3 Base Url
+const POLL_V3 = 'api/v3/polls';
+
 // const ME_FOLLLOWING = 'api/v4/me/following';
 // const ME_FOLLLOWERS = 'api/v4/me/followers';
 const USERS = 'users';

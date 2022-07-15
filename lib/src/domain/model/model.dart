@@ -2,6 +2,7 @@ export 'amity_comment.dart';
 export 'amity_file/amity_file.dart';
 export 'amity_mentionee.dart';
 export 'amity_mentionee_target.dart';
+export 'amity_poll/amity_poll.dart';
 export 'amity_post.dart';
 export 'amity_post/amity_post.dart';
 export 'amity_premissions.dart';

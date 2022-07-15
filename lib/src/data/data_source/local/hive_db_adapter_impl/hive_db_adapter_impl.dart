@@ -9,6 +9,7 @@ export 'feed_paging_db_adapter_impl.dart';
 export 'file_db_adater_impl.dart';
 export 'follow_db_adapter_impl.dart';
 export 'follow_info_db_adapter_impl.dart';
+export 'poll_db_adapter_impl.dart';
 export 'post_db_adapter_impl.dart';
 export 'reaction_db_adapter_impl.dart';
 export 'user_db_adapter_impl.dart';

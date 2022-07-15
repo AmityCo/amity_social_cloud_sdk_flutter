@@ -1,6 +1,8 @@
 import 'package:amity_sdk/src/data/data.dart';
 
+///
 extension PostResponseExtension on PostResponse {
+  /// Convert BE response to Db entity
   PostHiveEntity convertToPostHiveEntity() {
     return PostHiveEntity()
       ..id = id
