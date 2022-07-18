@@ -1,20 +1,22 @@
+import 'package:amity_sdk/src/core/core.dart';
+
 /// Class PollVoteRequest
 class PollVoteRequest {
   /// Init PollVoteRequest
   PollVoteRequest({
-    required this.text,
+    this.text,
     required this.pollId,
-    required this.answerIds,
+    this.answerIds,
   });
 
   /// Text
-  final String text;
+  final String? text;
 
   /// Poll Id
   final String pollId;
 
   /// Answer
-  final List<String> answerIds;
+  final List<String>? answerIds;
 
   /// factory method to create [PollVoteRequest] from json
   factory PollVoteRequest.fromJson(Map<String, dynamic> json) =>
@@ -28,6 +30,13 @@ class PollVoteRequest {
   Map<String, dynamic> toJson() => {
         "text": text,
         "pollId": pollId,
-        "answerIds": List<dynamic>.from(answerIds.map((x) => x)),
-      };
+        "answerIds": answerIds == null
+            ? null
+            : List<dynamic>.from(answerIds!.map((x) => x)),
+      }..removeNullValue();
+
+  @override
+  String toString() {
+    return toJson().toJson();
+  }
 }

@@ -2,13 +2,24 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// Reaction Repo Impl for Post & Comment
 class ReactionRepoImpl extends ReactionRepo {
+  /// Reaction API interface
   final ReactionApiInterface reactionApiInterface;
+
+  /// Post Db Adapter
   final PostDbAdapter postDbAdapter;
+
+  /// Comment Db Adapter
   final CommentDbAdapter commentDbAdapter;
+
+  /// Reaction  Db Adapter
   final ReactionDbAdapter reactionDbAdapter;
+
+  /// User Db Adapter
   final UserDbAdapter userDbAdapter;
 
+  /// Init ReactionRepoImpl
   ReactionRepoImpl({
     required this.reactionApiInterface,
     required this.postDbAdapter,

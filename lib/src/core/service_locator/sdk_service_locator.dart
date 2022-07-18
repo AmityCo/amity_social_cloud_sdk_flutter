@@ -124,6 +124,8 @@ class SdkServiceLocator {
             amityCoreClientOption: configServiceLocator()));
     serviceLocator.registerLazySingleton<CommunityCategoryApiInterface>(() =>
         CommunityCategoryApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<PollApiInterface>(
+        () => PollApiInterfaceImpl(httpApiClient: serviceLocator()));
 
     // Local Data Source
 
