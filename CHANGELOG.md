@@ -1,4 +1,4 @@
-## 0.4.0-beta.1
+## 0.4.0
 * feat: Post Query Reaction
 * feat: Comment/Nested Comment Query Reaction
 * fix: Blank Custom Avatar Url
