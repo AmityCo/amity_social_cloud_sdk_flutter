@@ -36,7 +36,7 @@ class SubmitPollCreateQueryBuilder {
 
   /// Set close time for the poll
   SubmitPollCreateQueryBuilder closedIn({required Duration closedIn}) {
-    _closedIn = _closedIn;
+    _closedIn = closedIn;
     return this;
   }
 
@@ -49,9 +49,9 @@ class SubmitPollCreateQueryBuilder {
             .map((e) =>
                 CreatePollAnswerRequest(data: e.data!, dataType: e.dataType!))
             .toList(),
-        answerType: _answerType,
+        answerType: _answerType.value,
         closedIn: _closedIn?.inMilliseconds ?? 0);
-
+    print(request.toString());
     final data = _useCase.get(request);
     return data;
   }

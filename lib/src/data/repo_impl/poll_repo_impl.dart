@@ -26,7 +26,7 @@ class PollRepoImpl extends PollRepo {
   Future<AmityPoll> createPoll(CreatePollRequest request) async {
     final data = await pollApiInterface.createPoll(request);
 
-    final amityPolls = data.saveToDb<AmityPoll>(dbAdapterRepo);
+    final amityPolls = await data.saveToDb<AmityPoll>(dbAdapterRepo);
 
     return (amityPolls as List).first;
   }
@@ -35,7 +35,7 @@ class PollRepoImpl extends PollRepo {
   Future<AmityPoll> votePoll(PollVoteRequest request) async {
     final data = await pollApiInterface.votePoll(request);
 
-    final amityPolls = data.saveToDb<AmityPoll>(dbAdapterRepo);
+    final amityPolls = await data.saveToDb<AmityPoll>(dbAdapterRepo);
 
     return (amityPolls as List).first;
   }
@@ -44,7 +44,7 @@ class PollRepoImpl extends PollRepo {
   Future<AmityPoll> deleteVotePoll(PollVoteRequest request) async {
     final data = await pollApiInterface.deleteVotePoll(request);
 
-    final amityPolls = data.saveToDb<AmityPoll>(dbAdapterRepo);
+    final amityPolls = await data.saveToDb<AmityPoll>(dbAdapterRepo);
 
     return (amityPolls as List).first;
   }
