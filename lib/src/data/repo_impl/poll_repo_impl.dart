@@ -35,6 +35,7 @@ class PollRepoImpl extends PollRepo {
   Future<AmityPoll> votePoll(PollVoteRequest request) async {
     final data = await pollApiInterface.votePoll(request);
 
+    /// this will update the poll hive entity and poll answer entity
     final amityPolls = await data.saveToDb<AmityPoll>(dbAdapterRepo);
 
     return (amityPolls as List).first;
