@@ -11,4 +11,7 @@ abstract class PollRepo {
 
   /// Vote Poll
   Future<AmityPoll> votePoll(PollVoteRequest request);
+
+  /// Delete Vote Poll
+  Future<AmityPoll> deleteVotePoll(PollVoteRequest request);
 }

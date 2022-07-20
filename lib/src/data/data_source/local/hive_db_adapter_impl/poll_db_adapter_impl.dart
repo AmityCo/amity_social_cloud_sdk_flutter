@@ -34,8 +34,7 @@ class PollDbAdapterImpl extends PollDbAdapter {
   /// Listen Poll Entity
   @override
   Stream<PollHiveEntity> listenPollEntity(String pollId) {
-    // TODO: implement listenPollEntity
-    throw UnimplementedError();
+    return box.watch(key: pollId).map((event) => event.value);
   }
 
   /// Save Poll Hive Entity

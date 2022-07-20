@@ -2,6 +2,8 @@
 //
 //     final createPollRequest = createPollRequestFromJson(jsonString);
 
+import 'package:amity_sdk/src/core/core.dart';
+
 /// Create Poll Request class for API
 class CreatePollRequest {
   /// Init Create Poll Request
@@ -23,7 +25,7 @@ class CreatePollRequest {
   final List<CreatePollAnswerRequest> answers;
 
   /// Answer type (single/multiple)
-  final dynamic answerType;
+  final String answerType;
 
   /// close in
   final int closedIn;
@@ -43,10 +45,17 @@ class CreatePollRequest {
   Map<String, dynamic> toJson() => {
         "text": text,
         "question": question,
-        "answers": List<dynamic>.from(answers.map((x) => x.toJson())),
+        "answers": answers == null
+            ? null
+            : List<dynamic>.from(answers.map((x) => x.toJson())),
         "answerType": answerType,
         "closedIn": closedIn,
-      };
+      }..removeNullValue();
+
+  @override
+  String toString() {
+    return toJson().toJson();
+  }
 }
 
 /// Answer Option for Create Poll
@@ -74,5 +83,10 @@ class CreatePollAnswerRequest {
   Map<String, dynamic> toJson() => {
         "dataType": dataType,
         "data": data,
-      };
+      }..removeNullValue();
+
+  // @override
+  // String toString() {
+  //   return toJson().toJson();
+  // }
 }

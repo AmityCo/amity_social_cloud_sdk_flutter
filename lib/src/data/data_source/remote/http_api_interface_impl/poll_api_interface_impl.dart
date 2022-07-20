@@ -8,7 +8,7 @@ class PollApiInterfaceImpl extends PollApiInterface {
   final HttpApiClient httpApiClient;
 
   /// Init [PollApiInterfaceImpl]
-  PollApiInterfaceImpl(this.httpApiClient);
+  PollApiInterfaceImpl({required this.httpApiClient});
 
   @override
   Future<CreatePostResponse> createPoll(CreatePollRequest request) async {
@@ -28,6 +28,20 @@ class PollApiInterfaceImpl extends PollApiInterface {
     try {
       final data = await httpApiClient()
           .post('$POLL_V3/${request.pollId}/votes', data: request);
+      return CreatePostResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    } catch (error) {
+      rethrow;
+    }
+  }
+
+  @override
+  Future<CreatePostResponse> deleteVotePoll(PollVoteRequest request) async {
+    try {
+      final data = await httpApiClient()
+          .delete('$POLL_V3/${request.pollId}/votes', data: request);
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

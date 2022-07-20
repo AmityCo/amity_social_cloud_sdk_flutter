@@ -40,7 +40,12 @@ class AmityPoll {
   int? closedIn;
 
   /// flag if poll is closed
-  bool get isClose => DateTime.now().isAfter(closedAt!);
+  bool get isClose =>
+      status == AmityPollStatus.CLOSED || DateTime.now().isAfter(closedAt!);
+
+  /// get the total vote count
+  int get totalVote => answers!.fold(
+      0, (previousValue, element) => previousValue + (element.voteCount ?? 0));
 
   @override
   String toString() {

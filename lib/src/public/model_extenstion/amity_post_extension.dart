@@ -5,7 +5,9 @@ import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 
+/// Amity Post Extension
 extension AmityPostExtension on AmityPost {
+  /// React On Amity Post
   AddReactionQueryBuilder react() {
     return AddReactionQueryBuilder(
         addReactionUsecase: serviceLocator(),
@@ -14,16 +16,19 @@ extension AmityPostExtension on AmityPost {
         referenceId: postId!);
   }
 
+  /// Get Amity Post Reaction
   GetReactionQueryBuilder getReaction() {
     return GetReactionQueryBuilder.post(postId: postId!);
   }
 
+  /// Get Amity Post Comment
   AmityCommentCreateTargetSelector comment() {
     return AmityCommentCreateTargetSelector(
       useCase: serviceLocator(),
     ).post(postId!);
   }
 
+  /// Amity Post Report
   PostFlagQueryBuilder report() {
     return PostFlagQueryBuilder(
         postFlagUsecase: serviceLocator(),
@@ -31,15 +36,18 @@ extension AmityPostExtension on AmityPost {
         postId: postId!);
   }
 
+  /// Edit Amity Post
   AmityTextPostEditorBuilder edit() {
     return AmityTextPostEditorBuilder(
         useCase: serviceLocator(), targetId: postId!);
   }
 
+  /// Delete Amity Post
   Future delete({bool hardDelete = false}) {
     return serviceLocator<PostDeleteUseCase>().get(postId!);
   }
 
+  /// Approve Amity Post
   Future<bool> approve() {
     return PostReviewQueryBuilder(
             postApproveUsecase: serviceLocator(),
@@ -48,6 +56,7 @@ extension AmityPostExtension on AmityPost {
         .approve();
   }
 
+  /// Decline Amity Post
   Future<bool> decline() {
     return PostReviewQueryBuilder(
             postApproveUsecase: serviceLocator(),
@@ -56,6 +65,7 @@ extension AmityPostExtension on AmityPost {
         .decline();
   }
 
+  /// Listen Post Id
   Stream<AmityPost> get listen {
     StreamController<AmityPost> controller = StreamController<AmityPost>();
 
