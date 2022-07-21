@@ -154,12 +154,9 @@ class SdkServiceLocator {
           accountDbAdapter: serviceLocator(),
         ));
     serviceLocator.registerLazySingleton<PostRepo>(() => PostRepoImpl(
-        publicPostApiInterface: serviceLocator(),
-        postDbAdapter: serviceLocator(),
-        commentDbAdapter: serviceLocator(),
-        userDbAdapter: serviceLocator(),
-        fileDbAdapter: serviceLocator(),
-        communityDbAdapter: serviceLocator()));
+          publicPostApiInterface: serviceLocator(),
+          dbAdapterRepo: serviceLocator(),
+        ));
     serviceLocator.registerLazySingleton<CommentRepo>(() => CommentRepoImpl(
         commentDbAdapter: serviceLocator(),
         commentApiInterface: serviceLocator(),
@@ -211,11 +208,7 @@ class SdkServiceLocator {
             ));
     serviceLocator.registerLazySingleton<UserFeedRepo>(() => UserFeedRepoImpl(
           userFeedApiInterface: serviceLocator(),
-          postDbAdapter: serviceLocator(),
-          commentDbAdapter: serviceLocator(),
-          userDbAdapter: serviceLocator(),
-          fileDbAdapter: serviceLocator(),
-          feedDbAdapter: serviceLocator(),
+          dbAdapterRepo: serviceLocator(),
         ));
 
     serviceLocator

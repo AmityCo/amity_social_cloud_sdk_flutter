@@ -66,65 +66,6 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
     return controller.stream;
   }
 
-  // Future<List<AmityPost>> _saveDataToDb(CreatePostResponse data) async {
-  //   //Convert to File Hive Entity
-  //   //we have save the file first, since every object depends on file
-  //   List<FileHiveEntity> fileHiveEntities =
-  //       data.files.map((e) => e.convertToFileHiveEntity()).toList();
-
-  //   //Convert to Community Hive Entity
-  //   List<CommunityHiveEntity> communityHiveEntities =
-  //       data.communities.map((e) => e.convertToCommunityHiveEntity()).toList();
-
-  //   //Convert to User Hive Entity
-  //   List<UserHiveEntity> userHiveEntities =
-  //       data.users.map((e) => e.convertToUserHiveEntity()).toList();
-
-  //   //Convert to Comment Hive Entity
-  //   List<CommentHiveEntity> commentHiveEntities =
-  //       data.comments.map((e) => e.convertToCommentHiveEntity()).toList();
-
-  //   //Convert Child Post to Post Hive Entity
-  //   List<PostHiveEntity> postChildHiveEntities =
-  //       data.postChildren.map((e) => e.convertToPostHiveEntity()).toList();
-
-  //   //Conver Post to Post Hive Entity
-  //   List<PostHiveEntity> postHiveEntities =
-  //       data.posts.map((e) => e.convertToPostHiveEntity()).toList();
-
-  //   //Save the File Entity
-  //   for (var e in fileHiveEntities) {
-  //     await dbAdapterRepo.fileDbAdapter.saveFileEntity(e);
-  //   }
-
-  //   //Save the Community Entity
-  //   for (var e in communityHiveEntities) {
-  //     await dbAdapterRepo.communityDbAdapter.saveCommunityEntity(e);
-  //   }
-
-  //   //Save Child Post Entity
-  //   for (var e in postChildHiveEntities) {
-  //     await dbAdapterRepo.postDbAdapter.savePostEntity(e);
-  //   }
-
-  //   //Save the User Entity
-  //   for (var e in userHiveEntities) {
-  //     await dbAdapterRepo.userDbAdapter.saveUserEntity(e);
-  //   }
-
-  //   //Save the Comment Entity
-  //   for (var e in commentHiveEntities) {
-  //     await dbAdapterRepo.commentDbAdapter.saveCommentEntity(e);
-  //   }
-
-  //   //Save Post Entity
-  //   for (var e in postHiveEntities) {
-  //     await dbAdapterRepo.postDbAdapter.savePostEntity(e);
-  //   }
-
-  //   return postHiveEntities.map((e) => e.convertToAmityPost()).toList();
-  // }
-
   Future<PageListData<List<AmityPost>, String>?> _getGlobalFeedCollectionFromDb(
       String collectionId) async {
     //Get feed collection from the db
