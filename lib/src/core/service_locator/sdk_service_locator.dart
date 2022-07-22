@@ -481,6 +481,8 @@ class SdkServiceLocator {
         () => CreatePollUseCase(pollRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<PollVoteUseCase>(
         () => PollVoteUseCase(pollRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<DeletePollUseCase>(
+        () => DeletePollUseCase(pollRepo: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
