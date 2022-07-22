@@ -15,6 +15,7 @@ extension UserResponseExtension on UserResponse {
       ..createdAt = createdAt
       ..updatedAt = updatedAt
       ..permissions = permissions
-      ..roles = roles;
+      ..roles = roles
+      ..isGlobalBan = isGlobalBan;
   }
 }

@@ -15,6 +15,7 @@ extension UserHiveEntityExtension on UserHiveEntity {
       ..metadata = metadata
       ..createdAt = createdAt
       ..updatedAt = updatedAt
-      ..roles = roles;
+      ..roles = roles
+      ..isGlobalBan = isGlobalBan;
   }
 }
