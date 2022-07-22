@@ -13,6 +13,7 @@ class PollResponse {
     required this.isVoted,
     required this.status,
     required this.closedIn,
+    required this.isDeleted,
   });
 
   /// Poll id
@@ -48,6 +49,9 @@ class PollResponse {
   /// Closed in
   final int closedIn;
 
+  /// is Deleted
+  final bool isDeleted;
+
   /// Factory method to generate the poll response from json
   factory PollResponse.fromJson(Map<String, dynamic> json) => PollResponse(
         pollId: json["pollId"],
@@ -67,6 +71,7 @@ class PollResponse {
         isVoted: json["isVoted"],
         status: json["status"],
         closedIn: json["closedIn"],
+        isDeleted: json["isDeleted"],
       );
 
   /// Convert the Poll response to json
@@ -81,6 +86,7 @@ class PollResponse {
         "isVoted": isVoted,
         "status": status,
         "closedIn": closedIn,
+        "isDeleted": isDeleted,
       };
 }
 

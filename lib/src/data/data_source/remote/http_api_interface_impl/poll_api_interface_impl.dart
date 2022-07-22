@@ -1,3 +1,5 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:dio/dio.dart';
@@ -38,11 +40,11 @@ class PollApiInterfaceImpl extends PollApiInterface {
   }
 
   @override
-  Future<CreatePostResponse> deleteVotePoll(PollVoteRequest request) async {
+  Future<bool> deleteVotePoll(PollVoteRequest request) async {
     try {
       final data = await httpApiClient()
-          .delete('$POLL_V3/${request.pollId}/votes', data: request);
-      return CreatePostResponse.fromJson(data.data);
+          .delete('$POLL_V3/${request.pollId}', data: request);
+      return true;
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());

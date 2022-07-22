@@ -6,6 +6,11 @@ import 'package:amity_sdk/src/domain/domain.dart';
 
 /// Amity Poll Extension method
 extension AmityPollExtension on AmityPoll {
+  /// Delete poll
+  Future<bool> delete() {
+    return serviceLocator<DeletePollUseCase>().get(pollId!);
+  }
+
   /// Lister Poll Model with PollId
   StreamController<AmityPoll> get listen {
     final controller = StreamController<AmityPoll>();

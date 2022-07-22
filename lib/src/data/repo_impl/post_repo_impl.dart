@@ -52,6 +52,7 @@ class PostRepoImpl extends PostRepo {
 
     ///Get the post from DB and update the delete flag to true
     final amityPostDb = dbAdapterRepo.postDbAdapter.getPostEntity(postId);
+
     amityPostDb
       ..isDeleted = true
       ..save();
