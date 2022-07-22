@@ -65,4 +65,13 @@ class PollRepoImpl extends PollRepo {
 
     return data;
   }
+
+  @override
+  Future<AmityPoll> closePoll(PollVoteRequest request) async {
+    final data = await pollApiInterface.closePoll(request);
+
+    final amityPolls = await data.saveToDb<AmityPoll>(dbAdapterRepo);
+
+    return (amityPolls as List).first;
+  }
 }

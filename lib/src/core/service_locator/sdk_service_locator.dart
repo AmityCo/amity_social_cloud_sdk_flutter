@@ -1,10 +1,7 @@
 import 'dart:developer';
 
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/repo_impl/poll_repo_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/repo/poll_repo.dart';
-import 'package:amity_sdk/src/domain/usecase/poll/get_poll_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -483,6 +480,8 @@ class SdkServiceLocator {
         () => PollVoteUseCase(pollRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<DeletePollUseCase>(
         () => DeletePollUseCase(pollRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<ClosePollUseCase>(
+        () => ClosePollUseCase(pollRepo: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo

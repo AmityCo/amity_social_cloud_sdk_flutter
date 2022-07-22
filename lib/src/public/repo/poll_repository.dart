@@ -19,4 +19,10 @@ class PollRepository {
     return serviceLocator<PollVoteUseCase>()
         .get(PollVoteRequest(pollId: pollId, answerIds: answerIds));
   }
+
+  /// Vote for the poll id
+  Future<AmityPoll> closePoll({required String pollId}) {
+    return serviceLocator<ClosePollUseCase>()
+        .get(PollVoteRequest(pollId: pollId));
+  }
 }
