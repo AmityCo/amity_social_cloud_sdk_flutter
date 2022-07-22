@@ -4,4 +4,4 @@ export 'model_extenstion/model_extenstion.dart';
 export 'permission/permission.dart';
 export 'query_builder/query_builder.dart';
 export 'repo/repo.dart';
-export 'token/amity_user_token_manager.dart';
+export 'token/token.dart';

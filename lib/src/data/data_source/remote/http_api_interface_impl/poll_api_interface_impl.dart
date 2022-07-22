@@ -52,4 +52,18 @@ class PollApiInterfaceImpl extends PollApiInterface {
       rethrow;
     }
   }
+
+  @override
+  Future<CreatePostResponse> closePoll(PollVoteRequest request) async {
+    try {
+      final data = await httpApiClient()
+          .put('$POLL_V3/${request.pollId}', data: {'status': 'closed'});
+      return CreatePostResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    } catch (error) {
+      rethrow;
+    }
+  }
 }

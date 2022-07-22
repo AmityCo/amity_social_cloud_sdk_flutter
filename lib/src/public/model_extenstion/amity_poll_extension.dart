@@ -22,4 +22,10 @@ extension AmityPollExtension on AmityPoll {
 
     return controller;
   }
+
+  /// Close the current Poll
+  Future<AmityPoll> close() {
+    return serviceLocator<ClosePollUseCase>()
+        .get(PollVoteRequest(pollId: pollId!));
+  }
 }
