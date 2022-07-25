@@ -6,7 +6,7 @@ abstract class PollDbAdapter {
   Future savePollEntity(PollHiveEntity data);
 
   /// Delete Poll Entity
-  Future deletePolllEntity(PollHiveEntity data);
+  Future deletePolllEntity(String pollId);
 
   /// Get Poll Entity from Hive
   PollHiveEntity getPollEntity(String pollId);

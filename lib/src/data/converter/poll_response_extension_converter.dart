@@ -17,6 +17,7 @@ extension PollResponseExtension on PollResponse {
       ..updatedAt = updatedAt
       ..isVoted = isVoted
       ..status = status
-      ..closeIn = closedIn;
+      ..closeIn = closedIn
+      ..isDeleted = isDeleted;
   }
 }

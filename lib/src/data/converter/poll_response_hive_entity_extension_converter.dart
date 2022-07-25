@@ -19,6 +19,7 @@ extension PollHiveEntityExtension on PollHiveEntity {
       ..updatedAt = updatedAt
       ..isVoted = isVoted
       ..status = AmityPollStatusExtension.enumOf(status!)
-      ..closedIn = closeIn;
+      ..closedIn = closeIn
+      ..isDeleted = isDeleted;
   }
 }

@@ -9,6 +9,9 @@ abstract class PollApiInterface {
   /// Vote for the poll
   Future<CreatePostResponse> votePoll(PollVoteRequest request);
 
+  /// Vote for the poll
+  Future<CreatePostResponse> closePoll(PollVoteRequest request);
+
   /// Delete Vote for the poll
-  Future<CreatePostResponse> deleteVotePoll(PollVoteRequest request);
+  Future<bool> deleteVotePoll(PollVoteRequest request);
 }

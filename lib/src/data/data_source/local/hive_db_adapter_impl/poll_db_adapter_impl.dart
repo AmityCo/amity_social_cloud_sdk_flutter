@@ -21,8 +21,8 @@ class PollDbAdapterImpl extends PollDbAdapter {
 
   /// Delete Poll Hive Entity
   @override
-  Future deletePolllEntity(PollHiveEntity data) async {
-    await box.delete(data.pollId);
+  Future deletePolllEntity(String pollId) async {
+    await box.delete(pollId);
   }
 
   /// Get Poll Entity

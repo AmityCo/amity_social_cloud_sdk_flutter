@@ -6,7 +6,7 @@ part 'poll_hive_entity_16.g.dart';
 
 /// Poll post Hive Entity
 @HiveType(typeId: 16)
-class PollHiveEntity {
+class PollHiveEntity extends HiveObject {
   /// Poll Id
   String? pollId;
 

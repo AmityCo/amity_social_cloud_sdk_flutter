@@ -43,7 +43,32 @@ class PollRepoImpl extends PollRepo {
 
   @override
   Future<AmityPoll> deleteVotePoll(PollVoteRequest request) async {
-    final data = await pollApiInterface.deleteVotePoll(request);
+    throw UnimplementedError();
+    // final data = await pollApiInterface.deleteVotePoll(request);
+
+    // final amityPolls = await data.saveToDb<AmityPoll>(dbAdapterRepo);
+
+    // return (amityPolls as List).first;
+  }
+
+  @override
+  Future<bool> deletePollById(String pollId) async {
+    final data =
+        await pollApiInterface.deleteVotePoll(PollVoteRequest(pollId: pollId));
+
+    ///Get the post from DB and update the delete flag to true
+    final amityPollDb = dbAdapterRepo.pollDbAdapter.getPollEntity(pollId);
+
+    amityPollDb
+      ..isDeleted = true
+      ..save();
+
+    return data;
+  }
+
+  @override
+  Future<AmityPoll> closePoll(PollVoteRequest request) async {
+    final data = await pollApiInterface.closePoll(request);
 
     final amityPolls = await data.saveToDb<AmityPoll>(dbAdapterRepo);
 

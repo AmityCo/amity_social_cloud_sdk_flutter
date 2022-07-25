@@ -14,4 +14,10 @@ abstract class PollRepo {
 
   /// Delete Vote Poll
   Future<AmityPoll> deleteVotePoll(PollVoteRequest request);
+
+  /// Delete Poll
+  Future<bool> deletePollById(String pollId);
+
+  /// Close  Poll
+  Future<AmityPoll> closePoll(PollVoteRequest request);
 }

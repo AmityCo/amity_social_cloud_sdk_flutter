@@ -9,9 +9,20 @@ class PollRepository {
     return PollCreateQueryBuilder(serviceLocator(), question);
   }
 
+  /// Delete Poll
+  Future<bool> deletePoll({required String pollId}) async {
+    return serviceLocator<DeletePollUseCase>().get(pollId);
+  }
+
   /// Vote for the poll id
   Future vote({required String pollId, required List<String> answerIds}) {
     return serviceLocator<PollVoteUseCase>()
         .get(PollVoteRequest(pollId: pollId, answerIds: answerIds));
+  }
+
+  /// Vote for the poll id
+  Future<AmityPoll> closePoll({required String pollId}) {
+    return serviceLocator<ClosePollUseCase>()
+        .get(PollVoteRequest(pollId: pollId));
   }
 }
