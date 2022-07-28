@@ -1,3 +1,9 @@
+## 0.5.0
+* feat: CRUD Poll Post
+* feat: Close Poll Post
+* feat: Vote Poll Post
+* fix: resolve the issue with Global Ban flag
+
 ## 0.4.0
 * feat: Post Query Reaction
 * feat: Comment/Nested Comment Query Reaction
