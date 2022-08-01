@@ -4,12 +4,12 @@ import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/community_member_hive_entity_14.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommunityRepoImpl extends CommunityRepo {
   final CommunityApiInterface communityApiInterface;
+
+  //Db Adapter
   final CommunityDbAdapter communityDbAdapter;
   final CommentDbAdapter commentDbAdapter;
   final UserDbAdapter userDbAdapter;
@@ -134,34 +134,34 @@ class CommunityRepoImpl extends CommunityRepo {
   }
 
   @override
-  Future<AmityCommunityCategory> getCommunityCategoryById(
+  Future<AmityCommunityCategory?> getCommunityCategoryById(
       String categoryId) async {
     return communityCategoryDbAdapter
         .getCommunityCategoryEntity(categoryId)
-        .convertToAmityCommunityCategory();
+        ?.convertToAmityCommunityCategory();
   }
 
   @override
-  Future<Tuple2<List<AmityCommunity>, String>> getCommunityQuery(
+  Future<PageListData<List<AmityCommunity>, String>> getCommunityQuery(
       GetCommunityRequest request) async {
     final data = await communityApiInterface.getCommunityQuery(request);
     final amityCommunity = await saveCommunity(data);
-    return Tuple2(amityCommunity, data.paging!.next ?? '');
+    return PageListData(amityCommunity, data.paging?.next ?? '');
   }
 
   @override
-  Future<Tuple2<List<AmityCommunity>, String>> getRecommendedCommunity(
+  Future<List<AmityCommunity>> getRecommendedCommunity(
       OptionsRequest request) async {
     final data = await communityApiInterface.getRecommendedCommunity(request);
     final amityCommunity = await saveCommunity(data);
-    return Tuple2(amityCommunity, data.paging!.next ?? '');
+    return amityCommunity;
   }
 
   @override
-  Future<Tuple2<List<AmityCommunity>, String>> getTopTredningCommunity(
+  Future<List<AmityCommunity>> getTopTrendingCommunity(
       OptionsRequest request) async {
     final data = await communityApiInterface.getTopTredningCommunity(request);
     final amityCommunity = await saveCommunity(data);
-    return Tuple2(amityCommunity, data.paging!.next ?? '');
+    return amityCommunity;
   }
 }

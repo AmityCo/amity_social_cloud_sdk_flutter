@@ -1,7 +1,5 @@
 import 'package:amity_sdk/src/data/data_source/data_source.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_paging_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/community_member_paging_hive_entity_15.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'package:hive/hive.dart';
 
 class CommunityMemberPagingDbAdapterImpl
     extends CommunityMemberPagingDbAdapter {

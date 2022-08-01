@@ -1,18 +1,34 @@
+/// Poll Data Response
 class PostDataResponse {
+  /// Init Post Data Response
   PostDataResponse({
     required this.text,
     required this.fileId,
     required this.thumbnailFileId,
     required this.videoFileId,
     required this.streamId,
+    required this.pollId,
   });
 
+  /// Text
   String? text;
+
+  /// File Id
   String? fileId;
+
+  /// Thumbnail File Id
   String? thumbnailFileId;
+
+  /// Video File Id
   Map<String, String>? videoFileId;
+
+  /// Stream Id
   String? streamId;
 
+  /// Poll Id
+  String? pollId;
+
+  /// Factory method to init from json
   factory PostDataResponse.fromJson(Map<String, dynamic> json) =>
       PostDataResponse(
         text: json["text"],
@@ -22,13 +38,16 @@ class PostDataResponse {
             ? null
             : Map<String, String>.from(json["videoFileId"]),
         streamId: json["streamId"],
+        pollId: json["pollId"],
       );
 
+  /// convert to map
   Map<String, dynamic> toJson() => {
         "text": text,
         "fileId": fileId,
         "thumbnailFileId": thumbnailFileId,
         "videoFileId": videoFileId,
         "streamId": streamId,
+        "pollId": pollId,
       };
 }

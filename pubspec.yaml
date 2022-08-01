@@ -1,6 +1,6 @@
 name: amity_sdk
 description: The SDK that enables social features such as Feeds, Groups, Profiles, Content Posts, and Social Media Type Interactions
-version: 0.0.2-hedgehog.1
+version: 0.5.0
 homepage: https://amity.co
 documentation: https://docs.amity.co/social/flutter-beta
 
@@ -12,18 +12,19 @@ dependencies:
   flutter:
     sdk: flutter
   get_it: ^7.2.0
-  dio: ^4.0.4
+  dio: ^4.0.6
   hive_flutter: ^1.1.0
-  hive: ^2.0.5
-  path_provider: ^2.0.9
-  mqtt_client: ^9.6.5
+  hive: ^2.2.1
+  path_provider: ^2.0.10
+  mqtt_client: ^9.6.8
   http: ^0.13.4
   uuid: ^3.0.6
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^1.0.0
-  build_runner: ^2.1.7
-  hive_generator: ^1.1.2
-  test: ^1.17.12
+  flutter_lints: ^2.0.1
+  build_runner: ^2.1.11
+  hive_generator: ^1.1.3
+  test: ^1.21.1
+  lints: ^2.0.0

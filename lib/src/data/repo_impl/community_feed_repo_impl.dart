@@ -2,12 +2,18 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// Community Feed Repo Impl
 class CommunityFeedRepoImpl extends CommunityFeedRepo {
+  /// Community Feed API Interface
   final CommunityFeedApiInterface communiytFeedApiInterface;
 
+  /// Common Db Adapter Repo
   final DbAdapterRepo dbAdapterRepo;
+
+  /// Post Repo
   final PostRepo postRepo;
 
+  /// Init Community Feed Repo Impl
   CommunityFeedRepoImpl({
     required this.communiytFeedApiInterface,
     required this.dbAdapterRepo,
@@ -15,7 +21,7 @@ class CommunityFeedRepoImpl extends CommunityFeedRepo {
   });
 
   @override
-  Future<Tuple2<List<AmityPost>, String>> getCommunityFeed(
+  Future<PageListData<List<AmityPost>, String>> getCommunityFeed(
       GetCommunityFeedRequest request) async {
     final data = await communiytFeedApiInterface.getCommunityFeed(request);
 
@@ -31,6 +37,6 @@ class CommunityFeedRepoImpl extends CommunityFeedRepo {
         .asyncMap((postId) => postRepo.getPostByIdFromDb(postId))
         .toList();
 
-    return Tuple2(amitPosts, data.paging!.next ?? '');
+    return PageListData(amitPosts, data.paging!.next ?? '');
   }
 }

@@ -3,7 +3,6 @@ import 'dart:convert';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_db_adapter.dart';
 import 'package:amity_sdk/src/domain/composer_usecase/community_member_composer_usecase.dart';
 import 'package:amity_sdk/src/domain/model/amity_user.dart';
 
@@ -22,11 +21,11 @@ class AmityCommunityMember {
     serviceLocator<CommunityMemberDbAdapter>()
         .listenCommnunityMemberEntity(communityId! + userId!)
         .listen((event) {
-      final _updateAmityCommunity = event.convertToAmityCommunityMember();
+      final updateAmityCommunity = event.convertToAmityCommunityMember();
 
       //TOOD: Good idea would be have compose method inside the object itself
       serviceLocator<CommunityMemberComposerUsecase>()
-          .get(_updateAmityCommunity)
+          .get(updateAmityCommunity)
           .then(
             (value) => controller.add(value),
           );

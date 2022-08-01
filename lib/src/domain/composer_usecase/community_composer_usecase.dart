@@ -24,15 +24,16 @@ class CommunityComposerUsecase extends UseCase<AmityCommunity, AmityCommunity> {
 
     //Fill in the avatar fields
     if (params.avatarFileId != null) {
-      final _fileProperties =
+      final fileProperties =
           await fileRepo.getFileByIdFromDb(params.avatarFileId!);
-      params.avatarImage = AmityImage(_fileProperties);
+      params.avatarImage = AmityImage(fileProperties);
     }
 
     //Fill in the category
     if (params.categoryIds != null) {
       params.categories = await Stream.fromIterable(params.categoryIds!)
-          .asyncMap((event) => communityRepo.getCommunityCategoryById(event))
+          .asyncMap<AmityCommunityCategory?>((event) async =>
+              await communityRepo.getCommunityCategoryById(event))
           .toList();
     }
 

@@ -15,12 +15,12 @@ class CommentQueryUsecase
     return data;
   }
 
-  Future<Tuple2<List<AmityComment>, String>> getPagingData(
+  Future<PageListData<List<AmityComment>, String>> getPagingData(
       GetCommentRequest params) async {
     final data = await commentRepo.queryCommentPagingData(params);
 
     //Composer usecase to fill in the details
-    final amityComposedPost = await Stream.fromIterable(data.item1)
+    final amityComposedPost = await Stream.fromIterable(data.data)
         .asyncMap((event) => commentComposerUsecase.get(event))
         .toList();
 

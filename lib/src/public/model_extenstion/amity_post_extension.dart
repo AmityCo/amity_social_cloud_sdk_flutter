@@ -1,25 +1,34 @@
-import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/public/query_builder/comment/comment_creator_builder.dart';
-import 'package:amity_sdk/src/public/query_builder/post/post_flag_query_builder.dart';
-import 'package:amity_sdk/src/public/query_builder/post/post_text_editor.dart';
-import 'package:amity_sdk/src/public/query_builder/reaction/reaction_query_builder.dart';
+import 'dart:async';
 
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/public/public.dart';
+
+/// Amity Post Extension
 extension AmityPostExtension on AmityPost {
+  /// React On Amity Post
   AddReactionQueryBuilder react() {
     return AddReactionQueryBuilder(
         addReactionUsecase: serviceLocator(),
         removeReactionUsecase: serviceLocator(),
-        referenceType: ReactionReferenceType.POST.value,
+        referenceType: AmityReactionReferenceType.POST.value,
         referenceId: postId!);
   }
 
+  /// Get Amity Post Reaction
+  GetReactionQueryBuilder getReaction() {
+    return GetReactionQueryBuilder.post(postId: postId!);
+  }
+
+  /// Get Amity Post Comment
   AmityCommentCreateTargetSelector comment() {
     return AmityCommentCreateTargetSelector(
       useCase: serviceLocator(),
     ).post(postId!);
   }
 
+  /// Amity Post Report
   PostFlagQueryBuilder report() {
     return PostFlagQueryBuilder(
         postFlagUsecase: serviceLocator(),
@@ -27,11 +36,48 @@ extension AmityPostExtension on AmityPost {
         postId: postId!);
   }
 
+  /// Edit Amity Post
   AmityTextPostEditorBuilder edit() {
-    return AmityTextPostEditorBuilder(useCase: serviceLocator(), targetId: postId!);
+    return AmityTextPostEditorBuilder(
+        useCase: serviceLocator(), targetId: postId!);
   }
 
+  /// Delete Amity Post
   Future delete({bool hardDelete = false}) {
     return serviceLocator<PostDeleteUseCase>().get(postId!);
+  }
+
+  /// Approve Amity Post
+  Future<bool> approve() {
+    return PostReviewQueryBuilder(
+            postApproveUsecase: serviceLocator(),
+            postDeclineUsecase: serviceLocator(),
+            postId: postId!)
+        .approve();
+  }
+
+  /// Decline Amity Post
+  Future<bool> decline() {
+    return PostReviewQueryBuilder(
+            postApproveUsecase: serviceLocator(),
+            postDeclineUsecase: serviceLocator(),
+            postId: postId!)
+        .decline();
+  }
+
+  /// Listen Post Id
+  Stream<AmityPost> get listen {
+    StreamController<AmityPost> controller = StreamController<AmityPost>();
+
+    serviceLocator<PostDbAdapter>().listenPostEntity(postId!).listen((event) {
+      final updateAmityPost = event.convertToAmityPost();
+
+      //TOOD: Good idea would be have compose method inside the object itself
+      serviceLocator<PostComposerUsecase>().get(updateAmityPost).then(
+            (value) => controller.add(value),
+          );
+    });
+
+    return controller.stream;
   }
 }

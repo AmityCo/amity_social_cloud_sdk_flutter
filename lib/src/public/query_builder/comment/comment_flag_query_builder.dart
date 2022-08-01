@@ -1,5 +1,4 @@
-import 'package:amity_sdk/src/domain/usecase/Comment/Comment_flag_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/comment/comment_unflag_usecase.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommentFlagQueryBuilder {
   final CommentFlagUsecase _commentFlagUsecase;

@@ -1,8 +1,7 @@
-import 'package:amity_sdk/src/public/permission/amity_permission_validator.dart';
-
-import '../../amity_sdk.dart';
-import '../core/core.dart';
-import '../data/data.dart';
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/public/public.dart';
 
 ///Amity Core Client to do primary Setup
 class AmityCoreClient {
@@ -92,13 +91,24 @@ class AmityCoreClient {
   static FileRepository newFileRepository() => serviceLocator<FileRepository>();
 }
 
+/// This class is AmityCore option to do initial setup Amity
 class AmityCoreClientOption {
+  /// network Apikey
   final String apiKey;
+
+  /// Http endpoint for amity client
   final AmityRegionalHttpEndpoint httpEndpoint;
+
+  /// Socket endpoint for amity client
   final AmityRegionalSocketEndpoint socketEndpoint;
+
+  /// MQTT endpoint for amity client
   final AmityRegionalMqttEndpoint mqttEndpoint;
+
+  /// flag to show logs for debug, by default it false
   final bool showLogs;
 
+  /// Amity Core Client Options to do initial Amity Client
   AmityCoreClientOption({
     required this.apiKey,
     this.httpEndpoint = AmityRegionalHttpEndpoint.SG,

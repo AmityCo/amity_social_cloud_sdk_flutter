@@ -1,6 +1,7 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/model/amity_user.dart';
+import 'package:amity_sdk/src/domain/model/amity_user_token.dart';
 import 'package:amity_sdk/src/domain/repo/authentication_repo.dart';
 
 class AuthenticationRepoImpl extends AuthenticationRepo {
@@ -58,5 +59,11 @@ class AuthenticationRepoImpl extends AuthenticationRepo {
     serviceLocator.registerSingleton<AmityUser>(amityUser);
 
     return Future.value(amityUser);
+  }
+
+  @override
+  Future<AmityUserToken> getUserToken(AuthenticationRequest params) async {
+    final data = await authenticationApiInterface.login(params);
+    return Future.value(AmityUserToken(accessToken: data.accessToken));
   }
 }

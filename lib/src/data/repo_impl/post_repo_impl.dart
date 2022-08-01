@@ -4,20 +4,19 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// Post Repo
 class PostRepoImpl extends PostRepo {
+  /// Public post API interface
   final PublicPostApiInterface publicPostApiInterface;
-  final PostDbAdapter postDbAdapter;
-  final CommentDbAdapter commentDbAdapter;
-  final UserDbAdapter userDbAdapter;
-  final FileDbAdapter fileDbAdapter;
-  final CommunityDbAdapter communityDbAdapter;
-  PostRepoImpl(
-      {required this.publicPostApiInterface,
-      required this.postDbAdapter,
-      required this.commentDbAdapter,
-      required this.userDbAdapter,
-      required this.fileDbAdapter,
-      required this.communityDbAdapter});
+
+  /// Common Db Adapter
+  final DbAdapterRepo dbAdapterRepo;
+
+  /// Init Post Repo Impl
+  PostRepoImpl({
+    required this.publicPostApiInterface,
+    required this.dbAdapterRepo,
+  });
 
   @override
   Future<AmityPost> getPostById(String postId) async {
@@ -30,7 +29,7 @@ class PostRepoImpl extends PostRepo {
     //Get the data from remote source and return it
     final data = await publicPostApiInterface.getPostById(postId);
 
-    final amitPosts = await _saveDataToDb(data);
+    final amitPosts = await data.saveToDb<AmityPost>(dbAdapterRepo);
 
     return amitPosts[0];
   }
@@ -38,13 +37,13 @@ class PostRepoImpl extends PostRepo {
   @override
   Future<AmityPost> createPost(CreatePostRequest request) async {
     final data = await publicPostApiInterface.createPost(request);
-    final amitPosts = await _saveDataToDb(data);
+    final amitPosts = await data.saveToDb<AmityPost>(dbAdapterRepo);
     return amitPosts[0];
   }
 
   @override
   Future<AmityPost> getPostByIdFromDb(String id) async {
-    return postDbAdapter.getPostEntity(id).convertToAmityPost();
+    return dbAdapterRepo.postDbAdapter.getPostEntity(id).convertToAmityPost();
   }
 
   @override
@@ -52,7 +51,8 @@ class PostRepoImpl extends PostRepo {
     final data = await publicPostApiInterface.deletePostById(postId);
 
     ///Get the post from DB and update the delete flag to true
-    final amityPostDb = postDbAdapter.getPostEntity(postId);
+    final amityPostDb = dbAdapterRepo.postDbAdapter.getPostEntity(postId);
+
     amityPostDb
       ..isDeleted = true
       ..save();
@@ -81,75 +81,16 @@ class PostRepoImpl extends PostRepo {
   @override
   Future<AmityPost> updatePostById(UpdatePostRequest request) async {
     final data = await publicPostApiInterface.updatePostById(request);
-    final amitPosts = await _saveDataToDb(data);
+    final amitPosts = await data.saveToDb<AmityPost>(dbAdapterRepo);
     return amitPosts[0];
   }
 
   @override
-  Future<Tuple2<List<AmityPost>, String>> queryPost(
+  Future<PageListData<List<AmityPost>, String>> queryPost(
       GetPostRequest request) async {
     final data = await publicPostApiInterface.queryPost(request);
-    final amitPosts = await _saveDataToDb(data);
-    return Tuple2(amitPosts, data.paging!.next ?? '');
-  }
-
-  Future<List<AmityPost>> _saveDataToDb(CreatePostResponse data) async {
-    //Convert to File Hive Entity
-    //we have save the file first, since every object depends on file
-    List<FileHiveEntity> fileHiveEntities =
-        data.files.map((e) => e.convertToFileHiveEntity()).toList();
-
-    //Convert to Community Hive Entity
-    List<CommunityHiveEntity> communityHiveEntities =
-        data.communities.map((e) => e.convertToCommunityHiveEntity()).toList();
-
-    //Convert to User Hive Entity
-    List<UserHiveEntity> userHiveEntities =
-        data.users.map((e) => e.convertToUserHiveEntity()).toList();
-
-    //Convert to Comment Hive Entity
-    List<CommentHiveEntity> commentHiveEntities =
-        data.comments.map((e) => e.convertToCommentHiveEntity()).toList();
-
-    //Convert Child Post to Post Hive Entity
-    List<PostHiveEntity> postChildHiveEntities =
-        data.postChildren.map((e) => e.convertToPostHiveEntity()).toList();
-
-    //Conver Post to Post Hive Entity
-    List<PostHiveEntity> postHiveEntities =
-        data.posts.map((e) => e.convertToPostHiveEntity()).toList();
-
-    //Save the File Entity
-    for (var e in fileHiveEntities) {
-      await fileDbAdapter.saveFileEntity(e);
-    }
-
-    //Save the Community Entity
-    for (var e in communityHiveEntities) {
-      await communityDbAdapter.saveCommunityEntity(e);
-    }
-
-    //Save the User Entity
-    for (var e in userHiveEntities) {
-      await userDbAdapter.saveUserEntity(e);
-    }
-
-    //Save Child Post Entity
-    for (var e in postChildHiveEntities) {
-      await postDbAdapter.savePostEntity(e);
-    }
-
-    //Save the Comment Entity
-    for (var e in commentHiveEntities) {
-      await commentDbAdapter.saveCommentEntity(e);
-    }
-
-    //Save Post Entity
-    for (var e in postHiveEntities) {
-      await postDbAdapter.savePostEntity(e);
-    }
-
-    return postHiveEntities.map((e) => e.convertToAmityPost()).toList();
+    final amitPosts = await data.saveToDb<AmityPost>(dbAdapterRepo);
+    return PageListData(amitPosts, data.paging!.next ?? '');
   }
 
   @override
@@ -166,7 +107,7 @@ class PostRepoImpl extends PostRepo {
     });
 
     //3. Listen any chagnes in the Amity Post Db and send the update back
-    postDbAdapter.listenPostEntity(postId).listen((event) {
+    dbAdapterRepo.postDbAdapter.listenPostEntity(postId).listen((event) {
       controller.add(event.convertToAmityPost());
     });
 
@@ -176,5 +117,17 @@ class PostRepoImpl extends PostRepo {
     //4. File
 
     return controller.stream;
+  }
+
+  @override
+  Future<bool> approvePost(String postId) async {
+    final data = await publicPostApiInterface.approvePost(postId);
+    return data;
+  }
+
+  @override
+  Future<bool> declinePost(String postId) async {
+    final data = await publicPostApiInterface.declinePost(postId);
+    return data;
   }
 }

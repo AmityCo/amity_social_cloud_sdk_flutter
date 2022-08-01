@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/model/api_request/community_member_check_request.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommunityMemberGetUsecase extends UseCase<AmityCommunityMember,

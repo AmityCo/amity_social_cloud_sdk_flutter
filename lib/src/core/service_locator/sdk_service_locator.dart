@@ -1,15 +1,7 @@
 import 'dart:developer';
 
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/community_member_paging_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/commnunity_member_paging_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/community_member_dp_adapter_impl.dart';
-import 'package:amity_sdk/src/data/data_source/remote/api_interface/community_member_api_interface.dart';
-import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/community_member_api_interface_impl.dart';
-import 'package:amity_sdk/src/data/repo_impl/community_member_repo_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_get_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
@@ -73,6 +65,12 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<FeedPagingDbAdapter>(
         () => FeedPagingDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<ReactionDbAdapter>(
+        () => ReactionDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<PollDbAdapter>(
+        () => PollDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
 
     //Register Db adapter Repo which hold all the Db Adapters
     serviceLocator.registerLazySingleton<DbAdapterRepo>(() => DbAdapterRepo(
@@ -83,7 +81,8 @@ class SdkServiceLocator {
         feedDbAdapter: serviceLocator(),
         fileDbAdapter: serviceLocator(),
         userDbAdapter: serviceLocator(),
-        communityCategoryDbAdapter: serviceLocator()));
+        communityCategoryDbAdapter: serviceLocator(),
+        pollDbAdapter: serviceLocator()));
 
     //-data_source/remote/
     serviceLocator.registerLazySingleton<HttpApiClient>(
@@ -120,6 +119,10 @@ class SdkServiceLocator {
         NotificationApiInterfaceImpl(
             httpApiClient: serviceLocator(),
             amityCoreClientOption: configServiceLocator()));
+    serviceLocator.registerLazySingleton<CommunityCategoryApiInterface>(() =>
+        CommunityCategoryApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<PollApiInterface>(
+        () => PollApiInterfaceImpl(httpApiClient: serviceLocator()));
 
     // Local Data Source
 
@@ -148,12 +151,9 @@ class SdkServiceLocator {
           accountDbAdapter: serviceLocator(),
         ));
     serviceLocator.registerLazySingleton<PostRepo>(() => PostRepoImpl(
-        publicPostApiInterface: serviceLocator(),
-        postDbAdapter: serviceLocator(),
-        commentDbAdapter: serviceLocator(),
-        userDbAdapter: serviceLocator(),
-        fileDbAdapter: serviceLocator(),
-        communityDbAdapter: serviceLocator()));
+          publicPostApiInterface: serviceLocator(),
+          dbAdapterRepo: serviceLocator(),
+        ));
     serviceLocator.registerLazySingleton<CommentRepo>(() => CommentRepoImpl(
         commentDbAdapter: serviceLocator(),
         commentApiInterface: serviceLocator(),
@@ -163,9 +163,12 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<FileRepo>(() => FileRepoImpl(
         fileDbAdapter: serviceLocator(), fileApiInterface: serviceLocator()));
     serviceLocator.registerLazySingleton<ReactionRepo>(() => ReactionRepoImpl(
-        reactionApiInterface: serviceLocator(),
-        commentDbAdapter: serviceLocator(),
-        postDbAdapter: serviceLocator()));
+          reactionApiInterface: serviceLocator(),
+          commentDbAdapter: serviceLocator(),
+          postDbAdapter: serviceLocator(),
+          userDbAdapter: serviceLocator(),
+          reactionDbAdapter: serviceLocator(),
+        ));
     serviceLocator.registerLazySingleton<CommunityRepo>(
       () => CommunityRepoImpl(
           communityApiInterface: serviceLocator(),
@@ -185,6 +188,15 @@ class SdkServiceLocator {
             communityMemberPagingDbAdapter: serviceLocator(),
             userDbAdapter: serviceLocator(),
             fileDbAdapter: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityCategoryRepo>(() =>
+        CommunityCategoryRepoImpl(
+            communityCategoryApiInterface: serviceLocator(),
+            communityDbAdapter: serviceLocator(),
+            commentDbAdapter: serviceLocator(),
+            userDbAdapter: serviceLocator(),
+            fileDbAdapter: serviceLocator(),
+            communityCategoryDbAdapter: serviceLocator(),
+            communityFeedDbAdapter: serviceLocator()));
 
     serviceLocator
         .registerLazySingleton<GlobalFeedRepo>(() => GlobalFeedRepoImpl(
@@ -193,11 +205,7 @@ class SdkServiceLocator {
             ));
     serviceLocator.registerLazySingleton<UserFeedRepo>(() => UserFeedRepoImpl(
           userFeedApiInterface: serviceLocator(),
-          postDbAdapter: serviceLocator(),
-          commentDbAdapter: serviceLocator(),
-          userDbAdapter: serviceLocator(),
-          fileDbAdapter: serviceLocator(),
-          feedDbAdapter: serviceLocator(),
+          dbAdapterRepo: serviceLocator(),
         ));
 
     serviceLocator
@@ -210,6 +218,10 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<NotificationRepo>(
       () => NotificationRepoImpl(notificationApiInterface: serviceLocator()),
     );
+    serviceLocator.registerLazySingleton<PollRepo>(
+      () => PollRepoImpl(
+          dbAdapterRepo: serviceLocator(), pollApiInterface: serviceLocator()),
+    );
 
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
@@ -217,7 +229,10 @@ class SdkServiceLocator {
             postRepo: serviceLocator(), postComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<LoginUsecase>(() => LoginUsecase(
         authenticationRepo: serviceLocator(),
-        userComposerUsecase: serviceLocator()));
+        userComposerUsecase: serviceLocator(),
+        accountDbAdapter: serviceLocator()));
+    serviceLocator.registerLazySingleton<GetUserTokenUsecase>(
+        () => GetUserTokenUsecase(authenticationRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<GetAllUserUseCase>(() =>
         GetAllUserUseCase(
             userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
@@ -307,6 +322,16 @@ class SdkServiceLocator {
               communityRepo: serviceLocator(),
               communityComposerUsecase: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<CommunityGetTrendingUseCase>(
+        () => CommunityGetTrendingUseCase(
+              communityRepo: serviceLocator(),
+              communityComposerUsecase: serviceLocator(),
+            ));
+    serviceLocator.registerLazySingleton<CommunityGetRecommendedUseCase>(
+        () => CommunityGetRecommendedUseCase(
+              communityRepo: serviceLocator(),
+              communityComposerUsecase: serviceLocator(),
+            ));
     serviceLocator.registerLazySingleton<CommunityMemberPermissionCheckUsecase>(
         () => CommunityMemberPermissionCheckUsecase(
             communityMemberRepo: serviceLocator()));
@@ -367,6 +392,11 @@ class SdkServiceLocator {
         () => AddReactionUsecase(reactionRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<RemoveReactionUsecase>(
         () => RemoveReactionUsecase(reactionRepo: serviceLocator()));
+    serviceLocator
+        .registerLazySingleton<GetReactionUsecase>(() => GetReactionUsecase(
+              reactionRepo: serviceLocator(),
+              userRepo: serviceLocator(),
+            ));
 
     serviceLocator.registerLazySingleton<CommentCreateUseCase>(() =>
         CommentCreateUseCase(
@@ -430,6 +460,29 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<CommunityMemberGetUsecase>(
         () => CommunityMemberGetUsecase(communityMemberRepo: serviceLocator()));
 
+    serviceLocator.registerLazySingleton<CommunityCategoryComposerUsecase>(
+        () => CommunityCategoryComposerUsecase(fileRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<CommunityCategoryQueryUsecase>(() =>
+        CommunityCategoryQueryUsecase(
+            communityCategoryRepo: serviceLocator(),
+            communityCategoryComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<PostApproveUsecase>(
+        () => PostApproveUsecase(postRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<PostDeclineUsecase>(
+        () => PostDeclineUsecase(postRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<GetPollUseCase>(
+        () => GetPollUseCase(pollRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CreatePollUseCase>(
+        () => CreatePollUseCase(pollRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<PollVoteUseCase>(
+        () => PollVoteUseCase(pollRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<DeletePollUseCase>(
+        () => DeletePollUseCase(pollRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<ClosePollUseCase>(
+        () => ClosePollUseCase(pollRepo: serviceLocator()));
+
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
     serviceLocator.registerLazySingleton(() => PostRepository());
@@ -439,6 +492,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => FileRepository());
     serviceLocator.registerLazySingleton(() => NotificationRepository());
     serviceLocator.registerLazySingleton(() => CommunityRepository());
+    serviceLocator.registerLazySingleton(() => PollRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(
@@ -455,6 +509,7 @@ class SdkServiceLocator {
     log('>> Time took to initilize the DI ${endTime.difference(startTime).inMilliseconds} Milis');
   }
 
+  /// Refresh the service locator
   static Future reloadServiceLocator() async {
     await serviceLocator.reset(dispose: true);
     await initServiceLocator(syc: true);

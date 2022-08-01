@@ -3,17 +3,14 @@
 const SG_HTTP_ENDPOINT = "https://api.sg.amity.co/";
 const EU_HTTP_ENDPOINT = "https://api.eu.amity.co/";
 const US_HTTP_ENDPOINT = "https://api.us.amity.co/";
-const STAGING_HTTP_ENDPOINT = "https://api.staging.amity.co/";
 
 const SG_SOCKET_ENDPOINT = "https://api.sg.amity.co/";
 const EU_SOCKET_ENDPOINT = "https://api.eu.amity.co/";
 const US_SOCKET_ENDPOINT = "https://api.us.amity.co/";
-const STAGING_SOCKET_ENDPOINT = "https://api.staging.amity.co/";
 
 const SG_MQTT_ENDPOINT = "ssq.sg.amity.co";
 const EU_MQTT_ENDPOINT = "ssq.eu.amity.co";
 const US_MQTT_ENDPOINT = "ssq.us.amity.co";
-const STAGING_MQTT_ENDPOINT = "ssq.us.amity.co";
 
 //API link
 const SESSION_URL = 'api/v3/sessions';
@@ -30,10 +27,14 @@ const FILE_V3 = 'api/v3/files';
 const VIDEO_FILE_V3 = 'api/v4/videos';
 
 const COMMUNITY_V3 = 'api/v3/communities';
+const COMMUNITY_CATEGORY_V3 = 'api/v3/community-categories';
 
 const ME_FOLLLOWING = 'api/v4/me/following';
 const ME_FOLLLOWERS = 'api/v4/me/followers';
 const ME_FOLLLOW_INFO = 'api/v4/me/followInfo';
+
+/// Poll API v3 Base Url
+const POLL_V3 = 'api/v3/polls';
 
 // const ME_FOLLLOWING = 'api/v4/me/following';
 // const ME_FOLLLOWERS = 'api/v4/me/followers';
@@ -43,6 +44,7 @@ const USERS_V4_URL = 'api/v4/users/';
 const GLOBAL_FEED_V3_URL = 'api/v4/me/global-feeds';
 const USER_FEED_V3_URL = 'api/v3/user-feeds';
 const COMMUNITY_FEED_V3_URL = 'api/v3/community-feeds';
+const COMMUNITY_CATEGORY_V3_URL = 'api/v3/community-categories';
 
 const REACTION_V2_URL = 'api/v2/reactions';
 
@@ -54,6 +56,3 @@ const LEAVE = 'leave';
 const ROLES = 'roles';
 const BAN = 'ban';
 const UNBAN = 'unban';
-
-
-

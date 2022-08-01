@@ -14,7 +14,7 @@ class CommunityCategoryDbAdapterImpl extends CommunityCategoryDbAdapter {
   }
 
   @override
-  CommunityCategoryHiveEntity getCommunityCategoryEntity(String id) {
+  CommunityCategoryHiveEntity? getCommunityCategoryEntity(String id) {
     return box.get(id);
   }
 

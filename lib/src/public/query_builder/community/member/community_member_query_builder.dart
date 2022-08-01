@@ -1,8 +1,5 @@
-import 'package:amity_sdk/amity_sdk.dart';
-import 'package:amity_sdk/src/core/model/api_request/get_community_members_request.dart';
-import 'package:amity_sdk/src/domain/usecase/community/member/community_member_query_usecase.dart';
-
-import '../../../../core/core.dart';
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommunityMemberQueryBuilder {
   final CommunityMemberQueryUsecase usecase;
@@ -27,7 +24,7 @@ class CommunityMemberQueryBuilder {
     return this;
   }
 
-  Future<Tuple2<List<AmityCommunityMember>, String>> getPagingData(
+  Future<PageListData<List<AmityCommunityMember>, String>> getPagingData(
       {String? token, int? limit}) async {
     _request.options = OptionsRequest();
 
@@ -38,8 +35,8 @@ class CommunityMemberQueryBuilder {
       _request.options!.limit = limit;
     }
 
-    final _data = await usecase.get(_request);
+    final data = await usecase.get(_request);
 
-    return _data;
+    return data;
   }
 }

@@ -1,22 +1,22 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'account_hive_entity_0.dart';
+part of 'poll_hive_entity_16.dart';
 
 // **************************************************************************
 // TypeAdapterGenerator
 // **************************************************************************
 
-class AccountHiveEntityAdapter extends TypeAdapter<AccountHiveEntity> {
+class PollHiveEntityAdapter extends TypeAdapter<PollHiveEntity> {
   @override
-  final int typeId = 0;
+  final int typeId = 16;
 
   @override
-  AccountHiveEntity read(BinaryReader reader) {
-    return AccountHiveEntity();
+  PollHiveEntity read(BinaryReader reader) {
+    return PollHiveEntity();
   }
 
   @override
-  void write(BinaryWriter writer, AccountHiveEntity obj) {
+  void write(BinaryWriter writer, PollHiveEntity obj) {
     writer.writeByte(0);
   }
 
@@ -26,7 +26,7 @@ class AccountHiveEntityAdapter extends TypeAdapter<AccountHiveEntity> {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is AccountHiveEntityAdapter &&
+      other is PollHiveEntityAdapter &&
           runtimeType == other.runtimeType &&
           typeId == other.typeId;
 }

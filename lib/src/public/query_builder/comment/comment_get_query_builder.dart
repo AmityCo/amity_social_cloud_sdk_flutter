@@ -1,9 +1,5 @@
-import 'package:amity_sdk/src/core/enum/amity_comment_sort_option.dart';
-import 'package:amity_sdk/src/core/enum/amity_comment_target_type.dart';
-import 'package:amity_sdk/src/core/model/api_request/get_comment_request.dart';
-import 'package:amity_sdk/src/core/utils/tuple.dart';
-import 'package:amity_sdk/src/domain/model/amity_comment.dart';
-import 'package:amity_sdk/src/domain/usecase/comment/comment_query_usecase.dart';
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 class AmityCommentQueryTypeSelector {
   late CommentQueryUsecase _useCase;
@@ -54,24 +50,30 @@ class AmityCommentQueryBuilder {
     return this;
   }
 
+  /// Get the comment with parent ID
   AmityCommentQueryBuilder parentId(String? parentId) {
     _parentId = parentId;
-    _isFilterByParentId = true;
     return this;
   }
 
+  AmityCommentQueryBuilder filterById(bool isFilterByParentId) {
+    _isFilterByParentId = isFilterByParentId;
+    return this;
+  }
+
+  /// Sort the comment by [AmityCommentSortOption]
   AmityCommentQueryBuilder sortBy(AmityCommentSortOption sortOption) {
     _sortOption = sortOption;
     return this;
   }
 
+  /// Query the comment list
   Future<List<AmityComment>> query() {
     GetCommentRequest getCommentRequest = GetCommentRequest(
         referenceId: _referenceId, referenceType: _referenceType);
 
     if (_parentId != null) {
       getCommentRequest.parentId = _parentId;
-      getCommentRequest.filterByParentId = _isFilterByParentId;
     }
 
     if (_isDeleted != null) {
@@ -83,13 +85,16 @@ class AmityCommentQueryBuilder {
     return _useCase.get(getCommentRequest);
   }
 
-  Future<Tuple2<List<AmityComment>, String>> getPagingData(
+  Future<PageListData<List<AmityComment>, String>> getPagingData(
       {String? token, int? limit}) {
     GetCommentRequest getCommentRequest = GetCommentRequest(
         referenceId: _referenceId, referenceType: _referenceType);
 
     if (_parentId != null) {
       getCommentRequest.parentId = _parentId;
+    }
+
+    if (_isFilterByParentId != null) {
       getCommentRequest.filterByParentId = _isFilterByParentId;
     }
 
@@ -108,6 +113,7 @@ class AmityCommentQueryBuilder {
 
     if (limit != null) {
       getCommentRequest.options?.limit = limit;
+      // getCommentRequest.options?.skip = 0;
     }
 
     return _useCase.getPagingData(getCommentRequest);

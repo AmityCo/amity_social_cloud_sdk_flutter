@@ -1,16 +1,20 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
-class RemoveFollowerUsecase extends UseCase<void, String> {
+/// Remove Follow Usecase
+class RemoveFollowerUsecase extends UseCase<AmityFollowStatus, String> {
+  /// Follow Repo
   final FollowRepo followRepo;
+
+  /// Init Remove follow usecase
   RemoveFollowerUsecase({required this.followRepo});
   @override
-  Future<void> get(String params) {
-    return followRepo.unfollow(params);
+  Future<AmityFollowStatus> get(String params) {
+    return followRepo.decline(params);
   }
 
   @override
-  Stream<void> listen(String params) {
+  Stream<AmityFollowStatus> listen(String params) {
     // TODO: implement listen
     throw UnimplementedError();
   }

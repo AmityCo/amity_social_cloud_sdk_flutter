@@ -15,6 +15,7 @@ class CreateCommunityRequest {
     this.isPublic,
     this.metadata,
     this.userIds,
+    this.tags,
     this.avatarFileId,
     this.needApprovalOnPostCreation,
   });
@@ -25,6 +26,7 @@ class CreateCommunityRequest {
   bool? isPublic;
   Map<String, dynamic>? metadata;
   List<String>? userIds;
+  List<String>? tags;
   String? avatarFileId;
   bool? needApprovalOnPostCreation;
 
@@ -38,6 +40,7 @@ class CreateCommunityRequest {
         isPublic: json["isPublic"],
         userIds: List<String>.from(
             json["userIds"].map((userId) => userId.toString())),
+        tags: List<String>.from(json["tags"].map((tag) => tag.toString())),
         avatarFileId: json["avatarFileId"],
         metadata: json["metadata"],
         needApprovalOnPostCreation: json["needApprovalOnPostCreation"],
@@ -51,6 +54,7 @@ class CreateCommunityRequest {
         "isPublic": isPublic,
         "metadata": metadata,
         "userIds": userIds,
+        "tags": tags,
         "avatarFileId": avatarFileId,
         "needApprovalOnPostCreation": needApprovalOnPostCreation,
       }..removeWhere((key, value) => value == null);

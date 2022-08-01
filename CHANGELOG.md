@@ -1,6 +1,58 @@
-## 0.0.2-hedgehog.1
+## 0.5.0
+* feat: CRUD Poll Post
+* feat: Close Poll Post
+* feat: Vote Poll Post
+* fix: resolve the issue with Global Ban flag
 
-*fix: flutter static analysis
+## 0.4.0
+* feat: Post Query Reaction
+* feat: Comment/Nested Comment Query Reaction
+* fix: Blank Custom Avatar Url
+* fix: Blank Unfollow Response
+* refactor: Optimize import & public api doc
+
+## 0.3.1
+* fix: GET post api issue
+## 0.3.0
+* feat: follow/unfollow functionlity
+* feat: accept/denied pending follow request functionlity
+* feat: Query user follower/following
+* fix: login issue without display name
+* fix: nested comment loading issue
+
+## 0.2.0
+* feat: Community Post Review feature
+* feat: Query community by tag
+* feat: add tags in community
+* feat: add recommend and trending communities in public repo
+* feat: Add Community Category in Create & Update Community
+* fix: data type filtering in get post API
+* fix: resolve edge case with page controller blank token
+* fix: resolve issue with multiple post in community feed
+* fix: updated post query for v4 api
+
+## 0.1.3
+* fix: null category ID in Community Category hive entiry
+* fix: resolve edge case with page controller blank token
+
+## 0.1.2
+* chore: enable the lint core and analyze the code
+## 0.1.1
+* fix: community category causes data corruption
+* fix: post metadata is unable to update
+
+
+## 0.1.0
+
+* feat: Add Metadata in post, comment and community
+* feat: Streams for Post, Comment, Community and Community Member
+* feat: Community CRUD and Query
+* feat: Community Member CRUD and Query
+* feat: Community Member Roles & Permissions
+* feat: Community feed query
+* feat: Add/Remove Post and Comment reactions
+* fix: resolve memory leak issue in post and comment object
+
 
 ## 0.0.2
 
