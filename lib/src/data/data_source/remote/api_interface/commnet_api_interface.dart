@@ -12,7 +12,12 @@ abstract class CommentApiInterface {
       String commentId, UpdateCommentRequest request);
   Future<bool> deleteComment(String commentId);
 
-  Future<bool> flagComment(String commentId);
-  Future<bool> unflagComment(String commentId);
+  /// Flag Comment
+  Future<CreateCommentResponse> flagComment(String commentId);
+
+  /// UnFlag Comment
+  Future<CreateCommentResponse> unflagComment(String commentId);
+
+  /// IsFlagByMe Comment
   Future<bool> isCommentFlagByMe(String commentId);
 }

@@ -34,6 +34,8 @@ class AmityPost {
   DateTime? updatedAt;
   String? path;
 
+  Map<String, dynamic>? hashFlag;
+
   @override
   String toString() {
     return 'AmityPost(postId: $postId, parentPostId: $parentPostId, postedUserId: $postedUserId, sharedUserId: $sharedUserId, type: $type, metadata: $metadata, sharedCount: $sharedCount, isFlaggedByMe: $isFlaggedByMe, myReactions: $myReactions, reactions: $reactions, reactionCount: $reactionCount, commentCount: $commentCount, flagCount: $flagCount, latestCommentIds: $latestCommentIds, latestComments: $latestComments, childrenPostIds: $childrenPostIds, children: $children, postedUser: $postedUser, sharedUser: $sharedUser, isDeleted: $isDeleted, feedType: $feedType, mentionees: $mentionees, createdAt: $createdAt, editedAt: $editedAt, updatedAt: $updatedAt, path: $path, type: $type,data: $data,comment: $latestComments,children: $children)';

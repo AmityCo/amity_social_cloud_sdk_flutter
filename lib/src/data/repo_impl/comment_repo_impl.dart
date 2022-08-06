@@ -5,22 +5,22 @@ import 'package:amity_sdk/src/core/utils/page_list_data.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// Comment Repo Impl
 class CommentRepoImpl extends CommentRepo {
+  /// Comment API interface
   final CommentApiInterface commentApiInterface;
-  final CommentDbAdapter commentDbAdapter;
-  final UserDbAdapter userDbAdapter;
-  final FileDbAdapter fileDbAdapter;
-  final PostDbAdapter postDbAdapter;
+
+  /// Common Db Adapter
+  final DbAdapterRepo dbAdapterRepo;
+
+  /// Init [CommentRepoImpl]
   CommentRepoImpl(
-      {required this.postDbAdapter,
-      required this.commentDbAdapter,
-      required this.commentApiInterface,
-      required this.userDbAdapter,
-      required this.fileDbAdapter});
+      {required this.commentApiInterface, required this.dbAdapterRepo});
 
   @override
   Future<AmityComment> getCommentByIdFromDb(String commentId) async {
-    final commentHiveEntity = commentDbAdapter.getCommentEntity(commentId);
+    final commentHiveEntity =
+        dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId);
     return commentHiveEntity.convertToAmityComment();
   }
 
@@ -31,13 +31,13 @@ class CommentRepoImpl extends CommentRepo {
     final amityComments = await _saveDetailsToDb(data);
 
     //Update the post entity, comment Id and comment count
-    postDbAdapter.updateComment(
-        request.referenceId, amityComments[0].commentId!);
+    dbAdapterRepo.postDbAdapter
+        .updateComment(request.referenceId, amityComments[0].commentId!);
 
     // Check if comment have any parent comment
     // if yes update the parent comment child count
     if (request.parentId != null) {
-      commentDbAdapter.updateChildComment(
+      dbAdapterRepo.commentDbAdapter.updateChildComment(
           amityComments[0].parentId!, amityComments[0].commentId!);
     }
 
@@ -57,7 +57,8 @@ class CommentRepoImpl extends CommentRepo {
   Future<bool> deleteComment(String commentId) async {
     final data = await commentApiInterface.deleteComment(commentId);
 
-    final amityCommentEntity = commentDbAdapter.getCommentEntity(commentId);
+    final amityCommentEntity =
+        dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId);
 
     amityCommentEntity
       ..isDeleted = true
@@ -69,7 +70,8 @@ class CommentRepoImpl extends CommentRepo {
   @override
   Future<bool> flagComment(String commentId) async {
     final data = await commentApiInterface.flagComment(commentId);
-    return data;
+    await _saveDetailsToDb(data);
+    return true;
   }
 
   @override
@@ -90,7 +92,8 @@ class CommentRepoImpl extends CommentRepo {
   @override
   Future<bool> unflagComment(String commentId) async {
     final data = await commentApiInterface.unflagComment(commentId);
-    return data;
+    await _saveDetailsToDb(data);
+    return true;
   }
 
   @override
@@ -124,22 +127,22 @@ class CommentRepoImpl extends CommentRepo {
 
     //Save the File Entity
     for (var e in fileHiveEntities) {
-      await fileDbAdapter.saveFileEntity(e);
+      await dbAdapterRepo.fileDbAdapter.saveFileEntity(e);
     }
 
     //Save the User Entity
     for (var e in userHiveEntities) {
-      await userDbAdapter.saveUserEntity(e);
+      await dbAdapterRepo.userDbAdapter.saveUserEntity(e);
     }
 
     //Save the Child Comment Entity
     for (var e in childCommentHiveEntities) {
-      await commentDbAdapter.saveCommentEntity(e);
+      await dbAdapterRepo.commentDbAdapter.saveCommentEntity(e);
     }
 
     //Save the Comment Entity
     for (var e in commentHiveEntities) {
-      await commentDbAdapter.saveCommentEntity(e);
+      await dbAdapterRepo.commentDbAdapter.saveCommentEntity(e);
     }
 
     return commentHiveEntities.map((e) => e.convertToAmityComment()).toList();

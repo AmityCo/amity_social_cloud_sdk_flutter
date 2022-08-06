@@ -2,7 +2,9 @@ import 'dart:convert';
 
 import 'package:amity_sdk/src/data/response/core_response/post_data_response.dart';
 
+/// Post Response from BR
 class PostResponse {
+  /// init [PostResponse]
   PostResponse({
     required this.id,
     required this.path,
@@ -33,74 +35,128 @@ class PostResponse {
     required this.feedId,
     required this.require,
   });
+
+  /// Doc id
   final String id;
+
+  /// Doc path
   final String? path;
+
+  /// post Id
   final String postId;
+
+  /// if post is child post, parent post Id
   String? parentPostId;
+
+  /// user id for the post owner
   final String postedUserId;
+
+  /// user id for the shared with user
   String? sharedUserId;
+
+  /// share count
   final int sharedCount;
+
+  /// target user/community id
   final String targetId;
+
+  /// post target type user/community
   final String targetType;
+
+  /// data type  - text/imgae/video/file
   final String dataType;
+
+  /// post data
   final PostDataResponse data;
+
+  /// metadata
   final Map<String, dynamic>? metadata;
+
+  ///flag count
   final int flagCount;
+
+  /// hash flag bloom filter data
   final HashFlag? hashFlag;
+
+  /// edit data
   final DateTime? editedAt;
+
+  /// create data
   final DateTime? createdAt;
+
+  /// update data
   final DateTime? updatedAt;
+
+  /// reaction map
   final Map<String, int>? reactions;
+
+  /// reaction count
   final int reactionsCount;
+
+  /// my reaction on the post
   final List<String> myReactions;
+
+  /// comment count
   final int commentsCount;
+
+  /// intial comment
   final List<String> comments;
+
+  /// child post id
   final List<String> children;
+
+  /// deleted flag
   final bool isDeleted;
+
+  /// if post has flagged comment
   final bool hasFlaggedComment;
+
+  /// if post have flagged child psot
   final bool hasFlaggedChildren;
+
+  /// feed if
   final String? feedId;
+
+  /// require
   final String? require;
 
+  /// factory method to init [PostResponse] from map
   factory PostResponse.fromJson(Map<String, dynamic> json) => PostResponse(
-        id: json["_id"],
-        path: json["path"],
-        postId: json["postId"],
-        parentPostId: json["parentPostId"],
-        postedUserId: json["postedUserId"],
-        sharedUserId: json["sharedUserId"],
-        sharedCount: json["sharedCount"],
-        targetId: json["targetId"],
-        targetType: json["targetType"],
-        dataType: json["dataType"],
-        data: PostDataResponse.fromJson(json["data"]),
-        // metadata: DataClass.fromJson(json["metadata"]),
-        flagCount: json["flagCount"],
-        hashFlag: json["hashFlag"] == null
-            ? null
-            : HashFlag.fromJson(json["hashFlag"]),
-        editedAt:
-            json["editedAt"] == null ? null : DateTime.parse(json["editedAt"]),
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.parse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.parse(json["updatedAt"]),
-        reactions: Map.from(json["reactions"]),
-        reactionsCount: json["reactionsCount"],
-        myReactions: List<String>.from(json["myReactions"].map((x) => x)),
-        commentsCount: json["commentsCount"],
-        comments: List<String>.from(json["comments"].map((x) => x)),
-        children: List<String>.from(json["children"].map((x) => x)),
-        isDeleted: json["isDeleted"],
-        hasFlaggedComment: json["hasFlaggedComment"],
-        hasFlaggedChildren: json["hasFlaggedChildren"],
-        feedId: json["feedId"],
-        require: json["required"],
-        metadata: json["metadata"]
-      );
+      id: json["_id"],
+      path: json["path"],
+      postId: json["postId"],
+      parentPostId: json["parentPostId"],
+      postedUserId: json["postedUserId"],
+      sharedUserId: json["sharedUserId"],
+      sharedCount: json["sharedCount"],
+      targetId: json["targetId"],
+      targetType: json["targetType"],
+      dataType: json["dataType"],
+      data: PostDataResponse.fromJson(json["data"]),
+      // metadata: DataClass.fromJson(json["metadata"]),
+      flagCount: json["flagCount"],
+      hashFlag:
+          json["hashFlag"] == null ? null : HashFlag.fromJson(json["hashFlag"]),
+      editedAt:
+          json["editedAt"] == null ? null : DateTime.parse(json["editedAt"]),
+      createdAt:
+          json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
+      updatedAt:
+          json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+      reactions: Map.from(json["reactions"]),
+      reactionsCount: json["reactionsCount"],
+      myReactions: List<String>.from(json["myReactions"].map((x) => x)),
+      commentsCount: json["commentsCount"],
+      comments: List<String>.from(json["comments"].map((x) => x)),
+      children: List<String>.from(json["children"].map((x) => x)),
+      isDeleted: json["isDeleted"],
+      hasFlaggedComment: json["hasFlaggedComment"],
+      hasFlaggedChildren: json["hasFlaggedChildren"],
+      feedId: json["feedId"],
+      require: json["required"],
+      metadata: json["metadata"]);
 
+  /// Create map from [PostResponse]
   Map<String, dynamic> toJson() => {
         "_id": id,
         "path": path,
@@ -133,23 +189,32 @@ class PostResponse {
       };
 }
 
+/// Hash Flag
 class HashFlag {
+  /// init [HashFlag]
   HashFlag({
     required this.bits,
     required this.hashes,
     required this.hash,
   });
 
+  /// bits
   final int bits;
+
+  ///hashes
   final int hashes;
+
+  ///hash
   final String hash;
 
+  /// factory method to init [HashFlag]
   factory HashFlag.fromJson(Map<String, dynamic> json) => HashFlag(
         bits: json["bits"],
         hashes: json["hashes"],
         hash: json["hash"],
       );
 
+  /// Convert [HashFlag] to map
   Map<String, dynamic> toJson() => {
         "bits": bits,
         "hashes": hashes,
