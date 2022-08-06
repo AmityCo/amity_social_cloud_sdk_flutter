@@ -64,6 +64,7 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
       ..reactionCount = reactionsCount
       ..commentCount = commentsCount
       ..flagCount = flagCount
+      ..hashFlag = hashFlag
       ..latestCommentIds = comments
       ..childrenPostIds = children
       ..isDeleted = isDeleted

@@ -4,9 +4,12 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:dio/dio.dart';
 
+/// Comment API Interface Impl
 class CommentApiInterfaceImpl extends CommentApiInterface {
+  /// Public HTTP client
   final HttpApiClient httpApiClient;
 
+  /// Init [CommentApiInterfaceImpl]
   CommentApiInterfaceImpl({required this.httpApiClient});
 
   @override
@@ -47,10 +50,10 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
   }
 
   @override
-  Future<bool> flagComment(String commentId) async {
+  Future<CreateCommentResponse> flagComment(String commentId) async {
     try {
       final data = await httpApiClient().post('$COMMENT_V3/$commentId/flag');
-      return true;
+      return CreateCommentResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
@@ -81,11 +84,11 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
   }
 
   @override
-  Future<bool> unflagComment(String commentId) async {
+  Future<CreateCommentResponse> unflagComment(String commentId) async {
     try {
       final data =
           await httpApiClient().delete('$COMMENT_V3/$commentId/unflag');
-      return true;
+      return CreateCommentResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());

@@ -63,7 +63,8 @@ class PostRepoImpl extends PostRepo {
   @override
   Future<bool> flagPost(String postId) async {
     final data = await publicPostApiInterface.flagPost(postId);
-    return data;
+    await data.saveToDb<AmityPost>(dbAdapterRepo);
+    return true;
   }
 
   @override
@@ -75,7 +76,8 @@ class PostRepoImpl extends PostRepo {
   @override
   Future<bool> unflagPost(String postId) async {
     final data = await publicPostApiInterface.unflagPost(postId);
-    return data;
+    await data.saveToDb<AmityPost>(dbAdapterRepo);
+    return true;
   }
 
   @override

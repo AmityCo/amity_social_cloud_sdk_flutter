@@ -11,8 +11,8 @@ abstract class PublicPostApiInterface {
   Future<CreatePostResponse> updatePostById(UpdatePostRequest request);
   Future<bool> deletePostById(String postId);
 
-  Future<bool> flagPost(String postId);
-  Future<bool> unflagPost(String postId);
+  Future<CreatePostResponse> flagPost(String postId);
+  Future<CreatePostResponse> unflagPost(String postId);
   Future<bool> isPostFlagByMe(String postId);
 
   Future<bool> approvePost(String postId);

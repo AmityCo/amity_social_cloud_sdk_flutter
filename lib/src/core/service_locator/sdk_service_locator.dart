@@ -155,11 +155,8 @@ class SdkServiceLocator {
           dbAdapterRepo: serviceLocator(),
         ));
     serviceLocator.registerLazySingleton<CommentRepo>(() => CommentRepoImpl(
-        commentDbAdapter: serviceLocator(),
         commentApiInterface: serviceLocator(),
-        fileDbAdapter: serviceLocator(),
-        userDbAdapter: serviceLocator(),
-        postDbAdapter: serviceLocator()));
+        dbAdapterRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<FileRepo>(() => FileRepoImpl(
         fileDbAdapter: serviceLocator(), fileApiInterface: serviceLocator()));
     serviceLocator.registerLazySingleton<ReactionRepo>(() => ReactionRepoImpl(

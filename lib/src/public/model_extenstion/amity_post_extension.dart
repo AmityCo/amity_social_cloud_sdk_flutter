@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
@@ -79,5 +80,15 @@ extension AmityPostExtension on AmityPost {
     });
 
     return controller.stream;
+  }
+
+  /// check if post is flagged by me
+  bool isFlaggedByMeCheck() {
+    if (hashFlag == null) return false;
+    return BloomFilter(
+            buckets: base64.decode((hashFlag!['hash'] as String)),
+            m: hashFlag!['bits'] as int,
+            k: hashFlag!['hashes'] as int)
+        .mightContains(AmityCoreClient.getUserId());
   }
 }

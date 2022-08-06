@@ -17,6 +17,7 @@ extension PostResponseExtension on PostResponse {
       ..dataType = dataType
       ..data = data.convertToPostDataHiveEntity()
       ..flagCount = flagCount
+      ..hashFlag = hashFlag?.toJson()
       ..reactions = reactions
       ..reactionsCount = reactionsCount
       ..myReactions = myReactions
