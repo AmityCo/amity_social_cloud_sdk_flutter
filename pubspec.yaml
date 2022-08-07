@@ -19,6 +19,7 @@ dependencies:
   mqtt_client: ^9.6.8
   http: ^0.13.4
   uuid: ^3.0.6
+  socket_io_client: ^1.0.2
 
 dev_dependencies:
   flutter_test:

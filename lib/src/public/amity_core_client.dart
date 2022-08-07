@@ -1,4 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/socket/amity_socket.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
@@ -31,6 +32,8 @@ class AmityCoreClient {
 
   /// Logout will wipe out all the data [AmityCoreClient] holds.
   static Future<void> logout() async {
+    //terminate current activeSocket
+    serviceLocator<AmitySocket>().terminate();
     //close all the hive boxes and wipe the data
     await serviceLocator<DBClient>().reset();
 
@@ -38,6 +41,12 @@ class AmityCoreClient {
     await SdkServiceLocator.reloadServiceLocator();
 
     return;
+  }
+
+  //temporarily disconnect chat real-time events from the system,
+  //call the function 'login(String userId)' to restore a connection
+  static void disconnect() {
+    serviceLocator<AmitySocket>().terminate();
   }
 
   ///Check if user is logged in
