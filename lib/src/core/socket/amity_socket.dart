@@ -67,7 +67,7 @@ class AmitySocket {
         IO.OptionBuilder()
             .setTransports(['websocket'])
             .enableAutoConnect()
-            .setQuery({'token': 'accessToken'})
+            .setQuery({'token': accessToken})
             .setReconnectionDelayMax(10000)
             .build());
 
