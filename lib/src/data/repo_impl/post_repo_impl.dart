@@ -64,6 +64,12 @@ class PostRepoImpl extends PostRepo {
   Future<bool> flagPost(String postId) async {
     final data = await publicPostApiInterface.flagPost(postId);
     await data.saveToDb<AmityPost>(dbAdapterRepo);
+
+    // Update the isFlaggedByMe
+    final post = dbAdapterRepo.postDbAdapter.getPostEntity(postId);
+    post.flaggedByMe = true;
+    post.save();
+
     return true;
   }
 
@@ -77,6 +83,12 @@ class PostRepoImpl extends PostRepo {
   Future<bool> unflagPost(String postId) async {
     final data = await publicPostApiInterface.unflagPost(postId);
     await data.saveToDb<AmityPost>(dbAdapterRepo);
+
+    // Update the isFlaggedByMe
+    final post = dbAdapterRepo.postDbAdapter.getPostEntity(postId);
+    post.flaggedByMe = false;
+    post.save();
+
     return true;
   }
 

@@ -71,6 +71,12 @@ class CommentRepoImpl extends CommentRepo {
   Future<bool> flagComment(String commentId) async {
     final data = await commentApiInterface.flagComment(commentId);
     await _saveDetailsToDb(data);
+
+    // Update the isFlaggedByMe
+    final comment = dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId);
+    comment.flaggedByMe = true;
+    comment.save();
+
     return true;
   }
 
@@ -93,6 +99,12 @@ class CommentRepoImpl extends CommentRepo {
   Future<bool> unflagComment(String commentId) async {
     final data = await commentApiInterface.unflagComment(commentId);
     await _saveDetailsToDb(data);
+
+    // Update the isFlaggedByMe
+    final comment = dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId);
+    comment.flaggedByMe = false;
+    comment.save();
+
     return true;
   }
 

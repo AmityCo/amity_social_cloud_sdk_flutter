@@ -72,6 +72,7 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
       ..editedAt = editedAt
       ..updatedAt = updatedAt
       ..path = path
-      ..metadata = metadata;
+      ..metadata = metadata
+      ..flaggedByMe = flaggedByMe;
   }
 }

@@ -1,17 +1,29 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
+import 'package:fixnum/fixnum.dart';
+
+/// BloomFilter for hash flag
 class BloomFilter {
+  /// Seed for bloom filter
   static final SEED = 1576284489;
 
-  final Uint8List buckets;
+  /// byte array for hash
+  late List<int> buckets;
+
+  /// bite size
   final int m;
+
+  /// hashes count
   final int k;
 
-  BloomFilter({required this.buckets, required this.m, required this.k});
+  /// init [BloomFilter]
+  BloomFilter({required String hash, required this.m, required this.k}) {
+    buckets = base64Decode(hash);
+  }
 
+  /// Might Contains
   bool mightContains(String element) {
-    Uint8List locations = locationFor(base64.decode(element));
+    List<int> locations = locationFor(element.codeUnits);
 
     for (int i = 0; i < k; i++) {
       int location = locations[i];
@@ -24,11 +36,12 @@ class BloomFilter {
     return true;
   }
 
-  Uint8List locationFor(Uint8List buf) {
-    int hash1 = new EkoFnv1a().hash(buf, 0);
-    int hash2 = new EkoFnv1a().hash(buf, SEED);
+  /// get the location in bucket
+  List<int> locationFor(List<int> buf) {
+    int hash1 = EkoFnv1a().hash(buf, 0).toInt();
+    int hash2 = EkoFnv1a().hash(buf, SEED).toInt();
 
-    final locations = Uint8List(k);
+    List<int> locations = List.filled(k, 0);
     int location = hash1 % m;
 
     for (int i = 0; i < k; i++) {
@@ -40,41 +53,31 @@ class BloomFilter {
   }
 }
 
-class EkoFnv1a implements HashFunction {
-  static final FNV1_32_INIT = 0x811c9dc5;
+/// EkoFnv1a
+class EkoFnv1a {
+  static final FNV1_64_INIT = 0x811c9dc5;
 
-  // @Override
-  //  int hash(Uint8List buf, int seed) {
-  //     int hash = (int) FNV1_32_INIT ^ seed;
-  //     for (byte b : buf) {
-  //         hash = multiply(hash ^ b);
-  //     }
-  //     return mix(hash);
-  // }
+  /// Hash
+  Int32 hash(List<int> buf, int seed) {
+    Int32 hash = Int32(FNV1_64_INIT ^ seed);
+    for (int b in buf) {
+      hash = multiply(hash ^ b).toInt32();
+    }
+    return mix(hash).toInt32();
+  }
 
-  int multiply(int a) {
+  /// Multiply
+  IntX multiply(IntX a) {
     return a + (a << 1) + (a << 4) + (a << 7) + (a << 8) + (a << 24);
   }
 
-  int mix(int a) {
+  ///Mix
+  IntX mix(IntX a) {
     a += a << 13;
-    a ^= a >>> 7;
+    a ^= a.shiftRightUnsigned(7);
     a += a << 3;
-    a ^= a >>> 17;
+    a ^= a.shiftRightUnsigned(17);
     a += a << 5;
     return a;
   }
-
-  @override
-  int hash(List<int> buf, int seed) {
-    int hash = FNV1_32_INIT ^ seed;
-    for (int b in buf) {
-      hash = multiply(hash ^ b);
-    }
-    return mix(hash);
-  }
-}
-
-abstract class HashFunction {
-  int hash(Uint8List buf, int seed);
 }

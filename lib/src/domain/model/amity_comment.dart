@@ -32,6 +32,9 @@ class AmityComment {
   AmityUser? user; //composer
   String? path;
 
+  Map<String, dynamic>? hashFlag;
+  bool? flaggedByMe;
+
   Stream<AmityComment> get listen {
     StreamController<AmityComment> controller =
         StreamController<AmityComment>();
