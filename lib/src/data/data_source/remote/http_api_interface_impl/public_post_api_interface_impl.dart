@@ -81,7 +81,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   @override
   Future<CreatePostResponse> unflagPost(String postId) async {
     try {
-      final data = await httpApiClient().delete('$POST_V3/$postId/flag');
+      final data = await httpApiClient().delete('$POST_V3/$postId/unflag');
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

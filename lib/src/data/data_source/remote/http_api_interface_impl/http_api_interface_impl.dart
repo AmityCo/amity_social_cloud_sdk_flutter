@@ -1,6 +1,6 @@
 export 'api_interface_impl.dart';
 export 'authentication_api_interface_impl.dart';
-export 'commant_api_interface_impl.dart';
+export 'comment_api_interface_impl.dart';
 export 'community_api_interface_impl.dart';
 export 'community_category_api_interface_impl.dart';
 export 'community_feed_api_interface_impl.dart';

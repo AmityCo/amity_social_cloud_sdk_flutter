@@ -89,4 +89,7 @@ class PostHiveEntity extends HiveObject {
 
   ///
   String? require;
+
+  ///
+  bool? flaggedByMe;
 }

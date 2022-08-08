@@ -43,4 +43,15 @@ extension AmityCommentExtension on AmityComment {
     return AmityTextCommentEditorBuilder(
         useCase: serviceLocator(), targetId: commentId!);
   }
+
+  /// check if post is flagged by me
+  bool get isFlaggedByMe {
+    if (hashFlag == null) return false;
+    return (flaggedByMe ?? false) ||
+        BloomFilter(
+                hash: (hashFlag!['hash'] as String),
+                m: hashFlag!['bits'] as int,
+                k: hashFlag!['hashes'] as int)
+            .mightContains(AmityCoreClient.getUserId());
+  }
 }
