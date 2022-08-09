@@ -1,6 +1,8 @@
 import 'package:amity_sdk/src/data/data.dart';
 
+/// Comment Response Extension
 extension CommentResponseExtension on CommentResponse {
+  /// Convert [CommentResponse] to [CommentHiveEntity]
   CommentHiveEntity convertToCommentHiveEntity() {
     return CommentHiveEntity()
       ..commentId = commentId
@@ -13,6 +15,7 @@ extension CommentResponseExtension on CommentResponse {
       ..data = data.convertToPostDataHiveEntity()
       ..childrenNumber = childrenNumber
       ..flagCount = flagCount
+      ..hashFlag = hashFlag?.toJson()
       ..reactions = reactions
       ..reactionsCount = reactionsCount
       ..myReactions = myReactions
