@@ -20,11 +20,13 @@ class AmityMQTT {
     final currentUser = AmityCoreClient.getCurrentUser();
     accountRepo
         .listenAccount(currentUser.userId!)
-        .takeWhile((account) => account.accessToken?.isNotEmpty ?? false)
+        .takeWhile((account) => account?.accessToken?.isNotEmpty ?? false)
         .distinct()
         .listen((account) {
-      print('AMITY_MQTT::connecting with accessToken ${account.accessToken}');
-      _connect(account);
+      if (account != null) {
+        print('AMITY_MQTT::connecting with accessToken ${account.accessToken}');
+        _connect(account);
+      }
     });
   }
 
@@ -89,7 +91,7 @@ class AmityMQTT {
     final currentUser = AmityCoreClient.getCurrentUser();
     accountRepo
         .listenAccount(currentUser.userId!)
-        .takeWhile((account) => account.isActive == false)
+        .takeWhile((account) => account?.isActive == false)
         .distinct()
         .listen((account) {
       _obsoleteClient();

@@ -11,7 +11,7 @@ class AccountRepoImpl extends AccountRepo {
   }
 
   @override
-  Stream<AccountHiveEntity> listenAccount(String userId) {
-    throw accountDbAdapter.listenAccountEntity();
+  Stream<AccountHiveEntity?> listenAccount(String userId) {
+    return accountDbAdapter.listenAccountEntity(userId);
   }
 }

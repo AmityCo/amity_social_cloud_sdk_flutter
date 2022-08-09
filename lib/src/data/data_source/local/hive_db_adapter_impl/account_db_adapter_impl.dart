@@ -13,8 +13,16 @@ class AccountDbAdapterImpl extends AccountDbAdapter {
   }
 
   @override
-  Stream<AccountHiveEntity> listenAccountEntity() {
-    return box.watch().map((event) => event.value as AccountHiveEntity);
+  Stream<AccountHiveEntity?> listenAccountEntity(String userId) {
+    //first value is always null regarding this issue
+    //https://github.com/hivedb/hive/issues/20
+    return box.watch(key: userId).map((event) {
+      if (event.value != null && event.value is AccountHiveEntity) {
+        return event.value as AccountHiveEntity;
+      } else {
+        return getAccountEntity(userId);
+      }
+    });
   }
 
   @override
