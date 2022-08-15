@@ -17,6 +17,7 @@ export 'follow_hive_entity_extension_converter.dart';
 export 'follow_info_hive_entity_extension_converter.dart';
 export 'follow_info_response_extension_converter.dart';
 export 'follow_response_extension_converter.dart';
+export 'message/message.dart';
 export 'poll_answer_response_extension_converter.dart';
 export 'poll_answer_response_hive_entity_extension_converter.dart';
 export 'poll_response_extension_converter.dart';
