@@ -1,9 +1,11 @@
 import 'dart:async';
+
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/public/amity_core_client.dart';
 import 'package:amity_sdk/src/domain/repo/account_repo.dart';
+import 'package:amity_sdk/src/public/amity_core_client.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
+/// [Amity Socket]
 class AmitySocket {
   static IO.Socket? activeSocket;
   final AccountRepo accountRepo;
@@ -76,7 +78,7 @@ class AmitySocket {
       // activeSocket!.emit('msg', 'test');
     });
 
-   //if token is not valid, always terminate socket until the next authentication
+    //if token is not valid, always terminate socket until the next authentication
     activeSocket!.onError((data) {
       if (data is Map && data['code'] == 400100) {
         terminate();

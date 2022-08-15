@@ -2,6 +2,7 @@ export 'amity_error_response.dart';
 export 'core_response/core_response.dart';
 export 'create_comment_response.dart';
 export 'create_community_response.dart';
+export 'create_message_response.dart';
 export 'create_post_response.dart';
 export 'follow_info_response.dart';
 export 'follow_response.dart';

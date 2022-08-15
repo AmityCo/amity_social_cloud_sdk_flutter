@@ -2,8 +2,15 @@ import 'dart:developer';
 
 import 'package:amity_sdk/src/core/socket/amity_socket.dart';
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/message_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/message_db_adapter_impl.dart';
+import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/message_api_interface_impl.dart';
+import 'package:amity_sdk/src/data/repo_impl/message_repo_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/repo/message_repo.dart';
+import 'package:amity_sdk/src/domain/usecase/message/message_query_use_case.dart';
 import 'package:amity_sdk/src/public/public.dart';
+import 'package:amity_sdk/src/public/repo/message/message_repository.dart';
 import 'package:get_it/get_it.dart';
 
 final configServiceLocator = GetIt.asNewInstance();
@@ -72,6 +79,9 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<PollDbAdapter>(
         () => PollDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<MessageDbAdapter>(
+        () => MessageDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
 
     //Register Db adapter Repo which hold all the Db Adapters
     serviceLocator.registerLazySingleton<DbAdapterRepo>(() => DbAdapterRepo(
@@ -83,7 +93,8 @@ class SdkServiceLocator {
         fileDbAdapter: serviceLocator(),
         userDbAdapter: serviceLocator(),
         communityCategoryDbAdapter: serviceLocator(),
-        pollDbAdapter: serviceLocator()));
+        pollDbAdapter: serviceLocator(),
+        messageDbAdapter: serviceLocator()));
 
     //-data_source/remote/
     serviceLocator.registerLazySingleton<HttpApiClient>(
@@ -124,6 +135,8 @@ class SdkServiceLocator {
         CommunityCategoryApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<PollApiInterface>(
         () => PollApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageApiInterface>(
+        () => MessageApiInterfaceImpl(httpApiClient: serviceLocator()));
 
     // Local Data Source
 
@@ -219,6 +232,11 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<PollRepo>(
       () => PollRepoImpl(
           dbAdapterRepo: serviceLocator(), pollApiInterface: serviceLocator()),
+    );
+    serviceLocator.registerLazySingleton<MessageRepo>(
+      () => MessageRepoImpl(
+          dbAdapterRepo: serviceLocator(),
+          messageApiInterface: serviceLocator()),
     );
 
     //-UserCase
@@ -481,6 +499,9 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<ClosePollUseCase>(
         () => ClosePollUseCase(pollRepo: serviceLocator()));
 
+    serviceLocator.registerLazySingleton<MessageQueryUseCase>(
+        () => MessageQueryUseCase(messageRepo: serviceLocator()));
+
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
     serviceLocator.registerLazySingleton(() => PostRepository());
@@ -491,6 +512,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => NotificationRepository());
     serviceLocator.registerLazySingleton(() => CommunityRepository());
     serviceLocator.registerLazySingleton(() => PollRepository());
+    serviceLocator.registerLazySingleton(() => MessageRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(
@@ -498,8 +520,9 @@ class SdkServiceLocator {
           accountRepo: serviceLocator(),
           amityCoreClientOption: configServiceLocator()),
     );
+
     //socket client
-   serviceLocator.registerLazySingleton<AmitySocket>(
+    serviceLocator.registerLazySingleton<AmitySocket>(
       () => AmitySocket(
           accountRepo: serviceLocator(),
           amityCoreClientOption: configServiceLocator()),
