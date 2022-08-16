@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class AmityTags {
-  List<String>? tags;
+  List<String>? tags = [];
 
   Map<String, dynamic> toMap() {
     return {

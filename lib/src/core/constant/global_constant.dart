@@ -53,6 +53,7 @@ const UNREGISTER_NOTIFICATION_V1_URL = 'v1/notification';
 
 /// Message API v3 Base Url
 const MESSAGE_V3 = 'api/v3/messages';
+const MESSAGE_V1 = 'api/v1/messages';
 
 const JOIN = 'join';
 const LEAVE = 'leave';
