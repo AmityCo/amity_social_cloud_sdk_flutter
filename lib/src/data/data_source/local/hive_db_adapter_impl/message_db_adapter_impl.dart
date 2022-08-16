@@ -24,12 +24,12 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
   }
 
   @override
-  PostHiveEntity getMessageEntity(String messageId) {
+  MessageHiveEntity getMessageEntity(String messageId) {
     return box.get(messageId);
   }
 
   @override
-  Stream<PostHiveEntity> listenMessageEntity(String messageId) {
+  Stream<MessageHiveEntity> listenMessageEntity(String messageId) {
     return box.watch(key: messageId).map((event) => event.value);
   }
 }

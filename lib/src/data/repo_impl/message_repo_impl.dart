@@ -1,3 +1,4 @@
+import 'package:amity_sdk/src/core/model/api_request/create_message_request.dart';
 import 'package:amity_sdk/src/core/model/api_request/message_query_request.dart';
 import 'package:amity_sdk/src/core/utils/page_list_data.dart';
 import 'package:amity_sdk/src/data/data.dart';
@@ -21,5 +22,12 @@ class MessageRepoImpl extends MessageRepo {
     final data = await messageApiInterface.messageQuery(request);
     final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
     return PageListData(amitMessages, data.paging!.next ?? '');
+  }
+
+  @override
+  Future<AmityMessage> createMessage(CreateMessageRequest request) async {
+    final data = await messageApiInterface.createMessage(request);
+    final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
+    return (amitMessages as List).first;
   }
 }
