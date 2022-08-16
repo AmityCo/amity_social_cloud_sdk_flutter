@@ -20,6 +20,21 @@ class MessageRepoImpl extends MessageRepo {
       MessageQueryRequest request) async {
     final data = await messageApiInterface.messageQuery(request);
     final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
-    return PageListData(amitMessages, data.paging!.next ?? '');
+    return PageListData(amitMessages, data.paging!.previous ?? '');
+  }
+
+  @override
+  Stream<List<AmityMessage>> listentMessages(MessageQueryRequest request) {
+    return dbAdapterRepo.messageDbAdapter
+        .listenMessageEntities(request)
+        .map((event) {
+      final List<AmityMessage> list = [];
+      for (var element in event) {
+        list.add(element.convertToAmityMessage());
+        //missing sort by asc/desc
+        list.sort((a, b) => b.channelSegment!.compareTo(a.channelSegment!));
+      }
+      return list;
+    });
   }
 }
