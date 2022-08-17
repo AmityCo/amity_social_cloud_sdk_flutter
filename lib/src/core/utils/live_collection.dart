@@ -35,6 +35,8 @@ abstract class LiveCollection<Model> {
   }
 
   bool hasNextPage() {
-    return currentToken != null;
+    final hasNextToken =
+        currentToken != null && (currentToken ?? '').isNotEmpty;
+    return hasNextToken && !_isFirstPage;
   }
 }
