@@ -11,10 +11,7 @@ class MessageLiveCollection extends LiveCollection<AmityMessage> {
   @override
   Future<PageListData<List<AmityMessage>, String>> getFirstPageRequest() async {
     params.options?.token = null;
-    params.options?.limit = 20;
-    final result = await serviceLocator<MessageQueryUseCase>().get(params);
-    currentToken = result.token;
-    return result;
+    return await serviceLocator<MessageQueryUseCase>().get(params);
   }
 
   @override
@@ -22,9 +19,7 @@ class MessageLiveCollection extends LiveCollection<AmityMessage> {
       String? token) async {
     params.options?.token = token;
     params.options?.limit = null;
-    final result = await serviceLocator<MessageQueryUseCase>().get(params);
-    currentToken = result.token;
-    return result;
+    return await serviceLocator<MessageQueryUseCase>().get(params);
   }
 
   @override

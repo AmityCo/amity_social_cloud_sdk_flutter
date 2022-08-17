@@ -15,17 +15,17 @@ abstract class LiveCollection<Model> {
   Stream<List<Model>> asStream();
 
   //open functions
-  void loadNext() async {
+  Future loadNext() async {
     if (!isFetching) {
       isFetching = true;
       if (_isFirstPage) {
-        getFirstPageRequest().then((value) {
+        return await getFirstPageRequest().then((value) {
           currentToken = value.token;
           isFetching = false;
           _isFirstPage = false;
         });
       } else {
-        getNextPageRequest(currentToken).then((value) {
+        return await getNextPageRequest(currentToken).then((value) {
           currentToken = value.token;
           isFetching = false;
           _isFirstPage = false;
