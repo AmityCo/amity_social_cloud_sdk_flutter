@@ -1,6 +1,4 @@
-import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/utils/message_live_collection.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/model/message/amity_message.dart';
 import 'package:amity_sdk/src/domain/usecase/message/message_query_use_case.dart';
@@ -104,21 +102,5 @@ class GetMessageQueryBuilder {
     final data = await _useCase.get(_request);
 
     return data.data;
-  }
-
-  MessageLiveCollection getLiveCollection(int pageSize) {
-    if (_isDeleted != null) _request.isDeleted = _isDeleted;
-    if (_includingTags != null) _request.tags = _includingTags!.tags;
-    if (_excludingTags != null) _request.excludeTags = _excludingTags!.tags;
-    if (_parentId != null) {
-      _request.parentId = _parentId;
-      _request.filterByParentId = _isFilterByParentId;
-    }
-
-    _request.options = OptionsRequest();
-    _request.options!.limit = pageSize;
-
-
-    return MessageLiveCollection(params: _request);
   }
 }

@@ -11,16 +11,12 @@ class MessageObserveUsecase
 
   @override
   Future<List<AmityMessage>> get(MessageQueryRequest params) async {
-    // final amityPost = await postRepo.queryPost(params);
-    // final amityComposedPost = await Stream.fromIterable(amityPost.data)
-    //     .asyncMap((event) => postComposerUsecase.get(event))
-    //     .toList();
-    // return amityPost.withItem1(amityComposedPost);
     throw UnimplementedError();
   }
 
   @override
   Stream<List<AmityMessage>> listen(MessageQueryRequest params) {
+    //missing compose use case :(
     return messageRepo.listentMessages(params);
   }
 }
