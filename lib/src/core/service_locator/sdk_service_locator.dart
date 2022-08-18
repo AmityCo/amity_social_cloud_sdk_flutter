@@ -11,6 +11,7 @@ import 'package:amity_sdk/src/domain/composer_usecase/message_file_composer_usec
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/repo/message_repo.dart';
 import 'package:amity_sdk/src/domain/usecase/message/message_create_use_case.dart';
+import 'package:amity_sdk/src/domain/usecase/message/message_has_local_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/message/message_observe_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/message/message_query_use_case.dart';
 import 'package:amity_sdk/src/public/public.dart';
@@ -519,7 +520,9 @@ class SdkServiceLocator {
             messageComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<MessageObserveUsecase>(
         () => MessageObserveUsecase(messageRepo: serviceLocator()));
-
+    serviceLocator.registerLazySingleton<MessageHasLocalUsecase>(
+        () => MessageHasLocalUsecase(messageRepo: serviceLocator()));
+        
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
     serviceLocator.registerLazySingleton(() => PostRepository());

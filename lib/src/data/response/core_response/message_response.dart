@@ -74,7 +74,7 @@ class MessageResponse {
   final Map<String, dynamic> reactions;
 
   /// My Reaction
-  final List<String> myReactions;
+  final List<String>? myReactions;
 
   /// Latest Reaction
   final Map<String, dynamic>? latestReaction;
@@ -114,7 +114,7 @@ class MessageResponse {
         childrenNumber: json["childrenNumber"],
         reactionsCount: json["reactionsCount"],
         reactions: json["reactions"],
-        myReactions: List<String>.from(json["myReactions"].map((x) => x)),
+        myReactions: json["myReactions"] == null ? null : List<String>.from(json["myReactions"].map((x) => x)),
         latestReaction: json["latestReaction"],
         isDeleted: json["isDeleted"],
         createdAt: DateTime.parse(json["createdAt"]),
@@ -141,7 +141,7 @@ class MessageResponse {
         "childrenNumber": childrenNumber,
         "reactionsCount": reactionsCount,
         "reactions": reactions,
-        "myReactions": List<dynamic>.from(myReactions.map((x) => x)),
+        "myReactions": myReactions == null ? null : List<dynamic>.from(myReactions!.map((x) => x)),
         "latestReaction": latestReaction,
         "isDeleted": isDeleted,
         "createdAt": createdAt.toIso8601String(),

@@ -47,7 +47,7 @@ class LoginQueryBuilder {
 
     //TODO uncomment when ready 
     //connect to socket if login is successful
-    // serviceLocator<AmitySocket>().connect();
+    serviceLocator<AmitySocket>().connect();
 
     return amityUser;
   }
