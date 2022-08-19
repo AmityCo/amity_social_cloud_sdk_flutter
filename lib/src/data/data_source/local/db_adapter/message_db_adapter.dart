@@ -4,8 +4,9 @@ import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_hive_en
 abstract class MessageDbAdapter {
   Future saveMessageEntity(MessageHiveEntity data);
   Future deleteMessageEntity(MessageHiveEntity data);
-  MessageHiveEntity getMessageEntity(String messageId);
+  MessageHiveEntity? getMessageEntity(String messageId);
   Stream<MessageHiveEntity> listenMessageEntity(String messageId);
   Stream<List<MessageHiveEntity>> listenMessageEntities(
       MessageQueryRequest request);
+  Future deleteMessagesByChannelId(String channelId);
 }

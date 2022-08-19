@@ -25,13 +25,24 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
   }
 
   @override
-  MessageHiveEntity getMessageEntity(String messageId) {
+  MessageHiveEntity? getMessageEntity(String messageId) {
     return box.get(messageId);
   }
 
   @override
   Stream<MessageHiveEntity> listenMessageEntity(String messageId) {
     return box.watch(key: messageId).map((event) => event.value);
+  }
+
+  @override
+  Future deleteMessagesByChannelId(String channelId) async {
+    box.values
+        .where((element) =>
+            element is MessageHiveEntity && element.channelId == channelId)
+        .forEach((element) {
+      box.delete((element as MessageHiveEntity).messageId);
+    });
+    return;
   }
 
   @override

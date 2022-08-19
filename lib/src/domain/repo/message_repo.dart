@@ -9,4 +9,5 @@ abstract class MessageRepo {
       MessageQueryRequest request);
   Future<AmityMessage> createMessage(CreateMessageRequest request);
   Stream<List<AmityMessage>> listentMessages(MessageQueryRequest request);
+  bool hasLocalMessage(String messageId);
 }
