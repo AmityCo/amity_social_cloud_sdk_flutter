@@ -10,7 +10,7 @@ abstract class MessageDbAdapter {
   Future deleteMessageEntity(MessageHiveEntity data);
 
   /// Get Message Entity
-  MessageHiveEntity getMessageEntity(String messageId);
+  MessageHiveEntity? getMessageEntity(String messageId);
 
   /// Listen Message Entity
   Stream<MessageHiveEntity> listenMessageEntity(String messageId);
@@ -18,4 +18,7 @@ abstract class MessageDbAdapter {
   /// Listen Message Entities
   Stream<List<MessageHiveEntity>> listenMessageEntities(
       MessageQueryRequest request);
+
+  /// Get all the messages which have SYNCING status.
+  List<MessageHiveEntity> getUnsendMessages();
 }
