@@ -1,4 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/utils/message_live_collection.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/model/message/amity_message.dart';
 import 'package:amity_sdk/src/domain/usecase/message/message_query_use_case.dart';
@@ -86,6 +87,26 @@ class MessageGetQueryBuilder {
     final data = await _useCase.get(_request);
 
     return data;
+  }
+
+  MessageLiveCollection getLiveCollection({int? pageSize = 20}) {
+    if (_isDeleted != null) _request.isDeleted = _isDeleted;
+    if (_parentId != null) {
+      _request.parentId = _parentId;
+      _request.filterByParentId = true;
+    }
+    if (_stackFromEnd != null) {
+      _request.stackFromEnd = _stackFromEnd;
+    }
+    _request.options = OptionsRequest();
+
+    _request.options!.type = 'scrollable';
+    if (!_stackFromEnd) {
+      _request.options!.first = pageSize;
+    } else {
+      _request.options!.last = pageSize;
+    }
+    return MessageLiveCollection(params: _request);
   }
 
   /// Query

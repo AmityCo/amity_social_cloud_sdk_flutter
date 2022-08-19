@@ -7,7 +7,6 @@ abstract class MessageRepo {
   /// Query Message
   Future<PageListData<List<AmityMessage>, String>> queryMesssage(
       MessageQueryRequest request);
-
-  /// Create Message
   Future<AmityMessage> createMessage(CreateMessageRequest request);
+  Stream<List<AmityMessage>> listentMessages(MessageQueryRequest request);
 }

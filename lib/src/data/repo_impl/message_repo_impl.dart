@@ -21,7 +21,34 @@ class MessageRepoImpl extends MessageRepo {
       MessageQueryRequest request) async {
     final data = await messageApiInterface.messageQuery(request);
     final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
-    return PageListData(amitMessages, data.paging!.next ?? '');
+    final String token;
+    // if stack from end is true, next page token always the previous one,
+    // vice versa with false stack from end
+    if (request.stackFromEnd == true) {
+      token = data.paging!.previous ?? '';
+    } else {
+      token = data.paging!.next ?? '';
+    }
+    return PageListData(amitMessages, token);
+  }
+
+  @override
+  Stream<List<AmityMessage>> listentMessages(MessageQueryRequest request) {
+    return dbAdapterRepo.messageDbAdapter
+        .listenMessageEntities(request)
+        .map((event) {
+      final List<AmityMessage> list = [];
+      for (var element in event) {
+        list.add(element.convertToAmityMessage());
+        //sort result
+        if (request.stackFromEnd == true) {
+          list.sort((a, b) => b.channelSegment!.compareTo(a.channelSegment!));
+        } else {
+          list.sort((a, b) => a.channelSegment!.compareTo(b.channelSegment!));
+        }
+      }
+      return list;
+    });
   }
 
   @override

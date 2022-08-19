@@ -25,6 +25,7 @@ class MessageQueryRequest {
     this.tags,
     this.excludeTags,
     this.options,
+    this.stackFromEnd
   });
 
   /// Channel ID
@@ -53,6 +54,9 @@ class MessageQueryRequest {
 
   /// Option
   OptionsRequest? options;
+
+  /// Stack from end, only use internally
+  bool? stackFromEnd = false;
 
   /// [MessageQueryRequest]
   factory MessageQueryRequest.fromJson(Map<String, dynamic> json) =>

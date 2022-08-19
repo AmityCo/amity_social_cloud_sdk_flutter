@@ -29,16 +29,16 @@ class MessageDataResponse {
   String? pollId;
 
   /// Factory method to init from json
-  factory MessageDataResponse.fromJson(Map<String, dynamic> json) =>
+  factory MessageDataResponse.fromJson(Map<String, dynamic>? json) =>
       MessageDataResponse(
-        text: json["text"],
-        fileId: json["fileId"],
-        thumbnailFileId: json["thumbnailFileId"],
-        videoFileId: json["videoFileId"] == null
+        text: json?["text"],
+        fileId: json?["fileId"],
+        thumbnailFileId: json?["thumbnailFileId"],
+        videoFileId: json?["videoFileId"] == null
             ? null
-            : Map<String, String>.from(json["videoFileId"]),
-        streamId: json["streamId"],
-        pollId: json["pollId"],
+            : Map<String, String>.from(json?["videoFileId"]),
+        streamId: json?["streamId"],
+        pollId: json?["pollId"],
       );
 
   /// convert to map
