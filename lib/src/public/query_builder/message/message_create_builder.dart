@@ -7,6 +7,7 @@ import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/model/message/amity_message.dart';
 import 'package:amity_sdk/src/domain/usecase/message/message_create_use_case.dart';
 import 'package:amity_sdk/src/public/public.dart';
+import 'package:uuid/uuid.dart';
 
 /// Amity Post Creator Query Builder
 class AmityMessageCreateTargetSelector {
@@ -254,6 +255,12 @@ abstract class AmityMessageCreator {
     if (_metadata != null) {
       request.metadata = _metadata;
     }
+
+    // Added the Message Id
+    request.messageId = Uuid().v4();
+
+    // Added the userId
+    request.userId = AmityCoreClient.getUserId();
 
     return _useCase.get(request);
   }

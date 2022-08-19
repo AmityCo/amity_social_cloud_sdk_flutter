@@ -40,6 +40,7 @@ extension MessageHiveExtensionConverter on MessageHiveEntity {
       ..userId = userId
       ..type = amityMessageDataType
       ..data = amityMessageData
+      ..syncState = syncState
       ..channelSegment = channelSegment
       ..parentId = parentId
       // ..fileId = fileId

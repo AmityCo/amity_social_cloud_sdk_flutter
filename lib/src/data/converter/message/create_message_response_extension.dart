@@ -1,3 +1,4 @@
+import 'package:amity_sdk/src/core/enum/amity_message_sync_state.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_hive_entity_18.dart';
 
@@ -31,6 +32,8 @@ extension CreateMessageResponseExtension on CreateMessageResponse {
 
     //Save Post Entity
     for (var e in messagesHiveEntities) {
+      /// Save all message with sync state
+      e.syncState = AmityMessageSyncState.SYNCED;
       await dbRepo.messageDbAdapter.saveMessageEntity(e);
     }
 

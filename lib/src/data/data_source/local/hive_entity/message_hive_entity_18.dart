@@ -1,3 +1,4 @@
+import 'package:amity_sdk/src/core/enum/amity_message_sync_state.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_data_hive_entity_19.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -71,4 +72,7 @@ class MessageHiveEntity extends HiveObject {
 
   /// Mentions
   // List<Mentionee> mentionees;
+
+  /// Sync State
+  AmityMessageSyncState? syncState;
 }

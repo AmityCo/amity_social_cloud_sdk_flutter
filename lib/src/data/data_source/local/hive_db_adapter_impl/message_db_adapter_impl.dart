@@ -1,13 +1,20 @@
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/enum/amity_message_sync_state.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/message_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_hive_entity_18.dart';
 import 'package:hive/hive.dart';
 
+/// MessageDbAdapterImpl
 class MessageDbAdapterImpl extends MessageDbAdapter {
+  /// [MessageDbAdapterImpl]
   MessageDbAdapterImpl({required this.dbClient});
+
+  /// Db Client
   final DBClient dbClient;
-  late Box box;
+
+  /// Message Box
+  late Box<MessageHiveEntity> box;
+
+  /// Init [MessageDbAdapterImpl]
   Future<MessageDbAdapter> init() async {
     Hive.registerAdapter(MessageHiveEntityAdapter(), override: true);
     box = await Hive.openBox<MessageHiveEntity>('Message_db');
@@ -25,7 +32,7 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
   }
 
   @override
-  MessageHiveEntity getMessageEntity(String messageId) {
+  MessageHiveEntity? getMessageEntity(String messageId) {
     return box.get(messageId);
   }
 
@@ -69,5 +76,12 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
       // else retur  parent messages only, which parentId must be null
       return message.parentId == null;
     }
+  }
+
+  @override
+  List<MessageHiveEntity> getUnsendMessages() {
+    return box.values
+        .where((element) => element.syncState == AmityMessageSyncState.SYNCING)
+        .toList();
   }
 }
