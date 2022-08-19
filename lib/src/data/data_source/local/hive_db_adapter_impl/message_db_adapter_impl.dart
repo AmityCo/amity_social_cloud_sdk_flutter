@@ -1,13 +1,19 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/message_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_hive_entity_18.dart';
 import 'package:hive/hive.dart';
 
+/// MessageDbAdapterImpl
 class MessageDbAdapterImpl extends MessageDbAdapter {
+  /// [MessageDbAdapterImpl]
   MessageDbAdapterImpl({required this.dbClient});
+
+  /// Db Client
   final DBClient dbClient;
+
+  /// Message Box
   late Box box;
+
+  /// Init [MessageDbAdapterImpl]
   Future<MessageDbAdapter> init() async {
     Hive.registerAdapter(MessageHiveEntityAdapter(), override: true);
     box = await Hive.openBox<MessageHiveEntity>('Message_db');

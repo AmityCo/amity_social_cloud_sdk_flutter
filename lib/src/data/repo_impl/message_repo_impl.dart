@@ -1,3 +1,4 @@
+import 'package:amity_sdk/src/core/enum/amity_message_sync_state.dart';
 import 'package:amity_sdk/src/core/model/api_request/create_message_request.dart';
 import 'package:amity_sdk/src/core/model/api_request/message_query_request.dart';
 import 'package:amity_sdk/src/core/utils/page_list_data.dart';
@@ -7,6 +8,7 @@ import 'package:amity_sdk/src/domain/repo/message_repo.dart';
 
 /// [MessageRepoImpl]
 class MessageRepoImpl extends MessageRepo {
+  /// Message API interface
   final MessageApiInterface messageApiInterface;
 
   /// Common Db Adapter
@@ -57,9 +59,19 @@ class MessageRepoImpl extends MessageRepo {
 
   @override
   Future<AmityMessage> createMessage(CreateMessageRequest request) async {
-    final data = await messageApiInterface.createMessage(request);
-    final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
-    return (amitMessages as List).first;
+    final entity = request.convertToMessageEntity();
+    try {
+      entity.syncState = AmityMessageSyncState.SYNCING;
+      entity.save();
+
+      final data = await messageApiInterface.createMessage(request);
+      final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
+      return (amitMessages as List).first;
+    } catch (error) {
+      entity.syncState == AmityMessageSyncState.FAILED;
+      entity.save();
+      rethrow;
+    }
   }
 
   @override
