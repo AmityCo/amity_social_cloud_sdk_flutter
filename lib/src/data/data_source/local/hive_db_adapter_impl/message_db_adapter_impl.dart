@@ -1,4 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/enum/amity_message_sync_state.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:hive/hive.dart';
 
@@ -11,7 +12,7 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
   final DBClient dbClient;
 
   /// Message Box
-  late Box box;
+  late Box<MessageHiveEntity> box;
 
   /// Init [MessageDbAdapterImpl]
   Future<MessageDbAdapter> init() async {
@@ -86,5 +87,12 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
       // else retur  parent messages only, which parentId must be null
       return message.parentId == null;
     }
+  }
+
+  @override
+  List<MessageHiveEntity> getUnsendMessages() {
+    return box.values
+        .where((element) => element.syncState == AmityMessageSyncState.SYNCING)
+        .toList();
   }
 }

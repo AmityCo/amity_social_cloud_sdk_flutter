@@ -16,5 +16,9 @@ abstract class MessageDbAdapter {
   /// Listen Message Entities
   Stream<List<MessageHiveEntity>> listenMessageEntities(
       MessageQueryRequest request);
+
   Future deleteMessagesByChannelId(String channelId);
+
+  /// Get all the messages which have SYNCING status.
+  List<MessageHiveEntity> getUnsendMessages();
 }
