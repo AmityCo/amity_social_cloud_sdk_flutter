@@ -5,6 +5,8 @@
 import 'dart:convert';
 
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_data_hive_entity_19.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_hive_entity_18.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 CreateMessageRequest createMessageRequestFromJson(String str) =>
@@ -19,6 +21,7 @@ class CreateMessageRequest {
   CreateMessageRequest({
     required this.channelId,
     this.messageId,
+    this.userId,
     this.type,
     this.data,
     this.fileId,
@@ -33,6 +36,9 @@ class CreateMessageRequest {
 
   /// Message ID
   String? messageId;
+
+  /// User ID
+  String? userId;
 
   /// Type
   String? type;
@@ -85,6 +91,19 @@ class CreateMessageRequest {
             : List<AmityMentioneeTarget>.from(
                 mentionees!.map((x) => x.toJson())),
       }..removeNullValue();
+
+  MessageHiveEntity convertToMessageEntity() {
+    return MessageHiveEntity()
+      ..messageId = messageId
+      ..channelId = channelId
+      ..userId = userId
+      ..type = type
+      ..data = data!.convertToMessageDataEntity()
+      ..parentId = parentId
+      ..fileId = fileId
+      ..tags = tags
+      ..metadata = metadata;
+  }
 }
 
 ///[CreateMessageData]
@@ -119,4 +138,8 @@ class CreateMessageData {
         "streamId": streamId,
         "pollId": pollId,
       }..removeWhere((key, value) => value == null);
+
+  MessageDataHiveEntity convertToMessageDataEntity() {
+    return MessageDataHiveEntity()..text = text;
+  }
 }

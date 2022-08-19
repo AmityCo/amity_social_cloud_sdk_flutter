@@ -11,6 +11,8 @@ export 'feed_paging_hive_entity_10.dart';
 export 'file_hive_entity_4.dart';
 export 'follow_hive_entity_3.dart';
 export 'follow_info_hive_entity_2.dart';
+export 'message_data_hive_entity_19.dart';
+export 'message_hive_entity_18.dart';
 export 'poll_answer_hive_entity_17.dart';
 export 'poll_hive_entity_16.dart';
 export 'post_data_hive_entity_7.dart';
