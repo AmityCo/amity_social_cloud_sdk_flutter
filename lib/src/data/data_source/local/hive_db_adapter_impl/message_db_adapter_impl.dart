@@ -101,8 +101,9 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
     return box.values
         .where((element) =>
             element.channelId == channelId &&
-            element.syncState == AmityMessageSyncState.SYNCING &&
-            element.syncState == AmityMessageSyncState.SYNCED)
+            element.parentId == null &&
+            (element.syncState == AmityMessageSyncState.SYNCING ||
+                element.syncState == AmityMessageSyncState.SYNCED))
         .fold<int>(
             0,
             (previousValue, element) => element.channelSegment! > previousValue
