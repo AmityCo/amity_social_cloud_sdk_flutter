@@ -21,4 +21,7 @@ abstract class MessageDbAdapter {
 
   /// Get all the messages which have SYNCING status.
   List<MessageHiveEntity> getUnsendMessages();
+
+  /// get the highest channel sagment for the channel Id
+  int getHighestChannelSagment(String channelId);
 }

@@ -56,16 +56,21 @@ class MessageRepoImpl extends MessageRepo {
   @override
   Future<AmityMessage> createMessage(CreateMessageRequest request) async {
     final entity = request.convertToMessageEntity();
+
+    /// Calculate the highest channel segment number for the channel id
+    entity.channelSegment = dbAdapterRepo.messageDbAdapter
+        .getHighestChannelSagment(request.channelId);
+
     try {
       entity.syncState = AmityMessageSyncState.SYNCING;
-      entity.save();
+      dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
 
       final data = await messageApiInterface.createMessage(request);
       final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
       return (amitMessages as List).first;
     } catch (error) {
       entity.syncState == AmityMessageSyncState.FAILED;
-      entity.save();
+      dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
       rethrow;
     }
   }

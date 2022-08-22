@@ -8,6 +8,7 @@ export 'community_repo.dart';
 export 'file_repo.dart';
 export 'follow_repo.dart';
 export 'global_feed_repo.dart';
+export 'message_repo.dart';
 export 'notification_repo.dart';
 export 'poll_repo.dart';
 export 'post_repo.dart';

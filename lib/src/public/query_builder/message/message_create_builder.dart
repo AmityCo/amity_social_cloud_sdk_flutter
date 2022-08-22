@@ -1,11 +1,7 @@
 // ignore_for_file: unused_field
 
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/enum/amity_message_type.dart';
-import 'package:amity_sdk/src/core/model/api_request/create_message_request.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/model/message/amity_message.dart';
-import 'package:amity_sdk/src/domain/usecase/message/message_create_use_case.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:uuid/uuid.dart';
 
@@ -210,26 +206,29 @@ abstract class AmityMessageCreator {
   }
 
   /// Metion Users
-  AmityMessageCreator mentionUsers(List<String> userIds) {
-    _mentionees ??= [];
-    _mentionees!.add(AmityMentioneeTarget(
-        type: AmityMentionType.USER.value, userIds: userIds));
-    return this;
-  }
+  /// Future Use
+  // AmityMessageCreator mentionUsers(List<String> userIds) {
+  //   _mentionees ??= [];
+  //   _mentionees!.add(AmityMentioneeTarget(
+  //       type: AmityMentionType.USER.value, userIds: userIds));
+  //   return this;
+  // }
 
   /// Metion Channel
-  AmityMessageCreator mentionChannel() {
-    _mentionees ??= [];
-    _mentionees!.add(AmityMentioneeTarget(
-        type: AmityMentionType.CHANNEL.value, userIds: [_channelId]));
-    return this;
-  }
+  /// Future Use
+  // AmityMessageCreator mentionChannel() {
+  //   _mentionees ??= [];
+  //   _mentionees!.add(AmityMentioneeTarget(
+  //       type: AmityMentionType.CHANNEL.value, userIds: [_channelId]));
+  //   return this;
+  // }
 
   /// Tags
-  AmityMessageCreator tags(AmityTags tags) {
-    _amityTags = tags;
-    return this;
-  }
+  /// Future Use
+  // AmityMessageCreator tags(AmityTags tags) {
+  //   _amityTags = tags;
+  //   return this;
+  // }
 
   /// Create Amity Post
   Future<AmityMessage> send() {

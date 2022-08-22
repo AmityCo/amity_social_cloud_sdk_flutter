@@ -2,19 +2,27 @@ import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
 
+/// Live Collection Abs layer
 abstract class LiveCollection<Model> {
-  String? currentToken = null;
+  /// Current Token (Next page token)
+  String? currentToken;
+
+  /// if live collection fetching next page
   bool isFetching = false;
+
+  /// Check if first page is loaded
   bool _isFirstPage = true;
 
-  //abstract functions
+  /// get the next page request
   Future<PageListData<List<Model>, String>> getNextPageRequest(String? token);
 
+  /// get the first page request( with out token)
   Future<PageListData<List<Model>, String>> getFirstPageRequest();
 
+  /// Listen to live collection
   Stream<List<Model>> asStream();
 
-  //open functions
+  /// Load next page for live collection
   Future loadNext() async {
     if (!isFetching) {
       isFetching = true;
@@ -34,9 +42,18 @@ abstract class LiveCollection<Model> {
     }
   }
 
+  /// Check if live collection have next page
   bool hasNextPage() {
     final hasNextToken =
         currentToken != null && (currentToken ?? '').isNotEmpty;
     return hasNextToken && !_isFirstPage;
+  }
+
+  /// Reset the live collection
+  bool reset() {
+    currentToken = null;
+    isFetching = false;
+    _isFirstPage = true;
+    return true;
   }
 }
