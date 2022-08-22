@@ -99,7 +99,10 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
   @override
   int getHighestChannelSagment(String channelId) {
     return box.values
-        .where((element) => element.channelId == channelId)
+        .where((element) =>
+            element.channelId == channelId &&
+            element.syncState == AmityMessageSyncState.SYNCING &&
+            element.syncState == AmityMessageSyncState.SYNCED)
         .fold<int>(
             0,
             (previousValue, element) => element.channelSegment! > previousValue
