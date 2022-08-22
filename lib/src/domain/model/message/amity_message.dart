@@ -69,6 +69,11 @@ class AmityMessage {
 
   /// Edited At
   DateTime? editedAt;
+
+  @override
+  String toString() {
+    return 'AmityMessage(messageId: $messageId, channelId: $channelId, userId: $userId, parentId: $parentId, channelSegment: $channelSegment, childrenNumber: $childrenNumber, isDeleted: $isDeleted, readByCount: $readByCount, flagCount: $flagCount, amityTags: $amityTags, myReactions: $myReactions, reactions: $reactions, reactionCount: $reactionCount, user: $user, metadata: $metadata, mentionees: $mentionees, createdAt: $createdAt, updatedAt: $updatedAt, editedAt: $editedAt)';
+  }
 }
 
 /// [AmityMessageData]
@@ -84,6 +89,10 @@ abstract class AmityMessageData {
 
   /// Init Amity Post Data
   AmityMessageData({required this.messageId, this.fileId, this.rawData});
+
+  @override
+  String toString() =>
+      'AmityMessageData(messageId: $messageId, fileId: $fileId, rawData: $rawData)';
 }
 
 /// Text Post Data
@@ -98,6 +107,5 @@ class MessageTextData extends AmityMessageData {
   }) : super(messageId: messageId);
 
   @override
-  String toString() =>
-      'MessageTextData(MessageTextData: $MessageTextData, text: $text)';
+  String toString() => 'MessageTextData(text: $text)';
 }

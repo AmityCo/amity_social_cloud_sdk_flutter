@@ -84,4 +84,15 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
         .where((element) => element.syncState == AmityMessageSyncState.SYNCING)
         .toList();
   }
+
+  @override
+  int getHighestChannelSagment(String channelId) {
+    return box.values
+        .where((element) => element.channelId == channelId)
+        .fold<int>(
+            0,
+            (previousValue, element) => element.channelSegment! > previousValue
+                ? element.channelSegment!
+                : previousValue);
+  }
 }

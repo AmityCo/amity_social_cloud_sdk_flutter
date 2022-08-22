@@ -2,17 +2,7 @@ import 'dart:developer';
 
 import 'package:amity_sdk/src/core/socket/amity_socket.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/message_db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/message_db_adapter_impl.dart';
-import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/message_api_interface_impl.dart';
-import 'package:amity_sdk/src/data/repo_impl/message_repo_impl.dart';
-import 'package:amity_sdk/src/domain/composer_usecase/message_composer_usecase.dart';
-import 'package:amity_sdk/src/domain/composer_usecase/message_file_composer_usecase.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/repo/message_repo.dart';
-import 'package:amity_sdk/src/domain/usecase/message/message_create_use_case.dart';
-import 'package:amity_sdk/src/domain/usecase/message/message_observe_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/message/message_query_use_case.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:amity_sdk/src/public/repo/message/message_repository.dart';
 import 'package:get_it/get_it.dart';
@@ -517,8 +507,10 @@ class SdkServiceLocator {
         MessageCreateUsecase(
             messageRepo: serviceLocator(),
             messageComposerUsecase: serviceLocator()));
-    serviceLocator.registerLazySingleton<MessageObserveUsecase>(
-        () => MessageObserveUsecase(messageRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageObserveUsecase>(() =>
+        MessageObserveUsecase(
+            messageRepo: serviceLocator(),
+            messageComposerUsecase: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo

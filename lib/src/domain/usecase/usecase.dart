@@ -3,6 +3,7 @@ export 'community/community.dart';
 export 'feed/feed.dart';
 export 'file/file.dart';
 export 'login_usecase.dart';
+export 'message/message.dart';
 export 'notification/notification.dart';
 export 'poll/poll.dart';
 export 'post/post.dart';

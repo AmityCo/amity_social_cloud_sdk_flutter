@@ -1,11 +1,12 @@
-import 'package:amity_sdk/src/core/utils/live_collection.dart';
-import 'package:amity_sdk/src/domain/model/message/amity_message.dart';
-import 'package:amity_sdk/src/domain/usecase/message/message_observe_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/message/message_query_use_case.dart';
-import 'package:amity_sdk/src/src.dart';
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
+/// Message Live Collection
 class MessageLiveCollection extends LiveCollection<AmityMessage> {
+  /// Message Request Params
   MessageQueryRequest params;
+
+  /// Init [MessageLiveCollection] with message request
   MessageLiveCollection({required this.params});
 
   @override
