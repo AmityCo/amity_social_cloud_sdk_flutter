@@ -1,13 +1,18 @@
+import 'dart:async';
+
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/domain/model/message/amity_message.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
-import 'package:amity_sdk/src/domain/repo/message_repo.dart';
-
+/// Message Observer Usecase
 class MessageObserveUsecase
     extends UseCase<List<AmityMessage>, MessageQueryRequest> {
+  /// Message Repo
   final MessageRepo messageRepo;
-  // final MessageComposerUsecase messageComposerUsecase;
-  MessageObserveUsecase({required this.messageRepo});
+  final MessageComposerUsecase messageComposerUsecase;
+
+  /// Init [MessageObserveUsecase]
+  MessageObserveUsecase(
+      {required this.messageRepo, required this.messageComposerUsecase});
 
   @override
   Future<List<AmityMessage>> get(MessageQueryRequest params) async {
@@ -17,6 +22,13 @@ class MessageObserveUsecase
   @override
   Stream<List<AmityMessage>> listen(MessageQueryRequest params) {
     //missing compose use case :(
-    return messageRepo.listentMessages(params);
+    final streamController = StreamController<List<AmityMessage>>();
+    messageRepo.listentMessages(params).listen((event) {
+      Stream.fromIterable(event).forEach((element) async {
+        element = await messageComposerUsecase.get(element);
+      });
+      streamController.add(event);
+    });
+    return streamController.stream;
   }
 }

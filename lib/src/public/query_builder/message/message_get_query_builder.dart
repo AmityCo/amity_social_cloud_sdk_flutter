@@ -89,6 +89,7 @@ class MessageGetQueryBuilder {
     return data;
   }
 
+  /// Get Live collection for the messages
   MessageLiveCollection getLiveCollection({int? pageSize = 20}) {
     if (_isDeleted != null) _request.isDeleted = _isDeleted;
     if (_parentId != null) {

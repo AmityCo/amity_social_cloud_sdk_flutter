@@ -3,6 +3,7 @@ export 'community_member_check_request.dart';
 export 'core/core.dart';
 export 'create_comment_request.dart';
 export 'create_community_request.dart';
+export 'create_message_request.dart';
 export 'create_poll_request.dart';
 export 'create_post_request.dart';
 export 'follow_request.dart';
