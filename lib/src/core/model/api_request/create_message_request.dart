@@ -92,6 +92,7 @@ class CreateMessageRequest {
                 mentionees!.map((x) => x.toJson())),
       }..removeNullValue();
 
+  /// Conver [CreateMessageRequest] to [MessageHiveEntity]
   MessageHiveEntity convertToMessageEntity() {
     return MessageHiveEntity()
       ..messageId = messageId
@@ -102,7 +103,7 @@ class CreateMessageRequest {
       ..parentId = parentId
       ..fileId = fileId
       ..tags = tags
-      ..metadata = metadata;
+      ..metadata = metadata; //def
   }
 }
 

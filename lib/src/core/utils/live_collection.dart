@@ -22,6 +22,14 @@ abstract class LiveCollection<Model> {
   /// Listen to live collection
   Stream<List<Model>> asStream();
 
+  /// On Error Callback
+  Function(Object? error, StackTrace stackTrace)? _onErrorCallback;
+
+  /// OnError
+  void onError(Function(Object? error, StackTrace stackTrace) onErrorCallback) {
+    _onErrorCallback = onErrorCallback;
+  }
+
   /// Load next page for live collection
   Future loadNext() async {
     if (!isFetching) {
@@ -31,12 +39,20 @@ abstract class LiveCollection<Model> {
           currentToken = value.token;
           isFetching = false;
           _isFirstPage = false;
+        }).onError((error, stackTrace) {
+          if (_onErrorCallback != null) {
+            _onErrorCallback!(error, stackTrace);
+          }
         });
       } else {
         return await getNextPageRequest(currentToken).then((value) {
           currentToken = value.token;
           isFetching = false;
           _isFirstPage = false;
+        }).onError((error, stackTrace) {
+          if (_onErrorCallback != null) {
+            _onErrorCallback!(error, stackTrace);
+          }
         });
       }
     }

@@ -24,8 +24,9 @@ class MessageRepoImpl extends MessageRepo {
     final data = await messageApiInterface.messageQuery(request);
     //mandatory to delete all previous messages, since we don't know
     //the up to date data for each messages
-    final isFirstPageRequest = ((request.options?.last ?? 0) > 0) || ((request.options?.before ?? 0) > 0);
-    if (request.options?.token == null &&  isFirstPageRequest) {
+    final isFirstPageRequest = ((request.options?.last ?? 0) > 0) ||
+        ((request.options?.before ?? 0) > 0);
+    if (request.options?.token == null && isFirstPageRequest) {
       await dbAdapterRepo.messageDbAdapter
           .deleteMessagesByChannelId(request.channelId);
     }
@@ -66,7 +67,8 @@ class MessageRepoImpl extends MessageRepo {
 
     /// Calculate the highest channel segment number for the channel id
     entity.channelSegment = dbAdapterRepo.messageDbAdapter
-        .getHighestChannelSagment(request.channelId) + 1;
+            .getHighestChannelSagment(request.channelId) +
+        1;
 
     try {
       entity.syncState = AmityMessageSyncState.SYNCING;
@@ -76,8 +78,9 @@ class MessageRepoImpl extends MessageRepo {
       final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
       return (amitMessages as List).first;
     } catch (error) {
-      entity.syncState == AmityMessageSyncState.FAILED;
+      entity.syncState = AmityMessageSyncState.FAILED;
       dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
+
       rethrow;
     }
   }
