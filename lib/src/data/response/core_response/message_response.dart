@@ -114,7 +114,9 @@ class MessageResponse {
         childrenNumber: json["childrenNumber"],
         reactionsCount: json["reactionsCount"],
         reactions: json["reactions"],
-        myReactions: json["myReactions"] == null ? null : List<String>.from(json["myReactions"].map((x) => x)),
+        myReactions: json["myReactions"] == null
+            ? null
+            : List<String>.from(json["myReactions"].map((x) => x)),
         latestReaction: json["latestReaction"],
         isDeleted: json["isDeleted"],
         createdAt: DateTime.parse(json["createdAt"]),
@@ -141,7 +143,9 @@ class MessageResponse {
         "childrenNumber": childrenNumber,
         "reactionsCount": reactionsCount,
         "reactions": reactions,
-        "myReactions": myReactions == null ? null : List<dynamic>.from(myReactions!.map((x) => x)),
+        "myReactions": myReactions == null
+            ? null
+            : List<dynamic>.from(myReactions!.map((x) => x)),
         "latestReaction": latestReaction,
         "isDeleted": isDeleted,
         "createdAt": createdAt.toIso8601String(),
@@ -212,23 +216,30 @@ class LatestReaction {
       };
 }
 
+/// Mentionee
 class Mentionee {
+  /// init [Mentionee]
   Mentionee({
     required this.type,
     required this.userIds,
   });
 
+  /// Mentionee type
   final String type;
-  final List<String> userIds;
+
+  /// Ids
+  final List<String>? userIds;
 
   factory Mentionee.fromJson(Map<String, dynamic> json) => Mentionee(
         type: json["type"],
-        userIds: List<String>.from(json["userIds"].map((x) => x)),
+        userIds: json["userIds"] == null
+            ? null
+            : List<String>.from(json["userIds"].map((x) => x)),
       );
 
   Map<String, dynamic> toJson() => {
         "type": type,
-        "userIds": List<dynamic>.from(userIds.map((x) => x)),
+        "userIds": List<dynamic>.from((userIds ?? []).map((x) => x)),
       };
 }
 
