@@ -2,7 +2,9 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/comment_hive_entity_6.dart';
 import 'package:amity_sdk/src/domain/model/model.dart';
 
+/// CommentHiveEntityExtension
 extension CommentHiveEntityExtension on CommentHiveEntity {
+  /// Convert [CommentHiveEntity] to [AmityComment]
   AmityComment convertToAmityComment() {
     AmityCommentReferenceType amityCommentReferenceType =
         AmityCommentReferenceTypeExtension.enumOf(referenceType!);
@@ -52,12 +54,14 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
       ..flagCount = flagCount
       ..reactions = AmityReactionMap(reactions: reactions)
       ..myReactions = myReactions
+      ..hashFlag = hashFlag
       ..reactionCount = reactionsCount
       ..isDeleted = isDeleted
       ..createdAt = createdAt
       ..editedAt = editedAt
       ..updatedAt = updatedAt
       ..path = path
-      ..metadata = metadata;
+      ..metadata = metadata
+      ..flaggedByMe = flaggedByMe;
   }
 }

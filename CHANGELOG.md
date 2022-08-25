@@ -1,3 +1,8 @@
+## 0.6.0
+* feat: Flag/Unflag post and comment 
+* feat: init socket.io client 
+* feat: Bloom filter for hashflag functionlity
+
 ## 0.5.0
 * feat: CRUD Poll Post
 * feat: Close Poll Post

@@ -5,5 +5,5 @@ abstract class AccountDbAdapter {
 
   AccountHiveEntity? getAccountEntity(String userId);
 
-  Stream<AccountHiveEntity> listenAccountEntity();
+  Stream<AccountHiveEntity?> listenAccountEntity(String userId);
 }

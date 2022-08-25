@@ -1,5 +1,6 @@
 import 'dart:developer';
 
+import 'package:amity_sdk/src/core/socket/amity_socket.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
@@ -155,11 +156,8 @@ class SdkServiceLocator {
           dbAdapterRepo: serviceLocator(),
         ));
     serviceLocator.registerLazySingleton<CommentRepo>(() => CommentRepoImpl(
-        commentDbAdapter: serviceLocator(),
         commentApiInterface: serviceLocator(),
-        fileDbAdapter: serviceLocator(),
-        userDbAdapter: serviceLocator(),
-        postDbAdapter: serviceLocator()));
+        dbAdapterRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<FileRepo>(() => FileRepoImpl(
         fileDbAdapter: serviceLocator(), fileApiInterface: serviceLocator()));
     serviceLocator.registerLazySingleton<ReactionRepo>(() => ReactionRepoImpl(
@@ -497,6 +495,12 @@ class SdkServiceLocator {
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(
       () => AmityMQTT(
+          accountRepo: serviceLocator(),
+          amityCoreClientOption: configServiceLocator()),
+    );
+    //socket client
+   serviceLocator.registerLazySingleton<AmitySocket>(
+      () => AmitySocket(
           accountRepo: serviceLocator(),
           amityCoreClientOption: configServiceLocator()),
     );

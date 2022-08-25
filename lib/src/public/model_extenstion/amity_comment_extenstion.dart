@@ -2,13 +2,16 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 
+/// Amity Comment Object Extension
 extension AmityCommentExtension on AmityComment {
+  /// Comment create query builder
   AmityCommentCreateTargetSelector comment() {
     return AmityCommentCreateTargetSelector(
       useCase: serviceLocator(),
     ).post(referenceId!).parentId(commentId!);
   }
 
+  /// Comment react query builder
   AddReactionQueryBuilder react() {
     return AddReactionQueryBuilder(
         addReactionUsecase: serviceLocator(),
@@ -17,10 +20,12 @@ extension AmityCommentExtension on AmityComment {
         referenceId: commentId!);
   }
 
+  /// Get Reaction on Comment
   GetReactionQueryBuilder getReaction() {
     return GetReactionQueryBuilder.comment(commentId: commentId!);
   }
 
+  /// Report Comment
   CommentFlagQueryBuilder report() {
     return CommentFlagQueryBuilder(
         commentFlagUsecase: serviceLocator(),
@@ -28,12 +33,25 @@ extension AmityCommentExtension on AmityComment {
         commentId: commentId!);
   }
 
+  /// Delete Comment
   Future delete({bool hardDelete = false}) {
     return serviceLocator<CommentDeleteUseCase>().get(commentId!);
   }
 
+  /// Edit Comment Text
   AmityTextCommentEditorBuilder edit() {
     return AmityTextCommentEditorBuilder(
         useCase: serviceLocator(), targetId: commentId!);
+  }
+
+  /// check if post is flagged by me
+  bool get isFlaggedByMe {
+    if (hashFlag == null) return false;
+    return (flaggedByMe ?? false) ||
+        BloomFilter(
+                hash: (hashFlag!['hash'] as String),
+                m: hashFlag!['bits'] as int,
+                k: hashFlag!['hashes'] as int)
+            .mightContains(AmityCoreClient.getUserId());
   }
 }
