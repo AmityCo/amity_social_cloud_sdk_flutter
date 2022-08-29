@@ -199,11 +199,11 @@ abstract class AmityMessageCreator {
     return this;
   }
 
-  /// Add metadata to Amity Post
-  AmityMessageCreator metadata(Map<String, dynamic> metadata) {
-    _metadata = metadata;
-    return this;
-  }
+  // /// Add metadata to Amity Post
+  // AmityMessageCreator metadata(Map<String, dynamic> metadata) {
+  //   _metadata = metadata;
+  //   return this;
+  // }
 
   /// Metion Users
   /// Future Use
