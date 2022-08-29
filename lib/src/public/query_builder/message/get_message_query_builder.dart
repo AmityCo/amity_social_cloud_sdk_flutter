@@ -1,7 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/model/message/amity_message.dart';
-import 'package:amity_sdk/src/domain/usecase/message/message_query_use_case.dart';
 
 /// [GetMessageQueryBuilder]
 class GetMessageQueryBuilder {
@@ -24,12 +22,12 @@ class GetMessageQueryBuilder {
   }
 
   /// includeDeleted
-  GetMessageQueryBuilder includeDeleted(bool includeDeleted) {
-    if (!includeDeleted) {
-      _isDeleted = false;
-    }
-    return this;
-  }
+  // GetMessageQueryBuilder includeDeleted(bool includeDeleted) {
+  //   if (!includeDeleted) {
+  //     _isDeleted = false;
+  //   }
+  //   return this;
+  // }
 
   GetMessageQueryBuilder stackFromEnd(bool stackFromEnd) {
     _stackFromEnd = stackFromEnd;
@@ -44,16 +42,16 @@ class GetMessageQueryBuilder {
   }
 
   /// includingTags
-  GetMessageQueryBuilder includingTags(AmityTags includingTags) {
-    _includingTags = includingTags;
-    return this;
-  }
+  // GetMessageQueryBuilder includingTags(AmityTags includingTags) {
+  //   _includingTags = includingTags;
+  //   return this;
+  // }
 
   /// excludingTags
-  GetMessageQueryBuilder excludingTags(AmityTags excludingTags) {
-    _excludingTags = excludingTags;
-    return this;
-  }
+  // GetMessageQueryBuilder excludingTags(AmityTags excludingTags) {
+  //   _excludingTags = excludingTags;
+  //   return this;
+  // }
 
   /// getPagingData
   Future<PageListData<List<AmityMessage>, String>> getPagingData(
