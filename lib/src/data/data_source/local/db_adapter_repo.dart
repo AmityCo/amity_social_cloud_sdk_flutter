@@ -1,4 +1,5 @@
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/message_db_adapter.dart';
 
 /// This class hold all the Db Adapter instance as Singleton class, so we dont have to pass all diffrent db adapter in the constructor
 /// of the repo, we can just pass this. this will bit clean the code.
@@ -30,6 +31,9 @@ class DbAdapterRepo {
   /// Poll Db Adapter
   final PollDbAdapter pollDbAdapter;
 
+  /// Message Db Adapter
+  final MessageDbAdapter messageDbAdapter;
+
   /// Init DbAdapter Repo
   DbAdapterRepo(
       {required this.postDbAdapter,
@@ -40,5 +44,6 @@ class DbAdapterRepo {
       required this.communityDbAdapter,
       required this.communityMemberDbAdapter,
       required this.communityCategoryDbAdapter,
-      required this.pollDbAdapter});
+      required this.pollDbAdapter,
+      required this.messageDbAdapter});
 }

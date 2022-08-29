@@ -14,3 +14,4 @@ export 'amity_user.dart';
 export 'amity_user_token.dart';
 export 'community/community.dart';
 export 'follow/follow.dart';
+export 'message/message.dart';

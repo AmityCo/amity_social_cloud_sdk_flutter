@@ -1,3 +1,8 @@
+## 0.7.0
+* feat: Create and Query Chat Message  
+* feat: Chat Message Live Collection
+* feat: Foundation for Chat SDK
+
 ## 0.6.0
 * feat: Flag/Unflag post and comment 
 * feat: init socket.io client 

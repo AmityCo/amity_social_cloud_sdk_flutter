@@ -4,6 +4,7 @@ import 'package:amity_sdk/src/core/socket/amity_socket.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
+import 'package:amity_sdk/src/public/repo/message/message_repository.dart';
 import 'package:get_it/get_it.dart';
 
 final configServiceLocator = GetIt.asNewInstance();
@@ -72,6 +73,9 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<PollDbAdapter>(
         () => PollDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<MessageDbAdapter>(
+        () => MessageDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
 
     //Register Db adapter Repo which hold all the Db Adapters
     serviceLocator.registerLazySingleton<DbAdapterRepo>(() => DbAdapterRepo(
@@ -83,7 +87,8 @@ class SdkServiceLocator {
         fileDbAdapter: serviceLocator(),
         userDbAdapter: serviceLocator(),
         communityCategoryDbAdapter: serviceLocator(),
-        pollDbAdapter: serviceLocator()));
+        pollDbAdapter: serviceLocator(),
+        messageDbAdapter: serviceLocator()));
 
     //-data_source/remote/
     serviceLocator.registerLazySingleton<HttpApiClient>(
@@ -124,6 +129,8 @@ class SdkServiceLocator {
         CommunityCategoryApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<PollApiInterface>(
         () => PollApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageApiInterface>(
+        () => MessageApiInterfaceImpl(httpApiClient: serviceLocator()));
 
     // Local Data Source
 
@@ -219,6 +226,11 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<PollRepo>(
       () => PollRepoImpl(
           dbAdapterRepo: serviceLocator(), pollApiInterface: serviceLocator()),
+    );
+    serviceLocator.registerLazySingleton<MessageRepo>(
+      () => MessageRepoImpl(
+          dbAdapterRepo: serviceLocator(),
+          messageApiInterface: serviceLocator()),
     );
 
     //-UserCase
@@ -481,6 +493,29 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<ClosePollUseCase>(
         () => ClosePollUseCase(pollRepo: serviceLocator()));
 
+    serviceLocator.registerLazySingleton<MessageComposerUsecase>(() =>
+        MessageComposerUsecase(
+            userRepo: serviceLocator(),
+            messageRepo: serviceLocator(),
+            userComposerUsecase: serviceLocator(),
+            messageComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageFileComposerUsecase>(
+        () => MessageFileComposerUsecase(fileRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageQueryUseCase>(
+        () => MessageQueryUseCase(messageRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageCreateUsecase>(() =>
+        MessageCreateUsecase(
+            messageRepo: serviceLocator(),
+            messageComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageHasLocalUsecase>(
+        () => MessageHasLocalUsecase(messageRepo: serviceLocator()));
+        
+    serviceLocator.registerLazySingleton<MessageObserveUsecase>(() =>
+        MessageObserveUsecase(
+            messageRepo: serviceLocator(),
+            messageComposerUsecase: serviceLocator()));
+
+
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
     serviceLocator.registerLazySingleton(() => PostRepository());
@@ -491,6 +526,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => NotificationRepository());
     serviceLocator.registerLazySingleton(() => CommunityRepository());
     serviceLocator.registerLazySingleton(() => PollRepository());
+    serviceLocator.registerLazySingleton(() => MessageRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(
@@ -498,8 +534,9 @@ class SdkServiceLocator {
           accountRepo: serviceLocator(),
           amityCoreClientOption: configServiceLocator()),
     );
+
     //socket client
-   serviceLocator.registerLazySingleton<AmitySocket>(
+    serviceLocator.registerLazySingleton<AmitySocket>(
       () => AmitySocket(
           accountRepo: serviceLocator(),
           amityCoreClientOption: configServiceLocator()),

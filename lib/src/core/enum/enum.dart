@@ -13,6 +13,8 @@ export 'amity_follow_status_filter.dart';
 export 'amity_membership_sorting_order.dart';
 export 'amity_membership_type.dart';
 export 'amity_mention_type.dart';
+export 'amity_message_sync_state.dart';
+export 'amity_message_type.dart';
 export 'amity_permission_type.dart';
 export 'amity_poll_answer_data_type.dart';
 export 'amity_poll_answer_type.dart';

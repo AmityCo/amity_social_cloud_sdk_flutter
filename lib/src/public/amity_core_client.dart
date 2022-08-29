@@ -22,6 +22,8 @@ class AmityCoreClient {
 
     await SdkServiceLocator.initServiceLocator(syc: sycInitialization);
 
+    _intialCleanUp();
+
     return;
   }
 
@@ -43,7 +45,7 @@ class AmityCoreClient {
     return;
   }
 
-  //temporarily disconnect chat real-time events from the system,
+  ///temporarily disconnect chat real-time events from the system,
   //call the function 'login(String userId)' to restore a connection
   static void disconnect() {
     serviceLocator<AmitySocket>().terminate();
@@ -89,6 +91,7 @@ class AmityCoreClient {
         .unregisterDeviceNotification();
   }
 
+  /// Check if Current user have the permissions
   static AmityPermissionValidator hasPermission(AmityPermission permission) {
     return AmityPermissionValidator(permission);
   }
@@ -98,6 +101,14 @@ class AmityCoreClient {
 
   /// Create new File Repository
   static FileRepository newFileRepository() => serviceLocator<FileRepository>();
+
+  /// Intial Clean for SDK
+  static _intialCleanUp() {
+    // Remove all the Syncing State Message (Unsend messages)
+    serviceLocator<MessageDbAdapter>()
+        .getUnsendMessages()
+        .forEach((element) => element.delete());
+  }
 }
 
 /// This class is AmityCore option to do initial setup Amity

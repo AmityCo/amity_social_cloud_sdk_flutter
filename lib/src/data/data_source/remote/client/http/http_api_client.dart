@@ -10,7 +10,9 @@ import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/amity_core_client.dart';
 import 'package:dio/dio.dart';
 
+/// Http API Client
 class HttpApiClient {
+  /// init [HttpApiClient]
   HttpApiClient({
     required AmityCoreClientOption amityCoreClientOption,
   }) {
@@ -32,7 +34,7 @@ class HttpApiClient {
       }
       handler.next(options);
     }, onError: (e, handler) {
-      if (e.response!.statusCode == 401) {
+      if (e.response != null && e.response!.statusCode == 401) {
         log('>>>>> Token Expire');
         final userId = AmityCoreClient.getUserId();
         final refreshToken = serviceLocator<SessionResponse>().refreshToken;
@@ -55,6 +57,7 @@ class HttpApiClient {
       }
       handler.next(e);
     }));
+
     if (amityCoreClientOption.showLogs) {
       dio.interceptors.add(LogInterceptor(
           requestBody: true,

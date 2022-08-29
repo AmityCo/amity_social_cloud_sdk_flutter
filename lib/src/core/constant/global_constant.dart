@@ -3,6 +3,7 @@
 const SG_HTTP_ENDPOINT = "https://api.sg.amity.co/";
 const EU_HTTP_ENDPOINT = "https://api.eu.amity.co/";
 const US_HTTP_ENDPOINT = "https://api.us.amity.co/";
+const STAGING_HTTP_ENDPOINT = "https://api.staging.amity.co/";
 
 const SG_SOCKET_ENDPOINT = "https://api.sg.amity.co/";
 const EU_SOCKET_ENDPOINT = "https://api.eu.amity.co/";
@@ -50,6 +51,10 @@ const REACTION_V2_URL = 'api/v2/reactions';
 
 const REGISTER_NOTIFICATION_V1_URL = 'v1/notification';
 const UNREGISTER_NOTIFICATION_V1_URL = 'v1/notification';
+
+/// Message API v3 Base Url
+const MESSAGE_V3 = 'api/v3/messages';
+const MESSAGE_V1 = 'api/v1/messages';
 
 const JOIN = 'join';
 const LEAVE = 'leave';

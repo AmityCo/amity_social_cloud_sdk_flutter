@@ -1,9 +1,15 @@
 import 'dart:async';
+
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/public/amity_core_client.dart';
+import 'package:amity_sdk/src/core/socket/event/message_create_event_listener.dart';
+import 'package:amity_sdk/src/core/socket/event/message_delete_event_listener.dart';
+import 'package:amity_sdk/src/core/socket/event/message_update_event_listener.dart';
+import 'package:amity_sdk/src/core/socket/event/socket_event_listener.dart';
 import 'package:amity_sdk/src/domain/repo/account_repo.dart';
+import 'package:amity_sdk/src/public/amity_core_client.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
+/// [Amity Socket]
 class AmitySocket {
   static IO.Socket? activeSocket;
   final AccountRepo accountRepo;
@@ -76,7 +82,7 @@ class AmitySocket {
       // activeSocket!.emit('msg', 'test');
     });
 
-   //if token is not valid, always terminate socket until the next authentication
+    //if token is not valid, always terminate socket until the next authentication
     activeSocket!.onError((data) {
       if (data is Map && data['code'] == 400100) {
         terminate();
@@ -94,11 +100,24 @@ class AmitySocket {
 
     activeSocket!.onDisconnect((_) => print('asocket disconnect'));
 
-    //TODO add more events here
-    activeSocket!
-        .on('v3.message.didCreate', (data) => print('asocket message $data'));
-    activeSocket!
-        .on('v3.channel.didCreate', (data) => print('asocket channel $data'));
+    //register all available socket events
+    _registerEvents();
+
     activeSocket!.connect();
+  }
+
+  void _registerEvents() {
+    final List<SocketEventListener> events = [
+      MessageCreateEventListener(),
+      MessageUpdateEventListener(),
+      MessageDeleteventListener()
+    ];
+    for (var event in events) {
+      activeSocket?.on(event.getEventName(), (data) {
+        if (event.shouldProcessEvent(data)) {
+          event.processEvent(data);
+        }
+      });
+    }
   }
 }
