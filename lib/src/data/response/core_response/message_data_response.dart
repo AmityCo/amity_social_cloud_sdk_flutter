@@ -4,10 +4,7 @@ class MessageDataResponse {
   MessageDataResponse({
     required this.text,
     required this.fileId,
-    required this.thumbnailFileId,
-    required this.videoFileId,
-    required this.streamId,
-    required this.pollId,
+    required this.caption,
   });
 
   /// Text
@@ -16,38 +13,21 @@ class MessageDataResponse {
   /// File Id
   String? fileId;
 
-  /// Thumbnail File Id
-  String? thumbnailFileId;
-
-  /// Video File Id
-  Map<String, String>? videoFileId;
-
-  /// Stream Id
-  String? streamId;
-
-  /// Poll Id
-  String? pollId;
+  /// Caption
+  String? caption;
 
   /// Factory method to init from json
   factory MessageDataResponse.fromJson(Map<String, dynamic>? json) =>
       MessageDataResponse(
         text: json?["text"],
         fileId: json?["fileId"],
-        thumbnailFileId: json?["thumbnailFileId"],
-        videoFileId: json?["videoFileId"] == null
-            ? null
-            : Map<String, String>.from(json?["videoFileId"]),
-        streamId: json?["streamId"],
-        pollId: json?["pollId"],
+        caption: json?["caption"],
       );
 
   /// convert to map
   Map<String, dynamic> toJson() => {
         "text": text,
         "fileId": fileId,
-        "thumbnailFileId": thumbnailFileId,
-        "videoFileId": videoFileId,
-        "streamId": streamId,
-        "pollId": pollId,
+        "caption": caption,
       };
 }

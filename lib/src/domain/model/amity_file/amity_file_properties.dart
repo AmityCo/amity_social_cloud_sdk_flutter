@@ -1,19 +1,44 @@
+/// [AmityFileProperties]
 class AmityFileProperties {
+  /// File Id
   String? fileId;
+
+  /// File Url
   String? fileUrl;
+
+  /// File Path
+  String? filePath;
+
+  /// Type
   String? type;
+
+  /// Create At
   DateTime? createdAt;
+
+  /// Updated At
   DateTime? updatedAt;
 
   //Attribute
+  /// File Name
   String? name;
+
+  /// File Ext
   String? ext;
+
+  /// File Size
   String? size;
+
+  /// File Mime Type
   String? mimeType;
 
   //Metadata
+  /// File Height
   int? height;
+
+  /// File Width
   int? width;
+
+  /// is Full Size
   bool? isFull;
 
   @override
