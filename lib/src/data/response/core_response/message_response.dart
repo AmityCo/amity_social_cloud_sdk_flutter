@@ -252,18 +252,18 @@ class _HashFlag {
 
   final int bits;
   final int hashes;
-  final List<int> hash;
+  final String hash;
 
   factory _HashFlag.fromJson(Map<String, dynamic> json) => _HashFlag(
         bits: json["bits"],
         hashes: json["hashes"],
-        hash: List<int>.from(json["hash"].map((x) => x)),
+        hash: json["hash"],
       );
 
   Map<String, dynamic> toJson() => {
         "bits": bits,
         "hashes": hashes,
-        "hash": List<dynamic>.from(hash.map((x) => x)),
+        "hash": hash,
       };
 }
 
