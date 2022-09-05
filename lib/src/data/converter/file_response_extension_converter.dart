@@ -1,7 +1,9 @@
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/file_hive_entity_4.dart';
 import 'package:amity_sdk/src/data/response/response.dart';
 
+/// [FileResponse] extension
 extension FileResponsseExtension on FileResponse {
+  /// convert [FileResponse] to [FileHiveEntity]
   FileHiveEntity convertToFileHiveEntity() {
     return FileHiveEntity()
       ..fileId = fileId

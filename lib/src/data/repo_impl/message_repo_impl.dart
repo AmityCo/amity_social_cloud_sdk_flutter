@@ -1,10 +1,12 @@
+import 'dart:io';
+
+import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/enum/amity_message_sync_state.dart';
 import 'package:amity_sdk/src/core/model/api_request/create_message_request.dart';
 import 'package:amity_sdk/src/core/model/api_request/message_query_request.dart';
 import 'package:amity_sdk/src/core/utils/page_list_data.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/domain/model/message/amity_message.dart';
-import 'package:amity_sdk/src/domain/repo/message_repo.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 /// [MessageRepoImpl]
 class MessageRepoImpl extends MessageRepo {
@@ -14,9 +16,13 @@ class MessageRepoImpl extends MessageRepo {
   /// Common Db Adapter
   final DbAdapterRepo dbAdapterRepo;
 
+  final FileRepo fileRepo;
+
   /// init [MessageRepoImpl]
   MessageRepoImpl(
-      {required this.messageApiInterface, required this.dbAdapterRepo});
+      {required this.messageApiInterface,
+      required this.dbAdapterRepo,
+      required this.fileRepo});
 
   @override
   Future<PageListData<List<AmityMessage>, String>> queryMesssage(
@@ -88,5 +94,56 @@ class MessageRepoImpl extends MessageRepo {
   @override
   bool hasLocalMessage(String messageId) {
     return dbAdapterRepo.messageDbAdapter.getMessageEntity(messageId) != null;
+  }
+
+  @override
+  Future<AmityMessage> createFileMessage(CreateMessageRequest request) async {
+    final entity = request.convertToMessageEntity();
+
+    /// Calculate the highest channel segment number for the channel id
+    entity.channelSegment = dbAdapterRepo.messageDbAdapter
+            .getHighestChannelSagment(request.channelId) +
+        1;
+
+    try {
+      // Create file Entity, update it for local preview
+      final fileEntity = FileHiveEntity()
+        ..fileId = request.messageId
+        ..filePath = request.uri!.path
+        ..createdAt = DateTime.now();
+      dbAdapterRepo.fileDbAdapter.saveFileEntity(fileEntity);
+      entity.fileId = request.messageId;
+
+      /// Message Created
+      entity.syncState = AmityMessageSyncState.CREATED;
+      dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
+
+      /// Message media Uploading
+      entity.syncState = AmityMessageSyncState.UPLOADING;
+      dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
+
+      final amityUploadResult = await fileRepo.uploadImage(UploadFileRequest()
+        ..files.add(File(request.uri!.path))
+        ..uploadId = request.messageId
+        ..fullImage = true);
+
+      if (amityUploadResult is AmityUploadComplete) {
+        request.fileId =
+            (amityUploadResult as AmityUploadComplete).getFile.fileId;
+      }
+
+      /// Message Syncing
+      entity.syncState = AmityMessageSyncState.SYNCING;
+      dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
+
+      final data = await messageApiInterface.createMessage(request);
+      final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
+      return (amitMessages as List).first;
+    } catch (error) {
+      entity.syncState = AmityMessageSyncState.FAILED;
+      dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
+
+      rethrow;
+    }
   }
 }

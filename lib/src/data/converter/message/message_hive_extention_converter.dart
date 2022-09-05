@@ -17,20 +17,30 @@ extension MessageHiveExtensionConverter on MessageHiveEntity {
             MessageTextData(messageId: messageId!, text: data!.text);
         break;
       case AmityMessageDataType.IMAGE:
-        // amityPostData = ImageData(postId: postId, fileId: data!.fileId);
+        amityMessageData = MessageImageData(
+          messageId: messageId!,
+          fileId: fileId!,
+          caption: data!.caption,
+        );
         break;
       case AmityMessageDataType.AUDIO:
-        // amityPostData = VideoData(
-        //   postId: postId,
-        //   fileId: data!.thumbnailFileId,
-        //   rawData: data?.videoFileId,
-        // );
+        amityMessageData = MessageAudioData(
+          messageId: messageId!,
+          fileId: fileId!,
+        );
         break;
       case AmityMessageDataType.FILE:
-        // amityPostData = FileData(postId: postId, fileId: data!.fileId);
+        amityMessageData = MessageFileData(
+          messageId: messageId!,
+          fileId: fileId!,
+          caption: data!.caption,
+        );
         break;
       case AmityMessageDataType.CUSTOM:
-        // TODO: Handle this case.
+        amityMessageData = MessageCustomData(
+          messageId: messageId!,
+          rawData: data!.toMap(),
+        );
         break;
     }
 

@@ -5,10 +5,15 @@ import 'package:amity_sdk/src/domain/model/amity_file/amity_file_properties.dart
 import 'package:amity_sdk/src/domain/model/amity_file/amity_upload_result.dart';
 import 'package:amity_sdk/src/domain/repo/file_repo.dart';
 
+/// File Repo Layer Impl
 class FileRepoImpl extends FileRepo {
+  /// File Db Adapter
   final FileDbAdapter fileDbAdapter;
+
+  /// file Api Interface
   final FileApiInterface fileApiInterface;
 
+  /// init [FileRepoImpl]
   FileRepoImpl({required this.fileDbAdapter, required this.fileApiInterface});
 
   @override
