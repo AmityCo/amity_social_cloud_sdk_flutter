@@ -1,5 +1,6 @@
-import 'package:amity_sdk/src/core/socket/event/message_event_listener.dart';
+import 'package:amity_sdk/src/core/core.dart';
 
+///[MessageDeleteventListener]
 class MessageDeleteventListener extends MessageEventListener {
   @override
   String getEventName() {

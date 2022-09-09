@@ -71,7 +71,7 @@ class MessageResponse {
   final int reactionsCount;
 
   /// Reactions
-  final Map<String, dynamic> reactions;
+  final Map<String, int> reactions;
 
   /// My Reaction
   final List<String>? myReactions;
@@ -113,7 +113,7 @@ class MessageResponse {
             : _HashFlag.fromJson(json["hashFlag"]),
         childrenNumber: json["childrenNumber"],
         reactionsCount: json["reactionsCount"],
-        reactions: json["reactions"],
+        reactions: Map.from(json["reactions"]),
         myReactions: json["myReactions"] == null
             ? null
             : List<String>.from(json["myReactions"].map((x) => x)),

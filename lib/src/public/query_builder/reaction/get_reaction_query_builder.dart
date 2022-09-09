@@ -1,15 +1,18 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// GetReactionQueryBuilder
 class GetReactionQueryBuilder {
   GetReactionUsecase _usecase;
   AmityReactionReferenceType _referenceType;
   String _referenceId;
   String? _reactionName;
 
+  /// init [GetReactionQueryBuilder]
   GetReactionQueryBuilder(
       this._usecase, this._referenceType, this._referenceId);
 
+  /// get reaction for Post
   factory GetReactionQueryBuilder.post({required String postId}) {
     return GetReactionQueryBuilder(
       serviceLocator<GetReactionUsecase>(),
@@ -18,6 +21,7 @@ class GetReactionQueryBuilder {
     );
   }
 
+  /// get reaction for Comment
   factory GetReactionQueryBuilder.comment({required String commentId}) {
     return GetReactionQueryBuilder(
       serviceLocator<GetReactionUsecase>(),
@@ -26,6 +30,7 @@ class GetReactionQueryBuilder {
     );
   }
 
+  /// get reaction for Message
   factory GetReactionQueryBuilder.message(String messageId) {
     return GetReactionQueryBuilder(
       serviceLocator<GetReactionUsecase>(),
@@ -34,11 +39,13 @@ class GetReactionQueryBuilder {
     );
   }
 
+  /// get reaction for Reaction name
   GetReactionQueryBuilder reactionName(String reactionName) {
     _reactionName = reactionName;
     return this;
   }
 
+  /// Get Reaction pagging data
   Future<PageListData<List<AmityReaction>, String>> getPagingData(
       {String? token, int? limit}) async {
     final request = GetReactionRequest(

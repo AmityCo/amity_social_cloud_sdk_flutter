@@ -50,7 +50,7 @@ class MessageHiveEntity extends HiveObject {
   int? reactionsCount;
 
   /// Reactions
-  Map<String, dynamic>? reactions;
+  Map<String, int>? reactions;
 
   /// My Reaction
   List<String>? myReactions;
@@ -75,4 +75,9 @@ class MessageHiveEntity extends HiveObject {
 
   /// Sync State
   AmityMessageSyncState? syncState;
+
+  @override
+  String toString() {
+    return 'MessageHiveEntity(messageId: $messageId, channelId: $channelId, userId: $userId, type: $type, data: $data, channelSegment: $channelSegment, parentId: $parentId, fileId: $fileId, tags: $tags, metadata: $metadata, flagCount: $flagCount, childrenNumber: $childrenNumber, reactionsCount: $reactionsCount, reactions: $reactions, myReactions: $myReactions, latestReaction: $latestReaction, isDeleted: $isDeleted, createdAt: $createdAt, updatedAt: $updatedAt, editedAt: $editedAt, syncState: $syncState)';
+  }
 }

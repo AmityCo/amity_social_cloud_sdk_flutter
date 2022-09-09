@@ -4,5 +4,6 @@ export 'error/error.dart';
 export 'extension/extension.dart';
 export 'model/model.dart';
 export 'service_locator/service_locator.dart';
+export 'socket/socket.dart';
 export 'usercase/usercase.dart';
 export 'utils/utils.dart';

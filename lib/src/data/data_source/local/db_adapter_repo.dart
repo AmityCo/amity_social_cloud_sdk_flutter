@@ -34,6 +34,9 @@ class DbAdapterRepo {
   /// Message Db Adapter
   final MessageDbAdapter messageDbAdapter;
 
+  /// Message Db Adapter
+  final ReactionDbAdapter reactionDbAdapter;
+
   /// Init DbAdapter Repo
   DbAdapterRepo(
       {required this.postDbAdapter,
@@ -45,5 +48,6 @@ class DbAdapterRepo {
       required this.communityMemberDbAdapter,
       required this.communityCategoryDbAdapter,
       required this.pollDbAdapter,
-      required this.messageDbAdapter});
+      required this.messageDbAdapter,
+      required this.reactionDbAdapter});
 }

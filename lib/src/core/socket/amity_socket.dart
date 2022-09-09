@@ -1,41 +1,41 @@
 import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/socket/event/message_create_event_listener.dart';
-import 'package:amity_sdk/src/core/socket/event/message_delete_event_listener.dart';
-import 'package:amity_sdk/src/core/socket/event/message_update_event_listener.dart';
-import 'package:amity_sdk/src/core/socket/event/socket_event_listener.dart';
 import 'package:amity_sdk/src/domain/repo/account_repo.dart';
 import 'package:amity_sdk/src/public/amity_core_client.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 
-/// [Amity Socket]
+/// [AmitySocket]
 class AmitySocket {
-  static IO.Socket? activeSocket;
-  final AccountRepo accountRepo;
-  final AmityCoreClientOption amityCoreClientOption;
+  /// Web Socket Connection
+  static IO.Socket? _activeSocket;
 
-  final StreamController<String> _streamEmitter = StreamController<String>();
+  /// Account Repo
+  final AccountRepo accountRepo;
+
+  /// Amity Core Client Option
+  final AmityCoreClientOption amityCoreClientOption;
 
   StreamSubscription? _accountSubscription;
 
-  bool shouldConnect = true;
+  bool _shouldConnect = true;
 
+  /// init [AmitySocket]
   AmitySocket({
     required this.amityCoreClientOption,
     required this.accountRepo,
   });
 
-//init account subscription and connect to the sever
-//it will always terminate the currect activeSocket if needed
+  ///init account subscription and connect to the sever
+  ///it will always terminate the currect activeSocket if needed
   void connect() {
     terminate();
-    shouldConnect = true;
+    _shouldConnect = true;
     final currentUser = AmityCoreClient.getCurrentUser();
     _accountSubscription = accountRepo
         .listenAccount(currentUser.userId!)
         .takeWhile((account) =>
-            (account?.accessToken?.isNotEmpty ?? false) && shouldConnect)
+            (account?.accessToken?.isNotEmpty ?? false) && _shouldConnect)
         .distinct()
         .listen((account) {
       if (account != null) {
@@ -49,9 +49,9 @@ class AmitySocket {
 //dispose function will disconect and clear all event listeners
 //then clear the current activeSocket instance
   void _disconnect() {
-    activeSocket?.dispose();
-    activeSocket = null;
-    shouldConnect = false;
+    _activeSocket?.dispose();
+    _activeSocket = null;
+    _shouldConnect = false;
   }
 
 //terminate will dispose activeSocket and stop account subscription
@@ -63,12 +63,12 @@ class AmitySocket {
 //initiate new socket connection
 //if activeSocket instance is available will be terminated first
   void _initConnection(String accessToken) async {
-    if (activeSocket != null && activeSocket?.connected == true) {
+    if (_activeSocket != null && _activeSocket?.connected == true) {
       _disconnect();
     }
-    shouldConnect = true;
+    _shouldConnect = true;
 
-    activeSocket = IO.io(
+    _activeSocket = IO.io(
         amityCoreClientOption.httpEndpoint.value,
         IO.OptionBuilder()
             .setTransports(['websocket'])
@@ -77,33 +77,33 @@ class AmitySocket {
             .setReconnectionDelayMax(10000)
             .build());
 
-    activeSocket!.onConnect((_) {
+    _activeSocket!.onConnect((_) {
       print('asocket connect');
       // activeSocket!.emit('msg', 'test');
     });
 
     //if token is not valid, always terminate socket until the next authentication
-    activeSocket!.onError((data) {
+    _activeSocket!.onError((data) {
       if (data is Map && data['code'] == 400100) {
         terminate();
       }
       print('asocket error $data');
     });
 
-    activeSocket!.onConnectError((data) {
+    _activeSocket!.onConnectError((data) {
       print('asocket onConnectError $data');
     });
 
-    activeSocket!.onConnectTimeout((data) {
+    _activeSocket!.onConnectTimeout((data) {
       print('asocket onConnectTimeout $data');
     });
 
-    activeSocket!.onDisconnect((_) => print('asocket disconnect'));
+    _activeSocket!.onDisconnect((_) => print('asocket disconnect'));
 
     //register all available socket events
     _registerEvents();
 
-    activeSocket!.connect();
+    _activeSocket!.connect();
   }
 
   void _registerEvents() {
@@ -113,7 +113,7 @@ class AmitySocket {
       MessageDeleteventListener()
     ];
     for (var event in events) {
-      activeSocket?.on(event.getEventName(), (data) {
+      _activeSocket?.on(event.getEventName(), (data) {
         if (event.shouldProcessEvent(data)) {
           event.processEvent(data);
         }

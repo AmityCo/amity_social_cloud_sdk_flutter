@@ -3,6 +3,7 @@ import 'package:amity_sdk/src/core/socket/event/socket_event_listener.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/usecase/message/message_has_local_usecase.dart';
 
+///[MessageEventListener]
 class MessageEventListener extends SocketEventListener {
   @override
   String getEventName() {
@@ -12,7 +13,11 @@ class MessageEventListener extends SocketEventListener {
   @override
   void processEvent(Map<String, dynamic> json) {
     final data = CreateMessageResponse.fromJson(json);
-    data.saveToDb(serviceLocator());
+
+    /// Exclude the update if we dont have my rection key
+    if (data.messages[0].myReactions != null) {
+      data.saveToDb(serviceLocator());
+    }
   }
 
   @override

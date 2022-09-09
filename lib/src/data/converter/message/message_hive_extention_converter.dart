@@ -1,5 +1,6 @@
 import 'package:amity_sdk/src/core/enum/amity_message_type.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_hive_entity_18.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/model/message/amity_message.dart';
 
 /// [MessageHiveExtensionConverter]
@@ -58,8 +59,8 @@ extension MessageHiveExtensionConverter on MessageHiveEntity {
       ..metadata = metadata
       ..flagCount = flagCount
       ..childrenNumber = childrenNumber
-      // ..reactionsCount = reactionsCount
-      // ..reactions = reactions
+      ..reactionCount = reactionsCount
+      ..reactions = AmityReactionMap(reactions: reactions)
       ..myReactions = myReactions
       // ..latestReaction = latestReaction
       ..isDeleted = isDeleted
