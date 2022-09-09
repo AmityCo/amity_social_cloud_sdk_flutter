@@ -72,7 +72,7 @@ class AmityMessage {
 
   @override
   String toString() {
-    return 'AmityMessage(messageId: $messageId, channelId: $channelId, userId: $userId, parentId: $parentId, channelSegment: $channelSegment, childrenNumber: $childrenNumber, isDeleted: $isDeleted, readByCount: $readByCount, flagCount: $flagCount, amityTags: $amityTags, myReactions: $myReactions, reactions: $reactions, reactionCount: $reactionCount, user: $user, metadata: $metadata, mentionees: $mentionees, createdAt: $createdAt, updatedAt: $updatedAt, editedAt: $editedAt)';
+    return 'AmityMessage(messageId: $messageId, channelId: $channelId, userId: $userId, parentId: $parentId, channelSegment: $channelSegment, childrenNumber: $childrenNumber, isDeleted: $isDeleted, readByCount: $readByCount, flagCount: $flagCount, amityTags: $amityTags, myReactions: $myReactions, reactions: $reactions, reactionCount: $reactionCount, user: $user, metadata: $metadata, mentionees: $mentionees, createdAt: $createdAt, updatedAt: $updatedAt, editedAt: $editedAt, data: $data)';
   }
 }
 
@@ -94,8 +94,9 @@ abstract class AmityMessageData {
   AmityMessageData({required this.messageId, this.fileId, this.rawData});
 
   @override
-  String toString() =>
-      'AmityMessageData(messageId: $messageId, fileId: $fileId, rawData: $rawData)';
+  String toString() {
+    return 'AmityMessageData(messageId: $messageId, fileId: $fileId, rawData: $rawData, fileInfo: $fileInfo)';
+  }
 }
 
 /// Text Message Data

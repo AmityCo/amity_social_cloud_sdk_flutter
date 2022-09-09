@@ -4,7 +4,7 @@ import 'package:amity_sdk/src/data/response/response.dart';
 
 /// [MessageResponseExtensionConverter]
 extension MessageResponseExtensionConverter on MessageResponse {
-  ///
+  /// Convert [MessageResponse] to [MessageHiveEntity]
   MessageHiveEntity convertToMesageHiveEntity() {
     return MessageHiveEntity()
       ..messageId = messageId

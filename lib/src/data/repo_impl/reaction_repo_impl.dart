@@ -7,25 +7,13 @@ class ReactionRepoImpl extends ReactionRepo {
   /// Reaction API interface
   final ReactionApiInterface reactionApiInterface;
 
-  /// Post Db Adapter
-  final PostDbAdapter postDbAdapter;
-
-  /// Comment Db Adapter
-  final CommentDbAdapter commentDbAdapter;
-
-  /// Reaction  Db Adapter
-  final ReactionDbAdapter reactionDbAdapter;
-
-  /// User Db Adapter
-  final UserDbAdapter userDbAdapter;
+  /// Common Db Adapter
+  final DbAdapterRepo dbAdapterRepo;
 
   /// Init ReactionRepoImpl
   ReactionRepoImpl({
     required this.reactionApiInterface,
-    required this.postDbAdapter,
-    required this.commentDbAdapter,
-    required this.reactionDbAdapter,
-    required this.userDbAdapter,
+    required this.dbAdapterRepo,
   });
 
   @override
@@ -37,7 +25,8 @@ class ReactionRepoImpl extends ReactionRepo {
     //2. Update the reaction count
     //3. Update the reaction map
     if (request.referenceType == AmityReactionReferenceType.POST.value) {
-      final amityPost = postDbAdapter.getPostEntity(request.referenceId);
+      final amityPost =
+          dbAdapterRepo.postDbAdapter.getPostEntity(request.referenceId);
 
       amityPost.myReactions ??= [];
       amityPost.myReactions!.add(request.reactionName);
@@ -48,13 +37,13 @@ class ReactionRepoImpl extends ReactionRepo {
       amityPost.reactions![request.reactionName] =
           (amityPost.reactions![request.reactionName] ?? 0) + 1;
 
-      postDbAdapter.savePostEntity(amityPost);
+      await dbAdapterRepo.postDbAdapter.savePostEntity(amityPost);
     }
 
     //Add Rection from local Amity Comment
     if (request.referenceType == AmityReactionReferenceType.COMMENT.value) {
       final amityComment =
-          commentDbAdapter.getCommentEntity(request.referenceId);
+          dbAdapterRepo.commentDbAdapter.getCommentEntity(request.referenceId);
 
       amityComment.myReactions ??= [];
       amityComment.myReactions!.add(request.reactionName);
@@ -65,7 +54,29 @@ class ReactionRepoImpl extends ReactionRepo {
       amityComment.reactions![request.reactionName] =
           (amityComment.reactions![request.reactionName] ?? 0) + 1;
 
-      amityComment.save();
+      await amityComment.save();
+    }
+
+    //Add Rection from local Amity Comment
+    if (request.referenceType == AmityReactionReferenceType.MESSAGE.value) {
+      final amitymessage =
+          dbAdapterRepo.messageDbAdapter.getMessageEntity(request.referenceId)!;
+
+      amitymessage.myReactions ??= [];
+      amitymessage.myReactions!.add(request.reactionName);
+
+      amitymessage.reactionsCount = (amitymessage.reactionsCount ?? 0) + 1;
+
+      amitymessage.reactions ??= {};
+      amitymessage.reactions![request.reactionName] =
+          (amitymessage.reactions![request.reactionName] ?? 0) + 1;
+
+      await dbAdapterRepo.messageDbAdapter.saveMessageEntity(amitymessage);
+
+      final amitymessage1 =
+          dbAdapterRepo.messageDbAdapter.getMessageEntity(request.referenceId)!;
+
+      print(amitymessage1);
     }
   }
 
@@ -75,7 +86,8 @@ class ReactionRepoImpl extends ReactionRepo {
 
     //Remove Reaction from Local Amity Post
     if (request.referenceType == AmityReactionReferenceType.POST.value) {
-      final amityPost = postDbAdapter.getPostEntity(request.referenceId);
+      final amityPost =
+          dbAdapterRepo.postDbAdapter.getPostEntity(request.referenceId);
 
       amityPost.myReactions ??= [];
       amityPost.myReactions!.remove(request.reactionName);
@@ -86,13 +98,13 @@ class ReactionRepoImpl extends ReactionRepo {
       amityPost.reactions![request.reactionName] =
           (amityPost.reactions![request.reactionName] ?? 0) - 1;
 
-      postDbAdapter.savePostEntity(amityPost);
+      await dbAdapterRepo.postDbAdapter.savePostEntity(amityPost);
     }
 
     //Remove Rection from local Amity Comment
     if (request.referenceType == AmityReactionReferenceType.COMMENT.value) {
       final amityComment =
-          commentDbAdapter.getCommentEntity(request.referenceId);
+          dbAdapterRepo.commentDbAdapter.getCommentEntity(request.referenceId);
 
       amityComment.myReactions ??= [];
       amityComment.myReactions!.remove(request.reactionName);
@@ -103,7 +115,28 @@ class ReactionRepoImpl extends ReactionRepo {
       amityComment.reactions![request.reactionName] =
           (amityComment.reactions![request.reactionName] ?? 0) - 1;
 
-      commentDbAdapter.saveCommentEntity(amityComment);
+      await dbAdapterRepo.commentDbAdapter.saveCommentEntity(amityComment);
+    }
+
+    //Remove Rection from local Amity Message
+    if (request.referenceType == AmityReactionReferenceType.MESSAGE.value) {
+      final amitymessage =
+          dbAdapterRepo.messageDbAdapter.getMessageEntity(request.referenceId)!;
+
+      amitymessage.myReactions ??= [];
+      amitymessage.myReactions!.remove(request.reactionName);
+
+      amitymessage.reactionsCount = (amitymessage.reactionsCount ?? 0) - 1;
+
+      amitymessage.reactions ??= {};
+      amitymessage.reactions![request.reactionName] =
+          (amitymessage.reactions![request.reactionName] ?? 0) - 1;
+
+      await dbAdapterRepo.messageDbAdapter.saveMessageEntity(amitymessage);
+
+      final amitymessage1 =
+          dbAdapterRepo.messageDbAdapter.getMessageEntity(request.referenceId)!;
+      print(amitymessage1);
     }
   }
 
@@ -125,12 +158,13 @@ class ReactionRepoImpl extends ReactionRepo {
 
     //Save the reaction
     Stream.fromIterable(reactionHiveEntities).asyncMap(
-      (event) async => await reactionDbAdapter.saveReactionEntity(event),
+      (event) async =>
+          await dbAdapterRepo.reactionDbAdapter.saveReactionEntity(event),
     );
 
     //Save the user
     Stream.fromIterable(userHiveEntities).asyncMap(
-      (event) async => await userDbAdapter.saveUserEntity(event),
+      (event) async => await dbAdapterRepo.userDbAdapter.saveUserEntity(event),
     );
 
     return PageListData(

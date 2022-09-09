@@ -3,6 +3,7 @@ export 'community/community.dart';
 export 'feed/feed.dart';
 export 'file/file.dart';
 export 'login_query_builder.dart';
+export 'message/message.dart';
 export 'poll/poll.dart';
 export 'post/post.dart';
 export 'reaction/reaction.dart';

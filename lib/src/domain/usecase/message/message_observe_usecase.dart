@@ -8,6 +8,8 @@ class MessageObserveUsecase
     extends UseCase<List<AmityMessage>, MessageQueryRequest> {
   /// Message Repo
   final MessageRepo messageRepo;
+
+  /// Message Composer UseCase
   final MessageComposerUsecase messageComposerUsecase;
 
   /// Init [MessageObserveUsecase]
@@ -23,12 +25,14 @@ class MessageObserveUsecase
   Stream<List<AmityMessage>> listen(MessageQueryRequest params) {
     //missing compose use case :(
     final streamController = StreamController<List<AmityMessage>>();
-    messageRepo.listentMessages(params).listen((event) {
-      Stream.fromIterable(event).forEach((element) async {
+
+    messageRepo.listentMessages(params).listen((event) async {
+      await Stream.fromIterable(event).forEach((element) async {
         element = await messageComposerUsecase.get(element);
       });
       streamController.add(event);
     });
+
     return streamController.stream;
   }
 }
