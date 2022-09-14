@@ -18,7 +18,7 @@ extension AmityMessageExtension on AmityMessage {
 
   /// Get Amity Post Reaction
   GetReactionQueryBuilder getReaction() {
-    return GetReactionQueryBuilder.message(messageId!);
+    return GetReactionQueryBuilder.message(messageId: messageId!);
   }
 
   /// Amity Post Report

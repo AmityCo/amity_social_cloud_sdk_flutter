@@ -31,7 +31,7 @@ class GetReactionQueryBuilder {
   }
 
   /// get reaction for Message
-  factory GetReactionQueryBuilder.message(String messageId) {
+  factory GetReactionQueryBuilder.message({required String messageId}) {
     return GetReactionQueryBuilder(
       serviceLocator<GetReactionUsecase>(),
       AmityReactionReferenceType.MESSAGE,
