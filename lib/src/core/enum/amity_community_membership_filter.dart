@@ -1,9 +1,11 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, public_member_api_docs
 
 import 'package:amity_sdk/src/core/enum/enum.dart';
 
+/// [AmityCommunityMembershipFilter]
 enum AmityCommunityMembershipFilter { ALL, MEMBER, BANNED }
 
+/// [AmityCommnunityMembershipFilterExtension]
 extension AmityCommnunityMembershipFilterExtension
     on AmityCommunityMembershipFilter {
   String get apiKey {

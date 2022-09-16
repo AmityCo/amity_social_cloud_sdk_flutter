@@ -3,10 +3,13 @@ import 'dart:async';
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// [CommunityMemberGetUsecase]
 class CommunityMemberGetUsecase extends UseCase<AmityCommunityMember,
     CommunityMemberPermissionCheckRequest> {
+  /// Community Member Repo
   final CommunityMemberRepo communityMemberRepo;
 
+  /// Init [CommunityMemberGetUsecase]
   CommunityMemberGetUsecase({required this.communityMemberRepo});
 
   @override

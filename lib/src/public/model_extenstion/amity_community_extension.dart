@@ -2,7 +2,9 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 
+/// [AmityCommunityExtension]
 extension AmityCommunityExtension on AmityCommunity {
+  /// Delete
   Future delete({bool hardDelete = false}) {
     return serviceLocator<CommunityDeleteUseCase>().get(communityId!);
   }
@@ -10,11 +12,11 @@ extension AmityCommunityExtension on AmityCommunity {
   /// Get User Roles for the Community
   Future<List<String>> _getUserRoles(String userId) async {
     AmityCommunityMember amityCommunityMember =
-        await serviceLocator<CommunityMemberGetUsecase>().get(
-            CommunityMemberPermissionCheckRequest(
-                communityId: communityId!,
-                userId: userId,
-                permission: AmityPermission.BAN_USER));
+        await serviceLocator<CommunityMemberGetUsecase>()
+            .get(CommunityMemberPermissionCheckRequest(
+      communityId: communityId!,
+      userId: userId,
+    ));
     return Future.value(amityCommunityMember.roles);
   }
 
