@@ -34,20 +34,29 @@ class DbAdapterRepo {
   /// Message Db Adapter
   final MessageDbAdapter messageDbAdapter;
 
-  /// Message Db Adapter
+  /// Reaction Db Adapter
   final ReactionDbAdapter reactionDbAdapter;
 
+  /// Channel Db Adapter
+  final ChannelDbAdapter channelDbAdapter;
+
+  /// Channel Member Db Adapter
+  final ChannelUserDbAdapter channelUserDbAdapter;
+
   /// Init DbAdapter Repo
-  DbAdapterRepo(
-      {required this.postDbAdapter,
-      required this.commentDbAdapter,
-      required this.userDbAdapter,
-      required this.fileDbAdapter,
-      required this.feedDbAdapter,
-      required this.communityDbAdapter,
-      required this.communityMemberDbAdapter,
-      required this.communityCategoryDbAdapter,
-      required this.pollDbAdapter,
-      required this.messageDbAdapter,
-      required this.reactionDbAdapter});
+  DbAdapterRepo({
+    required this.postDbAdapter,
+    required this.commentDbAdapter,
+    required this.userDbAdapter,
+    required this.fileDbAdapter,
+    required this.feedDbAdapter,
+    required this.communityDbAdapter,
+    required this.communityMemberDbAdapter,
+    required this.communityCategoryDbAdapter,
+    required this.pollDbAdapter,
+    required this.messageDbAdapter,
+    required this.reactionDbAdapter,
+    required this.channelDbAdapter,
+    required this.channelUserDbAdapter,
+  });
 }

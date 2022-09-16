@@ -1,6 +1,8 @@
 import 'package:amity_sdk/src/data/data.dart';
 
+/// [CreateCommunityResponse]
 class CreateCommunityResponse {
+  /// Init [CreateCommunityResponse]
   CreateCommunityResponse({
     required this.communities,
     required this.communityUsers,
@@ -11,14 +13,28 @@ class CreateCommunityResponse {
     this.paging,
   });
 
+  /// Communities
   final List<CommunityResponse> communities;
+
+  /// community Users
   final List<CommunityUserResponse> communityUsers;
+
+  ///Files
   final List<FileResponse> files;
+
+  /// users
   final List<UserResponse> users;
+
+  /// Category
   final List<CommunityCategoryResponse> categories;
+
+  ///fedds
   final List<CommunityFeedResponse> feeds;
+
+  /// Paging
   final PagingResponse? paging;
 
+  /// [CreateCommunityResponse]
   factory CreateCommunityResponse.fromJson(Map<String, dynamic> json) =>
       CreateCommunityResponse(
         communities: json["communities"] == null
@@ -51,6 +67,7 @@ class CreateCommunityResponse {
             : PagingResponse.fromJson(json['paging']),
       );
 
+  ///[CreateCommunityResponse]
   Map<String, dynamic> toJson() => {
         "communities": List<dynamic>.from(communities.map((x) => x.toJson())),
         "communityUsers":

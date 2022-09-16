@@ -3,9 +3,12 @@ import 'dart:async';
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/repo/community_member_repo.dart';
 
+/// [CommunityMemberLeaveUsecase]
 class CommunityMemberLeaveUsecase extends UseCase<void, String> {
+  /// Community Member Repo
   final CommunityMemberRepo communityMemberRepo;
 
+  /// Init [CommunityMemberLeaveUsecase]
   CommunityMemberLeaveUsecase({required this.communityMemberRepo});
 
   @override
@@ -15,7 +18,6 @@ class CommunityMemberLeaveUsecase extends UseCase<void, String> {
 
   @override
   Stream listen(String params) {
-    // TODO: implement listen
     throw UnimplementedError();
   }
 }

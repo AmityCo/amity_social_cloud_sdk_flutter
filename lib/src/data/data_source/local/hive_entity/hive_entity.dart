@@ -1,4 +1,6 @@
 export 'account_hive_entity_0.dart';
+export 'channel_hive_entity_20.dart';
+export 'channel_user_hive_entity_21.dart';
 export 'comment_hive_entity_6.dart';
 export 'community_category_hive_12.dart';
 export 'community_feed_hive_13.dart';
