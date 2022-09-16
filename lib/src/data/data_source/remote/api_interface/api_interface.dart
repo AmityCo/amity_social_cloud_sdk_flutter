@@ -1,4 +1,6 @@
 export 'authentication_api_interface.dart';
+export 'channel_api_interface.dart';
+export 'channel_member_api_interface.dart';
 export 'commnet_api_interface.dart';
 export 'community_api_interface.dart';
 export 'community_category_api_interface.dart';

@@ -1,4 +1,5 @@
 export 'account_hive_entity_extension_converter.dart';
+export 'channel/channel.dart';
 export 'comment_response_extension_converter.dart';
 export 'comment_response_hive_entity_extension_converter.dart';
 export 'community_category_hive_extension_converter.dart';

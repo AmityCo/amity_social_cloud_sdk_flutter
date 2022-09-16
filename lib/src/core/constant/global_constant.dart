@@ -56,6 +56,9 @@ const UNREGISTER_NOTIFICATION_V1_URL = 'v1/notification';
 const MESSAGE_V3 = 'api/v3/messages';
 const MESSAGE_V1 = 'api/v1/messages';
 
+const CHANNEL_V2 = 'api/v2/channels';
+const CHANNEL_V3 = 'api/v3/channels';
+
 const JOIN = 'join';
 const LEAVE = 'leave';
 const ROLES = 'roles';

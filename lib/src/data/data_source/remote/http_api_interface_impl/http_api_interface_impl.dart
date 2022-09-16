@@ -1,5 +1,7 @@
 export 'api_interface_impl.dart';
 export 'authentication_api_interface_impl.dart';
+export 'channel_api_interface_impl.dart';
+export 'channel_member_api_interface_impl.dart';
 export 'comment_api_interface_impl.dart';
 export 'community_api_interface_impl.dart';
 export 'community_category_api_interface_impl.dart';

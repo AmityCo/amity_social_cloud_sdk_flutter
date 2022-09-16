@@ -1,4 +1,4 @@
-// ignore_for_file: constant_identifier_names
+// ignore_for_file: constant_identifier_names, public_member_api_docs
 
 enum AmityPermission {
   BAN_USER,
@@ -21,6 +21,15 @@ enum AmityPermission {
   EDIT_COMMUNITY_COMMENT,
   DELETE_COMMUNITY_COMMENT,
   REVIEW_COMMUNITY_POST,
+  MUTE_CHANNEL,
+  CLOSE_CHANNEL,
+  EDIT_CHANNEL,
+  EDIT_CHANNEL_RATELIMIT,
+  BAN_CHANNEL_USER,
+  MUTE_CHANNEL_USER,
+  ADD_CHANNEL_USER,
+  REMOVE_CHANNEL_USER,
+  EDIT_CHANNEL_USER
 }
 
 extension AmityPermissionExtension on AmityPermission {
@@ -46,6 +55,15 @@ extension AmityPermissionExtension on AmityPermission {
       'EDIT_COMMUNITY_COMMENT',
       'DELETE_COMMUNITY_COMMENT',
       'REVIEW_COMMUNITY_POST',
+      'CLOSE_CHANNEL',
+      'CLOSE_CHANNEL',
+      'EDIT_CHANNEL',
+      'EDIT_CHANNEL_RATELIMIT',
+      'BAN_CHANNEL_USER',
+      'MUTE_CHANNEL_USER',
+      'ADD_CHANNEL_USER',
+      'REMOVE_CHANNEL_USER',
+      'EDIT_CHANNEL_USER'
     ][index];
   }
 }

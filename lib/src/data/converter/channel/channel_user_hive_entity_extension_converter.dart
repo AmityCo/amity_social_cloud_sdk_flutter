@@ -1,0 +1,16 @@
+import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
+
+/// [ChannelUserHiveExtensionConverter]
+extension ChannelUserHiveExtensionConverter on ChannelUserHiveEntity {
+  ///
+  AmityChannelMember convertToAmityChannelMember() {
+    return AmityChannelMember()
+      ..channelId = channelId
+      ..userId = userId
+      ..isMuted = isMuted
+      ..isBanned = isBanned
+      ..roles = AmityRoles(roles: roles)
+      ..permissions = AmityPermissions(permissions: permissions);
+  }
+}
