@@ -1,5 +1,6 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:dio/dio.dart';
 
 /// [ChannelMemberApiInterfaceImpl]
 class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
@@ -10,59 +11,133 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
   final HttpApiClient httpApiClient;
 
   @override
-  Future<CreateChannelResponse> addMember(UpdateChannelMembersRequest request) {
-    // TODO: implement addMember
-    throw UnimplementedError();
+  Future<CreateChannelResponse> addMember(
+      UpdateChannelMembersRequest request) async {
+    try {
+      final data = await httpApiClient().post(
+          '$CHANNEL_V3/${request.channelId}/$USERS',
+          data: request.toJson());
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
   }
 
   @override
-  Future<CreateChannelResponse> addRole(UpdateChannelRoleRequest request) {
-    // TODO: implement addRole
-    throw UnimplementedError();
+  Future<CreateChannelResponse> addRole(
+      UpdateChannelRoleRequest request) async {
+    try {
+      final data = await httpApiClient().post(
+          '$CHANNEL_V3/${request.channelId}/$USERS/$ROLES',
+          data: request.toJson());
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
   }
 
   @override
-  Future<CreateChannelResponse> banMember(UpdateChannelMembersRequest request) {
-    // TODO: implement banMember
-    throw UnimplementedError();
+  Future<CreateChannelResponse> banMember(
+      UpdateChannelMembersRequest request) async {
+    try {
+      final data = await httpApiClient().put(
+          '$CHANNEL_V3/${request.channelId}/$USERS/$BAN',
+          data: request.toJson());
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
   }
 
   @override
   Future<CreateChannelResponse> getChannelMembers(
-      GetChannelMembersRequest request) {
-    // TODO: implement getChannelMembers
-    throw UnimplementedError();
+      GetChannelMembersRequest request) async {
+    try {
+      final data = await httpApiClient().get(
+          '$CHANNEL_V3/${request.channelId}/$USERS/',
+          queryParameters: request.toJson());
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
   }
 
   @override
-  Future<CreateChannelResponse> joinChannel(String channelId) {
-    // TODO: implement joinChannel
-    throw UnimplementedError();
+  Future<CreateChannelResponse> joinChannel(String channelId) async {
+    try {
+      final param = <String, String>{
+        "channelId": channelId,
+      };
+      final data = await httpApiClient()
+          .post('$CHANNEL_V3/$channelId/$JOIN', data: param);
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
   }
 
   @override
-  Future<CreateChannelResponse> leaveChannel(String channelId) {
-    // TODO: implement leaveChannel
-    throw UnimplementedError();
+  Future<CreateChannelResponse> leaveChannel(String channelId) async {
+    try {
+      final param = <String, String>{
+        "channelId": channelId,
+      };
+      final data = await httpApiClient()
+          .delete('$CHANNEL_V3/$channelId/$LEAVE', data: param);
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
   }
 
   @override
   Future<CreateChannelResponse> removeMember(
-      UpdateChannelMembersRequest request) {
-    // TODO: implement removeMember
-    throw UnimplementedError();
+      UpdateChannelMembersRequest request) async {
+    try {
+      final param = <String, String>{
+        "channelId": request.channelId,
+      };
+      final data = await httpApiClient().delete(
+          '$CHANNEL_V3/${request.channelId}/$USERS',
+          data: param.toJson());
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
   }
 
   @override
-  Future<CreateChannelResponse> removeRole(UpdateChannelRoleRequest request) {
-    // TODO: implement removeRole
-    throw UnimplementedError();
+  Future<CreateChannelResponse> removeRole(
+      UpdateChannelRoleRequest request) async {
+    try {
+      final data = await httpApiClient().delete(
+          '$CHANNEL_V3/${request.channelId}/$USERS/$ROLES',
+          data: request.toJson());
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
   }
 
   @override
   Future<CreateChannelResponse> unbanMember(
-      UpdateChannelMembersRequest request) {
-    // TODO: implement unbanMember
-    throw UnimplementedError();
+      UpdateChannelMembersRequest request) async {
+    try {
+      final data = await httpApiClient().put(
+          '$CHANNEL_V3/${request.channelId}/$USERS/$UNBAN',
+          data: request.toJson());
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
   }
 }

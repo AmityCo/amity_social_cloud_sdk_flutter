@@ -3,7 +3,7 @@ import 'package:amity_sdk/src/core/model/api_request/channel/update_channel_memb
 import 'package:amity_sdk/src/core/model/api_request/channel/update_channel_role_request.dart';
 import 'package:amity_sdk/src/core/utils/page_list_data.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/domain/model/channel/amity_channel_member.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/repo/channel_member_repo.dart';
 
 /// [ChannelMemberRepoImpl]
@@ -23,48 +23,50 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
   @override
   Future addMember(UpdateChannelMembersRequest request) async {
     final data = await channelMemberApiInterface.addMember(request);
-    final amityChannel = await data.saveToDb(commonDbAdapter);
+    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
     return amityChannel.first;
   }
 
   @override
   Future addRole(UpdateChannelRoleRequest request) async {
     final data = await channelMemberApiInterface.addRole(request);
-    final amityChannel = await data.saveToDb(commonDbAdapter);
+    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
     return amityChannel.first;
   }
 
   @override
   Future banMember(UpdateChannelMembersRequest request) async {
     final data = await channelMemberApiInterface.banMember(request);
-    final amityChannel = await data.saveToDb(commonDbAdapter);
+    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
     return amityChannel.first;
   }
 
   @override
   Future<AmityChannelMember> getMember(String id, String userId) async {
-    final data = commonDbAdapter.channelUserDbAdapter.getEntity(id + userId);
+    final data =
+        commonDbAdapter.channelUserDbAdapter.getEntity('${userId}_$id');
     // final amityChannel = await data.saveToDb(commonDbAdapter);
     return data!.convertToAmityChannelMember();
   }
 
   @override
   List<String>? getMemberPermission(String id, String userId) {
-    final data = commonDbAdapter.channelUserDbAdapter.getEntity(id + userId);
+    final data =
+        commonDbAdapter.channelUserDbAdapter.getEntity('${userId}_$id');
     return data!.permissions;
   }
 
   @override
-  Future joinChannel(String id) async {
+  Future<AmityChannel> joinChannel(String id) async {
     final data = await channelMemberApiInterface.joinChannel(id);
-    final amityChannel = await data.saveToDb(commonDbAdapter);
+    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
     return amityChannel.first;
   }
 
   @override
   Future leaveChannel(String id) async {
     final data = await channelMemberApiInterface.leaveChannel(id);
-    final amityChannel = await data.saveToDb(commonDbAdapter);
+    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
     return amityChannel.first;
   }
 
@@ -77,28 +79,28 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
     // await communityMemberPagingDbAdapter.updateCommunityMemmberCollection(
     //     data.convertToCommunityMemberPagingHiveEntity());
 
-    final amityChannel = await data.saveToDb(commonDbAdapter);
+    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
     return PageListData(amityChannel, data.paging!.next ?? '');
   }
 
   @override
   Future removeMember(UpdateChannelMembersRequest request) async {
     final data = await channelMemberApiInterface.removeMember(request);
-    final amityChannel = await data.saveToDb(commonDbAdapter);
+    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
     return amityChannel.first;
   }
 
   @override
   Future removeRole(UpdateChannelRoleRequest request) async {
     final data = await channelMemberApiInterface.removeRole(request);
-    final amityChannel = await data.saveToDb(commonDbAdapter);
+    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
     return amityChannel.first;
   }
 
   @override
   Future unbanMember(UpdateChannelMembersRequest request) async {
     final data = await channelMemberApiInterface.unbanMember(request);
-    final amityChannel = await data.saveToDb(commonDbAdapter);
+    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
     return amityChannel.first;
   }
 }

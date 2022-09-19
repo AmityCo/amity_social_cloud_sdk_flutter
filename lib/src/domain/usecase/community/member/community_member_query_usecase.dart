@@ -3,12 +3,17 @@ import 'dart:async';
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// [CommunityMemberQueryUsecase]
 class CommunityMemberQueryUsecase extends UseCase<
     PageListData<List<AmityCommunityMember>, String>,
     GetCommunityMembersRequest> {
+  /// Community Member Repo
   final CommunityMemberRepo communityMemberRepo;
+
+  /// Community Member Composer Usecase
   final CommunityMemberComposerUsecase communityMemberComposerUsecase;
 
+  /// Init [CommunityMemberQueryUsecase]
   CommunityMemberQueryUsecase(
       {required this.communityMemberRepo,
       required this.communityMemberComposerUsecase});

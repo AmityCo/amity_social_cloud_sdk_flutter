@@ -1,3 +1,4 @@
+import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 /// [AmityChannelMember]
@@ -9,7 +10,7 @@ class AmityChannelMember {
   String? userId;
 
   /// Display Name
-  String? displayName;
+  String? displayName; // Compose
 
   /// is Muted
   bool? isMuted = false;
@@ -25,4 +26,7 @@ class AmityChannelMember {
 
   /// User
   AmityUser? user; // Compose
+
+  /// Member ship
+  AmityMembershipType membership = AmityMembershipType.NONE;
 }

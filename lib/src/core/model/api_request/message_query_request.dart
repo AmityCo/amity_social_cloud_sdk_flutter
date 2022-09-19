@@ -15,18 +15,17 @@ String messageQueryRequestToJson(MessageQueryRequest data) =>
 /// [MessageQueryRequest]
 class MessageQueryRequest {
   /// init [MessageQueryRequest]
-  MessageQueryRequest({
-    required this.channelId,
-    this.type,
-    this.parentId,
-    this.filterByParentId,
-    this.hasFlag,
-    this.isDeleted,
-    this.tags,
-    this.excludeTags,
-    this.options,
-    this.stackFromEnd
-  });
+  MessageQueryRequest(
+      {required this.channelId,
+      this.type,
+      this.parentId,
+      this.filterByParentId,
+      this.hasFlag,
+      this.isDeleted,
+      this.tags,
+      this.excludeTags,
+      this.options,
+      this.stackFromEnd});
 
   /// Channel ID
   final String channelId;

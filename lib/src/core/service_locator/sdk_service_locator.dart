@@ -8,7 +8,7 @@ import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/repo/channel_member_repo.dart';
 import 'package:amity_sdk/src/domain/usecase/channel/channel_get_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
-import 'package:amity_sdk/src/public/repo/channel_repository.dart';
+import 'package:amity_sdk/src/public/repo/channel/channel_repository.dart';
 import 'package:amity_sdk/src/public/repo/message/message_repository.dart';
 import 'package:get_it/get_it.dart';
 
@@ -553,11 +553,37 @@ class SdkServiceLocator {
         () => ChannelComposerUsecase(
               fileRepo: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<ChannelMemberComposerUsecase>(
+        () => ChannelMemberComposerUsecase(
+              channelRepo: serviceLocator(),
+              userRepo: serviceLocator(),
+              userComposerUsecase: serviceLocator(),
+            ));
     serviceLocator
         .registerLazySingleton<ChannelGetUseCase>(() => ChannelGetUseCase(
               channelRepo: serviceLocator(),
               channelComposerUsecase: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<ChannelMemberJoinUsecase>(
+        () => ChannelMemberJoinUsecase(
+              channelMemberRepo: serviceLocator(),
+              channelComposerUsecase: serviceLocator(),
+            ));
+
+    serviceLocator.registerLazySingleton<ChannelMemberLeaveUsecase>(
+        () => ChannelMemberLeaveUsecase(
+              channelMemberRepo: serviceLocator(),
+            ));
+
+    serviceLocator.registerLazySingleton<ChannelMemberGetUsecase>(() =>
+        ChannelMemberGetUsecase(
+            channelMemberRepo: serviceLocator(),
+            channelMemberComposerUsecase: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<ChannelMemberQueryUsecase>(() =>
+        ChannelMemberQueryUsecase(
+            channelMemberRepo: serviceLocator(),
+            channelComposerUsecase: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
@@ -571,6 +597,8 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => PollRepository());
     serviceLocator.registerLazySingleton(() => MessageRepository());
     serviceLocator.registerLazySingleton(() => ChannelRepository());
+    serviceLocator
+        .registerLazySingleton(() => ChannelParticipationRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(
