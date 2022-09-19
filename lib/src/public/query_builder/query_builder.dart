@@ -1,3 +1,4 @@
+export 'channel/channel.dart';
 export 'comment/comment.dart';
 export 'community/community.dart';
 export 'feed/feed.dart';

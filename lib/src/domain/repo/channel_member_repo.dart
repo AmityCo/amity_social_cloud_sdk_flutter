@@ -14,7 +14,7 @@ abstract class ChannelMemberRepo {
   Future removeMember(UpdateChannelMembersRequest request);
 
   /// Join Channel
-  Future joinChannel(String id);
+  Future<AmityChannel> joinChannel(String id);
 
   /// Leave Channel
   Future leaveChannel(String id);

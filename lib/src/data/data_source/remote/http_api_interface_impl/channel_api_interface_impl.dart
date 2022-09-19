@@ -1,6 +1,4 @@
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/model/api_request/channel/create_channel_request.dart';
-import 'package:amity_sdk/src/core/model/api_request/channel/get_channel_request.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:dio/dio.dart';
 
@@ -36,9 +34,16 @@ class ChannelApiInterfaceImpl extends ChannelApiInterface {
   }
 
   @override
-  Future<CreateChannelResponse> getChannelQuery(GetChannelRequest request) {
-    // TODO: implement getChannelQuery
-    throw UnimplementedError();
+  Future<CreateChannelResponse> getChannelQuery(
+      GetChannelRequest request) async {
+    try {
+      final data = await httpApiClient()
+          .get(CHANNEL_V3, queryParameters: request.toJson());
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
   }
 
   @override

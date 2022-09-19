@@ -1,24 +1,29 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// [CommunityMemberQueryBuilder]
 class CommunityMemberQueryBuilder {
   final CommunityMemberQueryUsecase usecase;
   final GetCommunityMembersRequest _request;
 
+  /// Init [CommunityMemberQueryBuilder]
   CommunityMemberQueryBuilder(
       {required this.usecase, required String communityId})
       : _request = GetCommunityMembersRequest(communityId: communityId);
 
+  /// Apply Filter
   CommunityMemberQueryBuilder roles(List<String> roles) {
     _request.roles = roles;
     return this;
   }
 
+  /// Apply Filter
   CommunityMemberQueryBuilder filter(AmityCommunityMembershipFilter filter) {
     _request.memberships = filter.memberships;
     return this;
   }
 
+  /// Apply Filter
   CommunityMemberQueryBuilder sortBy(AmityMembershipSortOption order) {
     _request.sortBy = order.value;
     return this;
