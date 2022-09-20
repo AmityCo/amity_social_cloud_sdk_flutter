@@ -21,8 +21,4 @@ class LoginUsecase extends UseCase<AmityUser, AuthenticationRequest> {
     return amityComposedUser;
   }
 
-  @override
-  Stream<AmityUser> listen(AuthenticationRequest params) {
-    throw UnimplementedError();
-  }
 }

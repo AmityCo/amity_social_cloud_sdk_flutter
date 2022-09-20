@@ -13,9 +13,4 @@ class PostUpdateUsecase extends UseCase<AmityPost, UpdatePostRequest> {
     final amityComposedPost = await postComposerUsecase.get(amityPost);
     return amityComposedPost;
   }
-
-  @override
-  Stream<AmityPost> listen(UpdatePostRequest params) {
-    throw UnimplementedError();
-  }
 }

@@ -12,9 +12,4 @@ class FileImageUploadUsecase
   Future<AmityUploadResult<AmityImage>> get(UploadFileRequest params) {
     return _fileRepo.uploadImage(params);
   }
-
-  @override
-  Stream<AmityUploadResult<AmityImage>> listen(UploadFileRequest params) {
-    throw UnimplementedError();
-  }
 }

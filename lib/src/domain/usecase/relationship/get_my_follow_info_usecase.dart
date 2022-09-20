@@ -8,10 +8,4 @@ class GetMyFollowInfoUsecase extends UseCaseWithoutParam<AmityMyFollowInfo> {
   Future<AmityMyFollowInfo> get() {
     return followRepo.getMyFollowInfo();
   }
-
-  @override
-  Stream<AmityMyFollowInfo> listen() {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

@@ -36,10 +36,4 @@ class RegisterDeviceNotificationUseCase extends UseCase<void, String> {
         platform: platform);
     return notificationRepo.registerNotification(request);
   }
-
-  @override
-  Stream<void> listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

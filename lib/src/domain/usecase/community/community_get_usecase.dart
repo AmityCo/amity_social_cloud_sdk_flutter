@@ -14,10 +14,4 @@ class CommunityGetUseCase extends UseCase<AmityCommunity, String> {
         await communityComposerUsecase.get(amityCommunity);
     return amityCommunityComposed;
   }
-
-  @override
-  Stream<AmityCommunity> listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

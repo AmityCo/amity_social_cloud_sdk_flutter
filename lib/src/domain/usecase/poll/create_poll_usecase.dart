@@ -13,10 +13,4 @@ class CreatePollUseCase extends UseCase<AmityPoll, CreatePollRequest> {
   Future<AmityPoll> get(CreatePollRequest params) {
     return pollRepo.createPoll(params);
   }
-
-  @override
-  Stream<AmityPoll> listen(CreatePollRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

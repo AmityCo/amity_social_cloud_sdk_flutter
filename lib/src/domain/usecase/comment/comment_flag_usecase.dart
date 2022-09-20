@@ -10,10 +10,4 @@ class CommentFlagUsecase extends UseCase<bool, String> {
   Future<bool> get(String params) {
     return commentRepo.flagComment(params);
   }
-
-  @override
-  Stream<bool> listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

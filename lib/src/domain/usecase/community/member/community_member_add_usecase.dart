@@ -23,11 +23,4 @@ class CommunityMemberAddUsecase
         .toList();
     return communityMembers;
   }
-
-  @override
-  Stream<List<AmityCommunityMember>> listen(
-      UpdateCommunityMembersRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

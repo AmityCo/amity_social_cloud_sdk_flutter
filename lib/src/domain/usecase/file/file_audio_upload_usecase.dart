@@ -15,8 +15,4 @@ class FileAudioUploadUsecase
     throw UnimplementedError();
   }
 
-  @override
-  Stream<AmityUploadResult<AmityAudio>> listen(UploadFileRequest params) {
-    throw UnimplementedError();
-  }
 }

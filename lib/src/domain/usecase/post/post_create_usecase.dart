@@ -13,9 +13,4 @@ class PostCreateUsecase extends UseCase<AmityPost, CreatePostRequest> {
     final amityComposedPost = await postComposerUsecase.get(amityPost);
     return amityComposedPost;
   }
-
-  @override
-  Stream<AmityPost> listen(CreatePostRequest params) {
-    throw UnimplementedError();
-  }
 }

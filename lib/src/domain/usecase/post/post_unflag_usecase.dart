@@ -10,10 +10,4 @@ class PostUnflagUsecase extends UseCase<bool, String> {
   Future<bool> get(String params) {
     return postRepo.unflagPost(params);
   }
-
-  @override
-  Stream<bool> listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

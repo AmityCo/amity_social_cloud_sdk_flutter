@@ -10,10 +10,4 @@ class PostApproveUsecase extends UseCase<bool, String> {
   Future<bool> get(String params) {
     return postRepo.approvePost(params);
   }
-
-  @override
-  Stream<bool> listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

@@ -35,8 +35,4 @@ class PostFileComposerUsecase extends UseCase<AmityPostData, AmityPostData> {
     return params;
   }
 
-  @override
-  Stream<AmityPostData> listen(AmityPostData params) {
-    throw UnimplementedError();
-  }
 }

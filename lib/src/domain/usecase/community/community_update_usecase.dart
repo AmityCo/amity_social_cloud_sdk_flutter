@@ -15,10 +15,4 @@ class CommunityUpdateUseCase
         await communityComposerUsecase.get(amityCommunity);
     return amityCommunityComposed;
   }
-
-  @override
-  Stream<AmityCommunity> listen(CreateCommunityRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

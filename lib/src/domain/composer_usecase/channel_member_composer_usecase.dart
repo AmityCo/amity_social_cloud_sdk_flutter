@@ -28,10 +28,4 @@ class ChannelMemberComposerUsecase
     params.user = await userComposerUsecase.get(rawUser);
     return params;
   }
-
-  @override
-  Stream<AmityChannelMember> listen(AmityChannelMember params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

@@ -17,10 +17,4 @@ class CommunityGetRecommendedUseCase
         .toList();
     return amityComposedCommunity;
   }
-
-  @override
-  Stream<List<AmityCommunity>> listen(OptionsRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

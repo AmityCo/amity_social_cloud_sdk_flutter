@@ -19,10 +19,4 @@ class ChannelCreateUsecase extends UseCase<AmityChannel, CreateChannelRequest> {
     final amityCreatedChannel = await channelComposerUsecase.get(amityChannel);
     return amityCreatedChannel;
   }
-
-  @override
-  Stream<AmityChannel> listen(CreateChannelRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

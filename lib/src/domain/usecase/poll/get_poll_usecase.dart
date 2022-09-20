@@ -13,10 +13,4 @@ class GetPollUseCase extends UseCase<AmityPoll, String> {
   Future<AmityPoll> get(String params) {
     return pollRepo.getPollByIdFromDb(params);
   }
-
-  @override
-  Stream<AmityPoll> listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

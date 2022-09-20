@@ -16,10 +16,4 @@ class CommunityCategoryComposerUsecase
 
     return params;
   }
-
-  @override
-  Stream<AmityCommunityCategory> listen(AmityCommunityCategory params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

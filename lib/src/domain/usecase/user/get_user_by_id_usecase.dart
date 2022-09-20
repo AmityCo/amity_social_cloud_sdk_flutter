@@ -18,10 +18,4 @@ class GetUserByIdUseCase extends UseCase<AmityUser, String> {
     final amityComposedUser = await userComposerUsecase.get(amityUser);
     return amityComposedUser;
   }
-
-  @override
-  Stream<AmityUser> listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

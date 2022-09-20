@@ -19,11 +19,4 @@ class CommunityGetQueryUseCase extends UseCase<
             .toList();
     return amityCommunities.withItem1(amityComposedCommunity);
   }
-
-  @override
-  Stream<PageListData<List<AmityCommunity>, String>> listen(
-      GetCommunityRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

@@ -36,9 +36,4 @@ class MessageFileComposerUsecase
     }
     return params;
   }
-
-  @override
-  Stream<AmityMessageData> listen(AmityMessageData params) {
-    throw UnimplementedError();
-  }
 }

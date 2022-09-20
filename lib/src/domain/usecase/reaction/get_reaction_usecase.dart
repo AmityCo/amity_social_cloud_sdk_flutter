@@ -27,10 +27,4 @@ class GetReactionUsecase extends UseCase<
 
     return data.withItem1(composedData);
   }
-
-  @override
-  Stream<PageListData<List<AmityReaction>, String>> listen(
-      GetReactionRequest params) {
-    throw UnimplementedError();
-  }
 }

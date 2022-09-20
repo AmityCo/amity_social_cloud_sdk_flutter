@@ -39,10 +39,4 @@ class CommunityComposerUsecase extends UseCase<AmityCommunity, AmityCommunity> {
 
     return params;
   }
-
-  @override
-  Stream<AmityCommunity> listen(AmityCommunity params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

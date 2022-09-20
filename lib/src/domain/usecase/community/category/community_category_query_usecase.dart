@@ -25,11 +25,4 @@ class CommunityCategoryQueryUsecase extends UseCase<
     return amityCommunityCategoryTuple
         .withItem1(amityComposedCommunityCategory);
   }
-
-  @override
-  Stream<PageListData<List<AmityCommunityCategory>, String>> listen(
-      GetCommunityCategoryRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

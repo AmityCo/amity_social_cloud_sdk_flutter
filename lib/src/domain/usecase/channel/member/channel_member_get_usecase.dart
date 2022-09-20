@@ -24,9 +24,4 @@ class ChannelMemberGetUsecase
         await channelMemberRepo.getMember(params.channelId, params.memberId!);
     return channelMemberComposerUsecase.get(data);
   }
-
-  @override
-  Stream<AmityChannelMember> listen(GetChannelMembersRequest params) {
-    throw UnimplementedError();
-  }
 }
