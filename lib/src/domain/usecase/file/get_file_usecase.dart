@@ -12,9 +12,4 @@ class GetFileUserCase extends UseCase<AmityFileProperties, String> {
   Future<AmityFileProperties> get(String params) {
     return fileRepo.getFileByIdFromDb(params);
   }
-
-  @override
-  Stream<AmityFileProperties> listen(String params) {
-    throw UnimplementedError();
-  }
 }

@@ -14,10 +14,4 @@ class ClosePollUseCase extends UseCase<AmityPoll, PollVoteRequest> {
   Future<AmityPoll> get(PollVoteRequest params) {
     return pollRepo.closePoll(params);
   }
-
-  @override
-  Stream<AmityPoll> listen(PollVoteRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

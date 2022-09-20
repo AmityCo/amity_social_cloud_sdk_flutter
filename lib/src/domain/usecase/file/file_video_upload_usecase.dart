@@ -12,9 +12,4 @@ class FileVideoUploadUsecase
   Future<AmityUploadResult<AmityVideo>> get(UploadFileRequest params) {
     return _fileRepo.uploadVidoe(params);
   }
-
-  @override
-  Stream<AmityUploadResult<AmityVideo>> listen(UploadFileRequest params) {
-    throw UnimplementedError();
-  }
 }

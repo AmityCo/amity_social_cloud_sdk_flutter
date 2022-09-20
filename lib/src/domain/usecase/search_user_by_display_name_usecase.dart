@@ -6,9 +6,4 @@ class SearchUserByDisplayNameUsecase extends UseCase<List<AmityUser>, String> {
   Future<List<AmityUser>> get(String params) {
     throw UnimplementedError();
   }
-
-  @override
-  Stream<List<AmityUser>> listen(String params) {
-    throw UnimplementedError();
-  }
 }

@@ -10,10 +10,4 @@ class CommentDeleteUseCase extends UseCase<void, String> {
   Future get(String params) {
     return commentRepo.deleteComment(params);
   }
-
-  @override
-  Stream<void> listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

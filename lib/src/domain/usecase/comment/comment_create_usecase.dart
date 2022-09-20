@@ -15,10 +15,4 @@ class CommentCreateUseCase extends UseCase<AmityComment, CreateCommentRequest> {
 
     return composedComment;
   }
-
-  @override
-  Stream<AmityComment> listen(CreateCommentRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

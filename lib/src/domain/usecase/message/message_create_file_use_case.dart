@@ -20,9 +20,4 @@ class MessageCreateFileUsecase
     final amityComposeMessage = await messageComposerUsecase.get(amityMessage);
     return amityComposeMessage;
   }
-
-  @override
-  Stream<AmityMessage> listen(CreateMessageRequest params) {
-    throw UnimplementedError();
-  }
 }

@@ -10,10 +10,4 @@ class PostDeclineUsecase extends UseCase<bool, String> {
   Future<bool> get(String params) {
     return postRepo.declinePost(params);
   }
-
-  @override
-  Stream<bool> listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

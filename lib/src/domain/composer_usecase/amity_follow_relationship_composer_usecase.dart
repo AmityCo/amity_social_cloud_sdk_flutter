@@ -1,10 +1,16 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// [AmityFollowRelationshipComposerUsecase]
 class AmityFollowRelationshipComposerUsecase
     extends UseCase<AmityFollowRelationship, AmityFollowRelationship> {
+  /// User Repo
   final UserRepo userRepo;
+
+  /// User Composer Usecase
   final UserComposerUsecase userComposerUsecase;
+
+  /// Init [AmityFollowRelationshipComposerUsecase]
   AmityFollowRelationshipComposerUsecase(
       {required this.userRepo, required this.userComposerUsecase});
 
@@ -22,10 +28,5 @@ class AmityFollowRelationshipComposerUsecase
       params.sourceUser = await userComposerUsecase.get(params.sourceUser!);
     }
     return params;
-  }
-
-  @override
-  Stream<AmityFollowRelationship> listen(AmityFollowRelationship params) {
-    throw UnimplementedError();
   }
 }

@@ -36,10 +36,4 @@ class MessageComposerUsecase extends UseCase<AmityMessage, AmityMessage> {
 
     return params;
   }
-
-  @override
-  Stream<AmityMessage> listen(AmityMessage params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

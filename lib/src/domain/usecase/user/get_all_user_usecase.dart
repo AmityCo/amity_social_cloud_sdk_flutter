@@ -18,9 +18,4 @@ class GetAllUserUseCase extends UseCase<List<AmityUser>, UsersRequest> {
         .toList();
     return amityComposedUsers;
   }
-
-  @override
-  Stream<List<AmityUser>> listen(UsersRequest params) {
-    throw UnimplementedError();
-  }
 }

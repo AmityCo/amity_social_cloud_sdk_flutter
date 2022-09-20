@@ -20,10 +20,4 @@ class GetUserFollowersUsecase extends UseCase<
         .toList();
     return followers.withItem1(followersComposed);
   }
-
-  @override
-  Stream<PageListData<List<AmityFollowRelationship>, String>> listen(
-      FollowRequest params) {
-    throw UnimplementedError();
-  }
 }

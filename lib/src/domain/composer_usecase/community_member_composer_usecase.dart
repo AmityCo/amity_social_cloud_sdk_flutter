@@ -17,10 +17,4 @@ class CommunityMemberComposerUsecase
     params.user = await userComposerUsecase.get(rawUser);
     return params;
   }
-
-  @override
-  Stream<AmityCommunityMember> listen(AmityCommunityMember params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

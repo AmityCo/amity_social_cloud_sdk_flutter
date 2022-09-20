@@ -21,8 +21,8 @@ class MessageObserveUsecase
     throw UnimplementedError();
   }
 
-  @override
-  Stream<List<AmityMessage>> listen(MessageQueryRequest params) {
+  /// Listen Message Query Request
+  StreamController<List<AmityMessage>> listen(MessageQueryRequest params) {
     //missing compose use case :(
     final streamController = StreamController<List<AmityMessage>>();
 
@@ -33,6 +33,6 @@ class MessageObserveUsecase
       streamController.add(event);
     });
 
-    return streamController.stream;
+    return streamController;
   }
 }

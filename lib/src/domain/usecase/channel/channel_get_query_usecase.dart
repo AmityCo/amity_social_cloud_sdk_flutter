@@ -24,11 +24,4 @@ class ChannelGetQueryUseCase extends UseCase<
             .toList();
     return amityCommunities.withItem1(amityComposedChannel);
   }
-
-  @override
-  Stream<PageListData<List<AmityChannel>, String>> listen(
-      GetChannelRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

@@ -29,11 +29,4 @@ class CommunityMemberQueryUsecase extends UseCase<
             .toList();
     return amityCommunityMemberTuple.withItem1(amityComposedCommunityMember);
   }
-
-  @override
-  Stream<PageListData<List<AmityCommunityMember>, String>> listen(
-      GetCommunityMembersRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

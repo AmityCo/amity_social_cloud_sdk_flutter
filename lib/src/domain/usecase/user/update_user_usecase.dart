@@ -16,10 +16,4 @@ class UpdateUserUsecase extends UseCase<AmityUser, UpdateUserRequest> {
     final amityComposedUser = await userComposerUsecase.get(amityUser.first);
     return amityComposedUser;
   }
-
-  @override
-  Stream<AmityUser> listen(UpdateUserRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

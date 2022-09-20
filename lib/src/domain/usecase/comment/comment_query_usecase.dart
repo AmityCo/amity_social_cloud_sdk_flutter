@@ -27,10 +27,4 @@ class CommentQueryUsecase
     //Replace the original data with compose data
     return data.withItem1(amityComposedPost);
   }
-
-  @override
-  Stream<List<AmityComment>> listen(GetCommentRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

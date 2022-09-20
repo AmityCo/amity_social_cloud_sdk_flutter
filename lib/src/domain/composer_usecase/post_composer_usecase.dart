@@ -82,10 +82,4 @@ class PostComposerUsecase extends UseCase<AmityPost, AmityPost> {
 
     return params;
   }
-
-  @override
-  Stream<AmityPost> listen(AmityPost params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

@@ -13,9 +13,4 @@ class GetUserTokenUsecase
     final amityUserToken = await authenticationRepo.getUserToken(params);
     return amityUserToken;
   }
-
-  @override
-  Stream<AmityUserToken> listen(AuthenticationRequest params) {
-    throw UnimplementedError();
-  }
 }

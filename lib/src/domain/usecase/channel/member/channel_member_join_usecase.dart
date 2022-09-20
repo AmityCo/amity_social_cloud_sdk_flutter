@@ -20,9 +20,4 @@ class ChannelMemberJoinUsecase extends UseCase<AmityChannel, String> {
   Future<AmityChannel> get(String params) async {
     return await channelMemberRepo.joinChannel(params);
   }
-
-  @override
-  Stream<AmityChannel> listen(String params) {
-    throw UnimplementedError();
-  }
 }

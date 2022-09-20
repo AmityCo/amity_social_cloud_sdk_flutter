@@ -12,9 +12,4 @@ class PollVoteUseCase extends UseCase<AmityPoll, PollVoteRequest> {
   Future<AmityPoll> get(PollVoteRequest params) {
     return pollRepo.votePoll(params);
   }
-
-  @override
-  Stream<AmityPoll> listen(PollVoteRequest params) {
-    throw UnimplementedError();
-  }
 }

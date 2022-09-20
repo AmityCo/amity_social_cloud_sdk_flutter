@@ -19,9 +19,4 @@ class CommunityGetTrendingUseCase
         .toList();
     return amityComposedCommunity;
   }
-
-  @override
-  Stream<List<AmityCommunity>> listen(OptionsRequest params) {
-    throw UnimplementedError();
-  }
 }

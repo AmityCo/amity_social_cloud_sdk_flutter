@@ -23,10 +23,4 @@ class UnregisterDeviceNotificationUseCase extends UseCase<void, void> {
         userId: account!.userId!, deviceId: account.deviceId!);
     return notificationRepo.unregisterNotification(request);
   }
-
-  @override
-  Stream<void> listen(void params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

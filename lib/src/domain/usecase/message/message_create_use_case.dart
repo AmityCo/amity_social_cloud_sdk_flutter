@@ -19,9 +19,4 @@ class MessageCreateUsecase extends UseCase<AmityMessage, CreateMessageRequest> {
     final amityComposeMessage = await messageComposerUsecase.get(amityMessage);
     return amityComposeMessage;
   }
-
-  @override
-  Stream<AmityMessage> listen(CreateMessageRequest params) {
-    throw UnimplementedError();
-  }
 }

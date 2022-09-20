@@ -20,9 +20,4 @@ class ChannelComposerUsecase extends UseCase<AmityChannel, AmityChannel> {
 
     return params;
   }
-
-  @override
-  Stream<AmityChannel> listen(AmityChannel params) {
-    throw UnimplementedError();
-  }
 }

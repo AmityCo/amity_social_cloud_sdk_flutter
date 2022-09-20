@@ -22,10 +22,4 @@ class ChannelMemberQueryUsecase extends UseCase<
       GetChannelMembersRequest params) async {
     return await channelMemberRepo.queryMembers(params);
   }
-
-  @override
-  Stream<PageListData<List<AmityChannelMember>, String>> listen(
-      GetChannelMembersRequest params) {
-    throw UnimplementedError();
-  }
 }

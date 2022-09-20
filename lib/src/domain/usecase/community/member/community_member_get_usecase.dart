@@ -19,10 +19,4 @@ class CommunityMemberGetUsecase extends UseCase<AmityCommunityMember,
         await communityMemberRepo.getMember(params.communityId, params.userId);
     return amityMember;
   }
-
-  @override
-  Stream<AmityCommunityMember> listen(
-      CommunityMemberPermissionCheckRequest params) {
-    throw UnimplementedError();
-  }
 }

@@ -1,9 +1,12 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// User Composer Usecae - to construct full user object
 class UserComposerUsecase extends UseCase<AmityUser, AmityUser> {
+  /// File Repo
   final FileRepo fileRepo;
 
+  /// Init [UserComposerUsecase]
   UserComposerUsecase({required this.fileRepo});
 
   @override
@@ -14,11 +17,5 @@ class UserComposerUsecase extends UseCase<AmityUser, AmityUser> {
       params.avatarUrl = fileProperties.fileUrl;
     }
     return params;
-  }
-
-  @override
-  Stream<AmityUser> listen(AmityUser params) {
-    // TODO: implement listen
-    throw UnimplementedError();
   }
 }
