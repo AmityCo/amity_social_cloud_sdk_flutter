@@ -46,7 +46,9 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
     final data =
         commonDbAdapter.channelUserDbAdapter.getEntity('${userId}_$id');
     // final amityChannel = await data.saveToDb(commonDbAdapter);
-    return data!.convertToAmityChannelMember();
+    return data?.convertToAmityChannelMember() ?? AmityChannelMember()
+      ..channelId = id
+      ..userId = userId;
   }
 
   @override
