@@ -20,7 +20,7 @@ abstract class LiveCollection<Model> {
   Future<PageListData<List<Model>, String>> getFirstPageRequest();
 
   /// Listen to live collection
-  StreamController<List<Model>> asStream();
+  StreamController<List<Model>> getStreamController();
 
   /// On Error Callback
   Function(Object? error, StackTrace stackTrace)? _onErrorCallback;
