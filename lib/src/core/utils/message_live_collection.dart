@@ -26,7 +26,7 @@ class MessageLiveCollection extends LiveCollection<AmityMessage> {
   }
 
   @override
-  StreamController<List<AmityMessage>> asStream() {
+  StreamController<List<AmityMessage>> getStreamController() {
     return serviceLocator<MessageObserveUsecase>().listen(params);
   }
 }
