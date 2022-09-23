@@ -19,7 +19,6 @@ class GetUserFeedUsecase
     return amityPost.withItem1(amityComposedPost);
   }
 
-  @override
   Stream<PageListData<List<AmityPost>, String>> listen(
       GetUserFeedRequest params) {
     //1. Listen to Global Feed collection

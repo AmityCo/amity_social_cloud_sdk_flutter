@@ -1,5 +1,4 @@
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/enum/amity_message_sync_state.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:hive/hive.dart';
 

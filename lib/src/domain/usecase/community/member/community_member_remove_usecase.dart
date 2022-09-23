@@ -13,10 +13,4 @@ class CommunityMemberRemoveUsecase
   Future get(UpdateCommunityMembersRequest params) async {
     return await communityMemberRepo.removeMember(params);
   }
-
-  @override
-  Stream listen(UpdateCommunityMembersRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

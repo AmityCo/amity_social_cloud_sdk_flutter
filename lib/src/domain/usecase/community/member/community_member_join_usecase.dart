@@ -15,10 +15,4 @@ class CommunityMemberJoinUsecase extends UseCase<void, String> {
   Future get(String params) async {
     return await communityMemberRepo.joinCommunity(params);
   }
-
-  @override
-  Stream listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

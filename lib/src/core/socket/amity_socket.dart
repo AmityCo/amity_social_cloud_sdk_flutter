@@ -3,12 +3,12 @@ import 'dart:async';
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/repo/account_repo.dart';
 import 'package:amity_sdk/src/public/amity_core_client.dart';
-import 'package:socket_io_client/socket_io_client.dart' as IO;
+import 'package:socket_io_client/socket_io_client.dart' as io;
 
 /// [AmitySocket]
 class AmitySocket {
   /// Web Socket Connection
-  static IO.Socket? _activeSocket;
+  static io.Socket? _activeSocket;
 
   /// Account Repo
   final AccountRepo accountRepo;
@@ -68,9 +68,9 @@ class AmitySocket {
     }
     _shouldConnect = true;
 
-    _activeSocket = IO.io(
+    _activeSocket = io.io(
         amityCoreClientOption.httpEndpoint.value,
-        IO.OptionBuilder()
+        io.OptionBuilder()
             .setTransports(['websocket'])
             .enableAutoConnect()
             .setQuery({'token': accessToken})

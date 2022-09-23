@@ -12,9 +12,4 @@ class RemoveReactionUsecase extends UseCase<void, ReactionRequest> {
   Future get(ReactionRequest params) {
     return reactionRepo.removeReaction(params);
   }
-
-  @override
-  Stream listen(ReactionRequest params) {
-    throw UnimplementedError();
-  }
 }

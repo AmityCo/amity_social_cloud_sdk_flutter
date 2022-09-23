@@ -19,7 +19,6 @@ class GetPostByIdUseCase extends UseCase<AmityPost, String> {
     return amityComposedPost;
   }
 
-  @override
   Stream<AmityPost> listen(String params) {
     //1. Listen to Amity post stream
     //2. compose the Amity post

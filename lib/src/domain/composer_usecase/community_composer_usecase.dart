@@ -2,7 +2,6 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class CommunityComposerUsecase extends UseCase<AmityCommunity, AmityCommunity> {
-  //TODO: Missing communityUserRepo tags and categoryRepo
   final CommunityRepo communityRepo;
   final UserRepo userRepo;
   final UserComposerUsecase userComposerUsecase;

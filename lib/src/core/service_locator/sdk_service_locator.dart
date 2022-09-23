@@ -6,19 +6,19 @@ import 'package:amity_sdk/src/data/repo_impl/channel_member_repo_impl.dart';
 import 'package:amity_sdk/src/data/repo_impl/channel_repo_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/repo/channel_member_repo.dart';
-import 'package:amity_sdk/src/domain/usecase/channel/channel_get_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
-import 'package:amity_sdk/src/public/repo/channel/channel_repository.dart';
-import 'package:amity_sdk/src/public/repo/message/message_repository.dart';
 import 'package:get_it/get_it.dart';
 
+/// Global GetIt instance
 final configServiceLocator = GetIt.asNewInstance();
 
+/// Global GetIt instance
 final serviceLocator =
     GetIt.asNewInstance(); //sl is referred to as Service Locator
 
+/// Service Locator class to init Get It
 class SdkServiceLocator {
-//Dependency injection
+  ///Dependency injection
   static Future<void> initServiceLocator({bool syc = false}) async {
     DateTime startTime = DateTime.now();
 
