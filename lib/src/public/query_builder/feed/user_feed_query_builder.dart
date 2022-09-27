@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// [UserFeedQueryBuilder]
 class UserFeedQueryBuilder {
   final GetUserFeedUsecase _usecase;
   final GetUserFeedRequest _request;
 
+  /// Init [UserFeedQueryBuilder]
   UserFeedQueryBuilder(this._usecase, String userId)
       : _request = GetUserFeedRequest(userId: userId);
 
@@ -39,7 +43,7 @@ class UserFeedQueryBuilder {
     return data;
   }
 
-  Stream<PageListData<List<AmityPost>, String>> getPagingDataStream(
+  StreamController<PageListData<List<AmityPost>, String>> getPagingDataStream(
       {String? token, int? limit}) {
     _request.options = OptionsRequest();
     if (token != null) {

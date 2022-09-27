@@ -58,7 +58,7 @@ class AmityCommunity {
     };
   }
 
-  Stream<AmityCommunity> get listen {
+  StreamController<AmityCommunity> get listen {
     StreamController<AmityCommunity> controller =
         StreamController<AmityCommunity>();
 
@@ -73,7 +73,7 @@ class AmityCommunity {
           );
     });
 
-    return controller.stream;
+    return controller;
   }
 
   String toJson() => json.encode(toMap());
