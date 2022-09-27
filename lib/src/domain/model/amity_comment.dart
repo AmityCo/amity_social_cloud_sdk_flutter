@@ -4,38 +4,86 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// [AmityComment]
 class AmityComment {
+  /// init [AmityComment]
   AmityComment({required this.commentId});
 
+  /// Commend ID
   String? commentId;
+
+  /// Reference Type
   AmityCommentReferenceType? referenceType; //TODO: should be enum
+  /// Reference ID
   String? referenceId;
+
+  /// User ID
   String? userId;
+
+  /// Parent ID
   String? parentId;
+
+  /// Root ID
   String? rootId;
+
+  /// Data Type
   AmityDataType? dataType;
+
+  /// Comment Data
   AmityCommentData? data;
+
+  /// Child Number
   int? childrenNumber;
+
+  /// Replies ID
   List<String>? repliesId;
+
+  /// Latest Replies
   List<AmityComment>? latestReplies; //composer
+  /// Flag Count
   int? flagCount;
+
+  /// My Reactions
   List<String>? myReactions;
+
+  /// Reaction Count
   int? reactionCount;
+
+  /// Reactions
   AmityReactionMap? reactions; //composer
+  /// Meta Data
   Map<String, dynamic>? metadata;
+
+  /// Is Deleted
   bool? isDeleted;
+
+  ///Create At
   DateTime? createdAt;
+
+  /// Edited At
   DateTime? editedAt;
+
+  /// Updated At
   DateTime? updatedAt;
+
+  /// Sync State
   String? syncState;
+
+  /// Mentionees
   List<AmityMentionee>? mentionees; //composer
+  /// User
   AmityUser? user; //composer
+  /// Path
   String? path;
 
+  /// Hash Flag
   Map<String, dynamic>? hashFlag;
+
+  /// Flagged By Me
   bool? flaggedByMe;
 
-  Stream<AmityComment> get listen {
+  /// Listen Update in Amity Comment
+  StreamController<AmityComment> get listen {
     StreamController<AmityComment> controller =
         StreamController<AmityComment>();
 
@@ -50,7 +98,7 @@ class AmityComment {
           );
     });
 
-    return controller.stream;
+    return controller;
   }
 }
 

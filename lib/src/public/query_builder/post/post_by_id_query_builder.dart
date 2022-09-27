@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:amity_sdk/src/domain/domain.dart';
 
 class PostByIdQueryBuilder {
@@ -19,7 +21,7 @@ class PostByIdQueryBuilder {
     return _useCase.get(_postId);
   }
 
-  Stream<AmityPost> listen() {
+  StreamController<AmityPost> listen() {
     return _useCase.listen(_postId);
   }
 }

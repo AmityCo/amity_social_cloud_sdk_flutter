@@ -9,7 +9,7 @@ class AmityUserFollowInfo {
   int? followingCount = 0;
   int? followerCount = 0;
 
-  Stream<AmityUserFollowInfo> get listen {
+  StreamController<AmityUserFollowInfo> get listen {
     final controller = StreamController<AmityUserFollowInfo>();
 
     serviceLocator<FollowInfoDbAdapter>().stream(id!).listen((event) {
@@ -17,6 +17,6 @@ class AmityUserFollowInfo {
       controller.add(amityUserFollowInfo);
     });
 
-    return controller.stream;
+    return controller;
   }
 }

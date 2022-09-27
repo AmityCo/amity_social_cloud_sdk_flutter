@@ -30,7 +30,7 @@ extension AmityMessageExtension on AmityMessage {
   // }
 
   /// Listen Post Id
-  Stream<AmityMessage> get listen {
+  StreamController<AmityMessage> get listen {
     StreamController<AmityMessage> controller =
         StreamController<AmityMessage>();
 
@@ -45,7 +45,7 @@ extension AmityMessageExtension on AmityMessage {
           );
     });
 
-    return controller.stream;
+    return controller;
   }
 
   /// check if post is flagged by me
