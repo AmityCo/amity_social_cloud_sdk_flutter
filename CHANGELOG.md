@@ -1,3 +1,11 @@
+## 0.8.0
+* feat: Create image/file message
+* feat: Channel repo setup
+* feat: Join/Leave channel
+* feat: Add/Remove message reactions
+* feat: Message reactions query
+* fix: change live collection stream to stream controller
+* fix: Error handling in live collection
 ## 0.7.0
 * feat: Create and Query Chat Message  
 * feat: Chat Message Live Collection

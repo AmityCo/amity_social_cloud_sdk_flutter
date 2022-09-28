@@ -13,10 +13,4 @@ class CommunityMemberBanUsecase
   Future get(UpdateCommunityMembersRequest params) async {
     return await communityMemberRepo.banMember(params);
   }
-
-  @override
-  Stream listen(UpdateCommunityMembersRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

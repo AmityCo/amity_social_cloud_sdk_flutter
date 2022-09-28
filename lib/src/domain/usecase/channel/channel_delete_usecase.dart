@@ -12,10 +12,4 @@ class ChannelDeleteUseCase extends UseCase<void, String> {
   Future get(String params) {
     return channelRepo.deleteChannel(params);
   }
-
-  @override
-  Stream listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

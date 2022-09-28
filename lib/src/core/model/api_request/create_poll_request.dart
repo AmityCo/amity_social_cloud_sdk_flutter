@@ -45,9 +45,7 @@ class CreatePollRequest {
   Map<String, dynamic> toJson() => {
         "text": text,
         "question": question,
-        "answers": answers == null
-            ? null
-            : List<dynamic>.from(answers.map((x) => x.toJson())),
+        "answers": List<dynamic>.from(answers.map((x) => x.toJson())),
         "answerType": answerType,
         "closedIn": closedIn,
       }..removeNullValue();

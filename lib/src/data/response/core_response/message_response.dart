@@ -62,7 +62,7 @@ class MessageResponse {
   final int flagCount;
 
   /// Hash Flag
-  final _HashFlag? hashFlag;
+  final HashFlag? hashFlag;
 
   /// Childer number
   final int childrenNumber;
@@ -110,7 +110,7 @@ class MessageResponse {
         flagCount: json["flagCount"],
         hashFlag: json["hashFlag"] == null
             ? null
-            : _HashFlag.fromJson(json["hashFlag"]),
+            : HashFlag.fromJson(json["hashFlag"]),
         childrenNumber: json["childrenNumber"],
         reactionsCount: json["reactionsCount"],
         reactions: Map.from(json["reactions"]),
@@ -243,29 +243,29 @@ class Mentionee {
       };
 }
 
-class _HashFlag {
-  _HashFlag({
-    required this.bits,
-    required this.hashes,
-    required this.hash,
-  });
+// class _HashFlag {
+//   _HashFlag({
+//     required this.bits,
+//     required this.hashes,
+//     required this.hash,
+//   });
 
-  final int bits;
-  final int hashes;
-  final String hash;
+//   final int bits;
+//   final int hashes;
+//   final String hash;
 
-  factory _HashFlag.fromJson(Map<String, dynamic> json) => _HashFlag(
-        bits: json["bits"],
-        hashes: json["hashes"],
-        hash: json["hash"],
-      );
+//   factory _HashFlag.fromJson(Map<String, dynamic> json) => _HashFlag(
+//         bits: json["bits"],
+//         hashes: json["hashes"],
+//         hash: json["hash"],
+//       );
 
-  Map<String, dynamic> toJson() => {
-        "bits": bits,
-        "hashes": hashes,
-        "hash": hash,
-      };
-}
+//   Map<String, dynamic> toJson() => {
+//         "bits": bits,
+//         "hashes": hashes,
+//         "hash": hash,
+//       };
+// }
 
 class Data {
   Data();

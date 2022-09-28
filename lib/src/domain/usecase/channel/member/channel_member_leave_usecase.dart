@@ -15,9 +15,4 @@ class ChannelMemberLeaveUsecase extends UseCase<void, String> {
   Future get(String params) async {
     return await channelMemberRepo.leaveChannel(params);
   }
-
-  @override
-  Stream listen(String params) {
-    throw UnimplementedError();
-  }
 }

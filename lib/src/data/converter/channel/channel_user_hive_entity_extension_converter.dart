@@ -1,6 +1,5 @@
 import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/domain/domain.dart';
 
 /// [ChannelUserHiveExtensionConverter]
 extension ChannelUserHiveExtensionConverter on ChannelUserHiveEntity {

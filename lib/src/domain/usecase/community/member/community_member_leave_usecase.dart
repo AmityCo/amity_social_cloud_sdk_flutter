@@ -15,9 +15,4 @@ class CommunityMemberLeaveUsecase extends UseCase<void, String> {
   Future get(String params) async {
     return await communityMemberRepo.leaveCommunity(params);
   }
-
-  @override
-  Stream listen(String params) {
-    throw UnimplementedError();
-  }
 }
