@@ -7,9 +7,6 @@ class ChannelParticipationRepository {
   /// Channel ID
   late String _channelId;
 
-  // /// Init [ChannelParticipation]
-  // ChannelParticipation(this.channelId);
-
   /// Get member for the channel Id
   ChannelParticipationRepository channelId(String id) {
     _channelId = id;

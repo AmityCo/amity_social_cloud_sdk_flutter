@@ -1,6 +1,6 @@
 // To parse this JSON data, do
 //
-//     final getChannelRequest = getChannelRequestFromJson(jsonString);
+//      getChannelRequest = getChannelRequestFromJson(jsonString);
 
 import 'dart:convert';
 
@@ -16,43 +16,43 @@ String getChannelRequestToJson(GetChannelRequest data) =>
 class GetChannelRequest {
   /// Init [GetChannelRequest]
   GetChannelRequest({
-    required this.keyword,
-    required this.isDeleted,
-    required this.tags,
-    required this.excludeTags,
-    required this.filter,
-    required this.types,
-    required this.userId,
-    required this.sortBy,
-    required this.options,
+    this.keyword,
+    this.isDeleted,
+    this.tags,
+    this.excludeTags,
+    this.filter,
+    this.types,
+    this.userId,
+    this.sortBy,
+    this.options,
   });
 
   /// Keyword
-  final String keyword;
+  String? keyword;
 
   /// Is Deleted
-  final bool? isDeleted;
+  bool? isDeleted;
 
   /// Tags
-  final List<String>? tags;
+  List<String>? tags;
 
   /// Excludes Tags
-  final List<String>? excludeTags;
+  List<String>? excludeTags;
 
   /// Filter
-  final String? filter;
+  String? filter;
 
   /// Types
-  final List<String>? types;
+  List<String>? types;
 
   /// User ID
-  final String? userId;
+  String? userId;
 
   /// Sort By
-  final String? sortBy;
+  String? sortBy;
 
   /// Options
-  final OptionsRequest? options;
+  OptionsRequest? options;
 
   /// [GetChannelRequest] from  Map
   factory GetChannelRequest.fromJson(Map<String, dynamic> json) =>
@@ -72,12 +72,15 @@ class GetChannelRequest {
   Map<String, dynamic> toJson() => {
         "keyword": keyword,
         "isDeleted": isDeleted,
-        "tags": List<dynamic>.from(tags?.map((x) => x) ?? []),
-        "excludeTags": List<dynamic>.from(excludeTags?.map((x) => x) ?? []),
+        "tags": tags == null ? null : List<String>.from(tags!.map((x) => x)),
+        "excludeTags": excludeTags == null
+            ? null
+            : List<String>.from(excludeTags!.map((x) => x)),
         "filter": filter,
-        "types": List<dynamic>.from(types?.map((x) => x) ?? []),
+        "types[]":
+            types == null ? null : List<dynamic>.from(types!.map((x) => x)),
         "userId": userId,
         "sortBy": sortBy,
         "options": options?.toJson(),
-      };
+      }..removeNullValue();
 }
