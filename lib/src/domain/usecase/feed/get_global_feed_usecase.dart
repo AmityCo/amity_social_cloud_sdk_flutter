@@ -23,7 +23,7 @@ class GetGlobalFeedUsecase extends UseCase<
   }
 
   /// Listen global feed
-  Stream<PageListData<List<AmityPost>, String>> listen(
+  StreamController<PageListData<List<AmityPost>, String>> listen(
       GetGlobalFeedRequest params) {
     //1. Listen to Global Feed collection
     //2. Compose Global Feed Collection post
@@ -37,6 +37,6 @@ class GetGlobalFeedUsecase extends UseCase<
       controller.add(event.withItem1(amityComposedPost));
     });
 
-    return controller.stream;
+    return controller;
   }
 }

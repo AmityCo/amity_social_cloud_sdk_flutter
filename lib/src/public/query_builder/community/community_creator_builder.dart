@@ -1,6 +1,7 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// [CommunityCreatorBuilder]
 class CommunityCreatorBuilder {
   final CommunityCreateUsecase usecase;
   final String _displayName;
@@ -15,6 +16,7 @@ class CommunityCreatorBuilder {
   String? _avatarFileId;
   bool? _needApprovalOnPostCreation;
 
+  /// init [CommunityCreatorBuilder]
   CommunityCreatorBuilder(this.usecase, this._displayName);
 
   CommunityCreatorBuilder description(String description) {

@@ -19,7 +19,8 @@ class GetPostByIdUseCase extends UseCase<AmityPost, String> {
     return amityComposedPost;
   }
 
-  Stream<AmityPost> listen(String params) {
+  /// Listen Post By Id
+  StreamController<AmityPost> listen(String params) {
     //1. Listen to Amity post stream
     //2. compose the Amity post
     StreamController<AmityPost> controller = StreamController<AmityPost>();
@@ -29,6 +30,6 @@ class GetPostByIdUseCase extends UseCase<AmityPost, String> {
       controller.add(amityComposedPost);
     });
 
-    return controller.stream;
+    return controller;
   }
 }

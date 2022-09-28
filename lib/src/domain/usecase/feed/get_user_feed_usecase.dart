@@ -19,7 +19,7 @@ class GetUserFeedUsecase
     return amityPost.withItem1(amityComposedPost);
   }
 
-  Stream<PageListData<List<AmityPost>, String>> listen(
+  StreamController<PageListData<List<AmityPost>, String>> listen(
       GetUserFeedRequest params) {
     //1. Listen to Global Feed collection
     //2. Compose Global Feed Collection post
@@ -33,6 +33,6 @@ class GetUserFeedUsecase
       controller.add(event.withItem1(amityComposedPost));
     });
 
-    return controller.stream;
+    return controller;
   }
 }
