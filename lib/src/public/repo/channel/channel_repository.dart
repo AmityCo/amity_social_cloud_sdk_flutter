@@ -9,6 +9,11 @@ class ChannelRepository {
     return serviceLocator<ChannelGetUseCase>().get(channelId);
   }
 
+  /// Get the [AmityChannel] by channel Id
+  GetChannelQueryBuilder getChannels() {
+    return GetChannelQueryBuilder(serviceLocator());
+  }
+
   /// Join the channel
   Future<AmityChannel> joinChannel(String channeld) {
     return serviceLocator<ChannelMemberJoinUsecase>().get(channeld);

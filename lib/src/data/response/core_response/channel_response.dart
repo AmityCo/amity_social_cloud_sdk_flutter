@@ -59,7 +59,7 @@ class ChannelResponse {
   final DateTime? rateLimitTimeout;
 
   ///Display Name
-  final String displayName;
+  final String? displayName;
 
   /// Message Auth DeleteEnable
   final bool messageAutoDeleteEnabled;
