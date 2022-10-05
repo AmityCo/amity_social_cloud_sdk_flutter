@@ -72,7 +72,7 @@ class GetChannelRequest {
   Map<String, dynamic> toJson() => {
         "keyword": keyword,
         "isDeleted": isDeleted,
-        "tags": tags == null ? null : List<String>.from(tags!.map((x) => x)),
+        "tags[]": tags == null ? null : List<String>.from(tags!.map((x) => x)),
         "excludeTags": excludeTags == null
             ? null
             : List<String>.from(excludeTags!.map((x) => x)),
