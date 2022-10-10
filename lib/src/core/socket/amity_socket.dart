@@ -39,8 +39,7 @@ class AmitySocket {
         .distinct()
         .listen((account) {
       if (account != null) {
-        print(
-            'AMITY_SOCKET::connecting with accessToken ${account.accessToken}');
+        print('asocket::connecting with accessToken ${account.accessToken}');
         _initConnection(account.accessToken!);
       }
     });
@@ -77,7 +76,7 @@ class AmitySocket {
             .setReconnectionDelayMax(10000)
             .build());
 
-    _activeSocket!.onConnect((_) {
+    _activeSocket!.onConnect((data) {
       print('asocket connect');
       // activeSocket!.emit('msg', 'test');
     });

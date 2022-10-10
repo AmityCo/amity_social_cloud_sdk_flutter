@@ -142,4 +142,11 @@ class MessageRepoImpl extends MessageRepo {
       rethrow;
     }
   }
+
+  @override
+  AmityMessage? getLocalMessage(String messageId) {
+    return dbAdapterRepo.messageDbAdapter
+        .getMessageEntity(messageId)
+        ?.convertToAmityMessage();
+  }
 }
