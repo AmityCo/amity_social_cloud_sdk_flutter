@@ -74,7 +74,7 @@ class MessageResponse {
   final Map<String, int> reactions;
 
   /// My Reaction
-  final List<String>? myReactions;
+  List<String>? myReactions;
 
   /// Latest Reaction
   final Map<String, dynamic>? latestReaction;
@@ -153,6 +153,56 @@ class MessageResponse {
         "editedAt": editedAt.toIso8601String(),
         "mentionees": List<dynamic>.from(mentionees.map((x) => x.toJson())),
       };
+
+  MessageResponse copyWith({
+    String? messageId,
+    String? channelId,
+    String? userId,
+    String? type,
+    MessageDataResponse? data,
+    int? channelSegment,
+    String? parentId,
+    String? fileId,
+    List<String>? tags,
+    Map<String, dynamic>? metadata,
+    int? flagCount,
+    HashFlag? hashFlag,
+    int? childrenNumber,
+    int? reactionsCount,
+    Map<String, int>? reactions,
+    List<String>? myReactions,
+    Map<String, dynamic>? latestReaction,
+    bool? isDeleted,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    DateTime? editedAt,
+    List<Mentionee>? mentionees,
+  }) {
+    return MessageResponse(
+      messageId: messageId ?? this.messageId,
+      channelId: channelId ?? this.channelId,
+      userId: userId ?? this.userId,
+      type: type ?? this.type,
+      data: data ?? this.data,
+      channelSegment: channelSegment ?? this.channelSegment,
+      parentId: parentId ?? this.parentId,
+      fileId: fileId ?? this.fileId,
+      tags: tags ?? this.tags,
+      metadata: metadata ?? this.metadata,
+      flagCount: flagCount ?? this.flagCount,
+      hashFlag: hashFlag ?? this.hashFlag,
+      childrenNumber: childrenNumber ?? this.childrenNumber,
+      reactionsCount: reactionsCount ?? this.reactionsCount,
+      reactions: reactions ?? this.reactions,
+      myReactions: myReactions ?? this.myReactions,
+      latestReaction: latestReaction ?? this.latestReaction,
+      isDeleted: isDeleted ?? this.isDeleted,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      editedAt: editedAt ?? this.editedAt,
+      mentionees: mentionees ?? this.mentionees,
+    );
+  }
 }
 
 /// [LatestReaction]

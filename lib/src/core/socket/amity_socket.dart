@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/repo/account_repo.dart';
@@ -39,8 +40,7 @@ class AmitySocket {
         .distinct()
         .listen((account) {
       if (account != null) {
-        print(
-            'AMITY_SOCKET::connecting with accessToken ${account.accessToken}');
+        print('asocket::connecting with accessToken ${account.accessToken}');
         _initConnection(account.accessToken!);
       }
     });
@@ -77,8 +77,9 @@ class AmitySocket {
             .setReconnectionDelayMax(10000)
             .build());
 
-    _activeSocket!.onConnect((_) {
+    _activeSocket!.onConnect((data) {
       print('asocket connect');
+      print('asocket $data');
       // activeSocket!.emit('msg', 'test');
     });
 
@@ -115,6 +116,7 @@ class AmitySocket {
     for (var event in events) {
       _activeSocket?.on(event.getEventName(), (data) {
         if (event.shouldProcessEvent(data)) {
+          log('asocket $data');
           event.processEvent(data);
         }
       });

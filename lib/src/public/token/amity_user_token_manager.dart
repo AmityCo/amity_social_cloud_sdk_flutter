@@ -16,7 +16,7 @@ class AmityUserTokenManager {
   AmityUserTokenManager({required this.endpoint, required this.apiKey});
 
   /// Create Amity JWT toke for the userId
-  Future<AmityUserToken> createAuthToken(String userId,
+  Future<AmityUserToken> createUserToken(String userId,
       {String? displayname = '', String? secureToken = ''}) async {
     if ((displayname ?? '').isEmpty) {
       displayname = null;

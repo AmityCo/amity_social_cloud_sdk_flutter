@@ -18,4 +18,7 @@ abstract class MessageRepo {
 
   /// Has Local Message
   bool hasLocalMessage(String messageId);
+
+  /// Get local Message
+  AmityMessage? getLocalMessage(String messageId);
 }
