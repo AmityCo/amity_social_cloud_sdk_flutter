@@ -10,6 +10,12 @@ abstract class MessageRepo {
   /// Create Message
   Future<AmityMessage> createMessage(CreateMessageRequest request);
 
+  /// Get Message
+  Future<AmityMessage> getMessage(String messageId);
+
+  /// Delete Message
+  Future deleteMessage(String messageId);
+
   /// Create File Message
   Future<AmityMessage> createFileMessage(CreateMessageRequest request);
 

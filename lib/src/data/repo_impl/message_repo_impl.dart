@@ -149,4 +149,16 @@ class MessageRepoImpl extends MessageRepo {
         .getMessageEntity(messageId)
         ?.convertToAmityMessage();
   }
+
+  @override
+  Future deleteMessage(String messageId) async {
+    await messageApiInterface.deleteMessage(messageId);
+  }
+
+  @override
+  Future<AmityMessage> getMessage(String messageId) async {
+    final data = await messageApiInterface.getMessage(messageId);
+    final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
+    return (amitMessages as List).first;
+  }
 }

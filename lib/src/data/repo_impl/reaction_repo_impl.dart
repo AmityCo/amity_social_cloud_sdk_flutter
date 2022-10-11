@@ -18,125 +18,175 @@ class ReactionRepoImpl extends ReactionRepo {
 
   @override
   Future addReaction(ReactionRequest request) async {
-    await reactionApiInterface.addReaction(request);
-
-    //Add Rection from local Amity Post
-    //1. Added to my reaction
-    //2. Update the reaction count
-    //3. Update the reaction map
+    ///Add Rection from local Amity Post
+    ///1. Added to my reaction
+    ///2. Update the reaction count
+    ///3. Update the reaction map
+    /// CHANGE: 11Oct 2021
+    /// Since now RTE event for message is enable,
+    /// we need to upload the local first and make the API call.
+    /// After the API call, we gonna recevive RTE callback,which will
+    /// overwrite the message data.
     if (request.referenceType == AmityReactionReferenceType.POST.value) {
       final amityPost =
           dbAdapterRepo.postDbAdapter.getPostEntity(request.referenceId);
 
-      amityPost.myReactions ??= [];
-      amityPost.myReactions!.add(request.reactionName);
+      try {
+        final amityPostLocalCopy = amityPost.copyWith();
+        amityPostLocalCopy.myReactions ??= [];
+        amityPostLocalCopy.myReactions!.add(request.reactionName);
 
-      amityPost.reactionsCount = (amityPost.reactionsCount ?? 0) + 1;
+        amityPostLocalCopy.reactionsCount =
+            (amityPostLocalCopy.reactionsCount ?? 0) + 1;
 
-      amityPost.reactions ??= {};
-      amityPost.reactions![request.reactionName] =
-          (amityPost.reactions![request.reactionName] ?? 0) + 1;
+        amityPostLocalCopy.reactions ??= {};
+        amityPost.reactions![request.reactionName] =
+            (amityPostLocalCopy.reactions![request.reactionName] ?? 0) + 1;
 
-      await dbAdapterRepo.postDbAdapter.savePostEntity(amityPost);
+        await dbAdapterRepo.postDbAdapter.savePostEntity(amityPostLocalCopy);
+
+        await reactionApiInterface.addReaction(request);
+      } catch (error) {
+        await dbAdapterRepo.postDbAdapter.savePostEntity(amityPost);
+        rethrow;
+      }
     }
 
     //Add Rection from local Amity Comment
     if (request.referenceType == AmityReactionReferenceType.COMMENT.value) {
       final amityComment =
           dbAdapterRepo.commentDbAdapter.getCommentEntity(request.referenceId);
+      try {
+        final amityCommentLocalCopy = amityComment.copyWith();
+        amityCommentLocalCopy.myReactions ??= [];
+        amityCommentLocalCopy.myReactions!.add(request.reactionName);
 
-      amityComment.myReactions ??= [];
-      amityComment.myReactions!.add(request.reactionName);
+        amityCommentLocalCopy.reactionsCount =
+            (amityCommentLocalCopy.reactionsCount ?? 0) + 1;
 
-      amityComment.reactionsCount = (amityComment.reactionsCount ?? 0) + 1;
+        amityCommentLocalCopy.reactions ??= {};
+        amityCommentLocalCopy.reactions![request.reactionName] =
+            (amityCommentLocalCopy.reactions![request.reactionName] ?? 0) + 1;
 
-      amityComment.reactions ??= {};
-      amityComment.reactions![request.reactionName] =
-          (amityComment.reactions![request.reactionName] ?? 0) + 1;
+        await dbAdapterRepo.commentDbAdapter
+            .saveCommentEntity(amityCommentLocalCopy);
 
-      await amityComment.save();
+        await reactionApiInterface.addReaction(request);
+      } catch (error) {
+        await dbAdapterRepo.commentDbAdapter.saveCommentEntity(amityComment);
+        rethrow;
+      }
     }
 
     //Add Rection from local Amity Comment
     if (request.referenceType == AmityReactionReferenceType.MESSAGE.value) {
-      final amitymessage =
+      final amityMessage =
           dbAdapterRepo.messageDbAdapter.getMessageEntity(request.referenceId)!;
+      try {
+        final amityMessageLocalCopy = amityMessage.copyWith();
+        amityMessageLocalCopy.myReactions ??= [];
+        amityMessageLocalCopy.myReactions!.add(request.reactionName);
 
-      amitymessage.myReactions ??= [];
-      amitymessage.myReactions!.add(request.reactionName);
+        /// Updated this information with RTE payload
+        amityMessageLocalCopy.reactionsCount =
+            (amityMessageLocalCopy.reactionsCount ?? 0) + 1;
 
-      amitymessage.reactionsCount = (amitymessage.reactionsCount ?? 0) + 1;
+        amityMessageLocalCopy.reactions ??= {};
+        amityMessageLocalCopy.reactions![request.reactionName] =
+            (amityMessageLocalCopy.reactions![request.reactionName] ?? 0) + 1;
 
-      amitymessage.reactions ??= {};
-      amitymessage.reactions![request.reactionName] =
-          (amitymessage.reactions![request.reactionName] ?? 0) + 1;
+        await dbAdapterRepo.messageDbAdapter
+            .saveMessageEntity(amityMessageLocalCopy);
 
-      await dbAdapterRepo.messageDbAdapter.saveMessageEntity(amitymessage);
-
-      final amitymessage1 =
-          dbAdapterRepo.messageDbAdapter.getMessageEntity(request.referenceId)!;
-
-      print(amitymessage1);
+        await reactionApiInterface.addReaction(request);
+      } catch (error) {
+        await dbAdapterRepo.messageDbAdapter.saveMessageEntity(amityMessage);
+        rethrow;
+      }
     }
   }
 
   @override
   Future removeReaction(ReactionRequest request) async {
-    await reactionApiInterface.removeReaction(request);
+    // await reactionApiInterface.removeReaction(request);
 
     //Remove Reaction from Local Amity Post
     if (request.referenceType == AmityReactionReferenceType.POST.value) {
       final amityPost =
           dbAdapterRepo.postDbAdapter.getPostEntity(request.referenceId);
 
-      amityPost.myReactions ??= [];
-      amityPost.myReactions!.remove(request.reactionName);
+      try {
+        final amityPostLocalCopy = amityPost.copyWith();
+        amityPostLocalCopy.myReactions ??= [];
+        amityPostLocalCopy.myReactions!.remove(request.reactionName);
 
-      amityPost.reactionsCount = (amityPost.reactionsCount ?? 0) - 1;
+        amityPostLocalCopy.reactionsCount =
+            (amityPostLocalCopy.reactionsCount ?? 0) - 1;
 
-      amityPost.reactions ??= {};
-      amityPost.reactions![request.reactionName] =
-          (amityPost.reactions![request.reactionName] ?? 0) - 1;
+        amityPostLocalCopy.reactions ??= {};
+        amityPost.reactions![request.reactionName] =
+            (amityPostLocalCopy.reactions![request.reactionName] ?? 0) - 1;
 
-      await dbAdapterRepo.postDbAdapter.savePostEntity(amityPost);
+        await dbAdapterRepo.postDbAdapter.savePostEntity(amityPostLocalCopy);
+
+        await reactionApiInterface.removeReaction(request);
+      } catch (error) {
+        await dbAdapterRepo.postDbAdapter.savePostEntity(amityPost);
+        rethrow;
+      }
     }
 
     //Remove Rection from local Amity Comment
     if (request.referenceType == AmityReactionReferenceType.COMMENT.value) {
       final amityComment =
           dbAdapterRepo.commentDbAdapter.getCommentEntity(request.referenceId);
+      try {
+        final amityCommentLocalCopy = amityComment.copyWith();
+        amityCommentLocalCopy.myReactions ??= [];
+        amityCommentLocalCopy.myReactions!.remove(request.reactionName);
 
-      amityComment.myReactions ??= [];
-      amityComment.myReactions!.remove(request.reactionName);
+        amityCommentLocalCopy.reactionsCount =
+            (amityCommentLocalCopy.reactionsCount ?? 0) - 1;
 
-      amityComment.reactionsCount = (amityComment.reactionsCount ?? 0) - 1;
+        amityCommentLocalCopy.reactions ??= {};
+        amityCommentLocalCopy.reactions![request.reactionName] =
+            (amityCommentLocalCopy.reactions![request.reactionName] ?? 0) - 1;
 
-      amityComment.reactions ??= {};
-      amityComment.reactions![request.reactionName] =
-          (amityComment.reactions![request.reactionName] ?? 0) - 1;
+        await dbAdapterRepo.commentDbAdapter
+            .saveCommentEntity(amityCommentLocalCopy);
 
-      await dbAdapterRepo.commentDbAdapter.saveCommentEntity(amityComment);
+        await reactionApiInterface.removeReaction(request);
+      } catch (error) {
+        await dbAdapterRepo.commentDbAdapter.saveCommentEntity(amityComment);
+        rethrow;
+      }
     }
 
     //Remove Rection from local Amity Message
     if (request.referenceType == AmityReactionReferenceType.MESSAGE.value) {
-      final amitymessage =
+      final amityMessage =
           dbAdapterRepo.messageDbAdapter.getMessageEntity(request.referenceId)!;
+      try {
+        final amityMessageLocalCopy = amityMessage.copyWith();
+        amityMessageLocalCopy.myReactions ??= [];
+        amityMessageLocalCopy.myReactions!.remove(request.reactionName);
 
-      amitymessage.myReactions ??= [];
-      amitymessage.myReactions!.remove(request.reactionName);
+        /// Updated this information with RTE payload
+        amityMessageLocalCopy.reactionsCount =
+            (amityMessageLocalCopy.reactionsCount ?? 0) - 1;
 
-      amitymessage.reactionsCount = (amitymessage.reactionsCount ?? 0) - 1;
+        amityMessageLocalCopy.reactions ??= {};
+        amityMessageLocalCopy.reactions![request.reactionName] =
+            (amityMessageLocalCopy.reactions![request.reactionName] ?? 0) - 1;
 
-      amitymessage.reactions ??= {};
-      amitymessage.reactions![request.reactionName] =
-          (amitymessage.reactions![request.reactionName] ?? 0) - 1;
+        await dbAdapterRepo.messageDbAdapter
+            .saveMessageEntity(amityMessageLocalCopy);
 
-      await dbAdapterRepo.messageDbAdapter.saveMessageEntity(amitymessage);
-
-      final amitymessage1 =
-          dbAdapterRepo.messageDbAdapter.getMessageEntity(request.referenceId)!;
-      print(amitymessage1);
+        await reactionApiInterface.removeReaction(request);
+      } catch (error) {
+        await dbAdapterRepo.messageDbAdapter.saveMessageEntity(amityMessage);
+        rethrow;
+      }
     }
   }
 
