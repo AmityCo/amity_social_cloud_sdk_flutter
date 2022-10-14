@@ -5,7 +5,6 @@ import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/data/repo_impl/channel_member_repo_impl.dart';
 import 'package:amity_sdk/src/data/repo_impl/channel_repo_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/repo/channel_member_repo.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
 
