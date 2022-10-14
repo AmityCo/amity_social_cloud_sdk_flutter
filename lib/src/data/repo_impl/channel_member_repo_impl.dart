@@ -4,7 +4,6 @@ import 'package:amity_sdk/src/core/model/api_request/channel/update_channel_role
 import 'package:amity_sdk/src/core/utils/page_list_data.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/repo/channel_member_repo.dart';
 
 /// [ChannelMemberRepoImpl]
 class ChannelMemberRepoImpl extends ChannelMemberRepo {

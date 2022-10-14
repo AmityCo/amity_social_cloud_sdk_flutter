@@ -93,9 +93,8 @@ class MessageGetQueryBuilder {
       _request.parentId = _parentId;
       _request.filterByParentId = true;
     }
-    if (_stackFromEnd != null) {
-      _request.stackFromEnd = _stackFromEnd;
-    }
+    _request.stackFromEnd = _stackFromEnd;
+
     _request.options = OptionsRequest();
 
     _request.options!.type = 'scrollable';

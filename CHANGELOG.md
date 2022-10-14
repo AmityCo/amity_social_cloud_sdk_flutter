@@ -1,3 +1,7 @@
+## 0.9.0
+* feat: Channel Query
+* feat: Get Channel By Id
+* fix: resolve issue with Message RTE payload 
 ## 0.8.0
 * feat: Create image/file message
 * feat: Channel repo setup
