@@ -20,7 +20,6 @@ class ChannelMemberQueryUsecase extends UseCase<
   @override
   Future<PageListData<List<AmityChannelMember>, String>> get(
       GetChannelMembersRequest params) async {
-    // return await channelMemberRepo.queryMembers(params);
     final amityChannelMembers = await channelMemberRepo.queryMembers(params);
     final amityComposedChannelMembers =
         await Stream.fromIterable(amityChannelMembers.data)
