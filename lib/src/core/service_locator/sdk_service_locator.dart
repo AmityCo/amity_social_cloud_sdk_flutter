@@ -589,7 +589,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<ChannelMemberQueryUsecase>(() =>
         ChannelMemberQueryUsecase(
             channelMemberRepo: serviceLocator(),
-            channelComposerUsecase: serviceLocator()));
+            channelMemberComposerUsecase: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo

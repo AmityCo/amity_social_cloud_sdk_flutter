@@ -7,4 +7,9 @@ class AmityRoles {
   AmityRoles({
     this.roles,
   });
+
+  @override
+  String toString() {
+    return (roles ?? []).join(',');
+  }
 }

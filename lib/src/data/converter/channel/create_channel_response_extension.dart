@@ -46,5 +46,11 @@ extension CreateChannelResponseExtension on CreateChannelResponse {
     if (T.toString() == 'AmityChannel') {
       return channelHiveEntities.map((e) => e.convertToAmityChannel()).toList();
     }
+    // FIXME: right logic for type checking
+    if (T.toString() == 'AmityChannelMember') {
+      return channelUserHiveEntities
+          .map((e) => e.convertToAmityChannelMember())
+          .toList();
+    }
   }
 }
