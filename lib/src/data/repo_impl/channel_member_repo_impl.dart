@@ -80,8 +80,9 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
     // await communityMemberPagingDbAdapter.updateCommunityMemmberCollection(
     //     data.convertToCommunityMemberPagingHiveEntity());
 
-    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
-    return PageListData(amityChannel, data.paging!.next ?? '');
+    final amityChannelMember =
+        await data.saveToDb<AmityChannelMember>(commonDbAdapter);
+    return PageListData(amityChannelMember, data.paging!.next ?? '');
   }
 
   @override

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
@@ -29,4 +31,25 @@ class AmityChannelMember {
 
   /// Member ship
   AmityMembershipType membership = AmityMembershipType.NONE;
+
+  StreamController<AmityChannelMember> get listen {
+    StreamController<AmityChannelMember> controller =
+        StreamController<AmityChannelMember>();
+
+    ///TODO:
+    // serviceLocator<ChannelMemberDbAdapter>()
+    //     .listenCommnunityMemberEntity(communityId! + userId!)
+    //     .listen((event) {
+    //   final updateAmityCommunity = event.convertToAmityCommunityMember();
+
+    //   //TOOD: Good idea would be have compose method inside the object itself
+    //   serviceLocator<CommunityMemberComposerUsecase>()
+    //       .get(updateAmityCommunity)
+    //       .then(
+    //         (value) => controller.add(value),
+    //       );
+    // });
+
+    return controller;
+  }
 }
