@@ -1,3 +1,6 @@
+## 0.10.0
+* feat: Channel Member Query
+* fix: Update listner method for AmityChannelMember model
 ## 0.9.0
 * feat: Channel Query
 * feat: Get Channel By Id
