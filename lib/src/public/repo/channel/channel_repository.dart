@@ -24,9 +24,14 @@ class ChannelRepository {
     return serviceLocator<ChannelMemberLeaveUsecase>().get(channelId);
   }
 
-  /// Leave the channel
+  /// Membership Repo
   ChannelParticipationRepository membership(String channelId) {
     return serviceLocator<ChannelParticipationRepository>()
         .channelId(channelId);
+  }
+
+  /// Channel Moderation Repo
+  ChannelModerationRepository moderation(String channelId) {
+    return serviceLocator<ChannelModerationRepository>().channelId(channelId);
   }
 }

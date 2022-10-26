@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:amity_sdk/src/core/extension/extension.dart';
+
 UpdateChannelRoleRequest updateChannelRoleRequestFromJson(String str) =>
     UpdateChannelRoleRequest.fromJson(json.decode(str));
 
@@ -39,5 +41,5 @@ class UpdateChannelRoleRequest {
         "channelId": channelId,
         "role": role,
         "userIds": List<dynamic>.from(userIds.map((x) => x)),
-      };
+      }..removeNullValue();
 }

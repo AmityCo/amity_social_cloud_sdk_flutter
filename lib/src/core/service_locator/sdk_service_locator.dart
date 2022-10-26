@@ -261,6 +261,12 @@ class SdkServiceLocator {
         channelMemberApiInterface: serviceLocator(),
       ),
     );
+    serviceLocator.registerLazySingleton<ChannelModerationRepo>(
+      () => ChannelModerationRepoImpl(
+        commonDbAdapter: serviceLocator(),
+        channelMemberApiInterface: serviceLocator(),
+      ),
+    );
 
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
@@ -591,6 +597,11 @@ class SdkServiceLocator {
             channelMemberRepo: serviceLocator(),
             channelMemberComposerUsecase: serviceLocator()));
 
+    serviceLocator.registerLazySingleton<AddRoleUsecase>(
+        () => AddRoleUsecase(channelModerationRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<RemoveRoleUsecase>(
+        () => RemoveRoleUsecase(channelModerationRepo: serviceLocator()));
+
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
     serviceLocator.registerLazySingleton(() => PostRepository());
@@ -605,6 +616,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => ChannelRepository());
     serviceLocator
         .registerLazySingleton(() => ChannelParticipationRepository());
+    serviceLocator.registerLazySingleton(() => ChannelModerationRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(
