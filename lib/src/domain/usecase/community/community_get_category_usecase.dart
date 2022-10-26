@@ -19,11 +19,4 @@ class CommunityGetCategoryUsecase extends UseCase<
     // TODO: implement listen
     throw UnimplementedError();
   }
-
-  @override
-  Stream<PageListData<AmityCommunityCategory, String>> listen(
-      OptionsRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

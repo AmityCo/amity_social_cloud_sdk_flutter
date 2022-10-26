@@ -9,10 +9,4 @@ class CommunityDeleteUseCase extends UseCase<void, String> {
   Future get(String params) {
     return communityRepo.deleteCommunity(params);
   }
-
-  @override
-  Stream listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

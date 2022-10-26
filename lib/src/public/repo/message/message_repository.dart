@@ -1,8 +1,7 @@
 import 'package:amity_sdk/src/core/service_locator/service_locator.dart';
 import 'package:amity_sdk/src/domain/usecase/message/message_create_use_case.dart';
 import 'package:amity_sdk/src/domain/usecase/message/message_query_use_case.dart';
-import 'package:amity_sdk/src/public/query_builder/message/message_create_builder.dart';
-import 'package:amity_sdk/src/public/query_builder/message/message_get_query_builder.dart';
+import 'package:amity_sdk/src/public/public.dart';
 
 /// [MessageRepository]
 class MessageRepository {
@@ -17,5 +16,10 @@ class MessageRepository {
     return AmityMessageCreateTargetSelector(
             useCase: serviceLocator<MessageCreateUsecase>())
         .channelId(channelId);
+  }
+
+  /// Get [AmityReaction] for the message Id
+  GetReactionQueryBuilder getReaction({required String messageId}) {
+    return GetReactionQueryBuilder.message(messageId: messageId);
   }
 }

@@ -1,6 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/repo/poll_repo.dart';
 
 /// Get Poll Use Case
 class CreatePollUseCase extends UseCase<AmityPoll, CreatePollRequest> {
@@ -12,11 +11,5 @@ class CreatePollUseCase extends UseCase<AmityPoll, CreatePollRequest> {
   @override
   Future<AmityPoll> get(CreatePollRequest params) {
     return pollRepo.createPoll(params);
-  }
-
-  @override
-  Stream<AmityPoll> listen(CreatePollRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
   }
 }

@@ -13,7 +13,7 @@ class PostHiveEntity extends HiveObject {
   String? path;
 
   /// post ID
-  String postId = '';
+  String postId;
 
   /// in case of child post, Id of parent post
   String? parentPostId;
@@ -92,4 +92,99 @@ class PostHiveEntity extends HiveObject {
 
   ///
   bool? flaggedByMe;
+  PostHiveEntity({
+    this.id,
+    this.path,
+    this.postId = '',
+    this.parentPostId,
+    this.postedUserId,
+    this.sharedUserId,
+    this.sharedCount,
+    this.targetId,
+    this.targetType,
+    this.dataType,
+    this.data,
+    this.metadata,
+    this.flagCount,
+    this.hashFlag,
+    this.editedAt,
+    this.createdAt,
+    this.updatedAt,
+    this.reactions,
+    this.reactionsCount,
+    this.myReactions,
+    this.commentsCount,
+    this.comments,
+    this.children,
+    this.isDeleted,
+    this.hasFlaggedComment,
+    this.hasFlaggedChildren,
+    this.feedId,
+    this.require,
+    this.flaggedByMe,
+  });
+
+  PostHiveEntity copyWith({
+    String? id,
+    String? path,
+    String? postId,
+    String? parentPostId,
+    String? postedUserId,
+    String? sharedUserId,
+    int? sharedCount,
+    String? targetId,
+    String? targetType,
+    String? dataType,
+    PostChildDataHiveEntity? data,
+    Map<String, dynamic>? metadata,
+    int? flagCount,
+    Map<String, dynamic>? hashFlag,
+    DateTime? editedAt,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    Map<String, int>? reactions,
+    int? reactionsCount,
+    List<String>? myReactions,
+    int? commentsCount,
+    List<String>? comments,
+    List<String>? children,
+    bool? isDeleted,
+    bool? hasFlaggedComment,
+    bool? hasFlaggedChildren,
+    String? feedId,
+    String? require,
+    bool? flaggedByMe,
+  }) {
+    return PostHiveEntity(
+      id: id ?? this.id,
+      path: path ?? this.path,
+      postId: postId ?? this.postId,
+      parentPostId: parentPostId ?? this.parentPostId,
+      postedUserId: postedUserId ?? this.postedUserId,
+      sharedUserId: sharedUserId ?? this.sharedUserId,
+      sharedCount: sharedCount ?? this.sharedCount,
+      targetId: targetId ?? this.targetId,
+      targetType: targetType ?? this.targetType,
+      dataType: dataType ?? this.dataType,
+      data: data ?? this.data,
+      metadata: metadata ?? this.metadata,
+      flagCount: flagCount ?? this.flagCount,
+      hashFlag: hashFlag ?? this.hashFlag,
+      editedAt: editedAt ?? this.editedAt,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      reactions: reactions ?? {...?this.reactions},
+      reactionsCount: reactionsCount ?? this.reactionsCount,
+      myReactions: myReactions ?? [...?this.myReactions],
+      commentsCount: commentsCount ?? this.commentsCount,
+      comments: comments ?? this.comments,
+      children: children ?? this.children,
+      isDeleted: isDeleted ?? this.isDeleted,
+      hasFlaggedComment: hasFlaggedComment ?? this.hasFlaggedComment,
+      hasFlaggedChildren: hasFlaggedChildren ?? this.hasFlaggedChildren,
+      feedId: feedId ?? this.feedId,
+      require: require ?? this.require,
+      flaggedByMe: flaggedByMe ?? this.flaggedByMe,
+    );
+  }
 }

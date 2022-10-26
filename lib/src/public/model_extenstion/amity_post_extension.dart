@@ -66,7 +66,7 @@ extension AmityPostExtension on AmityPost {
   }
 
   /// Listen Post Id
-  Stream<AmityPost> get listen {
+  StreamController<AmityPost> get listen {
     StreamController<AmityPost> controller = StreamController<AmityPost>();
 
     serviceLocator<PostDbAdapter>().listenPostEntity(postId!).listen((event) {
@@ -78,7 +78,7 @@ extension AmityPostExtension on AmityPost {
           );
     });
 
-    return controller.stream;
+    return controller;
   }
 
   /// check if post is flagged by me

@@ -16,9 +16,4 @@ class PostGetUsecase
         .toList();
     return amityPost.withItem1(amityComposedPost);
   }
-
-  @override
-  Stream<PageListData<List<AmityPost>, String>> listen(GetPostRequest params) {
-    throw UnimplementedError();
-  }
 }

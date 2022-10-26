@@ -13,10 +13,4 @@ class CommunityMemberRemoveRoleUsecase
   Future get(UpdateCommunityRoleRequest params) async {
     return await communityMemberRepo.removeRole(params);
   }
-
-  @override
-  Stream listen(UpdateCommunityRoleRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

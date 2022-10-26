@@ -12,10 +12,4 @@ class UnfollowUsecase extends UseCase<AmityFollowStatus, String> {
   Future<AmityFollowStatus> get(String params) {
     return followRepo.unfollow(params);
   }
-
-  @override
-  Stream<AmityFollowStatus> listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

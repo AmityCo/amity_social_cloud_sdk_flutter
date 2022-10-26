@@ -14,7 +14,7 @@ class AmityCommunityMember {
   List<String>? roles; //Notify
   AmityUser? user; //Compose
 
-  Stream<AmityCommunityMember> get listen {
+  StreamController<AmityCommunityMember> get listen {
     StreamController<AmityCommunityMember> controller =
         StreamController<AmityCommunityMember>();
 
@@ -31,7 +31,7 @@ class AmityCommunityMember {
           );
     });
 
-    return controller.stream;
+    return controller;
   }
 
   Map<String, dynamic> toMap() {

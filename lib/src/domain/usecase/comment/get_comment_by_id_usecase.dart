@@ -10,10 +10,4 @@ class GetCommentByIdUseCase extends UseCase<AmityComment, String> {
   Future<AmityComment> get(String params) {
     return commentRepo.getCommentByIdFromDb(params);
   }
-
-  @override
-  Stream<AmityComment> listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

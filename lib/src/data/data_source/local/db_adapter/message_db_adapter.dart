@@ -9,14 +9,17 @@ abstract class MessageDbAdapter {
   /// Delete Message Entity
   Future deleteMessageEntity(MessageHiveEntity data);
 
+  /// get message entity with message ID
   MessageHiveEntity? getMessageEntity(String messageId);
 
+  /// Listen message with message id
   Stream<MessageHiveEntity> listenMessageEntity(String messageId);
 
   /// Listen Message Entities
   Stream<List<MessageHiveEntity>> listenMessageEntities(
       MessageQueryRequest request);
 
+  /// delete all message with in the channel
   Future deleteMessagesByChannelId(String channelId);
 
   /// Get all the messages which have SYNCING status.

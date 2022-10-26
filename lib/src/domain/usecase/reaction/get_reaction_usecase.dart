@@ -1,11 +1,16 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// GetReactionUsecase
 class GetReactionUsecase extends UseCase<
     PageListData<List<AmityReaction>, String>, GetReactionRequest> {
+  /// Reaction Repo
   final ReactionRepo reactionRepo;
+
+  /// User Repo
   final UserRepo userRepo;
 
+  /// init [GetReactionUsecase]
   GetReactionUsecase({required this.reactionRepo, required this.userRepo});
 
   @override
@@ -21,12 +26,5 @@ class GetReactionUsecase extends UseCase<
     }).toList();
 
     return data.withItem1(composedData);
-  }
-
-  @override
-  Stream<PageListData<List<AmityReaction>, String>> listen(
-      GetReactionRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
   }
 }

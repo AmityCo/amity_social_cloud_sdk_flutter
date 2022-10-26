@@ -1,3 +1,5 @@
+export 'channel_response.dart';
+export 'channel_user_response.dart';
 export 'comment_response.dart';
 export 'community_category_response.dart';
 export 'community_feed_response.dart';

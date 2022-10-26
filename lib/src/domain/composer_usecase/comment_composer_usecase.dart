@@ -31,10 +31,4 @@ class CommentComposerUsecase extends UseCase<AmityComment, AmityComment> {
     params.user = await userComposerUsecase.get(params.user!);
     return params;
   }
-
-  @override
-  Stream<AmityComment> listen(AmityComment params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

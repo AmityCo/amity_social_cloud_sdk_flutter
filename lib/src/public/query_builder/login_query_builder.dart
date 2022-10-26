@@ -1,6 +1,4 @@
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/socket/amity_socket.dart';
-import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:uuid/uuid.dart';
 
@@ -45,7 +43,7 @@ class LoginQueryBuilder {
 
     var amityUser = await _useCase.get(params);
 
-    //TODO uncomment when ready 
+    //TODO uncomment when ready
     //connect to socket if login is successful
     serviceLocator<AmitySocket>().connect();
 

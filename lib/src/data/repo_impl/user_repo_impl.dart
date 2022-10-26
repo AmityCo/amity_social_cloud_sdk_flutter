@@ -16,7 +16,6 @@ class UserRepoImpl extends UserRepo {
   Future<AmityUser> getUserById(String userId) async {
     final data = await userApiInterface.getUserById(userId);
 
-    //TODO compare updated at local vs remote
     final userHiveEntity = data.users[0].convertToUserHiveEntity();
     await userDbAdapter.saveUserEntity(userHiveEntity);
 

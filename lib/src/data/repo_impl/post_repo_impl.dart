@@ -109,7 +109,7 @@ class PostRepoImpl extends PostRepo {
 
   @override
   Stream<AmityPost> getPostByIdStream(String postId) {
-    StreamController<AmityPost> controller = StreamController<AmityPost>();
+    final controller = StreamController<AmityPost>();
     //1. Get Amity Post from local db
     getPostByIdFromDb(postId).then((value) {
       controller.add(value);

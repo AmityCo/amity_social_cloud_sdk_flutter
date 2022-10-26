@@ -21,10 +21,4 @@ class MessageQueryUseCase extends UseCase<
     //     .toList();
     return amityMessage;
   }
-
-  @override
-  Stream<PageListData<List<AmityMessage>, String>> listen(
-      MessageQueryRequest params) {
-    throw UnimplementedError();
-  }
 }

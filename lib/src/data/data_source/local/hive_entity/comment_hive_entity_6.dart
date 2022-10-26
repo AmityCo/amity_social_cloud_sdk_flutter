@@ -14,7 +14,7 @@ class CommentHiveEntity extends HiveObject {
   String? path;
 
   /// Comment id
-  String commentId = '';
+  String commentId;
 
   /// Comment User Id
   String? userId;
@@ -83,4 +83,87 @@ class CommentHiveEntity extends HiveObject {
 
   ///
   bool? flaggedByMe;
+  CommentHiveEntity({
+    this.id,
+    this.path,
+    this.commentId = '',
+    this.userId,
+    this.parentId,
+    this.rootId,
+    this.referenceId,
+    this.referenceType,
+    this.dataType,
+    this.data,
+    this.metadata,
+    this.childrenNumber,
+    this.flagCount,
+    this.hashFlag,
+    this.reactions,
+    this.reactionsCount,
+    this.myReactions,
+    this.isDeleted,
+    this.editedAt,
+    this.createdAt,
+    this.updatedAt,
+    this.children,
+    this.segmentNumber,
+    this.required,
+    this.flaggedByMe,
+  });
+
+  CommentHiveEntity copyWith({
+    String? id,
+    String? path,
+    String? commentId,
+    String? userId,
+    String? parentId,
+    String? rootId,
+    String? referenceId,
+    String? referenceType,
+    String? dataType,
+    PostChildDataHiveEntity? data,
+    Map<String, dynamic>? metadata,
+    int? childrenNumber,
+    int? flagCount,
+    Map<String, dynamic>? hashFlag,
+    Map<String, int>? reactions,
+    int? reactionsCount,
+    List<String>? myReactions,
+    bool? isDeleted,
+    DateTime? editedAt,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    List<String>? children,
+    int? segmentNumber,
+    String? required,
+    bool? flaggedByMe,
+  }) {
+    return CommentHiveEntity(
+      id: id ?? this.id,
+      path: path ?? this.path,
+      commentId: commentId ?? this.commentId,
+      userId: userId ?? this.userId,
+      parentId: parentId ?? this.parentId,
+      rootId: rootId ?? this.rootId,
+      referenceId: referenceId ?? this.referenceId,
+      referenceType: referenceType ?? this.referenceType,
+      dataType: dataType ?? this.dataType,
+      data: data ?? this.data,
+      metadata: metadata ?? this.metadata,
+      childrenNumber: childrenNumber ?? this.childrenNumber,
+      flagCount: flagCount ?? this.flagCount,
+      hashFlag: hashFlag ?? this.hashFlag,
+      reactions: reactions ?? {...?this.reactions},
+      reactionsCount: reactionsCount ?? this.reactionsCount,
+      myReactions: myReactions ?? [...?this.myReactions],
+      isDeleted: isDeleted ?? this.isDeleted,
+      editedAt: editedAt ?? this.editedAt,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      children: children ?? this.children,
+      segmentNumber: segmentNumber ?? this.segmentNumber,
+      required: required ?? this.required,
+      flaggedByMe: flaggedByMe ?? this.flaggedByMe,
+    );
+  }
 }

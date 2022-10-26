@@ -16,11 +16,4 @@ class GetCommunityFeedUsecase extends UseCase<
         .toList();
     return amityPost.withItem1(amityComposedPost);
   }
-
-  @override
-  Stream<PageListData<List<AmityPost>, String>> listen(
-      GetCommunityFeedRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

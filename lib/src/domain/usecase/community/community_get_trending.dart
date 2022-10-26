@@ -1,11 +1,13 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// [CommunityGetTrendingUseCase]
 class CommunityGetTrendingUseCase
     extends UseCase<List<AmityCommunity>, OptionsRequest> {
   final CommunityRepo communityRepo;
   final CommunityComposerUsecase communityComposerUsecase;
 
+  /// Init [CommunityGetTrendingUseCase]
   CommunityGetTrendingUseCase(
       {required this.communityRepo, required this.communityComposerUsecase});
   @override
@@ -16,11 +18,5 @@ class CommunityGetTrendingUseCase
         .asyncMap((event) => communityComposerUsecase.get(event))
         .toList();
     return amityComposedCommunity;
-  }
-
-  @override
-  Stream<List<AmityCommunity>> listen(OptionsRequest params) {
-    // TODO: implement listen
-    throw UnimplementedError();
   }
 }

@@ -1,4 +1,6 @@
 export 'account_db_adapter.dart';
+export 'channel_db_adapter.dart';
+export 'channel_user_db_adapter.dart';
 export 'comment_db_adapter.dart';
 export 'community_category_db_adater.dart';
 export 'community_db_adapter.dart';

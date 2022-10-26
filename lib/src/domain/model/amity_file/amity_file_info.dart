@@ -26,36 +26,62 @@ abstract class AmityFileInfo {
 
   String get fileSize => _fileProperties.size!;
 
-  String getFilePath() {
-    throw UnimplementedError();
-  }
+  bool get _hasLocalPreview => _fileProperties.filePath != null;
+
+  /// Get Local preview file path
+  String? get _getFilePath => _fileProperties.filePath;
 
   @override
   String toString() => 'AmityFileInfo(_fileProperties: $_fileProperties)';
 }
 
+/// [AmityFile]
 class AmityFile extends AmityFileInfo {
+  /// init [AmityFile]
   AmityFile(AmityFileProperties fileProperties) : super(fileProperties);
+
+  /// Get url
+  String get getUrl => fileUrl;
+
+  /// Check if Image have local preview
+  bool get hasLocalPreview => _hasLocalPreview;
+
+  /// get local preview file path
+  /// Plese check if before if Amity Image have [hasLocalPreview]
+  String? get getFilePath => _getFilePath;
 }
 
+/// Amity Image Object
 class AmityImage extends AmityFileInfo {
+  /// init [AmityImage]
   AmityImage(AmityFileProperties fileProperties) : super(fileProperties);
 
+  /// Get url
   String getUrl(AmityImageSize size) {
     return '$fileUrl?size=${size.value}';
   }
 
+  /// Get Width
   int getWidth() {
     return getFileProperties.width!;
   }
 
+  /// Get Height
   int getHeight() {
     return getFileProperties.height!;
   }
 
+  /// is Full Image
   bool isFullImage() {
     return getFileProperties.isFull!;
   }
+
+  /// Check if Image have local preview
+  bool get hasLocalPreview => _hasLocalPreview;
+
+  /// get local preview file path
+  /// Plese check if before if Amity Image have [hasLocalPreview]
+  String? get getFilePath => _getFilePath;
 }
 
 enum AmityImageSize {

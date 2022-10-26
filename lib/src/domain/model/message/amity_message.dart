@@ -72,7 +72,7 @@ class AmityMessage {
 
   @override
   String toString() {
-    return 'AmityMessage(messageId: $messageId, channelId: $channelId, userId: $userId, parentId: $parentId, channelSegment: $channelSegment, childrenNumber: $childrenNumber, isDeleted: $isDeleted, readByCount: $readByCount, flagCount: $flagCount, amityTags: $amityTags, myReactions: $myReactions, reactions: $reactions, reactionCount: $reactionCount, user: $user, metadata: $metadata, mentionees: $mentionees, createdAt: $createdAt, updatedAt: $updatedAt, editedAt: $editedAt)';
+    return 'AmityMessage(messageId: $messageId, channelId: $channelId, userId: $userId, parentId: $parentId, channelSegment: $channelSegment, childrenNumber: $childrenNumber, isDeleted: $isDeleted, readByCount: $readByCount, flagCount: $flagCount, amityTags: $amityTags, myReactions: $myReactions, reactions: $reactions, reactionCount: $reactionCount, user: $user, metadata: $metadata, mentionees: $mentionees, createdAt: $createdAt, updatedAt: $updatedAt, editedAt: $editedAt, data: $data)';
   }
 }
 
@@ -87,15 +87,19 @@ abstract class AmityMessageData {
   /// Raw Data
   final Map<String, dynamic>? rawData;
 
+  /// File info
+  late AmityFileInfo fileInfo;
+
   /// Init Amity Post Data
   AmityMessageData({required this.messageId, this.fileId, this.rawData});
 
   @override
-  String toString() =>
-      'AmityMessageData(messageId: $messageId, fileId: $fileId, rawData: $rawData)';
+  String toString() {
+    return 'AmityMessageData(messageId: $messageId, fileId: $fileId, rawData: $rawData, fileInfo: $fileInfo)';
+  }
 }
 
-/// Text Post Data
+/// Text Message Data
 class MessageTextData extends AmityMessageData {
   /// Text Data
   String? text;
@@ -108,4 +112,68 @@ class MessageTextData extends AmityMessageData {
 
   @override
   String toString() => 'MessageTextData(text: $text)';
+}
+
+/// Image Message Data
+class MessageImageData extends AmityMessageData {
+  /// Amity Image
+  late AmityImage image;
+
+  /// Caption
+  String? caption;
+
+  /// Image Message Data
+  MessageImageData(
+      {required String messageId,
+      required String fileId,
+      required this.caption})
+      : super(messageId: messageId, fileId: fileId);
+
+  @override
+  String toString() => 'MessageImageData(fileId: $fileId)';
+}
+
+/// [MessageFileData]
+class MessageFileData extends AmityMessageData {
+  /// Amity File
+  late AmityFile file;
+
+  /// Caption
+  String? caption;
+
+  /// init [MessageFileData]
+  MessageFileData(
+      {required String messageId,
+      required String fileId,
+      required this.caption})
+      : super(messageId: messageId, fileId: fileId);
+
+  @override
+  String toString() => 'MessageFileData(fileId: $fileId)';
+}
+
+/// [MessageAudioData]
+class MessageAudioData extends AmityMessageData {
+  /// Amity File
+  late AmityAudio audio;
+
+  /// init [MessageFileData]
+  MessageAudioData({
+    required String messageId,
+    required String fileId,
+  }) : super(messageId: messageId, fileId: fileId);
+
+  @override
+  String toString() => 'MessageFileData(fileId: $fileId)';
+}
+
+/// [MessageCustomData]
+class MessageCustomData extends AmityMessageData {
+  /// init [MessageCustomData]
+  MessageCustomData(
+      {required String messageId, required Map<String, dynamic> rawData})
+      : super(messageId: messageId, rawData: rawData);
+
+  @override
+  String toString() => 'MessageFileData(fileId: $messageId)';
 }

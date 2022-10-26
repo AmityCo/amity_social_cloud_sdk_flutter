@@ -15,8 +15,4 @@ class CommentUpdateUsecase extends UseCase<AmityComment, UpdateCommentRequest> {
     return amityComposedComment;
   }
 
-  @override
-  Stream<AmityComment> listen(UpdateCommentRequest params) {
-    throw UnimplementedError();
-  }
 }

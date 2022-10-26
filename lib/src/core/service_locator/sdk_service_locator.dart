@@ -2,18 +2,22 @@ import 'dart:developer';
 
 import 'package:amity_sdk/src/core/socket/amity_socket.dart';
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/repo_impl/channel_member_repo_impl.dart';
+import 'package:amity_sdk/src/data/repo_impl/channel_repo_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
-import 'package:amity_sdk/src/public/repo/message/message_repository.dart';
 import 'package:get_it/get_it.dart';
 
+/// Global GetIt instance
 final configServiceLocator = GetIt.asNewInstance();
 
+/// Global GetIt instance
 final serviceLocator =
     GetIt.asNewInstance(); //sl is referred to as Service Locator
 
+/// Service Locator class to init Get It
 class SdkServiceLocator {
-//Dependency injection
+  ///Dependency injection
   static Future<void> initServiceLocator({bool syc = false}) async {
     DateTime startTime = DateTime.now();
 
@@ -76,19 +80,30 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<MessageDbAdapter>(
         () => MessageDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<ChannelDbAdapter>(
+        () => ChannelDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<ChannelUserDbAdapter>(
+        () => ChannelUserDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
 
     //Register Db adapter Repo which hold all the Db Adapters
-    serviceLocator.registerLazySingleton<DbAdapterRepo>(() => DbAdapterRepo(
-        postDbAdapter: serviceLocator(),
-        commentDbAdapter: serviceLocator(),
-        communityDbAdapter: serviceLocator(),
-        communityMemberDbAdapter: serviceLocator(),
-        feedDbAdapter: serviceLocator(),
-        fileDbAdapter: serviceLocator(),
-        userDbAdapter: serviceLocator(),
-        communityCategoryDbAdapter: serviceLocator(),
-        pollDbAdapter: serviceLocator(),
-        messageDbAdapter: serviceLocator()));
+    serviceLocator.registerLazySingleton<DbAdapterRepo>(
+      () => DbAdapterRepo(
+          postDbAdapter: serviceLocator(),
+          commentDbAdapter: serviceLocator(),
+          communityDbAdapter: serviceLocator(),
+          communityMemberDbAdapter: serviceLocator(),
+          feedDbAdapter: serviceLocator(),
+          fileDbAdapter: serviceLocator(),
+          userDbAdapter: serviceLocator(),
+          communityCategoryDbAdapter: serviceLocator(),
+          pollDbAdapter: serviceLocator(),
+          messageDbAdapter: serviceLocator(),
+          reactionDbAdapter: serviceLocator(),
+          channelDbAdapter: serviceLocator(),
+          channelUserDbAdapter: serviceLocator()),
+    );
 
     //-data_source/remote/
     serviceLocator.registerLazySingleton<HttpApiClient>(
@@ -131,6 +146,10 @@ class SdkServiceLocator {
         () => PollApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<MessageApiInterface>(
         () => MessageApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<ChannelApiInterface>(
+        () => ChannelApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<ChannelMemberApiInterface>(
+        () => ChannelMemberApiInterfaceImpl(httpApiClient: serviceLocator()));
 
     // Local Data Source
 
@@ -169,10 +188,7 @@ class SdkServiceLocator {
         fileDbAdapter: serviceLocator(), fileApiInterface: serviceLocator()));
     serviceLocator.registerLazySingleton<ReactionRepo>(() => ReactionRepoImpl(
           reactionApiInterface: serviceLocator(),
-          commentDbAdapter: serviceLocator(),
-          postDbAdapter: serviceLocator(),
-          userDbAdapter: serviceLocator(),
-          reactionDbAdapter: serviceLocator(),
+          dbAdapterRepo: serviceLocator(),
         ));
     serviceLocator.registerLazySingleton<CommunityRepo>(
       () => CommunityRepoImpl(
@@ -230,7 +246,20 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<MessageRepo>(
       () => MessageRepoImpl(
           dbAdapterRepo: serviceLocator(),
-          messageApiInterface: serviceLocator()),
+          messageApiInterface: serviceLocator(),
+          fileRepo: serviceLocator()),
+    );
+    serviceLocator.registerLazySingleton<ChannelRepo>(
+      () => ChannelRepoImpl(
+        commonDbAdapter: serviceLocator(),
+        channelApiInterface: serviceLocator(),
+      ),
+    );
+    serviceLocator.registerLazySingleton<ChannelMemberRepo>(
+      () => ChannelMemberRepoImpl(
+        commonDbAdapter: serviceLocator(),
+        channelMemberApiInterface: serviceLocator(),
+      ),
     );
 
     //-UserCase
@@ -507,14 +536,60 @@ class SdkServiceLocator {
         MessageCreateUsecase(
             messageRepo: serviceLocator(),
             messageComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageCreateFileUsecase>(() =>
+        MessageCreateFileUsecase(
+            messageRepo: serviceLocator(),
+            messageComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<MessageHasLocalUsecase>(
         () => MessageHasLocalUsecase(messageRepo: serviceLocator()));
-        
+    serviceLocator.registerLazySingleton<MessageGetLocalUsecase>(
+        () => MessageGetLocalUsecase(messageRepo: serviceLocator()));
+
     serviceLocator.registerLazySingleton<MessageObserveUsecase>(() =>
         MessageObserveUsecase(
             messageRepo: serviceLocator(),
             messageComposerUsecase: serviceLocator()));
 
+    serviceLocator.registerLazySingleton<ChannelComposerUsecase>(
+        () => ChannelComposerUsecase(
+              fileRepo: serviceLocator(),
+            ));
+    serviceLocator.registerLazySingleton<ChannelMemberComposerUsecase>(
+        () => ChannelMemberComposerUsecase(
+              channelRepo: serviceLocator(),
+              userRepo: serviceLocator(),
+              userComposerUsecase: serviceLocator(),
+            ));
+    serviceLocator
+        .registerLazySingleton<ChannelGetUseCase>(() => ChannelGetUseCase(
+              channelRepo: serviceLocator(),
+              channelComposerUsecase: serviceLocator(),
+            ));
+    serviceLocator.registerLazySingleton<ChannelGetQueryUseCase>(
+        () => ChannelGetQueryUseCase(
+              channelRepo: serviceLocator(),
+              channelComposerUsecase: serviceLocator(),
+            ));
+    serviceLocator.registerLazySingleton<ChannelMemberJoinUsecase>(
+        () => ChannelMemberJoinUsecase(
+              channelMemberRepo: serviceLocator(),
+              channelComposerUsecase: serviceLocator(),
+            ));
+
+    serviceLocator.registerLazySingleton<ChannelMemberLeaveUsecase>(
+        () => ChannelMemberLeaveUsecase(
+              channelMemberRepo: serviceLocator(),
+            ));
+
+    serviceLocator.registerLazySingleton<ChannelMemberGetUsecase>(() =>
+        ChannelMemberGetUsecase(
+            channelMemberRepo: serviceLocator(),
+            channelMemberComposerUsecase: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<ChannelMemberQueryUsecase>(() =>
+        ChannelMemberQueryUsecase(
+            channelMemberRepo: serviceLocator(),
+            channelMemberComposerUsecase: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
@@ -527,6 +602,9 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => CommunityRepository());
     serviceLocator.registerLazySingleton(() => PollRepository());
     serviceLocator.registerLazySingleton(() => MessageRepository());
+    serviceLocator.registerLazySingleton(() => ChannelRepository());
+    serviceLocator
+        .registerLazySingleton(() => ChannelParticipationRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(

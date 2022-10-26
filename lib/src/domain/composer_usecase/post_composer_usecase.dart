@@ -1,14 +1,30 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// [PostComposerUsecase]
 class PostComposerUsecase extends UseCase<AmityPost, AmityPost> {
+  /// User Repo
   final UserRepo userRepo;
+
+  /// Post Repo
   final PostRepo postRepo;
+
+  /// Comment Repo
   final CommentRepo commentRepo;
+
+  /// User Composer UseCase
   final UserComposerUsecase userComposerUsecase;
+
+  /// File Composer UseCase
   final PostFileComposerUsecase fileComposerUsecase;
+
+  /// Community Repo
   final CommunityRepo communityRepo;
+
+  /// Community Composer Usecase
   final CommunityComposerUsecase communityComposerUsecase;
+
+  /// init [PostComposerUsecase]
   PostComposerUsecase(
       {required this.userRepo,
       required this.postRepo,
@@ -65,11 +81,5 @@ class PostComposerUsecase extends UseCase<AmityPost, AmityPost> {
     params.postedUser = await userComposerUsecase.get(params.postedUser!);
 
     return params;
-  }
-
-  @override
-  Stream<AmityPost> listen(AmityPost params) {
-    // TODO: implement listen
-    throw UnimplementedError();
   }
 }

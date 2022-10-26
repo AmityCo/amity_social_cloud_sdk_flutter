@@ -1,5 +1,7 @@
 export 'account_repo.dart';
 export 'authentication_repo.dart';
+export 'channel_member_repo.dart';
+export 'channel_repo.dart';
 export 'comment_repo.dart';
 export 'community_category_repo.dart';
 export 'community_feed_repo.dart';

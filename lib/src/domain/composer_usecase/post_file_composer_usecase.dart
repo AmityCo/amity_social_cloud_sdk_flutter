@@ -1,8 +1,12 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// [PostFileComposerUsecase]
 class PostFileComposerUsecase extends UseCase<AmityPostData, AmityPostData> {
+  /// File Repo
   final FileRepo fileRepo;
+
+  /// init [PostFileComposerUsecase]
   PostFileComposerUsecase({required this.fileRepo});
   @override
   Future<AmityPostData> get(AmityPostData params) async {
@@ -31,9 +35,4 @@ class PostFileComposerUsecase extends UseCase<AmityPostData, AmityPostData> {
     return params;
   }
 
-  @override
-  Stream<AmityPostData> listen(AmityPostData params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

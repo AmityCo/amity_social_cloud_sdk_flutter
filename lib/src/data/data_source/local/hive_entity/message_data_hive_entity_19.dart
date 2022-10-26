@@ -13,27 +13,15 @@ class MessageDataHiveEntity {
   /// File Id
   String? fileId;
 
-  /// Thumbnail File Id for Video
-  String? thumbnailFileId;
-
-  /// Video  File Id
-  Map<String, String>? videoFileId;
-
   /// Stream Id for Live Stream post
-  String? streamId;
-
-  /// Poll Id for Poll Post
-  String? pollId;
+  String? caption;
 
   /// Change object to Map
   Map<String, dynamic> toMap() {
     return {
       'text': text,
       'fileId': fileId,
-      'thumbnailFileId': thumbnailFileId,
-      'videoFileId': videoFileId,
-      'streamId': streamId,
-      'pollId': pollId,
+      'caption': caption,
     };
   }
 

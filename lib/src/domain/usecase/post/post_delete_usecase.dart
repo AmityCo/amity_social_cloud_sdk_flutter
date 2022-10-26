@@ -13,9 +13,4 @@ class PostDeleteUseCase extends UseCase<void, String> {
   Future get(String params) {
     return postRepo.deletePostById(params);
   }
-
-  @override
-  Stream<void> listen(String params) {
-    throw UnimplementedError();
-  }
 }

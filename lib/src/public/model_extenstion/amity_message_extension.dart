@@ -2,12 +2,10 @@ import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/message_db_adapter.dart';
-import 'package:amity_sdk/src/domain/composer_usecase/message_composer_usecase.dart';
-import 'package:amity_sdk/src/domain/model/message/amity_message.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 
-/// Amity Post Extension
+/// Amity Message Extension
 extension AmityMessageExtension on AmityMessage {
   /// React On Amity Post
   AddReactionQueryBuilder react() {
@@ -20,7 +18,7 @@ extension AmityMessageExtension on AmityMessage {
 
   /// Get Amity Post Reaction
   GetReactionQueryBuilder getReaction() {
-    return GetReactionQueryBuilder.message(messageId!);
+    return GetReactionQueryBuilder.message(messageId: messageId!);
   }
 
   /// Amity Post Report
@@ -32,7 +30,7 @@ extension AmityMessageExtension on AmityMessage {
   // }
 
   /// Listen Post Id
-  Stream<AmityMessage> get listen {
+  StreamController<AmityMessage> get listen {
     StreamController<AmityMessage> controller =
         StreamController<AmityMessage>();
 
@@ -47,7 +45,7 @@ extension AmityMessageExtension on AmityMessage {
           );
     });
 
-    return controller.stream;
+    return controller;
   }
 
   /// check if post is flagged by me

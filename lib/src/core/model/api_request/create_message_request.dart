@@ -61,6 +61,9 @@ class CreateMessageRequest {
   /// Mentionees
   List<AmityMentioneeTarget>? mentionees;
 
+  /// File Uri
+  Uri? uri;
+
   factory CreateMessageRequest.fromJson(Map<String, dynamic> json) =>
       CreateMessageRequest(
         channelId: json["channelId"],
@@ -112,35 +115,32 @@ class CreateMessageData {
   /// Init [CreateMessageData]
   CreateMessageData({
     this.text,
-    this.streamId,
-    this.pollId,
+    this.caption,
   });
 
   /// Text Data
   String? text;
 
   /// Stream Id
-  String? streamId;
-
-  /// Poll Id
-  String? pollId;
+  String? caption;
 
   /// Init [CreateMessageData] from Json
   factory CreateMessageData.fromJson(Map<String, dynamic> json) =>
       CreateMessageData(
         text: json["text"],
-        streamId: json["streamId"],
-        pollId: json["pollId"],
+        caption: json["caption"],
       );
 
   /// map from [CreateMessageData]
   Map<String, dynamic> toJson() => {
         "text": text,
-        "streamId": streamId,
-        "pollId": pollId,
+        "caption": caption,
       }..removeWhere((key, value) => value == null);
 
+  /// Convert [CreateMessageData] to [MessageDataHiveEntity]
   MessageDataHiveEntity convertToMessageDataEntity() {
-    return MessageDataHiveEntity()..text = text;
+    return MessageDataHiveEntity()
+      ..text = text
+      ..caption = caption;
   }
 }

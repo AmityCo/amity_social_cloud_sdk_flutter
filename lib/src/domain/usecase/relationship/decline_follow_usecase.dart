@@ -12,10 +12,4 @@ class DeclineFollowUsecase extends UseCase<AmityFollowStatus, String> {
   Future<AmityFollowStatus> get(String params) {
     return followRepo.decline(params);
   }
-
-  @override
-  Stream<AmityFollowStatus> listen(String params) {
-    // TODO: implement listen
-    throw UnimplementedError();
-  }
 }

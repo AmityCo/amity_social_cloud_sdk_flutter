@@ -62,14 +62,23 @@ class AmityMessageCreateDataTypeSelector {
       ..parentId(_parentId);
   }
 
-  // /// Data Type Image
-  // AmityImagePostCreator image(List<AmityImage> images) {
-  //   return AmityImagePostCreator(
-  //       useCase: _useCase,
-  //       targetId: _userId,
-  //       targetType: _targetType.value,
-  //       images: images);
-  // }
+  /// Data Type Image
+  AmityImageMessageCreator image(Uri uri) {
+    return AmityImageMessageCreator(
+      useCase: _useCase,
+      channelId: _channelId,
+      uri: uri,
+    );
+  }
+
+  /// Data Type file
+  AmityFileMessageCreator file(Uri uri) {
+    return AmityFileMessageCreator(
+      useCase: _useCase,
+      channelId: _channelId,
+      uri: uri,
+    );
+  }
 
   // /// Data Type Video
   // AmityVideoPostCreator video(List<AmityVideo> videos) {
@@ -120,6 +129,82 @@ class AmityTextMessageCreator extends AmityMessageCreator {
   @override
   AmityMessageDataType getDataType() {
     return AmityMessageDataType.TEXT;
+  }
+}
+
+/// Implementation Layer for Amity Post Text Creator
+class AmityImageMessageCreator extends AmityMessageCreator {
+  /// Image uri
+  Uri uri;
+
+  /// Caption
+  String? _caption;
+
+  /// Init [AmityTextPostCreator]
+  AmityImageMessageCreator(
+      {required MessageCreateUsecase useCase,
+      required String channelId,
+      String? parentId,
+      required this.uri})
+      : super(useCase: useCase, channelId: channelId);
+
+  /// Add Caption to image
+  AmityImageMessageCreator caption(String caption) {
+    _caption = caption;
+    return this;
+  }
+
+  @override
+  CreateMessageData getData() {
+    return CreateMessageData(caption: _caption);
+  }
+
+  @override
+  AmityMessageDataType getDataType() {
+    return AmityMessageDataType.IMAGE;
+  }
+
+  @override
+  Uri? getUri() {
+    return uri;
+  }
+}
+
+/// Implementation Layer for Amity Message File Creator
+class AmityFileMessageCreator extends AmityMessageCreator {
+  /// Image uri
+  Uri uri;
+
+  /// Caption
+  String? _caption;
+
+  /// Init [AmityTextPostCreator]
+  AmityFileMessageCreator(
+      {required MessageCreateUsecase useCase,
+      required String channelId,
+      String? parentId,
+      required this.uri})
+      : super(useCase: useCase, channelId: channelId);
+
+  /// Add Caption to image
+  AmityFileMessageCreator caption(String caption) {
+    _caption = caption;
+    return this;
+  }
+
+  @override
+  CreateMessageData getData() {
+    return CreateMessageData(caption: _caption);
+  }
+
+  @override
+  AmityMessageDataType getDataType() {
+    return AmityMessageDataType.FILE;
+  }
+
+  @override
+  Uri? getUri() {
+    return uri;
   }
 }
 
@@ -193,6 +278,11 @@ abstract class AmityMessageCreator {
   /// Get Data Type
   AmityMessageDataType getDataType();
 
+  /// Get File Uri
+  Uri? getUri() {
+    return null;
+  }
+
   /// Add metadata to Amity Post
   AmityMessageCreator parentId(String? parentId) {
     _parentId = parentId;
@@ -231,8 +321,9 @@ abstract class AmityMessageCreator {
   // }
 
   /// Create Amity Post
-  Future<AmityMessage> send() {
+  Future<AmityMessage> send() async {
     // throw UnimplementedError();
+
     CreateMessageRequest request = CreateMessageRequest(channelId: _channelId);
 
     if (_parentId != null) {
@@ -260,6 +351,13 @@ abstract class AmityMessageCreator {
 
     // Added the userId
     request.userId = AmityCoreClient.getUserId();
+
+    if (getDataType() == AmityMessageDataType.IMAGE ||
+        getDataType() == AmityMessageDataType.FILE) {
+      /// set file Uri
+      request.uri = getUri();
+      return serviceLocator<MessageCreateFileUsecase>().get(request);
+    }
 
     return _useCase.get(request);
   }

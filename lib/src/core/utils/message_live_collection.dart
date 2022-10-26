@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
@@ -24,7 +26,7 @@ class MessageLiveCollection extends LiveCollection<AmityMessage> {
   }
 
   @override
-  Stream<List<AmityMessage>> asStream() {
+  StreamController<List<AmityMessage>> getStreamController() {
     return serviceLocator<MessageObserveUsecase>().listen(params);
   }
 }

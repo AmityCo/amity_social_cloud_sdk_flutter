@@ -3,10 +3,13 @@ import 'dart:async';
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
+/// [GetGlobalFeedUsecase]
 class GetGlobalFeedUsecase extends UseCase<
     PageListData<List<AmityPost>, String>, GetGlobalFeedRequest> {
   final GlobalFeedRepo _feedRepo;
   final PostComposerUsecase _postComposerUsecase;
+
+  /// Init [GetGlobalFeedUsecase]
   GetGlobalFeedUsecase(this._feedRepo, this._postComposerUsecase);
 
   @override
@@ -19,8 +22,8 @@ class GetGlobalFeedUsecase extends UseCase<
     return amityPost.withItem1(amityComposedPost);
   }
 
-  @override
-  Stream<PageListData<List<AmityPost>, String>> listen(
+  /// Listen global feed
+  StreamController<PageListData<List<AmityPost>, String>> listen(
       GetGlobalFeedRequest params) {
     //1. Listen to Global Feed collection
     //2. Compose Global Feed Collection post
@@ -34,6 +37,6 @@ class GetGlobalFeedUsecase extends UseCase<
       controller.add(event.withItem1(amityComposedPost));
     });
 
-    return controller.stream;
+    return controller;
   }
 }

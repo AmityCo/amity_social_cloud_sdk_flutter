@@ -1,4 +1,5 @@
 export 'authentication_request.dart';
+export 'channel/channel.dart';
 export 'community_member_check_request.dart';
 export 'core/core.dart';
 export 'create_comment_request.dart';

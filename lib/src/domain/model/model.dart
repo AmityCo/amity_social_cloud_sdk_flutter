@@ -12,6 +12,7 @@ export 'amity_roles.dart';
 export 'amity_tag.dart';
 export 'amity_user.dart';
 export 'amity_user_token.dart';
+export 'channel/channel.dart';
 export 'community/community.dart';
 export 'follow/follow.dart';
 export 'message/message.dart';

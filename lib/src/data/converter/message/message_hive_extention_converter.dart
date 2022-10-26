@@ -1,6 +1,6 @@
 import 'package:amity_sdk/src/core/enum/amity_message_type.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_hive_entity_18.dart';
-import 'package:amity_sdk/src/domain/model/message/amity_message.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 /// [MessageHiveExtensionConverter]
 extension MessageHiveExtensionConverter on MessageHiveEntity {
@@ -17,20 +17,30 @@ extension MessageHiveExtensionConverter on MessageHiveEntity {
             MessageTextData(messageId: messageId!, text: data!.text);
         break;
       case AmityMessageDataType.IMAGE:
-        // amityPostData = ImageData(postId: postId, fileId: data!.fileId);
+        amityMessageData = MessageImageData(
+          messageId: messageId!,
+          fileId: fileId!,
+          caption: data!.caption,
+        );
         break;
       case AmityMessageDataType.AUDIO:
-        // amityPostData = VideoData(
-        //   postId: postId,
-        //   fileId: data!.thumbnailFileId,
-        //   rawData: data?.videoFileId,
-        // );
+        amityMessageData = MessageAudioData(
+          messageId: messageId!,
+          fileId: fileId!,
+        );
         break;
       case AmityMessageDataType.FILE:
-        // amityPostData = FileData(postId: postId, fileId: data!.fileId);
+        amityMessageData = MessageFileData(
+          messageId: messageId!,
+          fileId: fileId!,
+          caption: data!.caption,
+        );
         break;
       case AmityMessageDataType.CUSTOM:
-        // TODO: Handle this case.
+        amityMessageData = MessageCustomData(
+          messageId: messageId!,
+          rawData: data!.toMap(),
+        );
         break;
     }
 
@@ -48,8 +58,8 @@ extension MessageHiveExtensionConverter on MessageHiveEntity {
       ..metadata = metadata
       ..flagCount = flagCount
       ..childrenNumber = childrenNumber
-      // ..reactionsCount = reactionsCount
-      // ..reactions = reactions
+      ..reactionCount = reactionsCount
+      ..reactions = AmityReactionMap(reactions: reactions)
       ..myReactions = myReactions
       // ..latestReaction = latestReaction
       ..isDeleted = isDeleted

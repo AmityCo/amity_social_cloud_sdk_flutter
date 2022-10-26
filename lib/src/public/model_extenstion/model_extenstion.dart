@@ -1,6 +1,7 @@
 export 'amity_comment_extenstion.dart';
 export 'amity_community_extension.dart';
 export 'amity_follow_relationship_extension.dart';
+export 'amity_message_extension.dart';
 export 'amity_poll_extension.dart';
 export 'amity_post_extension.dart';
 export 'amity_post_image_data_extension.dart';

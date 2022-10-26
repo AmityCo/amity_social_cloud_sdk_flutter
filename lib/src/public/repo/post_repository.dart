@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
@@ -15,7 +17,7 @@ class PostRepository {
   }
 
   /// listen to [AmityPost] with post id
-  Stream<AmityPost> getPostStream(String postId) {
+  StreamController<AmityPost> getPostStream(String postId) {
     return serviceLocator<GetPostByIdUseCase>().listen(postId);
   }
 

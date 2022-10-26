@@ -1,5 +1,4 @@
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/core/enum/amity_message_sync_state.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:hive/hive.dart';
 
@@ -44,10 +43,9 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
   @override
   Future deleteMessagesByChannelId(String channelId) async {
     box.values
-        .where((element) =>
-            element is MessageHiveEntity && element.channelId == channelId)
+        .where((element) => element.channelId == channelId)
         .forEach((element) {
-      box.delete((element as MessageHiveEntity).messageId);
+      box.delete(element.messageId);
     });
     return;
   }
@@ -57,13 +55,11 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
       MessageQueryRequest request) {
     return box.watch().map((event) => box.values
         .where((message) =>
-                (message is MessageHiveEntity) &&
                 message.channelId == request.channelId &&
                 _isDeletedCondition(message, request) &&
                 _parentCondition(message, request)
             //missing tags
             )
-        .map((e) => e as MessageHiveEntity)
         .toList());
   }
 

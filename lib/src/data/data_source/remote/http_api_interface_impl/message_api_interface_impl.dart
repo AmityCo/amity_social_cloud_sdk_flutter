@@ -38,7 +38,7 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
   @override
   Future deleteMessage(String messageId) async {
     try {
-      final data = await httpApiClient()
+      await httpApiClient()
           .delete('$MESSAGE_V3/$messageId', data: {'messageId': messageId});
       return;
     } on DioError catch (error) {
@@ -74,8 +74,7 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
   @override
   Future isFlaggedByMe(String messageId) async {
     try {
-      final data = await httpApiClient().get(
-          '$MESSAGE_V3/$messageId/isFlaggedByMe',
+      await httpApiClient().get('$MESSAGE_V3/$messageId/isFlaggedByMe',
           queryParameters: {'messageId': messageId});
       return;
     } on DioError catch (error) {
