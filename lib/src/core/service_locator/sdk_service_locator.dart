@@ -261,6 +261,12 @@ class SdkServiceLocator {
         channelMemberApiInterface: serviceLocator(),
       ),
     );
+    serviceLocator.registerLazySingleton<ChannelModerationRepo>(
+      () => ChannelModerationRepoImpl(
+        commonDbAdapter: serviceLocator(),
+        channelMemberApiInterface: serviceLocator(),
+      ),
+    );
 
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
@@ -591,6 +597,28 @@ class SdkServiceLocator {
             channelMemberRepo: serviceLocator(),
             channelMemberComposerUsecase: serviceLocator()));
 
+    serviceLocator.registerLazySingleton<ChannelMemberAddRoleUsecase>(() =>
+        ChannelMemberAddRoleUsecase(channelModerationRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<ChannelMemberRemoveRoleUsecase>(() =>
+        ChannelMemberRemoveRoleUsecase(
+            channelModerationRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<ChannelMemberAddUsecase>(() =>
+        ChannelMemberAddUsecase(
+            channelMemberRepo: serviceLocator(),
+            channelMemberComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<ChannelMemberRemoveUsecase>(
+        () => ChannelMemberRemoveUsecase(channelMemberRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<ChannelMemberBanUsecase>(
+        () => ChannelMemberBanUsecase(channelMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<ChannelMemberUnbanUsecase>(
+        () => ChannelMemberUnbanUsecase(channelMemberRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<ChannelMemberPermissionCheckUsecase>(
+        () => ChannelMemberPermissionCheckUsecase(
+            channelMemberRepo: serviceLocator()));
+
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
     serviceLocator.registerLazySingleton(() => PostRepository());
@@ -605,6 +633,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => ChannelRepository());
     serviceLocator
         .registerLazySingleton(() => ChannelParticipationRepository());
+    serviceLocator.registerLazySingleton(() => ChannelModerationRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(

@@ -20,10 +20,14 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
   });
 
   @override
-  Future addMember(UpdateChannelMembersRequest request) async {
+  Future<List<AmityChannelMember>> addMember(
+      UpdateChannelMembersRequest request) async {
     final data = await channelMemberApiInterface.addMember(request);
-    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
-    return amityChannel.first;
+    final amityChannelMember =
+        await data.saveToDb<AmityChannelMember>(commonDbAdapter);
+    return amityChannelMember
+        .where((element) => request.userIds.contains(element.userId))
+        .toList();
   }
 
   @override
@@ -43,7 +47,7 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
   @override
   Future<AmityChannelMember> getMember(String id, String userId) async {
     final data =
-        commonDbAdapter.channelUserDbAdapter.getEntity('${userId}_$id');
+        commonDbAdapter.channelUserDbAdapter.getEntity('${id}_$userId');
     // final amityChannel = await data.saveToDb(commonDbAdapter);
     return data?.convertToAmityChannelMember() ?? AmityChannelMember()
       ..channelId = id
@@ -53,7 +57,7 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
   @override
   List<String>? getMemberPermission(String id, String userId) {
     final data =
-        commonDbAdapter.channelUserDbAdapter.getEntity('${userId}_$id');
+        commonDbAdapter.channelUserDbAdapter.getEntity('${id}_$userId');
     return data!.permissions;
   }
 

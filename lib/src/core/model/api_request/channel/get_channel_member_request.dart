@@ -32,7 +32,7 @@ class GetChannelMembersRequest {
   /// [GetChannelMembersRequest] from Map
   factory GetChannelMembersRequest.fromJson(Map<String, dynamic> json) =>
       GetChannelMembersRequest(
-        channelId: json["communityId"],
+        channelId: json["channelId"],
         sortBy: json["sortBy"],
         memberships: List<String>.from(json["memberships"].map((x) => x)),
         roles: List<String>.from(json["roles"].map((x) => x)),
@@ -43,7 +43,7 @@ class GetChannelMembersRequest {
 
   /// Change [GetChannelMembersRequest] to Map
   Map<String, dynamic> toJson() => {
-        "communityId": channelId,
+        "channelId": channelId,
         "sortBy": sortBy,
         "memberships": memberships == null
             ? null
