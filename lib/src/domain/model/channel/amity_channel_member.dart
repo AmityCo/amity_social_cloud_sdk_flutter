@@ -38,7 +38,7 @@ class AmityChannelMember {
         StreamController<AmityChannelMember>();
 
     serviceLocator<ChannelUserDbAdapter>()
-        .listenEntity(channelId! + userId!)
+        .listenEntity('${channelId!}_$userId')
         .listen((event) {
       final updateAmityChannelMember = event.convertToAmityChannelMember();
 

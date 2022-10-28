@@ -1,13 +1,14 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
-/// [RemoveRoleUsecase]
-class RemoveRoleUsecase extends UseCase<void, UpdateChannelRoleRequest> {
+/// [ChannelMemberRemoveRoleUsecase]
+class ChannelMemberRemoveRoleUsecase
+    extends UseCase<void, UpdateChannelRoleRequest> {
   /// Channel Moderation Repo
   final ChannelModerationRepo channelModerationRepo;
 
-  /// Init [RemoveRoleUsecase]
-  RemoveRoleUsecase({required this.channelModerationRepo});
+  /// Init [ChannelMemberRemoveRoleUsecase]
+  ChannelMemberRemoveRoleUsecase({required this.channelModerationRepo});
 
   @override
   Future get(UpdateChannelRoleRequest params) async {

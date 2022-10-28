@@ -1,3 +1,5 @@
+export 'amity_channel_extension.dart';
+export 'amity_channel_member_extension.dart';
 export 'amity_comment_extenstion.dart';
 export 'amity_community_extension.dart';
 export 'amity_follow_relationship_extension.dart';

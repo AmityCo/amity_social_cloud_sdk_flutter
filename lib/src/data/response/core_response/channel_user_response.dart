@@ -62,7 +62,7 @@ class ChannelUserResponse {
 
   factory ChannelUserResponse.fromJson(Map<String, dynamic> json) =>
       ChannelUserResponse(
-        id: '${json["userId"]}_${json["channelId"]}',
+        id: '${json["channelId"]}_${json["userId"]}',
         userId: json["userId"],
         channelId: json["channelId"],
         membership: json["membership"],

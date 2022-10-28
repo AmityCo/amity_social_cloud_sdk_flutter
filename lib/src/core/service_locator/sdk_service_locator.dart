@@ -597,10 +597,27 @@ class SdkServiceLocator {
             channelMemberRepo: serviceLocator(),
             channelMemberComposerUsecase: serviceLocator()));
 
-    serviceLocator.registerLazySingleton<AddRoleUsecase>(
-        () => AddRoleUsecase(channelModerationRepo: serviceLocator()));
-    serviceLocator.registerLazySingleton<RemoveRoleUsecase>(
-        () => RemoveRoleUsecase(channelModerationRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<ChannelMemberAddRoleUsecase>(() =>
+        ChannelMemberAddRoleUsecase(channelModerationRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<ChannelMemberRemoveRoleUsecase>(() =>
+        ChannelMemberRemoveRoleUsecase(
+            channelModerationRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<ChannelMemberAddUsecase>(() =>
+        ChannelMemberAddUsecase(
+            channelMemberRepo: serviceLocator(),
+            channelMemberComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<ChannelMemberRemoveUsecase>(
+        () => ChannelMemberRemoveUsecase(channelMemberRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<ChannelMemberBanUsecase>(
+        () => ChannelMemberBanUsecase(channelMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<ChannelMemberUnbanUsecase>(
+        () => ChannelMemberUnbanUsecase(channelMemberRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<ChannelMemberPermissionCheckUsecase>(
+        () => ChannelMemberPermissionCheckUsecase(
+            channelMemberRepo: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo

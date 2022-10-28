@@ -5,3 +5,4 @@ export 'channel_get_usecase.dart';
 export 'channel_update_usecase.dart';
 export 'member/member.dart';
 export 'moderation/moderation.dart';
+export 'permission/permission.dart';

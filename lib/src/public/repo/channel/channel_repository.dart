@@ -24,6 +24,18 @@ class ChannelRepository {
     return serviceLocator<ChannelMemberLeaveUsecase>().get(channelId);
   }
 
+  /// Add Member to channel
+  Future addMembers(String channelId, List<String> userIds) {
+    return serviceLocator<ChannelMemberAddUsecase>().get(
+        UpdateChannelMembersRequest(channelId: channelId, userIds: userIds));
+  }
+
+  /// Remove member to channel
+  Future removeMembers(String channelId, List<String> userIds) {
+    return serviceLocator<ChannelMemberRemoveUsecase>().get(
+        UpdateChannelMembersRequest(channelId: channelId, userIds: userIds));
+  }
+
   /// Membership Repo
   ChannelParticipationRepository membership(String channelId) {
     return serviceLocator<ChannelParticipationRepository>()

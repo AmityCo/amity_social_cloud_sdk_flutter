@@ -13,18 +13,24 @@ class ChannelModerationRepoImpl extends ChannelModerationRepo {
   ChannelModerationRepoImpl(
       {required this.channelMemberApiInterface, required this.commonDbAdapter});
   @override
-  Future<CreateChannelResponse> addRole(
+  Future<List<AmityChannelMember>> addRole(
       UpdateChannelRoleRequest request) async {
     final data = await channelMemberApiInterface.addRole(request);
-    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
-    return amityChannel.first;
+    final amityChannelMember =
+        await data.saveToDb<AmityChannelMember>(commonDbAdapter);
+    return amityChannelMember
+        .where((element) => request.userIds.contains(element.userId))
+        .toList();
   }
 
   @override
-  Future<CreateChannelResponse> removeRole(
+  Future<List<AmityChannelMember>> removeRole(
       UpdateChannelRoleRequest request) async {
     final data = await channelMemberApiInterface.removeRole(request);
-    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
-    return amityChannel.first;
+    final amityChannelMember =
+        await data.saveToDb<AmityChannelMember>(commonDbAdapter);
+    return amityChannelMember
+        .where((element) => request.userIds.contains(element.userId))
+        .toList();
   }
 }
