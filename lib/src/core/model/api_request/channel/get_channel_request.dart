@@ -73,12 +73,12 @@ class GetChannelRequest {
         "keyword": keyword,
         "isDeleted": isDeleted,
         "tags[]": tags == null ? null : List<String>.from(tags!.map((x) => x)),
-        "excludeTags": excludeTags == null
+        "excludeTags[]": excludeTags == null
             ? null
             : List<String>.from(excludeTags!.map((x) => x)),
         "filter": filter,
         "types[]":
-            types == null ? null : List<dynamic>.from(types!.map((x) => x)),
+            types == null ? null : List<String>.from(types!.map((x) => x)),
         "userId": userId,
         "sortBy": sortBy,
         "options": options?.toJson(),
