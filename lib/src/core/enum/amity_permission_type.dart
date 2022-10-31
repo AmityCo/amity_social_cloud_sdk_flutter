@@ -66,4 +66,10 @@ extension AmityPermissionExtension on AmityPermission {
       'EDIT_CHANNEL_USER'
     ][index];
   }
+
+  static AmityPermission enumOf(String value) {
+    return AmityPermission.values.firstWhere(
+      (element) => element.name.toLowerCase() == value.toLowerCase(),
+    );
+  }
 }

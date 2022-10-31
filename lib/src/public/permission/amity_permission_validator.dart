@@ -16,9 +16,10 @@ class AmityPermissionValidator {
   }
 
   /// Check permission with Channel
-  AmityChannelPermissionValidator atChannel(String channelId) {
+  AmityChannelPermissionValidator atChannel(String channelId,
+      {String? userId}) {
     return AmityChannelPermissionValidator(
-        _permission, channelId, AmityCoreClient.getUserId());
+        _permission, channelId, userId ?? AmityCoreClient.getUserId());
   }
 
   /// Check Global permission
