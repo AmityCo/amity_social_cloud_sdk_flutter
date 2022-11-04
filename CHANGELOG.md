@@ -1,3 +1,7 @@
+## 0.11.0
+* feat: Channel Member Add/Remove roles and permission
+* feat: Check user perssion for channel
+* fix: Channel Query filere validation
 ## 0.10.0
 * feat: Channel Member Query
 * fix: Update listner method for AmityChannelMember model
