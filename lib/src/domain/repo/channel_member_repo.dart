@@ -8,7 +8,8 @@ abstract class ChannelMemberRepo {
       GetChannelMembersRequest request);
 
   /// Add Member
-  Future addMember(UpdateChannelMembersRequest request);
+  Future<List<AmityChannelMember>> addMember(
+      UpdateChannelMembersRequest request);
 
   /// Remove Member
   Future removeMember(UpdateChannelMembersRequest request);

@@ -1,6 +1,6 @@
-export 'create_channel_response.dart';
 export 'amity_error_response.dart';
 export 'core_response/core_response.dart';
+export 'create_channel_response.dart';
 export 'create_comment_response.dart';
 export 'create_community_response.dart';
 export 'create_message_response.dart';
