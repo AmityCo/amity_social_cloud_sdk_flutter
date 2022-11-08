@@ -16,5 +16,9 @@ abstract class ChannelApiInterface {
   Future<CreateChannelResponse> getChannel(String channelId);
 
   /// Delete Channel
+
   Future<bool> deleteChannel(String channelId);
+
+  /// Mute Channel
+  Future muteChannel(UpdateChannelMembersRequest request);
 }

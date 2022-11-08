@@ -32,4 +32,7 @@ abstract class ChannelMemberApiInterface {
   /// Update Member
   Future<CreateChannelResponse> unbanMember(
       UpdateChannelMembersRequest request);
+
+  /// Mute Member
+  Future muteMember(UpdateChannelMembersRequest request);
 }

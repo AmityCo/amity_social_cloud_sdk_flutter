@@ -24,6 +24,13 @@ class ChannelRepository {
     return serviceLocator<ChannelMemberLeaveUsecase>().get(channelId);
   }
 
+  /// Mute  channel
+  Future muteChannel(String channelId,
+      {Duration timeout = const Duration(minutes: 10)}) {
+    return serviceLocator<ChannelMuteUsecase>().get(UpdateChannelMembersRequest(
+        channelId: channelId, mutePeriod: timeout.inMilliseconds));
+  }
+
   /// Add Member to channel
   Future addMembers(String channelId, List<String> userIds) {
     return serviceLocator<ChannelMemberAddUsecase>().get(
