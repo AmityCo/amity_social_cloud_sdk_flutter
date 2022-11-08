@@ -69,4 +69,14 @@ class ChannelRepoImpl extends ChannelRepo {
     final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
     return PageListData(amityChannel, data.paging?.next ?? '');
   }
+
+  @override
+  Future muteChannel(UpdateChannelMembersRequest request) async {
+    final data = await channelApiInterface.muteChannel(request);
+
+    final amityChannelEntity =
+        commonDbAdapter.channelDbAdapter.getEntity(request.channelId);
+    amityChannelEntity.isMuted = true;
+    await amityChannelEntity.save();
+  }
 }

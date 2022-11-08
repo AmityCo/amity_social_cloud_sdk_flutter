@@ -24,9 +24,14 @@ class ChannelModerationRepository {
             channelId: _channelId, role: role, userIds: userIds));
   }
 
-  // Future muteMembers(timeout: Duration, List<String> userIds) {
-  //     return MuteUsersChannelUseCase().execute(channelId, timeout, userIds);
-  // }
+  Future muteMembers(List<String> userIds,
+      {Duration timeout = const Duration(minutes: 10)}) {
+    return serviceLocator<ChannelMemberMuteUsecase>().get(
+        UpdateChannelMembersRequest(
+            channelId: _channelId,
+            userIds: userIds,
+            mutePeriod: timeout.inMilliseconds));
+  }
 
   // Future unmuteMembers(List<String> userIds) {
   //     return UnMuteUsersChannelUseCase().execute(channelId, userIds);

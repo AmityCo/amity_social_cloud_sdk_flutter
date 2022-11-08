@@ -26,7 +26,7 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
     final amityChannelMember =
         await data.saveToDb<AmityChannelMember>(commonDbAdapter);
     return amityChannelMember
-        .where((element) => request.userIds.contains(element.userId))
+        .where((element) => request.userIds!.contains(element.userId))
         .toList();
   }
 
@@ -108,5 +108,23 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
     final data = await channelMemberApiInterface.unbanMember(request);
     final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
     return amityChannel.first;
+  }
+
+  @override
+  Future muteMember(UpdateChannelMembersRequest request) async {
+    await channelMemberApiInterface.muteMember(request);
+
+    if (request.userIds != null) {
+      for (String userId in request.userIds!) {
+        final channelMember = commonDbAdapter.channelUserDbAdapter
+            .getEntity('${request.channelId}_$userId');
+        if (channelMember != null) {
+          channelMember.isMuted = true;
+          await channelMember.save();
+        }
+      }
+    }
+
+    return;
   }
 }

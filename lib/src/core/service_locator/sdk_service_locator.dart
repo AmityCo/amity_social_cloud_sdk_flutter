@@ -618,6 +618,10 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<ChannelMemberPermissionCheckUsecase>(
         () => ChannelMemberPermissionCheckUsecase(
             channelMemberRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<ChannelMuteUsecase>(
+        () => ChannelMuteUsecase(channelRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<ChannelMemberMuteUsecase>(
+        () => ChannelMemberMuteUsecase(channelMemberRepo: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
