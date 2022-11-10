@@ -6,7 +6,7 @@ class GetChannelMembersRequest {
   GetChannelMembersRequest(
       {required this.channelId,
       this.memberId,
-      this.memberships,
+      this.filter,
       this.roles,
       this.sortBy,
       this.options});
@@ -18,7 +18,7 @@ class GetChannelMembersRequest {
   String? memberId;
 
   /// Membership
-  List<String>? memberships;
+  String? filter;
 
   /// Roles
   List<String>? roles;
@@ -34,7 +34,7 @@ class GetChannelMembersRequest {
       GetChannelMembersRequest(
         channelId: json["channelId"],
         sortBy: json["sortBy"],
-        memberships: List<String>.from(json["memberships"].map((x) => x)),
+        filter: json["filter"],
         roles: List<String>.from(json["roles"].map((x) => x)),
         options: json["options"] == null
             ? null
@@ -45,9 +45,7 @@ class GetChannelMembersRequest {
   Map<String, dynamic> toJson() => {
         "channelId": channelId,
         "sortBy": sortBy,
-        "memberships": memberships == null
-            ? null
-            : List<dynamic>.from(memberships!.map((x) => x)),
+        "filter": filter,
         "roles":
             roles == null ? null : List<dynamic>.from(roles!.map((x) => x)),
         "options": options?.toJson(),
