@@ -119,7 +119,11 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
         final channelMember = commonDbAdapter.channelUserDbAdapter
             .getEntity('${request.channelId}_$userId');
         if (channelMember != null) {
-          channelMember.isMuted = true;
+          if (request.mutePeriod! > 0) {
+            channelMember.isMuted = true;
+          } else if (request.mutePeriod! == 0) {
+            channelMember.isMuted = false;
+          }
           await channelMember.save();
         }
       }
