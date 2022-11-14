@@ -11,9 +11,16 @@ class ChannelApiInterfaceImpl extends ChannelApiInterface {
   final HttpApiClient httpApiClient;
 
   @override
-  Future<CreateChannelResponse> createChannel(CreateChannelRequest request) {
-    // TODO: implement createChannel
-    throw UnimplementedError();
+  Future<CreateChannelResponse> createChannel(
+      CreateChannelRequest request) async {
+    try {
+      final data =
+          await httpApiClient().post(CHANNELS_V3, data: request.toJson());
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
   }
 
   @override

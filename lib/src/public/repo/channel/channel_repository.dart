@@ -4,6 +4,11 @@ import 'package:amity_sdk/src/public/public.dart';
 
 /// Channel Repository
 class ChannelRepository {
+  /// Create the [AmityChannel]
+  ChannelCreatorTypeSelection createChannel() {
+    return ChannelCreatorTypeSelection();
+  }
+
   /// Get the [AmityChannel] by channel Id
   Future<AmityChannel> getChannel(String channelId) {
     return serviceLocator<ChannelGetUseCase>().get(channelId);
