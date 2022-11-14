@@ -24,6 +24,19 @@ class ChannelApiInterfaceImpl extends ChannelApiInterface {
   }
 
   @override
+  Future<CreateChannelResponse> createConversationChannel(
+      CreateChannelRequest request) async {
+    try {
+      final data = await httpApiClient()
+          .post('$CHANNELS_V3/conversation', data: request.toJson());
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
   Future<bool> deleteChannel(String channelId) {
     // TODO: implement deleteChannel
     throw UnimplementedError();

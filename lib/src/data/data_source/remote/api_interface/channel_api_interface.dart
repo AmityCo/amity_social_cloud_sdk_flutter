@@ -9,6 +9,10 @@ abstract class ChannelApiInterface {
   /// Create Channel
   Future<CreateChannelResponse> createChannel(CreateChannelRequest request);
 
+  /// Create Channel
+  Future<CreateChannelResponse> createConversationChannel(
+      CreateChannelRequest request);
+
   /// Update Channel
   Future<CreateChannelResponse> updateChannel(CreateChannelRequest request);
 
