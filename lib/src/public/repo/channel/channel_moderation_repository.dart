@@ -24,33 +24,25 @@ class ChannelModerationRepository {
             channelId: _channelId, role: role, userIds: userIds));
   }
 
-  Future muteMembers(List<String> userIds,
-      {Duration timeout = const Duration(minutes: 10)}) {
+  Future muteMembers(List<String> userIds, {int millis = 600000}) {
     return serviceLocator<ChannelMemberMuteUsecase>().get(
         UpdateChannelMembersRequest(
-            channelId: _channelId,
-            userIds: userIds,
-            mutePeriod: timeout.inMilliseconds));
+            channelId: _channelId, userIds: userIds, mutePeriod: millis));
   }
 
-  // Future unmuteMembers(List<String> userIds) {
-  //     return UnMuteUsersChannelUseCase().execute(channelId, userIds);
-  // }
+  Future unmuteMembers(List<String> userIds) {
+    return serviceLocator<ChannelMemberMuteUsecase>().get(
+        UpdateChannelMembersRequest(
+            channelId: _channelId, userIds: userIds, mutePeriod: 0));
+  }
 
-  // Future muteChannel(timeout: Duration) {
-  //     return MuteChannelUseCase().execute(channelId, timeout);
-  // }
+  Future banMembers(List<String> userIds) {
+    return serviceLocator<ChannelMemberBanUsecase>().get(
+        UpdateChannelMembersRequest(channelId: _channelId, userIds: userIds));
+  }
 
-  // Future unmuteChannel() {
-  //     return UnMuteChannelUseCase().execute(channelId);
-  // }
-
-  // Future banMembers(List<String> userIds) {
-  //     return BanUsersChannelUseCase().execute(channelId, userIds);
-  // }
-
-  // Future unbanMembers(List<String> userIds) {
-  //     return UnBanUsersChannelUseCase().execute(channelId, userIds);
-  // }
-
+  Future unbanMembers(List<String> userIds) {
+    return serviceLocator<ChannelMemberUnbanUsecase>().get(
+        UpdateChannelMembersRequest(channelId: _channelId, userIds: userIds));
+  }
 }

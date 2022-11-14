@@ -59,7 +59,7 @@ extension AmityPermissionExtension on AmityPermission {
       'CLOSE_CHANNEL',
       'EDIT_CHANNEL',
       'EDIT_CHANNEL_RATELIMIT',
-      'BAN_CHANNEL_USER',
+      'BAN_USER_FROM_CHANNEL',
       'MUTE_USER_INSIDE_CHANNEL',
       'ADD_CHANNEL_USER',
       'REMOVE_CHANNEL_USER',

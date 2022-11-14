@@ -38,13 +38,6 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
   }
 
   @override
-  Future banMember(UpdateChannelMembersRequest request) async {
-    final data = await channelMemberApiInterface.banMember(request);
-    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
-    return amityChannel.first;
-  }
-
-  @override
   Future<AmityChannelMember> getMember(String id, String userId) async {
     final data =
         commonDbAdapter.channelUserDbAdapter.getEntity('${id}_$userId');
@@ -104,6 +97,13 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
   }
 
   @override
+  Future banMember(UpdateChannelMembersRequest request) async {
+    final data = await channelMemberApiInterface.banMember(request);
+    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
+    return amityChannel.first;
+  }
+
+  @override
   Future unbanMember(UpdateChannelMembersRequest request) async {
     final data = await channelMemberApiInterface.unbanMember(request);
     final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
@@ -119,12 +119,15 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
         final channelMember = commonDbAdapter.channelUserDbAdapter
             .getEntity('${request.channelId}_$userId');
         if (channelMember != null) {
-          channelMember.isMuted = true;
+          if (request.mutePeriod! > 0) {
+            channelMember.isMuted = true;
+          } else if (request.mutePeriod! == 0) {
+            channelMember.isMuted = false;
+          }
           await channelMember.save();
         }
       }
     }
-
     return;
   }
 }

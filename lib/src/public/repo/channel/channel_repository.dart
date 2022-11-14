@@ -25,10 +25,15 @@ class ChannelRepository {
   }
 
   /// Mute  channel
-  Future muteChannel(String channelId,
-      {Duration timeout = const Duration(minutes: 10)}) {
-    return serviceLocator<ChannelMuteUsecase>().get(UpdateChannelMembersRequest(
-        channelId: channelId, mutePeriod: timeout.inMilliseconds));
+  Future muteChannel(String channelId, {int millis = 600000}) {
+    return serviceLocator<ChannelMuteUsecase>().get(
+        UpdateChannelMembersRequest(channelId: channelId, mutePeriod: millis));
+  }
+
+  /// Unmute  channel
+  Future unMuteChannel(String channelId) {
+    return serviceLocator<ChannelMuteUsecase>()
+        .get(UpdateChannelMembersRequest(channelId: channelId, mutePeriod: 0));
   }
 
   /// Add Member to channel
