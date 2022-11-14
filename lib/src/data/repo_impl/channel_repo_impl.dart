@@ -22,7 +22,9 @@ class ChannelRepoImpl extends ChannelRepo {
 
   @override
   Future<AmityChannel> createChannel(CreateChannelRequest request) async {
-    final data = await channelApiInterface.createChannel(request);
+    final data = await (request.type == AmityChannelType.CONVERSATION.value
+        ? channelApiInterface.createConversationChannel(request)
+        : channelApiInterface.createChannel(request));
     final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
     return amityChannel.first;
   }

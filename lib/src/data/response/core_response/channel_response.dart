@@ -3,6 +3,9 @@ class ChannelResponse {
   /// init [ChannelResponse]
   ChannelResponse({
     required this.channelId,
+    this.channelInternalId,
+    this.channelPublicId,
+    this.defaultMessageFeedId,
     required this.isDistinct,
     required this.metadata,
     required this.type,
@@ -27,6 +30,10 @@ class ChannelResponse {
 
   /// Channel Id
   final String channelId;
+
+  final String? channelPublicId;
+  final String? channelInternalId;
+  final String? defaultMessageFeedId;
 
   /// Is Distinct
   final bool isDistinct;
@@ -92,6 +99,9 @@ class ChannelResponse {
   factory ChannelResponse.fromJson(Map<String, dynamic> json) =>
       ChannelResponse(
         channelId: json["channelId"],
+        channelInternalId: json["channelInternalId"],
+        channelPublicId: json["channelPublicId"],
+        defaultMessageFeedId: json["defaultMessageFeedId"],
         isDistinct: json["isDistinct"],
         metadata: json["metadata"],
         type: json["type"],
