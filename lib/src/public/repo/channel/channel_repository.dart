@@ -1,12 +1,18 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
+import 'package:amity_sdk/src/public/query_builder/channel/update/channel_update_builder.dart';
 
 /// Channel Repository
 class ChannelRepository {
   /// Create the [AmityChannel]
   ChannelCreatorTypeSelection createChannel() {
     return ChannelCreatorTypeSelection();
+  }
+
+  /// Update the [AmityChannel]
+  ChannelUpdateBuilder updateChannel(String channelId) {
+    return ChannelUpdateBuilder(channelId, serviceLocator());
   }
 
   /// Get the [AmityChannel] by channel Id

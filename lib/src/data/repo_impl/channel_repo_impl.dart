@@ -30,6 +30,13 @@ class ChannelRepoImpl extends ChannelRepo {
   }
 
   @override
+  Future<AmityChannel> updateChannel(CreateChannelRequest request) async {
+    final data = await channelApiInterface.updateChannel(request);
+    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
+    return amityChannel.first;
+  }
+
+  @override
   Future<AmityChannel> getChannelById(String channelId) async {
     return commonDbAdapter.channelDbAdapter
         .getEntity(channelId)
@@ -53,13 +60,6 @@ class ChannelRepoImpl extends ChannelRepo {
   @override
   Future<AmityChannel> getChannel(String channelId) async {
     final data = await channelApiInterface.getChannel(channelId);
-    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
-    return amityChannel.first;
-  }
-
-  @override
-  Future<AmityChannel> updateChannel(CreateChannelRequest request) async {
-    final data = await channelApiInterface.updateChannel(request);
     final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
     return amityChannel.first;
   }

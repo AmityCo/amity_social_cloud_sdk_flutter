@@ -628,6 +628,11 @@ class SdkServiceLocator {
             channelRepo: serviceLocator(),
             channelComposerUsecase: serviceLocator()));
 
+    serviceLocator.registerLazySingleton<ChannelUpdateUseCase>(() =>
+        ChannelUpdateUseCase(
+            channelRepo: serviceLocator(),
+            channelComposerUsecase: serviceLocator()));
+
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
     serviceLocator.registerLazySingleton(() => PostRepository());
