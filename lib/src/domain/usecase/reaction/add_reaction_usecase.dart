@@ -10,7 +10,11 @@ class AddReactionUsecase extends UseCase<void, ReactionRequest> {
   AddReactionUsecase({required this.reactionRepo});
 
   @override
-  Future get(ReactionRequest params) {
+  Future<void> get(ReactionRequest params) {
     return reactionRepo.addReaction(params);
+  }
+
+  Future<T> getWithType<T>(ReactionRequest params) {
+    return reactionRepo.addReaction<T>(params);
   }
 }

@@ -3,7 +3,7 @@ import 'package:amity_sdk/src/domain/usecase/reaction/add_reaction_usecase.dart'
 import 'package:amity_sdk/src/domain/usecase/reaction/remove_reaction_usecase.dart';
 
 /// AddReactionQueryBuilder
-class AddReactionQueryBuilder {
+class AddReactionQueryBuilder<T> {
   late AddReactionUsecase _addReactionUsecase;
   late RemoveReactionUsecase _removeReactionUsecase;
   late String _referenceType;
@@ -22,20 +22,20 @@ class AddReactionQueryBuilder {
   }
 
   /// Add Reaction
-  Future<void> addReaction(String reaction) {
+  Future<T> addReaction(String reaction) {
     ReactionRequest reactionRequest = ReactionRequest(
         referenceId: _referenceId,
         referenceType: _referenceType,
         reactionName: reaction);
-    return _addReactionUsecase.get(reactionRequest);
+    return _addReactionUsecase.getWithType<T>(reactionRequest);
   }
 
   /// Remove Reaction
-  Future<void> removeReaction(String reaction) {
+  Future<T> removeReaction(String reaction) {
     ReactionRequest reactionRequest = ReactionRequest(
         referenceId: _referenceId,
         referenceType: _referenceType,
         reactionName: reaction);
-    return _removeReactionUsecase.get(reactionRequest);
+    return _removeReactionUsecase.getWithType<T>(reactionRequest);
   }
 }
