@@ -142,8 +142,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
   @override
   Future muteMember(UpdateChannelMembersRequest request) async {
     try {
-      final data = await httpApiClient().put(
-          '$CHANNEL_V2/${request.channelId}/$USERS/mute',
+      await httpApiClient().put('$CHANNEL_V2/${request.channelId}/$USERS/mute',
           data: request.toJson());
       return;
     } on DioError catch (error) {

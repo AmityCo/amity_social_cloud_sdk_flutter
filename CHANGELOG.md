@@ -1,3 +1,9 @@
+## 0.12.0
+* feat: Create/Update Channel
+* feat: Mute/Unmute Channel Member 
+* feat: Ban/Unban Channel Member 
+* fix: Amity post my reaction after reaction update
+
 ## 0.11.0
 * feat: Channel Member Add/Remove roles and permission
 * feat: Check user perssion for channel
