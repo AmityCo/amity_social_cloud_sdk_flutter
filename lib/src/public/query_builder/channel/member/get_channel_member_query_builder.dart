@@ -51,7 +51,7 @@ class GetChannelMemberQueryBuilder {
     GetChannelMembersRequest request =
         GetChannelMembersRequest(channelId: channelId);
 
-    request.memberships = _fileter.memberships;
+    request.filter = _fileter.value;
     request.sortBy = _sortOption.value;
 
     if (_roles != null) request.roles = _roles!.roles;

@@ -26,7 +26,6 @@ class ChannelUserDbAdapterImpl extends ChannelUserDbAdapter {
 
   @override
   ChannelUserHiveEntity? getEntity(String id) {
-    print('GET $id');
     return box.get(id);
   }
 
@@ -37,7 +36,6 @@ class ChannelUserDbAdapterImpl extends ChannelUserDbAdapter {
 
   @override
   Future saveEntity(ChannelUserHiveEntity data) async {
-    print('SAVE ${data.id}');
     box.put(data.id, data);
   }
 }

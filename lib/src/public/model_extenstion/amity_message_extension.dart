@@ -9,7 +9,7 @@ import 'package:amity_sdk/src/public/public.dart';
 extension AmityMessageExtension on AmityMessage {
   /// React On Amity Post
   AddReactionQueryBuilder react() {
-    return AddReactionQueryBuilder(
+    return AddReactionQueryBuilder<AmityMessage>(
         addReactionUsecase: serviceLocator(),
         removeReactionUsecase: serviceLocator(),
         referenceType: AmityReactionReferenceType.MESSAGE.value,

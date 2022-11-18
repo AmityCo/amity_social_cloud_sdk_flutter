@@ -1,9 +1,20 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
+import 'package:amity_sdk/src/public/query_builder/channel/update/channel_update_builder.dart';
 
 /// Channel Repository
 class ChannelRepository {
+  /// Create the [AmityChannel]
+  ChannelCreatorTypeSelection createChannel() {
+    return ChannelCreatorTypeSelection();
+  }
+
+  /// Update the [AmityChannel]
+  ChannelUpdateBuilder updateChannel(String channelId) {
+    return ChannelUpdateBuilder(channelId, serviceLocator());
+  }
+
   /// Get the [AmityChannel] by channel Id
   Future<AmityChannel> getChannel(String channelId) {
     return serviceLocator<ChannelGetUseCase>().get(channelId);
@@ -22,6 +33,18 @@ class ChannelRepository {
   /// Leave the channel
   Future leaveChannel(String channelId) {
     return serviceLocator<ChannelMemberLeaveUsecase>().get(channelId);
+  }
+
+  /// Mute  channel
+  Future muteChannel(String channelId, {int millis = 600000}) {
+    return serviceLocator<ChannelMuteUsecase>().get(
+        UpdateChannelMembersRequest(channelId: channelId, mutePeriod: millis));
+  }
+
+  /// Unmute  channel
+  Future unMuteChannel(String channelId) {
+    return serviceLocator<ChannelMuteUsecase>()
+        .get(UpdateChannelMembersRequest(channelId: channelId, mutePeriod: 0));
   }
 
   /// Add Member to channel

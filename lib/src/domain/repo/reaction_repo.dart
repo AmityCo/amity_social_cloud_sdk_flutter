@@ -8,8 +8,8 @@ abstract class ReactionRepo {
       GetReactionRequest request);
 
   /// Add Reaction
-  Future addReaction(ReactionRequest request);
+  Future<T> addReaction<T>(ReactionRequest request);
 
   /// Remove Reaction
-  Future removeReaction(ReactionRequest request);
+  Future<T> removeReaction<T>(ReactionRequest request);
 }

@@ -15,7 +15,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
       UpdateChannelMembersRequest request) async {
     try {
       final data = await httpApiClient().post(
-          '$CHANNEL_V3/${request.channelId}/$USERS',
+          '$CHANNELS_V3/${request.channelId}/$USERS',
           data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
     } on DioError catch (error) {
@@ -28,11 +28,9 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
   Future<CreateChannelResponse> removeMember(
       UpdateChannelMembersRequest request) async {
     try {
-      final param = <String, String>{
-        "channelId": request.channelId,
-      };
+      final param = <String, String>{"channelId": request.channelId};
       final data = await httpApiClient().delete(
-          '$CHANNEL_V3/${request.channelId}/$USERS',
+          '$CHANNELS_V3/${request.channelId}/$USERS',
           data: param.toJson());
       return CreateChannelResponse.fromJson(data.data);
     } on DioError catch (error) {
@@ -46,7 +44,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
       GetChannelMembersRequest request) async {
     try {
       final data = await httpApiClient().get(
-          '$CHANNEL_V3/${request.channelId}/$USERS/',
+          '$CHANNELS_V3/${request.channelId}/$USERS/',
           queryParameters: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
     } on DioError catch (error) {
@@ -62,7 +60,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
         "channelId": channelId,
       };
       final data = await httpApiClient()
-          .post('$CHANNEL_V3/$channelId/$JOIN', data: param);
+          .post('$CHANNELS_V3/$channelId/$JOIN', data: param);
       return CreateChannelResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -77,7 +75,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
         "channelId": channelId,
       };
       final data = await httpApiClient()
-          .delete('$CHANNEL_V3/$channelId/$LEAVE', data: param);
+          .delete('$CHANNELS_V3/$channelId/$LEAVE', data: param);
       return CreateChannelResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -90,7 +88,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
       UpdateChannelMembersRequest request) async {
     try {
       final data = await httpApiClient().put(
-          '$CHANNEL_V3/${request.channelId}/$USERS/$BAN',
+          '$CHANNELS_V3/${request.channelId}/$USERS/$BAN',
           data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
     } on DioError catch (error) {
@@ -104,7 +102,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
       UpdateChannelMembersRequest request) async {
     try {
       final data = await httpApiClient().put(
-          '$CHANNEL_V3/${request.channelId}/$USERS/$UNBAN',
+          '$CHANNELS_V3/${request.channelId}/$USERS/$UNBAN',
           data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
     } on DioError catch (error) {
@@ -118,7 +116,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
       UpdateChannelRoleRequest request) async {
     try {
       final data = await httpApiClient().post(
-          '$CHANNEL_V3/${request.channelId}/$USERS/$ROLES',
+          '$CHANNELS_V3/${request.channelId}/$USERS/$ROLES',
           data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
     } on DioError catch (error) {
@@ -132,9 +130,21 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
       UpdateChannelRoleRequest request) async {
     try {
       final data = await httpApiClient().delete(
-          '$CHANNEL_V3/${request.channelId}/$USERS/$ROLES',
+          '$CHANNELS_V3/${request.channelId}/$USERS/$ROLES',
           data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
+  Future muteMember(UpdateChannelMembersRequest request) async {
+    try {
+      await httpApiClient().put('$CHANNEL_V2/${request.channelId}/$USERS/mute',
+          data: request.toJson());
+      return;
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());

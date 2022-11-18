@@ -13,7 +13,7 @@ extension AmityCommentExtension on AmityComment {
 
   /// Comment react query builder
   AddReactionQueryBuilder react() {
-    return AddReactionQueryBuilder(
+    return AddReactionQueryBuilder<AmityComment>(
         addReactionUsecase: serviceLocator(),
         removeReactionUsecase: serviceLocator(),
         referenceType: AmityReactionReferenceType.COMMENT.value,

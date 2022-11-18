@@ -17,7 +17,7 @@ class ReactionRepoImpl extends ReactionRepo {
   });
 
   @override
-  Future addReaction(ReactionRequest request) async {
+  Future<T> addReaction<T>(ReactionRequest request) async {
     ///Add Rection from local Amity Post
     ///1. Added to my reaction
     ///2. Update the reaction count
@@ -40,12 +40,14 @@ class ReactionRepoImpl extends ReactionRepo {
             (amityPostLocalCopy.reactionsCount ?? 0) + 1;
 
         amityPostLocalCopy.reactions ??= {};
-        amityPost.reactions![request.reactionName] =
+        amityPostLocalCopy.reactions![request.reactionName] =
             (amityPostLocalCopy.reactions![request.reactionName] ?? 0) + 1;
 
         await dbAdapterRepo.postDbAdapter.savePostEntity(amityPostLocalCopy);
 
         await reactionApiInterface.addReaction(request);
+
+        return amityPostLocalCopy.convertToAmityPost() as T;
       } catch (error) {
         await dbAdapterRepo.postDbAdapter.savePostEntity(amityPost);
         rethrow;
@@ -72,6 +74,8 @@ class ReactionRepoImpl extends ReactionRepo {
             .saveCommentEntity(amityCommentLocalCopy);
 
         await reactionApiInterface.addReaction(request);
+
+        return amityCommentLocalCopy.convertToAmityComment() as T;
       } catch (error) {
         await dbAdapterRepo.commentDbAdapter.saveCommentEntity(amityComment);
         rethrow;
@@ -99,15 +103,19 @@ class ReactionRepoImpl extends ReactionRepo {
             .saveMessageEntity(amityMessageLocalCopy);
 
         await reactionApiInterface.addReaction(request);
+
+        return amityMessageLocalCopy.convertToAmityMessage() as T;
       } catch (error) {
         await dbAdapterRepo.messageDbAdapter.saveMessageEntity(amityMessage);
         rethrow;
       }
     }
+
+    return Future.value();
   }
 
   @override
-  Future removeReaction(ReactionRequest request) async {
+  Future<T> removeReaction<T>(ReactionRequest request) async {
     // await reactionApiInterface.removeReaction(request);
 
     //Remove Reaction from Local Amity Post
@@ -130,6 +138,8 @@ class ReactionRepoImpl extends ReactionRepo {
         await dbAdapterRepo.postDbAdapter.savePostEntity(amityPostLocalCopy);
 
         await reactionApiInterface.removeReaction(request);
+
+        return amityPostLocalCopy.convertToAmityPost() as T;
       } catch (error) {
         await dbAdapterRepo.postDbAdapter.savePostEntity(amityPost);
         rethrow;
@@ -156,6 +166,8 @@ class ReactionRepoImpl extends ReactionRepo {
             .saveCommentEntity(amityCommentLocalCopy);
 
         await reactionApiInterface.removeReaction(request);
+
+        return amityCommentLocalCopy.convertToAmityComment() as T;
       } catch (error) {
         await dbAdapterRepo.commentDbAdapter.saveCommentEntity(amityComment);
         rethrow;
@@ -183,11 +195,15 @@ class ReactionRepoImpl extends ReactionRepo {
             .saveMessageEntity(amityMessageLocalCopy);
 
         await reactionApiInterface.removeReaction(request);
+
+        return amityMessageLocalCopy.convertToAmityMessage() as T;
       } catch (error) {
         await dbAdapterRepo.messageDbAdapter.saveMessageEntity(amityMessage);
         rethrow;
       }
     }
+
+    return Future.value();
   }
 
   @override

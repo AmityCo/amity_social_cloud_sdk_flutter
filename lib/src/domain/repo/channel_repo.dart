@@ -21,4 +21,7 @@ abstract class ChannelRepo {
 
   /// Update Channel
   Future<AmityChannel> updateChannel(CreateChannelRequest request);
+
+  /// Mute Channel
+  Future muteChannel(UpdateChannelMembersRequest request);
 }

@@ -37,4 +37,7 @@ abstract class ChannelMemberRepo {
 
   /// Get Member
   Future<AmityChannelMember> getMember(String id, String userId);
+
+  /// Mute Member
+  Future muteMember(UpdateChannelMembersRequest request);
 }

@@ -54,4 +54,14 @@ extension AmityChannelExtension on AmityChannel {
   Future<List<String>> getCurentUserPermission() async {
     return _getUserPermissions(AmityCoreClient.getUserId());
   }
+
+  /// Mute  channel
+  Future muteChannel({Duration timeout = const Duration(minutes: 10)}) {
+    return serviceLocator<ChannelMuteUsecase>().get(
+      UpdateChannelMembersRequest(
+        channelId: channelId!,
+        mutePeriod: timeout.inMilliseconds,
+      ),
+    );
+  }
 }
