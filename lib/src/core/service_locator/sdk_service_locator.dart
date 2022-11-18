@@ -2,8 +2,6 @@ import 'dart:developer';
 
 import 'package:amity_sdk/src/core/socket/amity_socket.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/repo_impl/channel_member_repo_impl.dart';
-import 'package:amity_sdk/src/data/repo_impl/channel_repo_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:get_it/get_it.dart';
