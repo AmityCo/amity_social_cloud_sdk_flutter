@@ -1,16 +1,22 @@
 import 'dart:async';
 
-import 'package:amity_sdk/src/core/model/api_request/get_global_feed_request.dart';
-import 'package:amity_sdk/src/core/utils/page_list_data.dart';
-import 'package:amity_sdk/src/domain/model/amity_post.dart';
-import 'package:amity_sdk/src/domain/usecase/feed/get_global_feed_usecase.dart';
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 /// [AmityGlobalFeedQuery]
 class AmityGlobalFeedQuery {
   final GetGlobalFeedUsecase _usecase;
 
+  /// Post data type
+  List<String>? _dataTypes;
+
   /// Init [AmityGlobalFeedQuery]
   AmityGlobalFeedQuery(this._usecase);
+
+  AmityGlobalFeedQuery types(List<AmityDataType> postTypes) {
+    _dataTypes = postTypes.map((e) => e.value).toList();
+    return this;
+  }
 
   Future<PageListData<List<AmityPost>, String>> getPagingData(
       {String? token, int? limit}) async {
@@ -21,6 +27,10 @@ class AmityGlobalFeedQuery {
     }
     if (limit != null) {
       request.limit = limit;
+    }
+
+    if (_dataTypes != null) {
+      request.dataTypes = _dataTypes;
     }
 
     final data = await _usecase.get(request);
@@ -37,6 +47,10 @@ class AmityGlobalFeedQuery {
     }
     if (limit != null) {
       request.limit = limit;
+    }
+
+    if (_dataTypes != null) {
+      request.dataTypes = _dataTypes;
     }
 
     return _usecase.listen(request);
