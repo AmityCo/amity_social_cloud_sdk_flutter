@@ -21,6 +21,7 @@ class GetPostRequest {
     this.options,
     this.feedType,
     this.dataTypes,
+    this.tags,
     this.matchingOnlyParentPost,
   });
 
@@ -32,6 +33,7 @@ class GetPostRequest {
   OptionsRequest? options;
   String? feedType;
   List<String>? dataTypes;
+  List<String>? tags;
   bool? matchingOnlyParentPost;
 
   factory GetPostRequest.fromJson(Map<String, dynamic> json) => GetPostRequest(
@@ -43,6 +45,7 @@ class GetPostRequest {
         options: OptionsRequest.fromJson(json["options"]),
         feedType: json["feedType"],
         dataTypes: List<String>.from(json["dataTypes"].map((x) => x)),
+        tags: List<String>.from(json["tags"].map((x) => x)),
         matchingOnlyParentPost: json["matchingOnlyParentPost"],
       );
 
@@ -57,6 +60,7 @@ class GetPostRequest {
         "dataTypes": dataTypes == null
             ? null
             : List<dynamic>.from(dataTypes!.map((x) => x)),
+        "tags": tags == null ? null : List<dynamic>.from(tags!.map((x) => x)),
         "matchingOnlyParentPost": matchingOnlyParentPost,
       }..removeWhere((key, value) => value == null);
 }
