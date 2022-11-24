@@ -7,7 +7,7 @@ import 'package:amity_sdk/src/public/public.dart';
 
 /// Amity Message Extension
 extension AmityMessageExtension on AmityMessage {
-  /// React On Amity Post
+  /// React On Amity Mesage
   AddReactionQueryBuilder react() {
     return AddReactionQueryBuilder<AmityMessage>(
         addReactionUsecase: serviceLocator(),
@@ -16,20 +16,28 @@ extension AmityMessageExtension on AmityMessage {
         referenceId: messageId!);
   }
 
-  /// Get Amity Post Reaction
+  /// Get Amity Mesage Reaction
   GetReactionQueryBuilder getReaction() {
     return GetReactionQueryBuilder.message(messageId: messageId!);
   }
 
-  /// Amity Post Report
-  // PostFlagQueryBuilder report() {
-  //   return PostFlagQueryBuilder(
+  /// Get Amity Mesage Reaction
+  AmityMessageUpdateQueryBuilder upate() {
+    return AmityMessageUpdateQueryBuilder(
+        useCase: serviceLocator<MessageUpdateUsecase>(),
+        channelId: channelId!,
+        messageId: messageId!);
+  }
+
+  /// Amity Mesage Report
+  // MesageFlagQueryBuilder report() {
+  //   return MesageFlagQueryBuilder(
   //       postFlagUsecase: serviceLocator(),
   //       postUnflagUsecase: serviceLocator(),
   //       postId: postId!);
   // }
 
-  /// Listen Post Id
+  /// Listen Mesage Id
   StreamController<AmityMessage> get listen {
     StreamController<AmityMessage> controller =
         StreamController<AmityMessage>();

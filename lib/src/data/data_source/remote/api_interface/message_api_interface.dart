@@ -10,6 +10,9 @@ abstract class MessageApiInterface {
   /// Create Message
   Future<CreateMessageResponse> createMessage(CreateMessageRequest request);
 
+  /// Update Message
+  Future<CreateMessageResponse> updateMessage(CreateMessageRequest request);
+
   /// Get Message
   Future<CreateMessageResponse> getMessage(String messageId);
 

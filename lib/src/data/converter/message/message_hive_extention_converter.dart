@@ -54,7 +54,7 @@ extension MessageHiveExtensionConverter on MessageHiveEntity {
       ..channelSegment = channelSegment
       ..parentId = parentId
       // ..fileId = fileId
-      // ..tags = tags
+      ..amityTags = AmityTags(tags: tags ?? [])
       ..metadata = metadata
       ..flagCount = flagCount
       ..childrenNumber = childrenNumber
