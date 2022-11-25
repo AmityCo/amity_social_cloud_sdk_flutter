@@ -14,6 +14,7 @@ class MessageGetQueryBuilder {
   AmityTags? _includingTags;
   AmityTags? _excludingTags;
   bool? _isDeleted;
+  AmityMessageDataType? _type;
 
   /// [MessageGetQueryBuilder]
   MessageGetQueryBuilder(MessageQueryUseCase useCase, String channelId) {
@@ -26,6 +27,11 @@ class MessageGetQueryBuilder {
     if (!includeDeleted) {
       _isDeleted = false;
     }
+    return this;
+  }
+
+  MessageGetQueryBuilder type(AmityMessageDataType? type) {
+    _type = type;
     return this;
   }
 
@@ -43,14 +49,14 @@ class MessageGetQueryBuilder {
   }
 
   /// includingTags
-  MessageGetQueryBuilder includingTags(AmityTags includingTags) {
-    _includingTags = includingTags;
+  MessageGetQueryBuilder includingTags(List<String> tags) {
+    _includingTags = AmityTags(tags: tags);
     return this;
   }
 
   /// excludingTags
-  MessageGetQueryBuilder excludingTags(AmityTags excludingTags) {
-    _excludingTags = excludingTags;
+  MessageGetQueryBuilder excludingTags(List<String> tags) {
+    _excludingTags = AmityTags(tags: tags);
     return this;
   }
 
@@ -58,6 +64,7 @@ class MessageGetQueryBuilder {
   Future<PageListData<List<AmityMessage>, String>> getPagingData(
       {String? token, int? limit = 20}) async {
     if (_isDeleted != null) _request.isDeleted = _isDeleted;
+    if (_type != null) _request.type = _type!.value;
     if (_includingTags != null) _request.tags = _includingTags!.tags;
     if (_excludingTags != null) _request.excludeTags = _excludingTags!.tags;
     if (_parentId != null) {
