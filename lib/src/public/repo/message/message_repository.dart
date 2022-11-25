@@ -30,6 +30,11 @@ class MessageRepository {
         .channelId(channelId);
   }
 
+  /// Delete message
+  Future deleteMessage(String messageId) {
+    return serviceLocator<MessageDeleteUsecase>().get(messageId);
+  }
+
   /// Get [AmityReaction] for the message Id
   GetReactionQueryBuilder getReaction({required String messageId}) {
     return GetReactionQueryBuilder.message(messageId: messageId);

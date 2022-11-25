@@ -29,13 +29,9 @@ extension AmityMessageExtension on AmityMessage {
         messageId: messageId!);
   }
 
-  /// Amity Mesage Report
-  // MesageFlagQueryBuilder report() {
-  //   return MesageFlagQueryBuilder(
-  //       postFlagUsecase: serviceLocator(),
-  //       postUnflagUsecase: serviceLocator(),
-  //       postId: postId!);
-  // }
+  Future delete() {
+    return serviceLocator<MessageDeleteUsecase>().get(messageId!);
+  }
 
   /// Listen Mesage Id
   StreamController<AmityMessage> get listen {
@@ -55,15 +51,4 @@ extension AmityMessageExtension on AmityMessage {
 
     return controller;
   }
-
-  /// check if post is flagged by me
-  // bool get isFlaggedByMe {
-  //   if (hashFlag == null) return false;
-  //   return (flaggedByMe ?? false) ||
-  //       BloomFilter(
-  //               hash: (hashFlag!['hash'] as String),
-  //               m: hashFlag!['bits'] as int,
-  //               k: hashFlag!['hashes'] as int)
-  //           .mightContains(AmityCoreClient.getUserId());
-  // }
 }
