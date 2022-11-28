@@ -546,6 +546,8 @@ class SdkServiceLocator {
         MessageUpdateUsecase(
             messageRepo: serviceLocator(),
             messageComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageDeleteUsecase>(
+        () => MessageDeleteUsecase(messageRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<MessageCreateFileUsecase>(() =>
         MessageCreateFileUsecase(
             messageRepo: serviceLocator(),
