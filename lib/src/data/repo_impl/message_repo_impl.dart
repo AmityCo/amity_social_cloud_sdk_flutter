@@ -173,6 +173,10 @@ class MessageRepoImpl extends MessageRepo {
   @override
   Future deleteMessage(String messageId) async {
     await messageApiInterface.deleteMessage(messageId);
+
+    final entity = dbAdapterRepo.messageDbAdapter.getMessageEntity(messageId)!;
+    entity.isDeleted = true;
+    entity.save();
   }
 
   @override
