@@ -16,4 +16,7 @@ class AmityTags {
   }
 
   String toJson() => json.encode(toMap());
+
+  @override
+  String toString() => 'AmityTags(tags: $tags)';
 }
