@@ -315,8 +315,8 @@ abstract class AmityMessageCreator {
 
   /// Tags
   /// Future Use
-  // AmityMessageCreator tags(AmityTags tags) {
-  //   _amityTags = tags;
+  // AmityMessageCreator tags(List<String> tags) {
+  //   _amityTags = AmityTags(tags: tags);
   //   return this;
   // }
 

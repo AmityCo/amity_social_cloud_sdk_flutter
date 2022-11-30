@@ -52,37 +52,13 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
 
   @override
   Stream<List<MessageHiveEntity>> listenMessageEntities(
-      MessageQueryRequest request) {
+      RequestBuilder<MessageQueryRequest> request) {
+    // final req = request.call();
     return box.watch().map((event) => box.values
-        .where((message) =>
-                message.channelId == request.channelId &&
-                _isDeletedCondition(message, request) &&
-                _parentCondition(message, request)
+        .where((message) => message.isMatchingFilter(request.call())
             //missing tags
             )
         .toList());
-  }
-
-  bool _isDeletedCondition(
-      MessageHiveEntity message, MessageQueryRequest request) {
-    if (request.isDeleted == null) {
-      //if isDeleted is not defined, return both isDeleted == true && isDeleted == false
-      return true;
-    } else {
-      //if isDeleted is defined, return request.isDeleted messages only
-      return message.isDeleted == request.isDeleted;
-    }
-  }
-
-  bool _parentCondition(
-      MessageHiveEntity message, MessageQueryRequest request) {
-    if (request.parentId != null && request.filterByParentId == true) {
-      // if filterByParentId, return message with the parentId
-      return message.parentId == request.parentId;
-    } else {
-      // else retur  parent messages only, which parentId must be null
-      return message.parentId == null;
-    }
   }
 
   @override

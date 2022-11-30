@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
 
+typedef RequestBuilder<T> = T Function();
+
 /// Live Collection Abs layer
 abstract class LiveCollection<Model> {
   /// Current Token (Next page token)
