@@ -48,6 +48,12 @@ class MessageGetQueryBuilder {
     return this;
   }
 
+  /// Parent ID
+  MessageGetQueryBuilder filterByParent(bool filrerByParent) {
+    _isFilterByParentId = filrerByParent;
+    return this;
+  }
+
   /// includingTags
   MessageGetQueryBuilder includingTags(List<String> tags) {
     _includingTags = AmityTags(tags: tags);
@@ -63,43 +69,33 @@ class MessageGetQueryBuilder {
   /// getPagingData
   Future<PageListData<List<AmityMessage>, String>> getPagingData(
       {String? token, int? limit = 20}) async {
-    if (_isDeleted != null) _request.isDeleted = _isDeleted;
-    if (_type != null) _request.type = _type!.value;
-    if (_includingTags != null) _request.tags = _includingTags!.tags;
-    if (_excludingTags != null) _request.excludeTags = _excludingTags!.tags;
-    if (_parentId != null) {
-      _request.parentId = _parentId;
-      _request.filterByParentId = _isFilterByParentId;
-    }
-
-    _request.options = OptionsRequest();
-
-    if (token != null) {
-      _request.options!.token = token;
-    }
-
-    if (limit != null) {
-      // _request.options!.limit = limit;
-      _request.options!.type = 'scrollable';
-      if (!_stackFromEnd) {
-        _request.options!.first = limit;
-      } else {
-        _request.options!.last = limit;
-      }
-    }
-
-    final data = await _useCase.get(_request);
+    final data =
+        await _useCase.get(build(pageSize: limit)..options!.token = token);
 
     return data;
   }
 
   /// Get Live collection for the messages
   MessageLiveCollection getLiveCollection({int? pageSize = 20}) {
+    return MessageLiveCollection(
+      request: () => build(pageSize: pageSize),
+    );
+  }
+
+  /// Build request
+  MessageQueryRequest build({int? pageSize = 20}) {
     if (_isDeleted != null) _request.isDeleted = _isDeleted;
     if (_parentId != null) {
       _request.parentId = _parentId;
       _request.filterByParentId = true;
     }
+    if (_isFilterByParentId != null) {
+      _request.filterByParentId = _isFilterByParentId;
+    }
+    if (_type != null) _request.type = _type!.value;
+    if (_includingTags != null) _request.tags = _includingTags!.tags;
+    if (_excludingTags != null) _request.excludeTags = _excludingTags!.tags;
+
     _request.stackFromEnd = _stackFromEnd;
 
     _request.options = OptionsRequest();
@@ -110,35 +106,14 @@ class MessageGetQueryBuilder {
     } else {
       _request.options!.last = pageSize;
     }
-    return MessageLiveCollection(params: _request);
+
+    return _request;
   }
 
   /// Query
   Future<List<AmityMessage>> query({String? token, int? limit = 20}) async {
-    if (_isDeleted != null) _request.isDeleted = _isDeleted;
-    if (_includingTags != null) _request.tags = _includingTags!.tags;
-    if (_excludingTags != null) _request.excludeTags = _excludingTags!.tags;
-    if (_parentId != null) {
-      _request.parentId = _parentId;
-      _request.filterByParentId = _isFilterByParentId;
-    }
-
-    _request.options = OptionsRequest();
-
-    if (token != null) {
-      _request.options!.token = token;
-    }
-
-    if (limit != null) {
-      _request.options!.limit = limit;
-      if (!_stackFromEnd) {
-        _request.options!.first = limit;
-      } else {
-        _request.options!.last = limit;
-      }
-    }
-
-    final data = await _useCase.get(_request);
+    final data =
+        await _useCase.get(build(pageSize: limit)..options!.token = token);
 
     return data.data;
   }

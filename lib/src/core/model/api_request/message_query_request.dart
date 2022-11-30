@@ -79,10 +79,10 @@ class MessageQueryRequest {
         "filterByParentId": filterByParentId,
         "hasFlag": hasFlag,
         "isDeleted": isDeleted,
-        "tags": tags == null ? null : List<dynamic>.from(tags!.map((x) => x)),
-        "excludeTags": excludeTags == null
+        "tags[]": tags == null ? null : List<String>.from(tags!.map((x) => x)),
+        "excludeTags[]": excludeTags == null
             ? null
-            : List<dynamic>.from(excludeTags!.map((x) => x)),
+            : List<String>.from(excludeTags!.map((x) => x)),
         "options": options?.toJson(),
       }..removeWhere((key, value) => value == null);
 }

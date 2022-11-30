@@ -45,7 +45,9 @@ class MessageRepoImpl extends MessageRepo {
   }
 
   @override
-  Stream<List<AmityMessage>> listentMessages(MessageQueryRequest request) {
+  Stream<List<AmityMessage>> listentMessages(
+      RequestBuilder<MessageQueryRequest> request) {
+    final req = request.call();
     return dbAdapterRepo.messageDbAdapter
         .listenMessageEntities(request)
         .map((event) {
@@ -53,7 +55,7 @@ class MessageRepoImpl extends MessageRepo {
       for (var element in event) {
         list.add(element.convertToAmityMessage());
         //sort result
-        if (request.stackFromEnd == true) {
+        if (req.stackFromEnd == true) {
           list.sort((a, b) => b.channelSegment!.compareTo(a.channelSegment!));
         } else {
           list.sort((a, b) => a.channelSegment!.compareTo(b.channelSegment!));
