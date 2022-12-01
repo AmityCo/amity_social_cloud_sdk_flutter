@@ -5,7 +5,6 @@ import 'package:amity_sdk/src/core/constant/global_constant.dart';
 enum AmityRegionalHttpEndpoint {
   SG,
   EU,
-  STAGING,
   US,
 }
 
@@ -14,7 +13,6 @@ extension AmityRegionalHttpEndpointExtension on AmityRegionalHttpEndpoint {
     return [
       SG_HTTP_ENDPOINT,
       EU_HTTP_ENDPOINT,
-      STAGING_HTTP_ENDPOINT,
       US_HTTP_ENDPOINT,
     ][index];
   }
