@@ -1,3 +1,9 @@
+## 0.13.0
+* feat: Channel Message Query & Filter
+* feat: Channel Message Update
+* feat: Channel Message Delete
+* fix: Add tags support in v4/post query
+
 ## 0.12.0
 * feat: Create/Update Channel
 * feat: Mute/Unmute Channel Member 
