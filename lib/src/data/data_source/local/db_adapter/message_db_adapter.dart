@@ -17,7 +17,7 @@ abstract class MessageDbAdapter {
 
   /// Listen Message Entities
   Stream<List<MessageHiveEntity>> listenMessageEntities(
-      MessageQueryRequest request);
+      RequestBuilder<MessageQueryRequest> request);
 
   /// delete all message with in the channel
   Future deleteMessagesByChannelId(String channelId);

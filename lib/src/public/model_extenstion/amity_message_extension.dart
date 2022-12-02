@@ -7,7 +7,7 @@ import 'package:amity_sdk/src/public/public.dart';
 
 /// Amity Message Extension
 extension AmityMessageExtension on AmityMessage {
-  /// React On Amity Post
+  /// React On Amity Mesage
   AddReactionQueryBuilder react() {
     return AddReactionQueryBuilder<AmityMessage>(
         addReactionUsecase: serviceLocator(),
@@ -16,20 +16,24 @@ extension AmityMessageExtension on AmityMessage {
         referenceId: messageId!);
   }
 
-  /// Get Amity Post Reaction
+  /// Get Amity Mesage Reaction
   GetReactionQueryBuilder getReaction() {
     return GetReactionQueryBuilder.message(messageId: messageId!);
   }
 
-  /// Amity Post Report
-  // PostFlagQueryBuilder report() {
-  //   return PostFlagQueryBuilder(
-  //       postFlagUsecase: serviceLocator(),
-  //       postUnflagUsecase: serviceLocator(),
-  //       postId: postId!);
-  // }
+  /// Get Amity Mesage Reaction
+  AmityMessageUpdateQueryBuilder upate() {
+    return AmityMessageUpdateQueryBuilder(
+        useCase: serviceLocator<MessageUpdateUsecase>(),
+        channelId: channelId!,
+        messageId: messageId!);
+  }
 
-  /// Listen Post Id
+  Future delete() {
+    return serviceLocator<MessageDeleteUsecase>().get(messageId!);
+  }
+
+  /// Listen Mesage Id
   StreamController<AmityMessage> get listen {
     StreamController<AmityMessage> controller =
         StreamController<AmityMessage>();
@@ -47,15 +51,4 @@ extension AmityMessageExtension on AmityMessage {
 
     return controller;
   }
-
-  /// check if post is flagged by me
-  // bool get isFlaggedByMe {
-  //   if (hashFlag == null) return false;
-  //   return (flaggedByMe ?? false) ||
-  //       BloomFilter(
-  //               hash: (hashFlag!['hash'] as String),
-  //               m: hashFlag!['bits'] as int,
-  //               k: hashFlag!['hashes'] as int)
-  //           .mightContains(AmityCoreClient.getUserId());
-  // }
 }

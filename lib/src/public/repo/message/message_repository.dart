@@ -1,7 +1,6 @@
-import 'package:amity_sdk/src/core/service_locator/service_locator.dart';
-import 'package:amity_sdk/src/domain/usecase/message/message_create_use_case.dart';
-import 'package:amity_sdk/src/domain/usecase/message/message_query_use_case.dart';
-import 'package:amity_sdk/src/public/public.dart';
+import 'package:amity_sdk/amity_sdk.dart';
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 /// [MessageRepository]
 class MessageRepository {
@@ -11,11 +10,29 @@ class MessageRepository {
         serviceLocator<MessageQueryUseCase>(), channelId);
   }
 
+  /// Get Messages
+  Future<AmityMessage> getMessage(String messageId) {
+    return serviceLocator<MessageGetUseCase>().get(messageId);
+  }
+
   /// Create Message
   AmityMessageCreateDataTypeSelector createMessage(String channelId) {
     return AmityMessageCreateTargetSelector(
             useCase: serviceLocator<MessageCreateUsecase>())
         .channelId(channelId);
+  }
+
+  /// Create Message
+  AmityMessageCreateDataTypeSelector updateMessage(
+      String channelId, String messageId) {
+    return AmityMessageCreateTargetSelector(
+            useCase: serviceLocator<MessageCreateUsecase>())
+        .channelId(channelId);
+  }
+
+  /// Delete message
+  Future deleteMessage(String messageId) {
+    return serviceLocator<MessageDeleteUsecase>().get(messageId);
   }
 
   /// Get [AmityReaction] for the message Id

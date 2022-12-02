@@ -534,12 +534,20 @@ class SdkServiceLocator {
             messageComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<MessageFileComposerUsecase>(
         () => MessageFileComposerUsecase(fileRepo: serviceLocator()));
-    serviceLocator.registerLazySingleton<MessageQueryUseCase>(
-        () => MessageQueryUseCase(messageRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageQueryUseCase>(() =>
+        MessageQueryUseCase(
+            messageRepo: serviceLocator(),
+            messageComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<MessageCreateUsecase>(() =>
         MessageCreateUsecase(
             messageRepo: serviceLocator(),
             messageComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageUpdateUsecase>(() =>
+        MessageUpdateUsecase(
+            messageRepo: serviceLocator(),
+            messageComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageDeleteUsecase>(
+        () => MessageDeleteUsecase(messageRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<MessageCreateFileUsecase>(() =>
         MessageCreateFileUsecase(
             messageRepo: serviceLocator(),
@@ -548,6 +556,10 @@ class SdkServiceLocator {
         () => MessageHasLocalUsecase(messageRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<MessageGetLocalUsecase>(
         () => MessageGetLocalUsecase(messageRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageGetUseCase>(() =>
+        MessageGetUseCase(
+            messageRepo: serviceLocator(),
+            messageComposerUsecase: serviceLocator()));
 
     serviceLocator.registerLazySingleton<MessageObserveUsecase>(() =>
         MessageObserveUsecase(

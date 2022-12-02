@@ -5,7 +5,7 @@ import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:uuid/uuid.dart';
 
-/// Amity Post Creator Query Builder
+/// Amity Mesage Creator Query Builder
 class AmityMessageCreateTargetSelector {
   late MessageCreateUsecase _useCase;
 
@@ -36,7 +36,7 @@ class AmityMessageCreateTargetSelector {
   // }
 }
 
-/// Amity Post Data Type Selector Query Builder
+/// Amity Mesage Data Type Selector Query Builder
 class AmityMessageCreateDataTypeSelector {
   late MessageCreateUsecase _useCase;
   late String _channelId;
@@ -81,8 +81,8 @@ class AmityMessageCreateDataTypeSelector {
   }
 
   // /// Data Type Video
-  // AmityVideoPostCreator video(List<AmityVideo> videos) {
-  //   return AmityVideoPostCreator(
+  // AmityVideoMesageCreator video(List<AmityVideo> videos) {
+  //   return AmityVideoMesageCreator(
   //       useCase: _useCase,
   //       targetId: _userId,
   //       targetType: _targetType.value,
@@ -90,8 +90,8 @@ class AmityMessageCreateDataTypeSelector {
   // }
 
   // /// Data Type File
-  // AmityFilePostCreator file(List<AmityFile> files) {
-  //   return AmityFilePostCreator(
+  // AmityFileMesageCreator file(List<AmityFile> files) {
+  //   return AmityFileMesageCreator(
   //       useCase: _useCase,
   //       targetId: _userId,
   //       targetType: _targetType.value,
@@ -99,8 +99,8 @@ class AmityMessageCreateDataTypeSelector {
   // }
 
   // /// Data Type Poll
-  // AmityPollPostCreator poll(String pollId) {
-  //   return AmityPollPostCreator(
+  // AmityPollMesageCreator poll(String pollId) {
+  //   return AmityPollMesageCreator(
   //       useCase: _useCase,
   //       targetId: _userId,
   //       targetType: _targetType.value,
@@ -108,12 +108,12 @@ class AmityMessageCreateDataTypeSelector {
   // }
 }
 
-/// Implementation Layer for Amity Post Text Creator
+/// Implementation Layer for Amity Mesage Text Creator
 class AmityTextMessageCreator extends AmityMessageCreator {
   /// Text
   String text;
 
-  /// Init [AmityTextPostCreator]
+  /// Init [AmityTextMesageCreator]
   AmityTextMessageCreator(
       {required MessageCreateUsecase useCase,
       required String channelId,
@@ -132,7 +132,7 @@ class AmityTextMessageCreator extends AmityMessageCreator {
   }
 }
 
-/// Implementation Layer for Amity Post Text Creator
+/// Implementation Layer for Amity Mesage Text Creator
 class AmityImageMessageCreator extends AmityMessageCreator {
   /// Image uri
   Uri uri;
@@ -140,7 +140,7 @@ class AmityImageMessageCreator extends AmityMessageCreator {
   /// Caption
   String? _caption;
 
-  /// Init [AmityTextPostCreator]
+  /// Init [AmityTextMesageCreator]
   AmityImageMessageCreator(
       {required MessageCreateUsecase useCase,
       required String channelId,
@@ -178,7 +178,7 @@ class AmityFileMessageCreator extends AmityMessageCreator {
   /// Caption
   String? _caption;
 
-  /// Init [AmityTextPostCreator]
+  /// Init [AmityTextMesageCreator]
   AmityFileMessageCreator(
       {required MessageCreateUsecase useCase,
       required String channelId,
@@ -208,12 +208,12 @@ class AmityFileMessageCreator extends AmityMessageCreator {
   }
 }
 
-/// Implementation Layer for Amity Post Image Creator
-// class AmityImagePostCreator extends AmityMessageCreator {
+/// Implementation Layer for Amity Mesage Image Creator
+// class AmityImageMesageCreator extends AmityMessageCreator {
 //   late final List<AmityImage> _images;
 
-//   /// Init [AmityImagePostCreator]
-//   AmityImagePostCreator({
+//   /// Init [AmityImageMesageCreator]
+//   AmityImageMesageCreator({
 //     required List<AmityImage> images,
 //     required MessageCreateUsecase useCase,
 //     required String channelId,
@@ -223,7 +223,7 @@ class AmityFileMessageCreator extends AmityMessageCreator {
 //   }
 
 //   @override
-//   void _attachRequest(CreatePostRequest request) {
+//   void _attachRequest(CreateMesageRequest request) {
 //     request.attachments = _images
 //         .map((e) =>
 //             Attachment(fileId: e.fileId, type: AmityDataType.IMAGE.value))
@@ -231,12 +231,12 @@ class AmityFileMessageCreator extends AmityMessageCreator {
 //   }
 // }
 
-/// Implementation Layer for Amity Post File Creator
-// class AmityFilePostCreator extends AmityMessageCreator {
+/// Implementation Layer for Amity Mesage File Creator
+// class AmityFileMesageCreator extends AmityMessageCreator {
 //   late final List<AmityFile> _files;
 
-//   /// Init [AmityFilePostCreator]
-//   AmityFilePostCreator({
+//   /// Init [AmityFileMesageCreator]
+//   AmityFileMesageCreator({
 //     required List<AmityFile> files,
 //     required MessageCreateUsecase useCase,
 //     required String channelId,
@@ -246,7 +246,7 @@ class AmityFileMessageCreator extends AmityMessageCreator {
 //   }
 
 //   @override
-//   void _attachRequest(CreatePostRequest request) {
+//   void _attachRequest(CreateMesageRequest request) {
 //     request.attachments = _files
 //         .map(
 //             (e) => Attachment(fileId: e.fileId, type: AmityDataType.FILE.value))
@@ -254,7 +254,7 @@ class AmityFileMessageCreator extends AmityMessageCreator {
 //   }
 // }
 
-/// Abstract Layer for Amity Post Creator
+/// Abstract Layer for Amity Mesage Creator
 abstract class AmityMessageCreator {
   late MessageCreateUsecase _useCase;
   late String _channelId;
@@ -263,7 +263,7 @@ abstract class AmityMessageCreator {
   Map<String, dynamic>? _metadata;
   List<AmityMentioneeTarget>? _mentionees;
 
-  /// Init [PostCreator]
+  /// Init [MesageCreator]
   AmityMessageCreator({
     required MessageCreateUsecase useCase,
     required String channelId,
@@ -283,13 +283,13 @@ abstract class AmityMessageCreator {
     return null;
   }
 
-  /// Add metadata to Amity Post
+  /// Add metadata to Amity Mesage
   AmityMessageCreator parentId(String? parentId) {
     _parentId = parentId;
     return this;
   }
 
-  // /// Add metadata to Amity Post
+  // /// Add metadata to Amity Mesage
   // AmityMessageCreator metadata(Map<String, dynamic> metadata) {
   //   _metadata = metadata;
   //   return this;
@@ -315,12 +315,12 @@ abstract class AmityMessageCreator {
 
   /// Tags
   /// Future Use
-  // AmityMessageCreator tags(AmityTags tags) {
-  //   _amityTags = tags;
+  // AmityMessageCreator tags(List<String> tags) {
+  //   _amityTags = AmityTags(tags: tags);
   //   return this;
   // }
 
-  /// Create Amity Post
+  /// Create Amity Mesage
   Future<AmityMessage> send() async {
     // throw UnimplementedError();
 

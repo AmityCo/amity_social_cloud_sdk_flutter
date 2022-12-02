@@ -22,11 +22,11 @@ class MessageObserveUsecase
   }
 
   /// Listen Message Query Request
-  StreamController<List<AmityMessage>> listen(MessageQueryRequest params) {
-    //missing compose use case :(
+  StreamController<List<AmityMessage>> listen(
+      RequestBuilder<MessageQueryRequest> request) {
     final streamController = StreamController<List<AmityMessage>>();
 
-    messageRepo.listentMessages(params).listen((event) async {
+    messageRepo.listentMessages(request).listen((event) async {
       await Stream.fromIterable(event).forEach((element) async {
         element = await messageComposerUsecase.get(element);
       });

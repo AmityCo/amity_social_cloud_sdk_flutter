@@ -37,6 +37,7 @@ class AmityPostGetQueryBuilder {
   bool? _isDeleted = false; //Default Value false
   String? _amityFeedType;
   List<String>? _dataTypes;
+  List<String>? _tags;
 
   AmityPostGetQueryBuilder(this._useCase, this._targetId, this._targetType)
       : _request = GetPostRequest(targetId: _targetId, targetType: _targetType);
@@ -66,6 +67,11 @@ class AmityPostGetQueryBuilder {
     return this;
   }
 
+  AmityPostGetQueryBuilder tags(List<String> tags) {
+    _tags = tags;
+    return this;
+  }
+
   AmityPostGetQueryBuilder onlyParent(bool onlyParent) {
     _request.matchingOnlyParentPost = onlyParent;
     return this;
@@ -82,6 +88,10 @@ class AmityPostGetQueryBuilder {
 
       //Disable matchOnlyParent filtering, because all parent post is text only.
       _request.matchingOnlyParentPost = false;
+    }
+
+    if (_tags != null && _tags!.isNotEmpty) {
+      _request.tags = _tags;
     }
 
     _request.options = OptionsRequest();

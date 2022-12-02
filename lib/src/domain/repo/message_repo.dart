@@ -10,6 +10,9 @@ abstract class MessageRepo {
   /// Create Message
   Future<AmityMessage> createMessage(CreateMessageRequest request);
 
+  /// Create Message
+  Future<AmityMessage> updateMessage(CreateMessageRequest request);
+
   /// Get Message
   Future<AmityMessage> getMessage(String messageId);
 
@@ -20,7 +23,8 @@ abstract class MessageRepo {
   Future<AmityMessage> createFileMessage(CreateMessageRequest request);
 
   /// Listern Message
-  Stream<List<AmityMessage>> listentMessages(MessageQueryRequest request);
+  Stream<List<AmityMessage>> listentMessages(
+      RequestBuilder<MessageQueryRequest> request);
 
   /// Has Local Message
   bool hasLocalMessage(String messageId);

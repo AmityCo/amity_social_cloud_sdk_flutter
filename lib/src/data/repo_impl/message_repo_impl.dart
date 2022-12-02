@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:io' if (dart.library.html) 'dart:html';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
@@ -45,7 +45,9 @@ class MessageRepoImpl extends MessageRepo {
   }
 
   @override
-  Stream<List<AmityMessage>> listentMessages(MessageQueryRequest request) {
+  Stream<List<AmityMessage>> listentMessages(
+      RequestBuilder<MessageQueryRequest> request) {
+    final req = request.call();
     return dbAdapterRepo.messageDbAdapter
         .listenMessageEntities(request)
         .map((event) {
@@ -53,7 +55,7 @@ class MessageRepoImpl extends MessageRepo {
       for (var element in event) {
         list.add(element.convertToAmityMessage());
         //sort result
-        if (request.stackFromEnd == true) {
+        if (req.stackFromEnd == true) {
           list.sort((a, b) => b.channelSegment!.compareTo(a.channelSegment!));
         } else {
           list.sort((a, b) => a.channelSegment!.compareTo(b.channelSegment!));
@@ -77,6 +79,26 @@ class MessageRepoImpl extends MessageRepo {
       dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
 
       final data = await messageApiInterface.createMessage(request);
+      final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
+      return (amitMessages as List).first;
+    } catch (error) {
+      entity.syncState = AmityMessageSyncState.FAILED;
+      dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
+
+      rethrow;
+    }
+  }
+
+  @override
+  Future<AmityMessage> updateMessage(CreateMessageRequest request) async {
+    final entity =
+        dbAdapterRepo.messageDbAdapter.getMessageEntity(request.messageId!)!;
+
+    try {
+      entity.syncState = AmityMessageSyncState.SYNCING;
+      dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
+
+      final data = await messageApiInterface.updateMessage(request);
       final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
       return (amitMessages as List).first;
     } catch (error) {
@@ -153,6 +175,10 @@ class MessageRepoImpl extends MessageRepo {
   @override
   Future deleteMessage(String messageId) async {
     await messageApiInterface.deleteMessage(messageId);
+
+    final entity = dbAdapterRepo.messageDbAdapter.getMessageEntity(messageId)!;
+    entity.isDeleted = true;
+    entity.save();
   }
 
   @override

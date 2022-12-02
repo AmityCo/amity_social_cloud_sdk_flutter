@@ -7,7 +7,9 @@ extension MapExtension on Map {
 
   /// Remove all the null value from Map
   void removeNullValue() {
-    removeWhere(
-        (key, value) => value == null || (value is String && value.isEmpty));
+    removeWhere((key, value) =>
+        value == null ||
+        (value is String && value.isEmpty) ||
+        (value is List && value.isEmpty));
   }
 }

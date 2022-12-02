@@ -36,6 +36,19 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
   }
 
   @override
+  Future<CreateMessageResponse> updateMessage(
+      CreateMessageRequest request) async {
+    try {
+      final data = await httpApiClient()
+          .put('$MESSAGE_V3/${request.messageId}', data: request.toJson());
+      return CreateMessageResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
   Future deleteMessage(String messageId) async {
     try {
       await httpApiClient()
@@ -62,8 +75,9 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
   @override
   Future<CreateMessageResponse> getMessage(String messageId) async {
     try {
-      final data = await httpApiClient().get('$MESSAGE_V3/$messageId/flag',
-          queryParameters: {'messageId': messageId});
+      final data = await httpApiClient().get(
+        '$MESSAGE_V3/$messageId',
+      );
       return CreateMessageResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
