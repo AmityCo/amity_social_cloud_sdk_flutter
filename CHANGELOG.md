@@ -1,3 +1,5 @@
+## 0.13.1
+* fix: Resolve issue Amity Message Update Query Builder 
 ## 0.13.0
 * feat: Channel Message Query & Filter
 * feat: Channel Message Update

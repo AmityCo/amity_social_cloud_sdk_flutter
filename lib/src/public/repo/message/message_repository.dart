@@ -23,11 +23,12 @@ class MessageRepository {
   }
 
   /// Create Message
-  AmityMessageCreateDataTypeSelector updateMessage(
+  AmityMessageUpdateQueryBuilder updateMessage(
       String channelId, String messageId) {
-    return AmityMessageCreateTargetSelector(
-            useCase: serviceLocator<MessageCreateUsecase>())
-        .channelId(channelId);
+    return AmityMessageUpdateQueryBuilder(
+        useCase: serviceLocator<MessageUpdateUsecase>(),
+        channelId: channelId,
+        messageId: messageId);
   }
 
   /// Delete message
