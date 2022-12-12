@@ -73,4 +73,36 @@ class UserRepoImpl extends UserRepo {
         userHiveEntities.map((e) => e.convertToAmityUser()).toList();
     return amityUsers;
   }
+
+  @override
+  Future<AmityUser> flag(String userId) async {
+    final data = await userApiInterface.flag(userId);
+
+    final userHiveEntities =
+        data.users.map((e) => e.convertToUserHiveEntity()).toList();
+
+    for (var userEntity in userHiveEntities) {
+      await userDbAdapter.saveUserEntity(userEntity);
+    }
+
+    final amityUsers =
+        userHiveEntities.map((e) => e.convertToAmityUser()).toList();
+    return amityUsers.first;
+  }
+
+  @override
+  Future<AmityUser> unflag(String userId) async {
+    final data = await userApiInterface.unflag(userId);
+
+    final userHiveEntities =
+        data.users.map((e) => e.convertToUserHiveEntity()).toList();
+
+    for (var userEntity in userHiveEntities) {
+      await userDbAdapter.saveUserEntity(userEntity);
+    }
+
+    final amityUsers =
+        userHiveEntities.map((e) => e.convertToAmityUser()).toList();
+    return amityUsers.first;
+  }
 }

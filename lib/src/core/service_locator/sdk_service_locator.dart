@@ -282,6 +282,11 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<GetUserByIdUseCase>(() =>
         GetUserByIdUseCase(
             userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<UserFlagUsecase>(() => UserFlagUsecase(
+        userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<UserUnflagUsecase>(() =>
+        UserUnflagUsecase(
+            userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<UserGlobalPermissionCheckUsecase>(
         () => UserGlobalPermissionCheckUsecase(userRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<AcceptFollowUsecase>(

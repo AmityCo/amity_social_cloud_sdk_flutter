@@ -6,4 +6,6 @@ abstract class UserApiInterface {
   Future<UsersResponse> getUserById(String userId);
   Future<UsersResponse> getUsers(UsersRequest request);
   Future<UsersResponse> updateUser(UpdateUserRequest request);
+  Future<UsersResponse> flag(String userId);
+  Future<UsersResponse> unflag(String userId);
 }

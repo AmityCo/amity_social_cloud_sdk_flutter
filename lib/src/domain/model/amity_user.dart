@@ -28,7 +28,10 @@ class AmityUser {
 
   /// Flag count for the user
   int? flagCount;
-  //  HashFlag hashFlag;
+
+  /// Hash Flag
+  Map<String, dynamic>? hashFlag;
+
   /// Metadata for the user
   Map<String, dynamic>? metadata;
 

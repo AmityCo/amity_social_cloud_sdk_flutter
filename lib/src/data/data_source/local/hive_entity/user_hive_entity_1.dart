@@ -43,4 +43,7 @@ class UserHiveEntity extends HiveObject {
 
   /// User Update time
   DateTime? updatedAt;
+
+  /// Hash Flag
+  Map<String, dynamic>? hashFlag;
 }
