@@ -18,6 +18,7 @@ extension MessageResponseExtensionConverter on MessageResponse {
       ..tags = tags
       ..metadata = metadata
       ..flagCount = flagCount
+      ..hashFlag = hashFlag?.toJson()
       ..childrenNumber = childrenNumber
       ..reactionsCount = reactionsCount
       ..reactions = reactions

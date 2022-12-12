@@ -560,6 +560,10 @@ class SdkServiceLocator {
         MessageGetUseCase(
             messageRepo: serviceLocator(),
             messageComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageFlagUsecase>(
+        () => MessageFlagUsecase(messageRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageUnflagUsecase>(
+        () => MessageUnflagUsecase(messageRepo: serviceLocator()));
 
     serviceLocator.registerLazySingleton<MessageObserveUsecase>(() =>
         MessageObserveUsecase(
