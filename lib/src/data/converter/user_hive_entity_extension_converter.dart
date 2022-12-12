@@ -16,6 +16,8 @@ extension UserHiveEntityExtension on UserHiveEntity {
       ..createdAt = createdAt
       ..updatedAt = updatedAt
       ..roles = roles
-      ..isGlobalBan = isGlobalBan;
+      ..isGlobalBan = isGlobalBan
+      ..flagCount = flagCount
+      ..hashFlag = hashFlag;
   }
 }
