@@ -31,4 +31,10 @@ abstract class MessageRepo {
 
   /// Get local Message
   AmityMessage? getLocalMessage(String messageId);
+
+  /// flag Message
+  Future<AmityMessage> flagMessage(String messageId);
+
+  /// unflag Message
+  Future<AmityMessage> unFlagMessage(String messageId);
 }

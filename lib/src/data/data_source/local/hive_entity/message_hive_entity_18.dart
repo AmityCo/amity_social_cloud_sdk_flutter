@@ -41,7 +41,7 @@ class MessageHiveEntity extends HiveObject {
   int? flagCount;
 
   /// Hash Flag
-  // _HashFlag hashFlag;
+  Map<String, dynamic>? hashFlag;
 
   /// Childer number
   int? childrenNumber;
@@ -75,6 +75,9 @@ class MessageHiveEntity extends HiveObject {
 
   /// Sync State
   AmityMessageSyncState? syncState;
+
+  ///
+  bool? flaggedByMe;
 
   MessageHiveEntity({
     this.messageId,

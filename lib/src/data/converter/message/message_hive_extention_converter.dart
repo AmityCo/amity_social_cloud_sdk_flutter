@@ -57,6 +57,7 @@ extension MessageHiveExtensionConverter on MessageHiveEntity {
       ..amityTags = AmityTags(tags: tags ?? [])
       ..metadata = metadata
       ..flagCount = flagCount
+      ..hashFlag = hashFlag
       ..childrenNumber = childrenNumber
       ..reactionCount = reactionsCount
       ..reactions = AmityReactionMap(reactions: reactions)
@@ -65,7 +66,8 @@ extension MessageHiveExtensionConverter on MessageHiveEntity {
       ..isDeleted = isDeleted
       ..createdAt = createdAt
       ..updatedAt = updatedAt
-      ..editedAt = editedAt;
+      ..editedAt = editedAt
+      ..flaggedByMe = flaggedByMe;
   }
 
   bool isMatchingFilter(MessageQueryRequest filter) {

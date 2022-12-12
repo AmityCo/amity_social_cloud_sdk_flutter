@@ -31,6 +31,9 @@ class AmityMessage {
   /// Flag Count
   int? flagCount;
 
+  /// Hash Flag
+  Map<String, dynamic>? hashFlag;
+
   /// Amity Tags
   AmityTags? amityTags;
 
@@ -69,6 +72,9 @@ class AmityMessage {
 
   /// Edited At
   DateTime? editedAt;
+
+  /// Flagged By Me
+  bool? flaggedByMe;
 
   @override
   String toString() {
