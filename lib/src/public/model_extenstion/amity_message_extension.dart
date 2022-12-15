@@ -50,7 +50,7 @@ extension AmityMessageExtension on AmityMessage {
         .unflag();
   }
 
-  /// check if post is flagged by me
+  /// check if message is flagged by me
   bool get isFlaggedByMe {
     if (hashFlag == null) return false;
     return (flaggedByMe ?? false) ||

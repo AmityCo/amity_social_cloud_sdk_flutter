@@ -18,4 +18,8 @@ extension AmityUserExtenstion on AmityUser {
   AmityUserRelationshipRepository relationship() {
     return AmityUserRelationshipRepository(userId: userId!);
   }
+
+  AmityUserFlagRepository report() {
+    return AmityUserFlagRepository(userId: userId!);
+  }
 }
