@@ -78,7 +78,13 @@ class ChannelRepoImpl extends ChannelRepo {
 
     final amityChannelEntity =
         commonDbAdapter.channelDbAdapter.getEntity(request.channelId);
-    amityChannelEntity.isMuted = true;
+
+    if (request.mutePeriod! > 0) {
+      amityChannelEntity.isMuted = true;
+    } else if (request.mutePeriod! == 0) {
+      amityChannelEntity.isMuted = false;
+    }
+
     await amityChannelEntity.save();
   }
 }
