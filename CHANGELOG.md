@@ -1,3 +1,10 @@
+## 0.14.0
+* feat: Reply to channel message
+* feat: Flag/Unflag channel message
+* feat: Flag/Unflag channel message sender
+* feat: Add/Remove tags on channel message
+* feat: Mute/Unmute channel from client side 
+* fix: Added Amity Object extension method for reporting message and user
 ## 0.13.1
 * fix: Resolve issue Amity Message Update Query Builder 
 ## 0.13.0
