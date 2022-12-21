@@ -54,15 +54,15 @@ class VideoStreamingResponse {
             : Platform.fromJson(json["platform"]),
         startedAt: json["startedAt"] == null
             ? null
-            : DateTime.parse(json["startedAt"]),
+            : DateTime.tryParse(json["startedAt"]),
         endedAt:
-            json["endedAt"] == null ? null : DateTime.parse(json["endedAt"]),
+            json["endedAt"] == null ? null : DateTime.tryParse(json["endedAt"]),
         createdAt: json["createdAt"] == null
             ? null
-            : DateTime.parse(json["createdAt"]),
+            : DateTime.tryParse(json["createdAt"]),
         updatedAt: json["updatedAt"] == null
             ? null
-            : DateTime.parse(json["updatedAt"]),
+            : DateTime.tryParse(json["updatedAt"]),
         // metadata: DataClass.fromJson(json["metadata"]),
         resolution: json["resolution"],
         streamerUrl: json["platform"] == null
@@ -142,9 +142,9 @@ class Recording {
 
   factory Recording.fromJson(Map<String, dynamic> json) => Recording(
         url: json["url"],
-        duration: double.parse('${json["duration"]}'),
-        startTime: double.parse('${json["startTime"]}'),
-        stopTime: double.parse('${json["stopTime"]}'),
+        duration: double.tryParse('${json["duration"]}'),
+        startTime: double.tryParse('${json["startTime"]}'),
+        stopTime: double.tryParse('${json["stopTime"]}'),
       );
 
   Map<String, dynamic> toJson() => {

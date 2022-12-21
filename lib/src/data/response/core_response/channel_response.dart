@@ -110,12 +110,12 @@ class ChannelResponse {
         isRateLimited: json["isRateLimited"],
         muteTimeout: json["muteTimeout"] == null
             ? null
-            : DateTime.parse(json["muteTimeout"]),
+            : DateTime.tryParse(json["muteTimeout"]),
         rateLimit: json["rateLimit"],
         rateLimitWindow: json["rateLimitWindow"],
         rateLimitTimeout: json["rateLimitTimeout"] == null
             ? null
-            : DateTime.parse(json["rateLimitTimeout"]),
+            : DateTime.tryParse(json["rateLimitTimeout"]),
         displayName: json["displayName"],
         messageAutoDeleteEnabled: json["messageAutoDeleteEnabled"],
         autoDeleteMessageByFlagLimit: json["autoDeleteMessageByFlagLimit"],
