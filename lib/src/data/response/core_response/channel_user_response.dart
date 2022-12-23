@@ -75,7 +75,7 @@ class ChannelUserResponse {
         isMuted: json["isMuted"],
         muteTimeout: json["muteTimeout"] == null
             ? null
-            : DateTime.parse(json["muteTimeout"]),
+            : DateTime.tryParse(json["muteTimeout"]),
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
       );

@@ -79,10 +79,10 @@ class UserResponse {
         isGlobalBan: json["isGlobalBan"],
         createdAt: json["createdAt"] == null
             ? null
-            : DateTime.parse(json["createdAt"]),
+            : DateTime.tryParse(json["createdAt"]),
         updatedAt: json["updatedAt"] == null
             ? null
-            : DateTime.parse(json["updatedAt"]),
+            : DateTime.tryParse(json["updatedAt"]),
       );
 
   /// Covnert the User model to map

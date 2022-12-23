@@ -138,11 +138,13 @@ class PostResponse {
       hashFlag:
           json["hashFlag"] == null ? null : HashFlag.fromJson(json["hashFlag"]),
       editedAt:
-          json["editedAt"] == null ? null : DateTime.parse(json["editedAt"]),
-      createdAt:
-          json["createdAt"] == null ? null : DateTime.parse(json["createdAt"]),
-      updatedAt:
-          json["updatedAt"] == null ? null : DateTime.parse(json["updatedAt"]),
+          json["editedAt"] == null ? null : DateTime.tryParse(json["editedAt"]),
+      createdAt: json["createdAt"] == null
+          ? null
+          : DateTime.tryParse(json["createdAt"]),
+      updatedAt: json["updatedAt"] == null
+          ? null
+          : DateTime.tryParse(json["updatedAt"]),
       reactions: Map.from(json["reactions"]),
       reactionsCount: json["reactionsCount"],
       myReactions: List<String>.from(json["myReactions"].map((x) => x)),
