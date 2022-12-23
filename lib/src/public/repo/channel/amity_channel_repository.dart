@@ -4,7 +4,7 @@ import 'package:amity_sdk/src/public/public.dart';
 import 'package:amity_sdk/src/public/query_builder/channel/update/channel_update_builder.dart';
 
 /// Channel Repository
-class ChannelRepository {
+class AmityChannelRepository {
   /// Create the [AmityChannel]
   ChannelCreatorTypeSelection createChannel() {
     return ChannelCreatorTypeSelection();
@@ -60,9 +60,8 @@ class ChannelRepository {
   }
 
   /// Membership Repo
-  ChannelParticipationRepository membership(String channelId) {
-    return serviceLocator<ChannelParticipationRepository>()
-        .channelId(channelId);
+  AmityChannelParticipation membership(String channelId) {
+    return serviceLocator<AmityChannelParticipation>().channelId(channelId);
   }
 
   /// Channel Moderation Repo

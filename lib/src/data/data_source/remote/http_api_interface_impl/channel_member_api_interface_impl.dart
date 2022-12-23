@@ -54,6 +54,20 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
   }
 
   @override
+  Future<CreateChannelResponse> searchChannelMembers(
+      GetChannelMembersRequestV4 request) async {
+    try {
+      final data = await httpApiClient().get(
+          '$CHANNELS_V4/${request.channelId}/$USERS/',
+          queryParameters: request.toJson());
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
   Future<CreateChannelResponse> joinChannel(String channelId) async {
     try {
       final param = <String, String>{

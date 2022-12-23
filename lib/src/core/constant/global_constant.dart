@@ -60,6 +60,7 @@ const MESSAGE_V1 = 'api/v1/messages';
 const CHANNELS_V2 = 'api/v2/channels';
 const CHANNEL_V2 = 'api/v2/channel';
 const CHANNELS_V3 = 'api/v3/channels';
+const CHANNELS_V4 = 'api/v4/channels';
 
 const JOIN = 'join';
 const LEAVE = 'leave';

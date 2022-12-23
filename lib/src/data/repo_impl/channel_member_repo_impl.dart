@@ -1,4 +1,5 @@
 import 'package:amity_sdk/src/core/model/api_request/channel/get_channel_member_request.dart';
+import 'package:amity_sdk/src/core/model/api_request/channel/get_channel_member_request_v4.dart';
 import 'package:amity_sdk/src/core/model/api_request/channel/update_channel_member_request.dart';
 import 'package:amity_sdk/src/core/model/api_request/channel/update_channel_role_request.dart';
 import 'package:amity_sdk/src/core/utils/page_list_data.dart';
@@ -73,9 +74,15 @@ class ChannelMemberRepoImpl extends ChannelMemberRepo {
       GetChannelMembersRequest request) async {
     final data = await channelMemberApiInterface.getChannelMembers(request);
 
-    //Save members sequence in to feed db
-    // await communityMemberPagingDbAdapter.updateCommunityMemmberCollection(
-    //     data.convertToCommunityMemberPagingHiveEntity());
+    final amityChannelMember =
+        await data.saveToDb<AmityChannelMember>(commonDbAdapter);
+    return PageListData(amityChannelMember, data.paging!.next ?? '');
+  }
+
+  @override
+  Future<PageListData<List<AmityChannelMember>, String>> searchMembers(
+      GetChannelMembersRequestV4 request) async {
+    final data = await channelMemberApiInterface.searchChannelMembers(request);
 
     final amityChannelMember =
         await data.saveToDb<AmityChannelMember>(commonDbAdapter);
