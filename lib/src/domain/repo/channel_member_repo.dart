@@ -7,6 +7,10 @@ abstract class ChannelMemberRepo {
   Future<PageListData<List<AmityChannelMember>, String>> queryMembers(
       GetChannelMembersRequest request);
 
+  /// Search Members
+  Future<PageListData<List<AmityChannelMember>, String>> searchMembers(
+      GetChannelMembersRequestV4 request);
+
   /// Add Member
   Future<List<AmityChannelMember>> addMember(
       UpdateChannelMembersRequest request);

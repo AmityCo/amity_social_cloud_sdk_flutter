@@ -5,3 +5,4 @@ export 'channel_member_leave_usecase.dart';
 export 'channel_member_mute_usecase.dart';
 export 'channel_member_query_usecase.dart';
 export 'channel_member_remove_usecase.dart';
+export 'channel_member_search_usecase.dart';

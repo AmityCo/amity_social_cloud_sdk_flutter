@@ -1,4 +1,5 @@
 export 'amity_channel_filter.dart';
+export 'amity_channel_membership.dart';
 export 'amity_channel_membership_filter.dart';
 export 'amity_channel_sort_option.dart';
 export 'amity_channel_type.dart';
