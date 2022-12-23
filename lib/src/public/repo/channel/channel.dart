@@ -1,3 +1,3 @@
+export 'amity_channel_repository.dart';
 export 'channel_moderation_repository.dart';
-export 'channel_participation_repository.dart';
-export 'channel_repository.dart';
+export 'amity_channel_participation.dart';

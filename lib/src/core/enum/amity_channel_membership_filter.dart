@@ -21,7 +21,7 @@ extension AmityChannelMemberTypeExtension on AmityChannelMembershipFilter {
       case AmityChannelMembershipFilter.ALL:
         return [
           AmityMembershipType.MEMBER.value,
-          AmityMembershipType.BANNED.value
+          AmityMembershipType.BANNED.value,
         ];
       case AmityChannelMembershipFilter.MUTED:
         return [

@@ -615,6 +615,10 @@ class SdkServiceLocator {
         ChannelMemberQueryUsecase(
             channelMemberRepo: serviceLocator(),
             channelMemberComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<ChannelMemberSearchUsecase>(() =>
+        ChannelMemberSearchUsecase(
+            channelMemberRepo: serviceLocator(),
+            channelMemberComposerUsecase: serviceLocator()));
 
     serviceLocator.registerLazySingleton<ChannelMemberAddRoleUsecase>(() =>
         ChannelMemberAddRoleUsecase(channelModerationRepo: serviceLocator()));
@@ -663,9 +667,8 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => CommunityRepository());
     serviceLocator.registerLazySingleton(() => PollRepository());
     serviceLocator.registerLazySingleton(() => MessageRepository());
-    serviceLocator.registerLazySingleton(() => ChannelRepository());
-    serviceLocator
-        .registerLazySingleton(() => ChannelParticipationRepository());
+    serviceLocator.registerLazySingleton(() => AmityChannelRepository());
+    serviceLocator.registerLazySingleton(() => AmityChannelParticipation());
     serviceLocator.registerLazySingleton(() => ChannelModerationRepository());
 
     //MQTT Client

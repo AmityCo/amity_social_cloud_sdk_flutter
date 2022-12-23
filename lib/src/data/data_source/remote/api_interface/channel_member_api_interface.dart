@@ -7,6 +7,10 @@ abstract class ChannelMemberApiInterface {
   Future<CreateChannelResponse> getChannelMembers(
       GetChannelMembersRequest request);
 
+  /// Search Channel Member
+  Future<CreateChannelResponse> searchChannelMembers(
+      GetChannelMembersRequestV4 request);
+
   /// Join Channel
   Future<CreateChannelResponse> joinChannel(String channelId);
 
