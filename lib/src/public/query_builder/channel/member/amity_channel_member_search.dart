@@ -80,4 +80,27 @@ class AmityChannelMemberSearch {
 
     return data;
   }
+
+  Future<List<AmityChannelMember>> query({int? limit}) async {
+    final request = GetChannelMembersRequestV4(channelId: channelId);
+
+    request.memberships = _channelMembership.map((e) => e.value).toList();
+    request.sortBy = _sortOption.value;
+    request.keyword = _keyword;
+
+    if (_roles != null) request.roles = _roles!.roles;
+
+    request.options = OptionsRequest();
+
+    // if (token != null) {
+    //   request.options!.token = token;
+    // }
+    if (limit != null) {
+      request.options!.limit = limit;
+    }
+
+    final data = await useCase.get(request);
+
+    return data.data;
+  }
 }
