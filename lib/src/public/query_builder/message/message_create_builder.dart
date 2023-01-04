@@ -208,52 +208,6 @@ class AmityFileMessageCreator extends AmityMessageCreator {
   }
 }
 
-/// Implementation Layer for Amity Mesage Image Creator
-// class AmityImageMesageCreator extends AmityMessageCreator {
-//   late final List<AmityImage> _images;
-
-//   /// Init [AmityImageMesageCreator]
-//   AmityImageMesageCreator({
-//     required List<AmityImage> images,
-//     required MessageCreateUsecase useCase,
-//     required String channelId,
-//     String? parentId,
-//   }) : super(useCase: useCase, channelId: channelId, parentId: parentId) {
-//     _images = images;
-//   }
-
-//   @override
-//   void _attachRequest(CreateMesageRequest request) {
-//     request.attachments = _images
-//         .map((e) =>
-//             Attachment(fileId: e.fileId, type: AmityDataType.IMAGE.value))
-//         .toList();
-//   }
-// }
-
-/// Implementation Layer for Amity Mesage File Creator
-// class AmityFileMesageCreator extends AmityMessageCreator {
-//   late final List<AmityFile> _files;
-
-//   /// Init [AmityFileMesageCreator]
-//   AmityFileMesageCreator({
-//     required List<AmityFile> files,
-//     required MessageCreateUsecase useCase,
-//     required String channelId,
-//     String? parentId,
-//   }) : super(useCase: useCase, channelId: channelId, parentId: parentId) {
-//     _files = files;
-//   }
-
-//   @override
-//   void _attachRequest(CreateMesageRequest request) {
-//     request.attachments = _files
-//         .map(
-//             (e) => Attachment(fileId: e.fileId, type: AmityDataType.FILE.value))
-//         .toList();
-//   }
-// }
-
 /// Abstract Layer for Amity Mesage Creator
 abstract class AmityMessageCreator {
   late MessageCreateUsecase _useCase;
@@ -289,29 +243,27 @@ abstract class AmityMessageCreator {
     return this;
   }
 
-  // /// Add metadata to Amity Mesage
-  // AmityMessageCreator metadata(Map<String, dynamic> metadata) {
-  //   _metadata = metadata;
-  //   return this;
-  // }
+  /// Add metadata to Amity Mesage
+  AmityMessageCreator metadata(Map<String, dynamic> metadata) {
+    _metadata = metadata;
+    return this;
+  }
 
   /// Metion Users
-  /// Future Use
-  // AmityMessageCreator mentionUsers(List<String> userIds) {
-  //   _mentionees ??= [];
-  //   _mentionees!.add(AmityMentioneeTarget(
-  //       type: AmityMentionType.USER.value, userIds: userIds));
-  //   return this;
-  // }
+  AmityMessageCreator mentionUsers(List<String> userIds) {
+    _mentionees ??= [];
+    _mentionees!.add(AmityMentioneeTarget(
+        type: AmityMentionType.USER.value, userIds: userIds));
+    return this;
+  }
 
   /// Metion Channel
-  /// Future Use
-  // AmityMessageCreator mentionChannel() {
-  //   _mentionees ??= [];
-  //   _mentionees!.add(AmityMentioneeTarget(
-  //       type: AmityMentionType.CHANNEL.value, userIds: [_channelId]));
-  //   return this;
-  // }
+  AmityMessageCreator mentionChannel() {
+    _mentionees ??= [];
+    _mentionees!
+        .add(AmityMentioneeTarget(type: AmityMentionType.CHANNEL.value));
+    return this;
+  }
 
   /// Tags
   /// Future Use
