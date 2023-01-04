@@ -6,6 +6,8 @@ class AmityMentionMetadataCreator {
   AmityMentionMetadataCreator(this._mentionMetaData);
 
   Map<String, dynamic> create() {
-    return {'mentioned': _mentionMetaData.map((e) => e.toMap).toList()};
+    return {
+      'mentioned': List<dynamic>.from(_mentionMetaData.map((e) => e.toMap()))
+    };
   }
 }
