@@ -18,6 +18,7 @@ class SdkServiceLocator {
   ///Dependency injection
   static Future<void> initServiceLocator({bool syc = false}) async {
     DateTime startTime = DateTime.now();
+    serviceLocator.allowReassignment = true;
 
     ///----------------------------------- Core Layer -----------------------------------///
 
