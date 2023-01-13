@@ -1,0 +1,243 @@
+{
+    "posts": [
+        {
+            "_id": "63be493135c699324f30c175",
+            "path": "631f16be1e440400da5663b0/social/user/635b6bba35a67802ff21f5e9/post/63be493135c699324f30c175",
+            "sharedCount": 0,
+            "targetType": "user",
+            "dataType": "text",
+            "metadata": {
+                "mentioned": [
+                    {
+                        "index": 23,
+                        "length": 9,
+                        "type": "user",
+                        "userId": " android2"
+                    },
+                    {
+                        "index": 34,
+                        "length": 6,
+                        "type": "user",
+                        "userId": " FonAn"
+                    }
+                ]
+            },
+            "commentsCount": 0,
+            "editedAt": "2023-01-11T05:29:21.090Z",
+            "createdAt": "2023-01-11T05:29:21.090Z",
+            "updatedAt": "2023-01-11T05:29:21.100Z",
+            "isDeleted": false,
+            "hasFlaggedComment": false,
+            "hasFlaggedChildren": false,
+            "data": {
+                "text": "test multiple mention\n\n@ android2 @ FonAn"
+            },
+            "postId": "63be493135c699324f30c175",
+            "postedUserId": "pang20",
+            "targetId": "pang20",
+            "flagCount": 0,
+            "hashFlag": null,
+            "reactions": {},
+            "reactionsCount": 0,
+            "myReactions": [],
+            "comments": [],
+            "children": [
+                "63be493135c699707e30c17a"
+            ],
+            "mentionees": [
+                {
+                    "type": "user",
+                    "userIds": [
+                        " android2",
+                        " FonAn"
+                    ]
+                }
+            ],
+            "tags": []
+        }
+    ],
+    "postChildren": [
+        {
+            "_id": "63be493135c699707e30c17a",
+            "sharedCount": 0,
+            "targetType": "user",
+            "dataType": "liveStream",
+            "metadata": {
+                "mentioned": [
+                    {
+                        "index": 23,
+                        "length": 9,
+                        "type": "user",
+                        "userId": " android2"
+                    },
+                    {
+                        "index": 34,
+                        "length": 6,
+                        "type": "user",
+                        "userId": " FonAn"
+                    }
+                ]
+            },
+            "commentsCount": 0,
+            "editedAt": "2023-01-11T05:29:21.110Z",
+            "createdAt": "2023-01-11T05:29:21.110Z",
+            "updatedAt": "2023-01-11T05:29:21.110Z",
+            "isDeleted": false,
+            "hasFlaggedComment": false,
+            "hasFlaggedChildren": false,
+            "data": {
+                "streamId": "b5c35c4b810b7b79d4392f622c30e2e3"
+            },
+            "postId": "63be493135c699707e30c17a",
+            "parentPostId": "63be493135c699324f30c175",
+            "postedUserId": "pang20",
+            "targetId": "pang20",
+            "flagCount": 0,
+            "hashFlag": null,
+            "reactions": {},
+            "reactionsCount": 0,
+            "myReactions": [],
+            "comments": [],
+            "children": [],
+            "mentionees": [],
+            "tags": []
+        }
+    ],
+    "comments": [],
+    "users": [
+        {
+            "_id": "6358cb5a35a67874951e54f4",
+            "path": "631f16be1e440400da5663b0/user/6358cb5a35a67874951e54f4",
+            "updatedAt": "2022-10-26T05:53:30.761Z",
+            "createdAt": "2022-10-26T05:53:30.754Z",
+            "isDeleted": false,
+            "displayName": " android2",
+            "userId": " android2",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        },
+        {
+            "_id": "635b6bba35a67802ff21f5e9",
+            "path": "631f16be1e440400da5663b0/user/635b6bba35a67802ff21f5e9",
+            "updatedAt": "2023-01-13T05:15:45.286Z",
+            "createdAt": "2022-10-28T05:42:18.750Z",
+            "isDeleted": false,
+            "displayName": "pang20",
+            "userId": "pang20",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        },
+        {
+            "_id": "63aa69263f13a2cba801ba77",
+            "path": "631f16be1e440400da5663b0/user/63aa69263f13a2cba801ba77",
+            "updatedAt": "2022-12-27T03:40:22.660Z",
+            "createdAt": "2022-12-27T03:40:22.651Z",
+            "isDeleted": false,
+            "displayName": " FonAn",
+            "userId": " FonAn",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        }
+    ],
+    "files": [],
+    "categories": [],
+    "communityUsers": [],
+    "feeds": [],
+    "videoStreamings": [
+        {
+            "title": "test multiple mention",
+            "description": "@ android2 @ FonAn",
+            "streamerUrl": {
+                "url": "rtmp://live-ingest-staging.upstra-china.co/631f16be1e440400da5663b0/b5c35c4b810b7b79d4392f622c30e2e3?auth_key=1673425759-0-0-a5de45d062cfd95106f0d3c576a41fd1",
+                "components": {
+                    "origin": "rtmp://live-ingest-staging.upstra-china.co",
+                    "appName": "631f16be1e440400da5663b0",
+                    "streamName": "b5c35c4b810b7b79d4392f622c30e2e3",
+                    "query": "auth_key=1673425759-0-0-a5de45d062cfd95106f0d3c576a41fd1"
+                }
+            },
+            "watcherUrl": {
+                "flv": {
+                    "url": "http://live-stream-staging.upstra-china.co/631f16be1e440400da5663b0/b5c35c4b810b7b79d4392f622c30e2e3.flv?auth_key=1673425759-0-0-80257d847b7dae406fbf5dbffe17be91",
+                    "components": {
+                        "origin": "http://live-stream-staging.upstra-china.co",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "b5c35c4b810b7b79d4392f622c30e2e3",
+                        "query": "auth_key=1673425759-0-0-80257d847b7dae406fbf5dbffe17be91"
+                    }
+                },
+                "hls": {
+                    "url": "http://live-stream-staging.upstra-china.co/631f16be1e440400da5663b0/b5c35c4b810b7b79d4392f622c30e2e3.m3u8?auth_key=1673425759-0-0-0ac5ac2b9f6b532751e957c2df9fe9e4",
+                    "components": {
+                        "origin": "http://live-stream-staging.upstra-china.co",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "b5c35c4b810b7b79d4392f622c30e2e3",
+                        "query": "auth_key=1673425759-0-0-0ac5ac2b9f6b532751e957c2df9fe9e4"
+                    }
+                },
+                "rtmp": {
+                    "url": "rtmp://live-stream-staging.upstra-china.co/631f16be1e440400da5663b0/b5c35c4b810b7b79d4392f622c30e2e3?auth_key=1673425759-0-0-5818005a7d302cc7d2a624d6751df8db",
+                    "components": {
+                        "origin": "rtmp://live-stream-staging.upstra-china.co",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "b5c35c4b810b7b79d4392f622c30e2e3",
+                        "query": "auth_key=1673425759-0-0-5818005a7d302cc7d2a624d6751df8db"
+                    }
+                }
+            },
+            "status": "recorded",
+            "isLive": false,
+            "isDeleted": false,
+            "startedAt": "2023-01-11T05:29:25.739Z",
+            "endedAt": "2023-01-11T05:29:33.071Z",
+            "resolution": "HD",
+            "updatedAt": "2023-01-11T05:32:37.419Z",
+            "createdAt": "2023-01-11T05:29:19.281Z",
+            "streamId": "b5c35c4b810b7b79d4392f622c30e2e3",
+            "userId": "pang20",
+            "thumbnailFileId": null,
+            "platform": {
+                "name": "apsara",
+                "version": "2016-11-01"
+            },
+            "recordings": [
+                {
+                    "m3u8": {
+                        "url": "https://upstra-staging.oss-ap-southeast-1.aliyuncs.com/record/631f16be1e440400da5663b0/b5c35c4b810b7b79d4392f622c30e2e3/2023-01-11-13-29-25_2023-01-11-13-29-32.m3u8",
+                        "duration": 7.477,
+                        "startTime": 1673414964,
+                        "stopTime": 1673414972
+                    },
+                    "flv": {
+                        "url": "https://upstra-staging.oss-ap-southeast-1.aliyuncs.com/record/631f16be1e440400da5663b0/b5c35c4b810b7b79d4392f622c30e2e3/2023-01-11-13-29-25_2023-01-11-13-29-32.flv",
+                        "duration": 7.477,
+                        "startTime": 1673414964,
+                        "stopTime": 1673414972
+                    },
+                    "mp4": {
+                        "url": "https://upstra-staging.oss-ap-southeast-1.aliyuncs.com/record/631f16be1e440400da5663b0/b5c35c4b810b7b79d4392f622c30e2e3/2023-01-11-13-29-25_2023-01-11-13-29-32.mp4",
+                        "duration": 7.477,
+                        "startTime": 1673414964,
+                        "stopTime": 1673414972
+                    }
+                }
+            ]
+        }
+    ],
+    "polls": []
+}

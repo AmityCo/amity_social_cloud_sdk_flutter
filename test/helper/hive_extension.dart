@@ -5,7 +5,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 class HiveInit {
-  static Future main() async {
+  static Future main(String path) async {
     /// Setup mock channel call for path provider or mac OS
     const channel = MethodChannel(
       'plugins.flutter.io/path_provider_macos',
@@ -13,7 +13,7 @@ class HiveInit {
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
       switch (methodCall.method) {
         case 'getApplicationDocumentsDirectory':
-          return 'macos';
+          return 'macos/$path';
         default:
       }
     });
