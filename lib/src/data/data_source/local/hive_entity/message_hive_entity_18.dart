@@ -1,4 +1,5 @@
 import 'package:amity_sdk/src/core/enum/amity_message_sync_state.dart';
+import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_data_hive_entity_19.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -71,7 +72,7 @@ class MessageHiveEntity extends HiveObject {
   DateTime? editedAt;
 
   /// Mentions
-  // List<Mentionee> mentionees;
+  List<Mentionee>? mentionees;
 
   /// Sync State
   AmityMessageSyncState? syncState;
@@ -100,6 +101,7 @@ class MessageHiveEntity extends HiveObject {
     this.createdAt,
     this.updatedAt,
     this.editedAt,
+    this.mentionees,
     this.syncState,
   });
 
@@ -129,6 +131,7 @@ class MessageHiveEntity extends HiveObject {
     DateTime? createdAt,
     DateTime? updatedAt,
     DateTime? editedAt,
+    List<Mentionee>? mentionees,
     AmityMessageSyncState? syncState,
   }) {
     return MessageHiveEntity(
@@ -152,6 +155,7 @@ class MessageHiveEntity extends HiveObject {
       createdAt: createdAt ?? this.createdAt,
       updatedAt: updatedAt ?? this.updatedAt,
       editedAt: editedAt ?? this.editedAt,
+      mentionees: mentionees ?? this.mentionees,
       syncState: syncState ?? this.syncState,
     );
   }
