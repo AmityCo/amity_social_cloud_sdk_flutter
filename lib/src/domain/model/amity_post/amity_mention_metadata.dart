@@ -10,10 +10,6 @@ class AmityChannelMentionMetadata extends AmityMentionMetadata {
   final int length;
   AmityChannelMentionMetadata({required this.index, required this.length});
 
-  String get getType => _mentionType;
-  int get getIndex => index;
-  int get getLength => length;
-
   @override
   Map<String, dynamic> toMap() {
     return {
@@ -31,11 +27,6 @@ class AmityUserMentionMetadata extends AmityMentionMetadata {
   final int length;
   AmityUserMentionMetadata(
       {required this.userId, required this.index, required this.length});
-
-  String get getType => _mentionType;
-  String get getUserId => userId;
-  int get getIndex => index;
-  int get getLength => length;
 
   @override
   Map<String, dynamic> toMap() {

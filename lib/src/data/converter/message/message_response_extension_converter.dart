@@ -27,6 +27,7 @@ extension MessageResponseExtensionConverter on MessageResponse {
       ..isDeleted = isDeleted
       ..createdAt = createdAt
       ..updatedAt = updatedAt
-      ..editedAt = editedAt;
+      ..editedAt = editedAt
+      ..mentionees = mentionees;
   }
 }
