@@ -157,3 +157,4 @@ pubspec.lock
 .dart_tool/package_config.json
 
 /macos/
+.dart_tool/package_config.json

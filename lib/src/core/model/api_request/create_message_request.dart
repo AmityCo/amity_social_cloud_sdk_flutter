@@ -81,8 +81,6 @@ class CreateMessageRequest {
       );
 
   Map<String, dynamic> toJson() {
-    print([mentionees!.first.toJson().toString()].toString());
-    print(List.from(mentionees!.map((x) => x.toJson())));
     return {
       "channelId": channelId,
       "messageId": messageId,
