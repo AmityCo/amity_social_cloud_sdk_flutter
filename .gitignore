@@ -156,5 +156,5 @@ google-services.json
 pubspec.lock
 .dart_tool/package_config.json
 
-# temp hive db
 /macos/
+.dart_tool/package_config.json

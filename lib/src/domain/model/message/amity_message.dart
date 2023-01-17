@@ -47,13 +47,13 @@ class AmityMessage {
   int? reactionCount;
 
   /// User
-  AmityUser? user;
+  AmityUser? user; //Compose
 
   /// Message Data Type
   AmityMessageDataType? type;
 
   /// Message Data
-  AmityMessageData? data;
+  AmityMessageData? data; //Compose
 
   /// Sync State
   AmityMessageSyncState? syncState;
@@ -62,7 +62,7 @@ class AmityMessage {
   Map<String, dynamic>? metadata;
 
   /// Mentionees
-  List<AmityMentionee>? mentionees; //com
+  List<AmityMentionee>? mentionees; //compose
 
   /// Created At
   DateTime? createdAt;

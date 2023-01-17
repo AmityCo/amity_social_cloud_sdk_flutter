@@ -1,0 +1,114 @@
+{
+    "messages": [
+        {
+            "_id": "63c28c17d247463b1d8c5841",
+            "type": "text",
+            "channelSegment": 55,
+            "metadata": {
+                "mentioned": [
+                    {
+                        "type": "channel",
+                        "index": 0,
+                        "length": 3
+                    },
+                    {
+                        "userId": "awika kk",
+                        "type": "user",
+                        "index": 5,
+                        "length": 8
+                    }
+                ]
+            },
+            "tags": [],
+            "childrenNumber": 0,
+            "isDeleted": false,
+            "editedAt": "2023-01-14T11:03:51.474Z",
+            "updatedAt": "2023-01-14T11:03:51.475Z",
+            "createdAt": "2023-01-14T11:03:51.475Z",
+            "path": "631f16be1e440400da5663b0/chat/channel/63be8059623e81b73e80902b/message/63be8059623e81b73e80902b/63c28c17d247463b1d8c5841",
+            "messageId": "50c36481-1d69-445a-9ea5-2582fc4a2b0d",
+            "userId": "victimAndroid",
+            "channelId": "63be8059623e81b73e80902b",
+            "flagCount": 0,
+            "hashFlag": null,
+            "reactions": {},
+            "reactionsCount": 0,
+            "parentId": null,
+            "fileId": null,
+            "data": {
+                "text": "@all @awika kk testing mention"
+            },
+            "mentionees": [
+                {
+                    "type": "channel"
+                },
+                {
+                    "type": "user",
+                    "userIds": [
+                        "awika kk"
+                    ]
+                }
+            ],
+            "myReactions": []
+        }
+    ],
+    "users": [
+        {
+            "_id": "6321d1096de41000d9511623",
+            "path": "631f16be1e440400da5663b0/user/6321d1096de41000d9511623",
+            "updatedAt": "2023-01-13T17:52:12.270Z",
+            "createdAt": "2022-09-14T13:03:05.130Z",
+            "description": "",
+            "isDeleted": false,
+            "displayName": "Victim Android",
+            "userId": "victimAndroid",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 1,
+            "hashFlag": {
+                "bits": 24,
+                "hashes": 17,
+                "hash": "gP//"
+            },
+            "avatarFileId": "5d814a01ff2d4c22ba40d19b13c59fbb",
+            "isGlobalBan": false
+        },
+        {
+            "_id": "63c125f7d7a6c9193cdaed47",
+            "path": "631f16be1e440400da5663b0/user/63c125f7d7a6c9193cdaed47",
+            "updatedAt": "2023-01-13T09:36:39.458Z",
+            "createdAt": "2023-01-13T09:35:51.520Z",
+            "isDeleted": false,
+            "displayName": "awika kk",
+            "userId": "awika kk",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        }
+    ],
+    "files": [
+        {
+            "fileId": "5d814a01ff2d4c22ba40d19b13c59fbb",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/5d814a01ff2d4c22ba40d19b13c59fbb/download",
+            "type": "image",
+            "createdAt": "2022-12-14T09:40:49.509Z",
+            "updatedAt": "2022-12-14T09:40:49.764Z",
+            "attributes": {
+                "name": "img_cache_1671008972073.jpg",
+                "extension": "jpg",
+                "size": 47331,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 1500,
+                    "width": 3000,
+                    "isFull": false
+                }
+            }
+        }
+    ]
+}

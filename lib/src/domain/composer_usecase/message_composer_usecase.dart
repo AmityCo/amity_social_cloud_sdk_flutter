@@ -13,26 +13,32 @@ class MessageComposerUsecase extends UseCase<AmityMessage, AmityMessage> {
   final UserComposerUsecase userComposerUsecase;
 
   /// Message File Composer Usecase
-  final MessageFileComposerUsecase messageComposerUsecase;
+  final MessageFileComposerUsecase messageFileComposerUsecase;
 
   /// Init [MessageComposerUsecase]
   MessageComposerUsecase({
     required this.userRepo,
     required this.messageRepo,
     required this.userComposerUsecase,
-    required this.messageComposerUsecase,
+    required this.messageFileComposerUsecase,
   });
   @override
   Future<AmityMessage> get(AmityMessage params) async {
     //Add File url to DataType != TEXT
     final data = params.data;
     if (data != null && data is! TextData) {
-      params.data = await messageComposerUsecase.get(data);
+      params.data = await messageFileComposerUsecase.get(data);
     }
 
     /// Compose Posted User
     params.user = await userRepo.getUserByIdFromDb(params.userId!);
     params.user = await userComposerUsecase.get(params.user!);
+
+    ///Compose Mention
+    for (AmityMentionee mention in (params.mentionees ?? [])) {
+      mention.user = await userRepo.getUserByIdFromDb(mention.userId);
+      mention.user = await userComposerUsecase.get(mention.user!);
+    }
 
     return params;
   }
