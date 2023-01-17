@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:amity_sdk/src/src.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -10,7 +7,7 @@ import '../helper/amity_core_client_mock_setup.dart';
 class MockPublicPostApiInterface extends Mock
     implements PublicPostApiInterface {}
 
-// integration_test_id:92d452fe-7a28-4441-abfb-6c94f184a8fd
+// integration_test_id:5a9f10c2-92d6-4d14-8a86-6bdc659bc62d
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -26,21 +23,17 @@ void main() {
     );
   });
 
-  test(
-      'When the user gets a valid post, it should return a valid post. (Video Post)',
+  test('When the user deletes a valid post, it should return successful result',
       () async {
-    when(() => mockPublicPostApiInterface.getPostById(postId))
+    when(() => mockPublicPostApiInterface.deletePostById(postId))
         .thenAnswer((_) async {
-      final response =
-          await File('test/mock_json/amity_post_video.json').readAsString();
-      return CreatePostResponse.fromJson(json.decode(response));
+      return true;
     });
 
-    final amityPost =
-        await AmitySocialClient.newPostRepository().getPost(postId);
+    final success =
+        await AmitySocialClient.newPostRepository().deletePost(postId: postId);
 
-    expect(amityPost, isA<AmityPost>());
-    expect(amityPost.data, isA<VideoData>());
+    expect(success, true);
   });
 
   tearDownAll(() async {

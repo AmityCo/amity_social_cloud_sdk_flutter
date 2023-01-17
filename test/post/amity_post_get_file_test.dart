@@ -10,7 +10,7 @@ import '../helper/amity_core_client_mock_setup.dart';
 class MockPublicPostApiInterface extends Mock
     implements PublicPostApiInterface {}
 
-// integration_test_id:cd7057c0-3d13-4365-be44-ceb675aaab55
+// integration_test_id:4381ba51-572d-4763-bc27-6e5330da188e
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 

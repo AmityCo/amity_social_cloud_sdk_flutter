@@ -9,7 +9,7 @@ import '../helper/amity_core_client_mock_setup.dart';
 
 class MockMessageApiInterface extends Mock implements MessageApiInterface {}
 
-// integration_test_id:2eeb7dbd-5902-43b0-8b16-9be2c2cb4b17
+// integration_test_id:dd026b3a-cfa7-4d72-b904-73e44afde49d
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -31,7 +31,7 @@ void main() {
   });
 
   test(
-      'When the user gets a valid message with two mentioned users, it should return a valid message with two mentioned users.',
+      'When the user creates a valid text message with @mention to two users on the community channel. It should return a valid text message with mention ',
       () async {
     when(() =>
             mockMessageApiInterface.createMessage(any<CreateMessageRequest>()))

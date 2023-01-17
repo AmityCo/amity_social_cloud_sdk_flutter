@@ -11,7 +11,7 @@ import '../helper/hive_extension.dart';
 class MockAuthenticationApiInterface extends Mock
     implements AuthenticationApiInterface {}
 
-// integration_test_id:115bcfbb-d517-4aca-bc5f-241b014d5602
+// integration_test_id:82e320ab-e7c3-4d4d-8393-ec0b80a9edcf
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 

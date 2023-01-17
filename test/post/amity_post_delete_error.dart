@@ -1,6 +1,3 @@
-import 'dart:convert';
-import 'dart:io';
-
 import 'package:amity_sdk/src/src.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
@@ -10,11 +7,11 @@ import '../helper/amity_core_client_mock_setup.dart';
 class MockPublicPostApiInterface extends Mock
     implements PublicPostApiInterface {}
 
-// integration_test_id:92d452fe-7a28-4441-abfb-6c94f184a8fd
+// integration_test_id:2a7624b9-560f-45d7-a2ae-6427315a1cea
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  String postId = 'postId';
+  String deletedPostId = 'deletePostId';
 
   final mockPublicPostApiInterface = MockPublicPostApiInterface();
 
@@ -27,20 +24,18 @@ void main() {
   });
 
   test(
-      'When the user gets a valid post, it should return a valid post. (Video Post)',
+      'When the user deletes an invalid post that doesn\'t exist, it should return a not found error (400400).',
       () async {
-    when(() => mockPublicPostApiInterface.getPostById(postId))
-        .thenAnswer((_) async {
-      final response =
-          await File('test/mock_json/amity_post_video.json').readAsString();
-      return CreatePostResponse.fromJson(json.decode(response));
-    });
+    when(() => mockPublicPostApiInterface.deletePostById(deletedPostId))
+        .thenThrow(AmityException(message: 'PostId Not Found', code: 400400));
 
-    final amityPost =
-        await AmitySocialClient.newPostRepository().getPost(postId);
-
-    expect(amityPost, isA<AmityPost>());
-    expect(amityPost.data, isA<VideoData>());
+    try {
+      await AmitySocialClient.newPostRepository()
+          .deletePost(postId: deletedPostId);
+    } catch (error) {
+      expect(error, isA<AmityException>());
+      expect((error as AmityException).code, 400400);
+    }
   });
 
   tearDownAll(() async {

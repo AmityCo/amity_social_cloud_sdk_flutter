@@ -14,4 +14,15 @@ class AmityCoreClientMockSetup {
       sycInitialization: true,
     );
   }
+
+  static Future loadMockSession() async {
+    serviceLocator.registerSingleton<AmityUser>(AmityUser()
+      ..userId = 'userId'
+      ..displayName = 'displayName');
+    serviceLocator.registerSingleton<SessionResponse>(SessionResponse(
+        accessToken: 'mockAccessToken',
+        refreshToken: 'mockRefreshToken',
+        users: [],
+        files: []));
+  }
 }
