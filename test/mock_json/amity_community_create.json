@@ -1,0 +1,149 @@
+{
+    "communities": [
+        {
+            "_id": "63c111b68309f8e1dfc55424",
+            "path": "631f16be1e440400da5663b0/social/community/63c111b68309f8e1dfc55424",
+            "description": "Test Community Description",
+            "isOfficial": false,
+            "isPublic": true,
+            "onlyAdminCanPost": false,
+            "postsCount": 0,
+            "membersCount": 1,
+            "moderatorMemberCount": 1,
+            "updatedAt": "2023-01-13T08:09:26.115Z",
+            "createdAt": "2023-01-13T08:09:26.115Z",
+            "isDeleted": false,
+            "needApprovalOnPostCreation": false,
+            "displayName": "Test Community",
+            "tags": [],
+            "metadata": {},
+            "hasFlaggedComment": false,
+            "hasFlaggedPost": false,
+            "communityId": "63c111b68309f8e1dfc55424",
+            "channelId": "63c111b68309f8e1dfc55424",
+            "userId": "victimAndroid",
+            "isJoined": true,
+            "avatarFileId": null,
+            "categoryIds": []
+        }
+    ],
+    "communityUsers": [
+        {
+            "communityMembership": "member",
+            "lastActivity": "2023-01-13T08:09:26.144Z",
+            "updatedAt": "2023-01-13T08:09:26.145Z",
+            "createdAt": "2023-01-13T08:09:26.145Z",
+            "isBanned": false,
+            "userId": "victimAndroid",
+            "communityId": "63c111b68309f8e1dfc55424",
+            "channelId": "63c111b68309f8e1dfc55424",
+            "roles": [
+                "channel-moderator",
+                "community-moderator"
+            ],
+            "permissions": [
+                "CREATE_ROLE",
+                "DELETE_ROLE",
+                "EDIT_ROLE",
+                "User/ExemptFromFilters",
+                "User/ExemptFromRateLimits",
+                "User/ExemptFromMute",
+                "User/ExempFromRepetitionCheck",
+                "MANAGE_NOTIFICATION_NETWORK_SETTING",
+                "EDIT_CHANNEL_USER",
+                "BAN_USER_FROM_CHANNEL",
+                "ADD_CHANNEL_USER",
+                "REMOVE_CHANNEL_USER",
+                "EDIT_CHANNEL",
+                "MUTE_CHANNEL",
+                "MUTE_USER_INSIDE_CHANNEL",
+                "DELETE_MESSAGE",
+                "EDIT_MESSAGE",
+                "Channel/BanUser",
+                "Channel/MuteUser",
+                "Channel/MuteChannel",
+                "Channel/RateLimitUser",
+                "Channel/RateLimitChannel",
+                "Channel/ManageMessages",
+                "Channel/ManageUsers",
+                "CREATE_COMMUNITY_CATEGORY",
+                "EDIT_COMMUNITY_CATEGORY",
+                "DELETE_COMMUNITY_CATEGORY",
+                "DELETE_COMMUNITY",
+                "EDIT_COMMUNITY",
+                "EDIT_COMMUNITY_USER",
+                "ADD_COMMUNITY_USER",
+                "BAN_COMMUNITY_USER",
+                "REMOVE_COMMUNITY_USER",
+                "EDIT_COMMUNITY_POST",
+                "DELETE_COMMUNITY_POST",
+                "REVIEW_COMMUNITY_POST",
+                "EDIT_COMMUNITY_COMMENT",
+                "DELETE_COMMUNITY_COMMENT",
+                "CREATE_PRIVILEGED_POST",
+                "EDIT_USER_FEED_POST",
+                "DELETE_USER_FEED_POST",
+                "EDIT_USER_FEED_COMMENT",
+                "DELETE_USER_FEED_COMMENT",
+                "Post/ManagePosts",
+                "Post/ManageComments",
+                "Community/ManageCommunities"
+            ]
+        }
+    ],
+    "files": [
+        {
+            "fileId": "5d814a01ff2d4c22ba40d19b13c59fbb",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/5d814a01ff2d4c22ba40d19b13c59fbb/download",
+            "type": "image",
+            "createdAt": "2022-12-14T09:40:49.509Z",
+            "updatedAt": "2022-12-14T09:40:49.764Z",
+            "attributes": {
+                "name": "img_cache_1671008972073.jpg",
+                "extension": "jpg",
+                "size": 47331,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 1500,
+                    "width": 3000,
+                    "isFull": false
+                }
+            }
+        }
+    ],
+    "categories": [],
+    "users": [
+        {
+            "_id": "6321d1096de41000d9511623",
+            "path": "631f16be1e440400da5663b0/user/6321d1096de41000d9511623",
+            "updatedAt": "2023-01-12T12:02:28.583Z",
+            "createdAt": "2022-09-14T13:03:05.130Z",
+            "description": "",
+            "isDeleted": false,
+            "displayName": "Victim Android",
+            "userId": "victimAndroid",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 1,
+            "hashFlag": {
+                "bits": 24,
+                "hashes": 17,
+                "hash": "gP//"
+            },
+            "avatarFileId": "5d814a01ff2d4c22ba40d19b13c59fbb",
+            "isGlobalBan": false
+        }
+    ],
+    "feeds": [
+        {
+            "targetType": "community",
+            "targetId": "63c111b68309f8e1dfc55424",
+            "feedType": "published",
+            "feedId": "16735973661764fed0870022144bd84359adde45abbe3",
+            "postCount": 0,
+            "createdAt": "2023-01-13T08:09:26.168Z",
+            "updatedAt": "2023-01-13T08:09:26.178Z"
+        }
+    ]
+}

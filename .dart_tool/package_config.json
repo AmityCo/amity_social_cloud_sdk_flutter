@@ -320,6 +320,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "mocktail",
+      "rootUri": "file:///Users/saurabhkumar/sorbh/flutter/.pub-cache/hosted/pub.dartlang.org/mocktail-0.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "mqtt_client",
       "rootUri": "file:///Users/saurabhkumar/sorbh/flutter/.pub-cache/hosted/pub.dartlang.org/mqtt_client-9.7.3",
       "packageUri": "lib/",
@@ -614,7 +620,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2023-01-17T06:33:57.162976Z",
-  "generator": "melos",
-  "generatorVersion": "2.3.1"
+  "generated": "2023-01-17T08:08:04.953700Z",
+  "generator": "pub",
+  "generatorVersion": "2.18.5"
 }

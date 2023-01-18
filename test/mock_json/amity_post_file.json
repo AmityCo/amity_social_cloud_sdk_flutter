@@ -1,0 +1,130 @@
+{
+    "posts": [
+        {
+            "_id": "63c0d4e68309f8cbb9c4f63a",
+            "path": "631f16be1e440400da5663b0/social/user/632949a97a6aa100db7f11ac/post/63c0d4e68309f8cbb9c4f63a",
+            "sharedCount": 0,
+            "targetType": "user",
+            "dataType": "text",
+            "commentsCount": 0,
+            "editedAt": "2023-01-13T03:51:50.432Z",
+            "createdAt": "2023-01-13T03:49:58.699Z",
+            "updatedAt": "2023-01-13T03:51:50.433Z",
+            "isDeleted": false,
+            "hasFlaggedComment": false,
+            "hasFlaggedChildren": false,
+            "data": {
+                "text": "File"
+            },
+            "postId": "63c0d4e68309f8cbb9c4f63a",
+            "postedUserId": "FonAn",
+            "targetId": "FonAn",
+            "flagCount": 0,
+            "hashFlag": null,
+            "reactions": {},
+            "reactionsCount": 0,
+            "myReactions": [],
+            "comments": [],
+            "children": [
+                "63c0d4e68309f88123c4f640"
+            ],
+            "mentionees": [
+                {
+                    "type": "user",
+                    "userIds": []
+                }
+            ],
+            "tags": []
+        }
+    ],
+    "postChildren": [
+        {
+            "_id": "63c0d4e68309f88123c4f640",
+            "path": "631f16be1e440400da5663b0/social/user/632949a97a6aa100db7f11ac/post/63c0d4e68309f88123c4f640",
+            "sharedCount": 0,
+            "targetType": "user",
+            "dataType": "file",
+            "commentsCount": 0,
+            "editedAt": "2023-01-13T03:49:58.726Z",
+            "createdAt": "2023-01-13T03:49:58.726Z",
+            "updatedAt": "2023-01-13T03:49:58.739Z",
+            "isDeleted": false,
+            "hasFlaggedComment": false,
+            "hasFlaggedChildren": false,
+            "data": {
+                "fileId": "da5f307c860c4f438e8ae05b674f3385"
+            },
+            "postId": "63c0d4e68309f88123c4f640",
+            "parentPostId": "63c0d4e68309f8cbb9c4f63a",
+            "postedUserId": "FonAn",
+            "targetId": "FonAn",
+            "flagCount": 0,
+            "hashFlag": null,
+            "reactions": {},
+            "reactionsCount": 0,
+            "myReactions": [],
+            "comments": [],
+            "children": [],
+            "mentionees": [],
+            "tags": []
+        }
+    ],
+    "comments": [],
+    "users": [
+        {
+            "_id": "632949a97a6aa100db7f11ac",
+            "path": "631f16be1e440400da5663b0/user/632949a97a6aa100db7f11ac",
+            "updatedAt": "2023-01-12T03:48:45.206Z",
+            "createdAt": "2022-09-20T05:03:37.965Z",
+            "description": "",
+            "isDeleted": false,
+            "displayName": "FonAn",
+            "userId": "FonAn",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": "2f7f001fea1e47cfa28907a0894573b0",
+            "isGlobalBan": false
+        }
+    ],
+    "files": [
+        {
+            "fileId": "da5f307c860c4f438e8ae05b674f3385",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/da5f307c860c4f438e8ae05b674f3385/download",
+            "type": "file",
+            "createdAt": "2023-01-13T03:49:57.013Z",
+            "updatedAt": "2023-01-13T03:49:58.747Z",
+            "attributes": {
+                "name": "Screenrecorder-2023-01-12-17-43-51-135.mp4",
+                "extension": "mp4",
+                "size": 16687465,
+                "mimeType": "video/mp4"
+            }
+        },
+        {
+            "fileId": "2f7f001fea1e47cfa28907a0894573b0",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/2f7f001fea1e47cfa28907a0894573b0/download",
+            "type": "image",
+            "createdAt": "2022-11-17T06:56:10.919Z",
+            "updatedAt": "2022-11-17T06:56:11.102Z",
+            "attributes": {
+                "name": "img_cache_1668668163290.jpg",
+                "extension": "jpg",
+                "size": 184053,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 4000,
+                    "width": 3000,
+                    "isFull": false
+                }
+            }
+        }
+    ],
+    "categories": [],
+    "communityUsers": [],
+    "feeds": [],
+    "videoStreamings": [],
+    "polls": []
+}

@@ -1,0 +1,49 @@
+{
+    "accessToken": "eyJhbGciOiJSUzI1NiIsImtpZCI6IkQ4cVQzRHA5dlNvX0w5d2l4YmF1QlFkNHFLbk5neFhqWHJHakhlTGxVaDAifQ.eyJ1c2VyIjp7InVzZXJJZCI6IjYzMjFkMTA5NmRlNDEwMDBkOTUxMTYyMyIsInB1YmxpY1VzZXJJZCI6InZpY3RpbUFuZHJvaWQiLCJuZXR3b3JrSWQiOiI2MzFmMTZiZTFlNDQwNDAwZGE1NjYzYjAiLCJkaXNwbGF5TmFtZSI6IlZpY3RpbSBBbmRyb2lkIiwicmVmcmVzaFRva2VuIjoiMjlhMzI4YjJmZWQxYzMzMzQzNTE5OGVmNmIxMDc1MjJiMGVhZGY0YmIwZTlhNDc0ZWIzM2U2OTMyNTAzYmJkODU2NTllNzE0YjRhODNiZDkifSwic3ViIjoiNjMyMWQxMDk2ZGU0MTAwMGQ5NTExNjIzIiwiaXNzIjoiaHR0cHM6Ly9hcGkuc3RhZ2luZy5hbWl0eS5jbyIsImlhdCI6MTY3MzUyNDk0OSwiZXhwIjoxNjc2MTE2OTQ5fQ.lb7BxKFFdI0n0rqmAVAl7cSwY1QA3LF4TrNfonBdyswl85EeE5ttjs9QqMv-BNeg9sE4VFY_qqbSoPZR4xfLoFezzWi_CZaIJXoEMY2fwM2N1NJgzlZ74XFXa9EMHxSXvTVoDY4G7b4TRvkDVcDNeIZiuSFygxJBEiwmp4UXPvVypN9vUvKXHoIW9rENGGl9ghyF_U678Mlk0vdJujA-VCkzCu20zmzowNOLAoaC3yvp9elNVP6bWmNXUrFQZAywDoP8Ggt5gkYhHzWYzzwf4DPsWxcjOGXOWQlpZmrkrHcuY6bjoHGhlOz9Yk2mvT15pLPn-AkctoS6tBN8yToA6g",
+    "refreshToken": "29a328b2fed1c333435198ef6b107522b0eadf4bb0e9a474eb33e6932503bbd85659e714b4a83bd9",
+    "users": [
+        {
+            "_id": "6321d1096de41000d9511623",
+            "path": "631f16be1e440400da5663b0/user/6321d1096de41000d9511623",
+            "description": "",
+            "createdAt": "2022-09-14T13:03:05.130Z",
+            "updatedAt": "2023-01-12T12:02:28.583Z",
+            "isDeleted": false,
+            "displayName": "Victim Android",
+            "userId": "victimAndroid",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 1,
+            "hashFlag": {
+                "bits": 24,
+                "hashes": 17,
+                "hash": "gP//"
+            },
+            "avatarFileId": "5d814a01ff2d4c22ba40d19b13c59fbb",
+            "isGlobalBan": false
+        }
+    ],
+    "files": [
+        {
+            "fileId": "5d814a01ff2d4c22ba40d19b13c59fbb",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/5d814a01ff2d4c22ba40d19b13c59fbb/download",
+            "type": "image",
+            "createdAt": "2022-12-14T09:40:49.509Z",
+            "updatedAt": "2022-12-14T09:40:49.764Z",
+            "attributes": {
+                "name": "img_cache_1671008972073.jpg",
+                "extension": "jpg",
+                "size": 47331,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 1500,
+                    "width": 3000,
+                    "isFull": false
+                }
+            }
+        }
+    ],
+    "issuedAt": "2023-01-12T12:02:28.592Z",
+    "expiresAt": "2023-02-11T12:02:28.592Z"
+}
