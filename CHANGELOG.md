@@ -1,3 +1,11 @@
+## 0.15.0
+* feat: User mention in channel message
+* feat: Channel mention in channel message
+* feat: Channel message mention helper 
+* feat: Channel member search 
+* feat: isFlaggedByMe check for user
+* fix: handled null check in live stream post
+
 ## 0.14.0
 * feat: Reply to channel message
 * feat: Flag/Unflag channel message
@@ -5,8 +13,10 @@
 * feat: Add/Remove tags on channel message
 * feat: Mute/Unmute channel from client side 
 * fix: Added Amity Object extension method for reporting message and user
+
 ## 0.13.1
 * fix: Resolve issue Amity Message Update Query Builder 
+
 ## 0.13.0
 * feat: Channel Message Query & Filter
 * feat: Channel Message Update

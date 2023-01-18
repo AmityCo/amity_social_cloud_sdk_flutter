@@ -12,10 +12,6 @@ class PostHiveEntityAdapter extends TypeAdapter<PostHiveEntity> {
 
   @override
   PostHiveEntity read(BinaryReader reader) {
-    final numOfFields = reader.readByte();
-    final fields = <int, dynamic>{
-      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
-    };
     return PostHiveEntity();
   }
 

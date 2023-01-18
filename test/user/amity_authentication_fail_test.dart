@@ -34,8 +34,7 @@ void main() {
         .thenThrow(AmityException);
 
     try {
-      final amityUser =
-          await AmityCoreClient.login(userId).displayName(displayName).submit();
+      await AmityCoreClient.login(userId).displayName(displayName).submit();
     } catch (error) {
       expect(error, AmityException);
     }
