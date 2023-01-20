@@ -1,4 +1,9 @@
+import 'dart:async';
 import 'dart:convert';
+
+import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 /// Amity User
 class AmityUser {
@@ -72,5 +77,20 @@ class AmityUser {
   @override
   String toString() {
     return 'AmityUser(id: $id, userId: $userId, roles: $roles, displayName: $displayName, description: $description, avatarFileId: $avatarFileId, avatarUrl: $avatarUrl, avatarCustomUrl: $avatarCustomUrl, flagCount: $flagCount, hashFlag: $hashFlag, metadata: $metadata, isGlobalBan: $isGlobalBan, createdAt: $createdAt, updatedAt: $updatedAt, flaggedByMe: $flaggedByMe)';
+  }
+
+  StreamController<AmityUser> get listen {
+    StreamController<AmityUser> controller = StreamController<AmityUser>();
+
+    serviceLocator<UserDbAdapter>().listenEntity(userId!).listen((event) {
+      final amityUser = event.convertToAmityUser();
+
+      //TOOD: Good idea would be have compose method inside the object itself
+      serviceLocator<UserComposerUsecase>().get(amityUser).then(
+            (value) => controller.add(value),
+          );
+    });
+
+    return controller;
   }
 }

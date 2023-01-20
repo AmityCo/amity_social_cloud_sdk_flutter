@@ -12,9 +12,9 @@ class UserRepository {
 
   /// Search the user by their display name
   AmityUserSearchDisplayNameQueryBuilder searchUserByDisplayName(
-      String keyboard) {
+      String keyword) {
     return AmityUserSearchDisplayNameQueryBuilder(
-        useCase: serviceLocator<GetAllUserUseCase>(), keyword: keyboard);
+        useCase: serviceLocator<GetAllUserUseCase>(), keyword: keyword);
   }
 
   /// get the user with userId
