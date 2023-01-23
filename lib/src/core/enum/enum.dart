@@ -9,6 +9,7 @@ export 'amity_comment_target_type.dart';
 export 'amity_community_category_sort_option.dart';
 export 'amity_community_filter.dart';
 export 'amity_community_membership_filter.dart';
+export 'amity_community_membership_sort_option.dart';
 export 'amity_community_sorting_order.dart';
 export 'amity_data_type.dart';
 export 'amity_feed_type.dart';

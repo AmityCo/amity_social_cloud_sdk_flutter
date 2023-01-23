@@ -21,4 +21,9 @@ class UserDbAdapterImpl extends UserDbAdapter {
   Future saveUserEntity(UserHiveEntity entity) async {
     await box.put(entity.userId, entity);
   }
+
+  @override
+  Stream<UserHiveEntity> listenEntity(String userId) {
+    return box.watch(key: userId).map((event) => event.value);
+  }
 }

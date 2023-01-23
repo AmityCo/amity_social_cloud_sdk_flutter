@@ -9,11 +9,11 @@ enum AmityUserSortOption {
 }
 
 extension AmityUserSortOptionExtension on AmityUserSortOption {
-  String get apiKey {
+  String get value {
     return [
       'displayName',
-      'user.displayName',
-      'user.displayName',
+      'firstCreated',
+      'lastCreated',
     ][index];
   }
 

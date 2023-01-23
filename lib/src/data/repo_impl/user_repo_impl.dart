@@ -1,3 +1,4 @@
+import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/model/api_request/update_user_request.dart';
 import 'package:amity_sdk/src/core/model/api_request/users_request.dart';
 import 'package:amity_sdk/src/data/data.dart';
@@ -24,7 +25,8 @@ class UserRepoImpl extends UserRepo {
   }
 
   @override
-  Future<List<AmityUser>> getUsers(UsersRequest request) async {
+  Future<PageListData<List<AmityUser>, String>> getUsers(
+      UsersRequest request) async {
     final data = await userApiInterface.getUsers(request);
 
     final userHiveEntities =
@@ -36,7 +38,7 @@ class UserRepoImpl extends UserRepo {
 
     final amityUsers =
         userHiveEntities.map((e) => e.convertToAmityUser()).toList();
-    return amityUsers;
+    return PageListData(amityUsers, data.paging!.next ?? '');
   }
 
   @override

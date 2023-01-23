@@ -33,7 +33,7 @@ class UsersRequest {
 
   Map<String, dynamic> toJson() {
     Map<String, dynamic> data = {};
-    if (keyword != null) data['keyboard'] = keyword;
+    if (keyword != null) data['keyword'] = keyword;
     if (filter != null) data['filter'] = filter;
     if (sortBy != null) data['sortBy'] = sortBy;
     if (options != null) data['options'] = options!.toJson();

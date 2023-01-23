@@ -21,15 +21,37 @@ class AmityAllUserQueryBuilder {
   }
 
   /// Query User
-  Future<List<AmityUser>> query() {
+  Future<List<AmityUser>> query() async {
     UsersRequest usersRequest = UsersRequest();
 
     usersRequest.keyword = _keywoard;
 
-    usersRequest.sortBy = _amityUserSortOption.apiKey;
+    usersRequest.sortBy = _amityUserSortOption.value;
     usersRequest.filter = 'all';
 
     // usersRequest.options = Options(limit: 10, token: null);
+
+    final amityUsers = await _useCase.get(usersRequest);
+
+    return amityUsers.data;
+  }
+
+  Future<PageListData<List<AmityUser>, String>> getPagingData(
+      {String? token, int? limit}) async {
+    UsersRequest usersRequest = UsersRequest();
+
+    usersRequest.keyword = _keywoard;
+
+    usersRequest.sortBy = _amityUserSortOption.value;
+    usersRequest.filter = 'all';
+
+    usersRequest.options = OptionsRequest();
+    if (token != null) {
+      usersRequest.options!.token = token;
+    }
+    if (limit != null) {
+      usersRequest.options!.limit = limit;
+    }
 
     return _useCase.get(usersRequest);
   }
