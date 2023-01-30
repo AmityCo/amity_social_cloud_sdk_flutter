@@ -72,12 +72,13 @@ jobs:
         
       - name: Generate and Comment coverage report
         if: ${{ always() }}
-        uses: romeovs/lcov-reporter-action@v0.2.16
+        uses: andybelltree/lcov-reporter-action@v1.0.0
         with:
           lcov-file: ./coverage/lcov_head.info
           lcov-base: ./coverage/lcov.info
           delete-old-comments: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
+          filter-changed-files: true
         
      
       
