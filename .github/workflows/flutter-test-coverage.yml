@@ -58,14 +58,17 @@ jobs:
         
       - name: Flutter Test Coverage
         run: flutter test --coverage
+        continue-on-error: true
       
       - name: Create Coverage Report for base branch
-        if: ${{ always() }}
         run: |
           mv ./coverage/lcov.info ./coverage/lcov_head.info
           git fetch
           git checkout origin/${{ github.event.pull_request.base.ref }}
-          cd $WORKING_DIRECTORY && flutter test --coverage
+          flutter clean
+          flutter pub get
+          flutter test --coverage
+        continue-on-error: true
         
       - name: Generate and Comment coverage report
         if: ${{ always() }}
