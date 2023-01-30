@@ -55,6 +55,19 @@ jobs:
       
       - name: Dart Analyze
         uses: zgosalvez/github-actions-analyze-dart@v1
+      
+      - name: Flutter test
+        run: |
+          flutter pub global activate junitreport
+          flutter test --machine | tojunit --output report.xml
+        continue-on-error: true
+          
+      - name: Publish Test Report
+        id: publishJunitReport
+        uses: mikepenz/action-junit-report@v3
+        # if: always() 
+        with:
+          report_paths: ./report.xml
         
       - name: Flutter Test Coverage
         run: flutter test --coverage
@@ -71,7 +84,7 @@ jobs:
         continue-on-error: true
         
       - name: Generate and Comment coverage report
-        if: ${{ always() }}
+        if: always()
         uses: andybelltree/lcov-reporter-action@v1.0.0
         with:
           lcov-file: ./coverage/lcov_head.info
@@ -79,6 +92,17 @@ jobs:
           delete-old-comments: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           filter-changed-files: true
+          
+      - name: Publish test repo to PR Comment 
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: Flutter Test Result
+          message: |
+            Total ${{steps.publishJunitReport.outputs.total }} \n
+            Passed ${{steps.publishJunitReport.outputs.passed }} \n
+            Skipped ${{steps.publishJunitReport.outputs.skipped }} \n
+            Failed ${{steps.publishJunitReport.outputs.failed }} \n
+            
         
      
       
