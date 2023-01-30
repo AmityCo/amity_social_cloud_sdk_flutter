@@ -62,7 +62,7 @@ jobs:
       - name: Create Coverage Report for base branch
         if: ${{ always() }}
         run: |
-          mv $WORKING_DIRECTORY/coverage/lcov.info $WORKING_DIRECTORY/coverage/lcov_head.info
+          mv ./coverage/lcov.info ./coverage/lcov_head.info
           git fetch
           git checkout origin/${{ github.event.pull_request.base.ref }}
           cd $WORKING_DIRECTORY && flutter test --coverage
@@ -71,8 +71,8 @@ jobs:
         if: ${{ always() }}
         uses: romeovs/lcov-reporter-action@v0.2.16
         with:
-          lcov-file: "${{ env.WORKING_DIRECTORY }}/coverage/lcov_head.info"
-          lcov-base: "${{ env.WORKING_DIRECTORY }}/coverage/lcov.info" 
+          lcov-file: ./coverage/lcov_head.info
+          lcov-base: ./coverage/lcov.info
           delete-old-comments: true
         
      
