@@ -19,10 +19,12 @@ on:
       - "release-**"
 
 jobs:
-  setup_env:
+  test:
     runs-on: macos-latest
 
     steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
       # Note: This workflow uses the latest stable version of the Dart SDK.
       # You can specify other versions if desired, see documentation here:
       # https://github.com/dart-lang/setup-dart/blob/main/README.md
@@ -41,15 +43,6 @@ jobs:
           
       - name: Flutter version
         run: flutter --version
-        
-        
-  setup_code:
-    runs-on: macos-latest
-    needs: setup_env
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
       
       - name: Flutter Clean
         run: flutter clean
@@ -65,4 +58,8 @@ jobs:
         
       - name: generate and comment coverage report
         uses: romeovs/lcov-reporter-action@v0.2.16
+        
+     
+      
+      
       
