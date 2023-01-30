@@ -56,7 +56,7 @@ jobs:
       - name: Flutter Test Coverage
         run: flutter test --coverage
         
-      - name: generate and comment coverage report
+      - name: Generate and Comment coverage report
         uses: romeovs/lcov-reporter-action@v0.2.16
         with:
           lcov-file: ./coverage/lcov.info 
