@@ -8,7 +8,7 @@ class HiveInit {
   static Future main(String path) async {
     /// Setup mock channel call for path provider or mac OS
     const channel = MethodChannel(
-      'plugins.flutter.io/path_provider_macos',
+      'plugins.flutter.io/path_provider',
     );
     channel.setMockMethodCallHandler((MethodCall methodCall) async {
       switch (methodCall.method) {
