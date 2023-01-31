@@ -125,7 +125,7 @@ jobs:
         run: |
           echo "MESSAGE=${{ format('{0}\n\n{1}', 
               steps.pull_body_message.outputs.MESSAGE,
-              steps.string_test_report.outputs.MESSAGE,
+              steps.string_test_report.outputs.MESSAGE
             ) }}" >> $GITHUB_OUTPUT
        
           
