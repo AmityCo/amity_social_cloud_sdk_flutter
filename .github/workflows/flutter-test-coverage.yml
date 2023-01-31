@@ -62,8 +62,8 @@ jobs:
           flutter test --machine | tojunit --output report.xml
         continue-on-error: true
           
-      - name: Publish Test Report
-        id: publishJunitReport
+      - name: Create Test Report
+        id: createJunitReport
         uses: mikepenz/action-junit-report@v3
         # if: always() 
         with:
@@ -92,16 +92,33 @@ jobs:
           delete-old-comments: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
           filter-changed-files: true
+      
+      - name: Generate String test report
+        id: generatTestReport
+        run: |
+          echo "MESSAGE=${
+               Total ${{steps.createJunitReport.outputs.total }}
+               Passed ${{steps.createJunitReport.outputs.passed }} 
+               Skipped ${{steps.createJunitReport.outputs.skipped }} 
+               Failed ${{steps.createJunitReport.outputs.failed }}
+               }" >> $GITHUB_OUTPUT
           
       - name: Publish test repo to PR Comment 
+        id: testToPrComment
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: Flutter Test Result
-          message: |
-            Total ${{steps.publishJunitReport.outputs.total }} \n
-            Passed ${{steps.publishJunitReport.outputs.passed }} \n
-            Skipped ${{steps.publishJunitReport.outputs.skipped }} \n
-            Failed ${{steps.publishJunitReport.outputs.failed }} \n
+          message: ${{steps.generatTestReport.outputs.total }}
+        
+      - name: Send Message to Eko Chat
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.BOT_EKO_CHAT_MESSAGING_URL }}
+          method: 'POST'
+          bearerToken: ${{ secrets.BOT_AUTH_TOKEN }}
+          customHeaders: '{"Content-Type": "application/json"}'
+          data: '{"gid": "${{ secrets.BOT_GROUP_ID }}", "tid": "${{ secrets.BOT_CHAT_ID }}","message": {"data": "${{ steps.generatTestReport.outputs.MESSAGE }}", "type": "text"}}'
+
             
         
      
