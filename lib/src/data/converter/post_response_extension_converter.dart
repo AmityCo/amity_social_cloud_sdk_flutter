@@ -32,7 +32,8 @@ extension PostResponseExtension on PostResponse {
       ..createdAt = createdAt
       ..updatedAt = updatedAt
       ..editedAt = editedAt
-      ..metadata = metadata;
+      ..metadata = metadata
+      ..mentionees = mentionees;
   }
 }
 

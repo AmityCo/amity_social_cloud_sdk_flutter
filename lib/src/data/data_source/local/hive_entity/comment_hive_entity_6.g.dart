@@ -12,6 +12,10 @@ class CommentHiveEntityAdapter extends TypeAdapter<CommentHiveEntity> {
 
   @override
   CommentHiveEntity read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
     return CommentHiveEntity();
   }
 

@@ -29,6 +29,13 @@ class CommentComposerUsecase extends UseCase<AmityComment, AmityComment> {
     //Compose the user
     params.user = await userRepo.getUserByIdFromDb(params.userId!);
     params.user = await userComposerUsecase.get(params.user!);
+
+    ///Compose Mention
+    for (AmityMentionee mention in (params.mentionees ?? [])) {
+      mention.user = await userRepo.getUserByIdFromDb(mention.userId);
+      mention.user = await userComposerUsecase.get(mention.user!);
+    }
+
     return params;
   }
 }
