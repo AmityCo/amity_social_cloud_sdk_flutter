@@ -113,7 +113,7 @@ jobs:
       - name: Generate String test report
         id: string_test_report
         run: |
-          echo "MESSAGE=${{ format('Total=>{0}\nPassed=>{1}\nFailed=>{2}\nSkipped=>{3}', 
+          echo "MESSAGE=${{ format('Test Report\n🧑🏻‍💻Total=>{0}\t🕺🏻Passed=>{1}\t🤦🏻‍♂️Failed=>{2}\t🤷🏻‍♂️Skipped=>{3}', 
               steps.createJunitReport.outputs.total,
               steps.createJunitReport.outputs.passed,
               steps.createJunitReport.outputs.failed,
