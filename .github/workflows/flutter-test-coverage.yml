@@ -55,6 +55,10 @@ jobs:
       
       - name: Dart Analyze
         uses: zgosalvez/github-actions-analyze-dart@v1
+        
+      - name: Github Event logging
+        run: |
+          echo "${{toJSON(github.event)}}"
       
       - name: Flutter test
         run: |
@@ -93,8 +97,21 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           filter-changed-files: true
       
+      - name: Compose Message Body for Pull Request Event
+        # if: ${{ github.event_name == 'pull_request' }}
+        id: pull_body_message
+        run: |
+          echo "MESSAGE=${{ format('🥇 PR - #{0} {1} \n👉 Link - {2}\n🥇 Branch - into {3} from {4}\n', 
+              github.event.pull_request.number,
+              github.event.pull_request.title,
+              github.event.pull_request._links.html.href,
+              github.base_ref,
+              github.head_ref
+            ) }}" >> $GITHUB_OUTPUT
+        
+      
       - name: Generate String test report
-        id: generatTestReport
+        id: string_test_report
         run: |
           echo "MESSAGE=${{ format('Total=>{0}\nPassed=>{1}\nFailed=>{2}\nSkipped=>{3}', 
               steps.createJunitReport.outputs.total,
@@ -102,14 +119,25 @@ jobs:
               steps.createJunitReport.outputs.failed,
               steps.createJunitReport.outputs.skipped
             ) }}" >> $GITHUB_OUTPUT
-  
+    
+      - name: Compose Full Report Message to Send
+        id: compose_full_report
+        run: |
+          echo "MESSAGE=${{ format('{0}\n\n{1}', 
+              steps.pull_body_message.outputs.MESSAGE,
+              steps.string_test_report.outputs.MESSAGE,
+            ) }}" >> $GITHUB_OUTPUT
+       
           
       - name: Publish test repo to PR Comment 
         id: testToPrComment
         uses: marocchino/sticky-pull-request-comment@v2
         with:
           header: Flutter Test Result
-          message: ${{steps.generatTestReport.outputs.total }}
+          message: ${{steps.compose_full_report.outputs.MESSAGE }}
+        continue-on-error: true
+      
+      
         
       - name: Send Message to Eko Chat
         uses: fjogeleit/http-request-action@v1
@@ -118,7 +146,7 @@ jobs:
           method: 'POST'
           bearerToken: ${{ secrets.BOT_AUTH_TOKEN }}
           customHeaders: '{"Content-Type": "application/json"}'
-          data: '{"gid": "${{ secrets.BOT_GROUP_ID }}", "tid": "${{ secrets.BOT_CHAT_ID }}","message": {"data": "${{ steps.generatTestReport.outputs.MESSAGE }}", "type": "text"}}'
+          data: '{"gid": "${{ secrets.BOT_GROUP_ID }}", "tid": "${{ secrets.BOT_CHAT_ID }}","message": {"data": "${{ steps.compose_full_report.outputs.MESSAGE }}", "type": "text"}}'
 
             
         
