@@ -96,12 +96,13 @@ jobs:
       - name: Generate String test report
         id: generatTestReport
         run: |
-          echo "MESSAGE=${
-               Total ${{steps.createJunitReport.outputs.total }}
-               Passed ${{steps.createJunitReport.outputs.passed }} 
-               Skipped ${{steps.createJunitReport.outputs.skipped }} 
-               Failed ${{steps.createJunitReport.outputs.failed }}
-               }" >> $GITHUB_OUTPUT
+          echo "MESSAGE=${{ format('Total=>{0}\nPassed=>{1}\nFailed=>{2}\nSkipped=>{3}', 
+              steps.createJunitReport.outputs.total,
+              steps.createJunitReport.outputs.passed,
+              steps.createJunitReport.outputs.failed,
+              steps.createJunitReport.outputs.skipped
+            ) }}" >> $GITHUB_OUTPUT
+  
           
       - name: Publish test repo to PR Comment 
         id: testToPrComment
