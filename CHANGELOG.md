@@ -1,3 +1,9 @@
+## 0.16.0
+* feat: Global user search
+* feat: Comunity User Search
+* feat: Global user search sorting
+* fix: Added amityuser avatar file in compose usecase
+
 ## 0.15.0
 * feat: User mention in channel message
 * feat: Channel mention in channel message

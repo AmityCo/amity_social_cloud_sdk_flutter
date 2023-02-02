@@ -18,7 +18,7 @@ class RegisterDeviceNotificationUseCase extends UseCase<void, String> {
     final currentUser = AmityCoreClient.getCurrentUser();
     final account = accountRepo.getAccount(currentUser.userId!);
     if (account?.userId == null || account?.deviceId == null) {
-      throw NullThrownError();
+      throw TypeError();
     }
     var platform = "";
     if (Platform.isAndroid) {
@@ -26,7 +26,7 @@ class RegisterDeviceNotificationUseCase extends UseCase<void, String> {
     } else if (Platform.isIOS) {
       platform = "android";
     } else {
-      throw NullThrownError();
+      throw TypeError();
     }
     final RegisterNotificationRequest request = RegisterNotificationRequest(
         userId: account!.userId!,
