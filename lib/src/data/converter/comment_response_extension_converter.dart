@@ -26,6 +26,7 @@ extension CommentResponseExtension on CommentResponse {
       ..children = children
       ..segmentNumber = segmentNumber
       ..metadata = metadata
-      ..required = required;
+      ..required = required
+      ..mentionees = mentionees;
   }
 }

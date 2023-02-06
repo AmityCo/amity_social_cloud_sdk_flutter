@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:amity_sdk/src/domain/domain.dart';
+
 CreateCommentRequest createCommentRequestFromJson(String str) =>
     CreateCommentRequest.fromJson(json.decode(str));
 
@@ -18,6 +20,7 @@ class CreateCommentRequest {
     this.metadata,
     this.commentId,
     this.parentId,
+    this.mentionees,
   });
 
   final String referenceId;
@@ -26,6 +29,9 @@ class CreateCommentRequest {
   Map<String, dynamic>? metadata;
   String? commentId;
   String? parentId;
+
+  /// Mentionees
+  List<AmityMentioneeTarget>? mentionees;
 
   factory CreateCommentRequest.fromJson(Map<String, dynamic> json) =>
       CreateCommentRequest(
@@ -44,7 +50,10 @@ class CreateCommentRequest {
         "metadata": metadata,
         "commentId": commentId,
         "parentId": parentId,
-      };
+        "mentionees": mentionees == null
+            ? null
+            : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
+      }..removeWhere((key, value) => value == null);
 
   @override
   String toString() =>

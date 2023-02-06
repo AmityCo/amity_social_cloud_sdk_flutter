@@ -1,5 +1,4 @@
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/post_data_hive_entity_7.dart';
 import 'package:hive/hive.dart';
 
 part 'comment_hive_entity_6.g.dart';
@@ -83,6 +82,10 @@ class CommentHiveEntity extends HiveObject {
 
   ///
   bool? flaggedByMe;
+
+  /// Mentions
+  List<Mentionee>? mentionees;
+
   CommentHiveEntity({
     this.id,
     this.path,
@@ -109,6 +112,7 @@ class CommentHiveEntity extends HiveObject {
     this.segmentNumber,
     this.required,
     this.flaggedByMe,
+    this.mentionees,
   });
 
   CommentHiveEntity copyWith({
@@ -137,6 +141,7 @@ class CommentHiveEntity extends HiveObject {
     int? segmentNumber,
     String? required,
     bool? flaggedByMe,
+    List<Mentionee>? mentionees,
   }) {
     return CommentHiveEntity(
       id: id ?? this.id,
@@ -164,6 +169,7 @@ class CommentHiveEntity extends HiveObject {
       segmentNumber: segmentNumber ?? this.segmentNumber,
       required: required ?? this.required,
       flaggedByMe: flaggedByMe ?? this.flaggedByMe,
+      mentionees: mentionees ?? this.mentionees,
     );
   }
 }
