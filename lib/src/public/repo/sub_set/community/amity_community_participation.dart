@@ -15,6 +15,12 @@ class AmityCommunityParticipation {
         usecase: serviceLocator(), communityId: _communityId);
   }
 
+  /// Search Community Member
+  AmityCommunityMemberSearch searchMembers(String keyword) {
+    return AmityCommunityMemberSearch(
+        usecase: serviceLocator(), communityId: _communityId, keyword: keyword);
+  }
+
   /// Add Member to community
   Future addMembers(List<String> userIds) {
     final request = UpdateCommunityMembersRequest(
