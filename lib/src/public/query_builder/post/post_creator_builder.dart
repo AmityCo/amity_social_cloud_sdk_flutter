@@ -222,6 +222,13 @@ abstract class PostCreator {
     return this;
   }
 
+  PostCreator mentionUsers(List<String> userIds) {
+    _mentionees ??= [];
+    _mentionees!.add(AmityMentioneeTarget(
+        type: AmityMentionType.USER.value, userIds: userIds));
+    return this;
+  }
+
   /// Add metadata to Amity Post
   PostCreator metadata(Map<String, dynamic> metadata) {
     _metadata = metadata;
@@ -245,6 +252,10 @@ abstract class PostCreator {
         request.dataType = 'poll';
       }
       request.data = data;
+    }
+
+    if (_mentionees != null) {
+      request.mentionees = _mentionees;
     }
 
     if (_metadata != null) {

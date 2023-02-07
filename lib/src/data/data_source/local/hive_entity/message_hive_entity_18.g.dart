@@ -12,6 +12,10 @@ class MessageHiveEntityAdapter extends TypeAdapter<MessageHiveEntity> {
 
   @override
   MessageHiveEntity read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
     return MessageHiveEntity();
   }
 

@@ -80,6 +80,12 @@ class PostComposerUsecase extends UseCase<AmityPost, AmityPost> {
     params.postedUser = await userRepo.getUserByIdFromDb(params.postedUserId!);
     params.postedUser = await userComposerUsecase.get(params.postedUser!);
 
+    ///Compose Mention
+    for (AmityMentionee mention in (params.mentionees ?? [])) {
+      mention.user = await userRepo.getUserByIdFromDb(mention.userId);
+      mention.user = await userComposerUsecase.get(mention.user!);
+    }
+
     return params;
   }
 }

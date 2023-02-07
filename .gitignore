@@ -158,3 +158,4 @@ pubspec.lock
 
 /macos/
 .dart_tool/package_config.json
+coverage/lcov.info

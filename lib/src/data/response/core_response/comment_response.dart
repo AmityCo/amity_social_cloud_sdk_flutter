@@ -26,6 +26,7 @@ class CommentResponse {
     required this.children,
     required this.segmentNumber,
     required this.required,
+    required this.mentionees,
   });
   final String id;
   final String path;
@@ -52,6 +53,9 @@ class CommentResponse {
   final int segmentNumber;
   final String? required;
 
+  /// Mentions
+  final List<Mentionee> mentionees;
+
   factory CommentResponse.fromJson(Map<String, dynamic> json) =>
       CommentResponse(
         id: json["_id"],
@@ -76,8 +80,9 @@ class CommentResponse {
             ? null
             : List<String>.from(json["myReactions"]!.map((x) => x)),
         isDeleted: json["isDeleted"],
-        editedAt:
-            json["editedAt"] == null ? null : DateTime.tryParse(json["editedAt"]),
+        editedAt: json["editedAt"] == null
+            ? null
+            : DateTime.tryParse(json["editedAt"]),
         createdAt: json["createdAt"] == null
             ? null
             : DateTime.tryParse(json["createdAt"]),
@@ -88,6 +93,8 @@ class CommentResponse {
         segmentNumber: json["segmentNumber"],
         metadata: json["metadata"],
         required: json["required"],
+        mentionees: List<Mentionee>.from(
+            json["mentionees"].map((x) => Mentionee.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -118,5 +125,6 @@ class CommentResponse {
         "segmentNumber": segmentNumber,
         "metadata": metadata,
         "required": required,
+        "mentionees": List<dynamic>.from(mentionees.map((x) => x.toJson())),
       };
 }
