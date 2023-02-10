@@ -1,0 +1,26 @@
+{
+    "users": [
+        {
+            "_id": "6321d1096de41000d9511623",
+            "path": "631f16be1e440400da5663b0/user/6321d1096de41000d9511623",
+            "updatedAt": "2023-02-09T07:07:08.702Z",
+            "createdAt": "2022-09-14T13:03:05.130Z",
+            "description": "",
+            "isDeleted": false,
+            "displayName": "Updated Victim Android",
+            "userId": "victimAndroid",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 1,
+            "hashFlag": {
+                "bits": 24,
+                "hashes": 17,
+                "hash": "gP//"
+            },
+            "avatarFileId": null,
+            "isGlobalBan": false
+        }
+    ],
+    "files": []
+}

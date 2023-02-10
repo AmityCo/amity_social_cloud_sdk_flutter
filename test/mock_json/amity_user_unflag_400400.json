@@ -1,0 +1,8 @@
+{
+    "status": "error",
+    "message": "UserId awika kk!@ not found",
+    "code": 400400,
+    "data": {
+        "detail": null
+    }
+}

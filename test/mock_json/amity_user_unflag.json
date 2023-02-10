@@ -1,0 +1,25 @@
+{
+    "users": [
+        {
+            "_id": "63c125f7d7a6c9193cdaed47",
+            "path": "631f16be1e440400da5663b0/user/63c125f7d7a6c9193cdaed47",
+            "createdAt": "2023-01-13T09:35:51.520Z",
+            "updatedAt": "2023-02-09T07:10:16.116Z",
+            "isDeleted": false,
+            "displayName": "awika kk",
+            "userId": "awika kk",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 1,
+            "hashFlag": {
+                "bits": 24,
+                "hashes": 17,
+                "hash": "BEEQ"
+            },
+            "avatarFileId": null,
+            "isGlobalBan": false
+        }
+    ],
+    "files": []
+}
