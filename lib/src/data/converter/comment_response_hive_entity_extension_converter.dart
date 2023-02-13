@@ -1,5 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/comment_hive_entity_6.dart';
+import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/model/model.dart';
 
 /// CommentHiveEntityExtension
@@ -42,6 +42,17 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
         // TODO: Handle this case.
         break;
     }
+    List<AmityMentionee>? mentionees;
+
+    if (this.mentionees != null) {
+      for (Mentionee mentionee in this.mentionees!) {
+        if (mentionee.type == 'user') {
+          mentionees =
+              mentionee.userIds!.map((e) => AmityMentionee(userId: e)).toList();
+        }
+      }
+    }
+
     return AmityComment(commentId: commentId)
       ..referenceType = amityCommentReferenceType
       ..referenceId = referenceId
@@ -62,6 +73,7 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
       ..updatedAt = updatedAt
       ..path = path
       ..metadata = metadata
-      ..flaggedByMe = flaggedByMe;
+      ..flaggedByMe = flaggedByMe
+      ..mentionees = mentionees;
   }
 }

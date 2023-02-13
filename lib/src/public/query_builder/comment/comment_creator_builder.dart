@@ -98,6 +98,19 @@ class AmityTextCommentCreator {
     _text = text;
   }
 
+  AmityTextCommentCreator mentionUsers(List<String> userIds) {
+    _mentionees ??= [];
+    _mentionees!.add(AmityMentioneeTarget(
+        type: AmityMentionType.USER.value, userIds: userIds));
+    return this;
+  }
+
+  /// Add metadata to Amity Post
+  AmityTextCommentCreator metadata(Map<String, dynamic> metadata) {
+    _metadata = metadata;
+    return this;
+  }
+
   Future<AmityComment> send() {
     CreateCommentRequest request = CreateCommentRequest(
         referenceType: _referenceType, referenceId: _referenceId);
@@ -110,6 +123,14 @@ class AmityTextCommentCreator {
     if (_parentId != null) {
       request.parentId = _parentId;
       // request.commentId = _parentId;
+    }
+
+    if (_mentionees != null) {
+      request.mentionees = _mentionees;
+    }
+
+    if (_metadata != null) {
+      request.metadata = _metadata;
     }
 
     return _useCase.get(request);
