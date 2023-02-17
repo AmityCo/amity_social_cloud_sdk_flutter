@@ -13,9 +13,6 @@ class MockUserApiInterface extends Mock implements UserApiInterface {}
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  String userId = 'victimAndroid';
-  String displayName = 'Victim Android';
-
   final userApiInterface = MockUserApiInterface();
 
   setUpAll(() async {

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/response/core_response/post_data_response.dart';
 
 /// Post Response from BR
 class PostResponse {
