@@ -24,8 +24,8 @@ class CommunityMemberQueryBuilder {
   }
 
   /// Apply Filter
-  CommunityMemberQueryBuilder sortBy(AmityMembershipSortOption order) {
-    _request.sortBy = order.value;
+  CommunityMemberQueryBuilder sortBy(AmityCommunityMembershipSortOption order) {
+    _request.sortBy = order.apiKey;
     return this;
   }
 

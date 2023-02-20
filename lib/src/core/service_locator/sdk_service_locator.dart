@@ -18,6 +18,7 @@ class SdkServiceLocator {
   ///Dependency injection
   static Future<void> initServiceLocator({bool syc = false}) async {
     DateTime startTime = DateTime.now();
+    serviceLocator.allowReassignment = true;
 
     ///----------------------------------- Core Layer -----------------------------------///
 
@@ -282,6 +283,11 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<GetUserByIdUseCase>(() =>
         GetUserByIdUseCase(
             userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<UserFlagUsecase>(() => UserFlagUsecase(
+        userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<UserUnflagUsecase>(() =>
+        UserUnflagUsecase(
+            userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<UserGlobalPermissionCheckUsecase>(
         () => UserGlobalPermissionCheckUsecase(userRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<AcceptFollowUsecase>(
@@ -531,7 +537,7 @@ class SdkServiceLocator {
             userRepo: serviceLocator(),
             messageRepo: serviceLocator(),
             userComposerUsecase: serviceLocator(),
-            messageComposerUsecase: serviceLocator()));
+            messageFileComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<MessageFileComposerUsecase>(
         () => MessageFileComposerUsecase(fileRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<MessageQueryUseCase>(() =>
@@ -560,6 +566,10 @@ class SdkServiceLocator {
         MessageGetUseCase(
             messageRepo: serviceLocator(),
             messageComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageFlagUsecase>(
+        () => MessageFlagUsecase(messageRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<MessageUnflagUsecase>(
+        () => MessageUnflagUsecase(messageRepo: serviceLocator()));
 
     serviceLocator.registerLazySingleton<MessageObserveUsecase>(() =>
         MessageObserveUsecase(
@@ -604,6 +614,10 @@ class SdkServiceLocator {
 
     serviceLocator.registerLazySingleton<ChannelMemberQueryUsecase>(() =>
         ChannelMemberQueryUsecase(
+            channelMemberRepo: serviceLocator(),
+            channelMemberComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<ChannelMemberSearchUsecase>(() =>
+        ChannelMemberSearchUsecase(
             channelMemberRepo: serviceLocator(),
             channelMemberComposerUsecase: serviceLocator()));
 
@@ -654,9 +668,8 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => CommunityRepository());
     serviceLocator.registerLazySingleton(() => PollRepository());
     serviceLocator.registerLazySingleton(() => MessageRepository());
-    serviceLocator.registerLazySingleton(() => ChannelRepository());
-    serviceLocator
-        .registerLazySingleton(() => ChannelParticipationRepository());
+    serviceLocator.registerLazySingleton(() => AmityChannelRepository());
+    serviceLocator.registerLazySingleton(() => AmityChannelParticipation());
     serviceLocator.registerLazySingleton(() => ChannelModerationRepository());
 
     //MQTT Client

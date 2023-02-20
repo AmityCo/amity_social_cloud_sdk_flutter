@@ -4,6 +4,7 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
+import 'package:amity_sdk/src/public/query_builder/message/message_flag_query_builder.dart';
 
 /// Amity Message Extension
 extension AmityMessageExtension on AmityMessage {
@@ -31,6 +32,33 @@ extension AmityMessageExtension on AmityMessage {
 
   Future delete() {
     return serviceLocator<MessageDeleteUsecase>().get(messageId!);
+  }
+
+  Future<AmityMessage> flag() {
+    return MessageFlagQueryBuilder(
+            messageFlagUsecase: serviceLocator(),
+            messageUnflagUsecase: serviceLocator(),
+            messageId: messageId!)
+        .flag();
+  }
+
+  Future<AmityMessage> unflag() {
+    return MessageFlagQueryBuilder(
+            messageFlagUsecase: serviceLocator(),
+            messageUnflagUsecase: serviceLocator(),
+            messageId: messageId!)
+        .unflag();
+  }
+
+  /// check if message is flagged by me
+  bool get isFlaggedByMe {
+    if (hashFlag == null) return false;
+    return (flaggedByMe ?? false) ||
+        BloomFilter(
+                hash: (hashFlag!['hash'] as String),
+                m: hashFlag!['bits'] as int,
+                k: hashFlag!['hashes'] as int)
+            .mightContains(AmityCoreClient.getUserId());
   }
 
   /// Listen Mesage Id

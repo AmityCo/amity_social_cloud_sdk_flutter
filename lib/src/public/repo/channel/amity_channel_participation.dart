@@ -2,13 +2,13 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 
-/// [ChannelParticipationRepository]
-class ChannelParticipationRepository {
+/// [AmityChannelParticipation]
+class AmityChannelParticipation {
   /// Channel ID
   late String _channelId;
 
   /// Get member for the channel Id
-  ChannelParticipationRepository channelId(String id) {
+  AmityChannelParticipation channelId(String id) {
     _channelId = id;
     return this;
   }
@@ -23,6 +23,12 @@ class ChannelParticipationRepository {
   /// Get member for the channel Id
   GetChannelMemberQueryBuilder getMembers() {
     return GetChannelMemberQueryBuilder(serviceLocator(), _channelId);
+  }
+
+  /// Search Member using keyword
+  AmityChannelMemberSearch searchMembers(String keyword) {
+    return AmityChannelMemberSearch(serviceLocator(), _channelId)
+      ..keyword(keyword);
   }
 
   // fun searchMembers(keyword: String): AmityChannelMemberSearch.Builder {

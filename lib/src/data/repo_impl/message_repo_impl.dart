@@ -187,4 +187,36 @@ class MessageRepoImpl extends MessageRepo {
     final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
     return (amitMessages as List).first;
   }
+
+  @override
+  Future<AmityMessage> flagMessage(String messageId) async {
+    final data = await messageApiInterface.flagMessage(messageId);
+    final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
+
+    final amityMessage =
+        dbAdapterRepo.messageDbAdapter.getMessageEntity(messageId);
+
+    if (amityMessage != null) {
+      amityMessage.flaggedByMe = true;
+      amityMessage.save();
+    }
+
+    return (amitMessages as List).first;
+  }
+
+  @override
+  Future<AmityMessage> unFlagMessage(String messageId) async {
+    final data = await messageApiInterface.unFlagMessage(messageId);
+    final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
+
+    final amityMessage =
+        dbAdapterRepo.messageDbAdapter.getMessageEntity(messageId);
+
+    if (amityMessage != null) {
+      amityMessage.flaggedByMe = false;
+      amityMessage.save();
+    }
+
+    return (amitMessages as List).first;
+  }
 }

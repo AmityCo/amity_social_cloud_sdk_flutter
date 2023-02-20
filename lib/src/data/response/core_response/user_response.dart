@@ -1,3 +1,5 @@
+import 'package:amity_sdk/src/data/data.dart';
+
 /// User model SDK receive from the BE
 class UserResponse {
   /// Init the user response model
@@ -11,7 +13,7 @@ class UserResponse {
     this.avatarFileId,
     this.avatarCustomUrl,
     this.flagCount,
-    // this.hashFlag,
+    this.hashFlag,
     this.metadata,
     this.isGlobalBan,
     this.createdAt,
@@ -44,7 +46,9 @@ class UserResponse {
 
   /// User Flag Count
   final int? flagCount;
-  // final HashFlag hashFlag;
+
+  final HashFlag? hashFlag;
+
   /// User profile metadata
   final Map<String, dynamic>? metadata;
 
@@ -68,15 +72,17 @@ class UserResponse {
         avatarFileId: json["avatarFileId"],
         avatarCustomUrl: json["avatarCustomUrl"],
         flagCount: json["flagCount"],
-        // hashFlag: HashFlag.fromJson(json["hashFlag"]),
+        hashFlag: json["hashFlag"] == null
+            ? null
+            : HashFlag.fromJson(json["hashFlag"]),
         metadata: json["metadata"],
         isGlobalBan: json["isGlobalBan"],
         createdAt: json["createdAt"] == null
             ? null
-            : DateTime.parse(json["createdAt"]),
+            : DateTime.tryParse(json["createdAt"]),
         updatedAt: json["updatedAt"] == null
             ? null
-            : DateTime.parse(json["updatedAt"]),
+            : DateTime.tryParse(json["updatedAt"]),
       );
 
   /// Covnert the User model to map
@@ -93,7 +99,7 @@ class UserResponse {
         "avatarFileId": avatarFileId,
         "avatarCustomUrl": avatarCustomUrl,
         "flagCount": flagCount,
-        // "hashFlag": hashFlag.toJson(),
+        "hashFlag": hashFlag?.toJson(),
         "metadata": metadata,
         "isGlobalBan": isGlobalBan,
         "createdAt": createdAt?.toIso8601String(),

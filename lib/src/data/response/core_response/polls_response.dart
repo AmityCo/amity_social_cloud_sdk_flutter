@@ -60,14 +60,15 @@ class PollResponse {
         answers: List<PollAnswer>.from(
             json["answers"].map((x) => PollAnswer.fromJson(x))),
         answerType: json["answerType"],
-        closedAt:
-            json["closedAt"] == null ? null : DateTime.parse(json["closedAt"]),
+        closedAt: json["closedAt"] == null
+            ? null
+            : DateTime.tryParse(json["closedAt"]),
         createdAt: json["createdAt"] == null
             ? null
-            : DateTime.parse(json["createdAt"]),
+            : DateTime.tryParse(json["createdAt"]),
         updatedAt: json["updatedAt"] == null
             ? null
-            : DateTime.parse(json["updatedAt"]),
+            : DateTime.tryParse(json["updatedAt"]),
         isVoted: json["isVoted"],
         status: json["status"],
         closedIn: json["closedIn"],

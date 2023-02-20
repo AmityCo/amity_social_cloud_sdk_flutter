@@ -4,7 +4,9 @@ import 'package:amity_sdk/src/domain/domain.dart';
 abstract class UserRepo {
   Future<AmityUser> getUserById(String userId);
   Future<AmityUser> getUserByIdFromDb(String userId);
-  Future<List<AmityUser>> getUsers(UsersRequest request);
+  Future<PageListData<List<AmityUser>, String>> getUsers(UsersRequest request);
   List<String> getPermissions(String userId);
   Future<List<AmityUser>> updateUser(UpdateUserRequest request);
+  Future<AmityUser> flag(String userId);
+  Future<AmityUser> unflag(String userId);
 }

@@ -1,6 +1,7 @@
 import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/public/query_builder/message/message_flag_query_builder.dart';
 
 /// [MessageRepository]
 class MessageRepository {
@@ -39,5 +40,23 @@ class MessageRepository {
   /// Get [AmityReaction] for the message Id
   GetReactionQueryBuilder getReaction({required String messageId}) {
     return GetReactionQueryBuilder.message(messageId: messageId);
+  }
+
+  /// flag message
+  Future<AmityMessage> flag(String messageId) {
+    return MessageFlagQueryBuilder(
+            messageFlagUsecase: serviceLocator(),
+            messageUnflagUsecase: serviceLocator(),
+            messageId: messageId)
+        .flag();
+  }
+
+  /// unflag message
+  Future<AmityMessage> unflag(String messageId) {
+    return MessageFlagQueryBuilder(
+            messageFlagUsecase: serviceLocator(),
+            messageUnflagUsecase: serviceLocator(),
+            messageId: messageId)
+        .unflag();
   }
 }

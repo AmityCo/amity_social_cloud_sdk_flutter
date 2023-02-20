@@ -61,18 +61,6 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
   }
 
   @override
-  Future<CreateMessageResponse> flagMessage(String messageId) async {
-    try {
-      final data = await httpApiClient()
-          .post('$MESSAGE_V3/$messageId/flag', data: {'messageId': messageId});
-      return CreateMessageResponse.fromJson(data.data);
-    } on DioError catch (error) {
-      final amityError = AmityErrorResponse.fromJson(error.response!.data);
-      return Future.error(amityError.amityException());
-    }
-  }
-
-  @override
   Future<CreateMessageResponse> getMessage(String messageId) async {
     try {
       final data = await httpApiClient().get(
@@ -91,6 +79,18 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
       await httpApiClient().get('$MESSAGE_V3/$messageId/isFlaggedByMe',
           queryParameters: {'messageId': messageId});
       return;
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
+  Future<CreateMessageResponse> flagMessage(String messageId) async {
+    try {
+      final data = await httpApiClient()
+          .post('$MESSAGE_V3/$messageId/flag', data: {'messageId': messageId});
+      return CreateMessageResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());

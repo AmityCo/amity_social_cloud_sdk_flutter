@@ -1,0 +1,219 @@
+{
+    "posts": [
+        {
+            "_id": "63c0d362d24746b5d98bd649",
+            "path": "631f16be1e440400da5663b0/social/community/63bd219206a5f37c4ef5b853/post/63c0d362d24746b5d98bd649",
+            "sharedCount": 0,
+            "targetType": "community",
+            "dataType": "video",
+            "commentsCount": 0,
+            "editedAt": "2023-01-13T03:43:30.422Z",
+            "createdAt": "2023-01-13T03:43:30.422Z",
+            "updatedAt": "2023-01-13T03:43:36.953Z",
+            "isDeleted": false,
+            "hasFlaggedComment": false,
+            "hasFlaggedChildren": false,
+            "data": {
+                "videoFileId": {
+                    "original": "63c0d3619887fe2c822447dc"
+                },
+                "thumbnailFileId": "63c0d3619887fe2c822447dc_thumb_00001"
+            },
+            "postId": "63c0d362d24746b5d98bd649",
+            "parentPostId": "63c0d362d24746af9f8bd642",
+            "postedUserId": "JS-SDK",
+            "targetId": "63bd219206a5f37c4ef5b853",
+            "flagCount": 0,
+            "hashFlag": null,
+            "reactions": {},
+            "reactionsCount": 0,
+            "myReactions": [],
+            "comments": [],
+            "children": [],
+            "feedId": "1673339283001595fcde7202545cd868e3b5520045273",
+            "mentionees": [],
+            "tags": []
+        }
+    ],
+    "postChildren": [],
+    "comments": [],
+    "users": [
+        {
+            "_id": "6322cace6de41000d9529ac6",
+            "path": "631f16be1e440400da5663b0/user/6322cace6de41000d9529ac6",
+            "updatedAt": "2023-01-13T01:55:22.993Z",
+            "createdAt": "2022-09-15T06:48:46.854Z",
+            "isDeleted": false,
+            "displayName": "JS-SDK",
+            "userId": "JS-SDK",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        },
+        {
+            "_id": "6320559e2ed49000da274185",
+            "path": "631f16be1e440400da5663b0/user/6320559e2ed49000da274185",
+            "updatedAt": "2023-01-12T04:29:23.589Z",
+            "createdAt": "2022-09-13T10:04:14.476Z",
+            "isDeleted": false,
+            "displayName": "all-SDK",
+            "userId": "all-SDK",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        },
+        {
+            "_id": "6321d1096de41000d9511623",
+            "path": "631f16be1e440400da5663b0/user/6321d1096de41000d9511623",
+            "updatedAt": "2023-01-12T12:02:28.583Z",
+            "createdAt": "2022-09-14T13:03:05.130Z",
+            "description": "",
+            "isDeleted": false,
+            "displayName": "Victim Android",
+            "userId": "victimAndroid",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 1,
+            "hashFlag": {
+                "bits": 24,
+                "hashes": 17,
+                "hash": "gP//"
+            },
+            "avatarFileId": "5d814a01ff2d4c22ba40d19b13c59fbb",
+            "isGlobalBan": false
+        }
+    ],
+    "files": [
+        {
+            "fileId": "63c0d3619887fe2c822447dc",
+            "feedType": "post",
+            "status": "transcoded",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/63c0d3619887fe2c822447dc/download",
+            "type": "video",
+            "createdAt": "2023-01-13T03:43:30.101Z",
+            "updatedAt": "2023-01-13T03:43:36.936Z",
+            "attributes": {
+                "name": "[Success] 720p - 13sec.mp4",
+                "extension": "mp4",
+                "size": 1606698,
+                "mimeType": "video/mp4",
+                "metadata": {
+                    "video": {
+                        "width": "1280",
+                        "height": "720",
+                        "duration": "12.520",
+                        "bit_rate": "1023513",
+                        "avg_frame_rate": "25.000",
+                        "display_aspect_ratio": "1.778",
+                        "colour_primaries": "BT.709"
+                    }
+                }
+            },
+            "videoUrl": {
+                "480p": "https://api.staging.amity.co/api/v3/files/63c0d3619887fe2c822447dc_480p/download",
+                "original": "https://api.staging.amity.co/api/v3/files/63c0d3619887fe2c822447dc_original/download",
+                "720p": "https://api.staging.amity.co/api/v3/files/63c0d3619887fe2c822447dc_720p/download",
+                "360p": "https://api.staging.amity.co/api/v3/files/63c0d3619887fe2c822447dc_360p/download"
+            }
+        },
+        {
+            "fileId": "63c0d3619887fe2c822447dc_thumb_00001",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/63c0d3619887fe2c822447dc_thumb_00001/download",
+            "type": "video",
+            "createdAt": "2023-01-13T03:43:36.032Z",
+            "updatedAt": "2023-01-13T03:43:36.032Z",
+            "attributes": {
+                "name": "_Success__720p___13sec.jpg",
+                "extension": "jpg",
+                "size": 16765,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "thumbnail": true
+                }
+            }
+        },
+        {
+            "fileId": "5d814a01ff2d4c22ba40d19b13c59fbb",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/5d814a01ff2d4c22ba40d19b13c59fbb/download",
+            "type": "image",
+            "createdAt": "2022-12-14T09:40:49.509Z",
+            "updatedAt": "2022-12-14T09:40:49.764Z",
+            "attributes": {
+                "name": "img_cache_1671008972073.jpg",
+                "extension": "jpg",
+                "size": 47331,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 1500,
+                    "width": 3000,
+                    "isFull": false
+                }
+            }
+        }
+    ],
+    "communities": [
+        {
+            "_id": "63bd219206a5f37c4ef5b853",
+            "path": "631f16be1e440400da5663b0/social/community/63bd219206a5f37c4ef5b853",
+            "description": "",
+            "isOfficial": false,
+            "isPublic": true,
+            "onlyAdminCanPost": false,
+            "postsCount": 17,
+            "membersCount": 9,
+            "moderatorMemberCount": 3,
+            "updatedAt": "2023-01-13T03:55:25.592Z",
+            "createdAt": "2023-01-10T08:28:02.898Z",
+            "isDeleted": false,
+            "needApprovalOnPostCreation": false,
+            "displayName": "Artemis Public",
+            "tags": [],
+            "metadata": {},
+            "hasFlaggedComment": false,
+            "hasFlaggedPost": false,
+            "communityId": "63bd219206a5f37c4ef5b853",
+            "channelId": "63bd219206a5f37c4ef5b853",
+            "userId": "all-SDK",
+            "isJoined": true,
+            "avatarFileId": null,
+            "categoryIds": []
+        }
+    ],
+    "categories": [],
+    "communityUsers": [
+        {
+            "communityMembership": "member",
+            "lastActivity": "2023-01-10T08:28:02.944Z",
+            "updatedAt": "2023-01-10T08:28:02.944Z",
+            "createdAt": "2023-01-10T08:28:02.944Z",
+            "isBanned": false,
+            "userId": "JS-SDK",
+            "communityId": "63bd219206a5f37c4ef5b853",
+            "channelId": "63bd219206a5f37c4ef5b853",
+            "roles": [],
+            "permissions": []
+        }
+    ],
+    "feeds": [
+        {
+            "targetType": "community",
+            "targetId": "63bd219206a5f37c4ef5b853",
+            "feedType": "published",
+            "feedId": "1673339283001595fcde7202545cd868e3b5520045273",
+            "postCount": 13,
+            "createdAt": "2023-01-10T08:28:02.987Z",
+            "updatedAt": "2023-01-13T03:55:02.123Z"
+        }
+    ],
+    "videoStreamings": [],
+    "polls": []
+}

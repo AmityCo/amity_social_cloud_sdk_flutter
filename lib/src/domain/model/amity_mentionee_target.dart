@@ -17,6 +17,6 @@ class AmityMentioneeTarget {
 
   Map<String, dynamic> toJson() => {
         "type": type,
-        "userIds": List<dynamic>.from((userIds ?? []).map((x) => x)),
+        "userIds": (userIds ?? []).toList(),
       };
 }

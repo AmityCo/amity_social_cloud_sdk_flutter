@@ -6,43 +6,35 @@ abstract class AmityMentionMetadata {
 
 class AmityChannelMentionMetadata extends AmityMentionMetadata {
   final String _mentionType = AmityMentionType.CHANNEL.value;
-  final int _index;
-  final int _length;
-  AmityChannelMentionMetadata(this._index, this._length);
-
-  String get getType => _mentionType;
-  int get getIndex => _index;
-  int get getLength => _length;
+  final int index;
+  final int length;
+  AmityChannelMentionMetadata({required this.index, required this.length});
 
   @override
   Map<String, dynamic> toMap() {
     return {
       'type': _mentionType,
-      'index': _index,
-      'length': _length,
+      'index': index,
+      'length': length,
     };
   }
 }
 
 class AmityUserMentionMetadata extends AmityMentionMetadata {
-  final String _mentionType = AmityMentionType.CHANNEL.value;
-  final String _userId;
-  final int _index;
-  final int _length;
-  AmityUserMentionMetadata(this._userId, this._index, this._length);
-
-  String get getType => _mentionType;
-  String get getUserId => _userId;
-  int get getIndex => _index;
-  int get getLength => _length;
+  final String _mentionType = AmityMentionType.USER.value;
+  final String userId;
+  final int index;
+  final int length;
+  AmityUserMentionMetadata(
+      {required this.userId, required this.index, required this.length});
 
   @override
   Map<String, dynamic> toMap() {
     return {
-      'userId': _userId,
+      'userId': userId,
       'type': _mentionType,
-      'index': _index,
-      'length': _length,
+      'index': index,
+      'length': length,
     };
   }
 }

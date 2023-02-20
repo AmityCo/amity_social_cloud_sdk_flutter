@@ -1,5 +1,6 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_hive_entity_18.dart';
+import 'package:amity_sdk/src/data/response/response.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 /// [MessageHiveExtensionConverter]
@@ -44,6 +45,17 @@ extension MessageHiveExtensionConverter on MessageHiveEntity {
         break;
     }
 
+    List<AmityMentionee>? mentionees;
+
+    if (this.mentionees != null) {
+      for (Mentionee mentionee in this.mentionees!) {
+        if (mentionee.type == 'user') {
+          mentionees =
+              mentionee.userIds!.map((e) => AmityMentionee(userId: e)).toList();
+        }
+      }
+    }
+
     return AmityMessage()
       ..messageId = messageId
       ..channelId = channelId
@@ -57,6 +69,7 @@ extension MessageHiveExtensionConverter on MessageHiveEntity {
       ..amityTags = AmityTags(tags: tags ?? [])
       ..metadata = metadata
       ..flagCount = flagCount
+      ..hashFlag = hashFlag
       ..childrenNumber = childrenNumber
       ..reactionCount = reactionsCount
       ..reactions = AmityReactionMap(reactions: reactions)
@@ -65,7 +78,9 @@ extension MessageHiveExtensionConverter on MessageHiveEntity {
       ..isDeleted = isDeleted
       ..createdAt = createdAt
       ..updatedAt = updatedAt
-      ..editedAt = editedAt;
+      ..editedAt = editedAt
+      ..flaggedByMe = flaggedByMe
+      ..mentionees = mentionees;
   }
 
   bool isMatchingFilter(MessageQueryRequest filter) {

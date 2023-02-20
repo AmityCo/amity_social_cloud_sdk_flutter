@@ -3,6 +3,7 @@
 const SG_HTTP_ENDPOINT = "https://api.sg.amity.co/";
 const EU_HTTP_ENDPOINT = "https://api.eu.amity.co/";
 const US_HTTP_ENDPOINT = "https://api.us.amity.co/";
+const STAGING_HTTP_ENDPOINT = "https://api.staging.amity.co/";
 
 const SG_SOCKET_ENDPOINT = "https://api.sg.amity.co/";
 const EU_SOCKET_ENDPOINT = "https://api.eu.amity.co/";
@@ -16,6 +17,7 @@ const US_MQTT_ENDPOINT = "ssq.us.amity.co";
 const SESSION_URL = 'api/v3/sessions';
 const REFRESH_TOKEN = 'api/v1/accessToken';
 const USERS_URL = 'api/v3/users';
+const USERS_V4_URL = 'api/v4/users/';
 
 const USER_V4_URL = 'api/v4/users';
 
@@ -32,6 +34,7 @@ const COMMUNITY_CATEGORY_V3 = 'api/v3/community-categories';
 const ME_FOLLLOWING = 'api/v4/me/following';
 const ME_FOLLLOWERS = 'api/v4/me/followers';
 const ME_FOLLLOW_INFO = 'api/v4/me/followInfo';
+const ME_FLAG = 'api/v4/me/flags';
 
 /// Poll API v3 Base Url
 const POLL_V3 = 'api/v3/polls';
@@ -39,7 +42,6 @@ const POLL_V3 = 'api/v3/polls';
 // const ME_FOLLLOWING = 'api/v4/me/following';
 // const ME_FOLLLOWERS = 'api/v4/me/followers';
 const USERS = 'users';
-const USERS_V4_URL = 'api/v4/users/';
 
 const GLOBAL_FEED_V3_URL = 'api/v4/me/global-feeds';
 const USER_FEED_V3_URL = 'api/v3/user-feeds';
@@ -58,6 +60,7 @@ const MESSAGE_V1 = 'api/v1/messages';
 const CHANNELS_V2 = 'api/v2/channels';
 const CHANNEL_V2 = 'api/v2/channel';
 const CHANNELS_V3 = 'api/v3/channels';
+const CHANNELS_V4 = 'api/v4/channels';
 
 const JOIN = 'join';
 const LEAVE = 'leave';

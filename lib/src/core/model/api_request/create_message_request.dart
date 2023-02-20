@@ -80,20 +80,21 @@ class CreateMessageRequest {
             json["mentionees"].map((x) => AmityMentioneeTarget.fromJson(x))),
       );
 
-  Map<String, dynamic> toJson() => {
-        "channelId": channelId,
-        "messageId": messageId,
-        "type": type,
-        "data": data == null ? null : data!.toJson(),
-        "fileId": fileId,
-        "parentId": parentId,
-        "metadata": metadata,
-        "tags": tags == null ? null : List<dynamic>.from(tags!.map((x) => x)),
-        "mentionees": mentionees == null
-            ? null
-            : List<AmityMentioneeTarget>.from(
-                mentionees!.map((x) => x.toJson())),
-      }..removeNullValue();
+  Map<String, dynamic> toJson() {
+    return {
+      "channelId": channelId,
+      "messageId": messageId,
+      "type": type,
+      "data": data == null ? null : data!.toJson(),
+      "fileId": fileId,
+      "parentId": parentId,
+      "metadata": metadata,
+      "tags": tags == null ? null : List<dynamic>.from(tags!.map((x) => x)),
+      "mentionees": mentionees == null
+          ? null
+          : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
+    }..removeNullValue();
+  }
 
   /// Conver [CreateMessageRequest] to [MessageHiveEntity]
   MessageHiveEntity convertToMessageEntity() {

@@ -77,13 +77,13 @@ class CommentResponse {
             : List<String>.from(json["myReactions"]!.map((x) => x)),
         isDeleted: json["isDeleted"],
         editedAt:
-            json["editedAt"] == null ? null : DateTime.parse(json["editedAt"]),
+            json["editedAt"] == null ? null : DateTime.tryParse(json["editedAt"]),
         createdAt: json["createdAt"] == null
             ? null
-            : DateTime.parse(json["createdAt"]),
+            : DateTime.tryParse(json["createdAt"]),
         updatedAt: json["updatedAt"] == null
             ? null
-            : DateTime.parse(json["updatedAt"]),
+            : DateTime.tryParse(json["updatedAt"]),
         children: List<String>.from(json["children"].map((x) => x)),
         segmentNumber: json["segmentNumber"],
         metadata: json["metadata"],

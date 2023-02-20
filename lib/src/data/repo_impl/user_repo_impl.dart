@@ -1,8 +1,6 @@
-import 'package:amity_sdk/src/core/model/api_request/update_user_request.dart';
-import 'package:amity_sdk/src/core/model/api_request/users_request.dart';
+import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/domain/model/amity_user.dart';
-import 'package:amity_sdk/src/domain/repo/user_repo.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 class UserRepoImpl extends UserRepo {
   final UserApiInterface userApiInterface;
@@ -24,19 +22,27 @@ class UserRepoImpl extends UserRepo {
   }
 
   @override
-  Future<List<AmityUser>> getUsers(UsersRequest request) async {
+  Future<PageListData<List<AmityUser>, String>> getUsers(
+      UsersRequest request) async {
     final data = await userApiInterface.getUsers(request);
 
     final userHiveEntities =
         data.users.map((e) => e.convertToUserHiveEntity()).toList();
 
+    final fileHiveEntities =
+        data.files.map((e) => e.convertToFileHiveEntity()).toList();
+
     for (var userEntity in userHiveEntities) {
       await userDbAdapter.saveUserEntity(userEntity);
+    }
+    for (var fileEntity in fileHiveEntities) {
+      await fileDbAdapter.saveFileEntity(fileEntity);
     }
 
     final amityUsers =
         userHiveEntities.map((e) => e.convertToAmityUser()).toList();
-    return amityUsers;
+
+    return PageListData(amityUsers, data.paging!.next ?? '');
   }
 
   @override
@@ -72,5 +78,37 @@ class UserRepoImpl extends UserRepo {
     final amityUsers =
         userHiveEntities.map((e) => e.convertToAmityUser()).toList();
     return amityUsers;
+  }
+
+  @override
+  Future<AmityUser> flag(String userId) async {
+    final data = await userApiInterface.flag(userId);
+
+    final userHiveEntities =
+        data.users.map((e) => e.convertToUserHiveEntity()).toList();
+
+    for (var userEntity in userHiveEntities) {
+      await userDbAdapter.saveUserEntity(userEntity);
+    }
+
+    final amityUsers =
+        userHiveEntities.map((e) => e.convertToAmityUser()).toList();
+    return amityUsers.first;
+  }
+
+  @override
+  Future<AmityUser> unflag(String userId) async {
+    final data = await userApiInterface.unflag(userId);
+
+    final userHiveEntities =
+        data.users.map((e) => e.convertToUserHiveEntity()).toList();
+
+    for (var userEntity in userHiveEntities) {
+      await userDbAdapter.saveUserEntity(userEntity);
+    }
+
+    final amityUsers =
+        userHiveEntities.map((e) => e.convertToAmityUser()).toList();
+    return amityUsers.first;
   }
 }

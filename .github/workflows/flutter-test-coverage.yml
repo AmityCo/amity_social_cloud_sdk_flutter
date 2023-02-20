@@ -1,0 +1,141 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+
+name: Flutter Test Coverage
+
+on:
+  push:
+    branches:
+      - master
+      - develop
+      - "release-**"
+
+  pull_request:
+    branches:
+      - master
+      - develop
+      - "release-**"
+permissions:
+  contents: read # Required when overriding permissions
+  pull-requests: write # <== Add this to allow action to modify your PR
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      # Note: This workflow uses the latest stable version of the Dart SDK.
+      # You can specify other versions if desired, see documentation here:
+      # https://github.com/dart-lang/setup-dart/blob/main/README.md
+      # - uses: dart-lang/setup-dart@v1
+      - uses: dart-lang/setup-dart@9a04e6d73cca37bd455e0608d7e5092f881fd603
+
+      - name: Dart version
+        run: dart --version
+
+      - name: Install Flutter
+        # You may pin to the exact commit or the version.
+        # uses: britannio/action-install-flutter@a486b7e3148e54a76390d849100b9dee819ff810
+        uses: britannio/action-install-flutter@v1.1
+        with:
+          channel: "stable"
+
+      - name: Flutter version
+        run: flutter --version
+
+      - name: Flutter Clean
+        run: flutter clean
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Dart Analyze
+        uses: zgosalvez/github-actions-analyze-dart@v1
+
+      - name: Flutter test
+        run: |
+          flutter pub global activate junitreport
+          flutter test --machine | tojunit --output report.xml
+        continue-on-error: true
+
+      - name: Create Test Report
+        id: createJunitReport
+        uses: mikepenz/action-junit-report@v3
+        # if: always()
+        with:
+          report_paths: ./report.xml
+
+      - name: Flutter Test Coverage
+        run: flutter test --coverage
+        continue-on-error: true
+
+      - name: Create Coverage Report for base branch
+        run: |
+          mv ./coverage/lcov.info ./coverage/lcov_head.info
+          git fetch
+          git checkout origin/${{ github.event.pull_request.base.ref }}
+          flutter clean
+          flutter pub get
+          flutter test --coverage
+        continue-on-error: true
+
+      - name: Generate and Comment coverage report
+        if: always()
+        uses: andybelltree/lcov-reporter-action@v1.0.0
+        with:
+          lcov-file: ./coverage/lcov_head.info
+          lcov-base: ./coverage/lcov.info
+          delete-old-comments: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          filter-changed-files: true
+
+      - name: Compose Message Body for Pull Request Event
+        # if: ${{ github.event_name == 'pull_request' }}
+        id: pull_body_message
+        run: |
+          echo "MESSAGE=${{ format('🥇 PR - #{0} {1} \n👉 Link - {2}\n🥇 Branch - into {3} from {4}\n', 
+              github.event.pull_request.number,
+              github.event.pull_request.title,
+              github.event.pull_request._links.html.href,
+              github.base_ref,
+              github.head_ref
+            ) }}" >> $GITHUB_OUTPUT
+
+      - name: Generate String test report
+        id: string_test_report
+        run: |
+          echo "MESSAGE=${{ format('Test Report\n🧑🏻‍💻Total=>{0}\t🕺🏻Passed=>{1}\t🤦🏻‍♂️Failed=>{2}\t🤷🏻‍♂️Skipped=>{3}', 
+              steps.createJunitReport.outputs.total,
+              steps.createJunitReport.outputs.passed,
+              steps.createJunitReport.outputs.failed,
+              steps.createJunitReport.outputs.skipped
+            ) }}" >> $GITHUB_OUTPUT
+
+      - name: Compose Full Report Message to Send
+        id: compose_full_report
+        run: |
+          echo "MESSAGE=${{ format('{0}\n\n{1}', 
+              steps.pull_body_message.outputs.MESSAGE,
+              steps.string_test_report.outputs.MESSAGE
+            ) }}" >> $GITHUB_OUTPUT
+
+      - name: Publish test repo to PR Comment
+        id: testToPrComment
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: Flutter Test Result
+          message: ${{steps.compose_full_report.outputs.MESSAGE }}
+        continue-on-error: true
+
+      - name: Send Message to Eko Chat
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.BOT_EKO_CHAT_MESSAGING_URL }}
+          method: "POST"
+          bearerToken: ${{ secrets.BOT_AUTH_TOKEN }}
+          customHeaders: '{"Content-Type": "application/json"}'
+          data: '{"gid": "${{ secrets.BOT_GROUP_ID }}", "tid": "${{ secrets.BOT_CHAT_ID }}","message": {"data": "${{ steps.compose_full_report.outputs.MESSAGE }}", "type": "text"}}'

@@ -17,7 +17,7 @@ class UnregisterDeviceNotificationUseCase extends UseCase<void, void> {
     final currentUser = AmityCoreClient.getCurrentUser();
     final account = accountRepo.getAccount(currentUser.userId!);
     if (account?.userId == null || account?.deviceId == null) {
-      throw NullThrownError();
+      throw TypeError();
     }
     final UnregisterNotificationRequest request = UnregisterNotificationRequest(
         userId: account!.userId!, deviceId: account.deviceId!);

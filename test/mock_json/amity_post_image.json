@@ -1,0 +1,321 @@
+{
+    "posts": [
+        {
+            "_id": "63c0e5428309f8384ac5195d",
+            "path": "631f16be1e440400da5663b0/social/community/63bfe5e921bf4d216e0c2c39/post/63c0e5428309f8384ac5195d",
+            "sharedCount": 0,
+            "targetType": "community",
+            "dataType": "text",
+            "commentsCount": 0,
+            "editedAt": "2023-01-13T05:00:21.391Z",
+            "createdAt": "2023-01-13T04:59:46.410Z",
+            "updatedAt": "2023-01-13T05:00:21.391Z",
+            "isDeleted": false,
+            "hasFlaggedComment": false,
+            "hasFlaggedChildren": false,
+            "data": {
+                "text": ""
+            },
+            "postId": "63c0e5428309f8384ac5195d",
+            "postedUserId": "nami",
+            "targetId": "63bfe5e921bf4d216e0c2c39",
+            "flagCount": 0,
+            "hashFlag": null,
+            "reactions": {},
+            "reactionsCount": 0,
+            "myReactions": [],
+            "comments": [],
+            "children": [
+                "63c0e5428309f8e1b4c51964",
+                "63c0e5428309f857d9c51966",
+                "63c0e5428309f852e6c51968"
+            ],
+            "feedId": "1673520617845e29d668051924ef4af5bfcdd1f863e89",
+            "mentionees": [
+                {
+                    "type": "user",
+                    "userIds": []
+                }
+            ],
+            "tags": []
+        }
+    ],
+    "postChildren": [
+        {
+            "_id": "63c0e5428309f8e1b4c51964",
+            "path": "631f16be1e440400da5663b0/social/community/63bfe5e921bf4d216e0c2c39/post/63c0e5428309f8e1b4c51964",
+            "sharedCount": 0,
+            "targetType": "community",
+            "dataType": "image",
+            "commentsCount": 0,
+            "editedAt": "2023-01-13T04:59:46.439Z",
+            "createdAt": "2023-01-13T04:59:46.439Z",
+            "updatedAt": "2023-01-13T04:59:46.454Z",
+            "isDeleted": false,
+            "hasFlaggedComment": false,
+            "hasFlaggedChildren": false,
+            "data": {
+                "fileId": "3649b3a990a24f658e733799cd01943f"
+            },
+            "postId": "63c0e5428309f8e1b4c51964",
+            "parentPostId": "63c0e5428309f8384ac5195d",
+            "postedUserId": "nami",
+            "targetId": "63bfe5e921bf4d216e0c2c39",
+            "flagCount": 0,
+            "hashFlag": null,
+            "reactions": {},
+            "reactionsCount": 0,
+            "myReactions": [],
+            "comments": [],
+            "children": [],
+            "feedId": "1673520617845e29d668051924ef4af5bfcdd1f863e89",
+            "mentionees": [],
+            "tags": []
+        },
+        {
+            "_id": "63c0e5428309f857d9c51966",
+            "path": "631f16be1e440400da5663b0/social/community/63bfe5e921bf4d216e0c2c39/post/63c0e5428309f857d9c51966",
+            "sharedCount": 0,
+            "targetType": "community",
+            "dataType": "image",
+            "commentsCount": 0,
+            "editedAt": "2023-01-13T04:59:46.439Z",
+            "createdAt": "2023-01-13T04:59:46.439Z",
+            "updatedAt": "2023-01-13T04:59:46.454Z",
+            "isDeleted": false,
+            "hasFlaggedComment": false,
+            "hasFlaggedChildren": false,
+            "data": {
+                "fileId": "e27c77edf02c4e1582f4e5af8601b839"
+            },
+            "postId": "63c0e5428309f857d9c51966",
+            "parentPostId": "63c0e5428309f8384ac5195d",
+            "postedUserId": "nami",
+            "targetId": "63bfe5e921bf4d216e0c2c39",
+            "flagCount": 0,
+            "hashFlag": null,
+            "reactions": {},
+            "reactionsCount": 0,
+            "myReactions": [],
+            "comments": [],
+            "children": [],
+            "feedId": "1673520617845e29d668051924ef4af5bfcdd1f863e89",
+            "mentionees": [],
+            "tags": []
+        },
+        {
+            "_id": "63c0e5428309f852e6c51968",
+            "path": "631f16be1e440400da5663b0/social/community/63bfe5e921bf4d216e0c2c39/post/63c0e5428309f852e6c51968",
+            "sharedCount": 0,
+            "targetType": "community",
+            "dataType": "image",
+            "commentsCount": 0,
+            "editedAt": "2023-01-13T04:59:46.440Z",
+            "createdAt": "2023-01-13T04:59:46.440Z",
+            "updatedAt": "2023-01-13T04:59:46.454Z",
+            "isDeleted": false,
+            "hasFlaggedComment": false,
+            "hasFlaggedChildren": false,
+            "data": {
+                "fileId": "a061775b27f34c49bf8de9cfb83620d4"
+            },
+            "postId": "63c0e5428309f852e6c51968",
+            "parentPostId": "63c0e5428309f8384ac5195d",
+            "postedUserId": "nami",
+            "targetId": "63bfe5e921bf4d216e0c2c39",
+            "flagCount": 0,
+            "hashFlag": null,
+            "reactions": {},
+            "reactionsCount": 0,
+            "myReactions": [],
+            "comments": [],
+            "children": [],
+            "feedId": "1673520617845e29d668051924ef4af5bfcdd1f863e89",
+            "mentionees": [],
+            "tags": []
+        }
+    ],
+    "comments": [],
+    "users": [
+        {
+            "_id": "632949667a6aa100db7f1173",
+            "path": "631f16be1e440400da5663b0/user/632949667a6aa100db7f1173",
+            "updatedAt": "2023-01-13T04:38:58.308Z",
+            "createdAt": "2022-09-20T05:02:30.148Z",
+            "isDeleted": false,
+            "displayName": "nami",
+            "userId": "nami",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        },
+        {
+            "_id": "6321d1096de41000d9511623",
+            "path": "631f16be1e440400da5663b0/user/6321d1096de41000d9511623",
+            "updatedAt": "2023-01-12T12:02:28.583Z",
+            "createdAt": "2022-09-14T13:03:05.130Z",
+            "description": "",
+            "isDeleted": false,
+            "displayName": "Victim Android",
+            "userId": "victimAndroid",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 1,
+            "hashFlag": {
+                "bits": 24,
+                "hashes": 17,
+                "hash": "gP//"
+            },
+            "avatarFileId": "5d814a01ff2d4c22ba40d19b13c59fbb",
+            "isGlobalBan": false
+        },
+        {
+            "_id": "63bfe5ba5553f4cbbcfbf07b",
+            "path": "631f16be1e440400da5663b0/user/63bfe5ba5553f4cbbcfbf07b",
+            "updatedAt": "2023-01-12T10:49:30.823Z",
+            "createdAt": "2023-01-12T10:49:30.813Z",
+            "isDeleted": false,
+            "displayName": "social_66490",
+            "userId": "social_66490",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        }
+    ],
+    "files": [
+        {
+            "fileId": "e27c77edf02c4e1582f4e5af8601b839",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/e27c77edf02c4e1582f4e5af8601b839/download",
+            "type": "image",
+            "createdAt": "2023-01-13T04:59:41.459Z",
+            "updatedAt": "2023-01-13T04:59:47.876Z",
+            "attributes": {
+                "name": "img_cache_1673585978470.jpg",
+                "extension": "jpg",
+                "size": 227579,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 2340,
+                    "width": 1080,
+                    "isFull": false
+                }
+            }
+        },
+        {
+            "fileId": "3649b3a990a24f658e733799cd01943f",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/3649b3a990a24f658e733799cd01943f/download",
+            "type": "image",
+            "createdAt": "2023-01-13T04:59:41.150Z",
+            "updatedAt": "2023-01-13T04:59:47.876Z",
+            "attributes": {
+                "name": "img_cache_1673585976461.jpg",
+                "extension": "jpg",
+                "size": 60600,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 3000,
+                    "width": 3000,
+                    "isFull": false
+                }
+            }
+        },
+        {
+            "fileId": "a061775b27f34c49bf8de9cfb83620d4",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/a061775b27f34c49bf8de9cfb83620d4/download",
+            "type": "image",
+            "createdAt": "2023-01-13T04:59:45.209Z",
+            "updatedAt": "2023-01-13T04:59:47.876Z",
+            "attributes": {
+                "name": "img_cache_1673585980338.jpg",
+                "extension": "jpg",
+                "size": 160770,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 4000,
+                    "width": 3000,
+                    "isFull": false
+                }
+            }
+        },
+        {
+            "fileId": "5d814a01ff2d4c22ba40d19b13c59fbb",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/5d814a01ff2d4c22ba40d19b13c59fbb/download",
+            "type": "image",
+            "createdAt": "2022-12-14T09:40:49.509Z",
+            "updatedAt": "2022-12-14T09:40:49.764Z",
+            "attributes": {
+                "name": "img_cache_1671008972073.jpg",
+                "extension": "jpg",
+                "size": 47331,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 1500,
+                    "width": 3000,
+                    "isFull": false
+                }
+            }
+        }
+    ],
+    "communities": [
+        {
+            "_id": "63bfe5e921bf4d216e0c2c39",
+            "path": "631f16be1e440400da5663b0/social/community/63bfe5e921bf4d216e0c2c39",
+            "isOfficial": false,
+            "isPublic": true,
+            "onlyAdminCanPost": false,
+            "postsCount": 9,
+            "membersCount": 4,
+            "moderatorMemberCount": 1,
+            "updatedAt": "2023-01-13T05:02:27.421Z",
+            "createdAt": "2023-01-12T10:50:17.773Z",
+            "isDeleted": false,
+            "needApprovalOnPostCreation": false,
+            "displayName": "pubComm1_129078",
+            "tags": [],
+            "metadata": {},
+            "hasFlaggedComment": false,
+            "hasFlaggedPost": false,
+            "communityId": "63bfe5e921bf4d216e0c2c39",
+            "channelId": "63bfe5e921bf4d216e0c2c39",
+            "userId": "social_66490",
+            "isJoined": true,
+            "avatarFileId": null,
+            "categoryIds": [
+                "88d175da65cbfeb39b81e722b322430d"
+            ]
+        }
+    ],
+    "categories": [
+        {
+            "name": "$testing category",
+            "metadata": {},
+            "updatedAt": "2022-11-25T03:56:06.238Z",
+            "createdAt": "2022-11-25T03:56:06.238Z",
+            "isDeleted": false,
+            "categoryId": "88d175da65cbfeb39b81e722b322430d"
+        }
+    ],
+    "communityUsers": [],
+    "feeds": [
+        {
+            "targetType": "community",
+            "targetId": "63bfe5e921bf4d216e0c2c39",
+            "feedType": "published",
+            "feedId": "1673520617845e29d668051924ef4af5bfcdd1f863e89",
+            "postCount": 9,
+            "createdAt": "2023-01-12T10:50:17.835Z",
+            "updatedAt": "2023-01-13T05:02:05.272Z"
+        }
+    ],
+    "videoStreamings": [],
+    "polls": []
+}
