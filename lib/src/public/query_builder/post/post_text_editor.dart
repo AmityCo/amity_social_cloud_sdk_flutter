@@ -5,6 +5,8 @@ class AmityTextPostEditorBuilder {
   late PostUpdateUsecase _useCase;
   late String _targetId;
   late AmityPostUpdater _updater;
+  List<AmityMentioneeTarget>? _mentionees;
+
   AmityTextPostEditorBuilder({
     required PostUpdateUsecase useCase,
     required String targetId,
@@ -21,6 +23,14 @@ class AmityTextPostEditorBuilder {
 
   AmityTextPostEditorBuilder metadata(Map<String, dynamic>? metadata) {
     _updater._metadata = metadata;
+    return this;
+  }
+
+  AmityTextPostEditorBuilder mentionUsers(List<String> userIds) {
+    _mentionees ??= [];
+    _mentionees!.add(AmityMentioneeTarget(
+        type: AmityMentionType.USER.value, userIds: userIds));
+    _updater._mentionees = _mentionees;
     return this;
   }
 
@@ -44,7 +54,7 @@ class AmityPostUpdater {
   final String _targetId;
   String? _text;
   Map<String, dynamic>? _metadata;
-
+  List<AmityMentioneeTarget>? _mentionees;
   AmityPostUpdater(this._usecase, this._targetId);
 
   Future update() {
@@ -54,7 +64,14 @@ class AmityPostUpdater {
     if (_text != null) updateData.text = _text;
 
     updatePostRequest.data = updateData;
-    updatePostRequest.metadata = _metadata;
+
+    if (_mentionees != null) {
+      updatePostRequest.mentionees = _mentionees;
+    }
+
+    if (_metadata != null) {
+      updatePostRequest.metadata = _metadata;
+    }
 
     return _usecase.get(updatePostRequest);
   }

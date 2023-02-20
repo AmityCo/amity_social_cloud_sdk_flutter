@@ -9,7 +9,7 @@ class AmityCoreClientMockSetup {
     await AmityCoreClient.setup(
       option: AmityCoreClientOption(
           apiKey: 'apikey',
-          httpEndpoint: AmityRegionalHttpEndpoint.STAGING,
+          httpEndpoint: AmityRegionalHttpEndpoint.SG,
           showLogs: true),
       sycInitialization: true,
     );

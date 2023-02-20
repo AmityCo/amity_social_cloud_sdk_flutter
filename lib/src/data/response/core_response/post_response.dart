@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:amity_sdk/src/data/response/core_response/post_data_response.dart';
+import 'package:amity_sdk/src/data/data.dart';
 
 /// Post Response from BR
 class PostResponse {
@@ -34,6 +34,7 @@ class PostResponse {
     required this.hasFlaggedChildren,
     required this.feedId,
     required this.require,
+    required this.mentionees,
   });
 
   /// Doc id
@@ -120,43 +121,51 @@ class PostResponse {
   /// require
   final String? require;
 
+  /// Mentions
+  final List<Mentionee> mentionees;
+
   /// factory method to init [PostResponse] from map
   factory PostResponse.fromJson(Map<String, dynamic> json) => PostResponse(
-      id: json["_id"],
-      path: json["path"],
-      postId: json["postId"],
-      parentPostId: json["parentPostId"],
-      postedUserId: json["postedUserId"],
-      sharedUserId: json["sharedUserId"],
-      sharedCount: json["sharedCount"],
-      targetId: json["targetId"],
-      targetType: json["targetType"],
-      dataType: json["dataType"],
-      data: PostDataResponse.fromJson(json["data"]),
-      // metadata: DataClass.fromJson(json["metadata"]),
-      flagCount: json["flagCount"],
-      hashFlag:
-          json["hashFlag"] == null ? null : HashFlag.fromJson(json["hashFlag"]),
-      editedAt:
-          json["editedAt"] == null ? null : DateTime.tryParse(json["editedAt"]),
-      createdAt: json["createdAt"] == null
-          ? null
-          : DateTime.tryParse(json["createdAt"]),
-      updatedAt: json["updatedAt"] == null
-          ? null
-          : DateTime.tryParse(json["updatedAt"]),
-      reactions: Map.from(json["reactions"]),
-      reactionsCount: json["reactionsCount"],
-      myReactions: List<String>.from(json["myReactions"].map((x) => x)),
-      commentsCount: json["commentsCount"],
-      comments: List<String>.from(json["comments"].map((x) => x)),
-      children: List<String>.from(json["children"].map((x) => x)),
-      isDeleted: json["isDeleted"],
-      hasFlaggedComment: json["hasFlaggedComment"],
-      hasFlaggedChildren: json["hasFlaggedChildren"],
-      feedId: json["feedId"],
-      require: json["required"],
-      metadata: json["metadata"]);
+        id: json["_id"],
+        path: json["path"],
+        postId: json["postId"],
+        parentPostId: json["parentPostId"],
+        postedUserId: json["postedUserId"],
+        sharedUserId: json["sharedUserId"],
+        sharedCount: json["sharedCount"],
+        targetId: json["targetId"],
+        targetType: json["targetType"],
+        dataType: json["dataType"],
+        data: PostDataResponse.fromJson(json["data"]),
+        // metadata: DataClass.fromJson(json["metadata"]),
+        flagCount: json["flagCount"],
+        hashFlag: json["hashFlag"] == null
+            ? null
+            : HashFlag.fromJson(json["hashFlag"]),
+        editedAt: json["editedAt"] == null
+            ? null
+            : DateTime.tryParse(json["editedAt"]),
+        createdAt: json["createdAt"] == null
+            ? null
+            : DateTime.tryParse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null
+            ? null
+            : DateTime.tryParse(json["updatedAt"]),
+        reactions: Map.from(json["reactions"]),
+        reactionsCount: json["reactionsCount"],
+        myReactions: List<String>.from(json["myReactions"].map((x) => x)),
+        commentsCount: json["commentsCount"],
+        comments: List<String>.from(json["comments"].map((x) => x)),
+        children: List<String>.from(json["children"].map((x) => x)),
+        isDeleted: json["isDeleted"],
+        hasFlaggedComment: json["hasFlaggedComment"],
+        hasFlaggedChildren: json["hasFlaggedChildren"],
+        feedId: json["feedId"],
+        require: json["required"],
+        metadata: json["metadata"],
+        mentionees: List<Mentionee>.from(
+            json["mentionees"].map((x) => Mentionee.fromJson(x))),
+      );
 
   /// Create map from [PostResponse]
   Map<String, dynamic> toJson() => {
@@ -188,6 +197,7 @@ class PostResponse {
         "hasFlaggedChildren": hasFlaggedChildren,
         "feedId": feedId,
         "required": require,
+        "mentionees": List<dynamic>.from(mentionees.map((x) => x.toJson())),
       };
 }
 

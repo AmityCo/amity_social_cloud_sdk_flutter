@@ -1,3 +1,9 @@
+## 0.17.0
+* feat: Community user search by keyword
+* feat: Mention user in post creation
+* feat: Mention user in comment creation
+* fix: resolve issue with flag update
+
 ## 0.16.0
 * feat: Global user search
 * feat: Comunity User Search

@@ -5,7 +5,7 @@ class AmityTextCommentEditorBuilder {
   late CommentUpdateUsecase _useCase;
   late String _targetId;
   late AmityCommentUpdater updater;
-
+  List<AmityMentioneeTarget>? _mentionees;
   AmityTextCommentEditorBuilder({
     required CommentUpdateUsecase useCase,
     required String targetId,
@@ -22,6 +22,14 @@ class AmityTextCommentEditorBuilder {
 
   AmityTextCommentEditorBuilder metadata(Map<String, dynamic> metadata) {
     updater._metadata = metadata;
+    return this;
+  }
+
+  AmityTextCommentEditorBuilder mentionUsers(List<String> userIds) {
+    _mentionees ??= [];
+    _mentionees!.add(AmityMentioneeTarget(
+        type: AmityMentionType.USER.value, userIds: userIds));
+    updater._mentionees = _mentionees;
     return this;
   }
 
@@ -45,7 +53,7 @@ class AmityCommentUpdater {
   final String _targetId;
   String? _text;
   Map<String, dynamic>? _metadata;
-
+  List<AmityMentioneeTarget>? _mentionees;
   AmityCommentUpdater(this._usecase, this._targetId);
 
   Future update() {
@@ -56,8 +64,13 @@ class AmityCommentUpdater {
     if (_text != null) updateData.text = _text;
 
     updateCommentRequest.data = updateData;
-    updateCommentRequest.metadata = _metadata;
+    if (_mentionees != null) {
+      updateCommentRequest.mentionees = _mentionees;
+    }
 
+    if (_metadata != null) {
+      updateCommentRequest.metadata = _metadata;
+    }
     return _usecase.get(updateCommentRequest);
   }
 }

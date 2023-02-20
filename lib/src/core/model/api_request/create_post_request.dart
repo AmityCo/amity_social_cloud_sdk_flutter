@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:amity_sdk/src/domain/domain.dart';
+
 /// Create Post Request
 class CreatePostRequest {
   /// Init [CreatePostRequest]
@@ -15,6 +17,7 @@ class CreatePostRequest {
     required this.targetId,
     this.metadata,
     this.postId,
+    this.mentionees,
   });
 
   /// Post Data
@@ -38,6 +41,9 @@ class CreatePostRequest {
   /// Explicit post Id
   String? postId;
 
+  /// Mentionees
+  List<AmityMentioneeTarget>? mentionees;
+
   /// Init [CreatePostRequest] from Json
   factory CreatePostRequest.fromJson(Map<String, dynamic> json) =>
       CreatePostRequest(
@@ -49,6 +55,8 @@ class CreatePostRequest {
         targetId: json["targetId"],
         metadata: json["metadata"],
         postId: json["postId"],
+        mentionees: List<AmityMentioneeTarget>.from(
+            json["mentionees"].map((x) => AmityMentioneeTarget.fromJson(x))),
       );
 
   /// map from [CreatePostRequest]
@@ -62,6 +70,9 @@ class CreatePostRequest {
         "targetId": targetId,
         "metadata": metadata,
         "postId": postId,
+        "mentionees": mentionees == null
+            ? null
+            : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
       }..removeWhere((key, value) => value == null);
 
   @override

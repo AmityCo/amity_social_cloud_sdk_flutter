@@ -1,5 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/post_hive_entity_5.dart';
+import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 /// Post Response Hive Entity Extension
@@ -50,6 +50,18 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
         // TODO: Handle this case.
         break;
     }
+
+    List<AmityMentionee>? mentionees;
+
+    if (this.mentionees != null) {
+      for (Mentionee mentionee in this.mentionees!) {
+        if (mentionee.type == 'user') {
+          mentionees =
+              mentionee.userIds!.map((e) => AmityMentionee(userId: e)).toList();
+        }
+      }
+    }
+
     return AmityPost(postId: postId)
       ..targetType = amityPostTargetType
       ..target = amityPostTarget
@@ -73,6 +85,7 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
       ..updatedAt = updatedAt
       ..path = path
       ..metadata = metadata
-      ..flaggedByMe = flaggedByMe;
+      ..flaggedByMe = flaggedByMe
+      ..mentionees = mentionees;
   }
 }

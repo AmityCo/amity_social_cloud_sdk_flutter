@@ -1,4 +1,4 @@
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/post_data_hive_entity_7.dart';
+import 'package:amity_sdk/src/data/data.dart';
 import 'package:hive/hive.dart';
 
 part 'post_hive_entity_5.g.dart';
@@ -92,37 +92,41 @@ class PostHiveEntity extends HiveObject {
 
   ///
   bool? flaggedByMe;
-  PostHiveEntity({
-    this.id,
-    this.path,
-    this.postId = '',
-    this.parentPostId,
-    this.postedUserId,
-    this.sharedUserId,
-    this.sharedCount,
-    this.targetId,
-    this.targetType,
-    this.dataType,
-    this.data,
-    this.metadata,
-    this.flagCount,
-    this.hashFlag,
-    this.editedAt,
-    this.createdAt,
-    this.updatedAt,
-    this.reactions,
-    this.reactionsCount,
-    this.myReactions,
-    this.commentsCount,
-    this.comments,
-    this.children,
-    this.isDeleted,
-    this.hasFlaggedComment,
-    this.hasFlaggedChildren,
-    this.feedId,
-    this.require,
-    this.flaggedByMe,
-  });
+
+  /// Mentions
+  List<Mentionee>? mentionees;
+
+  PostHiveEntity(
+      {this.id,
+      this.path,
+      this.postId = '',
+      this.parentPostId,
+      this.postedUserId,
+      this.sharedUserId,
+      this.sharedCount,
+      this.targetId,
+      this.targetType,
+      this.dataType,
+      this.data,
+      this.metadata,
+      this.flagCount,
+      this.hashFlag,
+      this.editedAt,
+      this.createdAt,
+      this.updatedAt,
+      this.reactions,
+      this.reactionsCount,
+      this.myReactions,
+      this.commentsCount,
+      this.comments,
+      this.children,
+      this.isDeleted,
+      this.hasFlaggedComment,
+      this.hasFlaggedChildren,
+      this.feedId,
+      this.require,
+      this.flaggedByMe,
+      this.mentionees});
 
   PostHiveEntity copyWith({
     String? id,
@@ -154,6 +158,7 @@ class PostHiveEntity extends HiveObject {
     String? feedId,
     String? require,
     bool? flaggedByMe,
+    List<Mentionee>? mentionees,
   }) {
     return PostHiveEntity(
       id: id ?? this.id,
@@ -185,6 +190,7 @@ class PostHiveEntity extends HiveObject {
       feedId: feedId ?? this.feedId,
       require: require ?? this.require,
       flaggedByMe: flaggedByMe ?? this.flaggedByMe,
+      mentionees: mentionees ?? this.mentionees,
     );
   }
 }
