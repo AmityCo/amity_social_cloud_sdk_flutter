@@ -14,7 +14,6 @@ void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   String userId = 'victimAndroid';
-  String displayName = 'Victim Android';
 
   final userApiInterface = MockUserApiInterface();
 

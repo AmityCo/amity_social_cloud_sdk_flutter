@@ -43,7 +43,7 @@ void main() {
 
     final amityUserToken = await AmityUserTokenManager(
       apiKey: 'apikey',
-      endpoint: AmityRegionalHttpEndpoint.STAGING,
+      endpoint: AmityRegionalHttpEndpoint.SG,
     ).createUserToken(userId);
 
     expect(amityUserToken, isA<AmityUserToken>());
