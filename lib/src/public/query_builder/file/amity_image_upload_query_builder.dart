@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io' if (dart.library.html) 'dart:html';
 
 import 'package:amity_sdk/src/core/model/api_request/upload_file_request.dart';
@@ -28,12 +29,21 @@ class AmityImageUploadQueryBuilder {
     return this;
   }
 
+  // Future<AmityUploadResult<AmityImage>> upload() {
+  //   UploadFileRequest request = UploadFileRequest();
+  //   request.files.add(_file);
+  //   request.fullImage = _isFullImage;
+  //   if (_uploadId != null) request.uploadId = _uploadId;
+  //   return _usecase.get(request);
+  // }
+
   /// excute upload function
-  Future<AmityUploadResult<AmityImage>> upload() {
+  StreamController<AmityUploadResult<AmityImage>> upload() {
     UploadFileRequest request = UploadFileRequest();
     request.files.add(_file);
-    request.fullImage = _isFullImage;
+
     if (_uploadId != null) request.uploadId = _uploadId;
-    return _usecase.get(request);
+
+    return _usecase.listen(request);
   }
 }

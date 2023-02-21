@@ -146,8 +146,7 @@ class MessageRepoImpl extends MessageRepo {
         ..fullImage = true);
 
       if (amityUploadResult is AmityUploadComplete) {
-        request.fileId =
-            (amityUploadResult as AmityUploadComplete).getFile.fileId;
+        request.fileId = (amityUploadResult as AmityUploadComplete).file.fileId;
       }
 
       /// Message Syncing

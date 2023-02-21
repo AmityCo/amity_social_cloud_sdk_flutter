@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
@@ -11,5 +13,10 @@ class FileImageUploadUsecase
   @override
   Future<AmityUploadResult<AmityImage>> get(UploadFileRequest params) {
     return _fileRepo.uploadImage(params);
+  }
+
+  StreamController<AmityUploadResult<AmityImage>> listen(
+      UploadFileRequest params) {
+    return _fileRepo.uploadImageStream(params);
   }
 }

@@ -1,0 +1,15 @@
+[
+    {
+        "fileId": "b1d1f7247601454f83460b45ad77932e",
+        "fileUrl": "https: //api.staging.amity.co/api/v3/files/b1d1f7247601454f83460b45ad77932e/download",
+        "type": "file",
+        "createdAt": "2023-02-13T13:13:48.575Z",
+        "updatedAt": "2023-02-13T13:13:48.575Z",
+        "attributes": {
+            "name": "Free_Test_Data_10.5MB_PDF.pdf",
+            "extension": "pdf",
+            "size": "11081517",
+            "mimeType": "application/pdf"
+        }
+    }
+]
