@@ -17,4 +17,7 @@ class AmityUploadInfo {
   String getFilePath() {
     return _fileProperties['path'];
   }
+
+  @override
+  String toString() => 'AmityUploadInfo(_fileProperties: $_fileProperties)';
 }

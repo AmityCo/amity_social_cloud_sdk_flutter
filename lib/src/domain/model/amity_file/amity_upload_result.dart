@@ -1,38 +1,73 @@
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/domain/model/amity_file/amity_file_info.dart';
-import 'package:amity_sdk/src/domain/model/amity_file/amity_upload_info.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:dio/dio.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-abstract class AmityUploadResult<T extends AmityFileInfo> {}
+part 'amity_upload_result.freezed.dart';
 
-class AmityUploadInProgress extends AmityUploadResult {
-  final AmityUploadInfo _uploadInfo;
-  AmityUploadInProgress(this._uploadInfo);
-
-  AmityUploadInfo get getUploadInfo => _uploadInfo;
-
-  @override
-  String toString() => 'AmityUploadInProgress(_uploadInfo: $_uploadInfo)';
+@freezed
+class AmityUploadResult<T> with _$AmityUploadResult {
+  const factory AmityUploadResult.progress(
+          AmityUploadInfo uploadInfo, CancelToken cancelToken) =
+      AmityUploadInProgress;
+  const factory AmityUploadResult.complete(T file) = AmityUploadComplete;
+  const factory AmityUploadResult.error(AmityException error) =
+      AmityUploadError;
+  const factory AmityUploadResult.cancel() = AmityUploadCancel;
 }
 
-class AmityUploadComplete<T extends AmityFileInfo>
-    extends AmityUploadResult<T> {
-  final T _file;
-
-  AmityUploadComplete(this._file);
-  AmityFileInfo get getFile => _file;
-
-  @override
-  String toString() => 'AmityUploadComplete(_fileInfo: $_file)';
+extension AmityUploadInProgressExtension on AmityUploadInProgress {
+  AmityUploadInfo get getUploadInfo => uploadInfo;
 }
 
-class AmityUploadError extends AmityUploadResult {
-  final AmityException _error;
-  AmityUploadError(this._error);
-
-  AmityException get getErrror => _error;
-
-  @override
-  String toString() => 'AmityUploadError(_error: $_error)';
+extension AmityUploadCompleteExtension on AmityUploadComplete {
+  AmityFileInfo get getFile => file;
 }
 
-class AmityUploadCancel extends AmityUploadResult {}
+extension AmityUploadErrorExtension on AmityUploadError {
+  AmityException get getError => error;
+}
+
+// class AmityUploadInProgress<T extends AmityFileInfo>
+//     extends AmityUploadResult<T> {
+//   final AmityUploadInfo _uploadInfo;
+//   final CancelToken cancelToken;
+//   AmityUploadInProgress(this.cancelToken, this._uploadInfo)
+//       : super(AmityUploadState.progress);
+
+//   AmityUploadInfo get getUploadInfo => _uploadInfo;
+
+//   void cancel({String? reason}) {
+//     cancelToken.cancel(reason);
+//   }
+
+//   @override
+//   String toString() => 'AmityUploadInProgress(_uploadInfo: $_uploadInfo)';
+// }
+
+// class AmityUploadComplete<T extends AmityFileInfo>
+//     extends AmityUploadResult<T> {
+//   final T _file;
+
+//   AmityUploadComplete(this._file) : super(AmityUploadState.complete);
+//   AmityFileInfo get getFile => _file;
+
+//   @override
+//   String toString() => 'AmityUploadComplete(_fileInfo: $_file)';
+// }
+
+// class AmityUploadError<T extends AmityFileInfo> extends AmityUploadResult<T> {
+//   final AmityException _error;
+//   AmityUploadError(this._error) : super(AmityUploadState.error);
+
+//   AmityException get getError => _error;
+
+//   @override
+//   String toString() => 'AmityUploadError(_error: $_error)';
+// }
+
+// class AmityUploadCancel<T extends AmityFileInfo> extends AmityUploadResult<T> {
+//   AmityUploadCancel() : super(AmityUploadState.error);
+// }
+
+// enum AmityUploadState { progress, complete, error, cancelled }

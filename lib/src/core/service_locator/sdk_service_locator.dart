@@ -481,6 +481,8 @@ class SdkServiceLocator {
         () => FileVideoUploadUsecase(serviceLocator()));
     serviceLocator.registerLazySingleton<GetCommunityFeedUsecase>(
         () => GetCommunityFeedUsecase(serviceLocator(), serviceLocator()));
+    serviceLocator.registerLazySingleton<FileUploadCancelUsecase>(
+        () => FileUploadCancelUsecase(serviceLocator()));
 
     serviceLocator.registerLazySingleton<RegisterDeviceNotificationUseCase>(
         () => RegisterDeviceNotificationUseCase(

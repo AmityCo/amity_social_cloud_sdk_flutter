@@ -6,6 +6,9 @@ import 'package:dio/dio.dart';
 
 /// File API layer implementation
 class FileApiInterfaceImpl extends FileApiInterface {
+  /// Cancel token pool
+  final cancelTokenPool = <String, CancelToken>{};
+
   /// HttpClient
   final HttpApiClient httpApiClient;
 
@@ -35,8 +38,13 @@ class FileApiInterfaceImpl extends FileApiInterface {
   }
 
   @override
-  Future<List<FileResponse>> uploadFile(UploadFileRequest request) async {
+  Future<List<FileResponse>> uploadFile(UploadFileRequest request,
+      {ProgressCallback? onUploadProgress, CancelToken? cancelToken}) async {
     try {
+      if (cancelToken != null && request.uploadId != null) {
+        cancelTokenPool[request.uploadId!] = cancelToken;
+      }
+
       /// If we want to support multiple file upload it future
       // var formData = FormData.fromMap({
       //   'files': Stream.fromIterable(request.files)
@@ -48,17 +56,25 @@ class FileApiInterfaceImpl extends FileApiInterface {
         'file': await MultipartFile.fromFile(request.files[0].path,
             filename: request.files[0].path.split('/').last),
       }..addAll(request.toJson()));
-      final data = await httpApiClient().post('$FILE_V3/', data: formData);
+
+      final data = await httpApiClient().post('$FILE_V3/',
+          data: formData,
+          onSendProgress: onUploadProgress,
+          cancelToken: cancelToken);
       return fileResponseFromList(data.data);
     } on DioError catch (error) {
-      final amityError = AmityErrorResponse.fromJson(error.response!.data);
-      return Future.error(amityError.amityException());
+      return Future.error(error.toAmityExcetion());
     }
   }
 
   @override
-  Future<List<FileResponse>> uploadVideo(UploadFileRequest request) async {
+  Future<List<FileResponse>> uploadVideo(UploadFileRequest request,
+      {ProgressCallback? onUploadProgress, CancelToken? cancelToken}) async {
     try {
+      if (cancelToken != null && request.uploadId != null) {
+        cancelTokenPool[request.uploadId!] = cancelToken;
+      }
+
       /// If we want to support multiple file upload it future
       // var formData = FormData.fromMap({
       //   'files': Stream.fromIterable(request.files)
@@ -72,12 +88,20 @@ class FileApiInterfaceImpl extends FileApiInterface {
         'files': await MultipartFile.fromFile(request.files[0].path,
             filename: request.files[0].path.split('/').last),
       }..addAll(request.toJson()));
-      final data =
-          await httpApiClient().post('$VIDEO_FILE_V3/', data: formData);
+      final data = await httpApiClient().post('$VIDEO_FILE_V3/',
+          data: formData,
+          onSendProgress: onUploadProgress,
+          cancelToken: cancelToken);
       return fileResponseFromList(data.data);
     } on DioError catch (error) {
-      final amityError = AmityErrorResponse.fromJson(error.response!.data);
-      return Future.error(amityError.amityException());
+      return Future.error(error.toAmityExcetion());
+    }
+  }
+
+  @override
+  void cancelUpload(String uploadId) {
+    if (cancelTokenPool.containsKey(uploadId)) {
+      cancelTokenPool[uploadId]!.cancel();
     }
   }
 }

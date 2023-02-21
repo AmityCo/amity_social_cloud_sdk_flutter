@@ -1,9 +1,10 @@
-import 'package:amity_sdk/src/core/model/api_request/upload_file_request.dart';
+import 'dart:async';
+
+import 'package:amity_sdk/amity_sdk.dart';
+import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/domain/model/amity_file/amity_file_info.dart';
-import 'package:amity_sdk/src/domain/model/amity_file/amity_file_properties.dart';
-import 'package:amity_sdk/src/domain/model/amity_file/amity_upload_result.dart';
-import 'package:amity_sdk/src/domain/repo/file_repo.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:dio/dio.dart';
 
 /// File Repo Layer Impl
 class FileRepoImpl extends FileRepo {
@@ -24,7 +25,8 @@ class FileRepoImpl extends FileRepo {
 
   @override
   Future<AmityUploadResult<AmityFile>> uploadFile(
-      UploadFileRequest request) async {
+    UploadFileRequest request,
+  ) async {
     final data = await fileApiInterface.uploadFile(request);
 
     final fileProperties = await _saveDataToDb(data);
@@ -51,7 +53,8 @@ class FileRepoImpl extends FileRepo {
 
   @override
   Future<AmityUploadResult<AmityAudio>> uploadAudio(
-      UploadFileRequest request) async {
+    UploadFileRequest request,
+  ) async {
     final data = await fileApiInterface.uploadFile(request);
 
     final fileProperties = await _saveDataToDb(data);
@@ -61,7 +64,8 @@ class FileRepoImpl extends FileRepo {
 
   @override
   Future<AmityUploadResult<AmityImage>> uploadImage(
-      UploadFileRequest request) async {
+    UploadFileRequest request,
+  ) async {
     final data = await fileApiInterface.uploadFile(request);
 
     final fileProperties = await _saveDataToDb(data);
@@ -71,11 +75,99 @@ class FileRepoImpl extends FileRepo {
 
   @override
   Future<AmityUploadResult<AmityVideo>> uploadVidoe(
-      UploadFileRequest request) async {
+    UploadFileRequest request,
+  ) async {
     final data = await fileApiInterface.uploadVideo(request);
 
     final fileProperties = await _saveDataToDb(data);
 
     return AmityUploadComplete(AmityVideo(fileProperties.first));
+  }
+
+  @override
+  StreamController<AmityUploadResult<AmityFile>> uploadFileStream(
+      UploadFileRequest request) {
+    final controller = StreamController<AmityUploadResult<AmityFile>>();
+    final cancelToken = CancelToken();
+
+    try {
+      fileApiInterface.uploadFile(
+        request,
+        onUploadProgress: (int progress, int total) {
+          final amityUploadInfo = AmityUploadInfo({
+            'progress': ((progress / total) * 100).toInt(),
+            'contentLength': total
+          });
+          controller
+              .add(AmityUploadResult.progress(amityUploadInfo, cancelToken));
+        },
+        cancelToken: cancelToken,
+      ).then((value) async {
+        if (cancelToken.isCancelled) {
+          //Request Cancelled
+          controller.add(AmityUploadResult.cancel());
+          return;
+        }
+        final fileProperties = await _saveDataToDb(value);
+        controller.add(AmityUploadResult<AmityFile>.complete(
+            AmityFile(fileProperties.first)));
+      }).onError<AmityException>((error, stackTrace) {
+        if (error.code == 499) {
+          controller.add(AmityUploadResult.cancel());
+        } else {
+          controller.add(AmityUploadResult.error(error));
+        }
+      });
+    } catch (error) {
+      controller.add(AmityUploadResult.error(error as AmityException));
+    }
+
+    return controller;
+  }
+
+  @override
+  StreamController<AmityUploadResult<AmityImage>> uploadImageStream(
+      UploadFileRequest request) {
+    final controller = StreamController<AmityUploadResult<AmityImage>>();
+    final cancelToken = CancelToken();
+
+    try {
+      fileApiInterface.uploadFile(
+        request,
+        onUploadProgress: (int progress, int total) {
+          final amityUploadInfo = AmityUploadInfo({
+            'progress': ((progress / total) * 100).toInt(),
+            'contentLength': total
+          });
+          controller
+              .add(AmityUploadResult.progress(amityUploadInfo, cancelToken));
+        },
+        cancelToken: cancelToken,
+      ).then((value) async {
+        if (cancelToken.isCancelled) {
+          //Request Cancelled
+          controller.add(AmityUploadResult.cancel());
+          return;
+        }
+        final fileProperties = await _saveDataToDb(value);
+        controller.add(AmityUploadResult<AmityImage>.complete(
+            AmityImage(fileProperties.first)));
+      }).onError<AmityException>((error, stackTrace) {
+        if (error.code == 499) {
+          controller.add(AmityUploadResult.cancel());
+        } else {
+          controller.add(AmityUploadResult.error(error));
+        }
+      });
+    } catch (error) {
+      controller.add(AmityUploadResult.error(error as AmityException));
+    }
+
+    return controller;
+  }
+
+  @override
+  void cancelUpload(String uploadId) {
+    fileApiInterface.cancelUpload(uploadId);
   }
 }
