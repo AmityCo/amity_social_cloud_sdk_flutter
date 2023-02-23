@@ -51,7 +51,7 @@ class CommunityGetQueryBuilder {
     request.categoryId = _categoryId;
     request.filter = _filter.value;
     request.sortBy = _sortBy.apiKey;
-    request.isDeleted = _isDeleted;
+    request.isDeleted = _isDeleted ?? true ? null : false;
 
     request.options = OptionsRequest();
     if (token != null) {
