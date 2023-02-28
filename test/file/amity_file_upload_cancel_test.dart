@@ -36,22 +36,22 @@ void main() {
           onUploadProgress: any(named: 'onUploadProgress'),
           cancelToken: any(named: 'cancelToken'),
         )).thenAnswer((invocation) async {
-      final namedArgs = invocation.namedArguments;
+      // final namedArgs = invocation.namedArguments;
 
-      final onUploadProgress = namedArgs[Symbol('onUploadProgress')]
-          as Function(int progress, int total);
+      // final onUploadProgress = namedArgs[Symbol('onUploadProgress')]
+      //     as Function(int progress, int total);
 
-      // emulate in progress callback
-      for (int progress in uploadProgressStep) {
-        await Future.delayed(const Duration(milliseconds: 20));
-        onUploadProgress(progress, 100);
-      }
+      // // emulate in progress callback
+      // for (int progress in uploadProgressStep) {
+      //   // await Future.delayed(const Duration(milliseconds: 20));
+      //   onUploadProgress(progress, 100);
+      // }
 
-      return Future.error(DioError(
+      throw DioError(
         type: DioErrorType.cancel,
         error: 'User Cancel the request',
         requestOptions: RequestOptions(path: ''),
-      ));
+      );
     });
 
     final fileUpload = File('mock_path');

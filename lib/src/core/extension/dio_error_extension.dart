@@ -11,8 +11,7 @@ extension DioErrorExtension on DioError {
       case DioErrorType.receiveTimeout:
         return AmityException(message: 'Request Timeout', code: 408);
       case DioErrorType.response:
-        return AmityErrorResponse.fromJson(error.response!.data)
-            .amityException();
+        return AmityErrorResponse.fromJson(response!.data).amityException();
       case DioErrorType.cancel:
         return AmityException(message: 'Request Cancel', code: 499);
       case DioErrorType.other:
