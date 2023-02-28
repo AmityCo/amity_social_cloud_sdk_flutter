@@ -1,3 +1,6 @@
+## 0.17.1
+* fix: resolve issue with community query delete flag
+
 ## 0.17.0
 * feat: Community user search by keyword
 * feat: Mention user in post creation
