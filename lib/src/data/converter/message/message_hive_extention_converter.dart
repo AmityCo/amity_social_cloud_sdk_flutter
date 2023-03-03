@@ -20,7 +20,7 @@ extension MessageHiveExtensionConverter on MessageHiveEntity {
       case AmityMessageDataType.IMAGE:
         amityMessageData = MessageImageData(
           messageId: messageId!,
-          fileId: fileId!,
+          fileId: fileId,
           caption: data!.caption,
         );
         break;
@@ -33,7 +33,7 @@ extension MessageHiveExtensionConverter on MessageHiveEntity {
       case AmityMessageDataType.FILE:
         amityMessageData = MessageFileData(
           messageId: messageId!,
-          fileId: fileId!,
+          fileId: fileId,
           caption: data!.caption,
         );
         break;

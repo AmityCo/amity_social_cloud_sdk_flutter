@@ -123,16 +123,14 @@ class MessageTextData extends AmityMessageData {
 /// Image Message Data
 class MessageImageData extends AmityMessageData {
   /// Amity Image
-  late AmityImage image;
+  AmityImage? image;
 
   /// Caption
   String? caption;
 
   /// Image Message Data
   MessageImageData(
-      {required String messageId,
-      required String fileId,
-      required this.caption})
+      {required String messageId, String? fileId, required this.caption})
       : super(messageId: messageId, fileId: fileId);
 
   @override
@@ -142,16 +140,14 @@ class MessageImageData extends AmityMessageData {
 /// [MessageFileData]
 class MessageFileData extends AmityMessageData {
   /// Amity File
-  late AmityFile file;
+  AmityFile? file;
 
   /// Caption
   String? caption;
 
   /// init [MessageFileData]
   MessageFileData(
-      {required String messageId,
-      required String fileId,
-      required this.caption})
+      {required String messageId, String? fileId, required this.caption})
       : super(messageId: messageId, fileId: fileId);
 
   @override
