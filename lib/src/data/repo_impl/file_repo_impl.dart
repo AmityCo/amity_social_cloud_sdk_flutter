@@ -118,8 +118,8 @@ class FileRepoImpl extends FileRepo {
           controller.add(AmityUploadResult.error(error));
         }
       });
-    } catch (error) {
-      controller.add(AmityUploadResult.error(error as AmityException));
+    } on DioError catch (error) {
+      controller.add(AmityUploadResult.error(error.toAmityExcetion()));
     }
 
     return controller;
