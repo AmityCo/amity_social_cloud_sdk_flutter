@@ -26,7 +26,7 @@ class RegisterDeviceNotificationUseCase extends UseCase<void, String> {
     } else if (Platform.isIOS) {
       platform = "android";
     } else {
-      throw TypeError();
+      platform = 'unknown';
     }
     final RegisterNotificationRequest request = RegisterNotificationRequest(
         userId: account!.userId!,
