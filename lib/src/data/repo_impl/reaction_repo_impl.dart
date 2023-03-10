@@ -29,7 +29,7 @@ class ReactionRepoImpl extends ReactionRepo {
     /// overwrite the message data.
     if (request.referenceType == AmityReactionReferenceType.POST.value) {
       final amityPost =
-          dbAdapterRepo.postDbAdapter.getPostEntity(request.referenceId);
+          dbAdapterRepo.postDbAdapter.getPostEntity(request.referenceId)!;
 
       try {
         final amityPostLocalCopy = amityPost.copyWith();
@@ -57,7 +57,7 @@ class ReactionRepoImpl extends ReactionRepo {
     //Add Rection from local Amity Comment
     if (request.referenceType == AmityReactionReferenceType.COMMENT.value) {
       final amityComment =
-          dbAdapterRepo.commentDbAdapter.getCommentEntity(request.referenceId);
+          dbAdapterRepo.commentDbAdapter.getCommentEntity(request.referenceId)!;
       try {
         final amityCommentLocalCopy = amityComment.copyWith();
         amityCommentLocalCopy.myReactions ??= [];
@@ -121,7 +121,7 @@ class ReactionRepoImpl extends ReactionRepo {
     //Remove Reaction from Local Amity Post
     if (request.referenceType == AmityReactionReferenceType.POST.value) {
       final amityPost =
-          dbAdapterRepo.postDbAdapter.getPostEntity(request.referenceId);
+          dbAdapterRepo.postDbAdapter.getPostEntity(request.referenceId)!;
 
       try {
         final amityPostLocalCopy = amityPost.copyWith();
@@ -149,7 +149,7 @@ class ReactionRepoImpl extends ReactionRepo {
     //Remove Rection from local Amity Comment
     if (request.referenceType == AmityReactionReferenceType.COMMENT.value) {
       final amityComment =
-          dbAdapterRepo.commentDbAdapter.getCommentEntity(request.referenceId);
+          dbAdapterRepo.commentDbAdapter.getCommentEntity(request.referenceId)!;
       try {
         final amityCommentLocalCopy = amityComment.copyWith();
         amityCommentLocalCopy.myReactions ??= [];

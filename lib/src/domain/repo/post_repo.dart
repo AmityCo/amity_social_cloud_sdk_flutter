@@ -21,4 +21,7 @@ abstract class PostRepo {
 
   Future<bool> approvePost(String postId);
   Future<bool> declinePost(String postId);
+
+  /// Has Local Post
+  bool hasLocalPost(String postId);
 }

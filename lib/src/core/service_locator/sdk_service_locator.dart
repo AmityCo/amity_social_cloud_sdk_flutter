@@ -267,6 +267,10 @@ class SdkServiceLocator {
       ),
     );
 
+    serviceLocator.registerLazySingleton<TopicRepository>(
+      () => TopicRepositoryImpl(amityMqtt: serviceLocator()),
+    );
+
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
         GetPostByIdUseCase(
@@ -451,6 +455,10 @@ class SdkServiceLocator {
         CommentCreateUseCase(
             commentRepo: serviceLocator(),
             commentComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentGetUseCase>(() =>
+        CommentGetUseCase(
+            commentRepo: serviceLocator(),
+            commentComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<CommentQueryUsecase>(() =>
         CommentQueryUsecase(
             commentRepo: serviceLocator(),
@@ -465,6 +473,8 @@ class SdkServiceLocator {
         () => CommentFlagUsecase(commentRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommentUnflagUsecase>(
         () => CommentUnflagUsecase(commentRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentHasLocalUseCase>(
+        () => CommentHasLocalUseCase(commentRepo: serviceLocator()));
 
     serviceLocator.registerLazySingleton<GetGlobalFeedUsecase>(
         () => GetGlobalFeedUsecase(serviceLocator(), serviceLocator()));
@@ -498,6 +508,8 @@ class SdkServiceLocator {
             postRepo: serviceLocator(), postComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<PostGetUsecase>(() => PostGetUsecase(
         postRepo: serviceLocator(), postComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<PostHasLocalUsecase>(
+        () => PostHasLocalUsecase(postRepo: serviceLocator()));
 
     serviceLocator.registerLazySingleton<CommentDeleteUseCase>(
         () => CommentDeleteUseCase(commentRepo: serviceLocator()));
@@ -658,6 +670,11 @@ class SdkServiceLocator {
         ChannelUpdateUseCase(
             channelRepo: serviceLocator(),
             channelComposerUsecase: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<TopicSubscriptionUseCase>(
+        () => TopicSubscriptionUseCase(topicRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<TopicUnsubscriptionUseCase>(
+        () => TopicUnsubscriptionUseCase(topicRepo: serviceLocator()));
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo

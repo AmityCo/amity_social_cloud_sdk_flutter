@@ -12,4 +12,5 @@ export 'reaction/reaction.dart';
 export 'relationship/relationship.dart';
 export 'search_user_by_display_name_usecase.dart';
 export 'token/token.dart';
+export 'topic/topic.dart';
 export 'user/user.dart';

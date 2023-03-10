@@ -1,0 +1,1 @@
+enum AmityCommunityEvents { COMMUNITY, POSTS, COMMENTS, POSTS_AND_COMMENTS }

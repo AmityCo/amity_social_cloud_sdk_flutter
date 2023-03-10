@@ -16,5 +16,6 @@ export 'notification_repo.dart';
 export 'poll_repo.dart';
 export 'post_repo.dart';
 export 'reaction_repo.dart';
+export 'topic_repo.dart';
 export 'user_feed_repo.dart';
 export 'user_repo.dart';

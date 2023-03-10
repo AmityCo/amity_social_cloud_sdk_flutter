@@ -6,6 +6,7 @@ extension CommentResponseExtension on CommentResponse {
   CommentHiveEntity convertToCommentHiveEntity() {
     return CommentHiveEntity()
       ..commentId = commentId
+      ..path = path
       ..userId = userId
       ..parentId = parentId
       ..rootId = rootId

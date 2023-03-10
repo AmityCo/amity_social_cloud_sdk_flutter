@@ -43,7 +43,7 @@ class PostRepoImpl extends PostRepo {
 
   @override
   Future<AmityPost> getPostByIdFromDb(String id) async {
-    return dbAdapterRepo.postDbAdapter.getPostEntity(id).convertToAmityPost();
+    return dbAdapterRepo.postDbAdapter.getPostEntity(id)!.convertToAmityPost();
   }
 
   @override
@@ -51,7 +51,7 @@ class PostRepoImpl extends PostRepo {
     final data = await publicPostApiInterface.deletePostById(postId);
 
     ///Get the post from DB and update the delete flag to true
-    final amityPostDb = dbAdapterRepo.postDbAdapter.getPostEntity(postId);
+    final amityPostDb = dbAdapterRepo.postDbAdapter.getPostEntity(postId)!;
 
     amityPostDb
       ..isDeleted = true
@@ -66,7 +66,7 @@ class PostRepoImpl extends PostRepo {
     await data.saveToDb<AmityPost>(dbAdapterRepo);
 
     // Update the isFlaggedByMe
-    final post = dbAdapterRepo.postDbAdapter.getPostEntity(postId);
+    final post = dbAdapterRepo.postDbAdapter.getPostEntity(postId)!;
     post.flaggedByMe = true;
     post.save();
 
@@ -85,7 +85,7 @@ class PostRepoImpl extends PostRepo {
     await data.saveToDb<AmityPost>(dbAdapterRepo);
 
     // Update the isFlaggedByMe
-    final post = dbAdapterRepo.postDbAdapter.getPostEntity(postId);
+    final post = dbAdapterRepo.postDbAdapter.getPostEntity(postId)!;
     post.flaggedByMe = false;
     post.save();
 
@@ -143,5 +143,10 @@ class PostRepoImpl extends PostRepo {
   Future<bool> declinePost(String postId) async {
     final data = await publicPostApiInterface.declinePost(postId);
     return data;
+  }
+
+  @override
+  bool hasLocalPost(String postId) {
+    return dbAdapterRepo.postDbAdapter.getPostEntity(postId) != null;
   }
 }

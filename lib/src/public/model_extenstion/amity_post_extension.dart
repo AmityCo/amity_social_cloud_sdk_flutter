@@ -91,4 +91,9 @@ extension AmityPostExtension on AmityPost {
                 k: hashFlag!['hashes'] as int)
             .mightContains(AmityCoreClient.getUserId());
   }
+
+  ///Subscribe/Unsubscribe to post event
+  AmityTopicSubscription subscription(AmityPostEvents events) {
+    return AmityTopicSubscription(AmityTopic.POST(this, events));
+  }
 }

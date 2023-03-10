@@ -11,6 +11,7 @@ export 'community_member_response_extension_converter.dart';
 export 'community_member_response_hive_entity_extension_converter.dart';
 export 'community_members_response_extension_converter.dart';
 export 'community_response_extension_converter.dart';
+export 'create_comment_response_extension.dart';
 export 'create_post_response_extension_converter.dart';
 export 'file_hive_entity_extension_converter.dart';
 export 'file_response_extension_converter.dart';

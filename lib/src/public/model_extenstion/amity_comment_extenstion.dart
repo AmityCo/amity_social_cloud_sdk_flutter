@@ -54,4 +54,9 @@ extension AmityCommentExtension on AmityComment {
                 k: hashFlag!['hashes'] as int)
             .mightContains(AmityCoreClient.getUserId());
   }
+
+  /// Subscribe/Unsubscribe to comment events
+  AmityTopicSubscription subscription(AmityCommentEvents events) {
+    return AmityTopicSubscription(AmityTopic.COMMENT(this, events));
+  }
 }
