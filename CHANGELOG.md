@@ -1,3 +1,7 @@
+## 0.18.0
+* feat: File uploading progress
+* feat: Image uploading progress
+
 ## 0.17.1
 * fix: resolve issue with community query delete flag
 

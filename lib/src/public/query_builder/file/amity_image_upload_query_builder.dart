@@ -41,7 +41,7 @@ class AmityImageUploadQueryBuilder {
   StreamController<AmityUploadResult<AmityImage>> upload() {
     UploadFileRequest request = UploadFileRequest();
     request.files.add(_file);
-
+    request.fullImage = _isFullImage;
     if (_uploadId != null) request.uploadId = _uploadId;
 
     return _usecase.listen(request);
