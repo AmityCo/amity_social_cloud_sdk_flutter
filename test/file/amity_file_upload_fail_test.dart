@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:amity_sdk/src/src.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 

@@ -1,4 +1,5 @@
 import 'package:amity_sdk/src/src.dart';
+import 'package:uuid/uuid.dart';
 
 import 'hive_extension.dart';
 
@@ -24,5 +25,9 @@ class AmityCoreClientMockSetup {
         refreshToken: 'mockRefreshToken',
         users: [],
         files: []));
+    serviceLocator<AccountDbAdapter>().saveAccountEntity(AccountHiveEntity(
+        userId: 'userId',
+        displayName: 'displayName',
+        deviceId: const Uuid().v1()));
   }
 }
