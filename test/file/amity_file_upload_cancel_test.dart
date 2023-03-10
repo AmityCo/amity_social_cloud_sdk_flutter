@@ -15,8 +15,6 @@ void main() {
 
   final fileApiInterface = MockFileApiInterface();
 
-  const uploadProgressStep = [0, 10, 20, 30, 40, 50, 60];
-
   setUpAll(() async {
     registerFallbackValue(UploadFileRequest());
 
@@ -35,24 +33,11 @@ void main() {
           any(),
           onUploadProgress: any(named: 'onUploadProgress'),
           cancelToken: any(named: 'cancelToken'),
-        )).thenAnswer((invocation) async {
-      // final namedArgs = invocation.namedArguments;
-
-      // final onUploadProgress = namedArgs[Symbol('onUploadProgress')]
-      //     as Function(int progress, int total);
-
-      // // emulate in progress callback
-      // for (int progress in uploadProgressStep) {
-      //   // await Future.delayed(const Duration(milliseconds: 20));
-      //   onUploadProgress(progress, 100);
-      // }
-
-      throw DioError(
-        type: DioErrorType.cancel,
-        error: 'User Cancel the request',
-        requestOptions: RequestOptions(path: ''),
-      );
-    });
+        )).thenThrow(DioError(
+      type: DioErrorType.cancel,
+      error: 'User Cancel the request',
+      requestOptions: RequestOptions(path: ''),
+    ));
 
     final fileUpload = File('mock_path');
     AmityCoreClient.newFileRepository()
@@ -72,7 +57,7 @@ void main() {
               expect(event, isA<AmityUploadCancel>());
             },
           );
-        }, count: uploadProgressStep.length + 1));
+        }, count: 1));
   });
 
   tearDownAll(() async {
