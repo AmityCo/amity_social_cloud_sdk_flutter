@@ -76,7 +76,7 @@ class UserFeedRepoImpl extends UserFeedRepo {
       //Get all the post in feed collection from post db
       final amitPosts = await Stream.fromIterable(data.postIds!)
           .asyncMap((element) async => dbAdapterRepo.postDbAdapter
-              .getPostEntity(element)
+              .getPostEntity(element)!
               .convertToAmityPost())
           .toList();
 

@@ -111,6 +111,7 @@ class AmitySocket {
       MessageUpdateEventListener(),
       MessageDeleteventListener()
     ];
+
     for (var event in events) {
       _activeSocket?.on(event.getEventName(), (data) {
         if (event.shouldProcessEvent(data)) {
@@ -118,5 +119,14 @@ class AmitySocket {
         }
       });
     }
+  }
+
+  void subscribe(AmityTopic topic) {
+    _activeSocket?.on(topic.generateTopic(), (data) {
+      print('AmitySocketClient: get data $data');
+      // if (eventHandler.shouldProcessEvent(data)) {
+      //   eventHandler.processEvent(data);
+      // }
+    });
   }
 }

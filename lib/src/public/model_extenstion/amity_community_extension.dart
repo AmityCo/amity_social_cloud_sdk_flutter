@@ -33,4 +33,9 @@ extension AmityCommunityExtension on AmityCommunity {
             userId: AmityCoreClient.getUserId(),
             permission: permission));
   }
+
+  /// Subscribe to Community Events
+  AmityTopicSubscription subscription(AmityCommunityEvents events) {
+    return AmityTopicSubscription(AmityTopic.COMMUNITY(this, events));
+  }
 }

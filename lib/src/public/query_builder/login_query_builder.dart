@@ -1,4 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/mqtt/amity_mqtt.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:uuid/uuid.dart';
 
@@ -46,6 +47,7 @@ class LoginQueryBuilder {
     //TODO uncomment when ready
     //connect to socket if login is successful
     serviceLocator<AmitySocket>().connect();
+    serviceLocator<AmityMQTT>().connect();
 
     return amityUser;
   }

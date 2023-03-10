@@ -1,5 +1,6 @@
+import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/service_locator/service_locator.dart';
-import 'package:amity_sdk/src/public/public.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
 
 /// Comment Repository
 class CommentRepository {
@@ -16,5 +17,10 @@ class CommentRepository {
   /// Get [AmityReaction] for the comment Id
   GetReactionQueryBuilder getReaction({required String commentId}) {
     return GetReactionQueryBuilder.comment(commentId: commentId);
+  }
+
+  /// Get [AmityReaction] for the comment Id
+  Future<AmityComment> getComment({required String commentId}) {
+    return serviceLocator<CommentGetUseCase>().get(commentId);
   }
 }

@@ -1,0 +1,1 @@
+enum AmityPostEvents { POST, COMMENTS }

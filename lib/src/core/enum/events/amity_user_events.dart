@@ -1,0 +1,1 @@
+enum AmityUserEvents { USER, POSTS, COMMENTS, POSTS_AND_COMMENTS }

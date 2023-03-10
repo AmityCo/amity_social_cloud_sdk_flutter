@@ -20,7 +20,7 @@ class CommentRepoImpl extends CommentRepo {
   @override
   Future<AmityComment> getCommentByIdFromDb(String commentId) async {
     final commentHiveEntity =
-        dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId);
+        dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId)!;
     return commentHiveEntity.convertToAmityComment();
   }
 
@@ -58,7 +58,7 @@ class CommentRepoImpl extends CommentRepo {
     final data = await commentApiInterface.deleteComment(commentId);
 
     final amityCommentEntity =
-        dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId);
+        dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId)!;
 
     amityCommentEntity
       ..isDeleted = true
@@ -73,7 +73,7 @@ class CommentRepoImpl extends CommentRepo {
     await _saveDetailsToDb(data);
 
     // Update the isFlaggedByMe
-    final comment = dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId);
+    final comment = dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId)!;
     comment.flaggedByMe = true;
     comment.save();
 
@@ -101,7 +101,7 @@ class CommentRepoImpl extends CommentRepo {
     await _saveDetailsToDb(data);
 
     // Update the isFlaggedByMe
-    final comment = dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId);
+    final comment = dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId)!;
     comment.flaggedByMe = false;
     comment.save();
 
@@ -168,5 +168,10 @@ class CommentRepoImpl extends CommentRepo {
     final amityComments = await _saveDetailsToDb(data);
 
     return PageListData(amityComments, data.paging!.next ?? '');
+  }
+
+  @override
+  bool hasLocalComment(String commentId) {
+    return dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId) != null;
   }
 }

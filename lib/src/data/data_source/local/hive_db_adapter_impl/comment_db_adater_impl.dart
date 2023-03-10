@@ -13,7 +13,7 @@ class CommentDbAdapterImpl extends CommentDbAdapter {
   }
 
   @override
-  CommentHiveEntity getCommentEntity(String id) {
+  CommentHiveEntity? getCommentEntity(String id) {
     return box.get(id);
   }
 
@@ -29,7 +29,7 @@ class CommentDbAdapterImpl extends CommentDbAdapter {
 
   @override
   Future updateChildComment(String parentCommentId, String commentId) async {
-    CommentHiveEntity commentHiveEntity = getCommentEntity(parentCommentId);
+    CommentHiveEntity commentHiveEntity = getCommentEntity(parentCommentId)!;
     commentHiveEntity.children!.add(commentId);
     commentHiveEntity.childrenNumber =
         ((commentHiveEntity.childrenNumber) ?? 0) + 1;

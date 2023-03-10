@@ -9,4 +9,5 @@ export 'poll/poll.dart';
 export 'post/post.dart';
 export 'reaction/reaction.dart';
 export 'relationship/relationship.dart';
+export 'topic/topic.dart';
 export 'user/user.dart';

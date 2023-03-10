@@ -153,7 +153,8 @@ class PostResponse {
             : DateTime.tryParse(json["updatedAt"]),
         reactions: Map.from(json["reactions"]),
         reactionsCount: json["reactionsCount"],
-        myReactions: List<String>.from(json["myReactions"].map((x) => x)),
+        myReactions:
+            List<String>.from(json["myReactions"]?.map((x) => x) ?? []),
         commentsCount: json["commentsCount"],
         comments: List<String>.from(json["comments"].map((x) => x)),
         children: List<String>.from(json["children"].map((x) => x)),

@@ -3,7 +3,7 @@ import 'package:amity_sdk/src/data/data_source/local/hive_entity/post_hive_entit
 abstract class PostDbAdapter {
   Future savePostEntity(PostHiveEntity data);
   Future deletePostEntity(PostHiveEntity data);
-  PostHiveEntity getPostEntity(String postId);
+  PostHiveEntity? getPostEntity(String postId);
 
   Stream<PostHiveEntity> listenPostEntity(String postId);
 

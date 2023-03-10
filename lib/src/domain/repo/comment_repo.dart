@@ -17,4 +17,7 @@ abstract class CommentRepo {
   Future<bool> flagComment(String commentId);
   Future<bool> unflagComment(String commentId);
   Future<bool> isCommentFlagByMe(String commentId);
+
+  /// Has Local Comment
+  bool hasLocalComment(String commentId);
 }

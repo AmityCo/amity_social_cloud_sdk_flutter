@@ -35,4 +35,9 @@ class AccountDbAdapterImpl extends AccountDbAdapter {
     await box.clear();
     await box.put(entity.userId, entity);
   }
+
+  @override
+  Stream<AccountHiveEntity?> listenAccounts() {
+    return box.watch().map<AccountHiveEntity>((event) => event.value);
+  }
 }

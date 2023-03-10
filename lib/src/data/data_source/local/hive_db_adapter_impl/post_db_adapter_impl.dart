@@ -22,7 +22,7 @@ class PostDbAdapterImpl extends PostDbAdapter {
   }
 
   @override
-  PostHiveEntity getPostEntity(String postId) {
+  PostHiveEntity? getPostEntity(String postId) {
     return box.get(postId);
   }
 
@@ -33,7 +33,7 @@ class PostDbAdapterImpl extends PostDbAdapter {
 
   @override
   Future updateComment(String postId, String commentId) async {
-    PostHiveEntity postHiveEntity = getPostEntity(postId);
+    PostHiveEntity postHiveEntity = getPostEntity(postId)!;
     postHiveEntity.comments!.add(commentId);
     postHiveEntity.commentsCount = ((postHiveEntity.commentsCount) ?? 0) + 1;
     await postHiveEntity.save();
