@@ -1,0 +1,26 @@
+{
+    "results": {
+        "reactions": [
+            {
+                "referenceId": "6408201e92d04881cd88e5ad",
+                "referenceType": "post",
+                "reactors": [
+                    {
+                        "reactionName": "like",
+                        "userId": "victimAndroid",
+                        "reactionId": "640aa4bafea8da49a9cef364",
+                        "createdAt": "2023-03-10T03:32:10.878Z"
+                    }
+                ]
+            }
+        ],
+        "users": [
+            {
+                "displayName": "Victim Android",
+                "userId": "victimAndroid",
+                "metadata": {}
+            }
+        ]
+    },
+    "paging": {}
+}

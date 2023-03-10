@@ -32,7 +32,8 @@ void main() {
           any(),
           onUploadProgress: any(named: 'onUploadProgress'),
           cancelToken: any(named: 'cancelToken'),
-        )).thenAnswer((_) {
+        )).thenAnswer((_) async {
+      await Future.delayed(const Duration(seconds: 2));
       throw AmityException(message: 'Upload failed', code: 1234);
     });
 
