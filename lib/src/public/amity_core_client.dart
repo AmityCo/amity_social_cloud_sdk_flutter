@@ -25,16 +25,17 @@ class AmityCoreClient {
 
     return;
   }
-  
+
   /* begin_public_function 
   id: client.login
+  api_style: async
   */
   /// Login with userId, this will create user session
   static LoginQueryBuilder login(String userId) {
     return LoginQueryBuilder(useCase: serviceLocator(), userId: userId);
   }
   /* end_public_function */
-  
+
   /* begin_public_function 
   id: client.logout
   */
@@ -51,7 +52,7 @@ class AmityCoreClient {
     return;
   }
   /* end_public_function */
-  
+
   /* begin_public_function 
   id: client.disconnect
   */
@@ -61,8 +62,7 @@ class AmityCoreClient {
     serviceLocator<AmitySocket>().terminate();
   }
   /* end_public_function */
-  
-  
+
   ///Check if user is logged in
   static bool isUserLoggedIn() {
     try {
@@ -78,7 +78,7 @@ class AmityCoreClient {
   static String getUserId() {
     return getCurrentUser().userId!;
   }
-  
+
   /* begin_public_function 
   id: client.get_current_user
   */
@@ -94,7 +94,7 @@ class AmityCoreClient {
     );
   }
   /* end_public_function */
-  
+
   /* begin_public_function 
   id: client.register_push
   */
@@ -104,7 +104,7 @@ class AmityCoreClient {
         .registerDeviceNotification(fcmToken);
   }
   /* end_public_function */
-  
+
   /* begin_public_function 
   id: client.unregister_push
   */

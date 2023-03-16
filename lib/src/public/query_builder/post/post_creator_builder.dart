@@ -111,6 +111,12 @@ class AmityTextPostCreator extends PostCreator {
       : super(useCase: useCase, targetId: targetId, targetType: targetType) {
     _text = text;
   }
+
+  /* begin_public_function 
+  id: post.create.text_post
+  */
+  Future<AmityPost> createTextPost() => post();
+  /* end_public_function */
 }
 
 /// Implementation Layer for Amity Post Image Creator

@@ -30,10 +30,15 @@ class PostRepository {
   }
   /* end_public_function */
 
+  /* begin_public_function 
+  id: post.create.text_post, post.create.image_post, post.create.video_post, post.create.file_post, post.create.poll_post, post.create.custom_post
+  api_style: async
+  */
   /// Create Text/Image/Video/File post and retune [AmityPost]
   AmityPostCreateTargetSelector createPost() {
     return AmityPostCreateTargetSelector(useCase: serviceLocator());
   }
+  /* end_public_function */
 
   /* begin_public_function 
   id: post.soft_delete

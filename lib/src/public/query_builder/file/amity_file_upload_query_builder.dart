@@ -20,6 +20,9 @@ class AmityFileUploadQueryBuilder {
     _uploadId = id;
   }
 
+  /*  begin_public_function
+  id: file.upload.file
+  */
   /// Uplaod the File
   StreamController<AmityUploadResult<AmityFile>> upload() {
     UploadFileRequest request = UploadFileRequest();
@@ -29,4 +32,5 @@ class AmityFileUploadQueryBuilder {
 
     return _usecase.listen(request);
   }
+  /* end_public_function */
 }
