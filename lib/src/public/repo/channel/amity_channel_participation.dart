@@ -13,35 +13,35 @@ class AmityChannelParticipation {
     return this;
   }
 
+  /* begin_public_function 
+  id: channel.membership.get_my_membership
+  */
   /// Get the member ship for the current users
   Future<AmityChannelMember> getMyMembership() {
     return serviceLocator<ChannelMemberGetUsecase>().get(
         GetChannelMembersRequest(
             channelId: _channelId, memberId: AmityCoreClient.getUserId()));
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: channel.member.query
+  */
   /// Get member for the channel Id
   GetChannelMemberQueryBuilder getMembers() {
     return GetChannelMemberQueryBuilder(serviceLocator(), _channelId);
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: channel.member.search
+  */
   /// Search Member using keyword
   AmityChannelMemberSearch searchMembers(String keyword) {
     return AmityChannelMemberSearch(serviceLocator(), _channelId)
       ..keyword(keyword);
   }
-
-  // fun searchMembers(keyword: String): AmityChannelMemberSearch.Builder {
-  //     return AmityChannelMemberSearch.Builder(channelId, keyword)
-  // }
-
-  // fun addMembers(userIds: List<String>): Single<AmityChannel> {
-  //     return AddUsersChannelParticipationUseCase().execute(channelId, userIds)
-  // }
-
-  // fun removeMembers(userIds: List<String>): Single<AmityChannel> {
-  //     return RemoveUsersChannelParticipationUseCase().execute(channelId, userIds)
-  // }
+  /* end_public_function */
 
   // fun startReading() {
   //     return StartReadingChannelParticipationUseCase().execute(channelId)
@@ -50,5 +50,4 @@ class AmityChannelParticipation {
   // fun stopReading() {
   //     return StopReadingChannelParticipationUseCase().execute(channelId)
   // }
-
 }

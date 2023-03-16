@@ -29,14 +29,9 @@ class AmityImageUploadQueryBuilder {
     return this;
   }
 
-  // Future<AmityUploadResult<AmityImage>> upload() {
-  //   UploadFileRequest request = UploadFileRequest();
-  //   request.files.add(_file);
-  //   request.fullImage = _isFullImage;
-  //   if (_uploadId != null) request.uploadId = _uploadId;
-  //   return _usecase.get(request);
-  // }
-
+  /* begin_public_function
+  id: file.upload.image
+  */
   /// excute upload function
   StreamController<AmityUploadResult<AmityImage>> upload() {
     UploadFileRequest request = UploadFileRequest();
@@ -46,4 +41,5 @@ class AmityImageUploadQueryBuilder {
 
     return _usecase.listen(request);
   }
+  /* end_public_function */
 }
