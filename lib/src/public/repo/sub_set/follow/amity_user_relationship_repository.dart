@@ -22,7 +22,7 @@ class AmityUserRelationshipRepository {
   /* end_public_function */
 
   /* begin_public_function 
-  id:user.relationship.unfollow
+  id: user.relationship.unfollow
   */
   ///Unfollow this Amity User by Current logged in user
   Future<AmityFollowStatus> unfollow() {
