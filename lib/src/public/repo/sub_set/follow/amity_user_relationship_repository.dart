@@ -31,7 +31,7 @@ class AmityUserRelationshipRepository {
   /* end_public_function */
 
   /* begin_public_function 
-  id: user.relationship.query_followings
+  id: user.relationship.query_my_followings
   */
   /// Get the following user list for the user
   AmityUserFollowingsQueryBuilder getFollowings() {
@@ -41,7 +41,7 @@ class AmityUserRelationshipRepository {
   /* end_public_function */
 
   /* begin_public_function 
-  id: user.relationship.query_followers
+  id: user.relationship.query_my_followers
   */
   /// Get the Followers user list for the user
   AmityUserFollowersQueryBuilder getFollowers() {

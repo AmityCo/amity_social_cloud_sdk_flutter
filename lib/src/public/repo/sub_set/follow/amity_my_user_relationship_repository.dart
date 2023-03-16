@@ -59,7 +59,7 @@ class AmityMyUserRelationshipRepository {
   /* end_public_function */
 
   /* begin_public_function 
-  id: user.relationship.get_my_follow_info
+  id: user.relationship.get_follow_info
   */
   /// Get Follow info for the user
   Future<AmityMyFollowInfo> getFollowInfo() {
