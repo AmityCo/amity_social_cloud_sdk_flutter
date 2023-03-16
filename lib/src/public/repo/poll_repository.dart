@@ -9,20 +9,32 @@ class PollRepository {
     return PollCreateQueryBuilder(serviceLocator(), question);
   }
 
+  /* begin_public_function 
+  id: poll.close
+  */
   /// Delete Poll
   Future<bool> deletePoll({required String pollId}) async {
     return serviceLocator<DeletePollUseCase>().get(pollId);
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: poll.vote
+  */
   /// Vote for the poll id
   Future vote({required String pollId, required List<String> answerIds}) {
     return serviceLocator<PollVoteUseCase>()
         .get(PollVoteRequest(pollId: pollId, answerIds: answerIds));
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: poll.delete
+  */
   /// Vote for the poll id
   Future<AmityPoll> closePoll({required String pollId}) {
     return serviceLocator<ClosePollUseCase>()
         .get(PollVoteRequest(pollId: pollId));
   }
+  /* end_public_function */
 }
