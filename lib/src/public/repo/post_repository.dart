@@ -7,7 +7,7 @@ import 'package:amity_sdk/src/public/public.dart';
 /// Post Repo to get [AmityPost]
 class PostRepository {
   /* begin_public_function 
-  id: post.get
+  id: post.get, poll.get
   */
   /// get composed [AmityPost] for the psot
   Future<AmityPost> getPost(String postId) {
@@ -52,9 +52,7 @@ class PostRepository {
   /// Review the [AmityPost], Accept/denied
   PostReviewQueryBuilder reviewPost({required String postId}) {
     return PostReviewQueryBuilder(
-        postApproveUsecase: serviceLocator(),
-        postDeclineUsecase: serviceLocator(),
-        postId: postId);
+        postApproveUsecase: serviceLocator(), postDeclineUsecase: serviceLocator(), postId: postId);
   }
 
   /// Get [AmityReaction] for the post Id

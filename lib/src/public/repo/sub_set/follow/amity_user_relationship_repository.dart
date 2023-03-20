@@ -31,22 +31,20 @@ class AmityUserRelationshipRepository {
   /* end_public_function */
 
   /* begin_public_function 
-  id: user.relationship.query_my_followings
+  id: user.relationship.query_followings
   */
   /// Get the following user list for the user
   AmityUserFollowingsQueryBuilder getFollowings() {
-    return AmityUserFollowingsQueryBuilder(
-        useCase: serviceLocator(), userId: userId);
+    return AmityUserFollowingsQueryBuilder(useCase: serviceLocator(), userId: userId);
   }
   /* end_public_function */
 
   /* begin_public_function 
-  id: user.relationship.query_my_followers
+  id: user.relationship.query_followers
   */
   /// Get the Followers user list for the user
   AmityUserFollowersQueryBuilder getFollowers() {
-    return AmityUserFollowersQueryBuilder(
-        useCase: serviceLocator(), userId: userId);
+    return AmityUserFollowersQueryBuilder(useCase: serviceLocator(), userId: userId);
   }
   /* end_public_function */
 

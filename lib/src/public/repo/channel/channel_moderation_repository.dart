@@ -16,9 +16,8 @@ class ChannelModerationRepository {
   id: channel.moderation.add_roles
   */
   Future addRole(String role, List<String> userIds) {
-    return serviceLocator<ChannelMemberAddRoleUsecase>().get(
-        UpdateChannelRoleRequest(
-            channelId: _channelId, role: role, userIds: userIds));
+    return serviceLocator<ChannelMemberAddRoleUsecase>()
+        .get(UpdateChannelRoleRequest(channelId: _channelId, role: role, userIds: userIds));
   }
   /* end_public_function */
 
@@ -26,9 +25,8 @@ class ChannelModerationRepository {
   id: channel.moderation.remove_roles
   */
   Future removeRole(String role, List<String> userIds) {
-    return serviceLocator<ChannelMemberRemoveRoleUsecase>().get(
-        UpdateChannelRoleRequest(
-            channelId: _channelId, role: role, userIds: userIds));
+    return serviceLocator<ChannelMemberRemoveRoleUsecase>()
+        .get(UpdateChannelRoleRequest(channelId: _channelId, role: role, userIds: userIds));
   }
   /* end_public_function */
 
@@ -36,19 +34,17 @@ class ChannelModerationRepository {
   id: channel.moderation.mute_members
   */
   Future muteMembers(List<String> userIds, {int millis = 600000}) {
-    return serviceLocator<ChannelMemberMuteUsecase>().get(
-        UpdateChannelMembersRequest(
-            channelId: _channelId, userIds: userIds, mutePeriod: millis));
+    return serviceLocator<ChannelMemberMuteUsecase>()
+        .get(UpdateChannelMembersRequest(channelId: _channelId, userIds: userIds, mutePeriod: millis));
   }
   /* end_public_function */
 
   /* begin_public_function 
-  id: channel.leave
+  id: channel.moderation.unmute_members
   */
   Future unmuteMembers(List<String> userIds) {
-    return serviceLocator<ChannelMemberMuteUsecase>().get(
-        UpdateChannelMembersRequest(
-            channelId: _channelId, userIds: userIds, mutePeriod: 0));
+    return serviceLocator<ChannelMemberMuteUsecase>()
+        .get(UpdateChannelMembersRequest(channelId: _channelId, userIds: userIds, mutePeriod: 0));
   }
   /* end_public_function */
 
@@ -56,8 +52,8 @@ class ChannelModerationRepository {
   id: channel.moderation.ban_members
   */
   Future banMembers(List<String> userIds) {
-    return serviceLocator<ChannelMemberBanUsecase>().get(
-        UpdateChannelMembersRequest(channelId: _channelId, userIds: userIds));
+    return serviceLocator<ChannelMemberBanUsecase>()
+        .get(UpdateChannelMembersRequest(channelId: _channelId, userIds: userIds));
   }
   /* end_public_function */
 
@@ -65,8 +61,8 @@ class ChannelModerationRepository {
   id: channel.moderation.unban_members
   */
   Future unbanMembers(List<String> userIds) {
-    return serviceLocator<ChannelMemberUnbanUsecase>().get(
-        UpdateChannelMembersRequest(channelId: _channelId, userIds: userIds));
+    return serviceLocator<ChannelMemberUnbanUsecase>()
+        .get(UpdateChannelMembersRequest(channelId: _channelId, userIds: userIds));
   }
   /* end_public_function */
 }

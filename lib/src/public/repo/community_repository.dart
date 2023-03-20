@@ -32,7 +32,7 @@ class CommunityRepository {
   /* end_public_function */
 
   /* begin_public_function 
-  id: user.query
+  id: community.category.query
   */
   /// Get Community Categories
   CommunityCategoryGetQueryBuilder getCategories() {
@@ -90,8 +90,7 @@ class CommunityRepository {
   id: community.query.recommended_communities
   */
   /// Get the Recommended Community for the network
-  Future<List<AmityCommunity>> getRecommendedCommunities(
-      {String? token, int? limit}) {
+  Future<List<AmityCommunity>> getRecommendedCommunities({String? token, int? limit}) {
     final optionsRequest = OptionsRequest(limit: 5);
     return serviceLocator<CommunityGetRecommendedUseCase>().get(optionsRequest);
   }
@@ -109,12 +108,9 @@ class CommunityRepository {
 
   /// Get User Roles for the Community
   Future<List<String>> _getUserRoles(String communityId, String userId) async {
-    AmityCommunityMember amityCommunityMember =
-        await serviceLocator<CommunityMemberGetUsecase>().get(
-            CommunityMemberPermissionCheckRequest(
-                communityId: communityId,
-                userId: userId,
-                permission: AmityPermission.BAN_USER));
+    AmityCommunityMember amityCommunityMember = await serviceLocator<CommunityMemberGetUsecase>().get(
+        CommunityMemberPermissionCheckRequest(
+            communityId: communityId, userId: userId, permission: AmityPermission.BAN_USER));
     return Future.value(amityCommunityMember.roles);
   }
 

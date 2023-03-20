@@ -9,8 +9,7 @@ class UserRepository {
   */
   /// get the user query builder
   AmityAllUserQueryBuilder getUsers() {
-    return AmityAllUserQueryBuilder(
-        useCase: serviceLocator<GetAllUserUseCase>());
+    return AmityAllUserQueryBuilder(useCase: serviceLocator<GetAllUserUseCase>());
   }
   /* end_public_function */
 
@@ -18,10 +17,8 @@ class UserRepository {
   id: user.search
   */
   /// Search the user by their display name
-  AmityUserSearchDisplayNameQueryBuilder searchUserByDisplayName(
-      String keyword) {
-    return AmityUserSearchDisplayNameQueryBuilder(
-        useCase: serviceLocator<GetAllUserUseCase>(), keyword: keyword);
+  AmityUserSearchDisplayNameQueryBuilder searchUserByDisplayName(String keyword) {
+    return AmityUserSearchDisplayNameQueryBuilder(useCase: serviceLocator<GetAllUserUseCase>(), keyword: keyword);
   }
   /* end_public_function */
 
