@@ -9,8 +9,7 @@ class MessageRepository {
   */
   /// Get Messages
   MessageGetQueryBuilder getMessages(String channelId) {
-    return MessageGetQueryBuilder(
-        serviceLocator<MessageQueryUseCase>(), channelId);
+    return MessageGetQueryBuilder(serviceLocator<MessageQueryUseCase>(), channelId);
   }
   /* end_public_function */
 
@@ -29,9 +28,7 @@ class MessageRepository {
   */
   /// Create Message
   AmityMessageCreateDataTypeSelector createMessage(String channelId) {
-    return AmityMessageCreateTargetSelector(
-            useCase: serviceLocator<MessageCreateUsecase>())
-        .channelId(channelId);
+    return AmityMessageCreateTargetSelector(useCase: serviceLocator<MessageCreateUsecase>()).channelId(channelId);
   }
   /* end_public_function */
 
@@ -40,12 +37,9 @@ class MessageRepository {
   api_style: async
   */
   /// Create Message
-  AmityMessageUpdateQueryBuilder updateMessage(
-      String channelId, String messageId) {
+  AmityMessageUpdateQueryBuilder updateMessage(String channelId, String messageId) {
     return AmityMessageUpdateQueryBuilder(
-        useCase: serviceLocator<MessageUpdateUsecase>(),
-        channelId: channelId,
-        messageId: messageId);
+        useCase: serviceLocator<MessageUpdateUsecase>(), channelId: channelId, messageId: messageId);
   }
   /* end_public_function */
 
@@ -69,9 +63,7 @@ class MessageRepository {
   /// flag message
   Future<AmityMessage> flag(String messageId) {
     return MessageFlagQueryBuilder(
-            messageFlagUsecase: serviceLocator(),
-            messageUnflagUsecase: serviceLocator(),
-            messageId: messageId)
+            messageFlagUsecase: serviceLocator(), messageUnflagUsecase: serviceLocator(), messageId: messageId)
         .flag();
   }
   /* end_public_function */
@@ -82,9 +74,7 @@ class MessageRepository {
   /// unflag message
   Future<AmityMessage> unflag(String messageId) {
     return MessageFlagQueryBuilder(
-            messageFlagUsecase: serviceLocator(),
-            messageUnflagUsecase: serviceLocator(),
-            messageId: messageId)
+            messageFlagUsecase: serviceLocator(), messageUnflagUsecase: serviceLocator(), messageId: messageId)
         .unflag();
   }
   /* end_public_function */

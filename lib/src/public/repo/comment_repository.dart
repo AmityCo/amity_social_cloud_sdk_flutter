@@ -34,7 +34,7 @@ class CommentRepository {
   /* end_public_function */
 
   /* begin_public_function 
-  id: comment.get
+  id: comment.get_by_ids
   */
   /// Get [AmityReaction] for the comment Id
   Future<AmityComment> getComment({required String commentId}) {

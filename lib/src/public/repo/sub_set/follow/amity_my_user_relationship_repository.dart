@@ -41,7 +41,7 @@ class AmityMyUserRelationshipRepository {
   /* end_public_function */
 
   /* begin_public_function 
-  id: user.relationship.query_followings
+  id: user.relationship.query_my_followings
   */
   /// Get following user list
   AmityMyFollowingsQueryBuilder getFollowings() {
@@ -50,7 +50,7 @@ class AmityMyUserRelationshipRepository {
   /* end_public_function */
 
   /* begin_public_function 
-  id: user.relationship.query_followers
+  id: user.relationship.query_my_followers
   */
   /// Get Followers user list
   AmityMyFollowersQueryBuilder getFollowers() {
@@ -59,7 +59,7 @@ class AmityMyUserRelationshipRepository {
   /* end_public_function */
 
   /* begin_public_function 
-  id: user.relationship.get_follow_info
+  id: user.relationship.get_my_follow_info
   */
   /// Get Follow info for the user
   Future<AmityMyFollowInfo> getFollowInfo() {

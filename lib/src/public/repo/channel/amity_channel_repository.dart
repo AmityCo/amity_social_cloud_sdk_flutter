@@ -62,8 +62,7 @@ class AmityChannelRepository {
   id: channel.mute
   */
   /// Mute  channel
-  Future muteChannel(String channelId,
-      {int millis = 600000} /* end_public_function */) {
+  Future muteChannel(String channelId, {int millis = 600000}) {
     return serviceLocator<ChannelMuteUsecase>().get(
         UpdateChannelMembersRequest(channelId: channelId, mutePeriod: millis));
   }
