@@ -115,30 +115,70 @@ class AmityMQTT {
     activeClient = null;
   }
 
+  final _completerPool = <String, Completer>{};
 //todo change parameter to AmityTopic
-  void subscribe(AmityTopic topic) {
+  Future subscribe(AmityTopic topic) async {
+    if (_completerPool.containsKey(topic.generateTopic())) {
+      logger(
+          'AMITY_MQTT::Subscribing to - ${topic.generateTopic()} already in progress');
+      return;
+    }
+
+    ///Create a completer to add to the pool
+    final completer = Completer();
+    _completerPool[topic.generateTopic()] = completer;
+
     logger('AMITY_MQTT::Subscribing to - ${topic.generateTopic()}');
     activeClient?.subscribe(topic.generateTopic(), MqttQos.atMostOnce);
+
+    ///Wait for completer to get complete
+    await completer.future;
   }
 
 //todo change parameter to AmityTopic
-  void unsubscribe(AmityTopic topic) {
+  Future unsubscribe(AmityTopic topic) async {
+    if (_completerPool.containsKey(topic.generateTopic())) {
+      logger(
+          'AMITY_MQTT::Unsubscribing to - ${topic.generateTopic()} already in progress');
+      return;
+    }
+
+    ///Create a completer to add to the pool
+    final completer = Completer();
+    _completerPool[topic.generateTopic()] = completer;
+
     logger('AMITY_MQTT::Unsubscribing to ${topic.generateTopic()}');
     activeClient?.unsubscribe(topic.generateTopic());
+
+    ///Wait for completer to get complete
+    await completer.future;
   }
 
   /// The subscribed callback
   void _onSubscribed(String topic) {
     logger('AMITY_MQTT::Subscription confirmed for topic $topic');
+    if (_completerPool.containsKey(topic)) {
+      _completerPool[topic]?.complete();
+      _completerPool.remove(topic);
+    }
   }
 
   /// The subscribed callback
   void _onUnsubscribed(String? topic) {
     logger('AMITY_MQTT::Unsubscription confirmed for topic $topic');
+    if (_completerPool.containsKey(topic)) {
+      _completerPool[topic]?.complete();
+      _completerPool.remove(topic);
+    }
   }
 
   void _onSubscribFailed(String topic) {
     logger('AMITY_MQTT::Subscription  Fail for topic $topic');
+    if (_completerPool.containsKey(topic)) {
+      _completerPool[topic]?.completeError(AmityException(
+          message: 'Subcription failed for the topic $topic', code: 401));
+      _completerPool.remove(topic);
+    }
   }
 
   /// The unsolicited disconnect callback
