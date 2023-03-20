@@ -5,6 +5,6 @@ import 'package:amity_sdk/src/domain/model/amity_post.dart';
 extension AmityPostImageDataExtension on ImageData {
   /// Get Image Url
   String getUrl(AmityImageSize size) {
-    return '${image.fileUrl}?size=${size.value}';
+    return '${image!.fileUrl}?size=${size.value}';
   }
 }
