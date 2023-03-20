@@ -6,6 +6,7 @@ export 'community_get_query_usecase.dart';
 export 'community_get_recommend.dart';
 export 'community_get_trending.dart';
 export 'community_get_usecase.dart';
+export 'community_has_local_usecase.dart';
 export 'community_update_usecase.dart';
 export 'member/member.dart';
 export 'permission/permission.dart';

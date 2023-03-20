@@ -29,7 +29,9 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
     //Save members sequence in to feed db
     await communityMemberPagingDbAdapter.updateCommunityMemmberCollection(
         data.convertToCommunityMemberPagingHiveEntity());
+
     final amityCommunityMembers = await _saveDataToDb(data);
+
     return PageListData(amityCommunityMembers, data.paging!.next ?? '');
   }
 
@@ -61,7 +63,7 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
   Future<AmityCommunityMember> getMember(
       String communityId, String userId) async {
     final member = communityMemberDbAdapter
-        .getCommunityMemberEntity(communityId + userId)
+        .getCommunityMemberEntity(communityId + userId)!
         .convertToAmityCommunityMember();
     return member;
   }
@@ -80,8 +82,8 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
 
   @override
   List<String>? getMemberPermission(String communityId, String userId) {
-    final member =
-        communityMemberDbAdapter.getCommunityMemberEntity(communityId + userId);
+    final member = communityMemberDbAdapter
+        .getCommunityMemberEntity(communityId + userId)!;
     return member.permissions;
   }
 
@@ -141,5 +143,12 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
     return communityMemberHiveEntities
         .map((e) => e.convertToAmityCommunityMember())
         .toList();
+  }
+
+  @override
+  bool hasLocalCommunity(String communityId, String userId) {
+    return communityMemberDbAdapter
+            .getCommunityMemberEntity(communityId + userId) !=
+        null;
   }
 }

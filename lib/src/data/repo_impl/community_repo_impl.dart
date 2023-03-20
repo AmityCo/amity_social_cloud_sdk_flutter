@@ -38,7 +38,7 @@ class CommunityRepoImpl extends CommunityRepo {
   @override
   Future<AmityCommunity> getCommunityById(String communityId) async {
     return communityDbAdapter
-        .getCommunityEntity(communityId)
+        .getCommunityEntity(communityId)!
         .convertToAmityCommunity();
   }
 
@@ -48,9 +48,11 @@ class CommunityRepoImpl extends CommunityRepo {
 
     ///Get the post from DB and update the delete flag to true
     final amityCommunityDb = communityDbAdapter.getCommunityEntity(communityId);
-    amityCommunityDb
-      ..isDeleted = true
-      ..save();
+    if (amityCommunityDb != null) {
+      amityCommunityDb
+        ..isDeleted = true
+        ..save();
+    }
 
     return data;
   }
@@ -163,5 +165,10 @@ class CommunityRepoImpl extends CommunityRepo {
     final data = await communityApiInterface.getTopTredningCommunity(request);
     final amityCommunity = await saveCommunity(data);
     return amityCommunity;
+  }
+
+  @override
+  bool hasLocalCommunity(String communityId) {
+    return communityDbAdapter.getCommunityEntity(communityId) != null;
   }
 }
