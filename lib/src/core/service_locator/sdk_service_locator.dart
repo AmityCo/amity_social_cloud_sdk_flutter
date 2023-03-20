@@ -92,6 +92,7 @@ class SdkServiceLocator {
           postDbAdapter: serviceLocator(),
           commentDbAdapter: serviceLocator(),
           communityDbAdapter: serviceLocator(),
+          communityFeedDbAdapter: serviceLocator(),
           communityMemberDbAdapter: serviceLocator(),
           feedDbAdapter: serviceLocator(),
           fileDbAdapter: serviceLocator(),
@@ -414,6 +415,11 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<CommunityMemberComposerUsecase>(() =>
         CommunityMemberComposerUsecase(
             userComposerUsecase: serviceLocator(), userRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityHasLocalUsecase>(
+        () => CommunityHasLocalUsecase(communityRepo: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommunityMemberHasLocalUsecase>(() =>
+        CommunityMemberHasLocalUsecase(communityMemberRepo: serviceLocator()));
+
     serviceLocator
         .registerLazySingleton<PostComposerUsecase>(() => PostComposerUsecase(
               userRepo: serviceLocator(),

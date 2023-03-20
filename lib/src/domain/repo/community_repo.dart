@@ -14,4 +14,7 @@ abstract class CommunityRepo {
   Future<AmityCommunity> updateCommunity(CreateCommunityRequest request);
 
   Future<AmityCommunityCategory?> getCommunityCategoryById(String categoryId);
+
+  /// Has Local Community
+  bool hasLocalCommunity(String communityId);
 }

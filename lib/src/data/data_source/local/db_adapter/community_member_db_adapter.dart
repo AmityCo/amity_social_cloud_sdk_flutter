@@ -3,7 +3,7 @@ import 'package:amity_sdk/src/data/data_source/local/hive_entity/community_membe
 
 abstract class CommunityMemberDbAdapter {
   Future saveCommunityMemberEntity(CommnityMemberHiveEntity entity);
-  CommnityMemberHiveEntity getCommunityMemberEntity(String id);
+  CommnityMemberHiveEntity? getCommunityMemberEntity(String id);
   Future deleteCommunityMemberEntity(CommnityMemberHiveEntity entity);
   CommnityMemberHiveEntity getCommunityMemberEntities(
       String communityId,

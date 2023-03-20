@@ -4,10 +4,10 @@ import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 ///[PostEventListener]
-abstract class PostEventListener extends SocketEventListener {
+abstract class CommunityEventListener extends SocketEventListener {
   @override
   void processEvent(Map<String, dynamic> json) {
-    final data = CreatePostResponse.fromJson(json);
+    final data = CreateCommunityResponse.fromJson(json);
 
     data.saveToDb(serviceLocator());
   }
@@ -15,15 +15,15 @@ abstract class PostEventListener extends SocketEventListener {
   /// This method is used to check if the event should be processed or not.
   @override
   bool shouldProcessEvent(Map<String, dynamic> json) {
-    final data = CreatePostResponse.fromJson(json);
-    if (data.posts.isNotEmpty) {
-      return _hasLocalPost(data.posts[0].postId);
+    final data = CreateCommunityResponse.fromJson(json);
+    if (data.communities.isNotEmpty) {
+      return _hasLocalCommunity(data.communities[0].communityId);
     } else {
       return false;
     }
   }
 
-  bool _hasLocalPost(String postId) {
-    return serviceLocator<PostHasLocalUsecase>().get(postId);
+  bool _hasLocalCommunity(String communityId) {
+    return serviceLocator<CommunityHasLocalUsecase>().get(communityId);
   }
 }

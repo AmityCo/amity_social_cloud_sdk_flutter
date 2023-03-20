@@ -30,16 +30,18 @@ class CommunityMemberPagingDbAdapterImpl
   @override
   Future updateCommunityMemmberCollection(
       CommunityMemberPagingHiveEntity entity) async {
-    FeedPagingHiveEntity? feedHiveEntity = await box.get(entity.id);
-    if (feedHiveEntity == null) {
+    CommunityMemberPagingHiveEntity? communityMemberPagingHiveEntity =
+        getCommunityMemmberPagingEntity(entity.id!);
+    if (communityMemberPagingHiveEntity == null) {
       await box.put(entity.id, entity);
       return;
     }
 
     //Update exsisting object
-    feedHiveEntity.postIds?.addAll(entity.communityMemberIds!);
-    feedHiveEntity.nextToken = entity.nextToken;
-    feedHiveEntity.prevToken = entity.prevToken;
-    await box.put(entity.id, feedHiveEntity);
+    communityMemberPagingHiveEntity.communityMemberIds
+        ?.addAll(entity.communityMemberIds!);
+    communityMemberPagingHiveEntity.nextToken = entity.nextToken;
+    communityMemberPagingHiveEntity.prevToken = entity.prevToken;
+    await box.put(entity.id, communityMemberPagingHiveEntity);
   }
 }

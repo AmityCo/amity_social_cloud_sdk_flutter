@@ -21,6 +21,9 @@ class DbAdapterRepo {
   /// Community Db Adapter
   final CommunityDbAdapter communityDbAdapter;
 
+  /// Community Feed Db Adapter
+  final CommunityFeedDbAdapter communityFeedDbAdapter;
+
   /// Community Memebr Db Adapter
   final CommunityMemberDbAdapter communityMemberDbAdapter;
 
@@ -50,6 +53,7 @@ class DbAdapterRepo {
     required this.fileDbAdapter,
     required this.feedDbAdapter,
     required this.communityDbAdapter,
+    required this.communityFeedDbAdapter,
     required this.communityMemberDbAdapter,
     required this.communityCategoryDbAdapter,
     required this.pollDbAdapter,

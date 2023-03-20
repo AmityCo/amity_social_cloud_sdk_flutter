@@ -20,6 +20,22 @@ class MqttEventListeners {
     CommentRemoveReactionEventListener(),
     CommentFlaggedEventListener(),
     CommentUnflaggedEventListener(),
+
+    ///Community Event
+    CommunityCreateEventListener(),
+    CommunityUpdateEventListener(),
+    CommunityDeleteEventListener(),
+
+    /// Community Member Event
+    CommunityJoinEventListener(),
+    CommunityLeftEventListener(),
+    CommunityUserAddedEventListener(),
+    CommunityUserRemovedEventListener(),
+    CommunityRoleAddedEventListener(),
+    CommunityRoleRemovedEventListener(),
+    CommunityUserChangedEventListener(),
+    CommunityUserBannedEventListener(),
+    CommunityUserUnbannedEventListener(),
   ]);
 
   SocketEventListener? getEvent(String eventType) => listeners

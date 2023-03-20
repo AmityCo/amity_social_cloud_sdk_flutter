@@ -44,4 +44,19 @@ class CommunityMemberQueryBuilder {
 
     return data;
   }
+
+  Future<List<AmityCommunityMember>> query({String? token, int? limit}) async {
+    _request.options = OptionsRequest();
+
+    if (token != null) {
+      _request.options!.token = token;
+    }
+    if (limit != null) {
+      _request.options!.limit = limit;
+    }
+
+    final data = await usecase.get(_request);
+
+    return data.data;
+  }
 }

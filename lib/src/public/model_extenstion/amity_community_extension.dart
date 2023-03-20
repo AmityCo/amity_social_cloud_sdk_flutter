@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 
@@ -37,5 +40,23 @@ extension AmityCommunityExtension on AmityCommunity {
   /// Subscribe to Community Events
   AmityTopicSubscription subscription(AmityCommunityEvents events) {
     return AmityTopicSubscription(AmityTopic.COMMUNITY(this, events));
+  }
+
+  StreamController<AmityCommunity> get listen {
+    StreamController<AmityCommunity> controller =
+        StreamController<AmityCommunity>();
+
+    serviceLocator<CommunityDbAdapter>()
+        .listenCommunityEntity(communityId!)
+        .listen((event) {
+      final updateAmityCommunity = event.convertToAmityCommunity();
+
+      //TOOD: Good idea would be have compose method inside the object itself
+      serviceLocator<CommunityComposerUsecase>().get(updateAmityCommunity).then(
+            (value) => controller.add(value),
+          );
+    });
+
+    return controller;
   }
 }
