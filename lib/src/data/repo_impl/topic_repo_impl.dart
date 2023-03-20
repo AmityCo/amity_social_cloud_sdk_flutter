@@ -9,12 +9,8 @@ class TopicRepositoryImpl extends TopicRepository {
   });
 
   @override
-  Future subscribe(AmityTopic topic) async {
-    amityMqtt.subscribe(topic);
-  }
+  Future subscribe(AmityTopic topic) => amityMqtt.subscribe(topic);
 
   @override
-  Future unsubscribe(AmityTopic topic) async {
-    amityMqtt.unsubscribe(topic);
-  }
+  Future unsubscribe(AmityTopic topic) => amityMqtt.unsubscribe(topic);
 }
