@@ -7,7 +7,7 @@ import 'package:amity_sdk/src/public/public.dart';
 /// Post Repo to get [AmityPost]
 class PostRepository {
   /* begin_public_function 
-  id: post.get, poll.get
+  id: post.get, poll.get, post.get_by_ids
   */
   /// get composed [AmityPost] for the psot
   Future<AmityPost> getPost(String postId) {
@@ -28,7 +28,6 @@ class PostRepository {
   StreamController<AmityPost> getPostStream(String postId) {
     return serviceLocator<GetPostByIdUseCase>().listen(postId);
   }
-  /* end_public_function */
 
   /* begin_public_function 
   id: post.create.text_post, post.create.image_post, post.create.video_post, post.create.file_post, post.create.poll_post, post.create.custom_post
