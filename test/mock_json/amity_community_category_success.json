@@ -1,0 +1,209 @@
+{
+    "categories": [
+        {
+            "name": "~hello",
+            "updatedAt": "2022-11-25T04:19:34.446Z",
+            "createdAt": "2022-11-25T04:19:34.446Z",
+            "isDeleted": false,
+            "categoryId": "2ddea5ad242d0a2bd5dc5be8ae9fc8c2"
+        },
+        {
+            "name": "$testing category",
+            "updatedAt": "2022-11-25T03:56:06.238Z",
+            "createdAt": "2022-11-25T03:56:06.238Z",
+            "isDeleted": false,
+            "categoryId": "88d175da65cbfeb39b81e722b322430d"
+        },
+        {
+            "name": "0asd",
+            "updatedAt": "2022-11-25T04:18:59.180Z",
+            "createdAt": "2022-11-25T04:18:59.180Z",
+            "isDeleted": false,
+            "categoryId": "10051d82a1f371c6be3a8f4a4654b8a1"
+        },
+        {
+            "name": "A Category",
+            "updatedAt": "2022-11-25T03:56:29.037Z",
+            "createdAt": "2022-11-25T03:56:29.037Z",
+            "isDeleted": false,
+            "categoryId": "639942c6b2f121bed3901cf4a4c296e7"
+        },
+        {
+            "name": "A7-category",
+            "updatedAt": "2023-02-06T10:11:43.338Z",
+            "createdAt": "2023-02-06T10:11:43.338Z",
+            "isDeleted": false,
+            "categoryId": "4d3257fa7d504176dd1f0832852c4e50"
+        },
+        {
+            "name": "bubble",
+            "updatedAt": "2023-01-19T06:48:31.101Z",
+            "createdAt": "2023-01-19T06:48:31.101Z",
+            "isDeleted": false,
+            "categoryId": "a2144c35015abc3b560350b544393310",
+            "avatarFileId": "1a2216c039814a3893686e819aa06c15"
+        },
+        {
+            "name": "Calyp1",
+            "updatedAt": "2023-02-08T09:09:23.646Z",
+            "createdAt": "2023-02-08T09:09:23.646Z",
+            "isDeleted": false,
+            "categoryId": "641cc3a569a9b7bd2310d95569d95a5a"
+        },
+        {
+            "name": "cat",
+            "updatedAt": "2022-09-14T09:33:42.815Z",
+            "createdAt": "2022-09-14T09:33:42.815Z",
+            "isDeleted": false,
+            "categoryId": "c00c642beae7e6cbbe9540f25d20a073"
+        },
+        {
+            "name": "Cat",
+            "updatedAt": "2022-09-13T04:32:50.326Z",
+            "createdAt": "2022-09-13T04:32:50.326Z",
+            "isDeleted": false,
+            "categoryId": "970badb5297fb04e41daab08398545a3",
+            "avatarFileId": "ebafedb8001347c0bd1b0561154caca5"
+        },
+        {
+            "name": "Cat after disable old billing",
+            "updatedAt": "2022-09-15T07:06:00.265Z",
+            "createdAt": "2022-09-15T07:06:00.265Z",
+            "isDeleted": false,
+            "categoryId": "263d0bf2dca9a91db2c4dd1168297d38",
+            "avatarFileId": "0ecbea1ad01a429fa093359d268ae5bc"
+        },
+        {
+            "name": "CatAAAA",
+            "updatedAt": "2023-01-30T07:27:35.164Z",
+            "createdAt": "2023-01-30T07:27:35.164Z",
+            "isDeleted": false,
+            "categoryId": "484c88bef73898e2136f2d0892fdbc76"
+        },
+        {
+            "name": "cate111",
+            "updatedAt": "2023-03-10T04:20:24.929Z",
+            "createdAt": "2023-03-10T04:20:24.929Z",
+            "isDeleted": false,
+            "categoryId": "89dbd1faec555041ed872648efd0fdbc"
+        },
+        {
+            "name": "cate222",
+            "updatedAt": "2023-03-10T04:30:41.113Z",
+            "createdAt": "2023-03-10T04:30:41.113Z",
+            "isDeleted": false,
+            "categoryId": "456af3782731cfe072b6353d4b24228a"
+        },
+        {
+            "name": "cate333",
+            "updatedAt": "2023-03-10T04:34:08.821Z",
+            "createdAt": "2023-03-10T04:34:08.821Z",
+            "isDeleted": false,
+            "categoryId": "342a8f6ad1a6184f6f1c992a11f80026"
+        },
+        {
+            "name": "Catz",
+            "updatedAt": "2022-09-13T09:52:39.848Z",
+            "createdAt": "2022-09-13T09:52:39.848Z",
+            "isDeleted": false,
+            "categoryId": "c12e1e6af62bdbb9ccd16b78c4dc4a1f"
+        },
+        {
+            "name": "Deme1",
+            "updatedAt": "2023-02-22T04:54:37.929Z",
+            "createdAt": "2023-02-22T04:54:37.929Z",
+            "isDeleted": false,
+            "categoryId": "c0d9b087fe501de7c7f181476cb88baf"
+        },
+        {
+            "name": "dog",
+            "updatedAt": "2022-11-25T04:24:43.416Z",
+            "createdAt": "2022-11-25T04:24:43.416Z",
+            "isDeleted": false,
+            "categoryId": "37549615ecdc03a131feb1bdedd5fac9"
+        },
+        {
+            "name": "Dog",
+            "updatedAt": "2022-09-14T09:35:09.627Z",
+            "createdAt": "2022-09-14T09:35:09.627Z",
+            "isDeleted": false,
+            "categoryId": "75e07c149c3c89c03a7a9257d58116a0"
+        },
+        {
+            "name": "DogZ",
+            "updatedAt": "2022-09-14T09:37:26.268Z",
+            "createdAt": "2022-09-14T09:37:26.268Z",
+            "isDeleted": false,
+            "categoryId": "55f40a1031b3df6ebd0a57caa9bccb33"
+        },
+        {
+            "name": "fang-test-na-krub",
+            "metadata": {
+                "test": 1
+            },
+            "updatedAt": "2023-01-06T10:49:22.173Z",
+            "createdAt": "2023-01-06T08:06:56.157Z",
+            "isDeleted": false,
+            "categoryId": "aa3559e29ce1ae0a311041119d576880"
+        }
+    ],
+    "paging": {
+        "next": "eyJza2lwIjoyMCwibGltaXQiOjIwfQ=="
+    },
+    "files": [
+        {
+            "fileId": "ebafedb8001347c0bd1b0561154caca5",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/ebafedb8001347c0bd1b0561154caca5/download",
+            "type": "image",
+            "createdAt": "2022-09-13T04:32:48.014Z",
+            "updatedAt": "2022-09-13T04:32:50.333Z",
+            "attributes": {
+                "name": "2.jpg",
+                "extension": "jpg",
+                "size": 10338,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 207,
+                    "width": 404,
+                    "isFull": false
+                }
+            }
+        },
+        {
+            "fileId": "0ecbea1ad01a429fa093359d268ae5bc",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/0ecbea1ad01a429fa093359d268ae5bc/download",
+            "type": "image",
+            "createdAt": "2022-09-15T07:05:58.565Z",
+            "updatedAt": "2022-09-15T07:06:00.272Z",
+            "attributes": {
+                "name": "gif.gif",
+                "extension": "gif",
+                "size": 18693,
+                "mimeType": "image/gif",
+                "metadata": {
+                    "height": 400,
+                    "width": 314,
+                    "isFull": false
+                }
+            }
+        },
+        {
+            "fileId": "1a2216c039814a3893686e819aa06c15",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/1a2216c039814a3893686e819aa06c15/download",
+            "type": "image",
+            "createdAt": "2023-01-19T06:47:44.938Z",
+            "updatedAt": "2023-01-19T06:48:31.120Z",
+            "attributes": {
+                "name": "hand-drawn-bubble-tea-flavors_52683-46533.jpeg",
+                "extension": "jpg",
+                "size": 41778,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 417,
+                    "width": 626,
+                    "isFull": false
+                }
+            }
+        }
+    ]
+}
