@@ -21,14 +21,12 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
       required this.fileDbAdapter});
 
   @override
-  Future<PageListData<List<AmityCommunityMember>, String>> queryMembers(
-      GetCommunityMembersRequest request) async {
-    final data =
-        await communityMemmberApiInterface.getCommunityMembers(request);
+  Future<PageListData<List<AmityCommunityMember>, String>> queryMembers(GetCommunityMembersRequest request) async {
+    final data = await communityMemmberApiInterface.getCommunityMembers(request);
 
     //Save members sequence in to feed db
-    await communityMemberPagingDbAdapter.updateCommunityMemmberCollection(
-        data.convertToCommunityMemberPagingHiveEntity());
+    await communityMemberPagingDbAdapter
+        .updateCommunityMemmberCollection(data.convertToCommunityMemberPagingHiveEntity());
 
     final amityCommunityMembers = await _saveDataToDb(data);
 
@@ -38,87 +36,87 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
   @override
   Future joinCommunity(String communityId) async {
     final data = await communityMemmberApiInterface.joinCommunity(communityId);
-    return await _saveDataToDb(data);
+    await _saveDataToDb(data);
+    return true;
   }
 
   @override
   Future leaveCommunity(String communityId) async {
     final data = await communityMemmberApiInterface.leaveCommunity(communityId);
-    return await _saveDataToDb(data);
+    await _saveDataToDb(data);
+    return true;
   }
 
   @override
   Future addMember(UpdateCommunityMembersRequest request) async {
     final data = await communityMemmberApiInterface.addMember(request);
-    return await _saveDataToDb(data);
+    await _saveDataToDb(data);
+    return true;
   }
 
   @override
   Future removeMember(UpdateCommunityMembersRequest request) async {
     final data = await communityMemmberApiInterface.removeMember(request);
-    return await _saveDataToDb(data);
+    await _saveDataToDb(data);
+    return true;
   }
 
   @override
-  Future<AmityCommunityMember> getMember(
-      String communityId, String userId) async {
-    final member = communityMemberDbAdapter
-        .getCommunityMemberEntity(communityId + userId)!
-        .convertToAmityCommunityMember();
+  Future<AmityCommunityMember> getMember(String communityId, String userId) async {
+    final member =
+        communityMemberDbAdapter.getCommunityMemberEntity(communityId + userId)!.convertToAmityCommunityMember();
     return member;
   }
 
   @override
   Future addRole(UpdateCommunityRoleRequest request) async {
     final data = await communityMemmberApiInterface.addRole(request);
-    return await _saveDataToDb(data);
+    await _saveDataToDb(data);
+    return true;
   }
 
   @override
   Future removeRole(UpdateCommunityRoleRequest request) async {
     final data = await communityMemmberApiInterface.removeRole(request);
-    return await _saveDataToDb(data);
+    await _saveDataToDb(data);
+    return true;
   }
 
   @override
   List<String>? getMemberPermission(String communityId, String userId) {
-    final member = communityMemberDbAdapter
-        .getCommunityMemberEntity(communityId + userId)!;
+    final member = communityMemberDbAdapter.getCommunityMemberEntity(communityId + userId)!;
     return member.permissions;
   }
 
   @override
   Future banMember(UpdateCommunityMembersRequest request) async {
     final data = await communityMemmberApiInterface.banMember(request);
-    return await _saveDataToDb(data);
+    await _saveDataToDb(data);
+    return true;
   }
 
   @override
   Future unbanMember(UpdateCommunityMembersRequest request) async {
     final data = await communityMemmberApiInterface.unbanMember(request);
-    return await _saveDataToDb(data);
+    await _saveDataToDb(data);
+    return true;
   }
 
-  Future<List<AmityCommunityMember>> _saveDataToDb(
-      GetCommunityMembersResponse data) async {
+  Future<List<AmityCommunityMember>> _saveDataToDb(GetCommunityMembersResponse data) async {
     //Convert to File Hive Entity
     //we have save the file first, since every object depends on file
-    List<FileHiveEntity> fileHiveEntities =
-        data.files.map((e) => e.convertToFileHiveEntity()).toList();
+    List<FileHiveEntity> fileHiveEntities = data.files.map((e) => e.convertToFileHiveEntity()).toList();
 
     //Convert to Community Hive Entity
     List<CommunityHiveEntity> communityHiveEntities =
         data.communities.map((e) => e.convertToCommunityHiveEntity()).toList();
 
     //Convert to User Hive Entity
-    List<UserHiveEntity> userHiveEntities =
-        data.users.map((e) => e.convertToUserHiveEntity()).toList();
+    List<UserHiveEntity> userHiveEntities = data.users.map((e) => e.convertToUserHiveEntity()).toList();
 
     //Convert to Community Member Hive Entity
-    List<CommnityMemberHiveEntity> communityMemberHiveEntities = data
-        .communityUsers
-        .map((e) => e.convertToCommnityMemberHiveEntity())
-        .toList();
+    List<CommnityMemberHiveEntity> communityMemberHiveEntities =
+        data.communityUsers.map((e) => e.convertToCommnityMemberHiveEntity()).toList();
 
     //Save the File Entity
     for (var e in fileHiveEntities) {
@@ -140,15 +138,11 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
       await communityMemberDbAdapter.saveCommunityMemberEntity(e);
     }
 
-    return communityMemberHiveEntities
-        .map((e) => e.convertToAmityCommunityMember())
-        .toList();
+    return communityMemberHiveEntities.map((e) => e.convertToAmityCommunityMember()).toList();
   }
 
   @override
   bool hasLocalCommunity(String communityId, String userId) {
-    return communityMemberDbAdapter
-            .getCommunityMemberEntity(communityId + userId) !=
-        null;
+    return communityMemberDbAdapter.getCommunityMemberEntity(communityId + userId) != null;
   }
 }

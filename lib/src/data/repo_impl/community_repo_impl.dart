@@ -37,9 +37,7 @@ class CommunityRepoImpl extends CommunityRepo {
 
   @override
   Future<AmityCommunity> getCommunityById(String communityId) async {
-    return communityDbAdapter
-        .getCommunityEntity(communityId)!
-        .convertToAmityCommunity();
+    return communityDbAdapter.getCommunityEntity(communityId)!.convertToAmityCommunity();
   }
 
   @override
@@ -71,22 +69,17 @@ class CommunityRepoImpl extends CommunityRepo {
     return amityCommunity.first;
   }
 
-  Future<List<AmityCommunity>> saveCommunity(
-      CreateCommunityResponse data) async {
+  Future<List<AmityCommunity>> saveCommunity(CreateCommunityResponse data) async {
     //Convert to File Hive Entity
     //we have save the file first, since every object depends on file
-    List<FileHiveEntity> fileHiveEntities =
-        data.files.map((e) => e.convertToFileHiveEntity()).toList();
+    List<FileHiveEntity> fileHiveEntities = data.files.map((e) => e.convertToFileHiveEntity()).toList();
 
     //Convert to User Hive Entity
-    List<UserHiveEntity> userHiveEntities =
-        data.users.map((e) => e.convertToUserHiveEntity()).toList();
+    List<UserHiveEntity> userHiveEntities = data.users.map((e) => e.convertToUserHiveEntity()).toList();
 
     //Conver to category hive entity
-    List<CommunityCategoryHiveEntity> communityCategoryHiveEnties = data
-        .categories
-        .map((e) => e.convertToCommunityCategoryHiveEntity())
-        .toList();
+    List<CommunityCategoryHiveEntity> communityCategoryHiveEnties =
+        data.categories.map((e) => e.convertToCommunityCategoryHiveEntity()).toList();
 
     //Conver to Feed hive entity
     List<CommunityFeedHiveEntity> communityFeedHiveEnties =
@@ -97,10 +90,8 @@ class CommunityRepoImpl extends CommunityRepo {
         data.communities.map((e) => e.convertToCommunityHiveEntity()).toList();
 
     //Convert to Community Member Hive Entity
-    List<CommnityMemberHiveEntity> communityMemberHiveEntities = data
-        .communityUsers
-        .map((e) => e.convertToCommnityMemberHiveEntity())
-        .toList();
+    List<CommnityMemberHiveEntity> communityMemberHiveEntities =
+        data.communityUsers.map((e) => e.convertToCommnityMemberHiveEntity()).toList();
 
     //Save the File Entity
     for (var e in fileHiveEntities) {
@@ -136,32 +127,26 @@ class CommunityRepoImpl extends CommunityRepo {
   }
 
   @override
-  Future<AmityCommunityCategory?> getCommunityCategoryById(
-      String categoryId) async {
-    return communityCategoryDbAdapter
-        .getCommunityCategoryEntity(categoryId)
-        ?.convertToAmityCommunityCategory();
+  Future<AmityCommunityCategory?> getCommunityCategoryById(String categoryId) async {
+    return communityCategoryDbAdapter.getCommunityCategoryEntity(categoryId)?.convertToAmityCommunityCategory();
   }
 
   @override
-  Future<PageListData<List<AmityCommunity>, String>> getCommunityQuery(
-      GetCommunityRequest request) async {
+  Future<PageListData<List<AmityCommunity>, String>> getCommunityQuery(GetCommunityRequest request) async {
     final data = await communityApiInterface.getCommunityQuery(request);
     final amityCommunity = await saveCommunity(data);
     return PageListData(amityCommunity, data.paging?.next ?? '');
   }
 
   @override
-  Future<List<AmityCommunity>> getRecommendedCommunity(
-      OptionsRequest request) async {
+  Future<List<AmityCommunity>> getRecommendedCommunity(OptionsRequest request) async {
     final data = await communityApiInterface.getRecommendedCommunity(request);
     final amityCommunity = await saveCommunity(data);
     return amityCommunity;
   }
 
   @override
-  Future<List<AmityCommunity>> getTopTrendingCommunity(
-      OptionsRequest request) async {
+  Future<List<AmityCommunity>> getTopTrendingCommunity(OptionsRequest request) async {
     final data = await communityApiInterface.getTopTredningCommunity(request);
     final amityCommunity = await saveCommunity(data);
     return amityCommunity;

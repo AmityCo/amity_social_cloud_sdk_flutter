@@ -11,15 +11,11 @@ abstract class AmityTopic {
 
   String getKey() => nonce + id + events;
 
-  factory AmityTopic.POST(AmityPost amityPost, AmityPostEvents events) =
-      AmityTopicPost;
+  factory AmityTopic.POST(AmityPost amityPost, AmityPostEvents events) = AmityTopicPost;
 
-  factory AmityTopic.COMMENT(
-      AmityComment amityComment, AmityCommentEvents events) = AmityTopicComment;
+  factory AmityTopic.COMMENT(AmityComment amityComment, AmityCommentEvents events) = AmityTopicComment;
 
-  factory AmityTopic.COMMUNITY(
-          AmityCommunity amityCommunity, AmityCommunityEvents events) =
-      AmityTopicCommunity;
+  factory AmityTopic.COMMUNITY(AmityCommunity amityCommunity, AmityCommunityEvents events) = AmityTopicCommunity;
 
   /// Generate topic
   String generateTopic();
@@ -31,14 +27,18 @@ abstract class AmityTopic {
   bool operator ==(Object other) {
     return other is AmityTopic && other.getKey() == getKey();
   }
+
+  @override
+  String toString() {
+    return 'topic - ${generateTopic()}';
+  }
 }
 
 ///  Amity Topic for post
 class AmityTopicPost extends AmityTopic {
   final AmityPost amityPost;
   final AmityPostEvents event;
-  AmityTopicPost(this.amityPost, this.event)
-      : super._('post', amityPost.postId!, event.name);
+  AmityTopicPost(this.amityPost, this.event) : super._('post', amityPost.postId!, event.name);
 
   @override
   String generateTopic() {
@@ -55,8 +55,7 @@ class AmityTopicPost extends AmityTopic {
 class AmityTopicComment extends AmityTopic {
   final AmityComment amityComment;
   final AmityCommentEvents event;
-  AmityTopicComment(this.amityComment, this.event)
-      : super._('comment', amityComment.commentId!, event.name);
+  AmityTopicComment(this.amityComment, this.event) : super._('comment', amityComment.commentId!, event.name);
 
   @override
   String generateTopic() {
@@ -71,8 +70,7 @@ class AmityTopicComment extends AmityTopic {
 class AmityTopicCommunity extends AmityTopic {
   final AmityCommunity amityCommunity;
   final AmityCommunityEvents event;
-  AmityTopicCommunity(this.amityCommunity, this.event)
-      : super._('comment', amityCommunity.communityId!, event.name);
+  AmityTopicCommunity(this.amityCommunity, this.event) : super._('comment', amityCommunity.communityId!, event.name);
 
   @override
   String generateTopic() {

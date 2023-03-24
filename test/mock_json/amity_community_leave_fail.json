@@ -1,0 +1,6 @@
+{
+    "status": "error",
+    "message": "User [xxx] is not join this community [xxx]",
+    "code": 400300,
+    "data": {}
+}

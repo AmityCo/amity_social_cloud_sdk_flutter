@@ -28,9 +28,7 @@ extension AmityCommentExtension on AmityComment {
   /// Report Comment
   CommentFlagQueryBuilder report() {
     return CommentFlagQueryBuilder(
-        commentFlagUsecase: serviceLocator(),
-        commentUnflagUsecase: serviceLocator(),
-        commentId: commentId!);
+        commentFlagUsecase: serviceLocator(), commentUnflagUsecase: serviceLocator(), commentId: commentId!);
   }
 
   /// Delete Comment
@@ -40,18 +38,14 @@ extension AmityCommentExtension on AmityComment {
 
   /// Edit Comment Text
   AmityTextCommentEditorBuilder edit() {
-    return AmityTextCommentEditorBuilder(
-        useCase: serviceLocator(), targetId: commentId!);
+    return AmityTextCommentEditorBuilder(useCase: serviceLocator(), targetId: commentId!);
   }
 
   /// check if post is flagged by me
   bool get isFlaggedByMe {
     if (hashFlag == null) return false;
     return (flaggedByMe ?? false) ||
-        BloomFilter(
-                hash: (hashFlag!['hash'] as String),
-                m: hashFlag!['bits'] as int,
-                k: hashFlag!['hashes'] as int)
+        BloomFilter(hash: (hashFlag!['hash'] as String), m: hashFlag!['bits'] as int, k: hashFlag!['hashes'] as int)
             .mightContains(AmityCoreClient.getUserId());
   }
 

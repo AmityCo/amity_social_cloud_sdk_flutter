@@ -1,0 +1,6 @@
+{
+    "status": "error",
+    "message": "User is banned from a channel / community",
+    "code": 400304,
+    "data": {}
+}
