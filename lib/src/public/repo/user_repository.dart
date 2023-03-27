@@ -23,7 +23,7 @@ class UserRepository {
   /* end_public_function */
 
   /* begin_public_function 
-  id: user.get_by_ids
+  id: user.get, user.get_by_ids
   */
   /// get the user with userId
   Future<AmityUser> getUser(String userId) {

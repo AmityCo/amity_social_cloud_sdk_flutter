@@ -34,10 +34,14 @@ extension AmityPostExtension on AmityPost {
         postFlagUsecase: serviceLocator(), postUnflagUsecase: serviceLocator(), postId: postId!);
   }
 
+  /* begin_public_function 
+  id: post.edit
+  */
   /// Edit Amity Post
   AmityTextPostEditorBuilder edit() {
     return AmityTextPostEditorBuilder(useCase: serviceLocator(), targetId: postId!);
   }
+  /* end_public_function */
 
   /// Delete Amity Post
   Future delete({bool hardDelete = false}) {
