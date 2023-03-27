@@ -4,7 +4,7 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/repo/channel_member_repo.dart';
 
 /// [ChannelMemberLeaveUsecase]
-class ChannelMemberLeaveUsecase extends UseCase<void, String> {
+class ChannelMemberLeaveUsecase extends UseCase<dynamic, String> {
   /// Channel Member Repo
   final ChannelMemberRepo channelMemberRepo;
 
@@ -13,6 +13,6 @@ class ChannelMemberLeaveUsecase extends UseCase<void, String> {
 
   @override
   Future get(String params) async {
-    return await channelMemberRepo.leaveChannel(params);
+    return channelMemberRepo.leaveChannel(params);
   }
 }

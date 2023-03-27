@@ -1,7 +1,6 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
-import 'package:amity_sdk/src/public/query_builder/channel/update/channel_update_builder.dart';
 
 /// Channel Repository
 class AmityChannelRepository {
@@ -26,7 +25,7 @@ class AmityChannelRepository {
   }
 
   /// Join the channel
-  Future<AmityChannel> joinChannel(String channeld) {
+  Future joinChannel(String channeld) {
     return serviceLocator<ChannelMemberJoinUsecase>().get(channeld);
   }
 
@@ -37,26 +36,25 @@ class AmityChannelRepository {
 
   /// Mute  channel
   Future muteChannel(String channelId, {int millis = 600000}) {
-    return serviceLocator<ChannelMuteUsecase>().get(
-        UpdateChannelMembersRequest(channelId: channelId, mutePeriod: millis));
+    return serviceLocator<ChannelMuteUsecase>()
+        .get(UpdateChannelMembersRequest(channelId: channelId, mutePeriod: millis));
   }
 
   /// Unmute  channel
   Future unMuteChannel(String channelId) {
-    return serviceLocator<ChannelMuteUsecase>()
-        .get(UpdateChannelMembersRequest(channelId: channelId, mutePeriod: 0));
+    return serviceLocator<ChannelMuteUsecase>().get(UpdateChannelMembersRequest(channelId: channelId, mutePeriod: 0));
   }
 
   /// Add Member to channel
   Future addMembers(String channelId, List<String> userIds) {
-    return serviceLocator<ChannelMemberAddUsecase>().get(
-        UpdateChannelMembersRequest(channelId: channelId, userIds: userIds));
+    return serviceLocator<ChannelMemberAddUsecase>()
+        .get(UpdateChannelMembersRequest(channelId: channelId, userIds: userIds));
   }
 
   /// Remove member to channel
   Future removeMembers(String channelId, List<String> userIds) {
-    return serviceLocator<ChannelMemberRemoveUsecase>().get(
-        UpdateChannelMembersRequest(channelId: channelId, userIds: userIds));
+    return serviceLocator<ChannelMemberRemoveUsecase>()
+        .get(UpdateChannelMembersRequest(channelId: channelId, userIds: userIds));
   }
 
   /// Membership Repo
