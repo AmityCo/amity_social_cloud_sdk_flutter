@@ -4,7 +4,6 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
-import 'package:amity_sdk/src/public/query_builder/message/message_flag_query_builder.dart';
 
 /// Amity Message Extension
 extension AmityMessageExtension on AmityMessage {
@@ -25,9 +24,7 @@ extension AmityMessageExtension on AmityMessage {
   /// Get Amity Mesage Reaction
   AmityMessageUpdateQueryBuilder upate() {
     return AmityMessageUpdateQueryBuilder(
-        useCase: serviceLocator<MessageUpdateUsecase>(),
-        channelId: channelId!,
-        messageId: messageId!);
+        useCase: serviceLocator<MessageUpdateUsecase>(), channelId: channelId!, messageId: messageId!);
   }
 
   Future delete() {
@@ -36,39 +33,33 @@ extension AmityMessageExtension on AmityMessage {
 
   Future<AmityMessage> flag() {
     return MessageFlagQueryBuilder(
-            messageFlagUsecase: serviceLocator(),
-            messageUnflagUsecase: serviceLocator(),
-            messageId: messageId!)
+            messageFlagUsecase: serviceLocator(), messageUnflagUsecase: serviceLocator(), messageId: messageId!)
         .flag();
   }
 
   Future<AmityMessage> unflag() {
     return MessageFlagQueryBuilder(
-            messageFlagUsecase: serviceLocator(),
-            messageUnflagUsecase: serviceLocator(),
-            messageId: messageId!)
+            messageFlagUsecase: serviceLocator(), messageUnflagUsecase: serviceLocator(), messageId: messageId!)
         .unflag();
   }
 
+  /* begin_public_function 
+  id: message.check_flag_by_me
+  */
   /// check if message is flagged by me
   bool get isFlaggedByMe {
     if (hashFlag == null) return false;
     return (flaggedByMe ?? false) ||
-        BloomFilter(
-                hash: (hashFlag!['hash'] as String),
-                m: hashFlag!['bits'] as int,
-                k: hashFlag!['hashes'] as int)
+        BloomFilter(hash: (hashFlag!['hash'] as String), m: hashFlag!['bits'] as int, k: hashFlag!['hashes'] as int)
             .mightContains(AmityCoreClient.getUserId());
   }
+  //* end_public_function */
 
   /// Listen Mesage Id
   StreamController<AmityMessage> get listen {
-    StreamController<AmityMessage> controller =
-        StreamController<AmityMessage>();
+    StreamController<AmityMessage> controller = StreamController<AmityMessage>();
 
-    serviceLocator<MessageDbAdapter>()
-        .listenMessageEntity(messageId!)
-        .listen((event) {
+    serviceLocator<MessageDbAdapter>().listenMessageEntity(messageId!).listen((event) {
       final updateAmityMessage = event.convertToAmityMessage();
 
       //TOOD: Good idea would be have compose method inside the object itself
