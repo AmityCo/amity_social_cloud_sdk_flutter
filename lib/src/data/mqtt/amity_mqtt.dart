@@ -126,6 +126,15 @@ class AmityMQTT {
     logger('AMITY_MQTT::Subscribing to - ${topic.generateTopic()}');
     activeClient?.subscribe(topic.generateTopic(), MqttQos.atMostOnce);
 
+    /// Connection timeout for MQTT
+    Future.delayed(const Duration(seconds: 30), () {
+      if (_completerPool.containsKey(topic)) {
+        _completerPool[topic]?.completeError(
+            AmityException(message: 'Subcription failed for the topic $topic, Connection timeout', code: 408));
+        _completerPool.remove(topic);
+      }
+    });
+
     ///Wait for completer to get complete
     return completer.future;
   }
@@ -143,6 +152,15 @@ class AmityMQTT {
 
     logger('AMITY_MQTT::Unsubscribing to ${topic.generateTopic()}');
     activeClient?.unsubscribe(topic.generateTopic());
+
+    /// Connection timeout for MQTT
+    Future.delayed(const Duration(seconds: 30), () {
+      if (_completerPool.containsKey(topic)) {
+        _completerPool[topic]?.completeError(
+            AmityException(message: 'Subcription failed for the topic $topic, Connection timeout', code: 408));
+        _completerPool.remove(topic);
+      }
+    });
 
     ///Wait for completer to get complete
     return completer.future;
