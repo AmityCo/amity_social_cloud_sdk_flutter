@@ -9,7 +9,7 @@ import '../helper/amity_core_client_mock_setup.dart';
 
 class MockChannelApiInterface extends Mock implements ChannelApiInterface {}
 
-// integration_test_id:9c814bd0-903b-4ec0-938c-9923bd6c75d6
+// integration_test_id:11a43612-ff6f-4262-874c-4419d342cff1
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -26,7 +26,7 @@ void main() {
     );
   });
 
-  test('When the user creates a valid community, it should return a valid community.', () async {
+  test('When user creates valid conversation channel, it should return conversation channel', () async {
     when(() => mockChannelApiInterface.createConversationChannel(any<CreateChannelRequest>())).thenAnswer((_) async {
       final response = await File('test/mock_json/amity_channel_create_conversation_success.json').readAsString();
       return CreateChannelResponse.fromJson(json.decode(response));

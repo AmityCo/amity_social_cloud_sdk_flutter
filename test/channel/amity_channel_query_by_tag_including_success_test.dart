@@ -9,7 +9,7 @@ import '../helper/amity_core_client_mock_setup.dart';
 
 class MockChannelApiInterface extends Mock implements ChannelApiInterface {}
 
-// integration_test_id:b65fe20c-e9f2-47bc-bbcb-d5138e3180ca
+// integration_test_id:92329d41-9403-44e7-979f-ed227e6ab120
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -27,7 +27,7 @@ void main() {
     registerFallbackValue(GetChannelRequest());
   });
 
-  test('When the user query valid communities, it should return a valid communities.', () async {
+  test('When user filters channels by including tags, it should return channels which contains such tags', () async {
     when(() => mockChannelApiInterface.getChannelQuery(any())).thenAnswer((_) async {
       final response = await File('test/mock_json/amity_channel_query_tag_include_success.json').readAsString();
       return CreateChannelResponse.fromJson(json.decode(response));

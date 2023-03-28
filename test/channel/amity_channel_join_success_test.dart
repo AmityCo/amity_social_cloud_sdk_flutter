@@ -9,7 +9,7 @@ import '../helper/amity_core_client_mock_setup.dart';
 
 class MockChannelMemmberApiInterface extends Mock implements ChannelMemberApiInterface {}
 
-// integration_test_id:1880da39-bac6-4259-9d44-18f04193c407
+// integration_test_id:efef33a8-bf09-4dfe-8ed9-e7c3615ad74d
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -27,7 +27,7 @@ void main() {
     );
   });
 
-  test('When the user join a valid community, it should return `true` value.', () async {
+  test('When user joins valid channel, it should return Channel with joined status', () async {
     when(() => mockChannelMemberApiInterface.joinChannel(any())).thenAnswer((_) async {
       final response = await File('test/mock_json/amity_channel_join_success.json').readAsString();
       return CreateChannelResponse.fromJson(json.decode(response));
