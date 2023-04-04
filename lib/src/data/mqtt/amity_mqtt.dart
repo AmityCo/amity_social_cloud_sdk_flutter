@@ -114,13 +114,15 @@ class AmityMQTT {
   final _completerPool = <String, Completer<bool>>{};
 //todo change parameter to AmityTopic
   Future subscribe(AmityTopic topic) async {
-    if (_completerPool.containsKey(topic.generateTopic())) {
-      logger('AMITY_MQTT::Subscribing to - ${topic.generateTopic()} already in progress');
-      return;
-    }
-
     ///Create a completer to add to the pool
     final completer = Completer<bool>();
+
+    if (_completerPool.containsKey(topic.generateTopic())) {
+      logger('AMITY_MQTT::Subscribing to - ${topic.generateTopic()} already in progress');
+      completer.completeError('Subscription already in progress');
+      return completer.future;
+    }
+
     _completerPool[topic.generateTopic()] = completer;
 
     logger('AMITY_MQTT::Subscribing to - ${topic.generateTopic()}');
@@ -141,13 +143,15 @@ class AmityMQTT {
 
 //todo change parameter to AmityTopic
   Future unsubscribe(AmityTopic topic) async {
-    if (_completerPool.containsKey(topic.generateTopic())) {
-      logger('AMITY_MQTT::Unsubscribing to - ${topic.generateTopic()} already in progress');
-      return;
-    }
-
     ///Create a completer to add to the pool
     final completer = Completer<bool>();
+
+    if (_completerPool.containsKey(topic.generateTopic())) {
+      logger('AMITY_MQTT::Unsubscribing to - ${topic.generateTopic()} already in progress');
+      completer.completeError('unsubscription already in progress');
+      return completer.future;
+    }
+
     _completerPool[topic.generateTopic()] = completer;
 
     logger('AMITY_MQTT::Unsubscribing to ${topic.generateTopic()}');
