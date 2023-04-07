@@ -4,6 +4,6 @@ import 'package:amity_sdk/src/core/core.dart';
 class CommunityDeleteEventListener extends CommunityEventListener {
   @override
   String getEventName() {
-    return 'comunity.deleted';
+    return 'community.deleted';
   }
 }
