@@ -1,3 +1,9 @@
+## 0.19.0
+* feat: Added RTE event for Post topic
+* feat: Added RTE event for Comment topic
+* feat: Added RTE event for Channel topic
+* feat: Added RTE event for Community topic
+
 ## 0.18.0
 * feat: File uploading progress
 * feat: Image uploading progress
