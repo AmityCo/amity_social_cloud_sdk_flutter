@@ -9,4 +9,6 @@ abstract class UserRepo {
   Future<List<AmityUser>> updateUser(UpdateUserRequest request);
   Future<AmityUser> flag(String userId);
   Future<AmityUser> unflag(String userId);
+  Future block(String userId);
+  Future unblock(String userId);
 }

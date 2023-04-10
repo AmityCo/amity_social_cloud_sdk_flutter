@@ -23,14 +23,20 @@ extension AmityUserExtenstion on AmityUser {
     return AmityUserFlagRepository(userId: userId!);
   }
 
+  Future block() {
+    return serviceLocator<UserBlockUsecase>().get(userId!);
+  }
+
+  /// API to unblock user
+  Future unblock() {
+    return serviceLocator<UserUnblockUsecase>().get(userId!);
+  }
+
   /// check if user is flagged by me
   bool get isFlaggedByMe {
     if (hashFlag == null) return false;
     return (flaggedByMe ?? false) ||
-        BloomFilter(
-                hash: (hashFlag!['hash'] as String),
-                m: hashFlag!['bits'] as int,
-                k: hashFlag!['hashes'] as int)
+        BloomFilter(hash: (hashFlag!['hash'] as String), m: hashFlag!['bits'] as int, k: hashFlag!['hashes'] as int)
             .mightContains(AmityCoreClient.getUserId());
   }
 }

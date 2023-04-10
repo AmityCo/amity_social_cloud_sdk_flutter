@@ -67,4 +67,26 @@ class UserApiInterfaceImpl extends UserApiInterface {
       return Future.error(amityError.amityException());
     }
   }
+
+  @override
+  Future<bool> block(String userId) async {
+    try {
+      final data = await httpApiClient().post(ME_BLOCK + '/$userId');
+      return data.data['success'];
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
+  Future<bool> unblock(String userId) async {
+    try {
+      final data = await httpApiClient().delete(ME_BLOCK + '/$userId');
+      return data.data['success'];
+    } on DioError catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
 }

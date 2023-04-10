@@ -6,15 +6,12 @@ import 'package:amity_sdk/src/public/public.dart';
 class UserRepository {
   /// get the user query builder
   AmityAllUserQueryBuilder getUsers() {
-    return AmityAllUserQueryBuilder(
-        useCase: serviceLocator<GetAllUserUseCase>());
+    return AmityAllUserQueryBuilder(useCase: serviceLocator<GetAllUserUseCase>());
   }
 
   /// Search the user by their display name
-  AmityUserSearchDisplayNameQueryBuilder searchUserByDisplayName(
-      String keyword) {
-    return AmityUserSearchDisplayNameQueryBuilder(
-        useCase: serviceLocator<GetAllUserUseCase>(), keyword: keyword);
+  AmityUserSearchDisplayNameQueryBuilder searchUserByDisplayName(String keyword) {
+    return AmityUserSearchDisplayNameQueryBuilder(useCase: serviceLocator<GetAllUserUseCase>(), keyword: keyword);
   }
 
   /// get the user with userId
@@ -35,5 +32,15 @@ class UserRepository {
   /// API to get relationship mapping with the user
   AmityUserRelationshipsRepository relationship() {
     return AmityUserRelationshipsRepository();
+  }
+
+  /// API to unblock user
+  Future block(String userId) {
+    return serviceLocator<UserBlockUsecase>().get(userId);
+  }
+
+  /// API to unblock user
+  Future unblock(String userId) {
+    return serviceLocator<UserUnblockUsecase>().get(userId);
   }
 }

@@ -1,0 +1,10 @@
+{
+    "status": "error",
+    "message": "You have already blocked this user",
+    "code": 400000,
+    "data": {
+        "detail": {
+            "blockingUserId": "63ff7099539ae99fd11384a0"
+        }
+    }
+}

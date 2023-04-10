@@ -22,16 +22,24 @@ class AmityUserRelationshipRepository {
     return serviceLocator<UnfollowUsecase>().get(userId);
   }
 
+  /// API to block the user
+  Future block() {
+    return serviceLocator<UserBlockUsecase>().get(userId);
+  }
+
+  /// API to unblock user
+  Future unblock() {
+    return serviceLocator<UserUnblockUsecase>().get(userId);
+  }
+
   /// Get the following user list for the user
   AmityUserFollowingsQueryBuilder getFollowings() {
-    return AmityUserFollowingsQueryBuilder(
-        useCase: serviceLocator(), userId: userId);
+    return AmityUserFollowingsQueryBuilder(useCase: serviceLocator(), userId: userId);
   }
 
   /// Get the Followers user list for the user
   AmityUserFollowersQueryBuilder getFollowers() {
-    return AmityUserFollowersQueryBuilder(
-        useCase: serviceLocator(), userId: userId);
+    return AmityUserFollowersQueryBuilder(useCase: serviceLocator(), userId: userId);
   }
 
   ///Get Follow info for user Id

@@ -155,6 +155,18 @@ class FollowRepoImpl extends FollowRepo {
   }
 
   @override
+  Future updateFollowInfoStatus(String userId, AmityFollowStatus status) async {
+    final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
+
+    //Save the follow information
+    if (followInfoHiveEntity != null) {
+      followInfoHiveEntity.status = status.value;
+      followInfoHiveEntity.save();
+      return;
+    }
+  }
+
+  @override
   Future<PageListData<List<AmityFollowRelationship>, String>> getFollower(FollowRequest request) async {
     final data = await followWApiInterface.getFollower(request);
 
