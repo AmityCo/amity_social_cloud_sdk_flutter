@@ -49,4 +49,14 @@ class UserRepository {
   AmityUserRelationshipsRepository relationship() {
     return AmityUserRelationshipsRepository();
   }
+
+  /// API to unblock user
+  Future block(String userId) {
+    return serviceLocator<UserBlockUsecase>().get(userId);
+  }
+
+  /// API to unblock user
+  Future unblock(String userId) {
+    return serviceLocator<UserUnblockUsecase>().get(userId);
+  }
 }

@@ -8,4 +8,6 @@ abstract class UserApiInterface {
   Future<UsersResponse> updateUser(UpdateUserRequest request);
   Future<UsersResponse> flag(String userId);
   Future<UsersResponse> unflag(String userId);
+  Future<bool> block(String userId);
+  Future<bool> unblock(String userId);
 }

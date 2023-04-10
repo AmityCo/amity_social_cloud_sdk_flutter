@@ -1,10 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-enum AmityFollowStatus {
-  PENDING,
-  ACCEPTED,
-  NONE,
-}
+enum AmityFollowStatus { PENDING, ACCEPTED, NONE, BLOCKED }
 
 extension AmityFollowStatusExtension on AmityFollowStatus {
   String get value {
@@ -12,6 +8,7 @@ extension AmityFollowStatusExtension on AmityFollowStatus {
       'pending',
       'accepted',
       'none',
+      'blocked',
     ][index];
   }
 

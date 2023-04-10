@@ -61,7 +61,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   Future<FollowInfoResponse> getFollowInfo(String userId) async {
     try {
       final data = await httpApiClient().get(
-        '$USERS_V4_URL$userId/followInfo',
+        '$USER_FOLLLOW_INFO$userId/followInfo',
       );
       return FollowInfoResponse.fromJson(data.data);
     } on DioError catch (error) {
@@ -73,9 +73,8 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowResponse> getFollower(FollowRequest request) async {
     try {
-      final data = await httpApiClient().get(
-          '$USER_V4_URL/${request.userId}/followers',
-          queryParameters: request.toJson());
+      final data =
+          await httpApiClient().get('$USER_FOLLLOWERS/${request.userId}/followers', queryParameters: request.toJson());
       return FollowResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -86,9 +85,8 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowResponse> getFollowing(FollowRequest request) async {
     try {
-      final data = await httpApiClient().get(
-          '$USER_V4_URL/${request.userId}/following',
-          queryParameters: request.toJson());
+      final data =
+          await httpApiClient().get('$USER_FOLLLOWING/${request.userId}/following', queryParameters: request.toJson());
       return FollowResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -112,8 +110,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowResponse> getMyFollower(FollowRequest request) async {
     try {
-      final data = await httpApiClient()
-          .get(ME_FOLLLOWERS, queryParameters: request.toJson());
+      final data = await httpApiClient().get(ME_FOLLLOWERS, queryParameters: request.toJson());
       return FollowResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -124,8 +121,7 @@ class FollowApiInterfaceImpl extends FollowApiInterface {
   @override
   Future<FollowResponse> getMyFollowing(FollowRequest request) async {
     try {
-      final data = await httpApiClient()
-          .get(ME_FOLLLOWING, queryParameters: request.toJson());
+      final data = await httpApiClient().get(ME_FOLLLOWING, queryParameters: request.toJson());
       return FollowResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

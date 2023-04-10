@@ -3,7 +3,7 @@
 const SG_HTTP_ENDPOINT = "https://api.sg.amity.co/";
 const EU_HTTP_ENDPOINT = "https://api.eu.amity.co/";
 const US_HTTP_ENDPOINT = "https://api.us.amity.co/";
-const STAGING_HTTP_ENDPOINT = "https://api.staging.amity.co/";
+const STAGING_HTTP_ENDPOINT = "https://api.dev.amity.co/";
 
 const SG_SOCKET_ENDPOINT = "https://api.sg.amity.co/";
 const EU_SOCKET_ENDPOINT = "https://api.eu.amity.co/";
@@ -34,8 +34,13 @@ const COMMUNITY_CATEGORY_V3 = 'api/v3/community-categories';
 
 const ME_FOLLLOWING = 'api/v4/me/following';
 const ME_FOLLLOWERS = 'api/v4/me/followers';
-const ME_FOLLLOW_INFO = 'api/v4/me/followInfo';
+const ME_FOLLLOW_INFO = 'api/v5/me/followInfo';
 const ME_FLAG = 'api/v4/me/flags';
+const ME_BLOCK = 'api/v4/me/user-blocks';
+
+const USER_FOLLLOWING = 'api/v4/users/';
+const USER_FOLLLOWERS = 'api/v4/users/';
+const USER_FOLLLOW_INFO = 'api/v5/users/';
 
 /// Poll API v3 Base Url
 const POLL_V3 = 'api/v3/polls';
