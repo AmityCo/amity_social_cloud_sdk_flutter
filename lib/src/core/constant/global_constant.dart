@@ -34,7 +34,7 @@ const COMMUNITY_CATEGORY_V3 = 'api/v3/community-categories';
 
 const ME_FOLLLOWING = 'api/v4/me/following';
 const ME_FOLLLOWERS = 'api/v4/me/followers';
-const ME_FOLLLOW_INFO = 'api/v5/me/followInfo';
+const ME_FOLLLOW_INFO = 'api/v4/me/followInfo';
 const ME_FLAG = 'api/v4/me/flags';
 const ME_BLOCK = 'api/v4/me/user-blocks';
 

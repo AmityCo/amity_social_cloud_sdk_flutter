@@ -59,4 +59,9 @@ class UserRepository {
   Future unblock(String userId) {
     return serviceLocator<UserUnblockUsecase>().get(userId);
   }
+
+  /// API to get blocked users
+  AmityBlockUserQueryBuilder getBlockedUsers() {
+    return AmityBlockUserQueryBuilder(useCase: serviceLocator());
+  }
 }

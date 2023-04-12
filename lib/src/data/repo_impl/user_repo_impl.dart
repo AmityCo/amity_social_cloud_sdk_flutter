@@ -109,10 +109,9 @@ class UserRepoImpl extends UserRepo {
 
   @override
   Future block(String userId) async {
-    final data = await userApiInterface.block(userId);
+    final followInfo = await userApiInterface.block(userId);
 
-    // ///Update the follow info counts from the backend
-    final followInfo = await followApiInterface.getFollowInfo(userId);
+    ///Update the follow info counts from the backend
     AmityFollowStatus status = AmityFollowStatus.NONE;
     //Save the follow information
     if (followInfo.follows != null && followInfo.follows!.isNotEmpty) {
@@ -124,15 +123,14 @@ class UserRepoImpl extends UserRepo {
     followInfoHiveEntity.status = status.value;
     await followInfoDbAdapter.saveFollowInfo(followInfoHiveEntity);
 
-    return data;
+    return true;
   }
 
   @override
   Future unblock(String userId) async {
-    final data = await userApiInterface.unblock(userId);
+    final followInfo = await userApiInterface.unblock(userId);
 
     // ///Update the follow info counts from the backend
-    final followInfo = await followApiInterface.getFollowInfo(userId);
     AmityFollowStatus status = AmityFollowStatus.NONE;
     //Save the follow information
     if (followInfo.follows != null && followInfo.follows!.isNotEmpty) {
@@ -144,6 +142,26 @@ class UserRepoImpl extends UserRepo {
     followInfoHiveEntity.status = status.value;
     await followInfoDbAdapter.saveFollowInfo(followInfoHiveEntity);
 
-    return data;
+    return true;
+  }
+
+  @override
+  Future<PageListData<List<AmityUser>, String>> getBlockedUsers() async {
+    final data = await userApiInterface.getBlockedUsers();
+
+    final userHiveEntities = data.users.map((e) => e.convertToUserHiveEntity()).toList();
+
+    final fileHiveEntities = data.files.map((e) => e.convertToFileHiveEntity()).toList();
+
+    for (var userEntity in userHiveEntities) {
+      await userDbAdapter.saveUserEntity(userEntity);
+    }
+    for (var fileEntity in fileHiveEntities) {
+      await fileDbAdapter.saveFileEntity(fileEntity);
+    }
+
+    final amityUsers = userHiveEntities.map((e) => e.convertToAmityUser()).toList();
+
+    return PageListData(amityUsers, data.paging!.next ?? '');
   }
 }
