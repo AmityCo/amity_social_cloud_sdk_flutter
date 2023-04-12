@@ -38,4 +38,9 @@ class AmityMyUserRelationshipRepository {
   Future<AmityMyFollowInfo> getFollowInfo() {
     return serviceLocator<GetMyFollowInfoUsecase>().get();
   }
+
+  /// API to get blocked users
+  AmityBlockUserQueryBuilder getBlockedUsers() {
+    return AmityBlockUserQueryBuilder(useCase: serviceLocator());
+  }
 }
