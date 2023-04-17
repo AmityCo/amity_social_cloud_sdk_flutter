@@ -1,6 +1,5 @@
 import 'package:amity_sdk/src/core/service_locator/service_locator.dart';
 import 'package:amity_sdk/src/core/socket/event/socket_event_listener.dart';
-import 'package:amity_sdk/src/data/converter/create_comment_response_extension.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 

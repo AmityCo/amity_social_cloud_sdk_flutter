@@ -28,7 +28,7 @@ void main() {
 
   test('When the user delete a valid community, it should return a valid community.', () async {
     when(() => mockCommunityApiInterface.deleteCommunity(any())).thenAnswer((_) async {
-      final response = await File('test/mock_json/amity_community_delete_success.json').readAsString();
+      await File('test/mock_json/amity_community_delete_success.json').readAsString();
       return true;
     });
 
