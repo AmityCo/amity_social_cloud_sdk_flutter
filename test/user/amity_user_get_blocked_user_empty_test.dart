@@ -24,11 +24,12 @@ void main() {
     serviceLocator.registerLazySingleton<UserApiInterface>(
       () => userApiInterface,
     );
+    registerFallbackValue(OptionsRequest());
   });
 
   test('When user queries for list of blocked users when none of them are blocked, it should return empty list',
       () async {
-    when(() => userApiInterface.getBlockedUsers()).thenAnswer((_) async {
+    when(() => userApiInterface.getBlockedUsers(any())).thenAnswer((_) async {
       final response = await File('test/mock_json/amity_user_get_blocked_user_empty.json').readAsString();
       return UsersResponse.fromJson(json.decode(response));
     });

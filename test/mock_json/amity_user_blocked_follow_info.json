@@ -1,0 +1,19 @@
+{
+    "follows": [
+        {
+            "from": "victimAndroid",
+            "to": "pang1",
+            "status": "blocked",
+            "createdAt": "2023-04-17T04:53:27.207Z",
+            "updatedAt": "2023-04-18T08:15:56.910Z"
+        }
+    ],
+    "followCounts": [
+        {
+            "userId": "pang1",
+            "followingCount": 2,
+            "followerCount": 1,
+            "pendingCount": 0
+        }
+    ]
+}
