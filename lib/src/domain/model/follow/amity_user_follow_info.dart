@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
@@ -19,4 +20,15 @@ class AmityUserFollowInfo {
 
     return controller;
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'id': id,
+      'status': status.value,
+      'followingCount': followingCount,
+      'followerCount': followerCount,
+    };
+  }
+
+  String toJson() => json.encode(toMap());
 }
