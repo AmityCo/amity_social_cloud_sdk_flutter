@@ -3,7 +3,8 @@
 const SG_HTTP_ENDPOINT = "https://api.sg.amity.co/";
 const EU_HTTP_ENDPOINT = "https://api.eu.amity.co/";
 const US_HTTP_ENDPOINT = "https://api.us.amity.co/";
-const STAGING_HTTP_ENDPOINT = "https://api.dev.amity.co/";
+const STAGING_HTTP_ENDPOINT = "https://api.staging.amity.co/";
+const DEV_HTTP_ENDPOINT = "https://api.dev.amity.co/";
 
 const SG_SOCKET_ENDPOINT = "https://api.sg.amity.co/";
 const EU_SOCKET_ENDPOINT = "https://api.eu.amity.co/";
