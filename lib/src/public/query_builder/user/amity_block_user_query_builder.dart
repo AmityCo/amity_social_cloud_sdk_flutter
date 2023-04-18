@@ -12,12 +12,19 @@ class AmityBlockUserQueryBuilder {
 
   /// Query User
   Future<List<AmityUser>> query() async {
-    final amityUsers = await _useCase.get(null);
+    final amityUsers = await _useCase.get(OptionsRequest());
 
     return amityUsers.data;
   }
 
   Future<PageListData<List<AmityUser>, String>> getPagingData({String? token, int? limit}) async {
-    return _useCase.get(null);
+    OptionsRequest optionsRequest = OptionsRequest();
+    if (token != null) {
+      optionsRequest.token = token;
+    }
+    if (limit != null) {
+      optionsRequest.limit = limit;
+    }
+    return _useCase.get(optionsRequest);
   }
 }
