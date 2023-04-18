@@ -369,15 +369,15 @@
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/path_provider_android-2.0.24",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/path_provider_android-2.0.25",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "path_provider_foundation",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.1",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/path_provider_foundation-2.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "2.18"
     },
     {
       "name": "path_provider_linux",
@@ -591,9 +591,9 @@
     },
     {
       "name": "web_socket_channel",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/web_socket_channel-2.3.0",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/web_socket_channel-2.4.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.15"
     },
     {
       "name": "webkit_inspection_protocol",
@@ -626,7 +626,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2023-04-11T07:17:34.687758Z",
-  "generator": "melos",
-  "generatorVersion": "2.9.0"
+  "generated": "2023-04-17T04:51:42.108252Z",
+  "generator": "pub",
+  "generatorVersion": "2.19.3"
 }
