@@ -91,9 +91,9 @@ class UserApiInterfaceImpl extends UserApiInterface {
   }
 
   @override
-  Future<UsersResponse> getBlockedUsers() async {
+  Future<UsersResponse> getBlockedUsers(OptionsRequest request) async {
     try {
-      final data = await httpApiClient().get(ME_BLOCK);
+      final data = await httpApiClient().get(ME_BLOCK, queryParameters: request.toJson());
       return UsersResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

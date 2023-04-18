@@ -1,5 +1,4 @@
-import 'package:amity_sdk/src/core/model/api_request/update_user_request.dart';
-import 'package:amity_sdk/src/core/model/api_request/users_request.dart';
+import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 
 abstract class UserApiInterface {
@@ -10,5 +9,5 @@ abstract class UserApiInterface {
   Future<UsersResponse> unflag(String userId);
   Future<FollowInfoResponse> block(String userId);
   Future<FollowInfoResponse> unblock(String userId);
-  Future<UsersResponse> getBlockedUsers();
+  Future<UsersResponse> getBlockedUsers(OptionsRequest request);
 }

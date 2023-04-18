@@ -1,14 +1,7 @@
 /// [OptionsRequest]
 class OptionsRequest {
   /// init [OptionsRequest]
-  OptionsRequest(
-      {this.after,
-      this.first,
-      this.before,
-      this.last,
-      this.token,
-      this.type,
-      this.limit});
+  OptionsRequest({this.after, this.first, this.before, this.last, this.token, this.type, this.limit});
 
   /// After
   int? after;

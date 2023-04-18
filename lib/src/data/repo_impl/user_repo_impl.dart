@@ -146,8 +146,8 @@ class UserRepoImpl extends UserRepo {
   }
 
   @override
-  Future<PageListData<List<AmityUser>, String>> getBlockedUsers() async {
-    final data = await userApiInterface.getBlockedUsers();
+  Future<PageListData<List<AmityUser>, String>> getBlockedUsers(OptionsRequest request) async {
+    final data = await userApiInterface.getBlockedUsers(request);
 
     final userHiveEntities = data.users.map((e) => e.convertToUserHiveEntity()).toList();
 

@@ -11,5 +11,5 @@ abstract class UserRepo {
   Future<AmityUser> unflag(String userId);
   Future block(String userId);
   Future unblock(String userId);
-  Future<PageListData<List<AmityUser>, String>> getBlockedUsers();
+  Future<PageListData<List<AmityUser>, String>> getBlockedUsers(OptionsRequest request);
 }
