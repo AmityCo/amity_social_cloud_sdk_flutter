@@ -32,7 +32,7 @@ void main() {
       return FollowInfoResponse.fromJson(json.decode(response));
     });
 
-    final result = await AmityCoreClient.newUserRepository().relationship().user(userId).unblock();
+    final result = await AmityCoreClient.newUserRepository().relationship().unblockUser(userId);
 
     expect(result, isA<bool>());
     expect(result, true);

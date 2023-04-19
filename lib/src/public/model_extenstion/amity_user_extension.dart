@@ -23,12 +23,12 @@ extension AmityUserExtenstion on AmityUser {
     return AmityUserFlagRepository(userId: userId!);
   }
 
-  Future block() {
+  Future blockUser() {
     return serviceLocator<UserBlockUsecase>().get(userId!);
   }
 
   /// API to unblock user
-  Future unblock() {
+  Future unblockUser() {
     return serviceLocator<UserUnblockUsecase>().get(userId!);
   }
 
