@@ -34,7 +34,7 @@ void main() {
     });
 
     try {
-      await AmityCoreClient.newUserRepository().relationship().user(userId).unblock();
+      await AmityCoreClient.newUserRepository().relationship().unblockUser(userId);
     } catch (error) {
       expect(error, isA<AmityException>());
       expect((error as AmityException).code, 400000);

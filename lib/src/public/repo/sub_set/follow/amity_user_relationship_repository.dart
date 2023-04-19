@@ -30,9 +30,6 @@ class AmityUserRelationshipRepository {
   }
   /* end_public_function */
 
-  /* begin_public_function 
-  id: user.relationship.query_followings
-  */
   /// Get the following user list for the user
   AmityUserFollowingsQueryBuilder getFollowings() {
     return AmityUserFollowingsQueryBuilder(useCase: serviceLocator(), userId: userId);
