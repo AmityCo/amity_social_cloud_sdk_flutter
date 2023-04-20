@@ -7,8 +7,7 @@ import 'package:uuid/uuid.dart';
 
 import '../helper/amity_core_client_mock_setup.dart';
 
-class MockNotificationApiInterface extends Mock
-    implements NotificationApiInterface {}
+class MockNotificationApiInterface extends Mock implements NotificationApiInterface {}
 
 // integration_test_id:929e18eb-ac7b-461e-91b3-f41b276a2b64
 void main() {
@@ -39,14 +38,9 @@ void main() {
     );
   });
 
-  test(
-      'When the user registers push notification, it should return a successful result. ',
-      () async {
-    when(() => notificationApiInterface.registerNotification(
-        any<RegisterNotificationRequest>())).thenAnswer((_) async {
-      final response =
-          await File('test/mock_json/amity_notification_register_success.json')
-              .readAsString();
+  test('When the user registers push notification, it should return a successful result. ', () async {
+    when(() => notificationApiInterface.registerNotification(any<RegisterNotificationRequest>())).thenAnswer((_) async {
+      await File('test/mock_json/amity_notification_register_success.json').readAsString();
       return true;
     });
 

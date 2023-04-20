@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_log, non_constant_identifier_names, prefer_const_declarations, unused_element
+// ignore_for_file: avoid_log, non_constant_identifier_names, prefer_const_declarations, unused_element, unused_field
 
 import 'dart:async';
 import 'dart:convert';
