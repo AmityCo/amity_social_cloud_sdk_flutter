@@ -1,3 +1,5 @@
+import 'package:amity_sdk/src/core/core.dart';
+
 /// [OptionsRequest]
 class OptionsRequest {
   /// init [OptionsRequest]
@@ -42,5 +44,5 @@ class OptionsRequest {
         "token": token,
         "type": type,
         "limit": limit,
-      }..removeWhere((key, value) => value == null);
+      }..removeNullValue();
 }
