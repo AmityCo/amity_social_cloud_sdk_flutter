@@ -42,7 +42,7 @@ class AmityMQTT {
   }
 
   Future<int> _connect(AccountHiveEntity accountEntity) async {
-    activeClient = MqttServerClient(amityCoreClientOption.mqttEndpoint.value, accountEntity.deviceId!);
+    activeClient = MqttServerClient(amityCoreClientOption.mqttEndpoint.endpoint, accountEntity.deviceId!);
 
     activeClient?.autoReconnect = true;
     // activeClient?.instantiationCorrect = true;
@@ -68,7 +68,7 @@ class AmityMQTT {
         .withWillQos(MqttQos.atMostOnce)
         .authenticateAs(accountEntity.id!, accountEntity.accessToken!);
 
-    logger('AMITY_MQTT::Mosquitto client connecting to - ${amityCoreClientOption.mqttEndpoint.value}');
+    logger('AMITY_MQTT::Mosquitto client connecting to - ${amityCoreClientOption.mqttEndpoint.endpoint}');
     activeClient?.connectionMessage = connMess;
 
     try {
