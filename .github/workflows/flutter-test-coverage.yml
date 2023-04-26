@@ -10,6 +10,7 @@ on:
     branches:
       - master
       - develop
+      - sprint
       - "release-**"
 
   pull_request:
