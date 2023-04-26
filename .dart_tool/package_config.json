@@ -219,7 +219,7 @@
     },
     {
       "name": "get_it",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/get_it-7.2.0",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/get_it-7.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -626,8 +626,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2023-04-19T05:45:32.003526Z",
-  "generator": "melos",
-  "generatorVersion": "2.9.0"
+  "generated": "2023-04-24T16:54:43.546163Z",
+  "generator": "pub",
+  "generatorVersion": "2.19.3"
 }
-

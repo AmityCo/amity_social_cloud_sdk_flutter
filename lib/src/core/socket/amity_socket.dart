@@ -34,8 +34,7 @@ class AmitySocket {
     final currentUser = AmityCoreClient.getCurrentUser();
     _accountSubscription = accountRepo
         .listenAccount(currentUser.userId!)
-        .takeWhile((account) =>
-            (account?.accessToken?.isNotEmpty ?? false) && _shouldConnect)
+        .takeWhile((account) => (account?.accessToken?.isNotEmpty ?? false) && _shouldConnect)
         .distinct()
         .listen((account) {
       if (account != null) {
@@ -68,7 +67,7 @@ class AmitySocket {
     _shouldConnect = true;
 
     _activeSocket = io.io(
-        amityCoreClientOption.httpEndpoint.value,
+        amityCoreClientOption.httpEndpoint.endpoint,
         io.OptionBuilder()
             .setTransports(['websocket'])
             .enableAutoConnect()

@@ -2,22 +2,14 @@
 
 import 'package:amity_sdk/src/core/constant/global_constant.dart';
 
-enum AmityRegionalHttpEndpoint {
-  SG,
-  EU,
-  US,
-  STAGING,
-  DEV,
-}
+class AmityRegionalHttpEndpoint {
+  final String endpoint;
 
-extension AmityRegionalHttpEndpointExtension on AmityRegionalHttpEndpoint {
-  String get value {
-    return [
-      SG_HTTP_ENDPOINT,
-      EU_HTTP_ENDPOINT,
-      US_HTTP_ENDPOINT,
-      STAGING_HTTP_ENDPOINT,
-      DEV_HTTP_ENDPOINT,
-    ][index];
-  }
+  static const SG = AmityRegionalHttpEndpoint(SG_HTTP_ENDPOINT);
+  static const EU = AmityRegionalHttpEndpoint(EU_HTTP_ENDPOINT);
+  static const US = AmityRegionalHttpEndpoint(US_HTTP_ENDPOINT);
+
+  const AmityRegionalHttpEndpoint(this.endpoint);
+
+  factory AmityRegionalHttpEndpoint.custom(String url) => AmityRegionalHttpEndpoint(url);
 }
