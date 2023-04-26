@@ -17,7 +17,7 @@ class HttpApiClient {
     required AmityCoreClientOption amityCoreClientOption,
   }) {
     final baseOptions = BaseOptions(
-      baseUrl: amityCoreClientOption.httpEndpoint.value,
+      baseUrl: amityCoreClientOption.httpEndpoint.endpoint,
       connectTimeout: 30 * 1000,
       sendTimeout: 10 * 60 * 1000,
       receiveTimeout: 60 * 1000,
@@ -27,11 +27,9 @@ class HttpApiClient {
 
     dio = Dio(baseOptions);
 
-    dio.interceptors
-        .add(QueuedInterceptorsWrapper(onRequest: (options, handler) {
+    dio.interceptors.add(QueuedInterceptorsWrapper(onRequest: (options, handler) {
       if (serviceLocator.isRegistered<SessionResponse>()) {
-        options.headers['authorization'] =
-            'Bearer ${serviceLocator<SessionResponse>().accessToken}';
+        options.headers['authorization'] = 'Bearer ${serviceLocator<SessionResponse>().accessToken}';
       }
       handler.next(options);
     }, onError: (e, handler) {
