@@ -99,7 +99,8 @@ class AmityImagePostCreator extends PostCreator {
 
   @override
   void _attachRequest(CreatePostRequest request) {
-    request.attachments = _images.map((e) => Attachment(fileId: e.fileId, type: AmityDataType.IMAGE.value)).toList();
+    request.attachments =
+        _images.map((e) => PostAttachmentRequest(fileId: e.fileId, type: AmityDataType.IMAGE.value)).toList();
   }
 }
 
@@ -119,7 +120,8 @@ class AmityFilePostCreator extends PostCreator {
 
   @override
   void _attachRequest(CreatePostRequest request) {
-    request.attachments = _files.map((e) => Attachment(fileId: e.fileId, type: AmityDataType.FILE.value)).toList();
+    request.attachments =
+        _files.map((e) => PostAttachmentRequest(fileId: e.fileId, type: AmityDataType.FILE.value)).toList();
   }
 }
 
@@ -139,7 +141,8 @@ class AmityVideoPostCreator extends PostCreator {
 
   @override
   void _attachRequest(CreatePostRequest request) {
-    request.attachments = _videos.map((e) => Attachment(fileId: e.fileId, type: AmityDataType.VIDEO.value)).toList();
+    request.attachments =
+        _videos.map((e) => PostAttachmentRequest(fileId: e.fileId, type: AmityDataType.VIDEO.value)).toList();
   }
 }
 

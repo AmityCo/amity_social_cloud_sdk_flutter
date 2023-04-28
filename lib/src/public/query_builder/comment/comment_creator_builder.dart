@@ -3,37 +3,37 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
-class AmityCommentCreateTargetSelector {
+class AmityCommentCreationTarget {
   late CommentCreateUseCase _useCase;
   late String _referenceType;
   late String _referenceId;
   String? _parentId;
   // late AmityCommentTargetType _amityCommentTargetType;
-  AmityCommentCreateTargetSelector({
+  AmityCommentCreationTarget({
     required CommentCreateUseCase useCase,
   }) {
     _useCase = useCase;
   }
 
-  AmityCommentCreateTargetSelector post(String referenceId) {
+  AmityCommentCreationTarget post(String referenceId) {
     _referenceId = referenceId;
     _referenceType = AmityCommentTargetType.POST.value;
     return this;
   }
 
-  AmityCommentCreateTargetSelector content(String referenceId) {
+  AmityCommentCreationTarget content(String referenceId) {
     _referenceId = referenceId;
     _referenceType = AmityCommentTargetType.CONTENT.value;
     return this;
   }
 
-  AmityCommentCreateTargetSelector parentId(String parentId) {
+  AmityCommentCreationTarget parentId(String parentId) {
     _parentId = parentId;
     return this;
   }
 
-  AmityCommentCreateDataTypeSelector create() {
-    return AmityCommentCreateDataTypeSelector(
+  AmityCommentCreationType create() {
+    return AmityCommentCreationType(
       useCase: _useCase,
       referenceType: _referenceType,
       referenceId: _referenceId,
@@ -43,77 +43,120 @@ class AmityCommentCreateTargetSelector {
   }
 }
 
-class AmityCommentCreateDataTypeSelector {
+class AmityCommentCreationType {
   late CommentCreateUseCase _useCase;
   late String _referenceType;
   late String _referenceId;
   String? _parentId;
-  // late AmityCommentTargetType _amityCommentTargetType;
-  AmityCommentCreateDataTypeSelector({
+  AmityCommentCreationType({
     required CommentCreateUseCase useCase,
     required String referenceType,
     required String referenceId,
     String? parentId,
-    // required AmityCommentTargetType amityCommentTargetType
   }) {
     _useCase = useCase;
     _referenceType = referenceType;
     _referenceId = referenceId;
     _parentId = parentId;
-    // _amityCommentTargetType = amityCommentTargetType;
   }
 
   AmityTextCommentCreator text(String text) {
     return AmityTextCommentCreator(
+      useCase: _useCase,
+      referenceType: _referenceType,
+      referenceId: _referenceId,
+      parentId: _parentId,
+      text: text,
+    );
+  }
+
+  /// Data Type Image
+  AmityAttachmentCommentCreator attachments(List<CommentImageAttachment> images) {
+    return AmityAttachmentCommentCreator(
         useCase: _useCase,
         referenceType: _referenceType,
         referenceId: _referenceId,
         parentId: _parentId,
-        // amityCommentTargetType: _amityCommentTargetType,
-        text: text);
+        images: images);
   }
 }
 
-class AmityTextCommentCreator {
-  late CommentCreateUseCase _useCase;
-  late String _referenceType;
-  late String _referenceId;
-  String? _parentId;
-  // late AmityCommentTargetType _amityCommentTargetType;
-  late String? _text;
-  Map<String, dynamic>? _metadata;
-  List<AmityMentioneeTarget>? _mentionees;
+class AmityTextCommentCreator extends CommentCreator {
   AmityTextCommentCreator(
       {required CommentCreateUseCase useCase,
       required String referenceType,
       required String referenceId,
       String? parentId,
-      // required AmityCommentTargetType amityCommentTargetType,
-      String? text}) {
+      required String text})
+      : super(useCase: useCase, referenceType: referenceType, referenceId: referenceId, parentId: parentId, text: text);
+}
+
+class AmityAttachmentCommentCreator extends CommentCreator {
+  late final List<CommentImageAttachment> _images;
+
+  AmityAttachmentCommentCreator(
+      {required CommentCreateUseCase useCase,
+      required String referenceType,
+      required String referenceId,
+      String? parentId,
+      required List<CommentImageAttachment> images})
+      : super(useCase: useCase, referenceType: referenceType, referenceId: referenceId, parentId: parentId) {
+    _images = images;
+  }
+
+  CommentCreator text(String text) {
+    _text = text;
+    return this;
+  }
+
+  @override
+  void _attachRequest(CreateCommentRequest request) {
+    request.attachments =
+        _images.map((e) => CommentAttachmentRequest(fileId: e.getFileId(), type: AmityDataType.IMAGE.value)).toList();
+  }
+}
+
+abstract class CommentCreator {
+  late CommentCreateUseCase _useCase;
+  late String _referenceType;
+  late String _referenceId;
+  String? _parentId;
+  String? _text;
+
+  CommentCreator({
+    required CommentCreateUseCase useCase,
+    required String referenceType,
+    required String referenceId,
+    String? parentId,
+    String? text,
+  }) {
     _useCase = useCase;
     _referenceType = referenceType;
     _referenceId = referenceId;
     _parentId = parentId;
-    // _amityCommentTargetType = amityCommentTargetType;
     _text = text;
   }
 
-  AmityTextCommentCreator mentionUsers(List<String> userIds) {
+  List<AmityMentioneeTarget>? _mentionees;
+  CommentCreator mentionUsers(List<String> userIds) {
     _mentionees ??= [];
-    _mentionees!.add(AmityMentioneeTarget(
-        type: AmityMentionType.USER.value, userIds: userIds));
+    _mentionees!.add(AmityMentioneeTarget(type: AmityMentionType.USER.value, userIds: userIds));
     return this;
   }
 
-  /// Add metadata to Amity Post
-  AmityTextCommentCreator metadata(Map<String, dynamic> metadata) {
+  Map<String, dynamic>? _metadata;
+  CommentCreator metadata(Map<String, dynamic> metadata) {
     _metadata = metadata;
     return this;
   }
 
+  void _attachRequest(CreateCommentRequest request) {}
+
   Future<AmityComment> send() {
-    CreateCommentRequest request = CreateCommentRequest(
-        referenceType: _referenceType, referenceId: _referenceId);
+    CreateCommentRequest request = CreateCommentRequest(referenceType: _referenceType, referenceId: _referenceId);
+
+    //Attach attachment in the request
+    _attachRequest(request);
 
     CreateCommentData data = CreateCommentData();
     if (_text != null) data.text = _text;
@@ -122,7 +165,6 @@ class AmityTextCommentCreator {
 
     if (_parentId != null) {
       request.parentId = _parentId;
-      // request.commentId = _parentId;
     }
 
     if (_mentionees != null) {

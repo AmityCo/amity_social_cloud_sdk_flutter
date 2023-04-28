@@ -1,3 +1,4 @@
+export 'attachment_response.dart';
 export 'channel_response.dart';
 export 'channel_user_response.dart';
 export 'comment_response.dart';
