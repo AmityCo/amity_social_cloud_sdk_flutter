@@ -5,6 +5,8 @@ import 'package:dio/dio.dart';
 abstract class FileApiInterface {
   Future<List<FileResponse>> uploadFile(UploadFileRequest request,
       {ProgressCallback? onUploadProgress, CancelToken? cancelToken});
+  Future<List<FileResponse>> uploadImage(UploadFileRequest request,
+      {ProgressCallback? onUploadProgress, CancelToken? cancelToken});
   Future<List<FileResponse>> uploadVideo(UploadFileRequest request,
       {ProgressCallback? onUploadProgress, CancelToken? cancelToken});
   Future<CreatePostResponse> getFile(String fileId);
