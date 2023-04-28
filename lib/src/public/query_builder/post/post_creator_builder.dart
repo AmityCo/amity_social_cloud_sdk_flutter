@@ -16,25 +16,18 @@ class AmityPostCreateTargetSelector {
   /// Target the current user for Amity Post
   AmityPostCreateDataTypeSelector targetMe() {
     return AmityPostCreateDataTypeSelector(
-        useCase: _useCase,
-        userId: AmityCoreClient.getUserId(),
-        targetType: AmityPostTargetType.USER);
+        useCase: _useCase, userId: AmityCoreClient.getUserId(), targetType: AmityPostTargetType.USER);
   }
 
   /// Taget the user Id for the Amity Post
   AmityPostCreateDataTypeSelector targetUser(String targetUser) {
-    return AmityPostCreateDataTypeSelector(
-        useCase: _useCase,
-        userId: targetUser,
-        targetType: AmityPostTargetType.USER);
+    return AmityPostCreateDataTypeSelector(useCase: _useCase, userId: targetUser, targetType: AmityPostTargetType.USER);
   }
 
   /// Target the community for the Amity Post
   AmityPostCreateDataTypeSelector targetCommunity(String communityId) {
     return AmityPostCreateDataTypeSelector(
-        useCase: _useCase,
-        userId: communityId,
-        targetType: AmityPostTargetType.COMMUNITY);
+        useCase: _useCase, userId: communityId, targetType: AmityPostTargetType.COMMUNITY);
   }
 }
 
@@ -46,9 +39,7 @@ class AmityPostCreateDataTypeSelector {
 
   /// Init [AmityPostCreateDataTypeSelector]
   AmityPostCreateDataTypeSelector(
-      {required PostCreateUsecase useCase,
-      required String userId,
-      required AmityPostTargetType targetType}) {
+      {required PostCreateUsecase useCase, required String userId, required AmityPostTargetType targetType}) {
     _useCase = useCase;
     _userId = userId;
     _targetType = targetType;
@@ -56,47 +47,27 @@ class AmityPostCreateDataTypeSelector {
 
   /// Data Type Text
   AmityTextPostCreator text(String text) {
-    return AmityTextPostCreator(
-        useCase: _useCase,
-        targetId: _userId,
-        targetType: _targetType.value,
-        text: text);
+    return AmityTextPostCreator(useCase: _useCase, targetId: _userId, targetType: _targetType.value, text: text);
   }
 
   /// Data Type Image
   AmityImagePostCreator image(List<AmityImage> images) {
-    return AmityImagePostCreator(
-        useCase: _useCase,
-        targetId: _userId,
-        targetType: _targetType.value,
-        images: images);
+    return AmityImagePostCreator(useCase: _useCase, targetId: _userId, targetType: _targetType.value, images: images);
   }
 
   /// Data Type Video
   AmityVideoPostCreator video(List<AmityVideo> videos) {
-    return AmityVideoPostCreator(
-        useCase: _useCase,
-        targetId: _userId,
-        targetType: _targetType.value,
-        videos: videos);
+    return AmityVideoPostCreator(useCase: _useCase, targetId: _userId, targetType: _targetType.value, videos: videos);
   }
 
   /// Data Type File
   AmityFilePostCreator file(List<AmityFile> files) {
-    return AmityFilePostCreator(
-        useCase: _useCase,
-        targetId: _userId,
-        targetType: _targetType.value,
-        files: files);
+    return AmityFilePostCreator(useCase: _useCase, targetId: _userId, targetType: _targetType.value, files: files);
   }
 
   /// Data Type Poll
   AmityPollPostCreator poll(String pollId) {
-    return AmityPollPostCreator(
-        useCase: _useCase,
-        targetId: _userId,
-        targetType: _targetType.value,
-        pollId: pollId);
+    return AmityPollPostCreator(useCase: _useCase, targetId: _userId, targetType: _targetType.value, pollId: pollId);
   }
 }
 
@@ -104,10 +75,7 @@ class AmityPostCreateDataTypeSelector {
 class AmityTextPostCreator extends PostCreator {
   /// Init [AmityTextPostCreator]
   AmityTextPostCreator(
-      {required PostCreateUsecase useCase,
-      required String targetId,
-      required String targetType,
-      required String text})
+      {required PostCreateUsecase useCase, required String targetId, required String targetType, required String text})
       : super(useCase: useCase, targetId: targetId, targetType: targetType) {
     _text = text;
   }
@@ -129,10 +97,8 @@ class AmityImagePostCreator extends PostCreator {
 
   @override
   void _attachRequest(CreatePostRequest request) {
-    request.attachments = _images
-        .map((e) =>
-            Attachment(fileId: e.fileId, type: AmityDataType.IMAGE.value))
-        .toList();
+    request.attachments =
+        _images.map((e) => PostAttachmentRequest(fileId: e.fileId, type: AmityDataType.IMAGE.value)).toList();
   }
 }
 
@@ -152,10 +118,8 @@ class AmityFilePostCreator extends PostCreator {
 
   @override
   void _attachRequest(CreatePostRequest request) {
-    request.attachments = _files
-        .map(
-            (e) => Attachment(fileId: e.fileId, type: AmityDataType.FILE.value))
-        .toList();
+    request.attachments =
+        _files.map((e) => PostAttachmentRequest(fileId: e.fileId, type: AmityDataType.FILE.value)).toList();
   }
 }
 
@@ -175,10 +139,8 @@ class AmityVideoPostCreator extends PostCreator {
 
   @override
   void _attachRequest(CreatePostRequest request) {
-    request.attachments = _videos
-        .map((e) =>
-            Attachment(fileId: e.fileId, type: AmityDataType.VIDEO.value))
-        .toList();
+    request.attachments =
+        _videos.map((e) => PostAttachmentRequest(fileId: e.fileId, type: AmityDataType.VIDEO.value)).toList();
   }
 }
 
@@ -224,8 +186,7 @@ abstract class PostCreator {
 
   PostCreator mentionUsers(List<String> userIds) {
     _mentionees ??= [];
-    _mentionees!.add(AmityMentioneeTarget(
-        type: AmityMentionType.USER.value, userIds: userIds));
+    _mentionees!.add(AmityMentioneeTarget(type: AmityMentionType.USER.value, userIds: userIds));
     return this;
   }
 
@@ -239,8 +200,7 @@ abstract class PostCreator {
 
   /// Create Amity Post
   Future<AmityPost> post() {
-    CreatePostRequest request = CreatePostRequest(
-        targetType: _targetType, targetId: _targetId, dataType: null);
+    CreatePostRequest request = CreatePostRequest(targetType: _targetType, targetId: _targetId, dataType: null);
 
     _attachRequest(request);
 

@@ -24,7 +24,7 @@ class CreatePostRequest {
   CreatePostData? data;
 
   /// Attachment for the Post
-  List<Attachment>? attachments;
+  List<PostAttachmentRequest>? attachments;
 
   /// Data type for the Post
   String? dataType;
@@ -45,34 +45,28 @@ class CreatePostRequest {
   List<AmityMentioneeTarget>? mentionees;
 
   /// Init [CreatePostRequest] from Json
-  factory CreatePostRequest.fromJson(Map<String, dynamic> json) =>
-      CreatePostRequest(
+  factory CreatePostRequest.fromJson(Map<String, dynamic> json) => CreatePostRequest(
         data: CreatePostData.fromJson(json["data"]),
-        attachments: List<Attachment>.from(
-            json["attachments"].map((x) => Attachment.fromJson(x))),
+        attachments:
+            List<PostAttachmentRequest>.from(json["attachments"].map((x) => PostAttachmentRequest.fromJson(x))),
         dataType: json["dataType"],
         targetType: json["targetType"],
         targetId: json["targetId"],
         metadata: json["metadata"],
         postId: json["postId"],
-        mentionees: List<AmityMentioneeTarget>.from(
-            json["mentionees"].map((x) => AmityMentioneeTarget.fromJson(x))),
+        mentionees: List<AmityMentioneeTarget>.from(json["mentionees"].map((x) => AmityMentioneeTarget.fromJson(x))),
       );
 
   /// map from [CreatePostRequest]
   Map<String, dynamic> toJson() => {
         "data": data == null ? null : data!.toJson(),
-        "attachments": attachments == null
-            ? null
-            : List<dynamic>.from(attachments!.map((x) => x.toJson())),
+        "attachments": attachments == null ? null : List<dynamic>.from(attachments!.map((x) => x.toJson())),
         "dataType": dataType,
         "targetType": targetType,
         "targetId": targetId,
         "metadata": metadata,
         "postId": postId,
-        "mentionees": mentionees == null
-            ? null
-            : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
+        "mentionees": mentionees == null ? null : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
       }..removeWhere((key, value) => value == null);
 
   @override
@@ -82,9 +76,9 @@ class CreatePostRequest {
 }
 
 /// Post Attachment
-class Attachment {
-  /// Init [Attachment]
-  Attachment({
+class PostAttachmentRequest {
+  /// Init [PostAttachmentRequest]
+  PostAttachmentRequest({
     this.fileId,
     this.videoFileId,
     required this.type,
@@ -99,14 +93,14 @@ class Attachment {
   /// Type for data
   final String type;
 
-  /// Init [Attachment] from Json
-  factory Attachment.fromJson(Map<String, dynamic> json) => Attachment(
+  /// Init [PostAttachmentRequest] from Json
+  factory PostAttachmentRequest.fromJson(Map<String, dynamic> json) => PostAttachmentRequest(
         fileId: json["fileId"],
         videoFileId: json["videoFileId"],
         type: json["type"],
       );
 
-  /// map from [Attachment]
+  /// map from [PostAttachmentRequest]
   Map<String, dynamic> toJson() => {
         "fileId": fileId,
         "videoFileId": videoFileId,

@@ -19,7 +19,7 @@ class FileRepoImpl extends FileRepo {
 
   @override
   Future<AmityFileProperties> getFileByIdFromDb(String fileId) {
-    return Future.value(fileDbAdapter.getFileEntity(fileId).convertToAmityFileProperties());
+    return Future.value(fileDbAdapter.getFileEntity(fileId)?.convertToAmityFileProperties());
   }
 
   @override

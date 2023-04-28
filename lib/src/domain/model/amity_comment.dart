@@ -82,14 +82,14 @@ class AmityComment {
   /// Flagged By Me
   bool? flaggedByMe;
 
+  ///Attachements
+  List<CommentAttachment>? attachments;
+
   /// Listen Update in Amity Comment
   StreamController<AmityComment> get listen {
-    StreamController<AmityComment> controller =
-        StreamController<AmityComment>();
+    StreamController<AmityComment> controller = StreamController<AmityComment>();
 
-    serviceLocator<CommentDbAdapter>()
-        .listenCommentEntity(commentId!)
-        .listen((event) {
+    serviceLocator<CommentDbAdapter>().listenCommentEntity(commentId!).listen((event) {
       final updateAmityComment = event.convertToAmityComment();
 
       //TOOD: Good idea would be have compose method inside the object itself
@@ -106,8 +106,7 @@ abstract class AmityCommentData {
   final String commentId;
   final String? fileId;
   final Map<String, dynamic>? rawData;
-  late AmityFileInfo
-      fileInfo; //Composer, Incase of Text post we dont have fileId, File Info or Raw Data
+  late AmityFileInfo fileInfo; //Composer, Incase of Text post we dont have fileId, File Info or Raw Data
 
   AmityCommentData({required this.commentId, this.fileId, this.rawData});
 
@@ -170,4 +169,28 @@ class CommentLiveStreamData extends AmityCommentData {
     required this.streamId,
     Map<String, dynamic>? rawData,
   }) : super(commentId: commentId, fileId: streamId, rawData: rawData);
+}
+
+abstract class CommentAttachment {
+  CommentAttachment();
+  AmityDataType getDataType();
+  String getFileId();
+}
+
+class CommentImageAttachment extends CommentAttachment {
+  final String _fileId;
+  AmityImage? _image;
+  CommentImageAttachment({required String fileId, AmityImage? image})
+      : _fileId = fileId,
+        _image = image;
+
+  @override
+  AmityDataType getDataType() => AmityDataType.IMAGE;
+
+  @override
+  String getFileId() => _fileId;
+
+  AmityImage? getImage() => _image;
+
+  set image(AmityImage image) => _image = image;
 }

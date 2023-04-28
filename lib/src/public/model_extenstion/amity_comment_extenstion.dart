@@ -5,8 +5,8 @@ import 'package:amity_sdk/src/public/public.dart';
 /// Amity Comment Object Extension
 extension AmityCommentExtension on AmityComment {
   /// Comment create query builder
-  AmityCommentCreateTargetSelector comment() {
-    return AmityCommentCreateTargetSelector(
+  AmityCommentCreationTarget comment() {
+    return AmityCommentCreationTarget(
       useCase: serviceLocator(),
     ).post(referenceId!).parentId(commentId!);
   }

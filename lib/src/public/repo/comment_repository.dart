@@ -5,8 +5,8 @@ import 'package:amity_sdk/src/domain/domain.dart';
 /// Comment Repository
 class CommentRepository {
   /// Create Comment for the post and content
-  AmityCommentCreateTargetSelector createComment() {
-    return AmityCommentCreateTargetSelector(useCase: serviceLocator());
+  AmityCommentCreationTarget createComment() {
+    return AmityCommentCreationTarget(useCase: serviceLocator());
   }
 
   /// Get the comment for the post and content
