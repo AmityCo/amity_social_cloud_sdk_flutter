@@ -382,9 +382,12 @@ class SdkServiceLocator {
           communityComposerUsecase: serviceLocator(),
         ));
     serviceLocator.registerLazySingleton<CommentComposerUsecase>(() => CommentComposerUsecase(
-          commentRepo: serviceLocator(),
-          userRepo: serviceLocator(),
-          userComposerUsecase: serviceLocator(),
+        commentRepo: serviceLocator(),
+        userRepo: serviceLocator(),
+        userComposerUsecase: serviceLocator(),
+        commentFileComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<CommentFileComposerUsecase>(() => CommentFileComposerUsecase(
+          fileRepo: serviceLocator(),
         ));
     serviceLocator.registerLazySingleton<PostCreateUsecase>(() => PostCreateUsecase(
           postRepo: serviceLocator(),

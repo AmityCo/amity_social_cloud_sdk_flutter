@@ -22,8 +22,8 @@ extension AmityPostExtension on AmityPost {
   }
 
   /// Get Amity Post Comment
-  AmityCommentCreateTargetSelector comment() {
-    return AmityCommentCreateTargetSelector(
+  AmityCommentCreationTarget comment() {
+    return AmityCommentCreationTarget(
       useCase: serviceLocator(),
     ).post(postId!);
   }

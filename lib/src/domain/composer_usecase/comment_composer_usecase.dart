@@ -6,24 +6,25 @@ class CommentComposerUsecase extends UseCase<AmityComment, AmityComment> {
   final UserRepo userRepo;
   final UserComposerUsecase userComposerUsecase;
 
-  CommentComposerUsecase({
-    required this.commentRepo,
-    required this.userRepo,
-    required this.userComposerUsecase,
-  });
+  /// Comment File Composer Usecase
+  final CommentFileComposerUsecase commentFileComposerUsecase;
+
+  CommentComposerUsecase(
+      {required this.commentRepo,
+      required this.userRepo,
+      required this.userComposerUsecase,
+      required this.commentFileComposerUsecase});
   @override
   Future<AmityComment> get(AmityComment params) async {
     //Compose child comment
     if (params.repliesId != null && params.repliesId!.isNotEmpty) {
       //Add Child Amity Comment
       params.latestReplies = await Stream.fromIterable(params.repliesId!)
-          .asyncMap((element) async =>
-              await commentRepo.getCommentByIdFromDb(element))
+          .asyncMap((element) async => await commentRepo.getCommentByIdFromDb(element))
           .toList();
       //Compose Child Amity Comment
-      params.latestReplies = await Stream.fromIterable(params.latestReplies!)
-          .asyncMap((element) async => await get(element))
-          .toList();
+      params.latestReplies =
+          await Stream.fromIterable(params.latestReplies!).asyncMap((element) async => await get(element)).toList();
     }
 
     //Compose the user
@@ -34,6 +35,13 @@ class CommentComposerUsecase extends UseCase<AmityComment, AmityComment> {
     for (AmityMentionee mention in (params.mentionees ?? [])) {
       mention.user = await userRepo.getUserByIdFromDb(mention.userId);
       mention.user = await userComposerUsecase.get(mention.user!);
+    }
+
+    /// Attachment file composer
+    if (params.attachments?.isNotEmpty ?? false) {
+      params.attachments = await Stream.fromIterable(params.attachments!)
+          .asyncMap((element) async => await commentFileComposerUsecase.get(element))
+          .toList();
     }
 
     return params;

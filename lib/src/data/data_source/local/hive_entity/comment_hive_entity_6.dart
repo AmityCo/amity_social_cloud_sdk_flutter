@@ -86,6 +86,9 @@ class CommentHiveEntity extends HiveObject {
   /// Mentions
   List<Mentionee>? mentionees;
 
+  ///Attachment
+  List<AttachmentResponse>? attachments;
+
   CommentHiveEntity({
     this.id,
     this.path,
@@ -113,6 +116,7 @@ class CommentHiveEntity extends HiveObject {
     this.required,
     this.flaggedByMe,
     this.mentionees,
+    this.attachments,
   });
 
   CommentHiveEntity copyWith({
@@ -142,6 +146,7 @@ class CommentHiveEntity extends HiveObject {
     String? required,
     bool? flaggedByMe,
     List<Mentionee>? mentionees,
+    List<AttachmentResponse>? attachments,
   }) {
     return CommentHiveEntity(
       id: id ?? this.id,
@@ -170,6 +175,7 @@ class CommentHiveEntity extends HiveObject {
       required: required ?? this.required,
       flaggedByMe: flaggedByMe ?? this.flaggedByMe,
       mentionees: mentionees ?? this.mentionees,
+      attachments: attachments ?? this.attachments,
     );
   }
 }

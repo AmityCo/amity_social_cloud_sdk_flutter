@@ -13,7 +13,7 @@ class FileDbAdapterImpl extends FileDbAdapter {
   }
 
   @override
-  FileHiveEntity getFileEntity(String fileId) {
+  FileHiveEntity? getFileEntity(String fileId) {
     return box.get(fileId);
   }
 

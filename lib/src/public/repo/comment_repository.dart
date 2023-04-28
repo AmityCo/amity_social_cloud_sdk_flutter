@@ -9,8 +9,8 @@ class CommentRepository {
   api_style: async
   */
   /// Create Comment for the post and content
-  AmityCommentCreateTargetSelector createComment() {
-    return AmityCommentCreateTargetSelector(useCase: serviceLocator());
+  AmityCommentCreationTarget createComment() {
+    return AmityCommentCreationTarget(useCase: serviceLocator());
   }
   /* end_public_function */
 
