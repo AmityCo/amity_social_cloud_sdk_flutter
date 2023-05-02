@@ -67,6 +67,7 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
       ..userId = userId
       ..parentId = parentId
       ..dataType = amityCommentType
+      ..dataTypes = dataTypes
       ..data = amityCommentData
       ..childrenNumber = childrenNumber
       ..repliesId = children

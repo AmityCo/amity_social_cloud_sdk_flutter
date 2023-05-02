@@ -33,6 +33,9 @@ class CommentHiveEntity extends HiveObject {
   /// Comment data type
   String? dataType;
 
+  /// Comment data types
+  List<String>? dataTypes;
+
   ///
   PostChildDataHiveEntity? data;
 
