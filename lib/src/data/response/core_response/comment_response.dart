@@ -11,6 +11,7 @@ class CommentResponse {
     required this.referenceId,
     required this.referenceType,
     required this.dataType,
+    required this.dataTypes,
     required this.data,
     required this.metadata,
     required this.childrenNumber,
@@ -38,6 +39,7 @@ class CommentResponse {
   final String referenceId;
   final String referenceType;
   final String dataType;
+  final List<String> dataTypes;
   final PostDataResponse data;
   final Map<String, dynamic>? metadata;
   final int childrenNumber;
@@ -70,8 +72,8 @@ class CommentResponse {
         referenceId: json["referenceId"],
         referenceType: json["referenceType"],
         dataType: json["dataType"],
+        dataTypes: List<String>.from(json["dataTypes"].map((x) => x)),
         data: PostDataResponse.fromJson(json["data"]),
-        // metadata: DataClass.fromJson(json["metadata"]),
         childrenNumber: json["childrenNumber"],
         flagCount: json["flagCount"],
         hashFlag: json["hashFlag"] == null ? null : HashFlag.fromJson(json["hashFlag"]),
@@ -100,6 +102,7 @@ class CommentResponse {
         "referenceId": referenceId,
         "referenceType": referenceType,
         "dataType": dataType,
+        "dataTypes": dataTypes,
         "data": data.toJson(),
         // "metadata": metadata.toJson(),
         "childrenNumber": childrenNumber,
