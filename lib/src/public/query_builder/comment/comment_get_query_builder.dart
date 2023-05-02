@@ -109,6 +109,11 @@ class AmityCommentQueryBuilder {
       getCommentRequest.matchType = dataTypeFilter!.matchType;
     }
 
+    if (dataTypeFilter != null) {
+      getCommentRequest.dataTypes = dataTypeFilter!.dataTypes.map((e) => e.value).toList();
+      getCommentRequest.matchType = dataTypeFilter!.matchType;
+    }
+
     getCommentRequest.sortBy = _sortOption.apiKey;
 
     Options options = Options();
