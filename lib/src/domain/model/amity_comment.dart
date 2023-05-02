@@ -29,6 +29,9 @@ class AmityComment {
   /// Data Type
   AmityDataType? dataType;
 
+  /// Data Types
+  List<String>? dataTypes;
+
   /// Comment Data
   AmityCommentData? data;
 
