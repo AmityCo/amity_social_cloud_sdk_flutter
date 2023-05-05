@@ -4,31 +4,28 @@
 
 import 'dart:convert';
 
-AmityErrorResponse amityErrorResponseFromJson(String str) =>
-    AmityErrorResponse.fromJson(json.decode(str));
+AmityErrorResponse amityErrorResponseFromJson(String str) => AmityErrorResponse.fromJson(json.decode(str));
 
-String amityErrorResponseToJson(AmityErrorResponse data) =>
-    json.encode(data.toJson());
+String amityErrorResponseToJson(AmityErrorResponse data) => json.encode(data.toJson());
 
 class AmityErrorResponse {
   AmityErrorResponse({
     this.status,
     required this.message,
     required this.code,
-    // this.data,
+    this.data,
   });
 
   String? status;
   final String message;
   final int code;
-  // Data? data;
+  dynamic data;
 
-  factory AmityErrorResponse.fromJson(Map<String, dynamic> json) =>
-      AmityErrorResponse(
+  factory AmityErrorResponse.fromJson(Map<String, dynamic> json) => AmityErrorResponse(
         status: json["status"],
         message: json["message"],
         code: json["code"],
-        // data: Data.fromJson(json["data"]),
+        data: json["data"],
       );
 
   Map<String, dynamic> toJson() => {

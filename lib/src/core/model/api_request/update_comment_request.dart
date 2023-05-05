@@ -4,16 +4,20 @@
 
 import 'dart:convert';
 
+import 'package:amity_sdk/src/core/model/api_request/create_comment_request.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
-UpdateCommentRequest updateCommentRequestFromJson(String str) =>
-    UpdateCommentRequest.fromJson(json.decode(str));
+UpdateCommentRequest updateCommentRequestFromJson(String str) => UpdateCommentRequest.fromJson(json.decode(str));
 
-String updateCommentRequestToJson(UpdateCommentRequest data) =>
-    json.encode(data.toJson());
+String updateCommentRequestToJson(UpdateCommentRequest data) => json.encode(data.toJson());
 
 class UpdateCommentRequest {
-  UpdateCommentRequest({required this.commentId, this.data, this.metadata});
+  UpdateCommentRequest({
+    required this.commentId,
+    this.data,
+    this.metadata,
+    this.attachments,
+  });
 
   String commentId;
   UpdateCommentData? data;
@@ -22,8 +26,10 @@ class UpdateCommentRequest {
   /// Mentionees
   List<AmityMentioneeTarget>? mentionees;
 
-  factory UpdateCommentRequest.fromJson(Map<String, dynamic> json) =>
-      UpdateCommentRequest(
+  /// Attachment for the comment
+  List<CommentAttachmentRequest>? attachments;
+
+  factory UpdateCommentRequest.fromJson(Map<String, dynamic> json) => UpdateCommentRequest(
         commentId: json["commentId"],
         data: UpdateCommentData.fromJson(json["data"]),
         metadata: json["metadata"],
@@ -33,9 +39,8 @@ class UpdateCommentRequest {
         "commentId": commentId,
         "data": data?.toJson(),
         "metadata": metadata,
-        "mentionees": mentionees == null
-            ? null
-            : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
+        "mentionees": mentionees == null ? null : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
+        "attachments": attachments == null ? null : List<dynamic>.from(attachments!.map((x) => x.toJson())),
       }..removeWhere((key, value) => value == null);
 }
 
@@ -46,8 +51,7 @@ class UpdateCommentData {
 
   String? text;
 
-  factory UpdateCommentData.fromJson(Map<String, dynamic> json) =>
-      UpdateCommentData(
+  factory UpdateCommentData.fromJson(Map<String, dynamic> json) => UpdateCommentData(
         text: json["text"],
       );
 
