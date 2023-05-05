@@ -3,7 +3,7 @@ import 'package:amity_sdk/src/data/data.dart';
 
 extension AmityErrorResponseExtension on AmityErrorResponse {
   AmityException amityException() {
-    final exception = AmityException(message: message, code: code);
+    final exception = AmityException(message: message, code: code, data: data);
     return exception;
   }
 }
