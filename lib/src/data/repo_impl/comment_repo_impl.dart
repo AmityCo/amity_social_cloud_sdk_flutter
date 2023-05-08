@@ -14,13 +14,11 @@ class CommentRepoImpl extends CommentRepo {
   final DbAdapterRepo dbAdapterRepo;
 
   /// Init [CommentRepoImpl]
-  CommentRepoImpl(
-      {required this.commentApiInterface, required this.dbAdapterRepo});
+  CommentRepoImpl({required this.commentApiInterface, required this.dbAdapterRepo});
 
   @override
   Future<AmityComment> getCommentByIdFromDb(String commentId) async {
-    final commentHiveEntity =
-        dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId)!;
+    final commentHiveEntity = dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId)!;
     return commentHiveEntity.convertToAmityComment();
   }
 
@@ -31,14 +29,12 @@ class CommentRepoImpl extends CommentRepo {
     final amityComments = await _saveDetailsToDb(data);
 
     //Update the post entity, comment Id and comment count
-    dbAdapterRepo.postDbAdapter
-        .updateComment(request.referenceId, amityComments[0].commentId!);
+    dbAdapterRepo.postDbAdapter.updateComment(request.referenceId, amityComments[0].commentId!);
 
     // Check if comment have any parent comment
     // if yes update the parent comment child count
     if (request.parentId != null) {
-      dbAdapterRepo.commentDbAdapter.updateChildComment(
-          amityComments[0].parentId!, amityComments[0].commentId!);
+      dbAdapterRepo.commentDbAdapter.updateChildComment(amityComments[0].parentId!, amityComments[0].commentId!);
     }
 
     return Future.value(amityComments[0]);
@@ -57,8 +53,7 @@ class CommentRepoImpl extends CommentRepo {
   Future<bool> deleteComment(String commentId) async {
     final data = await commentApiInterface.deleteComment(commentId);
 
-    final amityCommentEntity =
-        dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId)!;
+    final amityCommentEntity = dbAdapterRepo.commentDbAdapter.getCommentEntity(commentId)!;
 
     amityCommentEntity
       ..isDeleted = true
@@ -109,8 +104,7 @@ class CommentRepoImpl extends CommentRepo {
   }
 
   @override
-  Future<AmityComment> updateComment(
-      String commentId, UpdateCommentRequest request) async {
+  Future<AmityComment> updateComment(String commentId, UpdateCommentRequest request) async {
     final data = await commentApiInterface.updateComment(commentId, request);
 
     final amityComments = await _saveDetailsToDb(data);
@@ -118,24 +112,19 @@ class CommentRepoImpl extends CommentRepo {
     return Future.value(amityComments[0]);
   }
 
-  Future<List<AmityComment>> _saveDetailsToDb(
-      CreateCommentResponse data) async {
+  Future<List<AmityComment>> _saveDetailsToDb(CreateCommentResponse data) async {
     //Convert to File Hive Entity
-    List<FileHiveEntity> fileHiveEntities =
-        data.files.map((e) => e.convertToFileHiveEntity()).toList();
+    List<FileHiveEntity> fileHiveEntities = data.files.map((e) => e.convertToFileHiveEntity()).toList();
 
     //Convert to User Hive Entity
-    List<UserHiveEntity> userHiveEntities =
-        data.users.map((e) => e.convertToUserHiveEntity()).toList();
+    List<UserHiveEntity> userHiveEntities = data.users.map((e) => e.convertToUserHiveEntity()).toList();
 
     //Convert to Child Comment Hive Entity
-    List<CommentHiveEntity> childCommentHiveEntities = data.commentChildren
-        .map((e) => e.convertToCommentHiveEntity())
-        .toList();
+    List<CommentHiveEntity> childCommentHiveEntities =
+        data.commentChildren.map((e) => e.convertToCommentHiveEntity()).toList();
 
     //Convert to Comment Hive Entity
-    List<CommentHiveEntity> commentHiveEntities =
-        data.comments.map((e) => e.convertToCommentHiveEntity()).toList();
+    List<CommentHiveEntity> commentHiveEntities = data.comments.map((e) => e.convertToCommentHiveEntity()).toList();
 
     //Save the File Entity
     for (var e in fileHiveEntities) {
@@ -161,8 +150,7 @@ class CommentRepoImpl extends CommentRepo {
   }
 
   @override
-  Future<PageListData<List<AmityComment>, String>> queryCommentPagingData(
-      GetCommentRequest request) async {
+  Future<PageListData<List<AmityComment>, String>> queryCommentPagingData(GetCommentRequest request) async {
     final data = await commentApiInterface.queryComment(request);
 
     final amityComments = await _saveDetailsToDb(data);

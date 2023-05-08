@@ -9,15 +9,13 @@ import '../helper/amity_core_client_mock_setup.dart';
 
 class MockCommentApiInterface extends Mock implements CommentApiInterface {}
 
-// integration_test_id:81e7d5bc-6881-4f9b-b8d4-deb5fe67200c
+// integration_test_id:2f83eabc-46db-43d8-89c6-1b5339d6a273
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   final mockCommentApiInterface = MockCommentApiInterface();
 
   final postId = 'postId';
-
-  final attachments = List.generate(1, (index) => CommentImageAttachment(fileId: 'eea9c113d8cf44b28d271390fb138f96'));
 
   setUpAll(() async {
     registerFallbackValue(
@@ -30,10 +28,9 @@ void main() {
     );
   });
 
-  test('When user create comment with only image, it should return success', () async {
-
+  test('When the user create comment, it should return a valid comment.', () async {
     when(() => mockCommentApiInterface.createComment(any<CreateCommentRequest>())).thenAnswer((_) async {
-      final response = await File('test/mock_json/amity_comment_create_with_image_success_test.json').readAsString();
+      final response = await File('test/mock_json/amity_comment_create_with_text_success_test.json').readAsString();
       return CreateCommentResponse.fromJson(json.decode(response));
     });
 
@@ -41,12 +38,10 @@ void main() {
         .createComment()
         .post(postId)
         .create()
-        .attachments(attachments)
+        .text('Create Comment')
         .send();
 
     expect(amityComment, isA<AmityComment>());
-    expect(amityComment.attachments, isA<List<CommentAttachment>>());
-    expect(amityComment.attachments?.length, 1);
-    expect(amityComment.dataTypes!.contains(AmityDataType.IMAGE.value), true);
+    expect(amityComment.dataTypes!.contains(AmityDataType.TEXT.value), true);
   });
 }

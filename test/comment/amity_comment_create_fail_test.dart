@@ -28,7 +28,8 @@ void main() {
     );
   });
 
-  test('When the user create comment with not existed parent id, it should return not found error (400400).', () async {
+test('When the user create comment with not existed parent id, it should return not found error (400400).', () async {
+
     when(() => mockCommentApiInterface.createComment(any<CreateCommentRequest>())).thenAnswer((_) async {
       final response = await File('test/mock_json/amity_comment_create_fail.json').readAsString();
       throw AmityErrorResponse.fromJson(json.decode(response)).amityException();

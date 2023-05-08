@@ -158,10 +158,11 @@ abstract class CommentCreator {
     //Attach attachment in the request
     _attachRequest(request);
 
-    CreateCommentData data = CreateCommentData();
-    if (_text != null) data.text = _text;
-
-    request.data = data;
+    if (_text != null && _text!.isNotEmpty) {
+      CreateCommentData data = CreateCommentData();
+      data.text = _text;
+      request.data = data;
+    }
 
     if (_parentId != null) {
       request.parentId = _parentId;
