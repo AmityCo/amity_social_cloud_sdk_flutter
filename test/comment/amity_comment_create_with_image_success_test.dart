@@ -31,6 +31,7 @@ void main() {
   });
 
   test('When user create comment with only image, it should return success', () async {
+
     when(() => mockCommentApiInterface.createComment(any<CreateCommentRequest>())).thenAnswer((_) async {
       final response = await File('test/mock_json/amity_comment_create_with_image_success_test.json').readAsString();
       return CreateCommentResponse.fromJson(json.decode(response));

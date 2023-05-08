@@ -9,6 +9,7 @@ import '../helper/amity_core_client_mock_setup.dart';
 
 class MockCommentApiInterface extends Mock implements CommentApiInterface {}
 
+
 // integration_test_id:015838a8-3267-4253-920a-9ae83197cf22
 
 void main() {
@@ -31,7 +32,9 @@ void main() {
     );
   });
 
+
   test('When user create comment with text and image, it should return success', () async {
+
     when(() => mockCommentApiInterface.createComment(any<CreateCommentRequest>())).thenAnswer((_) async {
       final response =
           await File('test/mock_json/amity_comment_create_with_text_image_success_test.json').readAsString();
