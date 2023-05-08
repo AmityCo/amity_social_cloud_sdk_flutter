@@ -1,0 +1,6 @@
+{
+    "status": "error",
+    "message": "Some comment not found",
+    "code": 400400,
+    "data": {}
+}

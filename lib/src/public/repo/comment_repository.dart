@@ -9,6 +9,11 @@ class CommentRepository {
     return AmityCommentCreationTarget(useCase: serviceLocator());
   }
 
+  /// Update Comment for the post and content
+  AmityTextCommentEditorBuilder updateComment({required String commentId}) {
+    return AmityTextCommentEditorBuilder(useCase: serviceLocator(), targetId: commentId);
+  }
+
   /// Get the comment for the post and content
   AmityCommentQueryTypeSelector getComments() {
     return AmityCommentQueryTypeSelector(useCase: serviceLocator());
