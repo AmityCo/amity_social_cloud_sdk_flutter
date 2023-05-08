@@ -36,16 +36,17 @@ class CreateCommentRequest {
   Map<String, dynamic> toJson() => {
         "referenceId": referenceId,
         "referenceType": referenceType,
-        "data": data!.toJson(),
+        "data": data == null ? null : data!.toJson(),
         "metadata": metadata,
         "commentId": commentId,
         "parentId": parentId,
         "mentionees": mentionees == null ? null : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
         "attachments": attachments == null ? null : List<dynamic>.from(attachments!.map((x) => x.toJson())),
-      }..removeWhere((key, value) => value == null);
+      }..removeNullValue();
 
   @override
-  String toString() => 'CreateCommentRequest(referenceId: $referenceId, referenceType: $referenceType)';
+  String toString() =>
+      'CreateCommentRequest(referenceId: $referenceId, referenceType: $referenceType, attachments: $attachments)';
 }
 
 class CreateCommentData {
@@ -61,7 +62,7 @@ class CreateCommentData {
 
   Map<String, dynamic> toJson() => {
         "text": text,
-      }..removeWhere((key, value) => value == null);
+      }..removeNullValue();
 }
 
 /// Comment Attachment

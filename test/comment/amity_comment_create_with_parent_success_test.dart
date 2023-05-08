@@ -9,19 +9,18 @@ import '../helper/amity_core_client_mock_setup.dart';
 
 class MockCommentApiInterface extends Mock implements CommentApiInterface {}
 
-// integration_test_id:81e7d5bc-6881-4f9b-b8d4-deb5fe67200c
+// integration_test_id:cb1bfe11-c11a-4324-aeb5-03370da820ad
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
   final mockCommentApiInterface = MockCommentApiInterface();
 
   final postId = 'postId';
-
-  final attachments = List.generate(1, (index) => CommentImageAttachment(fileId: 'eea9c113d8cf44b28d271390fb138f96'));
+  final parentId = 'parentId';
 
   setUpAll(() async {
-    registerFallbackValue(
-        CreateCommentRequest(referenceId: postId, referenceType: AmityCommentReferenceType.POST.value));
+    registerFallbackValue(CreateCommentRequest(
+        referenceId: postId, referenceType: AmityCommentReferenceType.POST.value, parentId: parentId));
 
     await AmityCoreClientMockSetup.setup();
 
@@ -30,23 +29,22 @@ void main() {
     );
   });
 
-  test('When user create comment with only image, it should return success', () async {
-
+  test('When the user create comment with parent id, it should return valid comment', () async {
     when(() => mockCommentApiInterface.createComment(any<CreateCommentRequest>())).thenAnswer((_) async {
-      final response = await File('test/mock_json/amity_comment_create_with_image_success_test.json').readAsString();
+      final response = await File('test/mock_json/amity_comment_create_with_parent_success_test.json').readAsString();
       return CreateCommentResponse.fromJson(json.decode(response));
     });
 
     final amityComment = await AmitySocialClient.newCommentRepository()
         .createComment()
         .post(postId)
+        .parentId(parentId)
         .create()
-        .attachments(attachments)
+        .text('Create Comment')
         .send();
 
     expect(amityComment, isA<AmityComment>());
-    expect(amityComment.attachments, isA<List<CommentAttachment>>());
-    expect(amityComment.attachments?.length, 1);
-    expect(amityComment.dataTypes!.contains(AmityDataType.IMAGE.value), true);
+    expect(amityComment.referenceId, postId);
+    expect(amityComment.parentId, parentId);
   });
 }
