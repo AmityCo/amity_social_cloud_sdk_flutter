@@ -68,10 +68,12 @@ class AmityCommentUpdater {
   Future update() {
     UpdateCommentRequest updateCommentRequest = UpdateCommentRequest(commentId: _targetId);
 
-    UpdateCommentData updateData = UpdateCommentData();
-    if (_text != null) updateData.text = _text;
+    if (_text != null && _text!.isNotEmpty) {
+      UpdateCommentData updateData = UpdateCommentData();
+      updateData.text = _text;
+      updateCommentRequest.data = updateData;
+    }
 
-    updateCommentRequest.data = updateData;
     if (_mentionees != null) {
       updateCommentRequest.mentionees = _mentionees;
     }
