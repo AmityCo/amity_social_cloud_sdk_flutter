@@ -4,8 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:amity_sdk/src/core/model/api_request/create_comment_request.dart';
-import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/src.dart';
 
 UpdateCommentRequest updateCommentRequestFromJson(String str) => UpdateCommentRequest.fromJson(json.decode(str));
 
@@ -41,7 +40,7 @@ class UpdateCommentRequest {
         "metadata": metadata,
         "mentionees": mentionees == null ? null : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
         "attachments": attachments == null ? null : List<dynamic>.from(attachments!.map((x) => x.toJson())),
-      }..removeWhere((key, value) => value == null);
+      }..removeNullValue();
 }
 
 class UpdateCommentData {
@@ -57,5 +56,5 @@ class UpdateCommentData {
 
   Map<String, dynamic> toJson() => {
         "text": text,
-      }..removeWhere((key, value) => value == null);
+      }..removeNullValue();
 }

@@ -14,6 +14,11 @@ class CommentRepository {
   }
   /* end_public_function */
 
+  /// Update Comment for the post and content
+  AmityTextCommentEditorBuilder updateComment({required String commentId}) {
+    return AmityTextCommentEditorBuilder(useCase: serviceLocator(), targetId: commentId);
+  }
+
   /* begin_public_function 
   id: comment.query
   api_style: async

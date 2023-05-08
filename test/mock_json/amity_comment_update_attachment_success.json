@@ -1,0 +1,138 @@
+{
+    "comments": [
+        {
+            "_id": "64561a2cb7720e3ad6bc7566",
+            "path": "631f16be1e440400da5663b0/social/community/63a40faabf9b2748a851aad0/post/643fdb22990b2ac0932d715f/comment/64561a2cb7720e3ad6bc7566",
+            "referenceType": "post",
+            "dataType": "text",
+            "dataTypes": [
+                "image",
+                "text"
+            ],
+            "data": {
+                "text": "Update Image Comment"
+            },
+            "metadata": {
+                "mentioned": []
+            },
+            "childrenNumber": 0,
+            "isDeleted": false,
+            "editedAt": "2023-05-06T09:13:16.091Z",
+            "updatedAt": "2023-05-06T09:13:16.091Z",
+            "createdAt": "2023-05-06T09:13:16.091Z",
+            "segmentNumber": 14,
+            "commentId": "64561a2cb7720e3ad6bc7566",
+            "userId": "victimAndroid",
+            "referenceId": "643fdb22990b2ac0932d715f",
+            "flagCount": 0,
+            "hashFlag": null,
+            "children": [],
+            "attachments": [
+                {
+                    "type": "image",
+                    "fileId": "a6b76af95a864f649743a1bbd05b469f"
+                },
+                {
+                    "type": "image",
+                    "fileId": "a6b76af95a864f649743a1bbd05b469e"
+                }
+            ],
+            "mentionees": [
+                {
+                    "type": "user",
+                    "userIds": []
+                }
+            ],
+            "reactions": {},
+            "reactionsCount": 0
+        }
+    ],
+    "commentChildren": [],
+    "users": [
+        {
+            "_id": "6321d1096de41000d9511623",
+            "path": "631f16be1e440400da5663b0/user/6321d1096de41000d9511623",
+            "updatedAt": "2023-05-02T19:00:10.947Z",
+            "createdAt": "2022-09-14T13:03:05.130Z",
+            "description": "",
+            "isDeleted": false,
+            "displayName": "Victim Android",
+            "userId": "victimAndroid",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 1,
+            "hashFlag": {
+                "bits": 24,
+                "hashes": 17,
+                "hash": "gP//"
+            },
+            "avatarFileId": "4bfbbf76548f412d8af654b660292a9e",
+            "isGlobalBan": false
+        }
+    ],
+    "files": [
+        {
+            "fileId": "4bfbbf76548f412d8af654b660292a9e",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/4bfbbf76548f412d8af654b660292a9e/download",
+            "type": "image",
+            "createdAt": "2023-03-14T16:14:42.281Z",
+            "updatedAt": "2023-03-14T16:14:43.115Z",
+            "attributes": {
+                "name": "img_cache_1678810475872.jpg",
+                "extension": "jpg",
+                "size": 105110,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 1280,
+                    "width": 960,
+                    "isFull": false
+                }
+            }
+        },
+        {
+            "fileId": "a6b76af95a864f649743a1bbd05b469f",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/a6b76af95a864f649743a1bbd05b469f/download",
+            "type": "image",
+            "createdAt": "2023-05-06T09:12:44.995Z",
+            "updatedAt": "2023-05-06T09:12:44.995Z",
+            "attributes": {
+                "name": "Astrological-Gemstones_Banner.jpg",
+                "extension": "jpg",
+                "size": 107920,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "exif": {
+                        "DateTimeOriginal": "2018-09-26T10:19:50.000Z"
+                    },
+                    "height": 979,
+                    "width": 2399,
+                    "orientation": 1,
+                    "isFull": false
+                }
+            }
+        },
+        {
+            "fileId": "a6b76af95a864f649743a1bbd05b469e",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/a6b76af95a864f649743a1bbd05b469f/download",
+            "type": "image",
+            "createdAt": "2023-05-06T09:12:44.995Z",
+            "updatedAt": "2023-05-06T09:12:44.995Z",
+            "attributes": {
+                "name": "Astrological-Gemstones_Banner.jpg",
+                "extension": "jpg",
+                "size": 107920,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "exif": {
+                        "DateTimeOriginal": "2018-09-26T10:19:50.000Z"
+                    },
+                    "height": 979,
+                    "width": 2399,
+                    "orientation": 1,
+                    "isFull": false
+                }
+            }
+        }
+    ]
+}
