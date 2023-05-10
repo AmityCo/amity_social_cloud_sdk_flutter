@@ -31,16 +31,17 @@ extension AmityPostExtension on AmityPost {
   /// Amity Post Report
   PostFlagQueryBuilder report() {
     return PostFlagQueryBuilder(
-        postFlagUsecase: serviceLocator(),
-        postUnflagUsecase: serviceLocator(),
-        postId: postId!);
+        postFlagUsecase: serviceLocator(), postUnflagUsecase: serviceLocator(), postId: postId!);
   }
 
+  /* begin_public_function 
+  id: post.edit
+  */
   /// Edit Amity Post
   AmityTextPostEditorBuilder edit() {
-    return AmityTextPostEditorBuilder(
-        useCase: serviceLocator(), targetId: postId!);
+    return AmityTextPostEditorBuilder(useCase: serviceLocator(), targetId: postId!);
   }
+  /* end_public_function */
 
   /// Delete Amity Post
   Future delete({bool hardDelete = false}) {
@@ -50,18 +51,14 @@ extension AmityPostExtension on AmityPost {
   /// Approve Amity Post
   Future<bool> approve() {
     return PostReviewQueryBuilder(
-            postApproveUsecase: serviceLocator(),
-            postDeclineUsecase: serviceLocator(),
-            postId: postId!)
+            postApproveUsecase: serviceLocator(), postDeclineUsecase: serviceLocator(), postId: postId!)
         .approve();
   }
 
   /// Decline Amity Post
   Future<bool> decline() {
     return PostReviewQueryBuilder(
-            postApproveUsecase: serviceLocator(),
-            postDeclineUsecase: serviceLocator(),
-            postId: postId!)
+            postApproveUsecase: serviceLocator(), postDeclineUsecase: serviceLocator(), postId: postId!)
         .decline();
   }
 
@@ -81,16 +78,17 @@ extension AmityPostExtension on AmityPost {
     return controller;
   }
 
+  /* begin_public_function 
+  id: post.check_flag_by_me
+  */
   /// check if post is flagged by me
   bool get isFlaggedByMe {
     if (hashFlag == null) return false;
     return (flaggedByMe ?? false) ||
-        BloomFilter(
-                hash: (hashFlag!['hash'] as String),
-                m: hashFlag!['bits'] as int,
-                k: hashFlag!['hashes'] as int)
+        BloomFilter(hash: (hashFlag!['hash'] as String), m: hashFlag!['bits'] as int, k: hashFlag!['hashes'] as int)
             .mightContains(AmityCoreClient.getUserId());
   }
+  /* end_public_function */
 
   ///Subscribe/Unsubscribe to post event
   AmityTopicSubscription subscription(AmityPostEvents events) {

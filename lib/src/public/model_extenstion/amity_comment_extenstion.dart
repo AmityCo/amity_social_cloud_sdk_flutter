@@ -31,16 +31,30 @@ extension AmityCommentExtension on AmityComment {
         commentFlagUsecase: serviceLocator(), commentUnflagUsecase: serviceLocator(), commentId: commentId!);
   }
 
+  /* begin_public_function 
+  id: comment.soft_delete
+  api_style: async
+  */
   /// Delete Comment
   Future delete({bool hardDelete = false}) {
     return serviceLocator<CommentDeleteUseCase>().get(commentId!);
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: comment.update_comment
+  api_style: async
+  */
   /// Edit Comment Text
   AmityTextCommentEditorBuilder edit() {
     return AmityTextCommentEditorBuilder(useCase: serviceLocator(), targetId: commentId!);
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: comment.check_flag_by_me
+  api_style: async
+  */
   /// check if post is flagged by me
   bool get isFlaggedByMe {
     if (hashFlag == null) return false;
@@ -48,6 +62,7 @@ extension AmityCommentExtension on AmityComment {
         BloomFilter(hash: (hashFlag!['hash'] as String), m: hashFlag!['bits'] as int, k: hashFlag!['hashes'] as int)
             .mightContains(AmityCoreClient.getUserId());
   }
+  /* end_public_function */
 
   /// Subscribe/Unsubscribe to comment events
   AmityTopicSubscription subscription(AmityCommentEvents events) {

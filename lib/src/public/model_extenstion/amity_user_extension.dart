@@ -32,6 +32,9 @@ extension AmityUserExtenstion on AmityUser {
     return serviceLocator<UserUnblockUsecase>().get(userId!);
   }
 
+  /* begin_public_function 
+  id: user.check_flag_by_me
+  */
   /// check if user is flagged by me
   bool get isFlaggedByMe {
     if (hashFlag == null) return false;
@@ -39,4 +42,5 @@ extension AmityUserExtenstion on AmityUser {
         BloomFilter(hash: (hashFlag!['hash'] as String), m: hashFlag!['bits'] as int, k: hashFlag!['hashes'] as int)
             .mightContains(AmityCoreClient.getUserId());
   }
+  //* end_public_function */
 }

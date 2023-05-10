@@ -45,6 +45,9 @@ class GetReactionQueryBuilder {
     return this;
   }
 
+  /* begin_public_function 
+  id: reaction.query
+  */
   /// Get Reaction pagging data
   Future<PageListData<List<AmityReaction>, String>> getPagingData(
       {String? token, int? limit}) async {
@@ -65,4 +68,5 @@ class GetReactionQueryBuilder {
 
     return data;
   }
+  /* end_public_function */
 }

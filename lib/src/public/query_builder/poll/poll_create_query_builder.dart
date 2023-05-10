@@ -40,6 +40,9 @@ class SubmitPollCreateQueryBuilder {
     return this;
   }
 
+  /* begin_public_function 
+  id: poll.create
+  */
   /// Create Poll
   Future<AmityPoll> create() {
     CreatePollRequest request = CreatePollRequest(
@@ -55,4 +58,5 @@ class SubmitPollCreateQueryBuilder {
     final data = _useCase.get(request);
     return data;
   }
+  /* end_public_function */
 }

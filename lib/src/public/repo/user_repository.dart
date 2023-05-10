@@ -4,25 +4,41 @@ import 'package:amity_sdk/src/public/public.dart';
 
 /// User Repository
 class UserRepository {
+  /* begin_public_function 
+  id: user.query
+  */
   /// get the user query builder
   AmityAllUserQueryBuilder getUsers() {
     return AmityAllUserQueryBuilder(useCase: serviceLocator<GetAllUserUseCase>());
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: user.search
+  */
   /// Search the user by their display name
   AmityUserSearchDisplayNameQueryBuilder searchUserByDisplayName(String keyword) {
     return AmityUserSearchDisplayNameQueryBuilder(useCase: serviceLocator<GetAllUserUseCase>(), keyword: keyword);
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: user.get, user.get_by_ids
+  */
   /// get the user with userId
   Future<AmityUser> getUser(String userId) {
     return serviceLocator<GetUserByIdUseCase>().get(userId);
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: client.update_user
+  */
   /// API to update the user
   UserUpdateQueryBuilder updateUser(String userId) {
     return UserUpdateQueryBuilder(serviceLocator<UpdateUserUsecase>(), userId);
   }
+  /* end_public_function */
 
   /// Report the current user
   AmityUserFlagRepository report(String userId) {

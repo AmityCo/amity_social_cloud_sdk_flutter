@@ -16,6 +16,9 @@ class AmityAudioUploadQueryBuilder {
     _uploadId = id;
   }
 
+  /* begin_public_function
+  id: file.upload.audio
+  */
   Future<AmityUploadResult<AmityAudio>> upload() {
     UploadFileRequest request = UploadFileRequest();
     request.files.add(_file);
@@ -24,4 +27,5 @@ class AmityAudioUploadQueryBuilder {
 
     return _usecase.get(request);
   }
+  /* end_public_function */
 }

@@ -21,6 +21,9 @@ class AddReactionQueryBuilder<T> {
     _referenceId = referenceId;
   }
 
+  /* begin_public_function 
+  id: reaction.add
+  */
   /// Add Reaction
   Future<T> addReaction(String reaction) {
     ReactionRequest reactionRequest = ReactionRequest(
@@ -29,7 +32,11 @@ class AddReactionQueryBuilder<T> {
         reactionName: reaction);
     return _addReactionUsecase.getWithType<T>(reactionRequest);
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: reaction.remove
+  */
   /// Remove Reaction
   Future<T> removeReaction(String reaction) {
     ReactionRequest reactionRequest = ReactionRequest(
@@ -38,4 +45,5 @@ class AddReactionQueryBuilder<T> {
         reactionName: reaction);
     return _removeReactionUsecase.getWithType<T>(reactionRequest);
   }
+  /* end_public_function */
 }

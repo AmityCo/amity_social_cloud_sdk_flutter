@@ -43,6 +43,9 @@ extension AmityMessageExtension on AmityMessage {
         .unflag();
   }
 
+  /* begin_public_function 
+  id: message.check_flag_by_me
+  */
   /// check if message is flagged by me
   bool get isFlaggedByMe {
     if (hashFlag == null) return false;
@@ -50,6 +53,7 @@ extension AmityMessageExtension on AmityMessage {
         BloomFilter(hash: (hashFlag!['hash'] as String), m: hashFlag!['bits'] as int, k: hashFlag!['hashes'] as int)
             .mightContains(AmityCoreClient.getUserId());
   }
+  //* end_public_function */
 
   /// Listen Mesage Id
   StreamController<AmityMessage> get listen {

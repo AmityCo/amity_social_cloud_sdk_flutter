@@ -11,11 +11,20 @@ class PostReviewQueryBuilder {
       : _postApproveUsecase = postApproveUsecase,
         _postDeclineUsecase = postDeclineUsecase,
         _postId = postId;
+
+  /* begin_public_function 
+  id: post.approve
+  */
   Future<bool> approve() {
     return _postApproveUsecase.get(_postId);
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: post.decline
+  */
   Future<bool> decline() {
     return _postDeclineUsecase.get(_postId);
   }
+  /* end_public_function */
 }

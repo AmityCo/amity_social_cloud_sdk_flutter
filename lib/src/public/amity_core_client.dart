@@ -26,11 +26,19 @@ class AmityCoreClient {
     return;
   }
 
+  /* begin_public_function 
+  id: client.login
+  api_style: async
+  */
   /// Login with userId, this will create user session
   static LoginQueryBuilder login(String userId) {
     return LoginQueryBuilder(useCase: serviceLocator(), userId: userId);
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: client.logout
+  */
   /// Logout will wipe out all the data [AmityCoreClient] holds.
   static Future<void> logout() async {
     //terminate current activeSocket
@@ -43,12 +51,17 @@ class AmityCoreClient {
 
     return;
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: client.disconnect
+  */
   ///temporarily disconnect chat real-time events from the system,
   //call the function 'login(String userId)' to restore a connection
   static void disconnect() {
     serviceLocator<AmitySocket>().terminate();
   }
+  /* end_public_function */
 
   ///Check if user is logged in
   static bool isUserLoggedIn() {
@@ -66,6 +79,9 @@ class AmityCoreClient {
     return getCurrentUser().userId!;
   }
 
+  /* begin_public_function 
+  id: client.get_current_user
+  */
   ///Get logged in user
   ///if user is not logged in this method will Through [AmityException]
   static AmityUser getCurrentUser() {
@@ -77,18 +93,27 @@ class AmityCoreClient {
       code: 401,
     );
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: client.register_push
+  */
   ///Register the devie to receive FCM token
   static Future registerDeviceNotification(String fcmToken) {
     return serviceLocator<NotificationRepository>()
         .registerDeviceNotification(fcmToken);
   }
+  /* end_public_function */
 
+  /* begin_public_function 
+  id: client.unregister_push
+  */
   ///Unregister the device with FCM
   static Future unregisterDeviceNotification() {
     return serviceLocator<NotificationRepository>()
         .unregisterDeviceNotification();
   }
+  /* end_public_function */
 
   /// Check if Current user have the permissions
   static AmityPermissionValidator hasPermission(AmityPermission permission) {

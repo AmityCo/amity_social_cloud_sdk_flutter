@@ -20,6 +20,9 @@ class AmityVideoUploadQueryBuilder {
     return this;
   }
 
+  /* begin_public_function
+  id: file.upload.video
+  */
   /// Excute Upload
   Future<AmityUploadResult<AmityVideo>> upload() {
     UploadFileRequest request = UploadFileRequest();
@@ -29,4 +32,5 @@ class AmityVideoUploadQueryBuilder {
 
     return _usecase.get(request);
   }
+  /* end_public_function */
 }
