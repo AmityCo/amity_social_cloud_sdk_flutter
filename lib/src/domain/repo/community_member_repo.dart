@@ -14,4 +14,7 @@ abstract class CommunityMemberRepo {
   Future banMember(UpdateCommunityMembersRequest request);
   Future unbanMember(UpdateCommunityMembersRequest request);
   Future<AmityCommunityMember> getMember(String communityId, String userId);
+
+  /// Has Local Community
+  bool hasLocalCommunity(String communityId, String userId);
 }

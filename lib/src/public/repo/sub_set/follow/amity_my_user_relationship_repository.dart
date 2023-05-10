@@ -66,4 +66,10 @@ class AmityMyUserRelationshipRepository {
     return serviceLocator<GetMyFollowInfoUsecase>().get();
   }
   /* end_public_function */
+
+  /// API to get blocked users
+  AmityBlockUserQueryBuilder getBlockedUsers() {
+    return AmityBlockUserQueryBuilder(useCase: serviceLocator());
+  }
+
 }

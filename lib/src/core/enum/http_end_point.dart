@@ -7,6 +7,7 @@ enum AmityRegionalHttpEndpoint {
   EU,
   US,
   STAGING,
+  DEV,
 }
 
 extension AmityRegionalHttpEndpointExtension on AmityRegionalHttpEndpoint {
@@ -16,6 +17,7 @@ extension AmityRegionalHttpEndpointExtension on AmityRegionalHttpEndpoint {
       EU_HTTP_ENDPOINT,
       US_HTTP_ENDPOINT,
       STAGING_HTTP_ENDPOINT,
+      DEV_HTTP_ENDPOINT,
     ][index];
   }
 }

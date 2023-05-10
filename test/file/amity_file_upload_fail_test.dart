@@ -1,7 +1,6 @@
 import 'dart:io';
 
 import 'package:amity_sdk/src/src.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -26,9 +25,7 @@ void main() {
     );
   });
 
-  test(
-      'When the user try to upload file and fail in middle, it should return amity error event',
-      () async {
+  test('When the user try to upload file and fail in middle, it should return amity error event', () async {
     when(() => fileApiInterface.uploadFile(
           any(),
           onUploadProgress: any(named: 'onUploadProgress'),

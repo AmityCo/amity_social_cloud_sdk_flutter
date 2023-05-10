@@ -4,22 +4,19 @@ import 'package:amity_sdk/src/domain/domain.dart';
 /// [ChannelMemberRepo]
 abstract class ChannelMemberRepo {
   /// Query Members
-  Future<PageListData<List<AmityChannelMember>, String>> queryMembers(
-      GetChannelMembersRequest request);
+  Future<PageListData<List<AmityChannelMember>, String>> queryMembers(GetChannelMembersRequest request);
 
   /// Search Members
-  Future<PageListData<List<AmityChannelMember>, String>> searchMembers(
-      GetChannelMembersRequestV4 request);
+  Future<PageListData<List<AmityChannelMember>, String>> searchMembers(GetChannelMembersRequestV4 request);
 
   /// Add Member
-  Future<List<AmityChannelMember>> addMember(
-      UpdateChannelMembersRequest request);
+  Future<List<AmityChannelMember>> addMember(UpdateChannelMembersRequest request);
 
   /// Remove Member
   Future removeMember(UpdateChannelMembersRequest request);
 
   /// Join Channel
-  Future<AmityChannel> joinChannel(String id);
+  Future joinChannel(String id);
 
   /// Leave Channel
   Future leaveChannel(String id);

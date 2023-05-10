@@ -1,0 +1,257 @@
+{
+    "communities": [
+        {
+            "_id": "63eda8c96a6539443a6bff4b",
+            "path": "631f16be1e440400da5663b0/social/community/63eda8c96a6539443a6bff4b",
+            "description": "string",
+            "isOfficial": false,
+            "isPublic": true,
+            "onlyAdminCanPost": false,
+            "postsCount": 3,
+            "membersCount": 30208,
+            "moderatorMemberCount": 1,
+            "updatedAt": "2023-02-21T03:08:53.957Z",
+            "createdAt": "2023-02-16T03:53:45.959Z",
+            "isDeleted": false,
+            "needApprovalOnPostCreation": false,
+            "displayName": "💥 ASC-7992 30,000 Members",
+            "tags": [
+                "tagsA",
+                "tagsB"
+            ],
+            "metadata": {},
+            "hasFlaggedComment": false,
+            "hasFlaggedPost": false,
+            "communityId": "63eda8c96a6539443a6bff4b",
+            "channelId": "63eda8c96a6539443a6bff4b",
+            "userId": "Alex6789012345678901234567890123456789012345678",
+            "isJoined": false,
+            "avatarFileId": null,
+            "categoryIds": []
+        },
+        {
+            "_id": "63eda8686a6539181c6becf2",
+            "path": "631f16be1e440400da5663b0/social/community/63eda8686a6539181c6becf2",
+            "description": "string",
+            "isOfficial": false,
+            "isPublic": true,
+            "onlyAdminCanPost": false,
+            "postsCount": 1,
+            "membersCount": 20203,
+            "moderatorMemberCount": 1,
+            "updatedAt": "2023-02-21T03:08:53.405Z",
+            "createdAt": "2023-02-16T03:52:08.491Z",
+            "isDeleted": false,
+            "needApprovalOnPostCreation": false,
+            "displayName": "💥 ASC-7992 20,000 Members",
+            "tags": [
+                "tagsA",
+                "tagsB"
+            ],
+            "metadata": {},
+            "hasFlaggedComment": false,
+            "hasFlaggedPost": false,
+            "communityId": "63eda8686a6539181c6becf2",
+            "channelId": "63eda8686a6539181c6becf2",
+            "userId": "Alex6789012345678901234567890123456789012345678",
+            "isJoined": false,
+            "avatarFileId": null,
+            "categoryIds": []
+        },
+        {
+            "_id": "64070b29099e74f73bdf4713",
+            "path": "631f16be1e440400da5663b0/social/community/64070b29099e74f73bdf4713",
+            "description": "string",
+            "isOfficial": false,
+            "isPublic": true,
+            "onlyAdminCanPost": false,
+            "postsCount": 0,
+            "membersCount": 19298,
+            "moderatorMemberCount": 1,
+            "updatedAt": "2023-03-07T10:50:19.363Z",
+            "createdAt": "2023-03-07T10:00:09.787Z",
+            "isDeleted": false,
+            "needApprovalOnPostCreation": false,
+            "displayName": "130k members",
+            "tags": [
+                "tagsA",
+                "tagsB"
+            ],
+            "metadata": {},
+            "hasFlaggedComment": false,
+            "hasFlaggedPost": false,
+            "communityId": "64070b29099e74f73bdf4713",
+            "channelId": "64070b29099e74f73bdf4713",
+            "userId": "Alex6789012345678901234567890123456789012345678",
+            "isJoined": false,
+            "avatarFileId": null,
+            "categoryIds": []
+        },
+        {
+            "_id": "63ecaeff6a65398a9154cebe",
+            "path": "631f16be1e440400da5663b0/social/community/63ecaeff6a65398a9154cebe",
+            "description": "string",
+            "isOfficial": false,
+            "isPublic": true,
+            "onlyAdminCanPost": false,
+            "postsCount": 1,
+            "membersCount": 11327,
+            "moderatorMemberCount": 1,
+            "updatedAt": "2023-02-16T03:58:37.962Z",
+            "createdAt": "2023-02-15T10:07:59.998Z",
+            "isDeleted": false,
+            "needApprovalOnPostCreation": false,
+            "displayName": "🎎 ASC-7992 10000 Members",
+            "tags": [
+                "tagsA",
+                "tagsB"
+            ],
+            "metadata": {},
+            "hasFlaggedComment": false,
+            "hasFlaggedPost": false,
+            "communityId": "63ecaeff6a65398a9154cebe",
+            "channelId": "63ecaeff6a65398a9154cebe",
+            "userId": "Alex6789012345678901234567890123456789012345678",
+            "isJoined": false,
+            "avatarFileId": null,
+            "categoryIds": []
+        },
+        {
+            "_id": "63ecb2ea8e751612efdf6870",
+            "path": "631f16be1e440400da5663b0/social/community/63ecb2ea8e751612efdf6870",
+            "description": "string",
+            "isOfficial": false,
+            "isPublic": true,
+            "onlyAdminCanPost": false,
+            "postsCount": 1,
+            "membersCount": 11063,
+            "moderatorMemberCount": 1,
+            "updatedAt": "2023-02-16T03:58:38.811Z",
+            "createdAt": "2023-02-15T10:24:42.447Z",
+            "isDeleted": false,
+            "needApprovalOnPostCreation": false,
+            "displayName": "😈 ASC-7992 20,000 Members",
+            "tags": [
+                "tagsA",
+                "tagsB"
+            ],
+            "metadata": {},
+            "hasFlaggedComment": false,
+            "hasFlaggedPost": false,
+            "communityId": "63ecb2ea8e751612efdf6870",
+            "channelId": "63ecb2ea8e751612efdf6870",
+            "userId": "Alex6789012345678901234567890123456789012345678",
+            "isJoined": false,
+            "avatarFileId": null,
+            "categoryIds": []
+        }
+    ],
+    "communityUsers": [],
+    "files": [
+        {
+            "fileId": "4bfbbf76548f412d8af654b660292a9e",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/4bfbbf76548f412d8af654b660292a9e/download",
+            "type": "image",
+            "createdAt": "2023-03-14T16:14:42.281Z",
+            "updatedAt": "2023-03-14T16:14:43.115Z",
+            "attributes": {
+                "name": "img_cache_1678810475872.jpg",
+                "extension": "jpg",
+                "size": 105110,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 1280,
+                    "width": 960,
+                    "isFull": false
+                }
+            }
+        }
+    ],
+    "categories": [],
+    "users": [
+        {
+            "_id": "6321d1096de41000d9511623",
+            "path": "631f16be1e440400da5663b0/user/6321d1096de41000d9511623",
+            "updatedAt": "2023-03-17T06:48:29.740Z",
+            "createdAt": "2022-09-14T13:03:05.130Z",
+            "description": "",
+            "isDeleted": false,
+            "displayName": "Victim Android",
+            "userId": "victimAndroid",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 1,
+            "hashFlag": {
+                "bits": 24,
+                "hashes": 17,
+                "hash": "gP//"
+            },
+            "avatarFileId": "4bfbbf76548f412d8af654b660292a9e",
+            "isGlobalBan": false
+        },
+        {
+            "_id": "63e36e32fdb811fe71c7e9b0",
+            "path": "631f16be1e440400da5663b0/user/63e36e32fdb811fe71c7e9b0",
+            "updatedAt": "2023-02-08T09:41:06.570Z",
+            "createdAt": "2023-02-08T09:41:06.570Z",
+            "isDeleted": false,
+            "displayName": "Alex6789012345678901234567890123456789012345678",
+            "userId": "Alex6789012345678901234567890123456789012345678",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        }
+    ],
+    "feeds": [
+        {
+            "targetType": "community",
+            "targetId": "63ecaeff6a65398a9154cebe",
+            "feedType": "published",
+            "feedId": "1676455680537e8dc38fd1b7e44e2a5860586c0c528e1",
+            "postCount": 1,
+            "createdAt": "2023-02-15T10:08:00.522Z",
+            "updatedAt": "2023-02-15T10:30:30.184Z"
+        },
+        {
+            "targetType": "community",
+            "targetId": "63ecb2ea8e751612efdf6870",
+            "feedType": "published",
+            "feedId": "16764566828223575e6ab2b2946b6b483ae79b98be980",
+            "postCount": 1,
+            "createdAt": "2023-02-15T10:24:42.814Z",
+            "updatedAt": "2023-02-15T10:29:39.288Z"
+        },
+        {
+            "targetType": "community",
+            "targetId": "63eda8686a6539181c6becf2",
+            "feedType": "published",
+            "feedId": "16765195288362c0033f7092243019dfa889b1b81fe8d",
+            "postCount": 1,
+            "createdAt": "2023-02-16T03:52:08.828Z",
+            "updatedAt": "2023-02-16T08:52:18.671Z"
+        },
+        {
+            "targetType": "community",
+            "targetId": "63eda8c96a6539443a6bff4b",
+            "feedType": "published",
+            "feedId": "16765196263263d6c9d6ba0d34a469fc5c7014011112c",
+            "postCount": 3,
+            "createdAt": "2023-02-16T03:53:46.319Z",
+            "updatedAt": "2023-02-16T08:52:31.718Z"
+        },
+        {
+            "targetType": "community",
+            "targetId": "64070b29099e74f73bdf4713",
+            "feedType": "published",
+            "feedId": "1678183210317fee6d49cb321401ca7bcc103dbe6889d",
+            "postCount": 0,
+            "createdAt": "2023-03-07T10:00:10.306Z",
+            "updatedAt": "2023-03-07T10:00:10.318Z"
+        }
+    ]
+}

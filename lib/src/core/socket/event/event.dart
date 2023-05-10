@@ -1,5 +1,6 @@
 export 'amity_topic.dart';
 export 'comment/comment.dart';
+export 'community/community.dart';
 export 'message/message.dart';
 export 'mqtt_event_listeners.dart';
 export 'post/post.dart';

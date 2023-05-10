@@ -1,0 +1,102 @@
+{
+    "channels": [
+        {
+            "_id": "641da517db640f3c6fbd0a62",
+            "isDistinct": false,
+            "type": "community",
+            "metadata": {},
+            "tags": [],
+            "isMuted": false,
+            "lastActivity": "2023-03-24T13:32:10.653Z",
+            "updatedAt": "2023-03-24T14:59:25.370Z",
+            "createdAt": "2023-03-24T13:26:47.643Z",
+            "isRateLimited": false,
+            "rateLimitWindow": 1000,
+            "displayName": "pang2026",
+            "messageAutoDeleteEnabled": false,
+            "autoDeleteMessageByFlagLimit": 0,
+            "isDeleted": false,
+            "path": "631f16be1e440400da5663b0/chat/channel/641da517db640f3c6fbd0a62",
+            "channelId": "641da517db640f3c6fbd0a62",
+            "memberCount": 3,
+            "messageCount": 3,
+            "moderatorMemberCount": 1,
+            "avatarFileId": null
+        }
+    ],
+    "channelUsers": [
+        {
+            "membership": "member",
+            "lastActivity": "2023-03-24T14:59:25.378Z",
+            "readToSegment": 3,
+            "isMuted": false,
+            "createdAt": "2023-03-24T14:59:25.379Z",
+            "updatedAt": "2023-03-24T14:59:25.379Z",
+            "lastMentionedSegment": 0,
+            "isBanned": false,
+            "userId": "victimAndroid",
+            "channelId": "641da517db640f3c6fbd0a62",
+            "roles": [],
+            "permissions": []
+        }
+    ],
+    "users": [
+        {
+            "_id": "6321d1096de41000d9511623",
+            "path": "631f16be1e440400da5663b0/user/6321d1096de41000d9511623",
+            "updatedAt": "2023-03-17T06:48:29.740Z",
+            "createdAt": "2022-09-14T13:03:05.130Z",
+            "description": "",
+            "isDeleted": false,
+            "displayName": "Victim Android",
+            "userId": "victimAndroid",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 1,
+            "hashFlag": {
+                "bits": 24,
+                "hashes": 17,
+                "hash": "gP//"
+            },
+            "avatarFileId": "4bfbbf76548f412d8af654b660292a9e",
+            "isGlobalBan": false
+        },
+        {
+            "_id": "641c6448db640fd145ba9b3a",
+            "path": "631f16be1e440400da5663b0/user/641c6448db640fd145ba9b3a",
+            "updatedAt": "2023-03-23T14:38:00.803Z",
+            "createdAt": "2023-03-23T14:38:00.803Z",
+            "isDeleted": false,
+            "displayName": "Pang",
+            "userId": "Pang",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        }
+    ],
+    "files": [
+        {
+            "fileId": "4bfbbf76548f412d8af654b660292a9e",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/4bfbbf76548f412d8af654b660292a9e/download",
+            "type": "image",
+            "createdAt": "2023-03-14T16:14:42.281Z",
+            "updatedAt": "2023-03-14T16:14:43.115Z",
+            "attributes": {
+                "name": "img_cache_1678810475872.jpg",
+                "extension": "jpg",
+                "size": 105110,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 1280,
+                    "width": 960,
+                    "isFull": false
+                }
+            }
+        }
+    ]
+}

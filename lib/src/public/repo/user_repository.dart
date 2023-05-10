@@ -49,4 +49,9 @@ class UserRepository {
   AmityUserRelationshipsRepository relationship() {
     return AmityUserRelationshipsRepository();
   }
+
+  /// API to get blocked users
+  AmityBlockUserQueryBuilder getBlockedUsers() {
+    return AmityBlockUserQueryBuilder(useCase: serviceLocator());
+  }
 }

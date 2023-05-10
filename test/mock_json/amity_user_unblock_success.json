@@ -1,0 +1,19 @@
+{
+    "follows": [
+        {
+            "from": "victimAndroid",
+            "to": " Android1",
+            "status": "none",
+            "createdAt": "2023-04-17T07:03:29.861Z",
+            "updatedAt": "2023-04-17T07:04:23.399Z"
+        }
+    ],
+    "followCounts": [
+        {
+            "userId": "victimAndroid",
+            "followingCount": 17,
+            "followerCount": 18,
+            "pendingCount": 1
+        }
+    ]
+}

@@ -81,8 +81,10 @@ class AmityPostGetQueryBuilder {
       {String? token, int? limit}) async {
     if (_sortOption != null) _request.sortBy = _sortOption;
     if (_hasFlag != null) _request.hasFlag = _hasFlag;
-    if (_isDeleted != null) _request.isDeleted = _isDeleted;
     if (_amityFeedType != null) _request.feedType = _amityFeedType;
+
+    _request.isDeleted = _isDeleted ?? true ? null : false;
+
     if (_dataTypes != null && _dataTypes!.isNotEmpty) {
       _request.dataTypes = _dataTypes;
 

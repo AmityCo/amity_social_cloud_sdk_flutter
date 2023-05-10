@@ -1,0 +1,56 @@
+{
+    "users": [
+        {
+            "_id": "60cb3610439eda6d9cd52e0c",
+            "path": "606f37a0ae601e3c33eba9e3/user/60cb3610439eda6d9cd52e0c",
+            "createdAt": "2021-06-17T11:46:24.816Z",
+            "updatedAt": "2022-08-08T08:49:07.372Z",
+            "isDeleted": false,
+            "displayName": "pang3",
+            "userId": "pang3",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        },
+        {
+            "_id": "63745f043819a8470c24a8f7",
+            "path": "606f37a0ae601e3c33eba9e3/user/63745f043819a8470c24a8f7",
+            "createdAt": "2022-11-16T03:54:44.103Z",
+            "updatedAt": "2022-11-16T03:54:44.118Z",
+            "isDeleted": false,
+            "displayName": " Android1",
+            "userId": " Android1",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        }
+    ],
+    "files": [],
+    "follows": [
+        {
+            "from": "victimAndroid",
+            "to": " Android1",
+            "status": "blocked",
+            "createdAt": "2023-04-17T07:03:29.861Z",
+            "updatedAt": "2023-04-17T11:49:44.233Z"
+        },
+        {
+            "from": "victimAndroid",
+            "to": "pang3",
+            "status": "blocked",
+            "createdAt": "2023-04-17T05:01:50.747Z",
+            "updatedAt": "2023-04-17T05:01:50.747Z"
+        }
+    ],
+    "paging": {
+        "total": 2
+    }
+}

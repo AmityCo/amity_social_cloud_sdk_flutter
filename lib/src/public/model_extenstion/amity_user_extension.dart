@@ -23,6 +23,15 @@ extension AmityUserExtenstion on AmityUser {
     return AmityUserFlagRepository(userId: userId!);
   }
 
+  Future blockUser() {
+    return serviceLocator<UserBlockUsecase>().get(userId!);
+  }
+
+  /// API to unblock user
+  Future unblockUser() {
+    return serviceLocator<UserUnblockUsecase>().get(userId!);
+  }
+
   /* begin_public_function 
   id: user.check_flag_by_me
   */

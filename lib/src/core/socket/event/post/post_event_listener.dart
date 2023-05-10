@@ -23,7 +23,7 @@ abstract class PostEventListener extends SocketEventListener {
     }
   }
 
-  bool _hasLocalPost(String messageId) {
-    return serviceLocator<PostHasLocalUsecase>().get(messageId);
+  bool _hasLocalPost(String postId) {
+    return serviceLocator<PostHasLocalUsecase>().get(postId);
   }
 }

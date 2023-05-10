@@ -82,7 +82,7 @@ class TextData extends AmityPostData {
 /// Image Post Data
 class ImageData extends AmityPostData {
   /// Amity Image
-  late AmityImage image; //composer
+  AmityImage? image; //composer
 
   /// Init Image Data
   ImageData({

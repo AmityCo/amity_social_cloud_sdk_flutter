@@ -13,7 +13,7 @@ class FollowDbAdapterImpl extends FollowDbAdapter {
   }
 
   @override
-  FollowHiveEntity getFollowEntiry(String id) {
+  FollowHiveEntity? getFollowEntiry(String id) {
     return box.get(id);
   }
 
