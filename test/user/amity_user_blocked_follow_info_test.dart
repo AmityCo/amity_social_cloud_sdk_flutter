@@ -32,7 +32,7 @@ void main() {
       return FollowInfoResponse.fromJson(json.decode(response));
     });
 
-    final amityUserFollowInfo = await AmityCoreClient.newUserRepository().relationship().user(userId).getFollowInfo();
+    final amityUserFollowInfo = await AmityCoreClient.newUserRepository().relationship().getFollowInfo(userId);
 
     expect(amityUserFollowInfo, isA<AmityUserFollowInfo>());
     expect(amityUserFollowInfo.status, AmityFollowStatus.BLOCKED);
