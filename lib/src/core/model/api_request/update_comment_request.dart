@@ -39,8 +39,14 @@ class UpdateCommentRequest {
         "data": data?.toJson(),
         "metadata": metadata,
         "mentionees": mentionees == null ? null : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
+        //Send attachments as blank array, in case want to remove all attachments
         "attachments": attachments == null ? null : List<dynamic>.from(attachments!.map((x) => x.toJson())),
-      }..removeNullValue();
+      }..removeWhere((key, value) => value == null);
+
+  @override
+  String toString() {
+    return jsonEncode(toJson());
+  }
 }
 
 class UpdateCommentData {
@@ -57,4 +63,9 @@ class UpdateCommentData {
   Map<String, dynamic> toJson() => {
         "text": text,
       }..removeNullValue();
+
+  @override
+  String toString() {
+    return jsonEncode(toJson());
+  }
 }
