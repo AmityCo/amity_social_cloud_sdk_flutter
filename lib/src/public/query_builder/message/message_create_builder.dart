@@ -20,8 +20,7 @@ class AmityMessageCreateTargetSelector {
   /// Channel ID
   AmityMessageCreateDataTypeSelector channelId(String channelId) {
     _channelId = channelId;
-    return AmityMessageCreateDataTypeSelector(
-        useCase: _useCase, channelId: _channelId!);
+    return AmityMessageCreateDataTypeSelector(useCase: _useCase, channelId: _channelId!);
   }
 
   // AmityMessageCreateTargetSelector parentId(String parentId) {
@@ -43,8 +42,7 @@ class AmityMessageCreateDataTypeSelector {
   String? _parentId;
 
   /// Init [AmityMessageCreateDataTypeSelector]
-  AmityMessageCreateDataTypeSelector(
-      {required MessageCreateUsecase useCase, required String channelId}) {
+  AmityMessageCreateDataTypeSelector({required MessageCreateUsecase useCase, required String channelId}) {
     _useCase = useCase;
     _channelId = channelId;
   }
@@ -57,9 +55,7 @@ class AmityMessageCreateDataTypeSelector {
 
   /// Data Type Text
   AmityTextMessageCreator text(String text) {
-    return AmityTextMessageCreator(
-        useCase: _useCase, channelId: _channelId, text: text)
-      ..parentId(_parentId);
+    return AmityTextMessageCreator(useCase: _useCase, channelId: _channelId, text: text)..parentId(_parentId);
   }
 
   /// Data Type Image
@@ -115,10 +111,7 @@ class AmityTextMessageCreator extends AmityMessageCreator {
 
   /// Init [AmityTextMesageCreator]
   AmityTextMessageCreator(
-      {required MessageCreateUsecase useCase,
-      required String channelId,
-      String? parentId,
-      required this.text})
+      {required MessageCreateUsecase useCase, required String channelId, String? parentId, required this.text})
       : super(useCase: useCase, channelId: channelId);
 
   @override
@@ -142,10 +135,7 @@ class AmityImageMessageCreator extends AmityMessageCreator {
 
   /// Init [AmityTextMesageCreator]
   AmityImageMessageCreator(
-      {required MessageCreateUsecase useCase,
-      required String channelId,
-      String? parentId,
-      required this.uri})
+      {required MessageCreateUsecase useCase, required String channelId, String? parentId, required this.uri})
       : super(useCase: useCase, channelId: channelId);
 
   /// Add Caption to image
@@ -180,10 +170,7 @@ class AmityFileMessageCreator extends AmityMessageCreator {
 
   /// Init [AmityTextMesageCreator]
   AmityFileMessageCreator(
-      {required MessageCreateUsecase useCase,
-      required String channelId,
-      String? parentId,
-      required this.uri})
+      {required MessageCreateUsecase useCase, required String channelId, String? parentId, required this.uri})
       : super(useCase: useCase, channelId: channelId);
 
   /// Add Caption to image
@@ -252,16 +239,14 @@ abstract class AmityMessageCreator {
   /// Metion Users
   AmityMessageCreator mentionUsers(List<String> userIds) {
     _mentionees ??= [];
-    _mentionees!.add(AmityMentioneeTarget(
-        type: AmityMentionType.USER.value, userIds: userIds));
+    _mentionees!.add(AmityMentioneeTarget(type: AmityMentionType.USER.value, userIds: userIds));
     return this;
   }
 
   /// Metion Channel
   AmityMessageCreator mentionChannel() {
     _mentionees ??= [];
-    _mentionees!
-        .add(AmityMentioneeTarget(type: AmityMentionType.CHANNEL.value));
+    _mentionees!.add(AmityMentioneeTarget(type: AmityMentionType.CHANNEL.value));
     return this;
   }
 
@@ -304,8 +289,7 @@ abstract class AmityMessageCreator {
     // Added the userId
     request.userId = AmityCoreClient.getUserId();
 
-    if (getDataType() == AmityMessageDataType.IMAGE ||
-        getDataType() == AmityMessageDataType.FILE) {
+    if (getDataType() == AmityMessageDataType.IMAGE || getDataType() == AmityMessageDataType.FILE) {
       /// set file Uri
       request.uri = getUri();
       return serviceLocator<MessageCreateFileUsecase>().get(request);
