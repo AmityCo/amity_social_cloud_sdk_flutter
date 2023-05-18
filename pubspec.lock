@@ -800,6 +800,7 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.4"
+
   xdg_directories:
     dependency: transitive
     description:

@@ -15,22 +15,16 @@ class MessageRepoImpl extends MessageRepo {
   final FileRepo fileRepo;
 
   /// init [MessageRepoImpl]
-  MessageRepoImpl(
-      {required this.messageApiInterface,
-      required this.dbAdapterRepo,
-      required this.fileRepo});
+  MessageRepoImpl({required this.messageApiInterface, required this.dbAdapterRepo, required this.fileRepo});
 
   @override
-  Future<PageListData<List<AmityMessage>, String>> queryMesssage(
-      MessageQueryRequest request) async {
+  Future<PageListData<List<AmityMessage>, String>> queryMesssage(MessageQueryRequest request) async {
     final data = await messageApiInterface.messageQuery(request);
     //mandatory to delete all previous messages, since we don't know
     //the up to date data for each messages
-    final isFirstPageRequest = ((request.options?.last ?? 0) > 0) ||
-        ((request.options?.before ?? 0) > 0);
+    final isFirstPageRequest = ((request.options?.last ?? 0) > 0) || ((request.options?.before ?? 0) > 0);
     if (request.options?.token == null && isFirstPageRequest) {
-      await dbAdapterRepo.messageDbAdapter
-          .deleteMessagesByChannelId(request.channelId);
+      await dbAdapterRepo.messageDbAdapter.deleteMessagesByChannelId(request.channelId);
     }
     final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
     final String token;
@@ -45,12 +39,9 @@ class MessageRepoImpl extends MessageRepo {
   }
 
   @override
-  Stream<List<AmityMessage>> listentMessages(
-      RequestBuilder<MessageQueryRequest> request) {
+  Stream<List<AmityMessage>> listentMessages(RequestBuilder<MessageQueryRequest> request) {
     final req = request.call();
-    return dbAdapterRepo.messageDbAdapter
-        .listenMessageEntities(request)
-        .map((event) {
+    return dbAdapterRepo.messageDbAdapter.listenMessageEntities(request).map((event) {
       final List<AmityMessage> list = [];
       for (var element in event) {
         list.add(element.convertToAmityMessage());
@@ -70,9 +61,7 @@ class MessageRepoImpl extends MessageRepo {
     final entity = request.convertToMessageEntity();
 
     /// Calculate the highest channel segment number for the channel id
-    entity.channelSegment = dbAdapterRepo.messageDbAdapter
-            .getHighestChannelSagment(request.channelId) +
-        1;
+    entity.channelSegment = dbAdapterRepo.messageDbAdapter.getHighestChannelSagment(request.channelId) + 1;
 
     try {
       entity.syncState = AmityMessageSyncState.SYNCING;
@@ -91,8 +80,7 @@ class MessageRepoImpl extends MessageRepo {
 
   @override
   Future<AmityMessage> updateMessage(CreateMessageRequest request) async {
-    final entity =
-        dbAdapterRepo.messageDbAdapter.getMessageEntity(request.messageId!)!;
+    final entity = dbAdapterRepo.messageDbAdapter.getMessageEntity(request.messageId!)!;
 
     try {
       entity.syncState = AmityMessageSyncState.SYNCING;
@@ -119,9 +107,7 @@ class MessageRepoImpl extends MessageRepo {
     final entity = request.convertToMessageEntity();
 
     /// Calculate the highest channel segment number for the channel id
-    entity.channelSegment = dbAdapterRepo.messageDbAdapter
-            .getHighestChannelSagment(request.channelId) +
-        1;
+    entity.channelSegment = dbAdapterRepo.messageDbAdapter.getHighestChannelSagment(request.channelId) + 1;
 
     try {
       // Create file Entity, update it for local preview
@@ -140,10 +126,14 @@ class MessageRepoImpl extends MessageRepo {
       entity.syncState = AmityMessageSyncState.UPLOADING;
       dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
 
-      final amityUploadResult = await fileRepo.uploadImage(UploadFileRequest()
-        ..files.add(File(request.uri!.path))
-        ..uploadId = request.messageId
-        ..fullImage = true);
+      final amityUploadResult = request.type == AmityMessageDataType.IMAGE.value
+          ? await fileRepo.uploadImage(UploadFileRequest()
+            ..files.add(File(request.uri!.path))
+            ..uploadId = request.messageId
+            ..fullImage = true)
+          : await fileRepo.uploadFile(UploadFileRequest()
+            ..files.add(File(request.uri!.path))
+            ..uploadId = request.messageId);
 
       if (amityUploadResult is AmityUploadComplete) {
         request.fileId = (amityUploadResult as AmityUploadComplete).file.fileId;
@@ -166,9 +156,7 @@ class MessageRepoImpl extends MessageRepo {
 
   @override
   AmityMessage? getLocalMessage(String messageId) {
-    return dbAdapterRepo.messageDbAdapter
-        .getMessageEntity(messageId)
-        ?.convertToAmityMessage();
+    return dbAdapterRepo.messageDbAdapter.getMessageEntity(messageId)?.convertToAmityMessage();
   }
 
   @override
@@ -192,8 +180,7 @@ class MessageRepoImpl extends MessageRepo {
     final data = await messageApiInterface.flagMessage(messageId);
     final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
 
-    final amityMessage =
-        dbAdapterRepo.messageDbAdapter.getMessageEntity(messageId);
+    final amityMessage = dbAdapterRepo.messageDbAdapter.getMessageEntity(messageId);
 
     if (amityMessage != null) {
       amityMessage.flaggedByMe = true;
@@ -208,8 +195,7 @@ class MessageRepoImpl extends MessageRepo {
     final data = await messageApiInterface.unFlagMessage(messageId);
     final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
 
-    final amityMessage =
-        dbAdapterRepo.messageDbAdapter.getMessageEntity(messageId);
+    final amityMessage = dbAdapterRepo.messageDbAdapter.getMessageEntity(messageId);
 
     if (amityMessage != null) {
       amityMessage.flaggedByMe = false;
