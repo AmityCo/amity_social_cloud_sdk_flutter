@@ -126,9 +126,12 @@ class MessageRepoImpl extends MessageRepo {
       entity.syncState = AmityMessageSyncState.UPLOADING;
       dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
 
-      final amityUploadResult = await fileRepo.uploadImage(UploadFileRequest(files: [File(request.uri!.path)])
-        ..uploadId = request.messageId
-        ..fullImage = true);
+      final amityUploadResult = request.type == AmityMessageDataType.IMAGE.value
+          ? await fileRepo.uploadImage(UploadFileRequest(files: [File(request.uri!.path)])
+            ..uploadId = request.messageId
+            ..fullImage = true)
+          : await fileRepo
+              .uploadFile(UploadFileRequest(files: [File(request.uri!.path)])..uploadId = request.messageId);
 
       if (amityUploadResult is AmityUploadComplete) {
         request.fileId = (amityUploadResult as AmityUploadComplete).file.fileId;
