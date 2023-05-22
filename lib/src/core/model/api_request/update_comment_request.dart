@@ -62,7 +62,7 @@ class UpdateCommentData {
 
   Map<String, dynamic> toJson() => {
         "text": text,
-      }..removeNullValue();
+      }..removeWhere((key, value) => value == null);
 
   @override
   String toString() {
