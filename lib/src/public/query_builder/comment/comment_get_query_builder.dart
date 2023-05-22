@@ -102,9 +102,7 @@ class AmityCommentQueryBuilder {
       getCommentRequest.filterByParentId = _isFilterByParentId;
     }
 
-    if (_isDeleted != null) {
-      getCommentRequest.isDeleted = _isDeleted;
-    }
+    getCommentRequest.isDeleted = _isDeleted ?? true ? null : false;
 
     if (dataTypeFilter != null) {
       getCommentRequest.dataTypes = dataTypeFilter!.dataTypes.map((e) => e.value).toList();

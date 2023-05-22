@@ -11,18 +11,15 @@ class AmityPostGetTargetSelector {
   }
 
   AmityPostGetQueryBuilder targetMe() {
-    return AmityPostGetQueryBuilder(
-        _useCase, AmityCoreClient.getUserId(), AmityPostTargetType.USER.value);
+    return AmityPostGetQueryBuilder(_useCase, AmityCoreClient.getUserId(), AmityPostTargetType.USER.value);
   }
 
   AmityPostGetQueryBuilder targetUser(String targetUser) {
-    return AmityPostGetQueryBuilder(
-        _useCase, targetUser, AmityPostTargetType.USER.value);
+    return AmityPostGetQueryBuilder(_useCase, targetUser, AmityPostTargetType.USER.value);
   }
 
   AmityPostGetQueryBuilder targetCommunity(String communityId) {
-    return AmityPostGetQueryBuilder(
-        _useCase, communityId, AmityPostTargetType.COMMUNITY.value);
+    return AmityPostGetQueryBuilder(_useCase, communityId, AmityPostTargetType.COMMUNITY.value);
   }
 }
 
@@ -77,8 +74,7 @@ class AmityPostGetQueryBuilder {
     return this;
   }
 
-  Future<PageListData<List<AmityPost>, String>> getPagingData(
-      {String? token, int? limit}) async {
+  Future<PageListData<List<AmityPost>, String>> getPagingData({String? token, int? limit}) async {
     if (_sortOption != null) _request.sortBy = _sortOption;
     if (_hasFlag != null) _request.hasFlag = _hasFlag;
     if (_amityFeedType != null) _request.feedType = _amityFeedType;
