@@ -73,3 +73,5 @@ const LEAVE = 'leave';
 const ROLES = 'roles';
 const BAN = 'ban';
 const UNBAN = 'unban';
+
+const MAX_FILE_SIZE = 1073741824; // 1GB
