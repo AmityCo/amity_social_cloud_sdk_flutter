@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io' if (dart.library.html) 'dart:html';
 
-import 'package:amity_sdk/src/core/model/api_request/upload_file_request.dart';
+import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/model/amity_file/amity_file_info.dart';
 import 'package:amity_sdk/src/domain/model/amity_file/amity_upload_result.dart';
 import 'package:amity_sdk/src/domain/usecase/file/file_image_upload_usecase.dart';
@@ -29,17 +29,11 @@ class AmityImageUploadQueryBuilder {
     return this;
   }
 
-  // Future<AmityUploadResult<AmityImage>> upload() {
-  //   UploadFileRequest request = UploadFileRequest();
-  //   request.files.add(_file);
-  //   request.fullImage = _isFullImage;
-  //   if (_uploadId != null) request.uploadId = _uploadId;
-  //   return _usecase.get(request);
-  // }
-
   /// excute upload function
   StreamController<AmityUploadResult<AmityImage>> upload() {
     UploadFileRequest request = UploadFileRequest();
+    if (_file.lengthSync() > MAX_FILE_SIZE) throw AmityException(message: 'FILE_SIZE_EXCEEDED', code: 800140);
+
     request.files.add(_file);
     request.fullImage = _isFullImage;
     if (_uploadId != null) request.uploadId = _uploadId;
