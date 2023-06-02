@@ -6,6 +6,7 @@ import 'package:amity_sdk/src/public/public.dart';
 class AmityChannelRepository {
   /* begin_public_function 
   id: channel.create
+  api_style: async
   */
   /// Create the [AmityChannel]
   ChannelCreatorTypeSelection createChannel() {
@@ -15,6 +16,7 @@ class AmityChannelRepository {
 
   /* begin_public_function 
   id: channel.update
+  api_style: async
   */
   /// Update the [AmityChannel]
   ChannelUpdateBuilder updateChannel(String channelId) {
