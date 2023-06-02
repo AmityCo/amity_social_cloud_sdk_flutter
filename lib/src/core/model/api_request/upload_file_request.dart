@@ -4,12 +4,13 @@ import 'dart:io' if (dart.library.html) 'dart:html';
 class UploadFileRequest {
   /// init [UploadFileRequest]
   UploadFileRequest({
+    required this.files,
     this.fullImage = false,
     this.uploadId,
   });
 
   /// files
-  List<File> files = [];
+  final List<File> files;
 
   /// fullimages
   bool fullImage;

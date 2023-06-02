@@ -570,7 +570,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => UserRepository());
     serviceLocator.registerLazySingleton(() => CommentRepository());
     serviceLocator.registerLazySingleton(() => FeedRepository());
-    serviceLocator.registerLazySingleton(() => FileRepository());
+    serviceLocator.registerLazySingleton(() => AmityFileRepository());
     serviceLocator.registerLazySingleton(() => NotificationRepository());
     serviceLocator.registerLazySingleton(() => AmityCommunityRepository());
     serviceLocator.registerLazySingleton(() => PollRepository());

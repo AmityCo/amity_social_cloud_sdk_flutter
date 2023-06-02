@@ -16,7 +16,7 @@ void main() {
   final fileApiInterface = MockFileApiInterface();
 
   setUpAll(() async {
-    registerFallbackValue(UploadFileRequest());
+    registerFallbackValue(UploadFileRequest(files: [File('')]));
 
     await AmityCoreClientMockSetup.setup();
     await AmityCoreClientMockSetup.loadMockSession();
@@ -26,9 +26,7 @@ void main() {
     );
   });
 
-  test(
-      'When the user try to upload file and cancel in middle, it should return cancel event',
-      () async {
+  test('When the user try to upload file and cancel in middle, it should return cancel event', () async {
     when(() => fileApiInterface.uploadFile(
           any(),
           onUploadProgress: any(named: 'onUploadProgress'),
@@ -40,11 +38,7 @@ void main() {
     ));
 
     final fileUpload = File('mock_path');
-    AmityCoreClient.newFileRepository()
-        .file(fileUpload)
-        .upload()
-        .stream
-        .listen(expectAsync1((event) {
+    AmityCoreClient.newFileRepository().uploadFile(fileUpload).stream.listen(expectAsync1((event) {
           event.when(
             progress: (uploadInfo, cancelToken) {
               final progress = uploadInfo.getProgressPercentage();

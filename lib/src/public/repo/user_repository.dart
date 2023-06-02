@@ -31,14 +31,9 @@ class UserRepository {
   }
   /* end_public_function */
 
-  /* begin_public_function 
-  id: client.update_user
-  */
-  /// API to update the user
   UserUpdateQueryBuilder updateUser(String userId) {
     return UserUpdateQueryBuilder(serviceLocator<UpdateUserUsecase>(), userId);
   }
-  /* end_public_function */
 
   /// Report the current user
   AmityUserFlagRepository report(String userId) {

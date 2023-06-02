@@ -16,8 +16,7 @@ class AmityCoreClient {
     //Reset SDK get_it instance
     await serviceLocator.reset();
 
-    configServiceLocator
-        .registerLazySingleton<AmityCoreClientOption>(() => option);
+    configServiceLocator.registerLazySingleton<AmityCoreClientOption>(() => option);
 
     await SdkServiceLocator.initServiceLocator(syc: sycInitialization);
 
@@ -96,12 +95,21 @@ class AmityCoreClient {
   /* end_public_function */
 
   /* begin_public_function 
+  id: client.update_user
+  api_style: async
+  */
+  /// API to update the user
+  UserUpdateQueryBuilder updateUser() {
+    return UserUpdateQueryBuilder(serviceLocator<UpdateUserUsecase>(), getUserId());
+  }
+  /* end_public_function */
+
+  /* begin_public_function 
   id: client.register_push
   */
   ///Register the devie to receive FCM token
   static Future registerDeviceNotification(String fcmToken) {
-    return serviceLocator<NotificationRepository>()
-        .registerDeviceNotification(fcmToken);
+    return serviceLocator<NotificationRepository>().registerDeviceNotification(fcmToken);
   }
   /* end_public_function */
 
@@ -110,8 +118,7 @@ class AmityCoreClient {
   */
   ///Unregister the device with FCM
   static Future unregisterDeviceNotification() {
-    return serviceLocator<NotificationRepository>()
-        .unregisterDeviceNotification();
+    return serviceLocator<NotificationRepository>().unregisterDeviceNotification();
   }
   /* end_public_function */
 
@@ -124,14 +131,12 @@ class AmityCoreClient {
   static UserRepository newUserRepository() => serviceLocator<UserRepository>();
 
   /// Create new File Repository
-  static FileRepository newFileRepository() => serviceLocator<FileRepository>();
+  static AmityFileRepository newFileRepository() => serviceLocator<AmityFileRepository>();
 
   /// Intial Clean for SDK
   static _intialCleanUp() {
     // Remove all the Syncing State Message (Unsend messages)
-    serviceLocator<MessageDbAdapter>()
-        .getUnsendMessages()
-        .forEach((element) => element.delete());
+    serviceLocator<MessageDbAdapter>().getUnsendMessages().forEach((element) => element.delete());
   }
 }
 
