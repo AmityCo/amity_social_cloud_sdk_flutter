@@ -442,6 +442,8 @@ class SdkServiceLocator {
         () => PostUpdateUsecase(postRepo: serviceLocator(), postComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<PostGetUsecase>(
         () => PostGetUsecase(postRepo: serviceLocator(), postComposerUsecase: serviceLocator()));
+    serviceLocator
+        .registerLazySingleton<PostIsFlaggedByMeUsecase>(() => PostIsFlaggedByMeUsecase(postRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<PostHasLocalUsecase>(() => PostHasLocalUsecase(postRepo: serviceLocator()));
 
     serviceLocator
@@ -570,7 +572,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => FeedRepository());
     serviceLocator.registerLazySingleton(() => FileRepository());
     serviceLocator.registerLazySingleton(() => NotificationRepository());
-    serviceLocator.registerLazySingleton(() => CommunityRepository());
+    serviceLocator.registerLazySingleton(() => AmityCommunityRepository());
     serviceLocator.registerLazySingleton(() => PollRepository());
     serviceLocator.registerLazySingleton(() => MessageRepository());
     serviceLocator.registerLazySingleton(() => AmityChannelRepository());

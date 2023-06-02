@@ -3,9 +3,10 @@ import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
 
 /// Community Repository for all community related operation
-class CommunityRepository {
+class AmityCommunityRepository {
   /* begin_public_function 
   id: community.create
+  api_style: async
   */
   ///Create Community
   CommunityCreatorBuilder createCommunity(String displayName) {
@@ -15,6 +16,7 @@ class CommunityRepository {
 
   /* begin_public_function 
   id: community.update
+  api_style: async
   */
   /// Update Community
   CommunityUpdaterBuilder updateCommunity(String communityId) {

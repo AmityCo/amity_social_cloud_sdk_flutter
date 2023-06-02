@@ -30,7 +30,7 @@ class PostRepository {
   }
 
   /* begin_public_function 
-  id: post.create.text_post, post.create.image_post, post.create.video_post, post.create.file_post, post.create.poll_post, post.create.custom_post
+  id: post.create.text_post,post.create.image_post,post.create.video_post,post.create.file_post,post.create.poll_post,post.create.custom_post
   api_style: async
   */
   /// Create Text/Image/Video/File post and retune [AmityPost]
@@ -58,4 +58,13 @@ class PostRepository {
   GetReactionQueryBuilder getReaction({required String postId}) {
     return GetReactionQueryBuilder.post(postId: postId);
   }
+
+  /* begin_public_function 
+  id: post.check_flag_by_me
+  */
+  /// check if post is flagged by me
+  Future<bool> isFlaggedByMe(String postId) {
+    return serviceLocator<PostIsFlaggedByMeUsecase>().get(postId);
+  }
+  /* end_public_function */
 }

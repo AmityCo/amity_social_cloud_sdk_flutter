@@ -78,9 +78,6 @@ extension AmityPostExtension on AmityPost {
     return controller;
   }
 
-  /* begin_public_function 
-  id: post.check_flag_by_me
-  */
   /// check if post is flagged by me
   bool get isFlaggedByMe {
     if (hashFlag == null) return false;
@@ -88,7 +85,6 @@ extension AmityPostExtension on AmityPost {
         BloomFilter(hash: (hashFlag!['hash'] as String), m: hashFlag!['bits'] as int, k: hashFlag!['hashes'] as int)
             .mightContains(AmityCoreClient.getUserId());
   }
-  /* end_public_function */
 
   ///Subscribe/Unsubscribe to post event
   AmityTopicSubscription subscription(AmityPostEvents events) {
