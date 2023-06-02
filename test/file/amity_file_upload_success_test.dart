@@ -18,7 +18,7 @@ void main() {
   const uploadProgressStep = [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100];
 
   setUpAll(() async {
-    registerFallbackValue(UploadFileRequest());
+    registerFallbackValue(UploadFileRequest(files: [File('')]));
 
     await AmityCoreClientMockSetup.setup();
     await AmityCoreClientMockSetup.loadMockSession();
@@ -28,9 +28,7 @@ void main() {
     );
   });
 
-  test(
-      'When the user try to upload file, it should return sucess with upload process',
-      () async {
+  test('When the user try to upload file, it should return sucess with upload process', () async {
     when(() => fileApiInterface.uploadFile(
           any(),
           onUploadProgress: any(named: 'onUploadProgress'),
@@ -38,8 +36,7 @@ void main() {
         )).thenAnswer((invocation) async {
       final namedArgs = invocation.namedArguments;
 
-      final onUploadProgress = namedArgs[Symbol('onUploadProgress')]
-          as Function(int progress, int total);
+      final onUploadProgress = namedArgs[Symbol('onUploadProgress')] as Function(int progress, int total);
 
       // emulate in progress callback
       for (int progress in uploadProgressStep) {
@@ -47,19 +44,14 @@ void main() {
         onUploadProgress(progress, 100);
       }
 
-      final response =
-          await File('test/mock_json/amity_file_upload.json').readAsString();
+      final response = await File('test/mock_json/amity_file_upload.json').readAsString();
 
       return fileResponseFromList(json.decode(response));
     });
 
     final fileUpload = File('mock_path');
     int callbackCount = 0;
-    AmityCoreClient.newFileRepository()
-        .file(fileUpload)
-        .upload()
-        .stream
-        .listen(expectAsync1((event) {
+    AmityCoreClient.newFileRepository().uploadFile(fileUpload).stream.listen(expectAsync1((event) {
           event.when(
             progress: (uploadInfo, cancelToken) {
               expect(event, isA<AmityUploadInProgress>());

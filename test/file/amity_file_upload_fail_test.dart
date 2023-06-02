@@ -15,7 +15,7 @@ void main() {
   final fileApiInterface = MockFileApiInterface();
 
   setUpAll(() async {
-    registerFallbackValue(UploadFileRequest());
+    registerFallbackValue(UploadFileRequest(files: [File('')]));
 
     await AmityCoreClientMockSetup.setup();
     await AmityCoreClientMockSetup.loadMockSession();
@@ -36,7 +36,7 @@ void main() {
     });
 
     final fileUpload = File('mock_path');
-    AmityCoreClient.newFileRepository().file(fileUpload).upload().stream.listen(
+    AmityCoreClient.newFileRepository().uploadFile(fileUpload).stream.listen(
       expectAsync1(
         (event) {
           event.when(
