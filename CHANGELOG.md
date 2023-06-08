@@ -1,3 +1,10 @@
+## 0.21.0
+* feat: Added create comment with Image
+* feat: Added query comment with Image
+* refactor: align function signature and namespace for Core module 
+* refactor: align function signature and namespace for Social module 
+* refactor: align function signature and namespace for Chat module 
+
 ## 0.20.0
 * feat: Added user block/unblock
 * feat: Added get blocked users
@@ -12,6 +19,7 @@
 ## 0.18.0
 * feat: File uploading progress
 * feat: Image uploading progress
+* BREAKING FEAT: Updated Future Upload public API to Stream Upload API
 
 ## 0.17.1
 * fix: resolve issue with community query delete flag
