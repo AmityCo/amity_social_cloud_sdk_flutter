@@ -1,0 +1,212 @@
+{
+    "comments": [
+        {
+            "_id": "6458932fb7720e0195bcad43",
+            "path": "631f16be1e440400da5663b0/social/user/6321d1096de41000d9511623/post/6448e69bd83beff5b0eadeda/comment/6458932fb7720e0195bcad43",
+            "referenceType": "post",
+            "dataType": "text",
+            "dataTypes": [
+                "image",
+                "text"
+            ],
+            "data": {
+                "text": "Text comment"
+            },
+            "metadata": {
+                "mentioned": []
+            },
+            "childrenNumber": 0,
+            "isDeleted": false,
+            "editedAt": "2023-05-08T06:14:07.183Z",
+            "updatedAt": "2023-05-08T06:14:07.183Z",
+            "createdAt": "2023-05-08T06:14:07.183Z",
+            "segmentNumber": 3,
+            "commentId": "6458932fb7720e0195bcad43",
+            "userId": "victimAndroid",
+            "referenceId": "6448e69bd83beff5b0eadeda",
+            "flagCount": 0,
+            "hashFlag": null,
+            "children": [],
+            "attachments": [
+                {
+                    "type": "image",
+                    "fileId": "c2f2f3b894f4480dbd130d5b9575475e"
+                }
+            ],
+            "mentionees": [
+                {
+                    "type": "user",
+                    "userIds": []
+                }
+            ],
+            "reactions": {},
+            "reactionsCount": 0
+        },
+        {
+            "_id": "645891265c2b0f0eb3fb4b46",
+            "path": "631f16be1e440400da5663b0/social/user/6321d1096de41000d9511623/post/6448e69bd83beff5b0eadeda/comment/645891265c2b0f0eb3fb4b46",
+            "referenceType": "post",
+            "dataType": "text",
+            "dataTypes": [
+                "image"
+            ],
+            "data": {
+                "text": ""
+            },
+            "metadata": {
+                "mentioned": []
+            },
+            "childrenNumber": 0,
+            "isDeleted": false,
+            "editedAt": "2023-05-08T06:05:26.742Z",
+            "updatedAt": "2023-05-08T06:05:26.742Z",
+            "createdAt": "2023-05-08T06:05:26.742Z",
+            "segmentNumber": 2,
+            "commentId": "645891265c2b0f0eb3fb4b46",
+            "userId": "victimAndroid",
+            "referenceId": "6448e69bd83beff5b0eadeda",
+            "flagCount": 0,
+            "hashFlag": null,
+            "children": [],
+            "attachments": [
+                {
+                    "type": "image",
+                    "fileId": "3407f729e24b424288badb2470d18400"
+                }
+            ],
+            "mentionees": [
+                {
+                    "type": "user",
+                    "userIds": []
+                }
+            ],
+            "reactions": {},
+            "reactionsCount": 0
+        },
+        {
+            "_id": "64588aecb7720e7875bcabbe",
+            "path": "631f16be1e440400da5663b0/social/user/6321d1096de41000d9511623/post/6448e69bd83beff5b0eadeda/comment/64588aecb7720e7875bcabbe",
+            "referenceType": "post",
+            "dataType": "text",
+            "dataTypes": [
+                "text"
+            ],
+            "data": {
+                "text": "Test Comment"
+            },
+            "metadata": {
+                "mentioned": []
+            },
+            "childrenNumber": 0,
+            "isDeleted": false,
+            "editedAt": "2023-05-08T05:38:52.935Z",
+            "updatedAt": "2023-05-08T05:38:52.934Z",
+            "createdAt": "2023-05-08T05:38:52.934Z",
+            "segmentNumber": 1,
+            "commentId": "64588aecb7720e7875bcabbe",
+            "userId": "victimAndroid",
+            "referenceId": "6448e69bd83beff5b0eadeda",
+            "flagCount": 0,
+            "hashFlag": null,
+            "children": [],
+            "attachments": [],
+            "mentionees": [
+                {
+                    "type": "user",
+                    "userIds": []
+                }
+            ],
+            "reactions": {},
+            "reactionsCount": 0
+        }
+    ],
+    "commentChildren": [],
+    "users": [
+        {
+            "_id": "6321d1096de41000d9511623",
+            "path": "631f16be1e440400da5663b0/user/6321d1096de41000d9511623",
+            "updatedAt": "2023-05-02T19:00:10.947Z",
+            "createdAt": "2022-09-14T13:03:05.130Z",
+            "description": "",
+            "isDeleted": false,
+            "displayName": "Victim Android",
+            "userId": "victimAndroid",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 1,
+            "hashFlag": {
+                "bits": 24,
+                "hashes": 17,
+                "hash": "gP//"
+            },
+            "avatarFileId": "4bfbbf76548f412d8af654b660292a9e",
+            "isGlobalBan": false
+        }
+    ],
+    "files": [
+        {
+            "fileId": "4bfbbf76548f412d8af654b660292a9e",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/4bfbbf76548f412d8af654b660292a9e/download",
+            "type": "image",
+            "createdAt": "2023-03-14T16:14:42.281Z",
+            "updatedAt": "2023-03-14T16:14:43.115Z",
+            "attributes": {
+                "name": "img_cache_1678810475872.jpg",
+                "extension": "jpg",
+                "size": 105110,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 1280,
+                    "width": 960,
+                    "isFull": false
+                }
+            }
+        },
+        {
+            "fileId": "3407f729e24b424288badb2470d18400",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/3407f729e24b424288badb2470d18400/download",
+            "type": "image",
+            "createdAt": "2023-05-08T06:05:26.356Z",
+            "updatedAt": "2023-05-08T06:05:26.759Z",
+            "attributes": {
+                "name": "d67b9a13-3220-489c-8d99-0b0f17ec2e245272591480222692278.jpg",
+                "extension": "jpg",
+                "size": 94145,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "exif": {
+                        "DateTimeOriginal": "2023-05-06T10:40:56.000Z"
+                    },
+                    "height": 1280,
+                    "width": 960,
+                    "orientation": 1,
+                    "isFull": false
+                }
+            }
+        },
+        {
+            "fileId": "c2f2f3b894f4480dbd130d5b9575475e",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/c2f2f3b894f4480dbd130d5b9575475e/download",
+            "type": "image",
+            "createdAt": "2023-05-08T06:14:06.768Z",
+            "updatedAt": "2023-05-08T06:14:07.203Z",
+            "attributes": {
+                "name": "88969b53-46bd-4aaf-af62-92d29f402a7b7243317170050104151.jpg",
+                "extension": "jpg",
+                "size": 93884,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "exif": {
+                        "DateTimeOriginal": "2023-05-06T10:49:29.000Z"
+                    },
+                    "height": 1280,
+                    "width": 960,
+                    "orientation": 1,
+                    "isFull": false
+                }
+            }
+        }
+    ],
+    "paging": {}
+}

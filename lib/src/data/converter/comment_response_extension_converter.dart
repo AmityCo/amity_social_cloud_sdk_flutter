@@ -13,6 +13,7 @@ extension CommentResponseExtension on CommentResponse {
       ..referenceId = referenceId
       ..referenceType = referenceType
       ..dataType = dataType
+      ..dataTypes = dataTypes
       ..data = data.convertToPostDataHiveEntity()
       ..childrenNumber = childrenNumber
       ..flagCount = flagCount
@@ -28,6 +29,7 @@ extension CommentResponseExtension on CommentResponse {
       ..segmentNumber = segmentNumber
       ..metadata = metadata
       ..required = required
-      ..mentionees = mentionees;
+      ..mentionees = mentionees
+      ..attachments = attanchment;
   }
 }

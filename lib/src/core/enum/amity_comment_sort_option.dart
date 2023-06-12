@@ -2,13 +2,15 @@
 
 import 'package:amity_sdk/src/core/enum/enum.dart';
 
-enum AmityCommentSortOption { FIRST_CREATED, LAST_CREATED }
+enum AmityCommentSortOption { FIRST_CREATED, LAST_CREATED, FIRST_UPDATED, LAST_UPDATED }
 
 extension AmityCommentSortOptionExtension on AmityCommentSortOption {
   String get apiKey {
     return [
       'firstCreated',
       'lastCreated',
+      'firstUpdated',
+      'lastUpdated',
     ][index];
   }
 

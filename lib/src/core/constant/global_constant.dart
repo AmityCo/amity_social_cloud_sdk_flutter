@@ -3,8 +3,6 @@
 const SG_HTTP_ENDPOINT = "https://api.sg.amity.co/";
 const EU_HTTP_ENDPOINT = "https://api.eu.amity.co/";
 const US_HTTP_ENDPOINT = "https://api.us.amity.co/";
-const STAGING_HTTP_ENDPOINT = "https://api.staging.amity.co/";
-const DEV_HTTP_ENDPOINT = "https://api.dev.amity.co/";
 
 const SG_SOCKET_ENDPOINT = "https://api.sg.amity.co/";
 const EU_SOCKET_ENDPOINT = "https://api.eu.amity.co/";
@@ -28,7 +26,8 @@ const POST_V3 = 'api/v3/posts';
 
 const COMMENT_V3 = 'api/v3/comments';
 const FILE_V3 = 'api/v3/files';
-const VIDEO_FILE_V3 = 'api/v4/videos';
+const VIDEO_FILE_V4 = 'api/v4/videos';
+const IMAGE_FILE_V4 = 'api/v4/images';
 
 const COMMUNITY_V3 = 'api/v3/communities';
 const COMMUNITY_CATEGORY_V3 = 'api/v3/community-categories';
@@ -74,3 +73,5 @@ const LEAVE = 'leave';
 const ROLES = 'roles';
 const BAN = 'ban';
 const UNBAN = 'unban';
+
+const MAX_FILE_SIZE = 1073741824; // 1GB

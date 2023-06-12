@@ -3,25 +3,25 @@
   "packages": [
     {
       "name": "_fe_analyzer_shared",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-58.0.0",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-59.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "analyzer",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/analyzer-5.10.0",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/analyzer-5.11.1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
     {
       "name": "args",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/args-2.4.0",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/args-2.4.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "async",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/async-2.10.0",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/async-2.11.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -75,7 +75,7 @@
     },
     {
       "name": "built_value",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/built_value-8.4.4",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/built_value-8.5.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -87,15 +87,15 @@
     },
     {
       "name": "characters",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/characters-1.2.1",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/characters-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "checked_yaml",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/checked_yaml-2.0.2",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/checked_yaml-2.0.3",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.19"
     },
     {
       "name": "clock",
@@ -111,9 +111,9 @@
     },
     {
       "name": "collection",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/collection-1.17.0",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/collection-1.17.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.18"
     },
     {
       "name": "convert",
@@ -129,13 +129,13 @@
     },
     {
       "name": "crypto",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/crypto-3.0.2",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/crypto-3.0.3",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.19"
     },
     {
       "name": "dart_style",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/dart_style-2.3.0",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/dart_style-2.3.1",
       "packageUri": "lib/",
       "languageVersion": "2.19"
     },
@@ -179,7 +179,7 @@
       "name": "flutter",
       "rootUri": "file:///Users/saurabhkumar/sorbh/flutter/packages/flutter",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.0"
     },
     {
       "name": "flutter_dotenv",
@@ -197,11 +197,11 @@
       "name": "flutter_test",
       "rootUri": "file:///Users/saurabhkumar/sorbh/flutter/packages/flutter_test",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.0"
     },
     {
       "name": "freezed",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/freezed-2.3.2",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/freezed-2.3.3",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -219,7 +219,7 @@
     },
     {
       "name": "get_it",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/get_it-7.2.0",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/get_it-7.4.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -261,9 +261,9 @@
     },
     {
       "name": "http",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/http-0.13.5",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/http-0.13.6",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.19"
     },
     {
       "name": "http_multi_server",
@@ -285,15 +285,15 @@
     },
     {
       "name": "js",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/js-0.6.5",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/js-0.6.7",
       "packageUri": "lib/",
-      "languageVersion": "2.16"
+      "languageVersion": "2.19"
     },
     {
       "name": "json_annotation",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/json_annotation-4.8.0",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/json_annotation-4.8.1",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "2.19"
     },
     {
       "name": "lints",
@@ -309,7 +309,7 @@
     },
     {
       "name": "matcher",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/matcher-0.12.13",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/matcher-0.12.15",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -321,7 +321,7 @@
     },
     {
       "name": "meta",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/meta-1.8.0",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/meta-1.9.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -357,7 +357,7 @@
     },
     {
       "name": "path",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/path-1.8.2",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/path-1.8.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -369,7 +369,7 @@
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/path_provider_android-2.0.25",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/path_provider_android-2.0.27",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -393,7 +393,7 @@
     },
     {
       "name": "path_provider_windows",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.5",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/path_provider_windows-2.1.6",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -423,37 +423,37 @@
     },
     {
       "name": "pub_semver",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/pub_semver-2.1.3",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/pub_semver-2.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "pubspec_parse",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/pubspec_parse-1.2.2",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/pubspec_parse-1.2.3",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "shelf",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/shelf-1.4.0",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/shelf-1.4.1",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
     {
       "name": "shelf_packages_handler",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/shelf_packages_handler-3.0.1",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/shelf_packages_handler-3.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.17"
     },
     {
       "name": "shelf_static",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/shelf_static-1.1.1",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/shelf_static-1.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.17"
     },
     {
       "name": "shelf_web_socket",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/shelf_web_socket-1.0.3",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/shelf_web_socket-1.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -461,7 +461,7 @@
       "name": "sky_engine",
       "rootUri": "file:///Users/saurabhkumar/sorbh/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "socket_io_client",
@@ -477,7 +477,7 @@
     },
     {
       "name": "source_gen",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/source_gen-1.2.7",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/source_gen-1.3.0",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -537,19 +537,19 @@
     },
     {
       "name": "test",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/test-1.22.0",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/test-1.24.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "test_api",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/test_api-0.4.16",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/test_api-0.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "test_core",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/test_core-0.4.20",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/test_core-0.5.1",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
@@ -603,7 +603,7 @@
     },
     {
       "name": "win32",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/win32-3.1.4",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/win32-4.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.17"
     },
@@ -615,9 +615,9 @@
     },
     {
       "name": "yaml",
-      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/yaml-3.1.1",
+      "rootUri": "file:///Users/saurabhkumar/.pub-cache/hosted/pub.dev/yaml-3.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "2.19"
     },
     {
       "name": "amity_sdk",
@@ -626,8 +626,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2023-04-19T05:45:32.003526Z",
-  "generator": "melos",
-  "generatorVersion": "2.9.0"
+  "generated": "2023-06-08T07:41:24.067083Z",
+  "generator": "pub",
+  "generatorVersion": "3.0.3"
 }
-

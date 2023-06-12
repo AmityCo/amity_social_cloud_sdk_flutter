@@ -33,6 +33,9 @@ class CommentHiveEntity extends HiveObject {
   /// Comment data type
   String? dataType;
 
+  /// Comment data types
+  List<String>? dataTypes;
+
   ///
   PostChildDataHiveEntity? data;
 
@@ -86,6 +89,9 @@ class CommentHiveEntity extends HiveObject {
   /// Mentions
   List<Mentionee>? mentionees;
 
+  ///Attachment
+  List<AttachmentResponse>? attachments;
+
   CommentHiveEntity({
     this.id,
     this.path,
@@ -96,6 +102,7 @@ class CommentHiveEntity extends HiveObject {
     this.referenceId,
     this.referenceType,
     this.dataType,
+    this.dataTypes,
     this.data,
     this.metadata,
     this.childrenNumber,
@@ -113,6 +120,7 @@ class CommentHiveEntity extends HiveObject {
     this.required,
     this.flaggedByMe,
     this.mentionees,
+    this.attachments,
   });
 
   CommentHiveEntity copyWith({
@@ -125,6 +133,7 @@ class CommentHiveEntity extends HiveObject {
     String? referenceId,
     String? referenceType,
     String? dataType,
+    List<String>? dataTypes,
     PostChildDataHiveEntity? data,
     Map<String, dynamic>? metadata,
     int? childrenNumber,
@@ -142,6 +151,7 @@ class CommentHiveEntity extends HiveObject {
     String? required,
     bool? flaggedByMe,
     List<Mentionee>? mentionees,
+    List<AttachmentResponse>? attachments,
   }) {
     return CommentHiveEntity(
       id: id ?? this.id,
@@ -153,6 +163,7 @@ class CommentHiveEntity extends HiveObject {
       referenceId: referenceId ?? this.referenceId,
       referenceType: referenceType ?? this.referenceType,
       dataType: dataType ?? this.dataType,
+      dataTypes: dataTypes ?? this.dataTypes,
       data: data ?? this.data,
       metadata: metadata ?? this.metadata,
       childrenNumber: childrenNumber ?? this.childrenNumber,
@@ -170,6 +181,7 @@ class CommentHiveEntity extends HiveObject {
       required: required ?? this.required,
       flaggedByMe: flaggedByMe ?? this.flaggedByMe,
       mentionees: mentionees ?? this.mentionees,
+      attachments: attachments ?? this.attachments,
     );
   }
 }

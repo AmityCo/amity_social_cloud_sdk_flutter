@@ -11,6 +11,7 @@ class CommentResponse {
     required this.referenceId,
     required this.referenceType,
     required this.dataType,
+    required this.dataTypes,
     required this.data,
     required this.metadata,
     required this.childrenNumber,
@@ -27,6 +28,7 @@ class CommentResponse {
     required this.segmentNumber,
     required this.required,
     required this.mentionees,
+    required this.attanchment,
   });
   final String id;
   final String path;
@@ -37,6 +39,7 @@ class CommentResponse {
   final String referenceId;
   final String referenceType;
   final String dataType;
+  final List<String> dataTypes;
   final PostDataResponse data;
   final Map<String, dynamic>? metadata;
   final int childrenNumber;
@@ -56,8 +59,10 @@ class CommentResponse {
   /// Mentions
   final List<Mentionee> mentionees;
 
-  factory CommentResponse.fromJson(Map<String, dynamic> json) =>
-      CommentResponse(
+  ///Attachments
+  final List<AttachmentResponse> attanchment;
+
+  factory CommentResponse.fromJson(Map<String, dynamic> json) => CommentResponse(
         id: json["_id"],
         path: json["path"],
         commentId: json["commentId"],
@@ -67,34 +72,24 @@ class CommentResponse {
         referenceId: json["referenceId"],
         referenceType: json["referenceType"],
         dataType: json["dataType"],
+        dataTypes: List<String>.from(json["dataTypes"].map((x) => x)),
         data: PostDataResponse.fromJson(json["data"]),
-        // metadata: DataClass.fromJson(json["metadata"]),
         childrenNumber: json["childrenNumber"],
         flagCount: json["flagCount"],
-        hashFlag: json["hashFlag"] == null
-            ? null
-            : HashFlag.fromJson(json["hashFlag"]),
+        hashFlag: json["hashFlag"] == null ? null : HashFlag.fromJson(json["hashFlag"]),
         reactions: Map.from(json["reactions"]),
         reactionsCount: json["reactionsCount"],
-        myReactions: json["myReactions"] == null
-            ? null
-            : List<String>.from(json["myReactions"]!.map((x) => x)),
+        myReactions: json["myReactions"] == null ? null : List<String>.from(json["myReactions"]!.map((x) => x)),
         isDeleted: json["isDeleted"],
-        editedAt: json["editedAt"] == null
-            ? null
-            : DateTime.tryParse(json["editedAt"]),
-        createdAt: json["createdAt"] == null
-            ? null
-            : DateTime.tryParse(json["createdAt"]),
-        updatedAt: json["updatedAt"] == null
-            ? null
-            : DateTime.tryParse(json["updatedAt"]),
+        editedAt: json["editedAt"] == null ? null : DateTime.tryParse(json["editedAt"]),
+        createdAt: json["createdAt"] == null ? null : DateTime.tryParse(json["createdAt"]),
+        updatedAt: json["updatedAt"] == null ? null : DateTime.tryParse(json["updatedAt"]),
         children: List<String>.from(json["children"].map((x) => x)),
         segmentNumber: json["segmentNumber"],
         metadata: json["metadata"],
         required: json["required"],
-        mentionees: List<Mentionee>.from(
-            json["mentionees"].map((x) => Mentionee.fromJson(x))),
+        mentionees: List<Mentionee>.from(json["mentionees"].map((x) => Mentionee.fromJson(x))),
+        attanchment: List<AttachmentResponse>.from(json["attachments"].map((x) => AttachmentResponse.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -107,6 +102,7 @@ class CommentResponse {
         "referenceId": referenceId,
         "referenceType": referenceType,
         "dataType": dataType,
+        "dataTypes": dataTypes,
         "data": data.toJson(),
         // "metadata": metadata.toJson(),
         "childrenNumber": childrenNumber,
@@ -114,9 +110,7 @@ class CommentResponse {
         "hashFlag": hashFlag == null ? null : hashFlag!.toJson(),
         "reactions": reactions,
         "reactionsCount": reactionsCount,
-        "myReactions": myReactions == null
-            ? null
-            : List<dynamic>.from(myReactions!.map((x) => x)),
+        "myReactions": myReactions == null ? null : List<dynamic>.from(myReactions!.map((x) => x)),
         "isDeleted": isDeleted,
         "editedAt": editedAt?.toIso8601String(),
         "createdAt": createdAt?.toIso8601String(),
@@ -126,5 +120,6 @@ class CommentResponse {
         "metadata": metadata,
         "required": required,
         "mentionees": List<dynamic>.from(mentionees.map((x) => x.toJson())),
+        "attachments": List<dynamic>.from(attanchment.map((x) => x.toJson())),
       };
 }

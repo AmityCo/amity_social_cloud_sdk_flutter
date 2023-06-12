@@ -6,20 +6,17 @@ import 'package:amity_sdk/src/domain/model/model.dart';
 extension CommentHiveEntityExtension on CommentHiveEntity {
   /// Convert [CommentHiveEntity] to [AmityComment]
   AmityComment convertToAmityComment() {
-    AmityCommentReferenceType amityCommentReferenceType =
-        AmityCommentReferenceTypeExtension.enumOf(referenceType!);
+    AmityCommentReferenceType amityCommentReferenceType = AmityCommentReferenceTypeExtension.enumOf(referenceType!);
 
     //Data type
     AmityDataType amityCommentType = AmityDataTypeExtension.enumOf(dataType!);
     AmityCommentData? amityCommentData;
     switch (amityCommentType) {
       case AmityDataType.TEXT:
-        amityCommentData =
-            CommentTextData(commentId: commentId, text: data!.text);
+        amityCommentData = CommentTextData(commentId: commentId, text: data!.text);
         break;
       case AmityDataType.IMAGE:
-        amityCommentData =
-            CommentImageData(commentId: commentId, fileId: data!.fileId);
+        amityCommentData = CommentImageData(commentId: commentId, fileId: data!.fileId);
         break;
       case AmityDataType.VIDEO:
         amityCommentData = CommentVideoData(
@@ -29,8 +26,7 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
         );
         break;
       case AmityDataType.FILE:
-        amityCommentData =
-            CommentFileData(commentId: commentId, fileId: data!.fileId);
+        amityCommentData = CommentFileData(commentId: commentId, fileId: data!.fileId);
         break;
       case AmityDataType.LIVE_STREAM:
         // TODO: Handle this case.
@@ -42,13 +38,25 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
         // TODO: Handle this case.
         break;
     }
+
+    ///Mentionees
     List<AmityMentionee>? mentionees;
 
     if (this.mentionees != null) {
       for (Mentionee mentionee in this.mentionees!) {
         if (mentionee.type == 'user') {
-          mentionees =
-              mentionee.userIds!.map((e) => AmityMentionee(userId: e)).toList();
+          mentionees = mentionee.userIds!.map((e) => AmityMentionee(userId: e)).toList();
+        }
+      }
+    }
+
+    ///Attachments
+    List<CommentAttachment>? attachments;
+
+    if (this.attachments != null) {
+      for (AttachmentResponse attachment in this.attachments!) {
+        if (attachment.type.toUpperCase() == AmityDataType.IMAGE.value.toUpperCase()) {
+          (attachments ??= []).add(CommentImageAttachment(fileId: attachment.fileId));
         }
       }
     }
@@ -59,6 +67,7 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
       ..userId = userId
       ..parentId = parentId
       ..dataType = amityCommentType
+      ..dataTypes = dataTypes
       ..data = amityCommentData
       ..childrenNumber = childrenNumber
       ..repliesId = children
@@ -74,6 +83,7 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
       ..path = path
       ..metadata = metadata
       ..flaggedByMe = flaggedByMe
-      ..mentionees = mentionees;
+      ..mentionees = mentionees
+      ..attachments = attachments;
   }
 }

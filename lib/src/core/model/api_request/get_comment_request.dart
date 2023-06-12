@@ -4,23 +4,20 @@
 
 import 'dart:convert';
 
-GetCommentRequest getCommentRequestFromJson(String str) =>
-    GetCommentRequest.fromJson(json.decode(str));
-
-String getCommentRequestToJson(GetCommentRequest data) =>
-    json.encode(data.toJson());
+String getCommentRequestToJson(GetCommentRequest data) => json.encode(data.toJson());
 
 class GetCommentRequest {
-  GetCommentRequest({
-    required this.referenceId,
-    required this.referenceType,
-    this.filterByParentId,
-    this.parentId,
-    this.hasFlag,
-    this.isDeleted,
-    this.sortBy,
-    this.options,
-  });
+  GetCommentRequest(
+      {required this.referenceId,
+      required this.referenceType,
+      this.filterByParentId,
+      this.parentId,
+      this.hasFlag,
+      this.isDeleted,
+      this.sortBy,
+      this.options,
+      this.dataTypes,
+      this.matchType});
 
   final String referenceId;
   final String referenceType;
@@ -31,17 +28,8 @@ class GetCommentRequest {
   String? sortBy;
   Options? options;
 
-  factory GetCommentRequest.fromJson(Map<String, dynamic> json) =>
-      GetCommentRequest(
-        referenceId: json["referenceId"],
-        referenceType: json["referenceType"],
-        filterByParentId: json["filterByParentId"],
-        parentId: json["parentId"],
-        hasFlag: json["hasFlag"],
-        isDeleted: json["isDeleted"],
-        sortBy: json["sortBy"],
-        options: Options.fromJson(json["options"]),
-      );
+  List<String>? dataTypes;
+  String? matchType;
 
   Map<String, dynamic> toJson() => {
         "referenceId": referenceId,
@@ -52,11 +40,12 @@ class GetCommentRequest {
         "isDeleted": isDeleted,
         "sortBy": sortBy,
         "options": options?.toJson(),
+        "dataTypes[values][]": dataTypes == null ? null : List<String>.from(dataTypes!.map((x) => x)),
+        "dataTypes[matchType]": matchType,
       }..removeWhere((key, value) => value == null);
 
   @override
-  String toString() =>
-      'GetCommentRequest(referenceId: $referenceId, referenceType: $referenceType)';
+  String toString() => 'GetCommentRequest(referenceId: $referenceId, referenceType: $referenceType)';
 }
 
 class Options {
@@ -107,3 +96,23 @@ class Options {
     return 'Options(type: $type, limit: $limit, skip: $skip, after: $after, first: $first, before: $before, last: $last, token: $token)';
   }
 }
+
+// class DataTypes {
+//   final List<String> values;
+//   final String matchType;
+
+//   DataTypes({
+//     required this.values,
+//     required this.matchType,
+//   });
+
+//   factory DataTypes.fromJson(Map<String, dynamic> json) => DataTypes(
+//         values: List<String>.from(json["values"].map((x) => x)),
+//         matchType: json["matchType"],
+//       );
+
+//   Map<String, dynamic> toJson() => {
+//         "values[]": List<String>.from(values.map((x) => x)),
+//         "matchType": matchType,
+//       };
+// }

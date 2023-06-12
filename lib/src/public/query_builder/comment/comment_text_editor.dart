@@ -6,6 +6,7 @@ class AmityTextCommentEditorBuilder {
   late String _targetId;
   late AmityCommentUpdater updater;
   List<AmityMentioneeTarget>? _mentionees;
+  List<CommentImageAttachment>? _attachments;
   AmityTextCommentEditorBuilder({
     required CommentUpdateUsecase useCase,
     required String targetId,
@@ -27,9 +28,16 @@ class AmityTextCommentEditorBuilder {
 
   AmityTextCommentEditorBuilder mentionUsers(List<String> userIds) {
     _mentionees ??= [];
-    _mentionees!.add(AmityMentioneeTarget(
-        type: AmityMentionType.USER.value, userIds: userIds));
+    _mentionees!.add(AmityMentioneeTarget(type: AmityMentionType.USER.value, userIds: userIds));
     updater._mentionees = _mentionees;
+    return this;
+  }
+
+  // /// Data Type Image
+  AmityTextCommentEditorBuilder attachments(List<CommentImageAttachment> images) {
+    _attachments ??= [];
+    _attachments!.addAll(images);
+    updater._attachments = _attachments;
     return this;
   }
 
@@ -54,22 +62,29 @@ class AmityCommentUpdater {
   String? _text;
   Map<String, dynamic>? _metadata;
   List<AmityMentioneeTarget>? _mentionees;
+  List<CommentImageAttachment>? _attachments;
   AmityCommentUpdater(this._usecase, this._targetId);
 
   Future update() {
-    UpdateCommentRequest updateCommentRequest =
-        UpdateCommentRequest(commentId: _targetId);
+    UpdateCommentRequest updateCommentRequest = UpdateCommentRequest(commentId: _targetId);
 
-    UpdateCommentData updateData = UpdateCommentData();
-    if (_text != null) updateData.text = _text;
+    if (_text != null) {
+      UpdateCommentData updateData = UpdateCommentData();
+      updateData.text = _text;
+      updateCommentRequest.data = updateData;
+    }
 
-    updateCommentRequest.data = updateData;
     if (_mentionees != null) {
       updateCommentRequest.mentionees = _mentionees;
     }
 
     if (_metadata != null) {
       updateCommentRequest.metadata = _metadata;
+    }
+    if (_attachments != null) {
+      updateCommentRequest.attachments = _attachments!
+          .map((e) => CommentAttachmentRequest(fileId: e.getFileId(), type: AmityDataType.IMAGE.value))
+          .toList();
     }
     return _usecase.get(updateCommentRequest);
   }

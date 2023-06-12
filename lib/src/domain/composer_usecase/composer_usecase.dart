@@ -2,6 +2,7 @@ export 'amity_follow_relationship_composer_usecase.dart';
 export 'channel_composer_usecase.dart';
 export 'channel_member_composer_usecase.dart';
 export 'comment_composer_usecase.dart';
+export 'comment_file_composer_usecase.dart';
 export 'community_category_composer_usecase.dart';
 export 'community_composer_usecase.dart';
 export 'community_member_composer_usecase.dart';
