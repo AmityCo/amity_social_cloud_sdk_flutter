@@ -18,9 +18,9 @@ class HttpApiClient {
   }) {
     final baseOptions = BaseOptions(
       baseUrl: amityCoreClientOption.httpEndpoint.endpoint,
-      connectTimeout: 30 * 1000,
-      sendTimeout: 10 * 60 * 1000,
-      receiveTimeout: 60 * 1000,
+      connectTimeout: Duration(milliseconds: 30 * 1000),
+      sendTimeout: Duration(milliseconds: 10 * 60 * 1000),
+      receiveTimeout: Duration(milliseconds: 60 * 1000),
       contentType: 'application/json',
       responseType: ResponseType.json,
     );
