@@ -6,6 +6,10 @@ class GetUserFollowInfoUsecase extends UseCase<AmityUserFollowInfo, String> {
   GetUserFollowInfoUsecase({required this.followRepo});
   @override
   Future<AmityUserFollowInfo> get(String params) {
-    return followRepo.getFollowInfo(params);
+    if (params.isNotEmpty) {
+          return followRepo.getFollowInfo(params);
+    } else {
+       throw Exception('userId can not be empty');
+    }
   }
 }
