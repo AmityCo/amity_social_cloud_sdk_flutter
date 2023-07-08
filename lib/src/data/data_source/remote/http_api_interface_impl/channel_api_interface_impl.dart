@@ -11,11 +11,9 @@ class ChannelApiInterfaceImpl extends ChannelApiInterface {
   final HttpApiClient httpApiClient;
 
   @override
-  Future<CreateChannelResponse> createChannel(
-      CreateChannelRequest request) async {
+  Future<CreateChannelResponse> createChannel(CreateChannelRequest request) async {
     try {
-      final data =
-          await httpApiClient().post(CHANNELS_V3, data: request.toJson());
+      final data = await httpApiClient().post(CHANNELS_V3, data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -24,11 +22,9 @@ class ChannelApiInterfaceImpl extends ChannelApiInterface {
   }
 
   @override
-  Future<CreateChannelResponse> updateChannel(
-      CreateChannelRequest request) async {
+  Future<CreateChannelResponse> updateChannel(CreateChannelRequest request) async {
     try {
-      final data = await httpApiClient()
-          .put('$CHANNELS_V3/${request.channelId}', data: request.toJson());
+      final data = await httpApiClient().put('$CHANNELS_V3/${request.channelId}', data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -37,11 +33,9 @@ class ChannelApiInterfaceImpl extends ChannelApiInterface {
   }
 
   @override
-  Future<CreateChannelResponse> createConversationChannel(
-      CreateChannelRequest request) async {
+  Future<CreateChannelResponse> createConversationChannel(CreateChannelRequest request) async {
     try {
-      final data = await httpApiClient()
-          .post('$CHANNELS_V3/conversation', data: request.toJson());
+      final data = await httpApiClient().post('$CHANNELS_V3/conversation', data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -72,11 +66,9 @@ class ChannelApiInterfaceImpl extends ChannelApiInterface {
   }
 
   @override
-  Future<CreateChannelResponse> getChannelQuery(
-      GetChannelRequest request) async {
+  Future<CreateChannelResponse> getChannelQuery(GetChannelRequest request) async {
     try {
-      final data = await httpApiClient()
-          .get(CHANNELS_V3, queryParameters: request.toJson());
+      final data = await httpApiClient().get(CHANNELS_V3, queryParameters: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -87,8 +79,7 @@ class ChannelApiInterfaceImpl extends ChannelApiInterface {
   @override
   Future muteChannel(UpdateChannelMembersRequest request) async {
     try {
-      await httpApiClient()
-          .put('$CHANNEL_V2/${request.channelId}/mute', data: request.toJson());
+      await httpApiClient().put('$CHANNEL_V2/${request.channelId}/mute', data: request.toJson());
       return;
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
