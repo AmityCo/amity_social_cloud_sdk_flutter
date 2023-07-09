@@ -7,12 +7,9 @@ part 'amity_upload_result.freezed.dart';
 
 @freezed
 class AmityUploadResult<T> with _$AmityUploadResult {
-  const factory AmityUploadResult.progress(
-          AmityUploadInfo uploadInfo, CancelToken cancelToken) =
-      AmityUploadInProgress;
+  const factory AmityUploadResult.progress(AmityUploadInfo uploadInfo, CancelToken cancelToken) = AmityUploadInProgress;
   const factory AmityUploadResult.complete(T file) = AmityUploadComplete;
-  const factory AmityUploadResult.error(AmityException error) =
-      AmityUploadError;
+  const factory AmityUploadResult.error(AmityException error) = AmityUploadError;
   const factory AmityUploadResult.cancel() = AmityUploadCancel;
 }
 
