@@ -6,15 +6,14 @@ import 'dart:convert';
 
 import 'package:amity_sdk/src/domain/domain.dart';
 
-UpdatePostRequest updatePostRequestFromJson(String str) =>
-    UpdatePostRequest.fromJson(json.decode(str));
+import 'create_post_request.dart';
 
-String updatePostRequestToJson(UpdatePostRequest data) =>
-    json.encode(data.toJson());
+UpdatePostRequest updatePostRequestFromJson(String str) => UpdatePostRequest.fromJson(json.decode(str));
+
+String updatePostRequestToJson(UpdatePostRequest data) => json.encode(data.toJson());
 
 class UpdatePostRequest {
-  UpdatePostRequest(
-      {required this.postId, this.data, this.metadata, this.mentionees});
+  UpdatePostRequest({required this.postId, this.data, this.metadata, this.mentionees, this.attachments});
 
   String postId;
   UpdatePostData? data;
@@ -23,22 +22,24 @@ class UpdatePostRequest {
   /// Mentionees
   List<AmityMentioneeTarget>? mentionees;
 
-  factory UpdatePostRequest.fromJson(Map<String, dynamic> json) =>
-      UpdatePostRequest(
+  /// Attachment for the Post
+  List<PostAttachmentRequest>? attachments;
+
+  factory UpdatePostRequest.fromJson(Map<String, dynamic> json) => UpdatePostRequest(
         postId: json["postId"],
         data: UpdatePostData.fromJson(json["data"]),
         metadata: json["metadata"],
-        mentionees: List<AmityMentioneeTarget>.from(
-            json["mentionees"].map((x) => AmityMentioneeTarget.fromJson(x))),
+        mentionees: List<AmityMentioneeTarget>.from(json["mentionees"].map((x) => AmityMentioneeTarget.fromJson(x))),
+        attachments:
+            List<PostAttachmentRequest>.from(json["attachments"].map((x) => PostAttachmentRequest.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "postId": postId,
         "data": data?.toJson(),
         "metadata": metadata,
-        "mentionees": mentionees == null
-            ? null
-            : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
+        "mentionees": mentionees == null ? null : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
+        "attachments": attachments == null ? null : List<dynamic>.from(attachments!.map((x) => x.toJson())),
       }..removeWhere((key, value) => value == null);
 }
 
