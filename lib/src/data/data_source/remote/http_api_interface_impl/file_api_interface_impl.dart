@@ -53,7 +53,10 @@ class FileApiInterfaceImpl extends FileApiInterface {
       //       .toList(),
       // }..addAll(request.toJson()));
       var formData = FormData.fromMap({
-        'file': await MultipartFile.fromFile(request.files[0].path, filename: request.files[0].path.split('/').last),
+        'file': await MultipartFile.fromFile(
+          request.files[0].path,
+          filename: request.files[0].path.split('/').last,
+        ),
       }..addAll(request.toJson()));
 
       final data = await httpApiClient()
@@ -82,9 +85,11 @@ class FileApiInterfaceImpl extends FileApiInterface {
       //       (index) async => await MultipartFile.fromFile(request.files[index].path,
       //           filename: request.files[index].path.split('/').last))
       // }..addAll(request.toJson()));
-
       var formData = FormData.fromMap({
-        'files': await MultipartFile.fromFile(request.files[0].path, filename: request.files[0].path.split('/').last),
+        'files': await MultipartFile.fromFile(
+          request.files[0].path,
+          filename: request.files[0].path.split('/').last,
+        ),
       }..addAll(request.toJson()));
 
       final data = await httpApiClient()
@@ -114,7 +119,10 @@ class FileApiInterfaceImpl extends FileApiInterface {
 
       // Upload single file
       var formData = FormData.fromMap({
-        'files': await MultipartFile.fromFile(request.files[0].path, filename: request.files[0].path.split('/').last),
+        'files': await MultipartFile.fromFile(
+          request.files[0].path,
+          filename: request.files[0].path.split('/').last,
+        ),
       }..addAll(request.toJson()));
 
       final data = await httpApiClient()
