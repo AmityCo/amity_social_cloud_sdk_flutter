@@ -21,7 +21,7 @@ class AmityRegionalMqttEndpoint {
   static const SG = AmityRegionalMqttEndpoint(SG_MQTT_ENDPOINT);
   static const EU = AmityRegionalMqttEndpoint(EU_MQTT_ENDPOINT);
   static const US = AmityRegionalMqttEndpoint(US_MQTT_ENDPOINT);
-
+  
   const AmityRegionalMqttEndpoint(this.endpoint);
 
   factory AmityRegionalMqttEndpoint.custom(String url) => AmityRegionalMqttEndpoint(url);
