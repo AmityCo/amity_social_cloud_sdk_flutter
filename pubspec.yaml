@@ -11,7 +11,7 @@ environment:
 
 dependencies:
   byte_util: ^3.0.0
-  collection: ^1.17.1
+  collection: ^1.17.0
   dio: ^5.2.1+1
   fixnum: ^1.0.1
   flutter:
