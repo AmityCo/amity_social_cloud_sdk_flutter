@@ -1,6 +1,6 @@
 ## 0.23.0
 * fix: Member can be removed from community and live channel
-* fix: iOS can receive notifications
+* fix: iOS can not receive notifications
 
 ## 0.21.0
 * feat: Added create comment with Image
