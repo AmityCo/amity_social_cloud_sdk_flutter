@@ -11,14 +11,14 @@ class RegisterNotificationRequest {
     required this.userId,
     required this.deviceId,
     required this.token,
-    required this.provider,
+    this.provider,
     required this.platform,
   });
 
   final String userId;
   final String deviceId;
   final String token;
-  final String provider;
+  String? provider;
   final String platform;
 
   factory RegisterNotificationRequest.fromJson(Map<String, dynamic> json) =>
