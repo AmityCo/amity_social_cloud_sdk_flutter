@@ -8,7 +8,7 @@
 .buildlog/
 .history
 .svn/
-/node_modules/
+node_modules/
 /_temporary/
 
 # IntelliJ related
@@ -135,13 +135,9 @@ app.*.map.json
 # Exclude the Assets for sample application
 /assets/
 
-# Exclude Sample Code gist js
-create-gist.js
-sample-code-project-validator.js
-update-sample-code.js
-package.json
-package-lock.json
-code_scanner.sh
+# Exclude Sample Code gist
+.script/sample-code/_temporary/
+.script/sample-code/node_modules/
 
 ## Custom
 # Google API key and other resources
