@@ -31,7 +31,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
       final param = <String, String>{"channelId": request.channelId};
       final data = await httpApiClient().delete(
           '$CHANNELS_V3/${request.channelId}/$USERS',
-          data: param.toJson());
+          data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

@@ -3,17 +3,16 @@
 //     final createMessageRequest = createMessageRequestFromJson(jsonString);
 
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_data_hive_entity_19.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_hive_entity_18.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
-CreateMessageRequest createMessageRequestFromJson(String str) =>
-    CreateMessageRequest.fromJson(json.decode(str));
+CreateMessageRequest createMessageRequestFromJson(String str) => CreateMessageRequest.fromJson(json.decode(str));
 
-String createMessageRequestToJson(CreateMessageRequest data) =>
-    json.encode(data.toJson());
+String createMessageRequestToJson(CreateMessageRequest data) => json.encode(data.toJson());
 
 /// [CreateMessageRequest]
 class CreateMessageRequest {
@@ -62,22 +61,18 @@ class CreateMessageRequest {
   List<AmityMentioneeTarget>? mentionees;
 
   /// File Uri
-  Uri? uri;
+  File? uri;
 
-  factory CreateMessageRequest.fromJson(Map<String, dynamic> json) =>
-      CreateMessageRequest(
+  factory CreateMessageRequest.fromJson(Map<String, dynamic> json) => CreateMessageRequest(
         channelId: json["channelId"],
         messageId: json["messageId"],
         type: json["type"],
-        data: json["data"] == null
-            ? null
-            : CreateMessageData.fromJson(json["data"]),
+        data: json["data"] == null ? null : CreateMessageData.fromJson(json["data"]),
         fileId: json["fileId"],
         parentId: json["parentId"],
         metadata: json["metadata"],
         tags: List<String>.from(json["tags"].map((x) => x)),
-        mentionees: List<AmityMentioneeTarget>.from(
-            json["mentionees"].map((x) => AmityMentioneeTarget.fromJson(x))),
+        mentionees: List<AmityMentioneeTarget>.from(json["mentionees"].map((x) => AmityMentioneeTarget.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() {
@@ -90,9 +85,7 @@ class CreateMessageRequest {
       "parentId": parentId,
       "metadata": metadata,
       "tags": tags == null ? null : List<dynamic>.from(tags!.map((x) => x)),
-      "mentionees": mentionees == null
-          ? null
-          : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
+      "mentionees": mentionees == null ? null : List<dynamic>.from(mentionees!.map((x) => x.toJson())),
     }..removeNullValue();
   }
 
@@ -126,8 +119,7 @@ class CreateMessageData {
   String? caption;
 
   /// Init [CreateMessageData] from Json
-  factory CreateMessageData.fromJson(Map<String, dynamic> json) =>
-      CreateMessageData(
+  factory CreateMessageData.fromJson(Map<String, dynamic> json) => CreateMessageData(
         text: json["text"],
         caption: json["caption"],
       );

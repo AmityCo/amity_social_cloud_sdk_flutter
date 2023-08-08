@@ -3,18 +3,20 @@ import 'package:amity_sdk/src/data/data.dart';
 import 'package:dio/dio.dart';
 
 /// dio error extention
-extension DioErrorExtension on DioError {
+extension DioErrorExtension on DioException {
   AmityException toAmityExcetion() {
     switch (type) {
-      case DioErrorType.connectTimeout:
-      case DioErrorType.sendTimeout:
-      case DioErrorType.receiveTimeout:
+      case DioExceptionType.connectionTimeout:
+      case DioExceptionType.connectionError:
+      case DioExceptionType.sendTimeout:
+      case DioExceptionType.receiveTimeout:
         return AmityException(message: 'Request Timeout', code: 408);
-      case DioErrorType.response:
+      case DioExceptionType.badResponse:
         return AmityErrorResponse.fromJson(response!.data).amityException();
-      case DioErrorType.cancel:
+      case DioExceptionType.cancel:
         return AmityException(message: 'Request Cancel', code: 499);
-      case DioErrorType.other:
+      case DioExceptionType.unknown:
+      case DioExceptionType.badCertificate:
         return AmityException(message: 'Unknow Error', code: 500);
     }
   }

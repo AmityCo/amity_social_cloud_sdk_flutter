@@ -18,10 +18,10 @@ import 'package:amity_sdk/src/core/constant/global_constant.dart';
 class AmityRegionalMqttEndpoint {
   final String endpoint;
 
-  static const SG = AmityRegionalMqttEndpoint(SG_HTTP_ENDPOINT);
-  static const EU = AmityRegionalMqttEndpoint(EU_HTTP_ENDPOINT);
-  static const US = AmityRegionalMqttEndpoint(US_HTTP_ENDPOINT);
-
+  static const SG = AmityRegionalMqttEndpoint(SG_MQTT_ENDPOINT);
+  static const EU = AmityRegionalMqttEndpoint(EU_MQTT_ENDPOINT);
+  static const US = AmityRegionalMqttEndpoint(US_MQTT_ENDPOINT);
+  
   const AmityRegionalMqttEndpoint(this.endpoint);
 
   factory AmityRegionalMqttEndpoint.custom(String url) => AmityRegionalMqttEndpoint(url);

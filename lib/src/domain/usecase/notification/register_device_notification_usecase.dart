@@ -24,7 +24,7 @@ class RegisterDeviceNotificationUseCase extends UseCase<void, String> {
     if (Platform.isAndroid) {
       platform = "android";
     } else if (Platform.isIOS) {
-      platform = "android";
+      platform = "ios";
     } else {
       platform = 'unknown';
     }
@@ -32,7 +32,6 @@ class RegisterDeviceNotificationUseCase extends UseCase<void, String> {
         userId: account!.userId!,
         deviceId: account.deviceId!,
         token: params,
-        provider: "fcm",
         platform: platform);
     return notificationRepo.registerNotification(request);
   }

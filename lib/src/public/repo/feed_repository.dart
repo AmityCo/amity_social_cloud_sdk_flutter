@@ -1,5 +1,6 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/public/public.dart';
+import 'package:amity_sdk/src/public/query_builder/feed/feed_get_qurey_builder.dart';
 
 /// [FeedRepository] to get feeds
 class FeedRepository {
@@ -16,8 +17,8 @@ class FeedRepository {
   id: feed.query.user_feed
   */
   /// Get User Feed
-  UserFeedQueryBuilder getUserFeed(String userId) {
-    return UserFeedQueryBuilder(serviceLocator(), userId);
+  AmityFeedGetQureyBuilder getUserFeed(String userId) {
+    return AmityFeedGetTargetSelector( useCase: serviceLocator()).targetUser(userId);
   }
   /* end_public_function */
 
@@ -25,8 +26,8 @@ class FeedRepository {
   id: feed.query.community_feed
   */
   /// Get Community Feed
-  CommunityFeedQueryBuilder getCommunityFeed(String communityId) {
-    return CommunityFeedQueryBuilder(serviceLocator(), communityId);
+  AmityFeedGetQureyBuilder getCommunityFeed(String communityId) {
+    return AmityFeedGetTargetSelector( useCase: serviceLocator()).targetCommunity(communityId);
   }
   /* end_public_function */
 }

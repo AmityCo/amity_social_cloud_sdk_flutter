@@ -1,5 +1,7 @@
 // ignore_for_file: unused_field
 
+import 'dart:io';
+
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
@@ -291,7 +293,8 @@ abstract class AmityMessageCreator {
 
     if (getDataType() == AmityMessageDataType.IMAGE || getDataType() == AmityMessageDataType.FILE) {
       /// set file Uri
-      request.uri = getUri();
+
+      request.uri = File(getUri()!.toFilePath());
       return serviceLocator<MessageCreateFileUsecase>().get(request);
     }
 
