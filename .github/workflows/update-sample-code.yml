@@ -1,10 +1,6 @@
 name: 'Update Sample Code'
 
 on:
-  push:
-    branches:
-      - develop
-
   workflow_dispatch:
 
 jobs:
