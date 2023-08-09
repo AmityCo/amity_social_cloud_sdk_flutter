@@ -25,7 +25,7 @@ jobs:
 
       - name: Create Gist files
         id: create-gist
-        run: node create-gist.js ${{ github.event.inputs.totalGists }} ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+        run: node workflow-create-gist.js ${{ github.event.inputs.totalGists }} ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
         working-directory: .script/sample-code/
 
       - name: Send notice
