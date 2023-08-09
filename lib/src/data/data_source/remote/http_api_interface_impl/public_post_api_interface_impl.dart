@@ -14,7 +14,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   @override
   Future<CreatePostResponse> getPostById(String postId) async {
     try {
-      final data = await httpApiClient().get('$POST_V4/$postId');
+      final data = await httpApiClient().get('$POST_V3/$postId');
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -47,7 +47,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   @override
   Future<CreatePostResponse> flagPost(String postId) async {
     try {
-      final data = await httpApiClient().post('$POST_V4/$postId/flag');
+      final data = await httpApiClient().post('$POST_V3/$postId/flag');
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -58,7 +58,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   @override
   Future<bool> isPostFlagByMe(String postId) async {
     try {
-      final data = await httpApiClient().post('$POST_V4/$postId/isflagbyme');
+      final data = await httpApiClient().post('$POST_V3/$postId/isflagbyme');
       return true;
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -105,7 +105,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   @override
   Future<bool> approvePost(String postId) async {
     try {
-      final data = await httpApiClient().post('$POST_V4/$postId/approve');
+      final data = await httpApiClient().post('$POST_V3/$postId/approve');
       return true;
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -116,7 +116,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   @override
   Future<bool> declinePost(String postId) async {
     try {
-      final data = await httpApiClient().post('$POST_V4/$postId/decline');
+      final data = await httpApiClient().post('$POST_V3/$postId/decline');
       return true;
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
