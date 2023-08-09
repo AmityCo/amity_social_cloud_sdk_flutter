@@ -260,13 +260,6 @@
       "languageVersion": "2.12"
     },
     {
-      "name": "http",
-      "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/http-1.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.0"
-    },
-    {
-
       "name": "http_multi_server",
       "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/http_multi_server-3.2.1",
       "packageUri": "lib/",
@@ -627,8 +620,7 @@
       "languageVersion": "2.15"
     }
   ],
-
-  "generated": "2023-07-08T17:41:19.106950Z",
-  "generator": "melos",
-  "generatorVersion": "2.9.0"
+  "generated": "2023-08-08T11:50:13.548865Z",
+  "generator": "pub",
+  "generatorVersion": "3.0.5"
 }
