@@ -1,6 +1,3 @@
-## 0.25.0
-* fix: Get Post by ID not working
-
 ## 0.24.0
 * fix: DataType Filter is now working on user and community feeds
 
