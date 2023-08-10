@@ -181,7 +181,7 @@ async function pushSampleCodeUpdate(sampleCode) {
 
     console.log(`gist: ${gist_id} commit and push the changes.`)
 
-    exec([
+    await exec([
         `git add .`,
         `git commit -m "Update sample code"`,
         `git push`
