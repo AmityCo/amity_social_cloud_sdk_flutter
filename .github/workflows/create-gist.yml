@@ -1,0 +1,58 @@
+name: 'Create Gist'
+
+on:
+  workflow_dispatch:
+    inputs:
+      totalGists:
+        description: 'Number of Gist files to create'
+        required: true
+        type: string
+
+jobs:
+  create-gist:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .script/sample-code
+
+    env:
+      GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+
+      - name: Install Node dependencies
+        run: npm install
+
+      - name: Create Gist files
+        id: create-gist
+        run: node workflow-create-gist.js ${{ github.event.inputs.totalGists }}
+
+      - name: Send notice
+        run: |
+          echo "::notice title=Created::Gist Id=>${{ steps.create-gist.outputs.message_notice }}"
+
+      - name: Replace Emoji text with icon in Message Body
+        run: |
+          MESSAGE="${{ steps.create-gist.outputs.message_chat }}"
+
+          MESSAGE="${MESSAGE//':pointing_right:'/'👉'}"
+          MESSAGE="${MESSAGE//':memo:'/'📝'}"
+          MESSAGE="${MESSAGE//'#'/'\n'}"
+
+          echo "MESSAGE=$MESSAGE" >> $GITHUB_OUTPUT
+        id: chat-message
+
+      - name: Send Message to Eko Chat
+        if: ${{ steps.chat-message.outputs.MESSAGE != '' }}
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.BOT_EKO_CHAT_MESSAGING_URL }}
+          method: 'POST'
+          bearerToken: ${{ secrets.BOT_AUTH_TOKEN }}
+          customHeaders: '{"Content-Type": "application/json"}'
+          data: '{"gid": "${{ secrets.BOT_GROUP_ID }}", "tid": "${{ secrets.BOT_CHAT_ID }}","message": {"data": "${{ steps.chat-message.outputs.MESSAGE }}", "type": "text"}}'
