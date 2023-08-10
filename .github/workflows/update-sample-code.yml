@@ -30,7 +30,7 @@ jobs:
 
       - name: Publish sample code update to gist files
         id: update-sample-code
-        run: node update-sample-code.js
+        run: node workflow-update-sample-code.js
         working-directory: .script/sample-code/
 
       - name: Replace Emoji text with icon in Message Body
