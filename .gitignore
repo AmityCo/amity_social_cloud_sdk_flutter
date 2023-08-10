@@ -137,9 +137,7 @@ app.*.map.json
 /assets/
 
 # Exclude Sample Code gist
-.script/sample-code/_temporary/
-.script/sample-code/node_modules/
-.script/sample-code/.env
+.script/sample-code/
 
 ## Custom
 # Google API key and other resources
