@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: .script/sample-code
+        working-directory: .
 
     env:
       GH_USERNAME: ${{ secrets.GH_USERNAME }}
@@ -26,10 +26,12 @@ jobs:
 
       - name: Install Node dependencies
         run: npm install
+        working-directory: .script/sample-code/
 
       - name: Publish sample code update to gist files
         id: update-sample-code
         run: node update-sample-code.js
+        working-directory: .script/sample-code/
 
       - name: Replace Emoji text with icon in Message Body
         if: ${{ steps.update-sample-code.outputs.message_chat != '' }}
@@ -54,4 +56,3 @@ jobs:
           bearerToken: ${{ secrets.BOT_AUTH_TOKEN }}
           customHeaders: '{"Content-Type": "application/json"}'
           data: '{"gid": "${{ secrets.BOT_GROUP_ID }}", "tid": "${{ secrets.BOT_CHAT_ID }}","message": {"data": "${{ steps.chat-message.outputs.MESSAGE }}", "type": "text"}}'
-          
