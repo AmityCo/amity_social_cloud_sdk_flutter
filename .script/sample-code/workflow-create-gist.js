@@ -2,26 +2,28 @@ const core = require('@actions/core');
 const gist = require("./create-gist");
 
 async function main() {
-	const total = parseInt(process.argv[2])
-	const accessToken = process.argv[3]
+    const total = parseInt(process.argv[2])
 
-	let msgNotice = ""
-	let msgEkoChat = ""
+    let msgNotice = ""
+    let msgEkoChat = ""
 
-	for(let i = 1; i <= total; i++) {
-		const gistId = await gist.createGist(accessToken)
+    console.log(`total: ${total}`)
 
-		msgNotice += gistId
-		msgEkoChat += `:memo: Gist ID: ${gistId}#:pointing_right: Link: https://gist.github.com/${gistId}#`
+    for(let i = 1; i <= total; i++) {
+        const gistId = await gist.createGist()
 
-		if ( i < total ) {
-			msgNotice += ", "
-			msgEkoChat += "#"
-		}
-	}
+        msgNotice += gistId
+        msgEkoChat += `:memo: Gist ID: ${gistId}#:pointing_right: Link: https://gist.github.com/${gistId}#`
 
-  	core.setOutput("message_notice", msgNotice)
-	core.setOutput("message_chat", msgEkoChat)
+        if ( i < total ) {
+            msgNotice += ", "
+            msgEkoChat += "#"
+        }
+    }
+
+    console.log(msgNotice)
+    core.setOutput("message_notice", msgNotice)
+    core.setOutput("message_chat", msgEkoChat)
 }
 
 main()

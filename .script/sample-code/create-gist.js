@@ -1,8 +1,11 @@
+require('dotenv').config()
 const { Octokit } = require("@octokit/core")
 
-async function createGist(accessToken) {
+async function createGist() {
+	validateENV()
+
 	const octokit = new Octokit({
-		auth: accessToken
+		auth: process.env.GH_PERSONAL_ACCESS_TOKEN
 	})
 
 	const lines = [
@@ -25,4 +28,27 @@ async function createGist(accessToken) {
 	return res.data.id
 }
 
-module.exports = { createGist }
+function validateENV() {
+
+	const expectedKeys = [
+		// The personal access token of that user; used for authenticate.
+		'GH_PERSONAL_ACCESS_TOKEN'
+	]
+
+	for (const key of expectedKeys) {
+		if (!process.env.hasOwnProperty(key)) {
+			console.error(`unable to find env.${key}.
+- If you run this script on your local machine, plase make sure to create '.env' file from '.env_template'
+- If you run this script on CI/CD, please make sure to inject env variables properly.
+- The value of each key; can be asked from the admin of dynamic sample code feature.
+`)
+			throw `env does not contain ${key}`
+		}
+	}
+}
+
+if (require.main === module){
+	createGist()
+} else {
+	module.exports = { createGist }
+}

@@ -1,5 +1,4 @@
 require('dotenv').config()
-const core = require('@actions/core');
 
 const fs = require('fs')
 const util = require('util')
@@ -8,11 +7,7 @@ const exec = util.promisify(require('child_process').exec)
 
 const tempPath = path.join(__dirname, '/_temporary')
 
-const args = process.argv.slice(2)
-
-var chatMessage = ''
-
-async function main() {
+async function updateSampleCode() {
 
     console.log('validating env...')
     validateENV()
@@ -42,24 +37,28 @@ async function main() {
         const task = pushSampleCodeUpdate(sampleCode)
         tasks.push(task)
     }
-    await Promise.all(tasks)
 
-    console.log('composing chat message...')
-	core.setOutput("message_chat", chatMessage)
+    let changedMeta = []
+    await Promise.all(tasks).then((values) => {
+        for (const value of values) {
+            if (value !== undefined) {
+                changedMeta.push(value.meta)
+            }
+        }
+    })
 
     // If you see this message, the tasks are done,
     console.log("All good 🚀!!")
 
+    return changedMeta
 }
-
-main();
 
 async function scanCode() {
     const { stdout, stderr } = await exec('sh code_scanner.sh')
     if (stderr) {
         throw `scanCode stderr ${stderr}`
     }
-    // Trim stdout, because stdout always contain extra '\n' at the tail.
+    // Trim stdout, becasuse stdout always contain extra '\n' at the tail.
     let chunks = stdout.trim().split('----sample_code_separator----')
     // Remove last element, since it is always just white spaces.
     chunks.pop()
@@ -180,28 +179,17 @@ async function pushSampleCodeUpdate(sampleCode) {
         return
     }
 
-    //  Concat changes to send in Chat
-    chatMessage += composeChatMessage(sampleCode)
-
     console.log(`gist: ${gist_id} commit and push the changes.`)
 
-//    await exec([
-//        `git config user.email "gh-action@amity.co"`,
-//        `git config user.name "gh-action-amity"`,
-//        `git add .`,
-//        `git commit -m "Update sample code"`,
-//        `git push`
-//    ].join('\n'), {ßß
-//        cwd: localRepoPath
-//    })
-}
+    exec([
+        `git add .`,
+        `git commit -m "Update sample code"`,
+        `git push`
+    ].join('\n'), {
+        cwd: localRepoPath
+    })
 
-function composeChatMessage(sampleCode) {
-    const gistId = sampleCode.meta.gist_id
-    const fileName = sampleCode.meta.filename
-    const description = sampleCode.meta.description
-
-    return `:new_line::memo: Gist Id: ${gistId}:new_line::file: File Name: ${fileName}:new_line::desc: Description: ${description}:new_line:`
+    return sampleCode
 }
 
 function validateENV() {
@@ -216,12 +204,17 @@ function validateENV() {
     for (const key of expectedKeys) {
         if (!process.env.hasOwnProperty(key)) {
             console.error(`unable to find env.${key}.
-- If you run this script on your local machine, please make sure to create '.env' file from '.env_template'
+- If you run this script on your local machine, plase make sure to create '.env' file from '.env_template'
 - If you run this script on CI/CD, please make sure to inject env variables properly.
 - The value of each key; can be asked from the admin of dynamic sample code feature.
 `)
             throw `env does not contain ${key}`
         }
     }
+}
 
+if (require.main === module){
+    updateSampleCode()
+} else {
+    module.exports = { updateSampleCode }
 }

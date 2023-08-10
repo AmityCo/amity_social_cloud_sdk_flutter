@@ -8,7 +8,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: .
+        working-directory: .script/sample-code
 
     env:
       GH_USERNAME: ${{ secrets.GH_USERNAME }}
@@ -26,12 +26,10 @@ jobs:
 
       - name: Install Node dependencies
         run: npm install
-        working-directory: .script/sample-code/
 
       - name: Publish sample code update to gist files
         id: update-sample-code
         run: node update-sample-code.js
-        working-directory: .script/sample-code/
 
       - name: Replace Emoji text with icon in Message Body
         if: ${{ steps.update-sample-code.outputs.message_chat != '' }}

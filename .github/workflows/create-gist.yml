@@ -11,7 +11,13 @@ on:
 jobs:
   create-gist:
     runs-on: ubuntu-latest
-    
+    defaults:
+      run:
+        working-directory: .script/sample-code
+
+    env:
+      GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -21,12 +27,10 @@ jobs:
 
       - name: Install Node dependencies
         run: npm install
-        working-directory: .script/sample-code/
 
       - name: Create Gist files
         id: create-gist
-        run: node workflow-create-gist.js ${{ github.event.inputs.totalGists }} ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-        working-directory: .script/sample-code/
+        run: node workflow-create-gist.js ${{ github.event.inputs.totalGists }}
 
       - name: Send notice
         run: |

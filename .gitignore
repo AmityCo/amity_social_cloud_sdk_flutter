@@ -10,6 +10,7 @@
 .svn/
 node_modules/
 /_temporary/
+.env
 
 # IntelliJ related
 *.iml
@@ -138,6 +139,7 @@ app.*.map.json
 # Exclude Sample Code gist
 .script/sample-code/_temporary/
 .script/sample-code/node_modules/
+.script/sample-code/.env
 
 ## Custom
 # Google API key and other resources
