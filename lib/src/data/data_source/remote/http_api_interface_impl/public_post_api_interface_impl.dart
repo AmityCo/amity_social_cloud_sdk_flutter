@@ -36,7 +36,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   @override
   Future<bool> deletePostById(String postId) async {
     try {
-      final data = await httpApiClient().delete('$POST_V3/$postId');
+      final data = await httpApiClient().delete('$POST_V4/$postId');
       return true;
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
@@ -82,7 +82,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
   @override
   Future<CreatePostResponse> unflagPost(String postId) async {
     try {
-      final data = await httpApiClient().delete('$POST_V3/$postId/unflag');
+      final data = await httpApiClient().delete('$POST_V4/$postId/unflag');
       return CreatePostResponse.fromJson(data.data);
     } on DioError catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
