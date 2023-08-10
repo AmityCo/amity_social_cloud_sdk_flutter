@@ -1,0 +1,58 @@
+name: 'Update Sample Code'
+
+on:
+  workflow_dispatch:
+
+jobs:
+  update-sample-code:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: .
+
+    env:
+      GH_USERNAME: ${{ secrets.GH_USERNAME }}
+      GH_PERSONAL_ACCESS_TOKEN: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+
+    steps:
+      - name: Install pcregrep
+        run: sudo apt-get install -y pcregrep
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Setup Node
+        uses: actions/setup-node@v3
+
+      - name: Install Node dependencies
+        run: npm install
+        working-directory: .script/sample-code/
+
+      - name: Publish sample code update to gist files
+        id: update-sample-code
+        run: node workflow-update-sample-code.js
+        working-directory: .script/sample-code/
+
+      - name: Replace Emoji text with icon in Message Body
+        if: ${{ steps.update-sample-code.outputs.message_chat != '' }}
+        run: |
+          MESSAGE="${{ steps.update-sample-code.outputs.message_chat }}"
+
+          MESSAGE="${MESSAGE//':memo:'/'📝'}"
+          MESSAGE="${MESSAGE//':file:'/'📄'}"
+          MESSAGE="${MESSAGE//':page:'/'👩‍💻'}"
+          MESSAGE="${MESSAGE//':desc:'/'✍️'}"
+          MESSAGE="${MESSAGE//':new_line:'/'\n'}"
+
+          echo "MESSAGE=$MESSAGE" >> $GITHUB_OUTPUT
+        id: chat-message
+
+      - name: Send Message to Eko Chat
+        if: ${{ steps.update-sample-code.outputs.message_chat != '' }}
+        uses: fjogeleit/http-request-action@v1
+        with:
+          url: ${{ secrets.BOT_EKO_CHAT_MESSAGING_URL }}
+          method: 'POST'
+          bearerToken: ${{ secrets.BOT_AUTH_TOKEN }}
+          customHeaders: '{"Content-Type": "application/json"}'
+          data: '{"gid": "${{ secrets.BOT_GROUP_ID }}", "tid": "${{ secrets.BOT_CHAT_ID }}","message": {"data": "${{ steps.chat-message.outputs.MESSAGE }}", "type": "text"}}'
