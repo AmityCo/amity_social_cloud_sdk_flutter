@@ -80,18 +80,13 @@ class MessageRepoImpl extends MessageRepo {
 
   @override
   Future<AmityMessage> updateMessage(CreateMessageRequest request) async {
-    final entity = dbAdapterRepo.messageDbAdapter.getMessageEntity(request.messageId!)!;
 
     try {
-      entity.syncState = AmityMessageSyncState.SYNCING;
-      dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
 
       final data = await messageApiInterface.updateMessage(request);
       final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
       return (amitMessages as List).first;
     } catch (error) {
-      entity.syncState = AmityMessageSyncState.FAILED;
-      dbAdapterRepo.messageDbAdapter.saveMessageEntity(entity);
 
       rethrow;
     }
