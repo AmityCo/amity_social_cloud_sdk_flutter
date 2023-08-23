@@ -3,33 +3,33 @@
 import 'package:amity_sdk/src/domain/model/amity_file/amity_file_properties.dart';
 
 abstract class AmityFileInfo {
-  final AmityFileProperties _fileProperties;
+  final AmityFileProperties? _fileProperties;
   AmityFileInfo(this._fileProperties);
 
-  AmityFileProperties get getFileProperties {
+  AmityFileProperties? get getFileProperties {
     return _fileProperties;
   }
 
-  String get fileId => _fileProperties.fileId!;
+  String? get fileId => _fileProperties?.fileId;
   // set fileId(String fileId) => _fileProperties.fileId = fileId;
 
-  String get fileUrl => _fileProperties.fileUrl!;
+  String? get fileUrl => _fileProperties?.fileUrl;
   // set fileUrl(String fileId) => _fileProperties.fileId = fileUrl;
 
-  String get fileExtension => _fileProperties.ext!;
+  String? get fileExtension => _fileProperties?.ext;
 
-  String get fileName => _fileProperties.name!;
+  String? get fileName => _fileProperties?.name!;
 
-  String getMimeType() {
-    return _fileProperties.mimeType!;
+  String? getMimeType() {
+    return _fileProperties?.mimeType;
   }
 
-  String get fileSize => _fileProperties.size!;
+  String ?get fileSize => _fileProperties?.size;
 
-  bool get _hasLocalPreview => _fileProperties.filePath != null;
+  bool? get _hasLocalPreview => _fileProperties?.filePath != null;
 
   /// Get Local preview file path
-  String? get _getFilePath => _fileProperties.filePath;
+  String? get _getFilePath => _fileProperties?.filePath;
 
   @override
   String toString() => 'AmityFileInfo(_fileProperties: $_fileProperties)';
@@ -41,10 +41,10 @@ class AmityFile extends AmityFileInfo {
   AmityFile(AmityFileProperties fileProperties) : super(fileProperties);
 
   /// Get url
-  String get getUrl => fileUrl;
+  String? get getUrl => fileUrl;
 
   /// Check if Image have local preview
-  bool get hasLocalPreview => _hasLocalPreview;
+  bool? get hasLocalPreview => _hasLocalPreview;
 
   /// get local preview file path
   /// Plese check if before if Amity Image have [hasLocalPreview]
@@ -62,22 +62,22 @@ class AmityImage extends AmityFileInfo {
   }
 
   /// Get Width
-  int getWidth() {
-    return getFileProperties.width!;
+  int? getWidth() {
+    return getFileProperties?.width!;
   }
 
   /// Get Height
-  int getHeight() {
-    return getFileProperties.height!;
+  int? getHeight() {
+    return getFileProperties?.height!;
   }
 
   /// is Full Image
-  bool isFullImage() {
-    return getFileProperties.isFull!;
+  bool? isFullImage() {
+    return getFileProperties?.isFull!;
   }
 
   /// Check if Image have local preview
-  bool get hasLocalPreview => _hasLocalPreview;
+  bool? get hasLocalPreview => _hasLocalPreview;
 
   /// get local preview file path
   /// Plese check if before if Amity Image have [hasLocalPreview]

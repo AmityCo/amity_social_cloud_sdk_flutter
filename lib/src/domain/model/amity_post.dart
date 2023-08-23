@@ -100,7 +100,7 @@ class ImageData extends AmityPostData {
 /// File Post dataa
 class FileData extends AmityPostData {
   /// Amity File
-  late AmityFile file; //composer
+  late AmityFile? file; //composer
 
   /// Init File Data
   FileData({
