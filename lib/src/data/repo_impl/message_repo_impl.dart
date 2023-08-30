@@ -80,9 +80,7 @@ class MessageRepoImpl extends MessageRepo {
 
   @override
   Future<AmityMessage> updateMessage(CreateMessageRequest request) async {
-
     try {
-
       final data = await messageApiInterface.updateMessage(request);
       final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
       return (amitMessages as List).first;
