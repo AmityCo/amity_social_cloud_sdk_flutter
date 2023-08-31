@@ -14,5 +14,6 @@ abstract class FileRepo {
   StreamController<AmityUploadResult<AmityImage>> uploadImageStream(UploadFileRequest request);
   Future<AmityUploadResult<AmityAudio>> uploadAudio(UploadFileRequest request);
   Future<AmityUploadResult<AmityVideo>> uploadVidoe(UploadFileRequest request);
+  StreamController<AmityUploadResult<AmityVideo>> uploadVideoStream(UploadFileRequest request);
   void cancelUpload(String uploadId);
 }

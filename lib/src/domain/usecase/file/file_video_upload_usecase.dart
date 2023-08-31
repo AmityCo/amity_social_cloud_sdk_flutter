@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
@@ -12,4 +14,10 @@ class FileVideoUploadUsecase
   Future<AmityUploadResult<AmityVideo>> get(UploadFileRequest params) {
     return _fileRepo.uploadVidoe(params);
   }
+
+  StreamController<AmityUploadResult<AmityVideo>> listen(
+      UploadFileRequest params) {
+    return _fileRepo.uploadVideoStream(params);
+  }
+  
 }

@@ -42,8 +42,8 @@ class AmityFileRepository {
   api_style: async
   */
   /// funtion to upload the video type
-  Future<AmityUploadResult<AmityVideo>> uploadVideo(File file, {String? uploadId}) {
-    return serviceLocator<FileVideoUploadUsecase>().get(UploadFileRequest(files: [file], uploadId: uploadId));
+  StreamController<AmityUploadResult<AmityVideo>> uploadVideo(File file, {String? uploadId}) {
+    return serviceLocator<FileVideoUploadUsecase>().listen(UploadFileRequest(files: [file], uploadId: uploadId));
   }
   /* end_public_function */
 
