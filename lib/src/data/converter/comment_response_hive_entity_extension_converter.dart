@@ -1,22 +1,54 @@
+import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/model/model.dart';
+import 'package:amity_sdk/src/src.dart';
 
 /// CommentHiveEntityExtension
 extension CommentHiveEntityExtension on CommentHiveEntity {
   /// Convert [CommentHiveEntity] to [AmityComment]
   AmityComment convertToAmityComment() {
-    AmityCommentReferenceType amityCommentReferenceType = AmityCommentReferenceTypeExtension.enumOf(referenceType!);
+    AmityCommentReferenceType amityCommentReferenceType =
+        AmityCommentReferenceTypeExtension.enumOf(referenceType!);
+    AmityCommentTarget amityCommentTarget = UnknownCommentTarget();
+    if (targetId != null && targetType != null) {
+      AmityCommentTargetType amityCommentTargetType =
+          AmityCommentTargetTypeExtension.enumOf(targetType!);
+      
+      switch (amityCommentTargetType) {
+        case AmityCommentTargetType.COMMUNITY:
+          amityCommentTarget = CommunityCommentTarget(
+            type: targetType,
+            communityId: targetId,
+          );
+          break;
+        case AmityCommentTargetType.USER:
+          amityCommentTarget =
+              UserCommentTarget(userId: targetId, type: targetType);
+
+          break;
+        case AmityCommentTargetType.CONTENT:
+          amityCommentTarget =
+              ContentCommentTarget(contentId: targetId, type: targetType);
+          break;
+        case AmityCommentTargetType.UNKNOWN:
+          amityCommentTarget = UnknownCommentTarget();
+          break;
+      }
+
+    }
 
     //Data type
     AmityDataType amityCommentType = AmityDataTypeExtension.enumOf(dataType!);
     AmityCommentData? amityCommentData;
     switch (amityCommentType) {
       case AmityDataType.TEXT:
-        amityCommentData = CommentTextData(commentId: commentId, text: data!.text);
+        amityCommentData =
+            CommentTextData(commentId: commentId, text: data!.text);
         break;
       case AmityDataType.IMAGE:
-        amityCommentData = CommentImageData(commentId: commentId, fileId: data!.fileId);
+        amityCommentData =
+            CommentImageData(commentId: commentId, fileId: data!.fileId);
         break;
       case AmityDataType.VIDEO:
         amityCommentData = CommentVideoData(
@@ -26,7 +58,8 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
         );
         break;
       case AmityDataType.FILE:
-        amityCommentData = CommentFileData(commentId: commentId, fileId: data!.fileId);
+        amityCommentData =
+            CommentFileData(commentId: commentId, fileId: data!.fileId);
         break;
       case AmityDataType.LIVE_STREAM:
         // TODO: Handle this case.
@@ -45,7 +78,8 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
     if (this.mentionees != null) {
       for (Mentionee mentionee in this.mentionees!) {
         if (mentionee.type == 'user') {
-          mentionees = mentionee.userIds!.map((e) => AmityMentionee(userId: e)).toList();
+          mentionees =
+              mentionee.userIds!.map((e) => AmityMentionee(userId: e)).toList();
         }
       }
     }
@@ -55,8 +89,10 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
 
     if (this.attachments != null) {
       for (AttachmentResponse attachment in this.attachments!) {
-        if (attachment.type.toUpperCase() == AmityDataType.IMAGE.value.toUpperCase()) {
-          (attachments ??= []).add(CommentImageAttachment(fileId: attachment.fileId));
+        if (attachment.type.toUpperCase() ==
+            AmityDataType.IMAGE.value.toUpperCase()) {
+          (attachments ??= [])
+              .add(CommentImageAttachment(fileId: attachment.fileId));
         }
       }
     }
@@ -84,6 +120,7 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
       ..metadata = metadata
       ..flaggedByMe = flaggedByMe
       ..mentionees = mentionees
-      ..attachments = attachments;
+      ..attachments = attachments
+      ..target = amityCommentTarget;
   }
 }

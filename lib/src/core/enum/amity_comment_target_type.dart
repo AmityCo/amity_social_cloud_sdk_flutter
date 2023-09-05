@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-enum AmityCommentTargetType { POST, CONTENT }
+enum AmityCommentTargetType { COMMUNITY, USER, CONTENT, UNKNOWN  }
 
 extension AmityCommentTargetTypeExtension on AmityCommentTargetType {
   // String get value {
@@ -18,7 +18,8 @@ extension AmityCommentTargetTypeExtension on AmityCommentTargetType {
   static AmityCommentTargetType enumOf(String value) {
     return AmityCommentTargetType.values.firstWhere(
       (element) => element.name.toLowerCase() == value.toLowerCase(),
-      orElse: () => AmityCommentTargetType.POST,
+      orElse: () => AmityCommentTargetType.UNKNOWN,
     );
   }
 }
+

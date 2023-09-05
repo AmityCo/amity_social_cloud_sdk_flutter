@@ -9,13 +9,13 @@ class AmityCommentQueryTypeSelector {
   AmityCommentQueryBuilder post(String postId) {
     return AmityCommentQueryBuilder(useCase: _useCase)
         .referenceId(postId)
-        .referenceType(AmityCommentTargetType.POST.value);
+        .referenceType(AmityCommentReferenceType.POST.value);
   }
 
   AmityCommentQueryBuilder content(String contentId) {
     return AmityCommentQueryBuilder(useCase: _useCase)
         .referenceId(contentId)
-        .referenceType(AmityCommentTargetType.CONTENT.value);
+        .referenceType(AmityCommentReferenceType.CONTENT.value);
   }
 }
 

@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-enum AmityCommentReferenceType { POST }
+enum AmityCommentReferenceType { POST , CONTENT }
 
 extension AmityCommentReferenceTypeExtension on AmityCommentReferenceType {
   String get value {

@@ -29,7 +29,7 @@ class CommunityMemberDbAdapterImpl extends CommunityMemberDbAdapter {
   }
 
   @override
-  CommnityMemberHiveEntity getCommunityMemberEntity(String id) {
+  CommnityMemberHiveEntity? getCommunityMemberEntity(String id) {
     return box.get(id);
   }
 

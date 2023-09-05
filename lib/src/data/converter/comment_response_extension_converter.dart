@@ -30,6 +30,8 @@ extension CommentResponseExtension on CommentResponse {
       ..metadata = metadata
       ..required = required
       ..mentionees = mentionees
-      ..attachments = attanchment;
+      ..attachments = attanchment
+      ..targetId = targetId
+      ..targetType = targetType;
   }
 }

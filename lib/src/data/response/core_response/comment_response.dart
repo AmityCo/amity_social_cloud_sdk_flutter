@@ -29,6 +29,8 @@ class CommentResponse {
     required this.required,
     required this.mentionees,
     required this.attanchment,
+    required this.targetId,
+    required this.targetType,
   });
   final String id;
   final String path;
@@ -55,6 +57,9 @@ class CommentResponse {
   final List<String> children;
   final int segmentNumber;
   final String? required;
+
+  final String? targetId;
+  final String? targetType;
 
   /// Mentions
   final List<Mentionee> mentionees;
@@ -88,6 +93,8 @@ class CommentResponse {
         segmentNumber: json["segmentNumber"],
         metadata: json["metadata"],
         required: json["required"],
+        targetId: json["targetId"],
+        targetType: json["targetType"],
         mentionees: List<Mentionee>.from(json["mentionees"].map((x) => Mentionee.fromJson(x))),
         attanchment: List<AttachmentResponse>.from(json["attachments"].map((x) => AttachmentResponse.fromJson(x))),
       );
@@ -119,6 +126,8 @@ class CommentResponse {
         "segmentNumber": segmentNumber,
         "metadata": metadata,
         "required": required,
+        "targetId": targetId,
+        "targetType": targetType,
         "mentionees": List<dynamic>.from(mentionees.map((x) => x.toJson())),
         "attachments": List<dynamic>.from(attanchment.map((x) => x.toJson())),
       };
