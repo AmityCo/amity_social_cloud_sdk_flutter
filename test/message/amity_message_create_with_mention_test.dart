@@ -9,7 +9,7 @@ import '../helper/amity_core_client_mock_setup.dart';
 
 class MockMessageApiInterface extends Mock implements MessageApiInterface {}
 
-// integration_test_id:dd026b3a-cfa7-4d72-b904-73e44afde49d
+// integration_test_id:3ae17ea2-dee5-4418-88af-fe809ee48a52
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
