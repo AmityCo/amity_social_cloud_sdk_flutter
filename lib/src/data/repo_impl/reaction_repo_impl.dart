@@ -132,7 +132,7 @@ class ReactionRepoImpl extends ReactionRepo {
             (amityPostLocalCopy.reactionsCount ?? 0) - 1;
 
         amityPostLocalCopy.reactions ??= {};
-        amityPost.reactions![request.reactionName] =
+        amityPostLocalCopy.reactions![request.reactionName] =
             (amityPostLocalCopy.reactions![request.reactionName] ?? 0) - 1;
 
         await dbAdapterRepo.postDbAdapter.savePostEntity(amityPostLocalCopy);
