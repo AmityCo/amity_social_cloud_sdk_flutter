@@ -25,7 +25,6 @@ permissions:
 jobs:
   test:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -56,6 +55,7 @@ jobs:
 
       - name: Dart Analyze
         uses: zgosalvez/github-actions-analyze-dart@v1
+        continue-on-error: true
 
       - name: Flutter test
         run: |

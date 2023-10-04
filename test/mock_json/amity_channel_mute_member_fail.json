@@ -1,0 +1,6 @@
+{
+    "status": "error",
+    "message": "You can not mute this member",
+    "code": 400400,
+    "data": {}
+}
