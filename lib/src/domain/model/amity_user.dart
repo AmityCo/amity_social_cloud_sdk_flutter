@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
@@ -50,7 +51,7 @@ class AmityUser {
   DateTime? updatedAt;
 
   /// Flagged By Me
-  bool? flaggedByMe;
+  bool? _flaggedByMe;
 
   /// Convert [AmityUser] to Map object
   Map<String, dynamic> toMap() {
@@ -76,7 +77,7 @@ class AmityUser {
 
   @override
   String toString() {
-    return 'AmityUser(id: $id, userId: $userId, roles: $roles, displayName: $displayName, description: $description, avatarFileId: $avatarFileId, avatarUrl: $avatarUrl, avatarCustomUrl: $avatarCustomUrl, flagCount: $flagCount, hashFlag: $hashFlag, metadata: $metadata, isGlobalBan: $isGlobalBan, createdAt: $createdAt, updatedAt: $updatedAt, flaggedByMe: $flaggedByMe)';
+    return 'AmityUser(id: $id, userId: $userId, roles: $roles, displayName: $displayName, description: $description, avatarFileId: $avatarFileId, avatarUrl: $avatarUrl, avatarCustomUrl: $avatarCustomUrl, flagCount: $flagCount, hashFlag: $hashFlag, metadata: $metadata, isGlobalBan: $isGlobalBan, createdAt: $createdAt, updatedAt: $updatedAt, flaggedByMe: $_flaggedByMe)';
   }
 
   StreamController<AmityUser> get listen {
@@ -93,4 +94,17 @@ class AmityUser {
 
     return controller;
   }
+
+  /* begin_public_function 
+  id: user.check_flag_by_me
+  */
+  /// check if user is flagged by me
+  bool get isFlaggedByMe {
+    if (hashFlag == null) return false;
+    return (_flaggedByMe ?? false) ||
+        BloomFilter(hash: (hashFlag!['hash'] as String), m: hashFlag!['bits'] as int, k: hashFlag!['hashes'] as int)
+            .mightContains(AmityCoreClient.getUserId());
+  }
+  //* end_public_function */
+
 }
