@@ -126,6 +126,9 @@ class CommentRepoImpl extends CommentRepo {
     //Convert to Comment Hive Entity
     List<CommentHiveEntity> commentHiveEntities = data.comments.map((e) => e.convertToCommentHiveEntity()).toList();
 
+    //Convert to File Hive Entity
+    List<CommnityMemberHiveEntity> communityUserHiveEntites = data.communityUsers.map((e) => e.convertToCommnityMemberHiveEntity()).toList();
+
     //Save the File Entity
     for (var e in fileHiveEntities) {
       await dbAdapterRepo.fileDbAdapter.saveFileEntity(e);
@@ -141,9 +144,19 @@ class CommentRepoImpl extends CommentRepo {
       await dbAdapterRepo.commentDbAdapter.saveCommentEntity(e);
     }
 
+    //Save the Child Comment Entity
+    for (var e in childCommentHiveEntities) {
+      await dbAdapterRepo.commentDbAdapter.saveCommentEntity(e);
+    }
+
     //Save the Comment Entity
     for (var e in commentHiveEntities) {
       await dbAdapterRepo.commentDbAdapter.saveCommentEntity(e);
+    }
+
+    //Save the Community Member Entity
+    for (var e in communityUserHiveEntites) {
+      await dbAdapterRepo.communityMemberDbAdapter.saveCommunityMemberEntity(e);
     }
 
     return commentHiveEntities.map((e) => e.convertToAmityComment()).toList();

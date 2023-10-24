@@ -1,0 +1,66 @@
+{
+    "messages":[
+       {
+          "_id":"64d1c847b23bcf7766642e35",
+          "type":"text",
+          "channelSegment":27,
+          "tags":[
+             
+          ],
+          "childrenNumber":0,
+          "isDeleted":false,
+          "editedAt":"2023-08-18T04:06:37.831Z",
+          "updatedAt":"2023-08-18T04:06:37.831Z",
+          "createdAt":"2023-08-08T04:44:55.662Z",
+          "path":"625e5854764a4600dcb849b9/chat/channel/64b508e658d70b51ee98c002/message/64b508e658d70b51ee98c002/64d1c847b23bcf7766642e35",
+          "messageId":"72c9b039-5666-4b9c-9d03-9bf8db39d2a3",
+          "userId":"bb01",
+          "channelId":"64b508e658d70b51ee98c002",
+          "flagCount":0,
+          "hashFlag":null,
+          "reactions":{
+             
+          },
+          "reactionsCount":0,
+          "parentId":null,
+          "fileId":null,
+          "data":{
+             "text":"dfxzzxc"
+          },
+          "mentionees":[
+             
+          ],
+          "myReactions":[
+             
+          ]
+       }
+    ],
+    "users":[
+       {
+          "_id":"62b18d2e17db6c00db5164bf",
+          "path":"625e5854764a4600dcb849b9/user/62b18d2e17db6c00db5164bf",
+          "createdAt":"2022-06-21T09:19:42.139Z",
+          "updatedAt":"2023-08-16T10:54:56.896Z",
+          "isDeleted":false,
+          "displayName":"BB01",
+          "userId":"bb01",
+          "userInternalId":"62b18d2e17db6c00db5164bf",
+          "userPublicId":"bb01",
+          "metadata":{},
+          "roles":[],
+          "permissions":[],
+          "flagCount":1,
+          "hashFlag":{
+             "bits":24,
+             "hashes":17,
+             "hash":"brfb"
+          },
+          "avatarCustomUrl":"https://images.unsplash.com/photo-1657092587752-1514c2632707?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1784&q=80",
+          "avatarFileId":null,
+          "isGlobalBan":false
+       }
+    ],
+    "files":[
+       
+    ]
+ }

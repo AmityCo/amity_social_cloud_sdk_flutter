@@ -85,6 +85,9 @@ class AmityComment {
   /// Flagged By Me
   bool? flaggedByMe;
 
+  ///  AmityCommentTarget
+  AmityCommentTarget? target;
+
   ///Attachements
   List<CommentAttachment>? attachments;
 
@@ -196,4 +199,38 @@ class CommentImageAttachment extends CommentAttachment {
   AmityImage? getImage() => _image;
 
   set image(AmityImage image) => _image = image;
+
 }
+
+
+class AmityCommentTarget{}
+
+class CommunityCommentTarget extends AmityCommentTarget {
+  String? type;
+  String? communityId; //composer
+  AmityCommunityMember? creatorMember; //composer
+  CommunityCommentTarget({this.type, this.communityId});
+  @override
+  String toString() =>
+      'CommunityCommentTarget(targetCommunityId: $communityId, type: $type, creatorMember: $creatorMember)';
+}
+
+class UserCommentTarget extends AmityCommentTarget {
+  String? type;
+  String? userId;
+  UserCommentTarget({this.type, this.userId});
+  @override
+  String toString() =>
+      'UserTarget(targetUserId: $userId, type: $type)';
+}
+
+class ContentCommentTarget extends AmityCommentTarget {
+  String? type;
+  String? contentId;//composer
+  ContentCommentTarget({this.contentId, this.type});
+  @override
+  String toString() =>
+      'UserTarget(targetContentId: $contentId, type: $type)';
+}
+
+class UnknownCommentTarget extends AmityCommentTarget {}

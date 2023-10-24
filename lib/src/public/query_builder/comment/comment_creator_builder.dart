@@ -8,7 +8,7 @@ class AmityCommentCreationTarget {
   late String _referenceType;
   late String _referenceId;
   String? _parentId;
-  // late AmityCommentTargetType _amityCommentTargetType;
+  // late AmityCommentReferenceType amityCommentReferenceType;
   AmityCommentCreationTarget({
     required CommentCreateUseCase useCase,
   }) {
@@ -17,13 +17,13 @@ class AmityCommentCreationTarget {
 
   AmityCommentCreationTarget post(String referenceId) {
     _referenceId = referenceId;
-    _referenceType = AmityCommentTargetType.POST.value;
+    _referenceType = AmityCommentReferenceType.POST.value;
     return this;
   }
 
   AmityCommentCreationTarget content(String referenceId) {
     _referenceId = referenceId;
-    _referenceType = AmityCommentTargetType.CONTENT.value;
+    _referenceType = AmityCommentReferenceType.CONTENT.value;
     return this;
   }
 
@@ -38,7 +38,7 @@ class AmityCommentCreationTarget {
       referenceType: _referenceType,
       referenceId: _referenceId,
       parentId: _parentId,
-      // amityCommentTargetType: _amityCommentTargetType,
+      // amityCommentReferenceType: amityCommentReferenceType,
     );
   }
 }

@@ -69,6 +69,15 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
   }
 
   @override
+  Future<AmityCommunityMember?> getMemberOptional(String communityId, String userId) async {
+    final memberEntity = communityMemberDbAdapter.getCommunityMemberEntity(communityId + userId);
+    if(memberEntity!=null){
+      return memberEntity.convertToAmityCommunityMember();
+    }
+    return null;
+  }
+
+  @override
   Future addRole(UpdateCommunityRoleRequest request) async {
     final data = await communityMemmberApiInterface.addRole(request);
     await _saveDataToDb(data);
