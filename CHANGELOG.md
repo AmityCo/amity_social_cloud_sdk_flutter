@@ -1,3 +1,7 @@
+## 0.28.0
+* Feat: Added tags option when creating new message
+* Fix: removed flaggedByMe in favour of isFlaggedByme for users
+
 ## 0.27.0
 * Feat: Added comminity user rolers in comments
 * Fix: Now video upload give back the upload progress
