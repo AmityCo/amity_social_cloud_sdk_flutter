@@ -11,6 +11,7 @@ class AmityMessageTextCreate {
     AmityChatClient.newMessageRepository()
         .createMessage(channelId)
         .text('Hello from flutter :D')
+        .tags(['Tag 1', 'Tag 2'])
         .send()
         .then((value) {
       //handle result

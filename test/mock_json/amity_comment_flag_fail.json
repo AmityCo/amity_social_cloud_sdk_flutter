@@ -1,0 +1,6 @@
+{
+    "status": "error",
+    "message": "User already flagged",
+    "code": 400300,
+    "data": {}
+}

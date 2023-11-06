@@ -8,18 +8,16 @@ import 'package:mocktail/mocktail.dart';
 import '../helper/amity_core_client_mock_setup.dart';
 
 class MockMessageApiInterface extends Mock implements MessageApiInterface {}
-
-// integration_test_id:3ae17ea2-dee5-4418-88af-fe809ee48a52
+// integration_test_id:afb432ec-52eb-49d7-8054-c162e3b60535
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  String channelId = 'channelId';
-  String message = 'message';
+  String messageId = '650bfbeb6d2464171b0c2b90';
 
   final mockMessageApiInterface = MockMessageApiInterface();
 
   setUpAll(() async {
-    registerFallbackValue(CreateMessageRequest(channelId: channelId));
+    registerFallbackValue(String);
 
     await AmityCoreClientMockSetup.setup();
 
@@ -28,28 +26,26 @@ void main() {
     serviceLocator.registerLazySingleton<MessageApiInterface>(
       () => mockMessageApiInterface,
     );
+
   });
 
   test(
-      'When the user creates a valid text message with @mention to two users on the community channel. It should return a valid text message with mention ',
+      'When user unflags a message, it should return success response.',
       () async {
     when(() =>
-            mockMessageApiInterface.createMessage(any<CreateMessageRequest>()))
+            mockMessageApiInterface.flagMessage(any<String>()))
         .thenAnswer((_) async {
       final response =
-          await File('test/mock_json/amity_message_text_with_mention.json')
+          await File('test/mock_json/amity_channel_unflag_message_success.json')
               .readAsString();
       return CreateMessageResponse.fromJson(json.decode(response));
-    });
+    } 
+    );
 
     final amityMessage = await AmityChatClient.newMessageRepository()
-        .createMessage(channelId)
-        .text(message)
-        .mentionChannel()
-        .mentionUsers(['userId1', 'userId2']).send();
+        .flag(messageId);
 
     expect(amityMessage, isA<AmityMessage>());
-    expect(amityMessage.mentionees?.length ?? 0, 1);
   });
 
   tearDownAll(() async {

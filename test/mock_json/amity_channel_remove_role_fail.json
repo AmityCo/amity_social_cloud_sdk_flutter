@@ -1,0 +1,6 @@
+{
+    "status": "error",
+    "message": "User not found",
+    "code": 400400,
+    "data": {}
+}

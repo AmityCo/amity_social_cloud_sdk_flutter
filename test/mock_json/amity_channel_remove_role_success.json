@@ -1,0 +1,157 @@
+{
+    "channels": [
+        {
+            "_id": "64f6e0ba7b4bc55ce06f9dd9",
+            "isDistinct": false,
+            "type": "community",
+            "tags": [],
+            "lastActivity": "2023-09-21T08:16:44.000Z",
+            "updatedAt": "2023-09-24T14:26:31.998Z",
+            "createdAt": "2023-09-05T08:03:06.753Z",
+            "muteTimeout": "2023-09-05T08:10:47.113Z",
+            "rateLimitWindow": 1000,
+            "displayName": "queen 💞👑",
+            "messageAutoDeleteEnabled": false,
+            "autoDeleteMessageByFlagLimit": 0,
+            "isDeleted": false,
+            "path": "631f16be1e440400da5663b0/chat/channel/64f6e0ba7b4bc55ce06f9dd9",
+            "channelId": "64f6e0ba7b4bc55ce06f9dd9",
+            "channelInternalId": "64f6e0ba7b4bc55ce06f9dd9",
+            "channelPublicId": "64f6e0ba7b4bc55ce06f9dd9",
+            "isMuted": false,
+            "isRateLimited": false,
+            "memberCount": 12,
+            "messageCount": 97,
+            "moderatorMemberCount": 1,
+            "avatarFileId": null,
+            "metadata": {}
+        }
+    ],
+    "channelUsers": [
+        {
+            "membership": "member",
+            "lastActivity": "2023-09-12T10:10:20.145Z",
+            "readToSegment": 72,
+            "muteTimeout": "2023-09-24T11:03:45.702Z",
+            "createdAt": "2023-09-12T10:10:20.145Z",
+            "updatedAt": "2023-09-24T14:26:31.898Z",
+            "lastMentionedSegment": 0,
+            "isBanned": false,
+            "isMuted": false,
+            "userId": "victimIOS",
+            "userInternalId": "632041c92ed49000da273a02",
+            "userPublicId": "victimIOS",
+            "channelId": "64f6e0ba7b4bc55ce06f9dd9",
+            "channelInternalId": "64f6e0ba7b4bc55ce06f9dd9",
+            "channelPublicId": "64f6e0ba7b4bc55ce06f9dd9",
+            "roles": [],
+            "permissions": []
+        },
+        {
+            "membership": "member",
+            "lastActivity": "2023-09-21T08:16:16.112Z",
+            "readToSegment": 0,
+            "createdAt": "2023-09-05T08:03:06.871Z",
+            "updatedAt": "2023-09-21T08:16:16.180Z",
+            "lastMentionedSegment": 59,
+            "isBanned": false,
+            "isMuted": false,
+            "userId": "queen",
+            "userInternalId": "64f565b707d02017162964ed",
+            "userPublicId": "queen",
+            "channelId": "64f6e0ba7b4bc55ce06f9dd9",
+            "channelInternalId": "64f6e0ba7b4bc55ce06f9dd9",
+            "channelPublicId": "64f6e0ba7b4bc55ce06f9dd9",
+            "roles": [
+                "channel-moderator"
+            ],
+            "permissions": [
+                "CREATE_ROLE",
+                "DELETE_ROLE",
+                "EDIT_ROLE",
+                "User/ExemptFromFilters",
+                "User/ExemptFromRateLimits",
+                "User/ExemptFromMute",
+                "User/ExempFromRepetitionCheck",
+                "MANAGE_NOTIFICATION_NETWORK_SETTING",
+                "EDIT_CHANNEL_USER",
+                "BAN_USER_FROM_CHANNEL",
+                "ADD_CHANNEL_USER",
+                "REMOVE_CHANNEL_USER",
+                "EDIT_CHANNEL",
+                "MUTE_CHANNEL",
+                "MUTE_USER_INSIDE_CHANNEL",
+                "DELETE_MESSAGE",
+                "EDIT_MESSAGE",
+                "Channel/BanUser",
+                "Channel/MuteUser",
+                "Channel/MuteChannel",
+                "Channel/RateLimitUser",
+                "Channel/RateLimitChannel",
+                "Channel/ManageMessages",
+                "Channel/ManageUsers"
+            ]
+        }
+    ],
+    "users": [
+        {
+            "_id": "632041c92ed49000da273a02",
+            "path": "631f16be1e440400da5663b0/user/632041c92ed49000da273a02",
+            "description": "",
+            "createdAt": "2022-09-13T08:39:37.678Z",
+            "updatedAt": "2023-09-01T06:36:57.220Z",
+            "isDeleted": false,
+            "displayName": "victimIOS",
+            "userId": "victimIOS",
+            "userInternalId": "632041c92ed49000da273a02",
+            "userPublicId": "victimIOS",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarCustomUrl": "https://cdn.pixabay.com/photo/2018/04/13/16/13/pixel-3316924_960_720.png",
+            "avatarFileId": "ef5ca5d28b5f4fd4b79af191cb8860eb",
+            "isGlobalBan": false
+        },
+        {
+            "_id": "64f565b707d02017162964ed",
+            "path": "631f16be1e440400da5663b0/user/64f565b707d02017162964ed",
+            "createdAt": "2023-09-04T05:05:59.229Z",
+            "updatedAt": "2023-09-04T05:05:59.229Z",
+            "isDeleted": false,
+            "displayName": "queen",
+            "userId": "queen",
+            "userInternalId": "64f565b707d02017162964ed",
+            "userPublicId": "queen",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        }
+    ],
+    "files": [
+        {
+            "fileId": "ef5ca5d28b5f4fd4b79af191cb8860eb",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/ef5ca5d28b5f4fd4b79af191cb8860eb/download",
+            "type": "image",
+            "createdAt": "2023-08-17T14:29:27.544Z",
+            "updatedAt": "2023-08-17T14:29:28.648Z",
+            "attributes": {
+                "name": "image_F3160701-0659-4AA3-93C5-2529764651C9_ios.jpeg",
+                "extension": "jpg",
+                "size": 2295460,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 3024,
+                    "width": 4032,
+                    "orientation": 6,
+                    "isFull": true
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,6 @@
+{
+    "status": "error",
+    "message": "You have no permission",
+    "code": 400301,
+    "data": {}
+}

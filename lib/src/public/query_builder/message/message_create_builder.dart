@@ -252,12 +252,12 @@ abstract class AmityMessageCreator {
     return this;
   }
 
-  /// Tags
-  /// Future Use
-  // AmityMessageCreator tags(List<String> tags) {
-  //   _amityTags = AmityTags(tags: tags);
-  //   return this;
-  // }
+  // / Tags
+  // / Future Use
+  AmityMessageCreator tags(List<String> tags) {
+    _amityTags = AmityTags(tags: tags);
+    return this;
+  }
 
   /// Create Amity Mesage
   Future<AmityMessage> send() async {

@@ -1,0 +1,128 @@
+{
+    "messages": [
+        {
+            "_id": "650bfbeb6d2464171b0c2b90",
+            "type": "text",
+            "channelSegment": 97,
+            "tags": [],
+            "childrenNumber": 0,
+            "isDeleted": false,
+            "editedAt": "2023-09-21T08:16:43.999Z",
+            "updatedAt": "2023-09-28T04:08:50.180Z",
+            "createdAt": "2023-09-21T08:16:44.000Z",
+            "path": "631f16be1e440400da5663b0/chat/channel/64f6e0ba7b4bc55ce06f9dd9/message/64f6e0ba7b4bc55ce06f9dd9/650bfbeb6d2464171b0c2b90",
+            "messageId": "650bfbeb6d2464171b0c2b90",
+            "userId": "sara",
+            "channelId": "64f6e0ba7b4bc55ce06f9dd9",
+            "flagCount": 0,
+            "hashFlag": null,
+            "reactions": {},
+            "reactionsCount": 0,
+            "parentId": null,
+            "fileId": null,
+            "data": {
+                "text": "Hi"
+            },
+            "mentionees": [],
+            "myReactions": []
+        }
+    ],
+    "users": [
+        {
+            "_id": "6322c93447551900d9a6c7aa",
+            "path": "631f16be1e440400da5663b0/user/6322c93447551900d9a6c7aa",
+            "description": "",
+            "createdAt": "2022-09-15T06:41:56.311Z",
+            "updatedAt": "2023-09-13T11:39:30.703Z",
+            "isDeleted": false,
+            "displayName": "sara Android",
+            "userId": "sara",
+            "userInternalId": "6322c93447551900d9a6c7aa",
+            "userPublicId": "sara",
+            "metadata": {},
+            "roles": [
+                "global-admin"
+            ],
+            "permissions": [
+                "CREATE_ROLE",
+                "DELETE_ROLE",
+                "EDIT_ROLE",
+                "CREATE_COMMUNITY_CATEGORY",
+                "EDIT_COMMUNITY_CATEGORY",
+                "DELETE_COMMUNITY_CATEGORY",
+                "DELETE_COMMUNITY",
+                "EDIT_COMMUNITY",
+                "EDIT_COMMUNITY_USER",
+                "ADD_COMMUNITY_USER",
+                "BAN_COMMUNITY_USER",
+                "REMOVE_COMMUNITY_USER",
+                "EDIT_COMMUNITY_POST",
+                "DELETE_COMMUNITY_POST",
+                "REVIEW_COMMUNITY_POST",
+                "EDIT_COMMUNITY_COMMENT",
+                "DELETE_COMMUNITY_COMMENT",
+                "CREATE_PRIVILEGED_POST",
+                "EDIT_USER_FEED_POST",
+                "DELETE_USER_FEED_POST",
+                "EDIT_USER_FEED_COMMENT",
+                "DELETE_USER_FEED_COMMENT",
+                "BAN_USER",
+                "EDIT_USER",
+                "EDIT_CHANNEL_USER",
+                "BAN_USER_FROM_CHANNEL",
+                "ADD_CHANNEL_USER",
+                "REMOVE_CHANNEL_USER",
+                "EDIT_CHANNEL",
+                "MUTE_CHANNEL",
+                "MUTE_USER_INSIDE_CHANNEL",
+                "EDIT_CHANNEL_RATELIMIT",
+                "DELETE_MESSAGE",
+                "EDIT_MESSAGE",
+                "Channel/BanUser",
+                "Channel/MuteUser",
+                "Channel/MuteChannel",
+                "Channel/RateLimitUser",
+                "Channel/RateLimitChannel",
+                "Channel/ManageMessages",
+                "Channel/ManageUsers",
+                "Channel/GlobalAccess",
+                "User/ExemptFromFilters",
+                "User/ExemptFromRateLimits",
+                "User/ExemptFromMute",
+                "User/ExempFromBan",
+                "User/ExempFromBlacklist",
+                "User/ExempFromWhitelist",
+                "User/ExempFromRepetitionCheck",
+                "Post/ManagePosts",
+                "Post/ManageComments",
+                "Community/ManageCommunities",
+                "MANAGE_NOTIFICATION_NETWORK_SETTING"
+            ],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": "451e7f6a228a48dea54b91b1a62faa85",
+            "isGlobalBan": false
+        }
+    ],
+    "files": [
+        {
+            "fileId": "451e7f6a228a48dea54b91b1a62faa85",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/451e7f6a228a48dea54b91b1a62faa85/download",
+            "type": "image",
+            "createdAt": "2023-09-12T04:10:21.452Z",
+            "updatedAt": "2023-09-12T04:10:21.783Z",
+            "attributes": {
+                "name": "image_picker_6668D8CF-3F88-4575-99EB-C39AA84A399D-578-000000182423BA7B.jpg",
+                "extension": "jpg",
+                "size": 63118,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 518,
+                    "width": 680,
+                    "orientation": 1,
+                    "isFull": false
+                }
+            }
+        }
+    ]
+}
