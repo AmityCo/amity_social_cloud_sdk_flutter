@@ -5,7 +5,7 @@ import 'package:amity_sdk/src/domain/model/amity_file/amity_file_properties.dart
 extension FileHiveEntityExtension on FileHiveEntity {
   /// Convert [FileHiveEntity] to [AmityFileProperties]
   AmityFileProperties convertToAmityFileProperties() {
-    return AmityFileProperties()
+    var properties = AmityFileProperties()
       ..fileId = fileId
       ..fileUrl = fileUrl
       ..filePath = filePath
@@ -21,5 +21,6 @@ extension FileHiveEntityExtension on FileHiveEntity {
       ..height = height
       ..width = width
       ..isFull = isFull;
+    return properties;
   }
 }

@@ -1,3 +1,6 @@
+## 0.29.0
+* Fix: Width and Height coming null for video
+
 ## 0.28.0
 * Feat: Added tags option when creating new message
 * Fix: removed flaggedByMe in favour of isFlaggedByme for users

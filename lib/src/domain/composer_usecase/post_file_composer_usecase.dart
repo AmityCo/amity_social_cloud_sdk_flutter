@@ -22,7 +22,8 @@ class PostFileComposerUsecase extends UseCase<AmityPostData, AmityPostData> {
       if (params is VideoData) {
         final thumbnailFile = AmityImage(fileProperties);
         params.thumbnail = thumbnailFile;
-
+        final file = AmityFile(fileProperties);
+        params.fileInfo = file;
         // final videoFile = AmityVideo(_fileProperties);
         // params.fileInfo = videoFile;
       }
