@@ -84,6 +84,8 @@ class AttributesMetadata {
     required this.height,
     required this.width,
     required this.isFull,
+    required this.video,
+    required this.audio,
   });
 
   final ExifClass? exif;
@@ -91,11 +93,15 @@ class AttributesMetadata {
   final int? height;
   final int? width;
   final bool? isFull;
+  final Video? video;
+  final Audio? audio;
 
   factory AttributesMetadata.fromJson(Map<String, dynamic> json) =>
       AttributesMetadata(
         exif: json["exif"] == null ? null : ExifClass.fromJson(json["exif"]),
         gps: json["gps"] == null ? null : ExifClass.fromJson(json["gps"]),
+        video: json["video"] == null ? null : Video.fromJson(json["video"]),
+        audio: json["audio"] == null ? null : Audio.fromJson(json["audio"]),
         height: json["height"],
         width: json["width"],
         isFull: json["isFull"],
@@ -108,6 +114,70 @@ class AttributesMetadata {
         "width": width,
         "isFull": isFull,
       };
+}
+
+class Video {
+  int? width;
+  int? height;
+  double? duration;
+  int? bitrate;
+  double? avgframerate;
+  double? displayaspectratio;
+  String? colourprimaries;
+
+  Video(
+      {this.width,
+      this.height,
+      this.duration,
+      this.bitrate,
+      this.avgframerate,
+      this.displayaspectratio,
+      this.colourprimaries});
+
+  factory Video.fromJson(Map<String, dynamic> json) => Video(
+      width: json['width'],
+      height: json['height'],
+      duration: json['duration'],
+      bitrate: json['bit_rate'],
+      avgframerate: json['avg_frame_rate'].toDouble(),
+      displayaspectratio: json['display_aspect_ratio'],
+      colourprimaries: json['colour_primaries']
+  );
+  
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['width'] = width;
+    data['height'] = height;
+    data['duration'] = duration;
+    data['bit_rate'] = bitrate;
+    data['avg_frame_rate'] = avgframerate;
+    data['display_aspect_ratio'] = displayaspectratio;
+    data['colour_primaries'] = colourprimaries;
+    return data;
+  }
+}
+
+class Audio {
+  String? samplerate;
+  String? duration;
+  String? bitrate;
+
+  Audio({this.samplerate, this.duration, this.bitrate});
+
+  factory Audio.fromJson(Map<String, dynamic> json) => Audio(
+      samplerate: json['sample_rate'],
+      duration: json['duration'],
+      bitrate: json['bit_rate']
+  );
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['sample_rate'] = samplerate;
+    data['duration'] = duration;
+    data['bit_rate'] = bitrate;
+    return data;
+  }
 }
 
 class ExifClass {

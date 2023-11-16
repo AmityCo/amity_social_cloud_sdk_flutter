@@ -5,7 +5,7 @@ import 'package:amity_sdk/src/data/response/response.dart';
 extension FileResponsseExtension on FileResponse {
   /// convert [FileResponse] to [FileHiveEntity]
   FileHiveEntity convertToFileHiveEntity() {
-    return FileHiveEntity()
+    var fileEntity = FileHiveEntity()
       ..fileId = fileId
       ..fileUrl = fileUrl
       ..type = type
@@ -17,8 +17,9 @@ extension FileResponsseExtension on FileResponse {
       ..mimeType = attributes.mimeType
       ..size = attributes.size
       //metadata
-      ..height = attributes.metadata?.height
-      ..width = attributes.metadata?.width
+      ..height = attributes.metadata?.video?.height ?? attributes.metadata?.height
+      ..width = attributes.metadata?.video?.width ?? attributes.metadata?.width
       ..isFull = attributes.metadata?.isFull;
+    return fileEntity;
   }
 }
