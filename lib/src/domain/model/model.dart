@@ -16,3 +16,4 @@ export 'channel/channel.dart';
 export 'community/community.dart';
 export 'follow/follow.dart';
 export 'message/message.dart';
+export 'amity_stream/amity_stream.dart';

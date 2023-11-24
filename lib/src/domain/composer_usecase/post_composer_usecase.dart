@@ -50,7 +50,7 @@ class PostComposerUsecase extends UseCase<AmityPost, AmityPost> {
 
     //Add File url to DataType != TEXT
     final data = params.data;
-    if (data != null && data is! TextData) {
+    if (data != null && data is! TextData && data is! LiveStreamData) {
       params.data = await fileComposerUsecase.get(data);
     }
 

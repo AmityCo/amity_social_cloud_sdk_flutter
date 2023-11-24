@@ -41,7 +41,6 @@ void main() {
               .readAsString();
           throw AmityErrorResponse.fromJson(json.decode(response)).amityException();
     });
-
     final amityComment = await AmitySocialClient.newCommentRepository()
         .getComment(commentId: commentId);
 

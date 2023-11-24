@@ -39,8 +39,8 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
       case AmityDataType.FILE:
         amityPostData = FileData(postId: postId, fileId: data!.fileId);
         break;
-      case AmityDataType.LIVE_STREAM:
-        // TODO: Handle this case.
+      case AmityDataType.LIVESTREAM:
+        amityPostData = LiveStreamData(postId: postId, streamId: data!.streamId , rawData: data!.toMap());
         break;
       case AmityDataType.POLL:
         amityPostData = PollData(

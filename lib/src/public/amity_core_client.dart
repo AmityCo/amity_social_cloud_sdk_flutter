@@ -1,7 +1,9 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/functions/stream_function.dart';
 import 'package:amity_sdk/src/public/public.dart';
+import 'package:amity_sdk_api/amity_sdk_api.dart';
 
 ///Amity Core Client to do primary Setup
 class AmityCoreClient {
@@ -91,6 +93,15 @@ class AmityCoreClient {
       message: 'App dont have active user, Please login',
       code: 401,
     );
+  }
+  /* end_public_function */
+
+
+  /* begin_public_function 
+  id: client.get_configuration
+  */
+  static AmityClientConfiguration getConfiguration() {
+    return AmityClientConfiguration(serviceLocator<StreamFunctionInterface>());
   }
   /* end_public_function */
 

@@ -2,9 +2,23 @@ import 'dart:developer';
 
 import 'package:amity_sdk/src/core/socket/amity_socket.dart';
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/stream_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/stream_db_adapter_impl.dart';
+import 'package:amity_sdk/src/data/data_source/remote/api_interface/stream_api_interface.dart';
+import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/stream_api_interface_impl.dart';
+import 'package:amity_sdk/src/data/repo_impl/stream_repo_impl.dart';
+import 'package:amity_sdk/src/domain/composer_usecase/stream_composer_usecase.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/repo/stream_repo.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_get_optional_usercase.dart';
+import 'package:amity_sdk/src/domain/usecase/stream/stream_get_local_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/stream/stream_has_local_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/stream/stream_observe_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/stream/stream_qurey_usecase.dart';
+import 'package:amity_sdk/src/functions/stream_function.dart';
 import 'package:amity_sdk/src/public/public.dart';
+import 'package:amity_sdk/src/public/repo/stream/stream_repository.dart';
+import 'package:amity_sdk_api/amity_sdk_api.dart';
 import 'package:get_it/get_it.dart';
 
 /// Global GetIt instance
@@ -86,6 +100,9 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<ChannelUserDbAdapter>(
         () => ChannelUserDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<StreamDbAdapter>(
+        () => StreamDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
 
     //Register Db adapter Repo which hold all the Db Adapters
     serviceLocator.registerLazySingleton<DbAdapterRepo>(
@@ -103,7 +120,8 @@ class SdkServiceLocator {
           messageDbAdapter: serviceLocator(),
           reactionDbAdapter: serviceLocator(),
           channelDbAdapter: serviceLocator(),
-          channelUserDbAdapter: serviceLocator()),
+          channelUserDbAdapter: serviceLocator(),
+          streamDbAdapter: serviceLocator()),
     );
 
     //-data_source/remote/
@@ -151,6 +169,8 @@ class SdkServiceLocator {
         () => ChannelApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<ChannelMemberApiInterface>(
         () => ChannelMemberApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<StreamApiInterface>(
+        () => StreamApiInterfaceImpl(httpApiClient: serviceLocator()));
 
     // Local Data Source
 
@@ -252,6 +272,12 @@ class SdkServiceLocator {
           dbAdapterRepo: serviceLocator(),
           messageApiInterface: serviceLocator(),
           fileRepo: serviceLocator()),
+    );
+    serviceLocator.registerLazySingleton<StreamRepo>(
+      () => StreamRepoImpl(
+        dbAdapterRepo: serviceLocator(),
+        streamApiInterface: serviceLocator(),
+      ),
     );
     serviceLocator.registerLazySingleton<ChannelRepo>(
       () => ChannelRepoImpl(
@@ -547,7 +573,8 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<CommunityMemberGetUsecase>(
         () => CommunityMemberGetUsecase(communityMemberRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<CommunityMemberGetOptionalUsecase>(
-        () => CommunityMemberGetOptionalUsecase(communityMemberRepo: serviceLocator()));
+        () => CommunityMemberGetOptionalUsecase(
+            communityMemberRepo: serviceLocator()));
 
     serviceLocator.registerLazySingleton<CommunityCategoryComposerUsecase>(
         () => CommunityCategoryComposerUsecase(fileRepo: serviceLocator()));
@@ -578,12 +605,19 @@ class SdkServiceLocator {
             messageRepo: serviceLocator(),
             userComposerUsecase: serviceLocator(),
             messageFileComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<StreamComposerUseCase>(() =>
+        StreamComposerUseCase(
+            userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<MessageFileComposerUsecase>(
         () => MessageFileComposerUsecase(fileRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<MessageQueryUseCase>(() =>
         MessageQueryUseCase(
             messageRepo: serviceLocator(),
             messageComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<StreamQueryUseCase>(() =>
+        StreamQueryUseCase(
+            streamRepo: serviceLocator(),
+            streamComposerUseCase: serviceLocator()));
     serviceLocator.registerLazySingleton<MessageCreateUsecase>(() =>
         MessageCreateUsecase(
             messageRepo: serviceLocator(),
@@ -615,6 +649,22 @@ class SdkServiceLocator {
         MessageObserveUsecase(
             messageRepo: serviceLocator(),
             messageComposerUsecase: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<StreamObserveUseCase>(() =>
+        StreamObserveUseCase(
+            streamRepo: serviceLocator(),
+            streamComposerUseCase: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<StreamHasLocalUseCase>(
+        () => StreamHasLocalUseCase(streamRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<StreamGetLocalUseCase>(
+        () => StreamGetLocalUseCase(streamRepo: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<StreamGetUseCase>(() =>
+        StreamGetUseCase(
+            streamRepo: serviceLocator(),
+            streamComposerUseCase: serviceLocator()));
 
     serviceLocator.registerLazySingleton<ChannelComposerUsecase>(
         () => ChannelComposerUsecase(
@@ -702,6 +752,10 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<TopicUnsubscriptionUseCase>(
         () => TopicUnsubscriptionUseCase(topicRepo: serviceLocator()));
 
+    //-data_source/remote/
+    serviceLocator.registerLazySingleton<StreamFunctionInterface>(
+        () => StreamFunction());
+
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
     serviceLocator.registerLazySingleton(() => PostRepository());
@@ -716,6 +770,7 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton(() => AmityChannelRepository());
     serviceLocator.registerLazySingleton(() => AmityChannelParticipation());
     serviceLocator.registerLazySingleton(() => ChannelModerationRepository());
+    serviceLocator.registerLazySingleton(() => StreamRepository());
 
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(

@@ -1,3 +1,7 @@
+## 0.30.0
+* Feat: Added Support for getting live and recorded streams
+* Feat: Configuration for AmityVideoPlayer added as well
+
 ## 0.29.0
 * Fix: Width and Height coming null for video
 
