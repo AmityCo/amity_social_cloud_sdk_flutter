@@ -75,3 +75,7 @@ const BAN = 'ban';
 const UNBAN = 'unban';
 
 const MAX_FILE_SIZE = 1073741824; // 1GB
+
+// Stream 
+const STREAM_V3 = 'api/v3/video-streaming';
+

@@ -19,3 +19,4 @@ export 'reaction_repo.dart';
 export 'topic_repo.dart';
 export 'user_feed_repo.dart';
 export 'user_repo.dart';
+export 'stream_repo.dart';

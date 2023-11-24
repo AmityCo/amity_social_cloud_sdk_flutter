@@ -61,7 +61,7 @@ extension CommentHiveEntityExtension on CommentHiveEntity {
         amityCommentData =
             CommentFileData(commentId: commentId, fileId: data!.fileId);
         break;
-      case AmityDataType.LIVE_STREAM:
+      case AmityDataType.LIVESTREAM:
         // TODO: Handle this case.
         break;
       case AmityDataType.POLL:

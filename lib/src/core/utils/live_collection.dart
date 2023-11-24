@@ -62,8 +62,7 @@ abstract class LiveCollection<Model> {
 
   /// Check if live collection have next page
   bool hasNextPage() {
-    final hasNextToken =
-        currentToken != null && (currentToken ?? '').isNotEmpty;
+    final hasNextToken = currentToken != null && (currentToken ?? '').isNotEmpty;
     return hasNextToken && !_isFirstPage;
   }
 

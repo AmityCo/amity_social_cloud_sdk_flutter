@@ -25,6 +25,10 @@ dependencies:
   path_provider: ^2.0.15
   socket_io_client: ^1.0.2
   uuid: ^3.0.6
+  amity_sdk_api: ^0.0.1
+# Add the lib from the pub dev before deploying
+  # amity_api:
+  #   path: ../amity_api
 
 dev_dependencies:
   build_runner: ^2.1.11

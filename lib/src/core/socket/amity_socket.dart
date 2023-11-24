@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/socket/event/stream/stream_start_event_listener.dart';
+import 'package:amity_sdk/src/core/socket/event/stream/stream_stop_event_listener.dart';
 import 'package:amity_sdk/src/domain/repo/account_repo.dart';
 import 'package:amity_sdk/src/public/amity_core_client.dart';
 import 'package:socket_io_client/socket_io_client.dart' as io;
@@ -108,7 +110,9 @@ class AmitySocket {
     final List<SocketEventListener> events = [
       MessageCreateEventListener(),
       MessageUpdateEventListener(),
-      MessageDeleteventListener()
+      MessageDeleteventListener(),
+      StreamStartEvent(),
+      StreamStopEvent(),
     ];
 
     for (var event in events) {

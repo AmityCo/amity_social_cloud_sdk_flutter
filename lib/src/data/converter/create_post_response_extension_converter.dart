@@ -1,4 +1,6 @@
+import 'package:amity_sdk/src/data/converter/stream/stream_response_extension_converter.dart';
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_entity/stream_hive_entity_22.dart';
 
 /// Create Post Response Extension
 extension CreatePostResponseExtension on CreatePostResponse {
@@ -37,6 +39,10 @@ extension CreatePostResponseExtension on CreatePostResponse {
     List<PostHiveEntity> postChildHiveEntities =
         postChildren.map((e) => e.convertToPostHiveEntity()).toList();
 
+        //Convert Child Post to Post Hive Entity
+    List<StreamHiveEntity> streamHiveEntities =
+        videoStreamings.map((e) => e.convertToStreamHiveEntity()).toList();
+
     //Conver Post to Post Hive Entity
     List<PostHiveEntity> postHiveEntities =
         posts.map((e) => e.convertToPostHiveEntity()).toList();
@@ -63,6 +69,11 @@ extension CreatePostResponseExtension on CreatePostResponse {
     //Save the Comment Entity
     for (var e in commentHiveEntities) {
       await dbRepo.commentDbAdapter.saveCommentEntity(e);
+    }
+
+    //Save the Stream Entity
+    for (var e in streamHiveEntities) {
+      await dbRepo.streamDbAdapter.saveStreamEntity(e);
     }
 
     //Save the Community Entity
