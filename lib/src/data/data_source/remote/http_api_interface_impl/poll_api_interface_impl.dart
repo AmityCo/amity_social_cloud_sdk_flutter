@@ -17,7 +17,7 @@ class PollApiInterfaceImpl extends PollApiInterface {
     try {
       final data = await httpApiClient().post(POLL_V3, data: request);
       return CreatePostResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     } catch (error) {
@@ -31,7 +31,7 @@ class PollApiInterfaceImpl extends PollApiInterface {
       final data = await httpApiClient()
           .post('$POLL_V3/${request.pollId}/votes', data: request);
       return CreatePostResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     } catch (error) {
@@ -45,7 +45,7 @@ class PollApiInterfaceImpl extends PollApiInterface {
       final data = await httpApiClient()
           .delete('$POLL_V3/${request.pollId}', data: request);
       return true;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     } catch (error) {
@@ -59,7 +59,7 @@ class PollApiInterfaceImpl extends PollApiInterface {
       final data = await httpApiClient()
           .put('$POLL_V3/${request.pollId}', data: {'status': 'closed'});
       return CreatePostResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     } catch (error) {

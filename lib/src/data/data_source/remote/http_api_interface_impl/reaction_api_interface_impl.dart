@@ -13,7 +13,7 @@ class ReactionApiInterfaceImpl extends ReactionApiInterface {
       final data = await httpApiClient()
           .get(REACTION_V2_URL, queryParameters: request.toJson());
       return GetReactionResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -24,7 +24,7 @@ class ReactionApiInterfaceImpl extends ReactionApiInterface {
     try {
       final data = await httpApiClient().post(REACTION_V2_URL, data: request);
       return data.data['addedId'];
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -35,7 +35,7 @@ class ReactionApiInterfaceImpl extends ReactionApiInterface {
     try {
       final data = await httpApiClient().delete(REACTION_V2_URL, data: request);
       return data.data['removedId'];
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }

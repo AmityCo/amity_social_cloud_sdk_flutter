@@ -18,7 +18,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
           '$CHANNELS_V3/${request.channelId}/$USERS',
           data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -33,7 +33,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
           '$CHANNELS_V3/${request.channelId}/$USERS',
           data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -47,7 +47,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
           '$CHANNELS_V3/${request.channelId}/$USERS/',
           queryParameters: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -61,7 +61,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
           '$CHANNELS_V4/${request.channelId}/$USERS/',
           queryParameters: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -76,7 +76,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
       final data = await httpApiClient()
           .post('$CHANNELS_V3/$channelId/$JOIN', data: param);
       return CreateChannelResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -91,7 +91,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
       final data = await httpApiClient()
           .delete('$CHANNELS_V3/$channelId/$LEAVE', data: param);
       return CreateChannelResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -105,7 +105,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
           '$CHANNELS_V3/${request.channelId}/$USERS/$BAN',
           data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -119,7 +119,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
           '$CHANNELS_V3/${request.channelId}/$USERS/$UNBAN',
           data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -133,7 +133,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
           '$CHANNELS_V3/${request.channelId}/$USERS/$ROLES',
           data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -147,7 +147,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
           '$CHANNELS_V3/${request.channelId}/$USERS/$ROLES',
           data: request.toJson());
       return CreateChannelResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -159,7 +159,7 @@ class ChannelMemberApiInterfaceImpl extends ChannelMemberApiInterface {
       await httpApiClient().put('$CHANNEL_V2/${request.channelId}/$USERS/mute',
           data: request.toJson());
       return;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }

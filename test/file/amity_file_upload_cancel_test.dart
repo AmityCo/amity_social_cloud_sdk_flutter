@@ -31,8 +31,8 @@ void main() {
           any(),
           onUploadProgress: any(named: 'onUploadProgress'),
           cancelToken: any(named: 'cancelToken'),
-        )).thenThrow(DioError(
-      type: DioErrorType.cancel,
+        )).thenThrow(DioException(
+      type: DioExceptionType.cancel,
       error: 'User Cancel the request',
       requestOptions: RequestOptions(path: ''),
     ));

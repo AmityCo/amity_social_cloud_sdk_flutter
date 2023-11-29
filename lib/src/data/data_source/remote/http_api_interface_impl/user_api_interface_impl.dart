@@ -16,7 +16,7 @@ class UserApiInterfaceImpl extends UserApiInterface {
         queryParameters: request.toJson(),
       );
       return UsersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -29,7 +29,7 @@ class UserApiInterfaceImpl extends UserApiInterface {
         USERS_URL + '/$userId',
       );
       return UsersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -40,7 +40,7 @@ class UserApiInterfaceImpl extends UserApiInterface {
     try {
       final data = await httpApiClient().put(USERS_URL, data: request);
       return UsersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -51,7 +51,7 @@ class UserApiInterfaceImpl extends UserApiInterface {
     try {
       final data = await httpApiClient().post(ME_FLAG + '/$userId');
       return UsersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -62,7 +62,7 @@ class UserApiInterfaceImpl extends UserApiInterface {
     try {
       final data = await httpApiClient().delete(ME_FLAG + '/$userId');
       return UsersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -73,7 +73,7 @@ class UserApiInterfaceImpl extends UserApiInterface {
     try {
       final data = await httpApiClient().post(ME_BLOCK + '/$userId');
       return FollowInfoResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -84,7 +84,7 @@ class UserApiInterfaceImpl extends UserApiInterface {
     try {
       final data = await httpApiClient().delete(ME_BLOCK + '/$userId');
       return FollowInfoResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -95,7 +95,7 @@ class UserApiInterfaceImpl extends UserApiInterface {
     try {
       final data = await httpApiClient().get(ME_BLOCK, queryParameters: request.toJson());
       return UsersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }

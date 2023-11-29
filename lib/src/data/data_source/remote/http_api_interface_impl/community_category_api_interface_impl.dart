@@ -13,7 +13,7 @@ class CommunityCategoryApiInterfaceImpl extends CommunityCategoryApiInterface {
       final data = await httpApiClient()
           .get(COMMUNITY_CATEGORY_V3, queryParameters: request.toJson());
       return CreateCommunityResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
