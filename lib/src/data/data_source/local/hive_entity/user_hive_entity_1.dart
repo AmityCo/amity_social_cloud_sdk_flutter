@@ -29,6 +29,9 @@ class UserHiveEntity extends HiveObject {
   /// User avatart url (direct Url)
   String? avatarCustomUrl;
 
+  /// User path with networkid 
+  String? path;
+
   /// User flag count
   int? flagCount;
   //  HashFlag hashFlag;
