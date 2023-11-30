@@ -18,6 +18,7 @@ class UserResponse {
     this.isGlobalBan,
     this.createdAt,
     this.updatedAt,
+    this.path
   });
 
   /// DocId for user
@@ -61,6 +62,9 @@ class UserResponse {
   /// User updated data
   final DateTime? updatedAt;
 
+  /// User path with networkid
+  final String? path;
+
   /// Factory method to create user model from the json
   factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
         id: json["_id"],
@@ -70,6 +74,7 @@ class UserResponse {
         displayName: json["displayName"],
         description: json["description"],
         avatarFileId: json["avatarFileId"],
+        path: json["path"],
         avatarCustomUrl: json["avatarCustomUrl"],
         flagCount: json["flagCount"],
         hashFlag: json["hashFlag"] == null
@@ -97,6 +102,7 @@ class UserResponse {
         "displayName": displayName,
         "description": description,
         "avatarFileId": avatarFileId,
+        "path": path,
         "avatarCustomUrl": avatarCustomUrl,
         "flagCount": flagCount,
         "hashFlag": hashFlag?.toJson(),

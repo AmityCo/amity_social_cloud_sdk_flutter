@@ -137,10 +137,10 @@ class Video {
   factory Video.fromJson(Map<String, dynamic> json) => Video(
       width: json['width'],
       height: json['height'],
-      duration: json['duration'],
+      duration: json['duration'].toDouble(),
       bitrate: json['bit_rate'],
       avgframerate: json['avg_frame_rate'].toDouble(),
-      displayaspectratio: json['display_aspect_ratio'],
+      displayaspectratio: json['display_aspect_ratio'].toDouble(),
       colourprimaries: json['colour_primaries']
   );
   

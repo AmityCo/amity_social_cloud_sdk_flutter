@@ -16,6 +16,7 @@ extension UserResponseExtension on UserResponse {
       ..updatedAt = updatedAt
       ..permissions = permissions
       ..roles = roles
+      ..path = path
       ..isGlobalBan = isGlobalBan
       ..flagCount = flagCount
       ..hashFlag = hashFlag?.toJson();

@@ -29,6 +29,9 @@ class AmityUser {
   /// Avatar Url
   String? avatarUrl;
 
+  /// User Path
+  String? path;
+
   /// Avatar Custom Url
   String? avatarCustomUrl;
 
