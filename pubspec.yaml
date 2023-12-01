@@ -21,9 +21,9 @@ dependencies:
   hive: ^2.2.1
   hive_flutter: ^1.1.0
   # http: ^1.1.0
-  mqtt_client: ^10.0.0
+  mqtt_client: ^9.7.4
   path_provider: ^2.0.15
-  socket_io_client: ^2.0.3+1
+  socket_io_client: ^1.0.2
   uuid: ^4.2.1
   amity_sdk_api: ^0.0.1
 # Add the lib from the pub dev before deploying
