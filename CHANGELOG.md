@@ -1,3 +1,7 @@
+## 0.31.0
+* Fix: Exception when scrolling through the posts
+* Feat: Auto Subscribe to the the network
+
 ## 0.30.0
 * Feat: Added Support for getting live and recorded streams
 * Feat: Configuration for AmityVideoPlayer added as well

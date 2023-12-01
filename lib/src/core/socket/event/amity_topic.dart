@@ -17,6 +17,8 @@ abstract class AmityTopic {
 
   factory AmityTopic.COMMUNITY(AmityCommunity amityCommunity, AmityCommunityEvents events) = AmityTopicCommunity;
 
+  factory AmityTopic.NETWORK(String networkId) = AmityTopicNetwork;
+
   /// Generate topic
   String generateTopic();
 
@@ -51,6 +53,16 @@ class AmityTopicPost extends AmityTopic {
   }
 }
 
+///  Amity Topic for Network
+class AmityTopicNetwork extends AmityTopic {
+  AmityTopicNetwork(String networkId) : super._('network', networkId, "");
+
+  @override
+  String generateTopic() {
+    return id;
+  }
+}
+
 /// Amity Topic for comment
 class AmityTopicComment extends AmityTopic {
   final AmityComment amityComment;
@@ -70,7 +82,7 @@ class AmityTopicComment extends AmityTopic {
 class AmityTopicCommunity extends AmityTopic {
   final AmityCommunity amityCommunity;
   final AmityCommunityEvents event;
-  AmityTopicCommunity(this.amityCommunity, this.event) : super._('comment', amityCommunity.communityId!, event.name);
+  AmityTopicCommunity(this.amityCommunity, this.event) : super._('community', amityCommunity.communityId!, event.name);
 
   @override
   String generateTopic() {

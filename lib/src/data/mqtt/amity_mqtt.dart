@@ -80,7 +80,8 @@ class AmityMQTT {
     }
 
     if (activeClient?.connectionStatus!.state == MqttConnectionState.connected) {
-      logger('AMITY_MQTT::Mosquitto client connected');
+      logger('AMITY_MQTT::Mosquitto client connected ---->  ${activeClient?.clientIdentifier}');
+      _subscribeToNetwork();
     } else {
       logger(
           'AMITY_MQTT::ERROR Mosquitto client connection failed - disconnecting, status is ${activeClient?.connectionStatus}');
@@ -93,6 +94,15 @@ class AmityMQTT {
     //     '5b028e4a673f81000fb040e7/social/community/61f2b7289ed52800da3e9c31/post/+');
 
     return MQTT_CONNECTED;
+  }
+
+  void _subscribeToNetwork(){
+    final currentUser = AmityCoreClient.getCurrentUser();
+      var split = currentUser.path?.split("/");
+      String? networkId = split?[0];
+      if(networkId!=null){
+        subscribe(AmityTopic.NETWORK(networkId));
+      }
   }
 
   void _addClientListeners() {
