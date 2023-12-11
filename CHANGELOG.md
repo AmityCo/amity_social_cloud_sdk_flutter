@@ -1,5 +1,5 @@
 ## 0.33.0
-* Feat: Upgraded, Upgradable libraries that would cuase breaking changes
+* Feat: Upgraded, Upgradable libraries that would not cuase breaking changes
 * Refactor: getCurentUserRoles is depercated in favor of getCurrentUserRoles for Amity Community Repository
 * Fix: Crash when getting current user roles for community 
 * Fix: Crash when getting reations of post
