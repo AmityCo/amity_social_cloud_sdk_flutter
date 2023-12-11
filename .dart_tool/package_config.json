@@ -500,12 +500,6 @@
       "languageVersion": "2.18"
     },
     {
-      "name": "sprintf",
-      "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/sprintf-7.0.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
       "name": "stack_trace",
       "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/stack_trace-1.11.0",
       "packageUri": "lib/",
@@ -567,9 +561,9 @@
     },
     {
       "name": "uuid",
-      "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/uuid-4.2.1",
+      "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/uuid-3.0.7",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "2.12"
     },
     {
       "name": "vector_math",
