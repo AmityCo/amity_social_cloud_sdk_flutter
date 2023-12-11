@@ -16,7 +16,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
     try {
       final data = await httpApiClient().get('$POST_V3/$postId');
       return CreatePostResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -27,7 +27,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
     try {
       final data = await httpApiClient().post(POST_V4, data: request);
       return CreatePostResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -38,7 +38,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
     try {
       final data = await httpApiClient().delete('$POST_V3/$postId');
       return true;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -49,7 +49,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
     try {
       final data = await httpApiClient().post('$POST_V3/$postId/flag');
       return CreatePostResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -60,7 +60,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
     try {
       final data = await httpApiClient().post('$POST_V3/$postId/isflagbyme');
       return true;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -72,7 +72,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
       final data =
           await httpApiClient().get(POST_V4, queryParameters: request.toJson());
       return CreatePostResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       print("POST API ERROR ---> ${error.response!.data}");
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
@@ -84,7 +84,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
     try {
       final data = await httpApiClient().delete('$POST_V3/$postId/unflag');
       return CreatePostResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -96,7 +96,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
       final data = await httpApiClient()
           .put('$POST_V4/${request.postId}', data: request);
       return CreatePostResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -107,7 +107,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
     try {
       final data = await httpApiClient().post('$POST_V3/$postId/approve');
       return true;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -118,7 +118,7 @@ class PublicPostApiInterfaceImpl extends PublicPostApiInterface {
     try {
       final data = await httpApiClient().post('$POST_V3/$postId/decline');
       return true;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }

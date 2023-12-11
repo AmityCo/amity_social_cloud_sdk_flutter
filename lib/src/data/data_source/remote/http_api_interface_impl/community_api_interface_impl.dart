@@ -12,7 +12,7 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
     try {
       final data = await httpApiClient().post(COMMUNITY_V3, data: request);
       return CreateCommunityResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -23,7 +23,7 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
     try {
       final data = await httpApiClient().get('$COMMUNITY_V3/$communityId');
       return CreateCommunityResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -36,7 +36,7 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
       final data = await httpApiClient()
           .put('$COMMUNITY_V3/${request.communityId}', data: request);
       return CreateCommunityResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -47,7 +47,7 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
     try {
       await httpApiClient().delete('$COMMUNITY_V3/$communityId');
       return true;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -62,7 +62,7 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
       final data =
           await client.get(COMMUNITY_V3, queryParameters: request.toJson());
       return CreateCommunityResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -75,7 +75,7 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
       final data = await httpApiClient()
           .get('$COMMUNITY_V3/recommended', queryParameters: request.toJson());
       return CreateCommunityResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -88,7 +88,7 @@ class CommunityApiInterfaceImpl extends CommunityApiInterface {
       final data = await httpApiClient()
           .get('$COMMUNITY_V3/top-trending', queryParameters: request.toJson());
       return CreateCommunityResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }

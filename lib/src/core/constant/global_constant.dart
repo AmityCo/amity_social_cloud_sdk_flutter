@@ -55,6 +55,7 @@ const COMMUNITY_FEED_V3_URL = 'api/v3/community-feeds';
 const COMMUNITY_CATEGORY_V3_URL = 'api/v3/community-categories';
 
 const REACTION_V2_URL = 'api/v2/reactions';
+const REACTION_V3_URL = 'api/v3/reactions';
 
 const REGISTER_NOTIFICATION_V1_URL = 'v1/notification';
 const UNREGISTER_NOTIFICATION_V1_URL = 'v1/notification';

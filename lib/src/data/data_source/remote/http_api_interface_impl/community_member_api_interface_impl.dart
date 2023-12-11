@@ -15,7 +15,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
           '$COMMUNITY_V3/${request.communityId}/$USERS',
           queryParameters: request.toJson());
       return GetCommunityMembersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -30,7 +30,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
       final data = await httpApiClient()
           .post('$COMMUNITY_V3/$communityId/$JOIN', data: param);
       return GetCommunityMembersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -45,7 +45,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
       final data = await httpApiClient()
           .delete('$COMMUNITY_V3/$communityId/$LEAVE', data: param);
       return GetCommunityMembersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -59,7 +59,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
           '$COMMUNITY_V3/${request.communityId}/$USERS',
           data: request.toJson());
       return GetCommunityMembersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -73,7 +73,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
           '$COMMUNITY_V3/${request.communityId}/$USERS',
           data: request.toJson());
       return GetCommunityMembersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -87,7 +87,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
           '$COMMUNITY_V3/${request.communityId}/$USERS/$ROLES',
           data: request.toJson());
       return GetCommunityMembersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -101,7 +101,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
           '$COMMUNITY_V3/${request.communityId}/$USERS/$ROLES',
           data: request.toJson());
       return GetCommunityMembersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -115,7 +115,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
           '$COMMUNITY_V3/${request.communityId}/$USERS/$BAN',
           data: request.toJson());
       return GetCommunityMembersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -129,7 +129,7 @@ class CommunityMemberApiInterfaceImpl extends CommunityMemmberApiInterface {
           '$COMMUNITY_V3/${request.communityId}/$USERS/$UNBAN',
           data: request.toJson());
       return GetCommunityMembersResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }

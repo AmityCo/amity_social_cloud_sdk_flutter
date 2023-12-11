@@ -20,7 +20,7 @@ class FileApiInterfaceImpl extends FileApiInterface {
     try {
       final data = await httpApiClient().delete('$FILE_V3/$fileId');
       return true;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -31,7 +31,7 @@ class FileApiInterfaceImpl extends FileApiInterface {
     try {
       final data = await httpApiClient().get('$FILE_V3/$fileId');
       return CreatePostResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -62,7 +62,7 @@ class FileApiInterfaceImpl extends FileApiInterface {
       final data = await httpApiClient()
           .post('$FILE_V3/', data: formData, onSendProgress: onUploadProgress, cancelToken: cancelToken);
       return fileResponseFromList(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       return Future.error(error.toAmityExcetion());
     }
   }
@@ -96,7 +96,7 @@ class FileApiInterfaceImpl extends FileApiInterface {
           .post('$IMAGE_FILE_V4/', data: formData, onSendProgress: onUploadProgress, cancelToken: cancelToken);
 
       return fileResponseFromList(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       return Future.error(error.toAmityExcetion());
     }
   }
@@ -129,7 +129,7 @@ class FileApiInterfaceImpl extends FileApiInterface {
           .post('$VIDEO_FILE_V4/', data: formData, onSendProgress: onUploadProgress, cancelToken: cancelToken);
 
       return fileResponseFromList(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       return Future.error(error.toAmityExcetion());
     }
   }

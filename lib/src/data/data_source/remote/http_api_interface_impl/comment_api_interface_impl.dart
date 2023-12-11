@@ -18,7 +18,7 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
     try {
       final data = await httpApiClient().post(COMMENT_V3, data: request);
       return CreateCommentResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -29,7 +29,7 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
     try {
       final data = await httpApiClient().delete('$COMMENT_V3/$commentId');
       return true;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -43,7 +43,7 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
       final data = await httpApiClient()
           .get(COMMENT_V3, queryParameters: request.toJson());
       return CreateCommentResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -54,7 +54,7 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
     try {
       final data = await httpApiClient().post('$COMMENT_V3/$commentId/flag');
       return CreateCommentResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -65,7 +65,7 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
     try {
       final data = await httpApiClient().get('$COMMENT_V3/$commentId');
       return CreateCommentResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -77,7 +77,7 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
       final data =
           await httpApiClient().get('$COMMENT_V3/$commentId/isflagbyme');
       return true;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -89,7 +89,7 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
       final data =
           await httpApiClient().delete('$COMMENT_V3/$commentId/unflag');
       return CreateCommentResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -102,7 +102,7 @@ class CommentApiInterfaceImpl extends CommentApiInterface {
       final data =
           await httpApiClient().put('$COMMENT_V3/$commentId', data: request);
       return CreateCommentResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }

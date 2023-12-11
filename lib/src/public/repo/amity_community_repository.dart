@@ -1,5 +1,6 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/usecase/community/member/community_member_get_optional_usercase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 
 /// Community Repository for all community related operation
@@ -109,15 +110,21 @@ class AmityCommunityRepository {
   }
 
   /// Get User Roles for the Community
-  Future<List<String>> _getUserRoles(String communityId, String userId) async {
-    AmityCommunityMember amityCommunityMember = await serviceLocator<CommunityMemberGetUsecase>().get(
+  Future<List<String>?> _getUserRoles(String communityId, String userId) async {
+    AmityCommunityMember? amityCommunityMember = await serviceLocator<CommunityMemberGetOptionalUsecase>().get(
         CommunityMemberPermissionCheckRequest(
             communityId: communityId, userId: userId, permission: AmityPermission.BAN_USER));
-    return Future.value(amityCommunityMember.roles);
+    return Future.value(amityCommunityMember?.roles);
+  }
+
+  /// Deprecated menthod to get current user roles for community
+  @Deprecated("Use AmitySocialClient.newCommunityRepository().getCurrentUserRoles(communityId) instead")
+  Future<List<String>?> getCurentUserRoles(String communityId) async {
+    return _getUserRoles(communityId, AmityCoreClient.getUserId());
   }
 
   /// Get Current logged in User Roles for the Community
-  Future<List<String>> getCurentUserRoles(String communityId) async {
+  Future<List<String>?> getCurrentUserRoles(String communityId) async {
     return _getUserRoles(communityId, AmityCoreClient.getUserId());
   }
 }

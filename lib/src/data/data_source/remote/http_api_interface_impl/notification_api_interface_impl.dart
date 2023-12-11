@@ -16,7 +16,7 @@ class NotificationApiInterfaceImpl extends NotificationApiInterface {
           data: request.toJson(),
           options: dio.Options(
               headers: {'X-API-Key': amityCoreClientOption.apiKey}));
-    } on dio.DioError catch (error) {
+    } on dio.DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -29,7 +29,7 @@ class NotificationApiInterfaceImpl extends NotificationApiInterface {
           data: request.toJson(),
           options: dio.Options(
               headers: {'X-API-Key': amityCoreClientOption.apiKey}));
-    } on dio.DioError catch (error) {
+    } on dio.DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }

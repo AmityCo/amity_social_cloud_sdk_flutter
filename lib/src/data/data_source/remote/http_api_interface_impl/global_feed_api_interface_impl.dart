@@ -15,7 +15,7 @@ class GlobalFeedApiInterfaceImpl extends GlobalFeedApiInterface {
       final data = await httpApiClient()
           .get(GLOBAL_FEED_V3_URL, queryParameters: request.toJson());
       return CreatePostResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     } catch (error) {

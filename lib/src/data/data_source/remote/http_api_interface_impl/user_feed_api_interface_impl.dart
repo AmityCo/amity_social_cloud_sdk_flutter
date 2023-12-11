@@ -12,7 +12,7 @@ class UserFeedApiInterfaceImpl extends UserFeedApiInterface {
           '$USER_FEED_V3_URL/${request.userId}',
           queryParameters: request.toJson());
       return CreatePostResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }

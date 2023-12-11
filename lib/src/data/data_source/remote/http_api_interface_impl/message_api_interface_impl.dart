@@ -16,7 +16,7 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
       final data = await httpApiClient()
           .get(MESSAGE_V3, queryParameters: request.toJson());
       return CreateMessageResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -29,7 +29,7 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
       final data =
           await httpApiClient().post(MESSAGE_V3, data: request.toJson());
       return CreateMessageResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -42,7 +42,7 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
       final data = await httpApiClient()
           .put('$MESSAGE_V3/${request.messageId}', data: request.toJson());
       return CreateMessageResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -54,7 +54,7 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
       await httpApiClient()
           .delete('$MESSAGE_V3/$messageId', data: {'messageId': messageId});
       return;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -67,7 +67,7 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
         '$MESSAGE_V3/$messageId',
       );
       return CreateMessageResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -79,7 +79,7 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
       await httpApiClient().get('$MESSAGE_V3/$messageId/isFlaggedByMe',
           queryParameters: {'messageId': messageId});
       return;
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -91,7 +91,7 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
       final data = await httpApiClient()
           .post('$MESSAGE_V3/$messageId/flag', data: {'messageId': messageId});
       return CreateMessageResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }
@@ -103,7 +103,7 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
       final data = await httpApiClient().delete('$MESSAGE_V3/$messageId/unflag',
           data: {'messageId': messageId});
       return CreateMessageResponse.fromJson(data.data);
-    } on DioError catch (error) {
+    } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());
     }

@@ -4,7 +4,7 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 /// [CommunityMemberGetOptionalUsecase]
-class CommunityMemberGetOptionalUsecase extends UseCase<AmityCommunityMember,
+class CommunityMemberGetOptionalUsecase extends UseCaseWithOptionalReturnValue<AmityCommunityMember,
     CommunityMemberPermissionCheckRequest> {
   /// Community Member Repo
   final CommunityMemberRepo communityMemberRepo;
@@ -13,10 +13,10 @@ class CommunityMemberGetOptionalUsecase extends UseCase<AmityCommunityMember,
   CommunityMemberGetOptionalUsecase({required this.communityMemberRepo});
 
   @override
-  Future<AmityCommunityMember> get(
+  Future<AmityCommunityMember?> get(
       CommunityMemberPermissionCheckRequest params) async {
     final amityMember =
-        await communityMemberRepo.getMember(params.communityId, params.userId);
+        await communityMemberRepo.getMemberOptional(params.communityId, params.userId);
     return amityMember;
   }
 }
