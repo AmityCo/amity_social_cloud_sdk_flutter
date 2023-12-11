@@ -9,9 +9,9 @@
     },
     {
       "name": "amity_sdk_api",
-      "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/amity_sdk_api-0.0.1",
+      "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/amity_sdk_api-0.0.2",
       "packageUri": "lib/",
-      "languageVersion": "3.1"
+      "languageVersion": "2.15"
     },
     {
       "name": "analyzer",
@@ -632,7 +632,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2023-12-04T03:29:52.964432Z",
+  "generated": "2023-12-01T09:09:01.470162Z",
   "generator": "pub",
   "generatorVersion": "3.1.0"
 }

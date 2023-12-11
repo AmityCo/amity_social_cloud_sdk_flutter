@@ -1,3 +1,7 @@
+
+## 0.32.0
+* Upgrade: amity_sdk_version
+
 ## 0.31.0
 * Fix: Exception when scrolling through the posts
 * Feat: Auto Subscribe to the the network
