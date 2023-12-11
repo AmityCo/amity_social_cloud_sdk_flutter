@@ -11,7 +11,7 @@ class ReactionApiInterfaceImpl extends ReactionApiInterface {
   Future<GetReactionResponse> getReaction(GetReactionRequest request) async {
     try {
       final data = await httpApiClient()
-          .get(REACTION_V2_URL, queryParameters: request.toJson());
+          .get(REACTION_V3_URL, queryParameters: request.toJson());
       return GetReactionResponse.fromJson(data.data);
     } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);

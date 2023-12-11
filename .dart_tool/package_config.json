@@ -339,9 +339,9 @@
     },
     {
       "name": "mqtt_client",
-      "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/mqtt_client-10.0.0",
+      "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/mqtt_client-9.8.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "2.12"
     },
     {
       "name": "node_preamble",
@@ -459,13 +459,13 @@
     },
     {
       "name": "socket_io_client",
-      "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/socket_io_client-2.0.3+1",
+      "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/socket_io_client-1.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "socket_io_common",
-      "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/socket_io_common-2.0.3",
+      "rootUri": "file:///Users/amity/.pub-cache/hosted/pub.dev/socket_io_common-1.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -632,7 +632,7 @@
       "languageVersion": "2.15"
     }
   ],
-  "generated": "2023-11-28T08:15:11.252545Z",
+  "generated": "2023-12-04T03:29:52.964432Z",
   "generator": "pub",
   "generatorVersion": "3.1.0"
 }

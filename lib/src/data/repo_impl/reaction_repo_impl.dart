@@ -212,17 +212,17 @@ class ReactionRepoImpl extends ReactionRepo {
     final data = await reactionApiInterface.getReaction(request);
 
     //Convert to Reaction Hive Entity
-    final reactionHiveEntities = data.results.reactions.isNotEmpty
-        ? data.results.reactions.first.reactors
+    final reactionHiveEntities = data.reactions.isNotEmpty
+        ? data.reactions.first.reactors
             .map((e) => e.convertToReactionHiveEntity(
-                data.results.reactions.first.referenceId,
-                data.results.reactions.first.referenceType))
+                data.reactions.first.referenceId,
+                data.reactions.first.referenceType))
             .toList()
         : <ReactionHiveEntity>[];
 
     //Convert to User Hive Entity
     final userHiveEntities =
-        data.results.users.map((e) => e.convertToUserHiveEntity()).toList();
+        data.users.map((e) => e.convertToUserHiveEntity()).toList();
 
     //Save the reaction
     Stream.fromIterable(reactionHiveEntities).asyncMap(

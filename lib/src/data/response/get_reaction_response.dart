@@ -14,21 +14,28 @@ String getReactionResponseToJson(GetReactionResponse data) =>
 
 class GetReactionResponse {
   GetReactionResponse({
-    required this.results,
+    required this.reactions,
+    required this.users,
     required this.paging,
   });
 
-  final Results results;
+
   final PagingResponse paging;
+  final List<ReactionResponse> reactions;
+  final List<UserResponse> users;
 
   factory GetReactionResponse.fromJson(Map<String, dynamic> json) =>
       GetReactionResponse(
-        results: Results.fromJson(json["results"]),
+         reactions: List<ReactionResponse>.from(
+            json["reactions"].map((x) => ReactionResponse.fromJson(x))),
+        users: List<UserResponse>.from(
+            json["users"].map((x) => UserResponse.fromJson(x))),
         paging: PagingResponse.fromJson(json["paging"]),
       );
 
   Map<String, dynamic> toJson() => {
-        "results": results.toJson(),
+        "reactions": List<dynamic>.from(reactions.map((x) => x.toJson())),
+        "users": List<dynamic>.from(users.map((x) => x.toJson())),
         "paging": paging.toJson(),
       };
 }
