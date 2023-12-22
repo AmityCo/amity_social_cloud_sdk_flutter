@@ -6,7 +6,7 @@ part 'message_hive_entity_18.g.dart';
 
 /// Post Hive entity
 @HiveType(typeId: 18)
-class MessageHiveEntity extends HiveObject {
+class MessageHiveEntity extends  EkoObject {
   /// Message ID
   String? messageId;
 
@@ -157,5 +157,10 @@ class MessageHiveEntity extends HiveObject {
       mentionees: mentionees ?? this.mentionees,
       syncState: syncState ?? this.syncState,
     );
+  }
+  
+  @override
+  String? getId() {
+    return messageId;
   }
 }

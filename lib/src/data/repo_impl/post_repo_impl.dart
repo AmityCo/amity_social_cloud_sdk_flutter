@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/mapper/post_model_mapper.dart';
+import 'package:amity_sdk/src/core/utils/model_mapper.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/repo/amity_object_repository.dart';
 
 /// Post Repo
-class PostRepoImpl extends PostRepo {
+class PostRepoImpl extends PostRepo with AmityObjectRepository<PostHiveEntity, AmityPost> {
+  
   /// Public post API interface
   final PublicPostApiInterface publicPostApiInterface;
 
@@ -149,6 +153,39 @@ class PostRepoImpl extends PostRepo {
   bool hasLocalPost(String postId) {
     return dbAdapterRepo.postDbAdapter.getPostEntity(postId) != null;
   }
+
+
+  @override
+  Future<AmityPost?> fetchAndSave(String objectId) async {
+    var post = await getPostById(objectId);
+    if(post != null){
+      return post;
+    }else{
+      await deletePostById(objectId);
+      return Future.value(null);
+    }
+  }
+
+  @override
+  ModelMapper<PostHiveEntity, AmityPost> mapper() {
+    return PostModelMapper();
+  }
+
+  @override
+  StreamController<PostHiveEntity> observeFromCache(String objectId) {
+    final streamController = StreamController<PostHiveEntity>();
+    dbAdapterRepo.postDbAdapter.listenPostEntity(objectId).listen((event) {
+      streamController.add(event);
+    });
+    return streamController;
+
+  }
+
+  @override
+  Future<PostHiveEntity?> queryFromCache(String objectId) async {
+    return dbAdapterRepo.postDbAdapter.getPostEntity(objectId);
+  }
+
   
   @override
   Stream<List<AmityPost>> listenPosts(RequestBuilder<GetPostRequest> request) {
@@ -162,6 +199,5 @@ class PostRepoImpl extends PostRepo {
       return list;
     });
   }
-  
   
 }

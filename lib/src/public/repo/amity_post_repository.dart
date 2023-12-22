@@ -2,18 +2,35 @@ import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/usecase/post/post_live_object_usecase.dart';
 import 'package:amity_sdk/src/public/public.dart';
+import 'package:amity_sdk/src/public/query_builder/post/post_get_live_object.dart';
 
 /// Post Repo to get [AmityPost]
 class PostRepository {
+
+  PostGetLiveObject live = PostGetLiveObject();
+
+
   /* begin_public_function 
   id: post.get, poll.get, post.get_by_ids
   */
   /// get composed [AmityPost] for the psot
+  @Deprecated("Use AmitySocialClient.newPostRepository().live.getPost(postId) instead")
   Future<AmityPost> getPost(String postId) {
     return serviceLocator<GetPostByIdUseCase>().get(postId);
   }
   /* end_public_function */
+
+
+  // /* begin_public_function 
+  // id: post.get, poll.get, post.get_by_ids
+  // */
+  // /// get composed [AmityPost] for the psot
+  // Stream<AmityPost> getPostLiveObject(String postId) {
+  //   return PostLiveObjectUseCase().execute(postId);
+  // }
+  // /* end_public_function */
 
   /* begin_public_function 
   id: post.query

@@ -2,20 +2,21 @@ import 'dart:developer';
 
 import 'package:amity_sdk/src/core/socket/amity_socket.dart';
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/tombstone_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/tombstone_db_adapter_impl.dart';
+import 'package:amity_sdk/src/data/repo_impl/tombstone_repo_impl.dart';
+import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/repo/tombstone_repo.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/stream_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/stream_db_adapter_impl.dart';
 import 'package:amity_sdk/src/data/data_source/remote/api_interface/stream_api_interface.dart';
 import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/stream_api_interface_impl.dart';
 import 'package:amity_sdk/src/data/repo_impl/stream_repo_impl.dart';
 import 'package:amity_sdk/src/domain/composer_usecase/stream_composer_usecase.dart';
-import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/domain/repo/stream_repo.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_get_optional_usercase.dart';
 import 'package:amity_sdk/src/domain/usecase/post/post_observe_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/stream/stream_get_local_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/stream/stream_has_local_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/stream/stream_observe_usecase.dart';
-import 'package:amity_sdk/src/domain/usecase/stream/stream_qurey_usecase.dart';
 import 'package:amity_sdk/src/functions/stream_function.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:amity_sdk/src/public/repo/stream/stream_repository.dart';
@@ -101,9 +102,12 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<ChannelUserDbAdapter>(
         () => ChannelUserDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<TombstoneDbAdapter>(
+        () => TombstoneDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]
+    );
     serviceLocator.registerSingletonAsync<StreamDbAdapter>(
-        () => StreamDbAdapterImpl(dbClient: serviceLocator()).init(),
-        dependsOn: [DBClient]);
+        () => StreamDbAdapterImpl(dbClient: serviceLocator()).init(),dependsOn: [DBClient]);
 
     //Register Db adapter Repo which hold all the Db Adapters
     serviceLocator.registerLazySingleton<DbAdapterRepo>(
@@ -122,7 +126,9 @@ class SdkServiceLocator {
           reactionDbAdapter: serviceLocator(),
           channelDbAdapter: serviceLocator(),
           channelUserDbAdapter: serviceLocator(),
-          streamDbAdapter: serviceLocator()),
+          tombstoneDbAdapter: serviceLocator(),
+          streamDbAdapter: serviceLocator()
+          ),
     );
 
     //-data_source/remote/
@@ -301,6 +307,10 @@ class SdkServiceLocator {
 
     serviceLocator.registerLazySingleton<TopicRepository>(
       () => TopicRepositoryImpl(amityMqtt: serviceLocator()),
+    );
+
+    serviceLocator.registerLazySingleton<TombstoneRepository>(
+      () => TombstoneRepoImpl(tombstoneDbAdapter: serviceLocator()),
     );
 
     //-UserCase
