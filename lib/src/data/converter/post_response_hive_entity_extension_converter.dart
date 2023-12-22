@@ -40,7 +40,8 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
         amityPostData = FileData(postId: postId, fileId: data!.fileId);
         break;
       case AmityDataType.LIVESTREAM:
-        amityPostData = LiveStreamData(postId: postId, streamId: data!.streamId , rawData: data!.toMap());
+        amityPostData = LiveStreamData(
+            postId: postId, streamId: data!.streamId, rawData: data!.toMap());
         break;
       case AmityDataType.POLL:
         amityPostData = PollData(
@@ -88,4 +89,31 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
       ..flaggedByMe = flaggedByMe
       ..mentionees = mentionees;
   }
+
+  bool isMatchingFilter(GetPostRequest request) {
+    return isMatchingTargetType(request.targetType) &&
+        isMatchingTargetid(request.targetId) 
+        // &&
+        // isMatchingType(request.feedType) &&
+        // isMatchingDeleted(request.isDeleted ?? false)
+        ;
+  }
+
+  bool isMatchingTargetType(String targetType) {
+    return this.targetType == targetType;
+  }
+
+  bool isMatchingTargetid(String targetId) {
+    return this.targetId == targetId;
+  }
+
+
+
+  // bool isMatchingDeleted(bool isDeleted) {
+  //   return this.isDeleted == isDeleted;
+  // }
+
+  // bool isMatchingType(String? type) {
+  //   return dataType == type;
+  // }
 }

@@ -149,4 +149,19 @@ class PostRepoImpl extends PostRepo {
   bool hasLocalPost(String postId) {
     return dbAdapterRepo.postDbAdapter.getPostEntity(postId) != null;
   }
+  
+  @override
+  Stream<List<AmityPost>> listenPosts(RequestBuilder<GetPostRequest> request) {
+    final req = request.call();
+    return dbAdapterRepo.postDbAdapter.listenPostEntities(request).map((event) {
+      final List<AmityPost> list = [];
+      for (var element in event) {
+        list.add(element.convertToAmityPost());
+      }
+      list.sort((a, b) => a.createdAt!.compareTo(b.createdAt!) * -1);
+      return list;
+    });
+  }
+  
+  
 }

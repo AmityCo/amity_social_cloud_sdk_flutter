@@ -11,6 +11,7 @@ import 'package:amity_sdk/src/domain/composer_usecase/stream_composer_usecase.da
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/repo/stream_repo.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_get_optional_usercase.dart';
+import 'package:amity_sdk/src/domain/usecase/post/post_observe_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/stream/stream_get_local_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/stream/stream_has_local_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/stream/stream_observe_usecase.dart';
@@ -654,6 +655,11 @@ class SdkServiceLocator {
         StreamObserveUseCase(
             streamRepo: serviceLocator(),
             streamComposerUseCase: serviceLocator()));
+
+    serviceLocator.registerLazySingleton<PostObserveUseCase>(() =>
+        PostObserveUseCase(
+            postRepo: serviceLocator(),
+            postComposerUsecase: serviceLocator()));
 
     serviceLocator.registerLazySingleton<StreamHasLocalUseCase>(
         () => StreamHasLocalUseCase(streamRepo: serviceLocator()));

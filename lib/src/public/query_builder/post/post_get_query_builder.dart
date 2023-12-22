@@ -105,4 +105,38 @@ class AmityPostGetQueryBuilder {
 
     return data;
   }
+
+
+  GetPostRequest build({int? pageSize = 20}) {
+    if (_sortOption != null) _request.sortBy = _sortOption;
+    if (_hasFlag != null) _request.hasFlag = _hasFlag;
+    if (_amityFeedType != null) _request.feedType = _amityFeedType;
+
+    _request.isDeleted = _isDeleted ?? true ? null : false;
+
+    if (_dataTypes != null && _dataTypes!.isNotEmpty) {
+      _request.dataTypes = _dataTypes;
+
+      //Disable matchOnlyParent filtering, because all parent post is text only.
+      _request.matchingOnlyParentPost = false;
+    }
+
+    if (_tags != null && _tags!.isNotEmpty) {
+      _request.tags = _tags;
+    }
+
+    _request.options = OptionsRequest();
+
+
+    return _request;
+  }
+
+
+  /// Query
+  Future<List<AmityPost>> query({String? token, int? limit = 20}) async {
+    final data =
+        await _useCase.get(build(pageSize: limit)..options!.token = token);
+
+    return data.data;
+  }
 }
