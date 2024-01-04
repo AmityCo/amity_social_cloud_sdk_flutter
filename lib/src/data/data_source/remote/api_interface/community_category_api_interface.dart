@@ -4,4 +4,8 @@ import 'package:amity_sdk/src/data/data.dart';
 abstract class CommunityCategoryApiInterface {
   Future<CreateCommunityResponse> communityCategoryQuery(
       GetCommunityCategoryRequest request);
+
+
+  Future<CreateCommunityResponse> getCommunityCategory(
+      String communityId);
 }
