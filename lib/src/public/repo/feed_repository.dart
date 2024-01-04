@@ -13,6 +13,16 @@ class FeedRepository {
   }
   /* end_public_function */
 
+
+  /* begin_public_function 
+  id: feed.query.custom_ranking_global_feed
+  */
+  /// Get Custom Ranking
+  AmityCustomRankingGlobalFeedQuery getCustomRankingGlobalFeed() {
+    return AmityCustomRankingGlobalFeedQuery(serviceLocator());
+  }
+  /* end_public_function */
+
   /* begin_public_function 
   id: feed.query.user_feed
   */

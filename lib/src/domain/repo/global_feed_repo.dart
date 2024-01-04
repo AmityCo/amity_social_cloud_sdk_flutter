@@ -7,4 +7,6 @@ abstract class GlobalFeedRepo {
       GetGlobalFeedRequest request);
   Stream<PageListData<List<AmityPost>, String>> getGlobalFeedStream(
       GetGlobalFeedRequest request);
+  Future<PageListData<List<AmityPost>, String>> getCustomPostRanking(
+      GetGlobalFeedRequest request);
 }

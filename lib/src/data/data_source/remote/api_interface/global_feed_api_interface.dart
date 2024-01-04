@@ -3,4 +3,5 @@ import 'package:amity_sdk/src/data/response/response.dart';
 
 abstract class GlobalFeedApiInterface {
   Future<CreatePostResponse> getGlobalFeed(GetGlobalFeedRequest request);
+  Future<CreatePostResponse> getCustomPostRanking(GetGlobalFeedRequest request);
 }

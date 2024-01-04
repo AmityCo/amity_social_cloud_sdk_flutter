@@ -15,6 +15,7 @@ import 'package:amity_sdk/src/data/repo_impl/stream_repo_impl.dart';
 import 'package:amity_sdk/src/domain/composer_usecase/stream_composer_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/category/community_get_category_usercase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_get_optional_usercase.dart';
+import 'package:amity_sdk/src/domain/usecase/feed/get_custom_ranking_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/post/post_observe_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/stream/stream_get_local_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/stream/stream_has_local_usecase.dart';
@@ -105,10 +106,10 @@ class SdkServiceLocator {
         dependsOn: [DBClient]);
     serviceLocator.registerSingletonAsync<TombstoneDbAdapter>(
         () => TombstoneDbAdapterImpl(dbClient: serviceLocator()).init(),
-        dependsOn: [DBClient]
-    );
+        dependsOn: [DBClient]);
     serviceLocator.registerSingletonAsync<StreamDbAdapter>(
-        () => StreamDbAdapterImpl(dbClient: serviceLocator()).init(),dependsOn: [DBClient]);
+        () => StreamDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
 
     //Register Db adapter Repo which hold all the Db Adapters
     serviceLocator.registerLazySingleton<DbAdapterRepo>(
@@ -128,8 +129,7 @@ class SdkServiceLocator {
           channelDbAdapter: serviceLocator(),
           channelUserDbAdapter: serviceLocator(),
           tombstoneDbAdapter: serviceLocator(),
-          streamDbAdapter: serviceLocator()
-          ),
+          streamDbAdapter: serviceLocator()),
     );
 
     //-data_source/remote/
@@ -538,9 +538,10 @@ class SdkServiceLocator {
 
     serviceLocator.registerLazySingleton<GetGlobalFeedUsecase>(
         () => GetGlobalFeedUsecase(serviceLocator(), serviceLocator()));
+    serviceLocator.registerLazySingleton<GetCustomRankingUseCase>(
+        () => GetCustomRankingUseCase(serviceLocator(), serviceLocator()));
     serviceLocator.registerLazySingleton<GetUserFeedUsecase>(
         () => GetUserFeedUsecase(serviceLocator(), serviceLocator()));
-
     serviceLocator.registerLazySingleton<FileUploadUsecase>(
         () => FileUploadUsecase(serviceLocator()));
     serviceLocator.registerLazySingleton<FileImageUploadUsecase>(
@@ -675,8 +676,7 @@ class SdkServiceLocator {
 
     serviceLocator.registerLazySingleton<PostObserveUseCase>(() =>
         PostObserveUseCase(
-            postRepo: serviceLocator(),
-            postComposerUsecase: serviceLocator()));
+            postRepo: serviceLocator(), postComposerUsecase: serviceLocator()));
 
     serviceLocator.registerLazySingleton<StreamHasLocalUseCase>(
         () => StreamHasLocalUseCase(streamRepo: serviceLocator()));
@@ -776,8 +776,8 @@ class SdkServiceLocator {
         () => TopicUnsubscriptionUseCase(topicRepo: serviceLocator()));
 
     //-data_source/remote/
-    serviceLocator.registerLazySingleton<StreamFunctionInterface>(
-        () => StreamFunction());
+    serviceLocator
+        .registerLazySingleton<StreamFunctionInterface>(() => StreamFunction());
 
     ///----------------------------------- Public Layer -----------------------------------///
     //-public_repo
