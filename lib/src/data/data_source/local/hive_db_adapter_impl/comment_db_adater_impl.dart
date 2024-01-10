@@ -14,11 +14,15 @@ class CommentDbAdapterImpl extends CommentDbAdapter {
 
   @override
   CommentHiveEntity? getCommentEntity(String id) {
-    return box.values
+    var comments = box.values
         .where(
           (element) => element.commentId == id,
         )
-        .toList().first;
+        .toList();
+    if (comments.isEmpty) {
+      return null;
+    }
+    return comments.first;
   }
 
   @override

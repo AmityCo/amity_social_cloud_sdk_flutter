@@ -8,7 +8,7 @@ part of 'tombstone_hive_entity_22.dart';
 
 class TombstoneHiveEntityAdapter extends TypeAdapter<TombstoneHiveEntity> {
   @override
-  final int typeId = 22;
+  final int typeId = 23;
 
   @override
   TombstoneHiveEntity read(BinaryReader reader) {
