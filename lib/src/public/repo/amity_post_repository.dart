@@ -84,4 +84,6 @@ class PostRepository {
     return serviceLocator<PostIsFlaggedByMeUsecase>().get(postId);
   }
   /* end_public_function */
+
+
 }

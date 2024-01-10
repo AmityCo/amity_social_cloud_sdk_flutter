@@ -139,4 +139,9 @@ class AmityPostGetQueryBuilder {
 
     return data.data;
   }
+
+
+  PostLiveCollection getLiveCollection({int? pageSize = 20}) {
+    return PostLiveCollection(request: (() => build(pageSize: pageSize)));
+  }
 }
