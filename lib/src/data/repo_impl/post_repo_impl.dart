@@ -8,8 +8,8 @@ import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/repo/amity_object_repository.dart';
 
 /// Post Repo
-class PostRepoImpl extends PostRepo with AmityObjectRepository<PostHiveEntity, AmityPost> {
-  
+class PostRepoImpl extends PostRepo
+    with AmityObjectRepository<PostHiveEntity, AmityPost> {
   /// Public post API interface
   final PublicPostApiInterface publicPostApiInterface;
 
@@ -106,6 +106,10 @@ class PostRepoImpl extends PostRepo with AmityObjectRepository<PostHiveEntity, A
   @override
   Future<PageListData<List<AmityPost>, String>> queryPost(
       GetPostRequest request) async {
+    if (request.options?.token == null) {
+      await dbAdapterRepo.postDbAdapter
+          .deletePostEntitiesByTargetId(request.targetId);
+    }
     final data = await publicPostApiInterface.queryPost(request);
     final amitPosts = await data.saveToDb<AmityPost>(dbAdapterRepo);
     return PageListData(amitPosts, data.paging!.next ?? '');
@@ -154,13 +158,12 @@ class PostRepoImpl extends PostRepo with AmityObjectRepository<PostHiveEntity, A
     return dbAdapterRepo.postDbAdapter.getPostEntity(postId) != null;
   }
 
-
   @override
   Future<AmityPost?> fetchAndSave(String objectId) async {
     var post = await getPostById(objectId);
-    if(post != null){
+    if (post != null) {
       return post;
-    }else{
+    } else {
       await deletePostById(objectId);
       return Future.value(null);
     }
@@ -178,7 +181,6 @@ class PostRepoImpl extends PostRepo with AmityObjectRepository<PostHiveEntity, A
       streamController.add(event);
     });
     return streamController;
-
   }
 
   @override
@@ -186,18 +188,22 @@ class PostRepoImpl extends PostRepo with AmityObjectRepository<PostHiveEntity, A
     return dbAdapterRepo.postDbAdapter.getPostEntity(objectId);
   }
 
-  
   @override
   Stream<List<AmityPost>> listenPosts(RequestBuilder<GetPostRequest> request) {
-    final req = request.call();
     return dbAdapterRepo.postDbAdapter.listenPostEntities(request).map((event) {
+      final req = request.call();
       final List<AmityPost> list = [];
       for (var element in event) {
         list.add(element.convertToAmityPost());
       }
-      list.sort((a, b) => a.createdAt!.compareTo(b.createdAt!) * -1);
+
+      if (req.sortBy == AmityPostSortOption.LAST_CREATED.apiKey) {
+        list.sort((a, b) => a.createdAt!.compareTo(b.createdAt!) * -1);
+      } else {
+        list.sort((a, b) => a.createdAt!.compareTo(b.createdAt!) * 1);
+      }
+
       return list;
     });
   }
-  
 }

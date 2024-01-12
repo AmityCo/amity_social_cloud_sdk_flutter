@@ -92,11 +92,8 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
 
   bool isMatchingFilter(GetPostRequest request) {
     return isMatchingTargetType(request.targetType) &&
-        isMatchingTargetid(request.targetId) 
-        // &&
-        // isMatchingType(request.feedType) &&
-        // isMatchingDeleted(request.isDeleted ?? false)
-        ;
+        isMatchingTargetid(request.targetId) &&
+        isMatchingDataType(request.dataTypes);
   }
 
   bool isMatchingTargetType(String targetType) {
@@ -107,13 +104,16 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
     return this.targetId == targetId;
   }
 
-
-
-  // bool isMatchingDeleted(bool isDeleted) {
-  //   return this.isDeleted == isDeleted;
-  // }
-
-  // bool isMatchingType(String? type) {
-  //   return dataType == type;
-  // }
+  bool isMatchingDataType(List<String>? dataTypes) {
+    if (dataTypes == null) {
+      return true;
+    } else {
+      for (String type in dataTypes) {
+        if (dataType == AmityDataTypeExtension.enumOf(type).value) {
+          return true;
+        }
+      }
+      return false;
+    }
+  }
 }

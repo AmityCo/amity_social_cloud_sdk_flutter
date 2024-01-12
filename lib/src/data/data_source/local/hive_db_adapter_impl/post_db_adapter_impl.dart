@@ -53,4 +53,14 @@ class PostDbAdapterImpl extends PostDbAdapter {
             )
         .toList());
   }
+  
+  @override
+  Future deletePostEntitiesByTargetId(String targetId) async {
+    box.values
+        .where((element) => element.targetId == targetId)
+        .forEach((element) {
+      box.delete(element.postId);
+    });
+    return;
+  }
 }
