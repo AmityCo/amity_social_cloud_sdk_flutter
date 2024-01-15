@@ -194,6 +194,13 @@ class PostRepoImpl extends PostRepo
       final req = request.call();
       final List<AmityPost> list = [];
       for (var element in event) {
+        // Temprorary Solution 
+        // Todo: Introduce Query Stream and remove this 
+        if (req.dataTypes == null) {
+          if (element.parentPostId != null) {
+            continue;
+          }
+        } 
         list.add(element.convertToAmityPost());
       }
 
