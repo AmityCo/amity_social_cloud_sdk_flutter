@@ -59,9 +59,12 @@ class PostComposerUsecase extends UseCase<AmityPost, AmityPost> {
         params.latestCommentIds!.isNotEmpty) {
       params.latestComments =
           await Stream.fromIterable(params.latestCommentIds!)
-              .asyncMap((element) async =>
-                  await commentRepo.getCommentByIdFromDb(element))
-              .toList();
+              .asyncMap((element) async {
+        AmityComment comment = await commentRepo.getCommentByIdFromDb(element);
+        comment.user = await userRepo.getUserByIdFromDb(comment.userId!);
+        comment.user = await userComposerUsecase.get(comment.user!);
+        return comment;
+      }).toList();
     }
 
     //Compose Children post

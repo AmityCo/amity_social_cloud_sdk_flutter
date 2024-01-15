@@ -1,5 +1,6 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/usecase/community/category/community_get_category_usercase.dart';
 import 'package:amity_sdk/src/domain/usecase/community/member/community_member_get_optional_usercase.dart';
 import 'package:amity_sdk/src/public/public.dart';
 
@@ -40,6 +41,16 @@ class AmityCommunityRepository {
   /// Get Community Categories
   CommunityCategoryGetQueryBuilder getCategories() {
     return CommunityCategoryGetQueryBuilder(usecase: serviceLocator());
+  }
+  /* end_public_function */
+
+
+  /* begin_public_function 
+  id: community.category.get
+  */
+  /// Get Community Category by id
+  Future<AmityCommunityCategory> getCategory(String categoryId) {
+    return serviceLocator<CommunityGetCategoryUsecase>().get(categoryId);
   }
   /* end_public_function */
 

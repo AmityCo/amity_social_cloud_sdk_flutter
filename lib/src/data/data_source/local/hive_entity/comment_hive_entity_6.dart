@@ -5,7 +5,7 @@ part 'comment_hive_entity_6.g.dart';
 
 /// Comment Hive Entity
 @HiveType(typeId: 6)
-class CommentHiveEntity extends HiveObject {
+class CommentHiveEntity extends EkoObject {
   /// Comment doc id
   String? id;
 
@@ -193,5 +193,10 @@ class CommentHiveEntity extends HiveObject {
       targetId: targetId ?? this.targetId,
       targetType: targetType ?? this.targetType,
     );
+  }
+  
+  @override
+  String? getId() {
+    return id;
   }
 }

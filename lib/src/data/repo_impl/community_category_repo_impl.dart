@@ -85,4 +85,12 @@ class CommunityCategoryRepoImpl extends CommunityCategoryRepo {
         .map<AmityCommunityCategory>((e) => e.convertToAmityCommunityCategory())
         .toList();
   }
+  
+  @override
+  Future<AmityCommunityCategory> getCommunityCategory(String categoryId) async {
+    final data =
+        await communityCategoryApiInterface.getCommunityCategory(categoryId);
+    final amityCommunityCategory = await saveCommunity(data);
+    return amityCommunityCategory.where((cat) => cat.categoryId == categoryId ).first;
+  }
 }

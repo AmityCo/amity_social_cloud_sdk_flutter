@@ -1,12 +1,12 @@
 import 'package:amity_sdk/src/core/enum/enum.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/poll_answer_hive_entity_17.dart';
+import 'package:amity_sdk/src/data/data_source/data_source.dart';
 import 'package:hive/hive.dart';
 
 part 'poll_hive_entity_16.g.dart';
 
 /// Poll post Hive Entity
 @HiveType(typeId: 16)
-class PollHiveEntity extends HiveObject {
+class PollHiveEntity extends  EkoObject {
   /// Poll Id
   String? pollId;
 
@@ -42,4 +42,9 @@ class PollHiveEntity extends HiveObject {
 
   /// Poll close In
   int? closeIn;
+  
+  @override
+  String? getId() {
+    return pollId;
+  }
 }

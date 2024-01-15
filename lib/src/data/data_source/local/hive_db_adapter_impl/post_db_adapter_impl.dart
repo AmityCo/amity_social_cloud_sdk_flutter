@@ -1,10 +1,12 @@
+import 'package:amity_sdk/src/core/model/api_request/get_post_request.dart';
+import 'package:amity_sdk/src/core/utils/live_collection.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:hive/hive.dart';
 
 class PostDbAdapterImpl extends PostDbAdapter {
   PostDbAdapterImpl({required this.dbClient});
   final DBClient dbClient;
-  late Box box;
+  late Box<PostHiveEntity> box;
   Future<PostDbAdapter> init() async {
     Hive.registerAdapter(PostHiveEntityAdapter(), override: true);
     box = await Hive.openBox<PostHiveEntity>('post_db');
@@ -39,6 +41,26 @@ class PostDbAdapterImpl extends PostDbAdapter {
       postHiveEntity.commentsCount = ((postHiveEntity.commentsCount) ?? 0) + 1;
       await postHiveEntity.save();
     }
+    return;
+  }
+
+  @override
+  Stream<List<PostHiveEntity>> listenPostEntities(
+      RequestBuilder<GetPostRequest> request) {
+    return box.watch().map((event) => box.values
+        .where((post) => post.isMatchingFilter(request.call())
+            //missing tags
+            )
+        .toList());
+  }
+  
+  @override
+  Future deletePostEntitiesByTargetId(String targetId) async {
+    box.values
+        .where((element) => element.targetId == targetId)
+        .forEach((element) {
+      box.delete(element.postId);
+    });
     return;
   }
 }

@@ -50,6 +50,7 @@ const POLL_V3 = 'api/v3/polls';
 const USERS = 'users';
 
 const GLOBAL_FEED_V3_URL = 'api/v4/me/global-feeds';
+const GLOBAL_FEED_V5_URL = 'api/v5/me/global-feeds';
 const USER_FEED_V3_URL = 'api/v3/user-feeds';
 const COMMUNITY_FEED_V3_URL = 'api/v3/community-feeds';
 const COMMUNITY_CATEGORY_V3_URL = 'api/v3/community-categories';

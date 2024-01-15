@@ -1,10 +1,11 @@
+import 'package:amity_sdk/src/src.dart';
 import 'package:hive/hive.dart';
 
 part 'user_hive_entity.g.dart';
 
 /// User Hive Entity
 @HiveType(typeId: 1)
-class UserHiveEntity extends HiveObject {
+class UserHiveEntity extends  EkoObject {
   /// User doc Id
   String? id;
 
@@ -49,4 +50,11 @@ class UserHiveEntity extends HiveObject {
 
   /// Hash Flag
   Map<String, dynamic>? hashFlag;
+  
+  @override
+  String? getId() {
+    return id;
+  }
+  
+  
 }

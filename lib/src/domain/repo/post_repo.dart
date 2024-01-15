@@ -5,6 +5,8 @@ abstract class PostRepo {
   //Future Method
   Future<PageListData<List<AmityPost>, String>> queryPost(
       GetPostRequest request);
+  Stream<List<AmityPost>> listenPosts(RequestBuilder<GetPostRequest> request);
+
   Future<AmityPost> getPostById(String postId);
   Future<AmityPost> createPost(CreatePostRequest request);
   Future<AmityPost> getPostByIdFromDb(String id);

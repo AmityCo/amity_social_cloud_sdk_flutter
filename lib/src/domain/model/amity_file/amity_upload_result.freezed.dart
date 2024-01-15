@@ -92,20 +92,23 @@ class _$AmityUploadResultCopyWithImpl<T, $Res,
 }
 
 /// @nodoc
-abstract class _$$AmityUploadInProgressCopyWith<T, $Res> {
-  factory _$$AmityUploadInProgressCopyWith(_$AmityUploadInProgress<T> value,
-          $Res Function(_$AmityUploadInProgress<T>) then) =
-      __$$AmityUploadInProgressCopyWithImpl<T, $Res>;
+abstract class _$$AmityUploadInProgressImplCopyWith<T, $Res> {
+  factory _$$AmityUploadInProgressImplCopyWith(
+          _$AmityUploadInProgressImpl<T> value,
+          $Res Function(_$AmityUploadInProgressImpl<T>) then) =
+      __$$AmityUploadInProgressImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({AmityUploadInfo uploadInfo, CancelToken cancelToken});
 }
 
 /// @nodoc
-class __$$AmityUploadInProgressCopyWithImpl<T, $Res>
-    extends _$AmityUploadResultCopyWithImpl<T, $Res, _$AmityUploadInProgress<T>>
-    implements _$$AmityUploadInProgressCopyWith<T, $Res> {
-  __$$AmityUploadInProgressCopyWithImpl(_$AmityUploadInProgress<T> _value,
-      $Res Function(_$AmityUploadInProgress<T>) _then)
+class __$$AmityUploadInProgressImplCopyWithImpl<T, $Res>
+    extends _$AmityUploadResultCopyWithImpl<T, $Res,
+        _$AmityUploadInProgressImpl<T>>
+    implements _$$AmityUploadInProgressImplCopyWith<T, $Res> {
+  __$$AmityUploadInProgressImplCopyWithImpl(
+      _$AmityUploadInProgressImpl<T> _value,
+      $Res Function(_$AmityUploadInProgressImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -114,7 +117,7 @@ class __$$AmityUploadInProgressCopyWithImpl<T, $Res>
     Object? uploadInfo = null,
     Object? cancelToken = null,
   }) {
-    return _then(_$AmityUploadInProgress<T>(
+    return _then(_$AmityUploadInProgressImpl<T>(
       null == uploadInfo
           ? _value.uploadInfo
           : uploadInfo // ignore: cast_nullable_to_non_nullable
@@ -129,8 +132,8 @@ class __$$AmityUploadInProgressCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$AmityUploadInProgress<T> implements AmityUploadInProgress<T> {
-  const _$AmityUploadInProgress(this.uploadInfo, this.cancelToken);
+class _$AmityUploadInProgressImpl<T> implements AmityUploadInProgress<T> {
+  const _$AmityUploadInProgressImpl(this.uploadInfo, this.cancelToken);
 
   @override
   final AmityUploadInfo uploadInfo;
@@ -146,7 +149,7 @@ class _$AmityUploadInProgress<T> implements AmityUploadInProgress<T> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AmityUploadInProgress<T> &&
+            other is _$AmityUploadInProgressImpl<T> &&
             (identical(other.uploadInfo, uploadInfo) ||
                 other.uploadInfo == uploadInfo) &&
             (identical(other.cancelToken, cancelToken) ||
@@ -159,10 +162,9 @@ class _$AmityUploadInProgress<T> implements AmityUploadInProgress<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AmityUploadInProgressCopyWith<T, _$AmityUploadInProgress<T>>
-      get copyWith =>
-          __$$AmityUploadInProgressCopyWithImpl<T, _$AmityUploadInProgress<T>>(
-              this, _$identity);
+  _$$AmityUploadInProgressImplCopyWith<T, _$AmityUploadInProgressImpl<T>>
+      get copyWith => __$$AmityUploadInProgressImplCopyWithImpl<T,
+          _$AmityUploadInProgressImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -246,30 +248,31 @@ class _$AmityUploadInProgress<T> implements AmityUploadInProgress<T> {
 abstract class AmityUploadInProgress<T> implements AmityUploadResult<T> {
   const factory AmityUploadInProgress(
           final AmityUploadInfo uploadInfo, final CancelToken cancelToken) =
-      _$AmityUploadInProgress<T>;
+      _$AmityUploadInProgressImpl<T>;
 
   AmityUploadInfo get uploadInfo;
   CancelToken get cancelToken;
   @JsonKey(ignore: true)
-  _$$AmityUploadInProgressCopyWith<T, _$AmityUploadInProgress<T>>
+  _$$AmityUploadInProgressImplCopyWith<T, _$AmityUploadInProgressImpl<T>>
       get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AmityUploadCompleteCopyWith<T, $Res> {
-  factory _$$AmityUploadCompleteCopyWith(_$AmityUploadComplete<T> value,
-          $Res Function(_$AmityUploadComplete<T>) then) =
-      __$$AmityUploadCompleteCopyWithImpl<T, $Res>;
+abstract class _$$AmityUploadCompleteImplCopyWith<T, $Res> {
+  factory _$$AmityUploadCompleteImplCopyWith(_$AmityUploadCompleteImpl<T> value,
+          $Res Function(_$AmityUploadCompleteImpl<T>) then) =
+      __$$AmityUploadCompleteImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({T file});
 }
 
 /// @nodoc
-class __$$AmityUploadCompleteCopyWithImpl<T, $Res>
-    extends _$AmityUploadResultCopyWithImpl<T, $Res, _$AmityUploadComplete<T>>
-    implements _$$AmityUploadCompleteCopyWith<T, $Res> {
-  __$$AmityUploadCompleteCopyWithImpl(_$AmityUploadComplete<T> _value,
-      $Res Function(_$AmityUploadComplete<T>) _then)
+class __$$AmityUploadCompleteImplCopyWithImpl<T, $Res>
+    extends _$AmityUploadResultCopyWithImpl<T, $Res,
+        _$AmityUploadCompleteImpl<T>>
+    implements _$$AmityUploadCompleteImplCopyWith<T, $Res> {
+  __$$AmityUploadCompleteImplCopyWithImpl(_$AmityUploadCompleteImpl<T> _value,
+      $Res Function(_$AmityUploadCompleteImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -277,7 +280,7 @@ class __$$AmityUploadCompleteCopyWithImpl<T, $Res>
   $Res call({
     Object? file = freezed,
   }) {
-    return _then(_$AmityUploadComplete<T>(
+    return _then(_$AmityUploadCompleteImpl<T>(
       freezed == file
           ? _value.file
           : file // ignore: cast_nullable_to_non_nullable
@@ -288,8 +291,8 @@ class __$$AmityUploadCompleteCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$AmityUploadComplete<T> implements AmityUploadComplete<T> {
-  const _$AmityUploadComplete(this.file);
+class _$AmityUploadCompleteImpl<T> implements AmityUploadComplete<T> {
+  const _$AmityUploadCompleteImpl(this.file);
 
   @override
   final T file;
@@ -303,7 +306,7 @@ class _$AmityUploadComplete<T> implements AmityUploadComplete<T> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AmityUploadComplete<T> &&
+            other is _$AmityUploadCompleteImpl<T> &&
             const DeepCollectionEquality().equals(other.file, file));
   }
 
@@ -314,9 +317,9 @@ class _$AmityUploadComplete<T> implements AmityUploadComplete<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AmityUploadCompleteCopyWith<T, _$AmityUploadComplete<T>> get copyWith =>
-      __$$AmityUploadCompleteCopyWithImpl<T, _$AmityUploadComplete<T>>(
-          this, _$identity);
+  _$$AmityUploadCompleteImplCopyWith<T, _$AmityUploadCompleteImpl<T>>
+      get copyWith => __$$AmityUploadCompleteImplCopyWithImpl<T,
+          _$AmityUploadCompleteImpl<T>>(this, _$identity);
 
   @override
   @optionalTypeArgs
@@ -398,29 +401,30 @@ class _$AmityUploadComplete<T> implements AmityUploadComplete<T> {
 }
 
 abstract class AmityUploadComplete<T> implements AmityUploadResult<T> {
-  const factory AmityUploadComplete(final T file) = _$AmityUploadComplete<T>;
+  const factory AmityUploadComplete(final T file) =
+      _$AmityUploadCompleteImpl<T>;
 
   T get file;
   @JsonKey(ignore: true)
-  _$$AmityUploadCompleteCopyWith<T, _$AmityUploadComplete<T>> get copyWith =>
-      throw _privateConstructorUsedError;
+  _$$AmityUploadCompleteImplCopyWith<T, _$AmityUploadCompleteImpl<T>>
+      get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AmityUploadErrorCopyWith<T, $Res> {
-  factory _$$AmityUploadErrorCopyWith(_$AmityUploadError<T> value,
-          $Res Function(_$AmityUploadError<T>) then) =
-      __$$AmityUploadErrorCopyWithImpl<T, $Res>;
+abstract class _$$AmityUploadErrorImplCopyWith<T, $Res> {
+  factory _$$AmityUploadErrorImplCopyWith(_$AmityUploadErrorImpl<T> value,
+          $Res Function(_$AmityUploadErrorImpl<T>) then) =
+      __$$AmityUploadErrorImplCopyWithImpl<T, $Res>;
   @useResult
   $Res call({AmityException error});
 }
 
 /// @nodoc
-class __$$AmityUploadErrorCopyWithImpl<T, $Res>
-    extends _$AmityUploadResultCopyWithImpl<T, $Res, _$AmityUploadError<T>>
-    implements _$$AmityUploadErrorCopyWith<T, $Res> {
-  __$$AmityUploadErrorCopyWithImpl(
-      _$AmityUploadError<T> _value, $Res Function(_$AmityUploadError<T>) _then)
+class __$$AmityUploadErrorImplCopyWithImpl<T, $Res>
+    extends _$AmityUploadResultCopyWithImpl<T, $Res, _$AmityUploadErrorImpl<T>>
+    implements _$$AmityUploadErrorImplCopyWith<T, $Res> {
+  __$$AmityUploadErrorImplCopyWithImpl(_$AmityUploadErrorImpl<T> _value,
+      $Res Function(_$AmityUploadErrorImpl<T>) _then)
       : super(_value, _then);
 
   @pragma('vm:prefer-inline')
@@ -428,7 +432,7 @@ class __$$AmityUploadErrorCopyWithImpl<T, $Res>
   $Res call({
     Object? error = null,
   }) {
-    return _then(_$AmityUploadError<T>(
+    return _then(_$AmityUploadErrorImpl<T>(
       null == error
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
@@ -439,8 +443,8 @@ class __$$AmityUploadErrorCopyWithImpl<T, $Res>
 
 /// @nodoc
 
-class _$AmityUploadError<T> implements AmityUploadError<T> {
-  const _$AmityUploadError(this.error);
+class _$AmityUploadErrorImpl<T> implements AmityUploadError<T> {
+  const _$AmityUploadErrorImpl(this.error);
 
   @override
   final AmityException error;
@@ -454,7 +458,7 @@ class _$AmityUploadError<T> implements AmityUploadError<T> {
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
-            other is _$AmityUploadError<T> &&
+            other is _$AmityUploadErrorImpl<T> &&
             (identical(other.error, error) || other.error == error));
   }
 
@@ -464,8 +468,8 @@ class _$AmityUploadError<T> implements AmityUploadError<T> {
   @JsonKey(ignore: true)
   @override
   @pragma('vm:prefer-inline')
-  _$$AmityUploadErrorCopyWith<T, _$AmityUploadError<T>> get copyWith =>
-      __$$AmityUploadErrorCopyWithImpl<T, _$AmityUploadError<T>>(
+  _$$AmityUploadErrorImplCopyWith<T, _$AmityUploadErrorImpl<T>> get copyWith =>
+      __$$AmityUploadErrorImplCopyWithImpl<T, _$AmityUploadErrorImpl<T>>(
           this, _$identity);
 
   @override
@@ -549,34 +553,34 @@ class _$AmityUploadError<T> implements AmityUploadError<T> {
 
 abstract class AmityUploadError<T> implements AmityUploadResult<T> {
   const factory AmityUploadError(final AmityException error) =
-      _$AmityUploadError<T>;
+      _$AmityUploadErrorImpl<T>;
 
   AmityException get error;
   @JsonKey(ignore: true)
-  _$$AmityUploadErrorCopyWith<T, _$AmityUploadError<T>> get copyWith =>
+  _$$AmityUploadErrorImplCopyWith<T, _$AmityUploadErrorImpl<T>> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$AmityUploadCancelCopyWith<T, $Res> {
-  factory _$$AmityUploadCancelCopyWith(_$AmityUploadCancel<T> value,
-          $Res Function(_$AmityUploadCancel<T>) then) =
-      __$$AmityUploadCancelCopyWithImpl<T, $Res>;
+abstract class _$$AmityUploadCancelImplCopyWith<T, $Res> {
+  factory _$$AmityUploadCancelImplCopyWith(_$AmityUploadCancelImpl<T> value,
+          $Res Function(_$AmityUploadCancelImpl<T>) then) =
+      __$$AmityUploadCancelImplCopyWithImpl<T, $Res>;
 }
 
 /// @nodoc
-class __$$AmityUploadCancelCopyWithImpl<T, $Res>
-    extends _$AmityUploadResultCopyWithImpl<T, $Res, _$AmityUploadCancel<T>>
-    implements _$$AmityUploadCancelCopyWith<T, $Res> {
-  __$$AmityUploadCancelCopyWithImpl(_$AmityUploadCancel<T> _value,
-      $Res Function(_$AmityUploadCancel<T>) _then)
+class __$$AmityUploadCancelImplCopyWithImpl<T, $Res>
+    extends _$AmityUploadResultCopyWithImpl<T, $Res, _$AmityUploadCancelImpl<T>>
+    implements _$$AmityUploadCancelImplCopyWith<T, $Res> {
+  __$$AmityUploadCancelImplCopyWithImpl(_$AmityUploadCancelImpl<T> _value,
+      $Res Function(_$AmityUploadCancelImpl<T>) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AmityUploadCancel<T> implements AmityUploadCancel<T> {
-  const _$AmityUploadCancel();
+class _$AmityUploadCancelImpl<T> implements AmityUploadCancel<T> {
+  const _$AmityUploadCancelImpl();
 
   @override
   String toString() {
@@ -586,7 +590,8 @@ class _$AmityUploadCancel<T> implements AmityUploadCancel<T> {
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$AmityUploadCancel<T>);
+        (other.runtimeType == runtimeType &&
+            other is _$AmityUploadCancelImpl<T>);
   }
 
   @override
@@ -672,5 +677,5 @@ class _$AmityUploadCancel<T> implements AmityUploadCancel<T> {
 }
 
 abstract class AmityUploadCancel<T> implements AmityUploadResult<T> {
-  const factory AmityUploadCancel() = _$AmityUploadCancel<T>;
+  const factory AmityUploadCancel() = _$AmityUploadCancelImpl<T>;
 }

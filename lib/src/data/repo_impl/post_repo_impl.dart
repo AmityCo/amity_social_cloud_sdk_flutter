@@ -1,11 +1,15 @@
 import 'dart:async';
 
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/mapper/post_model_mapper.dart';
+import 'package:amity_sdk/src/core/utils/model_mapper.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/repo/amity_object_repository.dart';
 
 /// Post Repo
-class PostRepoImpl extends PostRepo {
+class PostRepoImpl extends PostRepo
+    with AmityObjectRepository<PostHiveEntity, AmityPost> {
   /// Public post API interface
   final PublicPostApiInterface publicPostApiInterface;
 
@@ -102,6 +106,10 @@ class PostRepoImpl extends PostRepo {
   @override
   Future<PageListData<List<AmityPost>, String>> queryPost(
       GetPostRequest request) async {
+    if (request.options?.token == null) {
+      await dbAdapterRepo.postDbAdapter
+          .deletePostEntitiesByTargetId(request.targetId);
+    }
     final data = await publicPostApiInterface.queryPost(request);
     final amitPosts = await data.saveToDb<AmityPost>(dbAdapterRepo);
     return PageListData(amitPosts, data.paging!.next ?? '');
@@ -148,5 +156,61 @@ class PostRepoImpl extends PostRepo {
   @override
   bool hasLocalPost(String postId) {
     return dbAdapterRepo.postDbAdapter.getPostEntity(postId) != null;
+  }
+
+  @override
+  Future<AmityPost?> fetchAndSave(String objectId) async {
+    var post = await getPostById(objectId);
+    if (post != null) {
+      return post;
+    } else {
+      await deletePostById(objectId);
+      return Future.value(null);
+    }
+  }
+
+  @override
+  ModelMapper<PostHiveEntity, AmityPost> mapper() {
+    return PostModelMapper();
+  }
+
+  @override
+  StreamController<PostHiveEntity> observeFromCache(String objectId) {
+    final streamController = StreamController<PostHiveEntity>();
+    dbAdapterRepo.postDbAdapter.listenPostEntity(objectId).listen((event) {
+      streamController.add(event);
+    });
+    return streamController;
+  }
+
+  @override
+  Future<PostHiveEntity?> queryFromCache(String objectId) async {
+    return dbAdapterRepo.postDbAdapter.getPostEntity(objectId);
+  }
+
+  @override
+  Stream<List<AmityPost>> listenPosts(RequestBuilder<GetPostRequest> request) {
+    return dbAdapterRepo.postDbAdapter.listenPostEntities(request).map((event) {
+      final req = request.call();
+      final List<AmityPost> list = [];
+      for (var element in event) {
+        // Temprorary Solution 
+        // Todo: Introduce Query Stream and remove this 
+        if (req.dataTypes == null) {
+          if (element.parentPostId != null) {
+            continue;
+          }
+        } 
+        list.add(element.convertToAmityPost());
+      }
+
+      if (req.sortBy == AmityPostSortOption.LAST_CREATED.apiKey) {
+        list.sort((a, b) => a.createdAt!.compareTo(b.createdAt!) * -1);
+      } else {
+        list.sort((a, b) => a.createdAt!.compareTo(b.createdAt!) * 1);
+      }
+
+      return list;
+    });
   }
 }

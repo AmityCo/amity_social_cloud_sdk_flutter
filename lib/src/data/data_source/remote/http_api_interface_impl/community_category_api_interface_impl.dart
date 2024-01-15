@@ -18,4 +18,16 @@ class CommunityCategoryApiInterfaceImpl extends CommunityCategoryApiInterface {
       return Future.error(amityError.amityException());
     }
   }
+  
+  @override
+  Future<CreateCommunityResponse> getCommunityCategory(String communityId) async  {
+    try {
+      final data = await httpApiClient()
+          .get('$COMMUNITY_CATEGORY_V3/$communityId');
+      return CreateCommunityResponse.fromJson(data.data);
+    } on DioException catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
 }

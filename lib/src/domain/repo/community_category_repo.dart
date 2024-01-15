@@ -4,4 +4,6 @@ import 'package:amity_sdk/src/domain/domain.dart';
 abstract class CommunityCategoryRepo {
   Future<PageListData<List<AmityCommunityCategory>, String>>
       getCommunityCategoryQuery(GetCommunityCategoryRequest request);
+
+  Future<AmityCommunityCategory> getCommunityCategory(String categoryId);
 }

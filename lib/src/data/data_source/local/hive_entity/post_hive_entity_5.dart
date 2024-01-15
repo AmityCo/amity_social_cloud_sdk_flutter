@@ -5,7 +5,7 @@ part 'post_hive_entity_5.g.dart';
 
 /// Post Hive entity
 @HiveType(typeId: 5)
-class PostHiveEntity extends HiveObject {
+class PostHiveEntity extends EkoObject {
   /// doc Id
   String? id;
 
@@ -192,5 +192,10 @@ class PostHiveEntity extends HiveObject {
       flaggedByMe: flaggedByMe ?? this.flaggedByMe,
       mentionees: mentionees ?? this.mentionees,
     );
+  }
+  
+  @override
+  String? getId() {
+    return id;
   }
 }

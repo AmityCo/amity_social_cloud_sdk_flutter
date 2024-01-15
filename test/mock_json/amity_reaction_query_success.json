@@ -1,26 +1,80 @@
 {
-    "results": {
-        "reactions": [
-            {
-                "referenceId": "6408201e92d04881cd88e5ad",
-                "referenceType": "post",
-                "reactors": [
-                    {
-                        "reactionName": "like",
-                        "userId": "victimAndroid",
-                        "reactionId": "640aa4bafea8da49a9cef364",
-                        "createdAt": "2023-03-10T03:32:10.878Z"
-                    }
-                ]
-            }
-        ],
-        "users": [
-            {
-                "displayName": "Victim Android",
-                "userId": "victimAndroid",
-                "metadata": {}
-            }
-        ]
-    },
-    "paging": {}
-}
+    "reactions":[
+       {
+          "referenceId":"6582e7eeb786f6e418c1754e",
+          "referenceType":"post",
+          "reactors":[
+             {
+                "reactionName":"like",
+                "userId":"victimAndroid",
+                "userPublicId":"victimAndroid",
+                "userInternalId":"6321d1096de41000d9511623",
+                "reactionId":"659b6d842f640d271394ccaf",
+                "createdAt":"2024-01-08T03:35:32.173Z"
+             }
+          ]
+       }
+    ],
+    "users":[
+       {
+          "_id":"6321d1096de41000d9511623",
+          "path":"631f16be1e440400da5663b0/user/6321d1096de41000d9511623",
+          "description":"",
+          "createdAt":"2022-09-14T13:03:05.130Z",
+          "updatedAt":"2023-12-21T04:07:44.619Z",
+          "isDeleted":false,
+          "displayName":"Victim Android",
+          "userId":"victimAndroid",
+          "userInternalId":"6321d1096de41000d9511623",
+          "userPublicId":"victimAndroid",
+          "metadata":{
+             
+          },
+          "roles":[
+             
+          ],
+          "permissions":[
+             
+          ],
+          "flagCount":1,
+          "hashFlag":{
+             "bits":24,
+             "hashes":17,
+             "hash":"gP//"
+          },
+          "avatarFileId":"defecb0420534bfab5fe86353706049a",
+          "isGlobalBan":false
+       }
+    ],
+    "files":[
+       {
+          "fileId":"defecb0420534bfab5fe86353706049a",
+          "fileUrl":"https://api.staging.amity.co/api/v3/files/defecb0420534bfab5fe86353706049a/download",
+          "type":"image",
+          "createdAt":"2023-09-11T06:39:02.627Z",
+          "updatedAt":"2023-09-11T06:39:02.885Z",
+          "attributes":{
+             "name":"image_picker_6EC77D4C-C0D3-46CA-AB2A-A96437A46C5A-14974-00000D1EDBA00CFD.jpg",
+             "extension":"jpg",
+             "size":236549,
+             "mimeType":"image/jpeg",
+             "metadata":{
+                "exif":{
+                   "DateTimeOriginal":"2012-08-08T14:29:49.000Z"
+                },
+                "gps":{
+                   "lat":64.7529,
+                   "lng":-14.5386
+                },
+                "height":2500,
+                "width":1668,
+                "orientation":1,
+                "isFull":false
+             }
+          }
+       }
+    ],
+    "paging":{
+       
+    }
+ }

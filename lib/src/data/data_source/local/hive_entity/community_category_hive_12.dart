@@ -1,9 +1,10 @@
+import 'package:amity_sdk/src/src.dart';
 import 'package:hive/hive.dart';
 
 part 'community_category_hive_12.g.dart';
 
 @HiveType(typeId: 12)
-class CommunityCategoryHiveEntity extends HiveObject {
+class CommunityCategoryHiveEntity extends  EkoObject {
   String? categoryId;
   String? name;
   String? avatarFileId;
@@ -11,4 +12,9 @@ class CommunityCategoryHiveEntity extends HiveObject {
   bool? isDeleted;
   DateTime? createdAt;
   DateTime? updatedAt;
+  
+  @override
+  String? getId() {
+    return categoryId;
+  }
 }

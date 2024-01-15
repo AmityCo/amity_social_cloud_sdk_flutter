@@ -16,7 +16,7 @@ class MockUserApiInterface extends Mock implements UserApiInterface {}
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
-  String referenceId = const Uuid().v1();
+  String referenceId = "6582e7eeb786f6e418c1754e";
   String referenceType = 'post';
 
   final reactionApiInterface = MockReactionApiInterface();

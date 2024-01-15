@@ -14,7 +14,15 @@ class CommentDbAdapterImpl extends CommentDbAdapter {
 
   @override
   CommentHiveEntity? getCommentEntity(String id) {
-    return box.get(id);
+    var comments = box.values
+        .where(
+          (element) => element.commentId == id,
+        )
+        .toList();
+    if (comments.isEmpty) {
+      return null;
+    }
+    return comments.first;
   }
 
   @override
@@ -32,7 +40,8 @@ class CommentDbAdapterImpl extends CommentDbAdapter {
     final commentHiveEntity = getCommentEntity(parentCommentId);
     if (commentHiveEntity != null) {
       commentHiveEntity.children!.add(commentId);
-      commentHiveEntity.childrenNumber = ((commentHiveEntity.childrenNumber) ?? 0) + 1;
+      commentHiveEntity.childrenNumber =
+          ((commentHiveEntity.childrenNumber) ?? 0) + 1;
       await commentHiveEntity.save();
     }
 

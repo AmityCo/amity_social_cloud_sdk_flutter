@@ -22,3 +22,4 @@ export 'post_hive_entity_5.dart';
 export 'reaction_hive_entity_8.dart';
 export 'user_hive_entity_1.dart';
 export 'video_file_id_hive_entity_11.dart';
+export 'tombstone_hive_entity_22.dart';

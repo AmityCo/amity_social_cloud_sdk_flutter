@@ -85,4 +85,18 @@ class GlobalFeedRepoImpl extends GlobalFeedRepo {
 
     return Future.value();
   }
+  
+  @override
+  Future<PageListData<List<AmityPost>, String>> getCustomPostRanking(GetGlobalFeedRequest request) async {
+    final data = await feedApiInterface.getCustomPostRanking(request);
+
+    //Save the feed sequence in to feed db
+    await dbAdapterRepo.feedDbAdapter
+        .updateFeedCollection(data.convertToFeedHiveEntity());
+
+    // final amitPosts = await dbAdapterRepo.saveDataToDb(data);
+    final amitPosts = await data.saveToDb<AmityPost>(dbAdapterRepo);
+
+    return PageListData(amitPosts, data.paging!.next ?? '');
+  }
 }

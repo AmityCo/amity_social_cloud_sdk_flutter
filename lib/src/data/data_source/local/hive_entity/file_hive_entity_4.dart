@@ -1,3 +1,4 @@
+import 'package:amity_sdk/src/src.dart';
 import 'package:hive/hive.dart';
 
 part 'file_hive_entity_4.g.dart';
@@ -5,7 +6,7 @@ part 'file_hive_entity_4.g.dart';
 @HiveType(typeId: 4)
 
 /// [FileHiveEntity]
-class FileHiveEntity {
+class FileHiveEntity  extends EkoObject{
   /// File Doc ID
   String? fileId;
 
@@ -31,4 +32,9 @@ class FileHiveEntity {
   int? height;
   int? width;
   bool? isFull;
+  
+  @override
+  String? getId() {
+    return fileId;
+  }
 }
