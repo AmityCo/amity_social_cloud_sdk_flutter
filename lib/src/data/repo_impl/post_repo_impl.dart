@@ -9,7 +9,7 @@ import 'package:amity_sdk/src/domain/repo/amity_object_repository.dart';
 
 /// Post Repo
 class PostRepoImpl extends PostRepo
-    with AmityObjectRepository<PostHiveEntity, AmityPost> {
+ {
   /// Public post API interface
   final PublicPostApiInterface publicPostApiInterface;
 

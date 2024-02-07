@@ -1,7 +1,9 @@
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data_source/data_source.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/repo/amity_object_repository.dart';
 
-abstract class PostRepo {
+abstract class PostRepo  extends AmityObjectRepository<PostHiveEntity, AmityPost>{
   //Future Method
   Future<PageListData<List<AmityPost>, String>> queryPost(
       GetPostRequest request);
