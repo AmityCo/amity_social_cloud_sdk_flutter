@@ -25,6 +25,8 @@
             "reactionsCount": 0,
             "myReactions": [],
             "comments": [],
+            "impression": 0,
+            "reach": 0,
             "children": [
                 "63c0d4e68309f88123c4f640"
             ],
@@ -60,6 +62,8 @@
             "targetId": "FonAn",
             "flagCount": 0,
             "hashFlag": null,
+            "impression": 0,
+            "reach": 0,
             "reactions": {},
             "reactionsCount": 0,
             "myReactions": [],

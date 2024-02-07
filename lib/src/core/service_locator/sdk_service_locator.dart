@@ -2,10 +2,16 @@ import 'dart:developer';
 
 import 'package:amity_sdk/src/core/socket/amity_socket.dart';
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/analytics_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/tombstone_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/analytics_db_adapter_impl.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/tombstone_db_adapter_impl.dart';
+import 'package:amity_sdk/src/data/data_source/remote/api_interface/analytics_api_interface.dart';
+import 'package:amity_sdk/src/data/data_source/remote/http_api_interface_impl/analytics_api_interface_impl.dart';
+import 'package:amity_sdk/src/data/repo_impl/analytics_repo_impl.dart';
 import 'package:amity_sdk/src/data/repo_impl/tombstone_repo_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/repo/analytics_repo.dart';
 import 'package:amity_sdk/src/domain/repo/tombstone_repo.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/stream_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_db_adapter_impl/stream_db_adapter_impl.dart';
@@ -19,6 +25,7 @@ import 'package:amity_sdk/src/domain/usecase/feed/get_custom_ranking_usecase.dar
 import 'package:amity_sdk/src/domain/usecase/post/post_observe_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/stream/stream_get_local_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/stream/stream_has_local_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/user/get_reach_user_usecase.dart';
 import 'package:amity_sdk/src/functions/stream_function.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:amity_sdk/src/public/repo/stream/stream_repository.dart';
@@ -40,6 +47,8 @@ class SdkServiceLocator {
     serviceLocator.allowReassignment = true;
 
     ///----------------------------------- Core Layer -----------------------------------///
+    ///
+    ///
 
     ///----------------------------------- Data Layer -----------------------------------///
 
@@ -110,6 +119,9 @@ class SdkServiceLocator {
     serviceLocator.registerSingletonAsync<StreamDbAdapter>(
         () => StreamDbAdapterImpl(dbClient: serviceLocator()).init(),
         dependsOn: [DBClient]);
+    serviceLocator.registerSingletonAsync<AnalyticsDbAdapter>(
+        () => AnalyticsDbAdapterImpl(dbClient: serviceLocator()).init(),
+        dependsOn: [DBClient]);
 
     //Register Db adapter Repo which hold all the Db Adapters
     serviceLocator.registerLazySingleton<DbAdapterRepo>(
@@ -129,7 +141,8 @@ class SdkServiceLocator {
           channelDbAdapter: serviceLocator(),
           channelUserDbAdapter: serviceLocator(),
           tombstoneDbAdapter: serviceLocator(),
-          streamDbAdapter: serviceLocator()),
+          streamDbAdapter: serviceLocator(),
+          analyticsDbAdapter: serviceLocator()),
     );
 
     //-data_source/remote/
@@ -179,6 +192,8 @@ class SdkServiceLocator {
         () => ChannelMemberApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<StreamApiInterface>(
         () => StreamApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<AnalyticsApiInterface>(
+        () => AnalyticsApiInterfaceImpl(httpApiClient: serviceLocator()));
 
     // Local Data Source
 
@@ -314,6 +329,12 @@ class SdkServiceLocator {
       () => TombstoneRepoImpl(tombstoneDbAdapter: serviceLocator()),
     );
 
+    serviceLocator.registerLazySingleton<AnalyticsRepo>(
+      () => AnalytcisRepoImpl(
+          analyticsApiInterface: serviceLocator(),
+          dbAdapterRepo: serviceLocator()),
+    );
+
     //-UserCase
     serviceLocator.registerLazySingleton<GetPostByIdUseCase>(() =>
         GetPostByIdUseCase(
@@ -330,6 +351,10 @@ class SdkServiceLocator {
     serviceLocator.registerLazySingleton<GetUserByIdUseCase>(() =>
         GetUserByIdUseCase(
             userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
+    serviceLocator.registerLazySingleton<GetReachUserUseCase>(() =>
+        GetReachUserUseCase(
+            analyticsRepo: serviceLocator(),
+            userComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<UserFlagUsecase>(() => UserFlagUsecase(
         userRepo: serviceLocator(), userComposerUsecase: serviceLocator()));
     serviceLocator.registerLazySingleton<UserUnflagUsecase>(() =>

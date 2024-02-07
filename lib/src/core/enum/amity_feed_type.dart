@@ -8,10 +8,16 @@ enum AmityFeedType {
 
 extension AmityFeedTypeExtension on AmityFeedType {
   String get value {
-    return [
-      'published',
-      'reviewing',
-      'declined',
-    ][index];
+    return AmityFeedType.values[index].name.toLowerCase();
+  
   }
+
+
+  static AmityFeedType enumOf(String value) {
+    return AmityFeedType.values.firstWhere(
+      (element) => element.name.toLowerCase() == value.toLowerCase(),
+      orElse: () => AmityFeedType.PUBLISHED,
+    );
+  }
+
 }

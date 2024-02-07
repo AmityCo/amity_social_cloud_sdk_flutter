@@ -5,7 +5,7 @@ import 'package:hive/hive.dart';
 
 part 'community_permission_hive_entity_13.g.dart';
 
-@HiveType(typeId: 13)
+@HiveType(typeId: 25)
 class CommnityPermissionHiveEntity extends HiveObject
     implements PermissionObject {
   String? id;

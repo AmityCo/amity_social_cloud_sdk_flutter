@@ -4,7 +4,7 @@ import 'package:hive/hive.dart';
 
 part 'tombstone_hive_entity_22.g.dart';
 
-@HiveType(typeId: 22)
+@HiveType(typeId: 23)
 class TombstoneHiveEntity extends EkoObject  {
 
   String? objectId = null;

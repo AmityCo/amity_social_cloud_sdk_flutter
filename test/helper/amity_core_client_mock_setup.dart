@@ -1,4 +1,5 @@
 import 'package:amity_sdk/src/src.dart';
+import 'package:hive/hive.dart';
 import 'package:uuid/uuid.dart';
 
 import 'hive_extension.dart';
@@ -6,7 +7,7 @@ import 'hive_extension.dart';
 class AmityCoreClientMockSetup {
   static Future setup() async {
     await HiveInit.main(DateTime.now().toIso8601String());
-
+    Hive.resetAdapters();
     await AmityCoreClient.setup(
       option: AmityCoreClientOption(
           apiKey: 'apikey',

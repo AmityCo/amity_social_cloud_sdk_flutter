@@ -27,6 +27,8 @@
             "createdAt": "2023-01-11T05:29:21.090Z",
             "updatedAt": "2023-01-11T05:29:21.100Z",
             "isDeleted": false,
+            "impression": 0,
+            "reach": 0,
             "hasFlaggedComment": false,
             "hasFlaggedChildren": false,
             "data": {
@@ -93,6 +95,8 @@
             "postedUserId": "pang20",
             "targetId": "pang20",
             "flagCount": 0,
+            "impression": 0,
+            "reach": 0,
             "hashFlag": null,
             "reactions": {},
             "reactionsCount": 0,

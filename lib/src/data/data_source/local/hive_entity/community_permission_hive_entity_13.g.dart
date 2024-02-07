@@ -9,7 +9,7 @@ part of 'community_permission_hive_entity_13.dart';
 class CommnityPermissionHiveEntityAdapter
     extends TypeAdapter<CommnityPermissionHiveEntity> {
   @override
-  final int typeId = 13;
+  final int typeId = 25;
 
   @override
   CommnityPermissionHiveEntity read(BinaryReader reader) {

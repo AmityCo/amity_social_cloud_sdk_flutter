@@ -38,3 +38,4 @@ export 'mqtt_end_point.dart';
 export 'socket_end_point.dart';
 export 'amity_watcher_data_format.dart';
 export 'amity_recording_data_format.dart';
+export 'amity_viewed_type.dart';
