@@ -1,3 +1,4 @@
+
 ## 0.35.0
 * Feat: Added Post Impression, now post can be marked as read using amityPost.analytics().markPostAsViewed(). Likewise post impression and reach can be get by using amityPost.impression and amityPost.reach
 * Upgrade: Upgraded dart version from ">=2.15.1 <4.0.0" to ">=3.0.0 <4.0.0"
@@ -5,12 +6,12 @@
 * Fix: AmityFeedType filter not working on post live collection 
 
 
+
 ## 0.34.0
 * Feat: Post Live Object can be used by AmitySocialClient.newPostRepository().live.getPost(postId)
 * Feat: Post Live collection have been added
 * Feat: Now user can get category by AmitySocialClient.newCommunityRepository().getCategory(categoryId)
 * Feat: Now user can get global feed custom ranking by AmitySocialClient.newFeedRepository().getCustomRankingGlobalFeed()
-
 
 ## 0.33.0
 * Feat: Upgraded, Upgradable libraries that would not cuase breaking changes
