@@ -106,10 +106,10 @@ class PostRepoImpl extends PostRepo
   @override
   Future<PageListData<List<AmityPost>, String>> queryPost(
       GetPostRequest request) async {
-    if (request.options?.token == null) {
-      await dbAdapterRepo.postDbAdapter
-          .deletePostEntitiesByTargetId(request.targetId);
-    }
+    // if (request.options?.token == null) {
+    //   await dbAdapterRepo.postDbAdapter
+    //       .deletePostEntitiesByTargetId(request.targetId);
+    // }
     final data = await publicPostApiInterface.queryPost(request);
     final amitPosts = await data.saveToDb<AmityPost>(dbAdapterRepo);
     return PageListData(amitPosts, data.paging!.next ?? '');
