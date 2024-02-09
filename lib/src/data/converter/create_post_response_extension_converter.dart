@@ -1,3 +1,4 @@
+import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/data/converter/stream/stream_response_extension_converter.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/stream_hive_entity_22.dart';
@@ -36,16 +37,21 @@ extension CreatePostResponseExtension on CreatePostResponse {
         comments.map((e) => e.convertToCommentHiveEntity()).toList();
 
     //Convert Child Post to Post Hive Entity
-    List<PostHiveEntity> postChildHiveEntities =
-        postChildren.map((e) => e.convertToPostHiveEntity()).toList();
+    List<PostHiveEntity> postChildHiveEntities = postChildren.map((e) {
+      var postEntity = e.convertToPostHiveEntity();
+      postEntity.feedType = getFeedTypeFromId(e.feedId, feeds);
+      return postEntity;
+    }).toList();
 
-        //Convert Child Post to Post Hive Entity
+    //Convert Child Post to Post Hive Entity
     List<StreamHiveEntity> streamHiveEntities =
         videoStreamings.map((e) => e.convertToStreamHiveEntity()).toList();
 
     //Conver Post to Post Hive Entity
     List<PostHiveEntity> postHiveEntities =
-        posts.map((e) => e.convertToPostHiveEntity()).toList();
+        posts.map((e) {var postEntity = e.convertToPostHiveEntity();
+      postEntity.feedType = getFeedTypeFromId(e.feedId, feeds);
+      return postEntity;}).toList();
 
     //Conver Post to Poll Hive Entity
     List<PollHiveEntity> pollHiveEntities =
@@ -105,5 +111,16 @@ extension CreatePostResponseExtension on CreatePostResponse {
     if (T.toString() == 'AmityPoll') {
       return pollHiveEntities.map((e) => e.convertToAmityPoll()).toList();
     }
+  }
+
+  String getFeedTypeFromId(String? feedId, List<CommunityFeedResponse> feeds) {
+    if (feedId == null) {
+      return AmityFeedType.PUBLISHED.value;
+    }
+    var feed = feeds.firstWhere((element) => element.feedId == feedId);
+    if (feed != null) {
+      return feed.feedType;
+    }
+    return AmityFeedType.PUBLISHED.value;
   }
 }

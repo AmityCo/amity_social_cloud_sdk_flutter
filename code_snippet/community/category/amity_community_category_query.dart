@@ -1,4 +1,5 @@
 import 'package:amity_sdk/amity_sdk.dart';
+import 'package:flutter/widgets.dart';
 
 class AmityCategoryQuery {
   /* begin_sample_code
@@ -9,6 +10,7 @@ class AmityCategoryQuery {
     */
   final _amityCategories = <AmityCommunityCategory>[];
   late PagingController<AmityCommunityCategory> _communityCategoryController;
+  final scrollcontroller = ScrollController();
 
   //Available sort options
   // AmityCommunityCategorySortOption.NAME;
@@ -37,6 +39,19 @@ class AmityCategoryQuery {
           }
         },
       );
+    
+    // fetch the data for the first page
+    _communityCategoryController.fetchNextPage();
+
+    scrollcontroller.addListener(pagination);
+  }
+
+  void pagination() {
+    if ((scrollcontroller.position.pixels ==
+            scrollcontroller.position.maxScrollExtent) &&
+        _communityCategoryController.hasMoreItems) {
+        _communityCategoryController.fetchNextPage();
+    }
   }
 
   /* end_sample_code */

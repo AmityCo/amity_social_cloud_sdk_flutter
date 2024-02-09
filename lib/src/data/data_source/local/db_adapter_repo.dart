@@ -1,3 +1,4 @@
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/analytics_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/tombstone_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/stream_db_adapter.dart';
@@ -55,6 +56,8 @@ class DbAdapterRepo {
   /// Channel Member Db Adapter
   final StreamDbAdapter streamDbAdapter;
 
+   final AnalyticsDbAdapter analyticsDbAdapter;
+
 
   /// Init DbAdapter Repo
   DbAdapterRepo({
@@ -74,6 +77,6 @@ class DbAdapterRepo {
     required this.channelUserDbAdapter,
     required this.tombstoneDbAdapter,
     required this.streamDbAdapter,
-
+    required this.analyticsDbAdapter,
   });
 }

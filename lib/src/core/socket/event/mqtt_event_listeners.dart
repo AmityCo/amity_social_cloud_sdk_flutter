@@ -1,4 +1,6 @@
 import 'package:amity_sdk/src/core/socket/event/event.dart';
+import 'package:amity_sdk/src/core/socket/event/post/post_approved_event_listener.dart';
+import 'package:amity_sdk/src/core/socket/event/post/post_declined_event_listener.dart';
 import 'package:collection/collection.dart' show IterableExtension;
 
 class MqttEventListeners {
@@ -11,6 +13,8 @@ class MqttEventListeners {
     PostRemoveReactionEventListener(),
     PostFlaggedEventListener(),
     PostUnflaggedEventListener(),
+    PostApprovedEventListener(),
+    PostDeclinedEventListener(),
 
     ///Comment Event
     CommentCreateEventListener(),

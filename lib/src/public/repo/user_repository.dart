@@ -1,6 +1,7 @@
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
+import 'package:amity_sdk/src/public/query_builder/user/amity_query_reach_user_builder.dart';
 
 /// User Repository
 class UserRepository {
@@ -48,5 +49,11 @@ class UserRepository {
   /// API to get blocked users
   AmityBlockUserQueryBuilder getBlockedUsers() {
     return AmityBlockUserQueryBuilder(useCase: serviceLocator());
+  }
+
+
+  /// API to get blocked users
+  AmityQueryReachUserBuilder getViewedUsers({ required AmityViewedType viewedType , required String  viewedId}) {
+    return AmityQueryReachUserBuilder(useCase: serviceLocator() , viewedType: viewedType , viewedId: viewedId);
   }
 }

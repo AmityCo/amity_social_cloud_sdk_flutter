@@ -1,12 +1,26 @@
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/engine/analytics_engine.dart';
+import 'package:amity_sdk/src/core/session/event_bus/app_event_bus.dart';
+import 'package:amity_sdk/src/core/session/event_bus/session_life_cycle_event_bus.dart';
+import 'package:amity_sdk/src/core/session/event_bus/session_state_event_bus.dart';
+import 'package:amity_sdk/src/core/session/model/app_event.dart';
+import 'package:amity_sdk/src/core/session/model/session_life_cycle.dart';
+import 'package:amity_sdk/src/core/session/model/session_state.dart';
+import 'package:amity_sdk/src/core/session/session_state_manager.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
-import 'package:amity_sdk/src/functions/stream_function.dart';
 import 'package:amity_sdk/src/public/public.dart';
 import 'package:amity_sdk_api/amity_sdk_api.dart';
 
 ///Amity Core Client to do primary Setup
 class AmityCoreClient {
+  static SessionStateManager? _sessionStateManager;
+  static SessionLifeCycleEventBus? _sessionLifeCycleEventBus;
+  static AppEventBus? _appEventBus;
+  static SessionStateEventBus? _sessionStateEventBus;
+  static SessionState currentSessionState = SessionState.NotLoggedIn;
+  static AnalyticsEngine? analyticsEngine = null;
+
   ///Do the intial set
   static Future setup({
     required AmityCoreClientOption option,
@@ -18,13 +32,30 @@ class AmityCoreClient {
     //Reset SDK get_it instance
     await serviceLocator.reset();
 
-    configServiceLocator.registerLazySingleton<AmityCoreClientOption>(() => option);
+    configServiceLocator
+        .registerLazySingleton<AmityCoreClientOption>(() => option);
 
     await SdkServiceLocator.initServiceLocator(syc: sycInitialization);
 
     _intialCleanUp();
+    setupSessionComponents();
 
     return;
+  }
+
+  static void setupSessionComponents() {
+    _sessionLifeCycleEventBus ??= SessionLifeCycleEventBus();
+    _appEventBus ??= AppEventBus();
+    _sessionStateEventBus ??= SessionStateEventBus();
+    _sessionStateManager ??= SessionStateManager(
+        appEventBus: _appEventBus!,
+        sessionStateEventBus: _sessionStateEventBus!,
+        sessionLifeCycleEventBus: _sessionLifeCycleEventBus!);
+
+    analyticsEngine = AnalyticsEngine(
+      sessionLifeCycleEventBus: _sessionLifeCycleEventBus!,
+      sessionStateEventBus: _sessionStateEventBus!,
+    );
   }
 
   /* begin_public_function 
@@ -33,7 +64,7 @@ class AmityCoreClient {
   */
   /// Login with userId, this will create user session
   static LoginQueryBuilder login(String userId) {
-    return LoginQueryBuilder(useCase: serviceLocator(), userId: userId);
+    return LoginQueryBuilder(useCase: serviceLocator(), userId: userId, sessionLifeCycleEventBus: _sessionLifeCycleEventBus!, appEventBus: _appEventBus!);
   }
   /* end_public_function */
 
@@ -44,6 +75,8 @@ class AmityCoreClient {
   static Future<void> logout() async {
     //terminate current activeSocket
     serviceLocator<AmitySocket>().terminate();
+    _sessionLifeCycleEventBus!.publish(SessionLifeCycle.Destroy);
+    _appEventBus!.publish(AppEvent.ManualLogout);
     //close all the hive boxes and wipe the data
     await serviceLocator<DBClient>().reset();
 
@@ -65,7 +98,7 @@ class AmityCoreClient {
   /* end_public_function */
 
   ///Check if user is logged in
-  static bool isUserLoggedIn() {
+  static bool isUserLoggedIn(){
     try {
       getCurrentUser();
       return true;
@@ -86,6 +119,7 @@ class AmityCoreClient {
   ///Get logged in user
   ///if user is not logged in this method will Through [AmityException]
   static AmityUser getCurrentUser() {
+    // serviceLocator<AccountDbAdapter>().getAccountEntity(userId)
     if (serviceLocator.isRegistered<AmityUser>()) {
       return serviceLocator<AmityUser>();
     }
@@ -95,7 +129,6 @@ class AmityCoreClient {
     );
   }
   /* end_public_function */
-
 
   /* begin_public_function 
   id: client.get_configuration
@@ -111,7 +144,8 @@ class AmityCoreClient {
   */
   /// API to update the user
   UserUpdateQueryBuilder updateUser() {
-    return UserUpdateQueryBuilder(serviceLocator<UpdateUserUsecase>(), getUserId());
+    return UserUpdateQueryBuilder(
+        serviceLocator<UpdateUserUsecase>(), getUserId());
   }
   /* end_public_function */
 
@@ -120,7 +154,8 @@ class AmityCoreClient {
   */
   ///Register the devie to receive FCM token
   static Future registerDeviceNotification(String fcmToken) {
-    return serviceLocator<NotificationRepository>().registerDeviceNotification(fcmToken);
+    return serviceLocator<NotificationRepository>()
+        .registerDeviceNotification(fcmToken);
   }
   /* end_public_function */
 
@@ -129,7 +164,8 @@ class AmityCoreClient {
   */
   ///Unregister the device with FCM
   static Future unregisterDeviceNotification() {
-    return serviceLocator<NotificationRepository>().unregisterDeviceNotification();
+    return serviceLocator<NotificationRepository>()
+        .unregisterDeviceNotification();
   }
   /* end_public_function */
 
@@ -142,12 +178,19 @@ class AmityCoreClient {
   static UserRepository newUserRepository() => serviceLocator<UserRepository>();
 
   /// Create new File Repository
-  static AmityFileRepository newFileRepository() => serviceLocator<AmityFileRepository>();
+  static AmityFileRepository newFileRepository() =>
+      serviceLocator<AmityFileRepository>();
 
   /// Intial Clean for SDK
   static _intialCleanUp() {
     // Remove all the Syncing State Message (Unsend messages)
-    serviceLocator<MessageDbAdapter>().getUnsendMessages().forEach((element) => element.delete());
+    serviceLocator<MessageDbAdapter>()
+        .getUnsendMessages()
+        .forEach((element) => element.delete());
+  }
+
+  static AnalyticsEngine? getAnalyticsEngine() {
+    return analyticsEngine;
   }
 }
 

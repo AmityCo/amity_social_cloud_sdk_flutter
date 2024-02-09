@@ -18,7 +18,7 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
         amityPostTarget = CommunityTarget(targetCommunityId: targetId);
         break;
     }
-
+    AmityFeedType feedType = AmityFeedTypeExtension.enumOf(this.feedType!);
     //Data type
     AmityDataType amityDataType = AmityDataTypeExtension.enumOf(dataType!);
     AmityPostData? amityPostData;
@@ -65,6 +65,7 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
 
     return AmityPost(postId: postId)
       ..targetType = amityPostTargetType
+      ..mid = id
       ..target = amityPostTarget
       ..parentPostId = parentPostId
       ..postedUserId = postedUserId
@@ -85,15 +86,31 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
       ..editedAt = editedAt
       ..updatedAt = updatedAt
       ..path = path
+      ..feedType = feedType
       ..metadata = metadata
       ..flaggedByMe = flaggedByMe
+      ..reach = reach
+      ..impression = impression
       ..mentionees = mentionees;
   }
 
   bool isMatchingFilter(GetPostRequest request) {
     return isMatchingTargetType(request.targetType) &&
         isMatchingTargetid(request.targetId) &&
-        isMatchingDataType(request.dataTypes);
+        isMatchingDataType(request.dataTypes) &&
+        isMatchingFeedType(request.feedType) &&
+        isMatchingDeleted(request.isDeleted);
+  }
+
+  bool isMatchingFeedType(String? feed) {
+    if (feed == null) return true;
+    return feedType == feed;
+  }
+
+  bool isMatchingDeleted( bool? isDeleted) {
+    if (isDeleted == null) return true;
+    return this.isDeleted == isDeleted;
+
   }
 
   bool isMatchingTargetType(String targetType) {
@@ -103,6 +120,7 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
   bool isMatchingTargetid(String targetId) {
     return this.targetId == targetId;
   }
+
 
   bool isMatchingDataType(List<String>? dataTypes) {
     if (dataTypes == null) {
@@ -116,4 +134,5 @@ extension PostResponseHiveEntityExtension on PostHiveEntity {
       return false;
     }
   }
+
 }

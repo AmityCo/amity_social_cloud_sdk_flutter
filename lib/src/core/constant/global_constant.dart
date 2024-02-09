@@ -81,3 +81,9 @@ const MAX_FILE_SIZE = 1073741824; // 1GB
 // Stream 
 const STREAM_V3 = 'api/v3/video-streaming';
 
+
+// Analytcis
+const ANALYTICS = 'api/v1/analytics/activities';
+const REACH_POSTS = 'api/v1/analytics/views/posts/';
+const REACH_STORIES = 'api/v1/analytics/views/stories/';
+

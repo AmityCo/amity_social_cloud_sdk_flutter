@@ -87,11 +87,20 @@ class PostHiveEntity extends EkoObject {
   /// feed ID
   String? feedId;
 
+  /// feed Type
+  String? feedType;
+
   ///
   String? require;
 
   ///
   bool? flaggedByMe;
+
+  ///
+  int? impression;
+
+  ///
+  int? reach;
 
   /// Mentions
   List<Mentionee>? mentionees;
@@ -124,9 +133,13 @@ class PostHiveEntity extends EkoObject {
       this.hasFlaggedComment,
       this.hasFlaggedChildren,
       this.feedId,
+      this.feedType,
       this.require,
       this.flaggedByMe,
-      this.mentionees});
+      this.mentionees,
+      this.impression,
+      this.reach,
+      });
 
   PostHiveEntity copyWith({
     String? id,
@@ -156,8 +169,11 @@ class PostHiveEntity extends EkoObject {
     bool? hasFlaggedComment,
     bool? hasFlaggedChildren,
     String? feedId,
+    String? feedType,
     String? require,
     bool? flaggedByMe,
+    int? impression,
+    int? reach,
     List<Mentionee>? mentionees,
   }) {
     return PostHiveEntity(
@@ -188,9 +204,12 @@ class PostHiveEntity extends EkoObject {
       hasFlaggedComment: hasFlaggedComment ?? this.hasFlaggedComment,
       hasFlaggedChildren: hasFlaggedChildren ?? this.hasFlaggedChildren,
       feedId: feedId ?? this.feedId,
+      feedType: feedType ?? this.feedType,
       require: require ?? this.require,
       flaggedByMe: flaggedByMe ?? this.flaggedByMe,
       mentionees: mentionees ?? this.mentionees,
+      impression: impression ?? this.impression,
+      reach: reach ?? this.reach,
     );
   }
   

@@ -1,3 +1,12 @@
+
+## 0.35.0
+* Feat: Added Post Impression, now post can be marked as read using amityPost.analytics().markPostAsViewed(). Likewise post impression and reach can be get by using amityPost.impression and amityPost.reach
+* Upgrade: Upgraded dart version from ">=2.15.1 <4.0.0" to ">=3.0.0 <4.0.0"
+* Upgrade: Upgraded the dependencies except Socket as amity backend currently works on socket v2
+* Fix: AmityFeedType filter not working on post live collection 
+
+
+
 ## 0.34.0
 * Feat: Post Live Object can be used by AmitySocialClient.newPostRepository().live.getPost(postId)
 * Feat: Post Live collection have been added

@@ -58,6 +58,8 @@ class AuthenticationRepoImpl extends AuthenticationRepo {
     }
     serviceLocator.registerSingleton<AmityUser>(amityUser);
 
+
+
     return Future.value(amityUser);
   }
 

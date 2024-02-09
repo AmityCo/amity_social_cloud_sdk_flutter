@@ -9,7 +9,7 @@ import 'package:amity_sdk/src/domain/repo/amity_object_repository.dart';
 
 /// Post Repo
 class PostRepoImpl extends PostRepo
-    with AmityObjectRepository<PostHiveEntity, AmityPost> {
+ {
   /// Public post API interface
   final PublicPostApiInterface publicPostApiInterface;
 
@@ -106,10 +106,10 @@ class PostRepoImpl extends PostRepo
   @override
   Future<PageListData<List<AmityPost>, String>> queryPost(
       GetPostRequest request) async {
-    if (request.options?.token == null) {
-      await dbAdapterRepo.postDbAdapter
-          .deletePostEntitiesByTargetId(request.targetId);
-    }
+    // if (request.options?.token == null) {
+    //   await dbAdapterRepo.postDbAdapter
+    //       .deletePostEntitiesByTargetId(request.targetId);
+    // }
     final data = await publicPostApiInterface.queryPost(request);
     final amitPosts = await data.saveToDb<AmityPost>(dbAdapterRepo);
     return PageListData(amitPosts, data.paging!.next ?? '');

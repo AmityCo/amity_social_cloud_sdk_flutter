@@ -35,6 +35,8 @@ class PostResponse {
     required this.feedId,
     required this.require,
     required this.mentionees,
+    required this.impression,
+    required this.reach,
   });
 
   /// Doc id
@@ -124,6 +126,12 @@ class PostResponse {
   /// Mentions
   final List<Mentionee> mentionees;
 
+  /// impression count
+  final int impression;
+
+  /// reach count
+  final int reach;
+
   /// factory method to init [PostResponse] from map
   factory PostResponse.fromJson(Map<String, dynamic> json) => PostResponse(
         id: json["_id"],
@@ -164,6 +172,8 @@ class PostResponse {
         feedId: json["feedId"],
         require: json["required"],
         metadata: json["metadata"],
+        impression: json["impression"],
+        reach: json["reach"],
         mentionees: List<Mentionee>.from(
             json["mentionees"].map((x) => Mentionee.fromJson(x))),
       );
@@ -198,6 +208,8 @@ class PostResponse {
         "hasFlaggedChildren": hasFlaggedChildren,
         "feedId": feedId,
         "required": require,
+        "impression": impression,
+        "reach": reach,
         "mentionees": List<dynamic>.from(mentionees.map((x) => x.toJson())),
       };
 }
