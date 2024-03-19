@@ -13,10 +13,10 @@ packages:
     dependency: "direct main"
     description:
       name: amity_sdk_api
-      sha256: "9d285f921640c35d7fd54af8a990d867d6440245dd4583dd31686d34e691d123"
+      sha256: "786ddeb362aaa4534471d12e007c8c70243dde20d9c4a00bb8b0f547b282ac6c"
       url: "https://pub.dev"
     source: hosted
-    version: "0.0.2"
+    version: "0.0.3"
   analyzer:
     dependency: transitive
     description:
@@ -680,14 +680,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.1"
-  test:
-    dependency: "direct dev"
-    description:
-      name: test
-      sha256: a1f7595805820fcc05e5c52e3a231aedd0b72972cb333e8c738a8b1239448b6f
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.24.9"
   test_api:
     dependency: transitive
     description:
@@ -795,4 +787,3 @@ packages:
 sdks:
   dart: ">=3.2.0 <4.0.0"
   flutter: ">=3.10.0"
-
