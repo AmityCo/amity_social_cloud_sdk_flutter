@@ -15,6 +15,7 @@ class FileResponse {
     required this.createdAt,
     required this.updatedAt,
     required this.attributes,
+    this.videoUrl 
   });
 
   final String fileId;
@@ -23,11 +24,13 @@ class FileResponse {
   final DateTime createdAt;
   final DateTime updatedAt;
   final Attributes attributes;
+  Map<String, dynamic>? videoUrl = {};
 
   factory FileResponse.fromJson(Map<String, dynamic> json) => FileResponse(
         fileId: json["fileId"],
         fileUrl: json["fileUrl"],
         type: json["type"],
+        videoUrl: json["videoUrl"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         attributes: Attributes.fromJson(json["attributes"]),
@@ -37,6 +40,7 @@ class FileResponse {
         "fileId": fileId,
         "fileUrl": fileUrl,
         "type": type,
+        "videoUrl": videoUrl,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
         "attributes": attributes.toJson(),

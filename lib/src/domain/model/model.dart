@@ -18,3 +18,6 @@ export 'follow/follow.dart';
 export 'message/message.dart';
 export 'amity_stream/amity_stream.dart';
 export 'analytics/amity_post_analytics.dart';
+export 'amity_story.dart';
+export 'amity_story_item.dart';
+export 'amity_story_data.dart';

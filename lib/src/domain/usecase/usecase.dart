@@ -15,3 +15,4 @@ export 'token/token.dart';
 export 'topic/topic.dart';
 export 'user/user.dart';
 export 'stream/stream.dart';
+export 'story/story.dart';

@@ -1,5 +1,7 @@
 // ignore_for_file: constant_identifier_names
 
+import 'package:amity_sdk/amity_sdk.dart';
+import 'package:amity_sdk/src/core/enum/amity_broadcast_resolution.dart';
 import 'package:amity_sdk/src/domain/model/amity_file/amity_file_properties.dart';
 
 abstract class AmityFileInfo {
@@ -24,7 +26,7 @@ abstract class AmityFileInfo {
     return _fileProperties?.mimeType;
   }
 
-  String ?get fileSize => _fileProperties?.size;
+  String? get fileSize => _fileProperties?.size;
 
   bool? get _hasLocalPreview => _fileProperties?.filePath != null;
 
@@ -106,7 +108,23 @@ extension AmityImageSizeExtension on AmityImageSize {
 
 ///Amity Video
 class AmityVideo extends AmityFileInfo {
-  AmityVideo(AmityFileProperties fileProperties) : super(fileProperties);
+  bool? get hasLocalPreview => _hasLocalPreview;
+  String? get getFilePath => _getFilePath;
+  AmityFileProperties fileProperties;
+
+  AmityVideo(this.fileProperties) : super(fileProperties);
+
+  List<AmityVideoResolution> getResolutions() {
+    List<AmityVideoResolution> resolutions = [];
+    fileProperties.rawFile?['videoUrl']?.keys.toList().forEach((e) {
+      resolutions.add(AmityVideoResolutionExtension.enumOf(e));
+    });
+    return resolutions;
+  }
+
+  String? getVideoUrl(AmityVideoResolution resolution) {
+    return fileProperties.rawFile?['videoUrl'][resolution.apiKey];
+  }
 }
 
 enum AmityVideoQuality { ORIGINAL, HIGH, MEDIUM, LOW }

@@ -19,7 +19,8 @@ extension FileResponsseExtension on FileResponse {
       //metadata
       ..height = attributes.metadata?.video?.height ?? attributes.metadata?.height
       ..width = attributes.metadata?.video?.width ?? attributes.metadata?.width
-      ..isFull = attributes.metadata?.isFull;
+      ..isFull = attributes.metadata?.isFull
+      ..rawFile = toJson();
     return fileEntity;
   }
 }

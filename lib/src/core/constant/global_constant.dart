@@ -87,3 +87,6 @@ const ANALYTICS = 'api/v1/analytics/activities';
 const REACH_POSTS = 'api/v1/analytics/views/posts/';
 const REACH_STORIES = 'api/v1/analytics/views/stories/';
 
+// Stories
+const STORIES = 'api/v4/stories';
+

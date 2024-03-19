@@ -1,6 +1,8 @@
 import 'package:amity_sdk/src/core/socket/event/event.dart';
 import 'package:amity_sdk/src/core/socket/event/post/post_approved_event_listener.dart';
 import 'package:amity_sdk/src/core/socket/event/post/post_declined_event_listener.dart';
+import 'package:amity_sdk/src/core/socket/event/story/story_create_event_listener.dart';
+import 'package:amity_sdk/src/core/socket/event/story/story_delete_event_listener.dart';
 import 'package:collection/collection.dart' show IterableExtension;
 
 class MqttEventListeners {
@@ -40,6 +42,11 @@ class MqttEventListeners {
     CommunityUserChangedEventListener(),
     CommunityUserBannedEventListener(),
     CommunityUserUnbannedEventListener(),
+
+    // Stories 
+    StoryCreateEventListener(),
+    StoryDeleteEventListener(),
+
   ]);
 
   SocketEventListener? getEvent(String eventType) =>

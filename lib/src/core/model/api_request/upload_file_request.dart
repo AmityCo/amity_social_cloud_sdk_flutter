@@ -5,6 +5,7 @@ class UploadFileRequest {
   /// init [UploadFileRequest]
   UploadFileRequest({
     required this.files,
+    this.feedtype,
     this.fullImage = false,
     this.uploadId,
   });
@@ -18,9 +19,13 @@ class UploadFileRequest {
   /// upload ID
   String? uploadId;
 
+  /// feedtype ID
+  String? feedtype;
+
   /// To Json
   Map<String, dynamic> toJson() => {
         "fullImage": fullImage,
         "uploadId": uploadId,
+        "feedtype": feedtype,
       }..removeWhere((key, value) => value == null);
 }
