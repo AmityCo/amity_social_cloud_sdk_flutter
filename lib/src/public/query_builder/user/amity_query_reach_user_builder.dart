@@ -16,6 +16,17 @@ class AmityQueryReachUserBuilder {
   }
 
 
+Future<List<AmityUser>> query() async {
+    if(_viewedType == AmityViewedType.POST){
+      _request.postId = _viewedId;
+      }else{
+      _request.storyId = _viewedId;
+      }
+    final amityUsers = await _useCase.get(_request);
+
+    return amityUsers.data;
+  }
+
   /// Query User
   Future<PageListData<List<AmityUser>, String>> getPagingData(
       {String? token, int? limit}) async {

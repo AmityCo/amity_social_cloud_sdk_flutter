@@ -1,0 +1,206 @@
+{
+    "categories": [
+        {
+            "name": " Gaming",
+            "updatedAt": "2023-11-01T05:59:58.255Z",
+            "createdAt": "2023-07-12T03:54:46.538Z",
+            "isDeleted": false,
+            "categoryId": "fa4ef4b10baac2db3f0a0535b28e1b85"
+        },
+        {
+            "name": "!!qq",
+            "updatedAt": "2023-03-28T10:07:43.032Z",
+            "createdAt": "2023-03-28T10:07:43.032Z",
+            "isDeleted": false,
+            "categoryId": "82d7ec623f6cc4c82ad11e6e0670d087"
+        },
+        {
+            "name": "!A",
+            "updatedAt": "2023-05-02T08:59:19.527Z",
+            "createdAt": "2023-05-02T08:59:19.527Z",
+            "isDeleted": false,
+            "categoryId": "7d69c96a49a8aaac737bd025808dd94f"
+        },
+        {
+            "name": "++BB",
+            "updatedAt": "2023-05-05T11:06:44.331Z",
+            "createdAt": "2023-05-05T11:06:44.331Z",
+            "isDeleted": false,
+            "categoryId": "35b3466813b5a01f8d6ee7354fad3fad"
+        },
+        {
+            "name": "++cc",
+            "updatedAt": "2023-05-17T03:30:30.798Z",
+            "createdAt": "2023-05-17T03:30:30.798Z",
+            "isDeleted": false,
+            "categoryId": "a0fb4b993be3f8c465baf14277547aad"
+        },
+        {
+            "name": "++dd",
+            "updatedAt": "2023-05-18T09:56:15.531Z",
+            "createdAt": "2023-05-18T09:56:15.531Z",
+            "isDeleted": false,
+            "categoryId": "b4480296f2490f5daab47c9ea4347994"
+        },
+        {
+            "name": "+A",
+            "updatedAt": "2023-05-02T08:59:08.236Z",
+            "createdAt": "2023-05-02T08:59:08.236Z",
+            "isDeleted": false,
+            "categoryId": "e939be8566e6b4c4ab7fed0e4fc1013c"
+        },
+        {
+            "name": "~hello",
+            "updatedAt": "2022-11-25T04:19:34.446Z",
+            "createdAt": "2022-11-25T04:19:34.446Z",
+            "isDeleted": false,
+            "categoryId": "2ddea5ad242d0a2bd5dc5be8ae9fc8c2"
+        },
+        {
+            "name": "$testing category",
+            "updatedAt": "2022-11-25T03:56:06.238Z",
+            "createdAt": "2022-11-25T03:56:06.238Z",
+            "isDeleted": false,
+            "categoryId": "88d175da65cbfeb39b81e722b322430d"
+        },
+        {
+            "name": "0asd",
+            "updatedAt": "2022-11-25T04:18:59.180Z",
+            "createdAt": "2022-11-25T04:18:59.180Z",
+            "isDeleted": false,
+            "categoryId": "10051d82a1f371c6be3a8f4a4654b8a1"
+        },
+        {
+            "name": "22May23",
+            "updatedAt": "2023-05-22T06:53:07.861Z",
+            "createdAt": "2023-05-22T06:53:07.861Z",
+            "isDeleted": false,
+            "categoryId": "088ae8f63e9cf17409daa7aab315dd6f"
+        },
+        {
+            "name": "A Category",
+            "updatedAt": "2022-11-25T03:56:29.037Z",
+            "createdAt": "2022-11-25T03:56:29.037Z",
+            "isDeleted": false,
+            "categoryId": "639942c6b2f121bed3901cf4a4c296e7"
+        },
+        {
+            "name": "A7-category",
+            "updatedAt": "2023-02-06T10:11:43.338Z",
+            "createdAt": "2023-02-06T10:11:43.338Z",
+            "isDeleted": false,
+            "categoryId": "4d3257fa7d504176dd1f0832852c4e50"
+        },
+        {
+            "name": "Beauty",
+            "updatedAt": "2023-11-01T05:58:50.055Z",
+            "createdAt": "2023-08-16T06:21:08.416Z",
+            "isDeleted": false,
+            "categoryId": "ba0435f59acdbddff0fa3bf520f2fe2f"
+        },
+        {
+            "name": "Boardgames",
+            "updatedAt": "2023-11-01T06:08:10.486Z",
+            "createdAt": "2023-06-13T02:44:13.087Z",
+            "isDeleted": false,
+            "categoryId": "8a69356b5824c1a6a9efcad679b167de"
+        },
+        {
+            "name": "bubble",
+            "updatedAt": "2023-01-19T06:48:31.101Z",
+            "createdAt": "2023-01-19T06:48:31.101Z",
+            "isDeleted": false,
+            "categoryId": "a2144c35015abc3b560350b544393310",
+            "avatarFileId": "1a2216c039814a3893686e819aa06c15"
+        },
+        {
+            "name": "Calyp1",
+            "updatedAt": "2023-02-08T09:09:23.646Z",
+            "createdAt": "2023-02-08T09:09:23.646Z",
+            "isDeleted": false,
+            "categoryId": "641cc3a569a9b7bd2310d95569d95a5a"
+        },
+        {
+            "name": "cat",
+            "updatedAt": "2022-09-14T09:33:42.815Z",
+            "createdAt": "2022-09-14T09:33:42.815Z",
+            "isDeleted": false,
+            "categoryId": "c00c642beae7e6cbbe9540f25d20a073"
+        },
+        {
+            "name": "Cat",
+            "updatedAt": "2022-09-13T04:32:50.326Z",
+            "createdAt": "2022-09-13T04:32:50.326Z",
+            "isDeleted": false,
+            "categoryId": "970badb5297fb04e41daab08398545a3",
+            "avatarFileId": "ebafedb8001347c0bd1b0561154caca5"
+        },
+        {
+            "name": "Cat after disable old billing",
+            "updatedAt": "2022-09-15T07:06:00.265Z",
+            "createdAt": "2022-09-15T07:06:00.265Z",
+            "isDeleted": false,
+            "categoryId": "263d0bf2dca9a91db2c4dd1168297d38",
+            "avatarFileId": "0ecbea1ad01a429fa093359d268ae5bc"
+        }
+    ],
+    "paging": {
+        "next": "eyJza2lwIjoyMCwibGltaXQiOjIwfQ=="
+    },
+    "files": [
+        {
+            "fileId": "ebafedb8001347c0bd1b0561154caca5",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/ebafedb8001347c0bd1b0561154caca5/download",
+            "type": "image",
+            "createdAt": "2022-09-13T04:32:48.014Z",
+            "updatedAt": "2022-09-13T04:32:50.333Z",
+            "attributes": {
+                "name": "2.jpg",
+                "extension": "jpg",
+                "size": 10338,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 207,
+                    "width": 404,
+                    "isFull": false
+                }
+            }
+        },
+        {
+            "fileId": "0ecbea1ad01a429fa093359d268ae5bc",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/0ecbea1ad01a429fa093359d268ae5bc/download",
+            "type": "image",
+            "createdAt": "2022-09-15T07:05:58.565Z",
+            "updatedAt": "2022-09-15T07:06:00.272Z",
+            "attributes": {
+                "name": "gif.gif",
+                "extension": "gif",
+                "size": 18693,
+                "mimeType": "image/gif",
+                "metadata": {
+                    "height": 400,
+                    "width": 314,
+                    "isFull": false
+                }
+            }
+        },
+        {
+            "fileId": "1a2216c039814a3893686e819aa06c15",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/1a2216c039814a3893686e819aa06c15/download",
+            "type": "image",
+            "createdAt": "2023-01-19T06:47:44.938Z",
+            "updatedAt": "2023-01-19T06:48:31.120Z",
+            "attributes": {
+                "name": "hand-drawn-bubble-tea-flavors_52683-46533.jpeg",
+                "extension": "jpg",
+                "size": 41778,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "height": 417,
+                    "width": 626,
+                    "isFull": false
+                }
+            }
+        }
+    ]
+}

@@ -16,3 +16,4 @@ export 'public_post_api_interface.dart';
 export 'reaction_api_interface.dart';
 export 'user_api_interface.dart';
 export 'user_feed_api_interface.dart';
+export 'analytics_api_interface.dart';

@@ -1,0 +1,236 @@
+{
+    "channels": [
+        {
+            "_id": "64f6e0ba7b4bc55ce06f9dd9",
+            "isDistinct": false,
+            "type": "community",
+            "tags": [],
+            "lastActivity": "2024-03-11T07:41:44.208Z",
+            "updatedAt": "2024-03-11T07:42:07.023Z",
+            "createdAt": "2024-03-11T07:41:44.207Z",
+            "rateLimitWindow": 1000,
+            "displayName": "WyneMannerTwo",
+            "messageAutoDeleteEnabled": false,
+            "autoDeleteMessageByFlagLimit": 0,
+            "isDeleted": false,
+            "path": "631f16be1e440400da5663b0/chat/channel/65eeb5b84098f9bf7af342d6",
+            "isPublic": true,
+            "channelId": "97ad5a5c-826e-48f3-8633-55244a54e411",
+            "channelInternalId": "65eeb5b84098f9bf7af342d6",
+            "channelPublicId": "97ad5a5c-826e-48f3-8633-55244a54e411",
+            "isMuted": false,
+            "isRateLimited": false,
+            "memberCount": 3,
+            "messageCount": 0,
+            "moderatorMemberCount": 1,
+            "avatarFileId": null,
+            "metadata": {},
+            "messagePreviewId": null,
+            "notificationMode": "default"
+        }
+    ],
+    "channelUsers": [
+        {
+            "membership": "member",
+            "lastActivity": "2024-03-11T07:41:44.554Z",
+            "readToSegment": 0,
+            "createdAt": "2024-03-11T07:41:44.555Z",
+            "updatedAt": "2024-03-11T07:41:44.555Z",
+            "lastMentionedSegment": 0,
+            "isBanned": false,
+            "isMuted": false,
+            "userId": "victimAndroid",
+            "userInternalId": "6321d1096de41000d9511623",
+            "userPublicId": "victimAndroid",
+            "channelId": "97ad5a5c-826e-48f3-8633-55244a54e411",
+            "channelInternalId": "65eeb5b84098f9bf7af342d6",
+            "channelPublicId": "97ad5a5c-826e-48f3-8633-55244a54e411",
+            "roles": [],
+            "permissions": []
+        },
+        {
+            "membership": "member",
+            "lastActivity": "2024-03-11T07:41:44.554Z",
+            "readToSegment": 0,
+            "createdAt": "2024-03-11T07:41:44.555Z",
+            "updatedAt": "2024-03-11T07:41:44.555Z",
+            "lastMentionedSegment": 0,
+            "isBanned": false,
+            "isMuted": false,
+            "userId": "superman",
+            "userInternalId": "64af77789202f6b8cc0a89a1",
+            "userPublicId": "superman",
+            "channelId": "97ad5a5c-826e-48f3-8633-55244a54e411",
+            "channelInternalId": "65eeb5b84098f9bf7af342d6",
+            "channelPublicId": "97ad5a5c-826e-48f3-8633-55244a54e411",
+            "roles": [],
+            "permissions": []
+        },
+        {
+            "membership": "member",
+            "lastActivity": "2024-03-11T07:41:44.351Z",
+            "readToSegment": 0,
+            "createdAt": "2024-03-11T07:41:44.351Z",
+            "updatedAt": "2024-03-11T07:41:44.351Z",
+            "lastMentionedSegment": 0,
+            "isBanned": false,
+            "isMuted": false,
+            "userId": "batman",
+            "userInternalId": "64ae21a5b084fea97395649d",
+            "userPublicId": "batman",
+            "channelId": "97ad5a5c-826e-48f3-8633-55244a54e411",
+            "channelInternalId": "65eeb5b84098f9bf7af342d6",
+            "channelPublicId": "97ad5a5c-826e-48f3-8633-55244a54e411",
+            "roles": [
+                "channel-moderator"
+            ],
+            "permissions": [
+                "CREATE_ROLE",
+                "DELETE_ROLE",
+                "EDIT_ROLE",
+                "User/ExemptFromFilters",
+                "User/ExemptFromRateLimits",
+                "User/ExemptFromMute",
+                "User/ExempFromRepetitionCheck",
+                "MANAGE_NOTIFICATION_NETWORK_SETTING",
+                "EDIT_CHANNEL_USER",
+                "BAN_USER_FROM_CHANNEL",
+                "ADD_CHANNEL_USER",
+                "REMOVE_CHANNEL_USER",
+                "EDIT_CHANNEL",
+                "MUTE_CHANNEL",
+                "MUTE_USER_INSIDE_CHANNEL",
+                "DELETE_MESSAGE",
+                "EDIT_MESSAGE",
+                "Channel/BanUser",
+                "Channel/MuteUser",
+                "Channel/MuteChannel",
+                "Channel/RateLimitUser",
+                "Channel/RateLimitChannel",
+                "Channel/ManageMessages",
+                "Channel/ManageUsers"
+            ]
+        }
+    ],
+    "users": [
+        {
+            "_id": "6321d1096de41000d9511623",
+            "path": "631f16be1e440400da5663b0/user/6321d1096de41000d9511623",
+            "description": "",
+            "createdAt": "2022-09-14T13:03:05.130Z",
+            "updatedAt": "2024-02-29T09:07:41.583Z",
+            "isDeleted": false,
+            "displayName": "Victim Android",
+            "userId": "victimAndroid",
+            "userInternalId": "6321d1096de41000d9511623",
+            "userPublicId": "victimAndroid",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 1,
+            "hashFlag": {
+                "bits": 24,
+                "hashes": 17,
+                "hash": "BEEQ"
+            },
+            "avatarFileId": "defecb0420534bfab5fe86353706049a",
+            "isGlobalBan": false
+        },
+        {
+            "_id": "64ae21a5b084fea97395649d",
+            "path": "631f16be1e440400da5663b0/user/64ae21a5b084fea97395649d",
+            "createdAt": "2023-07-12T03:44:37.052Z",
+            "updatedAt": "2024-02-27T11:12:29.461Z",
+            "isDeleted": false,
+            "displayName": "batman",
+            "userId": "batman",
+            "userInternalId": "64ae21a5b084fea97395649d",
+            "userPublicId": "batman",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 1,
+            "hashFlag": {
+                "bits": 24,
+                "hashes": 17,
+                "hash": "BEEQ"
+            },
+            "avatarFileId": "e2acad186bd04328ae44c1314e71ecad",
+            "isGlobalBan": false
+        },
+        {
+            "_id": "64af77789202f6b8cc0a89a1",
+            "path": "631f16be1e440400da5663b0/user/64af77789202f6b8cc0a89a1",
+            "createdAt": "2023-07-13T04:03:04.907Z",
+            "updatedAt": "2023-07-13T04:03:04.907Z",
+            "isDeleted": false,
+            "displayName": "superman",
+            "userId": "superman",
+            "userInternalId": "64af77789202f6b8cc0a89a1",
+            "userPublicId": "superman",
+            "metadata": {},
+            "roles": [],
+            "permissions": [],
+            "flagCount": 0,
+            "hashFlag": null,
+            "avatarFileId": null,
+            "isGlobalBan": false
+        }
+    ],
+    "files": [
+        {
+            "fileId": "defecb0420534bfab5fe86353706049a",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/defecb0420534bfab5fe86353706049a/download",
+            "type": "image",
+            "createdAt": "2023-09-11T06:39:02.627Z",
+            "updatedAt": "2023-09-11T06:39:02.885Z",
+            "attributes": {
+                "name": "image_picker_6EC77D4C-C0D3-46CA-AB2A-A96437A46C5A-14974-00000D1EDBA00CFD.jpg",
+                "extension": "jpg",
+                "size": 236549,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "exif": {
+                        "DateTimeOriginal": "2012-08-08T14:29:49.000Z"
+                    },
+                    "gps": {
+                        "lat": 64.7529,
+                        "lng": -14.5386
+                    },
+                    "height": 2500,
+                    "width": 1668,
+                    "orientation": 1,
+                    "isFull": false
+                }
+            }
+        },
+        {
+            "fileId": "e2acad186bd04328ae44c1314e71ecad",
+            "fileUrl": "https://api.staging.amity.co/api/v3/files/e2acad186bd04328ae44c1314e71ecad/download",
+            "type": "image",
+            "createdAt": "2024-02-27T11:12:29.222Z",
+            "updatedAt": "2024-02-27T11:12:29.565Z",
+            "attributes": {
+                "name": "image_picker_3D4677C8-45D6-4C62-B26D-0E463A3585BF-27733-000001DA78CD6E2E.jpg",
+                "extension": "jpg",
+                "size": 237029,
+                "mimeType": "image/jpeg",
+                "metadata": {
+                    "exif": {
+                        "DateTimeOriginal": "2012-08-08T14:29:49.000Z"
+                    },
+                    "gps": {
+                        "lat": 64.7529,
+                        "lng": -14.5386
+                    },
+                    "height": 2500,
+                    "width": 1668,
+                    "isFull": false
+                }
+            }
+        }
+    ],
+    "messageFeedsInfo": [],
+    "messagePreviews": [],
+    "paging": {}
+}

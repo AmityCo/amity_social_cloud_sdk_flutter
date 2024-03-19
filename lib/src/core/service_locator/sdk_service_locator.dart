@@ -158,6 +158,8 @@ class SdkServiceLocator {
             amityCoreClientOption: configServiceLocator()));
     serviceLocator.registerLazySingleton<UserApiInterface>(
         () => UserApiInterfaceImpl(httpApiClient: serviceLocator()));
+    serviceLocator.registerLazySingleton<AnalyticsApiInterface>(
+        () => AnalyticsApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<FollowApiInterface>(
         () => FollowApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<CommentApiInterface>(
@@ -192,8 +194,6 @@ class SdkServiceLocator {
         () => ChannelMemberApiInterfaceImpl(httpApiClient: serviceLocator()));
     serviceLocator.registerLazySingleton<StreamApiInterface>(
         () => StreamApiInterfaceImpl(httpApiClient: serviceLocator()));
-    serviceLocator.registerLazySingleton<AnalyticsApiInterface>(
-        () => AnalyticsApiInterfaceImpl(httpApiClient: serviceLocator()));
 
     // Local Data Source
 
