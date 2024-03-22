@@ -22,6 +22,8 @@ class FileHiveEntity  extends EkoObject{
 
   DateTime? updatedAt;
 
+  Map<String, dynamic>? rawFile;
+
   //Attribute
   String? name;
   String? ext;

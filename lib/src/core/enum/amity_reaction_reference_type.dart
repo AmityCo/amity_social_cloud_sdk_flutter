@@ -1,6 +1,6 @@
 // ignore_for_file: constant_identifier_names
 
-enum AmityReactionReferenceType { POST, COMMENT, MESSAGE }
+enum AmityReactionReferenceType { POST, COMMENT, MESSAGE , STORY }
 
 extension AmityReactionReferenceTypeExtension on AmityReactionReferenceType {
   String get value {

@@ -4,11 +4,11 @@ extension AmityBroadcastResolutionExtension on AmityBroadcastResolution {
   String get name {
     switch (this) {
       case AmityBroadcastResolution.SD_480P:
-        return 'idle';
+        return '480p';
       case AmityBroadcastResolution.HD_720P:
-        return 'live';
+        return '720p';
       case AmityBroadcastResolution.FD_1080P:
-        return 'ended';
+        return '1080p';
       default:
         return "";
     }

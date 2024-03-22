@@ -95,6 +95,8 @@ class AmityTopicCommunity extends AmityTopic {
         return "${amityCommunity.path!}/post/+/comment/+";
       case AmityCommunityEvents.POSTS_AND_COMMENTS:
         return "${amityCommunity.path!}/post/#";
+      case AmityCommunityEvents.STORIES_AND_COMMENTS:
+        return "${amityCommunity.path!}/story/#";
     }
   }
 }

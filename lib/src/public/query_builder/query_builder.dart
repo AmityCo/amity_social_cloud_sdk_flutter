@@ -10,3 +10,4 @@ export 'reaction/reaction.dart';
 export 'relationship/relationship.dart';
 export 'topic/topic.dart';
 export 'user/user.dart';
+export 'story/story.dart';

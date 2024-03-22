@@ -123,6 +123,7 @@ class FileApiInterfaceImpl extends FileApiInterface {
           request.files[0].path,
           filename: request.files[0].path.split('/').last,
         ),
+        'feedType': request.feedtype,
       }..addAll(request.toJson()));
 
       final data = await httpApiClient()

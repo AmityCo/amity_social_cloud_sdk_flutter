@@ -1,0 +1,1573 @@
+{
+    "results": {
+        "videoStreamings": [
+            {
+                "title": "Time : 2 : 42",
+                "description": "Date : 7/2/2024",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/825cf1401ca7a23d7a6de626b8845967?auth_key=1707313323-0-0-5cc4ed0239a120bf74196c6eb4fcc041",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "825cf1401ca7a23d7a6de626b8845967",
+                        "query": "auth_key=1707313323-0-0-5cc4ed0239a120bf74196c6eb4fcc041"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/825cf1401ca7a23d7a6de626b8845967_ulTr4R3krK.flv?auth_key=1707313323-0-0-c31b7eb6739f612b7c4436c79215eddd",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "825cf1401ca7a23d7a6de626b8845967_ulTr4R3krK",
+                            "query": "auth_key=1707313323-0-0-c31b7eb6739f612b7c4436c79215eddd"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/825cf1401ca7a23d7a6de626b8845967_ulTr4R3krK.m3u8?auth_key=1707313323-0-0-3ce0ef033b0159ffdbf4311e876d9efa",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "825cf1401ca7a23d7a6de626b8845967_ulTr4R3krK",
+                            "query": "auth_key=1707313323-0-0-3ce0ef033b0159ffdbf4311e876d9efa"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/825cf1401ca7a23d7a6de626b8845967_ulTr4R3krK?auth_key=1707313323-0-0-bccabcc9c8fbebcca860687a29802533",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "825cf1401ca7a23d7a6de626b8845967_ulTr4R3krK",
+                            "query": "auth_key=1707313323-0-0-bccabcc9c8fbebcca860687a29802533"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T10:42:07.223Z",
+                "endedAt": "2024-02-07T10:45:11.523Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T10:45:43.827Z",
+                "createdAt": "2024-02-07T10:42:03.180Z",
+                "streamId": "825cf1401ca7a23d7a6de626b8845967",
+                "userId": "swag",
+                "userInternalId": "632413076de41000d9558028",
+                "userPublicId": "swag",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/825cf1401ca7a23d7a6de626b8845967_ulTr4R3krK/2024-02-07-18-42-06_2024-02-07-18-42-40.mp4",
+                            "duration": 29.681,
+                            "startTime": 1707302530,
+                            "stopTime": 1707302560
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Time : 17 : 35",
+                "description": "Date : 7/2/2024",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/ce619a5782a7b8e8ecda103d6a6f71b9?auth_key=1707312930-0-0-5b043908507db77cec4cf0701aa6c51c",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "ce619a5782a7b8e8ecda103d6a6f71b9",
+                        "query": "auth_key=1707312930-0-0-5b043908507db77cec4cf0701aa6c51c"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/ce619a5782a7b8e8ecda103d6a6f71b9_ulTr4R3krK.flv?auth_key=1707312930-0-0-8ea5c6b320b4d3e6793ee351b6c3c2bb",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "ce619a5782a7b8e8ecda103d6a6f71b9_ulTr4R3krK",
+                            "query": "auth_key=1707312930-0-0-8ea5c6b320b4d3e6793ee351b6c3c2bb"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/ce619a5782a7b8e8ecda103d6a6f71b9_ulTr4R3krK.m3u8?auth_key=1707312930-0-0-a1f59227a651ebe795dd5d8bd482f43f",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "ce619a5782a7b8e8ecda103d6a6f71b9_ulTr4R3krK",
+                            "query": "auth_key=1707312930-0-0-a1f59227a651ebe795dd5d8bd482f43f"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/ce619a5782a7b8e8ecda103d6a6f71b9_ulTr4R3krK?auth_key=1707312930-0-0-1f841a77abe3c156e9cc83523ca0fec7",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "ce619a5782a7b8e8ecda103d6a6f71b9_ulTr4R3krK",
+                            "query": "auth_key=1707312930-0-0-1f841a77abe3c156e9cc83523ca0fec7"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T10:35:32.655Z",
+                "endedAt": "2024-02-07T10:36:16.011Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T10:39:21.356Z",
+                "createdAt": "2024-02-07T10:35:30.477Z",
+                "streamId": "ce619a5782a7b8e8ecda103d6a6f71b9",
+                "userId": "nike",
+                "userInternalId": "64c750f6a8ed6e20cd67511d",
+                "userPublicId": "nike",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/ce619a5782a7b8e8ecda103d6a6f71b9_ulTr4R3krK/2024-02-07-18-35-31_2024-02-07-18-36-17.mp4",
+                            "duration": 41.533,
+                            "startTime": 1707302132,
+                            "stopTime": 1707302177
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Time : 10 : 34",
+                "description": "Date : 7/2/2024",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/5e23fbceefcbbb6632e1b1aae685e4f3?auth_key=1707312846-0-0-91fd0c4da33be8f8ffe004ec38d04bd9",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "5e23fbceefcbbb6632e1b1aae685e4f3",
+                        "query": "auth_key=1707312846-0-0-91fd0c4da33be8f8ffe004ec38d04bd9"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/5e23fbceefcbbb6632e1b1aae685e4f3_ulTr4R3krK.flv?auth_key=1707312846-0-0-d953380b7160737983f9bfabe22b0183",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "5e23fbceefcbbb6632e1b1aae685e4f3_ulTr4R3krK",
+                            "query": "auth_key=1707312846-0-0-d953380b7160737983f9bfabe22b0183"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/5e23fbceefcbbb6632e1b1aae685e4f3_ulTr4R3krK.m3u8?auth_key=1707312846-0-0-6e42c45a16011ee6849369444653aceb",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "5e23fbceefcbbb6632e1b1aae685e4f3_ulTr4R3krK",
+                            "query": "auth_key=1707312846-0-0-6e42c45a16011ee6849369444653aceb"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/5e23fbceefcbbb6632e1b1aae685e4f3_ulTr4R3krK?auth_key=1707312846-0-0-bd860845519f6752fa62af9b68f65161",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "5e23fbceefcbbb6632e1b1aae685e4f3_ulTr4R3krK",
+                            "query": "auth_key=1707312846-0-0-bd860845519f6752fa62af9b68f65161"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T10:34:08.650Z",
+                "endedAt": "2024-02-07T10:39:28.511Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T10:40:00.492Z",
+                "createdAt": "2024-02-07T10:34:06.027Z",
+                "streamId": "5e23fbceefcbbb6632e1b1aae685e4f3",
+                "userId": "swag",
+                "userInternalId": "632413076de41000d9558028",
+                "userPublicId": "swag",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/5e23fbceefcbbb6632e1b1aae685e4f3_ulTr4R3krK/2024-02-07-18-34-08_2024-02-07-18-36-57.mp4",
+                            "duration": 167.18,
+                            "startTime": 1707302049,
+                            "stopTime": 1707302217
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Time : 10 : 33",
+                "description": "Date : 7/2/2024",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/072e04282591f7c94fc799502f597449?auth_key=1707312818-0-0-4c318f3d81b645261570a97db0ff7242",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "072e04282591f7c94fc799502f597449",
+                        "query": "auth_key=1707312818-0-0-4c318f3d81b645261570a97db0ff7242"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/072e04282591f7c94fc799502f597449_ulTr4R3krK.flv?auth_key=1707312818-0-0-1d6a16c13c7dd4237b87994f3bed0ea9",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "072e04282591f7c94fc799502f597449_ulTr4R3krK",
+                            "query": "auth_key=1707312818-0-0-1d6a16c13c7dd4237b87994f3bed0ea9"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/072e04282591f7c94fc799502f597449_ulTr4R3krK.m3u8?auth_key=1707312818-0-0-6db31bc47bdad95b19520d0b4e0539d4",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "072e04282591f7c94fc799502f597449_ulTr4R3krK",
+                            "query": "auth_key=1707312818-0-0-6db31bc47bdad95b19520d0b4e0539d4"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/072e04282591f7c94fc799502f597449_ulTr4R3krK?auth_key=1707312818-0-0-43c3badc205876ac033b576cb3902305",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "072e04282591f7c94fc799502f597449_ulTr4R3krK",
+                            "query": "auth_key=1707312818-0-0-43c3badc205876ac033b576cb3902305"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T10:33:41.273Z",
+                "endedAt": "2024-02-07T10:36:19.832Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T10:36:53.119Z",
+                "createdAt": "2024-02-07T10:33:38.760Z",
+                "streamId": "072e04282591f7c94fc799502f597449",
+                "userId": "swag",
+                "userInternalId": "632413076de41000d9558028",
+                "userPublicId": "swag",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/072e04282591f7c94fc799502f597449_ulTr4R3krK/2024-02-07-18-33-41_2024-02-07-18-33-49.mp4",
+                            "duration": 5.418,
+                            "startTime": 1707302024,
+                            "stopTime": 1707302029
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Time : 16 : 0",
+                "description": "Date : 7/2/2024",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/ac827d0386cbeb37f77886e543249102?auth_key=1707312623-0-0-4982623393015ffdbd8c159dc444feff",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "ac827d0386cbeb37f77886e543249102",
+                        "query": "auth_key=1707312623-0-0-4982623393015ffdbd8c159dc444feff"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/ac827d0386cbeb37f77886e543249102_ulTr4R3krK.flv?auth_key=1707312623-0-0-d54f06c1850e45ace394d818e3dd4c67",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "ac827d0386cbeb37f77886e543249102_ulTr4R3krK",
+                            "query": "auth_key=1707312623-0-0-d54f06c1850e45ace394d818e3dd4c67"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/ac827d0386cbeb37f77886e543249102_ulTr4R3krK.m3u8?auth_key=1707312623-0-0-30c0a5d653bee4f1208d757a0669b898",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "ac827d0386cbeb37f77886e543249102_ulTr4R3krK",
+                            "query": "auth_key=1707312623-0-0-30c0a5d653bee4f1208d757a0669b898"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/ac827d0386cbeb37f77886e543249102_ulTr4R3krK?auth_key=1707312623-0-0-d5a273b122c968fb89678ff51a4b0187",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "ac827d0386cbeb37f77886e543249102_ulTr4R3krK",
+                            "query": "auth_key=1707312623-0-0-d5a273b122c968fb89678ff51a4b0187"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T10:30:25.571Z",
+                "endedAt": "2024-02-07T10:34:27.998Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T10:35:00.045Z",
+                "createdAt": "2024-02-07T10:30:23.140Z",
+                "streamId": "ac827d0386cbeb37f77886e543249102",
+                "userId": "swag",
+                "userInternalId": "632413076de41000d9558028",
+                "userPublicId": "swag",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/ac827d0386cbeb37f77886e543249102_ulTr4R3krK/2024-02-07-18-30-24_2024-02-07-18-31-56.mp4",
+                            "duration": 89.333,
+                            "startTime": 1707301825,
+                            "stopTime": 1707301916
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Time : 15 : 59",
+                "description": "Date : 7/2/2024",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/1df0a932b532780e3de5ba593f2f7e5c?auth_key=1707312576-0-0-f263ae3892425e21b52cb7591f1ab2be",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "1df0a932b532780e3de5ba593f2f7e5c",
+                        "query": "auth_key=1707312576-0-0-f263ae3892425e21b52cb7591f1ab2be"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/1df0a932b532780e3de5ba593f2f7e5c_ulTr4R3krK.flv?auth_key=1707312576-0-0-66bfb288327770a282c590af08c62d08",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "1df0a932b532780e3de5ba593f2f7e5c_ulTr4R3krK",
+                            "query": "auth_key=1707312576-0-0-66bfb288327770a282c590af08c62d08"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/1df0a932b532780e3de5ba593f2f7e5c_ulTr4R3krK.m3u8?auth_key=1707312576-0-0-4f776747268731982eeb71cb0e40e3ba",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "1df0a932b532780e3de5ba593f2f7e5c_ulTr4R3krK",
+                            "query": "auth_key=1707312576-0-0-4f776747268731982eeb71cb0e40e3ba"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/1df0a932b532780e3de5ba593f2f7e5c_ulTr4R3krK?auth_key=1707312576-0-0-d3616a89c1d7615f3e13794179dd76cf",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "1df0a932b532780e3de5ba593f2f7e5c_ulTr4R3krK",
+                            "query": "auth_key=1707312576-0-0-d3616a89c1d7615f3e13794179dd76cf"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T10:29:40.599Z",
+                "endedAt": "2024-02-07T10:30:15.127Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T10:33:19.862Z",
+                "createdAt": "2024-02-07T10:29:36.545Z",
+                "streamId": "1df0a932b532780e3de5ba593f2f7e5c",
+                "userId": "swag",
+                "userInternalId": "632413076de41000d9558028",
+                "userPublicId": "swag",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/1df0a932b532780e3de5ba593f2f7e5c_ulTr4R3krK/2024-02-07-18-29-39_2024-02-07-18-30-16.mp4",
+                            "duration": 32.2,
+                            "startTime": 1707301781,
+                            "stopTime": 1707301816
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Time : 17 : 10",
+                "description": "Date : 7/2/2024",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/f94ee81319edf69d8bbf074f12f2cc6a?auth_key=1707311411-0-0-f289fa1acc00423a2ff8869210114036",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "f94ee81319edf69d8bbf074f12f2cc6a",
+                        "query": "auth_key=1707311411-0-0-f289fa1acc00423a2ff8869210114036"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/f94ee81319edf69d8bbf074f12f2cc6a_ulTr4R3krK.flv?auth_key=1707311411-0-0-404ee937be82687a6621bbf03b8e1adc",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "f94ee81319edf69d8bbf074f12f2cc6a_ulTr4R3krK",
+                            "query": "auth_key=1707311411-0-0-404ee937be82687a6621bbf03b8e1adc"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/f94ee81319edf69d8bbf074f12f2cc6a_ulTr4R3krK.m3u8?auth_key=1707311411-0-0-f8425676ec1ac224a3e7a7c14d63f7ac",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "f94ee81319edf69d8bbf074f12f2cc6a_ulTr4R3krK",
+                            "query": "auth_key=1707311411-0-0-f8425676ec1ac224a3e7a7c14d63f7ac"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/f94ee81319edf69d8bbf074f12f2cc6a_ulTr4R3krK?auth_key=1707311411-0-0-c62a5907e1560e0d313facf1462c0a3a",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "f94ee81319edf69d8bbf074f12f2cc6a_ulTr4R3krK",
+                            "query": "auth_key=1707311411-0-0-c62a5907e1560e0d313facf1462c0a3a"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T10:10:13.166Z",
+                "endedAt": "2024-02-07T10:23:32.738Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T10:24:09.001Z",
+                "createdAt": "2024-02-07T10:10:11.076Z",
+                "streamId": "f94ee81319edf69d8bbf074f12f2cc6a",
+                "userId": "nike",
+                "userInternalId": "64c750f6a8ed6e20cd67511d",
+                "userPublicId": "nike",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/f94ee81319edf69d8bbf074f12f2cc6a_ulTr4R3krK/2024-02-07-18-10-12_2024-02-07-18-20-58.mp4",
+                            "duration": 634.933,
+                            "startTime": 1707300615,
+                            "stopTime": 1707301258
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Time : 17 : 9",
+                "description": "Date : 7/2/2024",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/096345c42a8ce7c3fdce984b15e4d283?auth_key=1707311396-0-0-456e9a9717f4711e0f1a2bd356631953",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "096345c42a8ce7c3fdce984b15e4d283",
+                        "query": "auth_key=1707311396-0-0-456e9a9717f4711e0f1a2bd356631953"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/096345c42a8ce7c3fdce984b15e4d283_ulTr4R3krK.flv?auth_key=1707311396-0-0-85438ed226ebdd871934aaef72753a9f",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "096345c42a8ce7c3fdce984b15e4d283_ulTr4R3krK",
+                            "query": "auth_key=1707311396-0-0-85438ed226ebdd871934aaef72753a9f"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/096345c42a8ce7c3fdce984b15e4d283_ulTr4R3krK.m3u8?auth_key=1707311396-0-0-a666297b47d2627f888e79bf630bf68f",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "096345c42a8ce7c3fdce984b15e4d283_ulTr4R3krK",
+                            "query": "auth_key=1707311396-0-0-a666297b47d2627f888e79bf630bf68f"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/096345c42a8ce7c3fdce984b15e4d283_ulTr4R3krK?auth_key=1707311396-0-0-1635dec150af43b601023615abae7713",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "096345c42a8ce7c3fdce984b15e4d283_ulTr4R3krK",
+                            "query": "auth_key=1707311396-0-0-1635dec150af43b601023615abae7713"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T10:09:58.497Z",
+                "endedAt": "2024-02-07T10:10:02.321Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T10:13:06.755Z",
+                "createdAt": "2024-02-07T10:09:56.426Z",
+                "streamId": "096345c42a8ce7c3fdce984b15e4d283",
+                "userId": "nike",
+                "userInternalId": "64c750f6a8ed6e20cd67511d",
+                "userPublicId": "nike",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/096345c42a8ce7c3fdce984b15e4d283_ulTr4R3krK/2024-02-07-18-09-57_2024-02-07-18-10-03.mp4",
+                            "duration": 3.667,
+                            "startTime": 1707300599,
+                            "stopTime": 1707300603
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Time : 17 : 9",
+                "description": "Date : 7/2/2024",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/c6d0f6d92b4cfc0c07b985b4355c9e8c?auth_key=1707311358-0-0-bd02f10e6110a9d4c358e52bf1643a57",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "c6d0f6d92b4cfc0c07b985b4355c9e8c",
+                        "query": "auth_key=1707311358-0-0-bd02f10e6110a9d4c358e52bf1643a57"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/c6d0f6d92b4cfc0c07b985b4355c9e8c_ulTr4R3krK.flv?auth_key=1707311358-0-0-bd770cbed429d613210d91d1795ddeab",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "c6d0f6d92b4cfc0c07b985b4355c9e8c_ulTr4R3krK",
+                            "query": "auth_key=1707311358-0-0-bd770cbed429d613210d91d1795ddeab"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/c6d0f6d92b4cfc0c07b985b4355c9e8c_ulTr4R3krK.m3u8?auth_key=1707311358-0-0-7bb78719aad84f3e2c3e2050c9ec0ba3",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "c6d0f6d92b4cfc0c07b985b4355c9e8c_ulTr4R3krK",
+                            "query": "auth_key=1707311358-0-0-7bb78719aad84f3e2c3e2050c9ec0ba3"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/c6d0f6d92b4cfc0c07b985b4355c9e8c_ulTr4R3krK?auth_key=1707311358-0-0-63d602adf190e570c944987550550143",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "c6d0f6d92b4cfc0c07b985b4355c9e8c_ulTr4R3krK",
+                            "query": "auth_key=1707311358-0-0-63d602adf190e570c944987550550143"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T10:09:20.119Z",
+                "endedAt": "2024-02-07T10:09:43.610Z",
+                "resolution": "SD",
+                "updatedAt": "2024-02-07T10:12:47.713Z",
+                "createdAt": "2024-02-07T10:09:18.190Z",
+                "streamId": "c6d0f6d92b4cfc0c07b985b4355c9e8c",
+                "userId": "nike",
+                "userInternalId": "64c750f6a8ed6e20cd67511d",
+                "userPublicId": "nike",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/c6d0f6d92b4cfc0c07b985b4355c9e8c_ulTr4R3krK/2024-02-07-18-09-19_2024-02-07-18-09-44.mp4",
+                            "duration": 23.133,
+                            "startTime": 1707300561,
+                            "stopTime": 1707300584
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Time : 17 : 8",
+                "description": "Date : 7/2/2024",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/4503f89e0c031c515cb4c7846b5601ee?auth_key=1707311300-0-0-0bbfd0f98c107303c5e7b28b712d8fc9",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "4503f89e0c031c515cb4c7846b5601ee",
+                        "query": "auth_key=1707311300-0-0-0bbfd0f98c107303c5e7b28b712d8fc9"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/4503f89e0c031c515cb4c7846b5601ee_ulTr4R3krK.flv?auth_key=1707311300-0-0-cc621cd3ec212f857fac40ed6f7749ad",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "4503f89e0c031c515cb4c7846b5601ee_ulTr4R3krK",
+                            "query": "auth_key=1707311300-0-0-cc621cd3ec212f857fac40ed6f7749ad"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/4503f89e0c031c515cb4c7846b5601ee_ulTr4R3krK.m3u8?auth_key=1707311300-0-0-70afd896fc0cef8719fc7e121c53291b",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "4503f89e0c031c515cb4c7846b5601ee_ulTr4R3krK",
+                            "query": "auth_key=1707311300-0-0-70afd896fc0cef8719fc7e121c53291b"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/4503f89e0c031c515cb4c7846b5601ee_ulTr4R3krK?auth_key=1707311300-0-0-0da2d10ea4ee6cb0390e886a380a4705",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "4503f89e0c031c515cb4c7846b5601ee_ulTr4R3krK",
+                            "query": "auth_key=1707311300-0-0-0da2d10ea4ee6cb0390e886a380a4705"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T10:08:22.479Z",
+                "endedAt": "2024-02-07T10:08:53.889Z",
+                "resolution": "FHD",
+                "updatedAt": "2024-02-07T10:11:58.863Z",
+                "createdAt": "2024-02-07T10:08:20.441Z",
+                "streamId": "4503f89e0c031c515cb4c7846b5601ee",
+                "userId": "nike",
+                "userInternalId": "64c750f6a8ed6e20cd67511d",
+                "userPublicId": "nike",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/4503f89e0c031c515cb4c7846b5601ee_ulTr4R3krK/2024-02-07-18-08-21_2024-02-07-18-08-55.mp4",
+                            "duration": 31,
+                            "startTime": 1707300502,
+                            "stopTime": 1707300535
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Time : 17 : 7",
+                "description": "Date : 7/2/2024",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/bae5ac6a8274029a7195a1a9ac4bcb47?auth_key=1707311250-0-0-f40b26d151c36815c400c366602f921a",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "bae5ac6a8274029a7195a1a9ac4bcb47",
+                        "query": "auth_key=1707311250-0-0-f40b26d151c36815c400c366602f921a"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/bae5ac6a8274029a7195a1a9ac4bcb47_ulTr4R3krK.flv?auth_key=1707311250-0-0-2b42cf336340962b66c750353af11ad4",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "bae5ac6a8274029a7195a1a9ac4bcb47_ulTr4R3krK",
+                            "query": "auth_key=1707311250-0-0-2b42cf336340962b66c750353af11ad4"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/bae5ac6a8274029a7195a1a9ac4bcb47_ulTr4R3krK.m3u8?auth_key=1707311250-0-0-4b901906b40ff19f4dce6a75c2cf2098",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "bae5ac6a8274029a7195a1a9ac4bcb47_ulTr4R3krK",
+                            "query": "auth_key=1707311250-0-0-4b901906b40ff19f4dce6a75c2cf2098"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/bae5ac6a8274029a7195a1a9ac4bcb47_ulTr4R3krK?auth_key=1707311250-0-0-7e7695f0a449a3c4c085fb8bb7d1287f",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "bae5ac6a8274029a7195a1a9ac4bcb47_ulTr4R3krK",
+                            "query": "auth_key=1707311250-0-0-7e7695f0a449a3c4c085fb8bb7d1287f"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T10:07:34.204Z",
+                "endedAt": "2024-02-07T10:07:38.627Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T10:10:42.562Z",
+                "createdAt": "2024-02-07T10:07:30.722Z",
+                "streamId": "bae5ac6a8274029a7195a1a9ac4bcb47",
+                "userId": "nike",
+                "userInternalId": "64c750f6a8ed6e20cd67511d",
+                "userPublicId": "nike",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/bae5ac6a8274029a7195a1a9ac4bcb47_ulTr4R3krK/2024-02-07-18-07-32_2024-02-07-18-07-39.mp4",
+                            "duration": 4.467,
+                            "startTime": 1707300455,
+                            "stopTime": 1707300459
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Time : 11 : 52",
+                "description": "Date : 7/2/2024",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/5bf0c24dabc43f56ca258161c37de3f7?auth_key=1707292373-0-0-47a49ad1426b325cf142870ad890c5e1",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "5bf0c24dabc43f56ca258161c37de3f7",
+                        "query": "auth_key=1707292373-0-0-47a49ad1426b325cf142870ad890c5e1"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/5bf0c24dabc43f56ca258161c37de3f7_ulTr4R3krK.flv?auth_key=1707292373-0-0-7cf3f9a0a04a0f1d8e6bb517e0cbf055",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "5bf0c24dabc43f56ca258161c37de3f7_ulTr4R3krK",
+                            "query": "auth_key=1707292373-0-0-7cf3f9a0a04a0f1d8e6bb517e0cbf055"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/5bf0c24dabc43f56ca258161c37de3f7_ulTr4R3krK.m3u8?auth_key=1707292373-0-0-a02d6bfee4b5855c0cd6707cce63d896",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "5bf0c24dabc43f56ca258161c37de3f7_ulTr4R3krK",
+                            "query": "auth_key=1707292373-0-0-a02d6bfee4b5855c0cd6707cce63d896"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/5bf0c24dabc43f56ca258161c37de3f7_ulTr4R3krK?auth_key=1707292373-0-0-c535795f3480f57bb618b12167581d31",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "5bf0c24dabc43f56ca258161c37de3f7_ulTr4R3krK",
+                            "query": "auth_key=1707292373-0-0-c535795f3480f57bb618b12167581d31"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T04:52:55.568Z",
+                "endedAt": "2024-02-07T04:53:46.459Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T04:56:51.306Z",
+                "createdAt": "2024-02-07T04:52:53.351Z",
+                "streamId": "5bf0c24dabc43f56ca258161c37de3f7",
+                "userId": "asc_deleted_b946d6dc-b316-47e1-9c27-b7095f376cba",
+                "userInternalId": "632949a97a6aa100db7f11ac",
+                "userPublicId": "asc_deleted_b946d6dc-b316-47e1-9c27-b7095f376cba",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/5bf0c24dabc43f56ca258161c37de3f7_ulTr4R3krK/2024-02-07-12-52-54_2024-02-07-12-53-47.mp4",
+                            "duration": 50.333,
+                            "startTime": 1707281575,
+                            "stopTime": 1707281627
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "kkk",
+                "description": "@fah01 @fah01",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/aa252d9669325c9ff8676bd34d0a0f9d?auth_key=1707292094-0-0-8988fe4cc5145f8e8de5c2e37c543425",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "aa252d9669325c9ff8676bd34d0a0f9d",
+                        "query": "auth_key=1707292094-0-0-8988fe4cc5145f8e8de5c2e37c543425"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/aa252d9669325c9ff8676bd34d0a0f9d_ulTr4R3krK.flv?auth_key=1707292094-0-0-6f5a6a888634571b540faaff251e6d15",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "aa252d9669325c9ff8676bd34d0a0f9d_ulTr4R3krK",
+                            "query": "auth_key=1707292094-0-0-6f5a6a888634571b540faaff251e6d15"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/aa252d9669325c9ff8676bd34d0a0f9d_ulTr4R3krK.m3u8?auth_key=1707292094-0-0-91b085781b9486b432561fc08399b4b4",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "aa252d9669325c9ff8676bd34d0a0f9d_ulTr4R3krK",
+                            "query": "auth_key=1707292094-0-0-91b085781b9486b432561fc08399b4b4"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/aa252d9669325c9ff8676bd34d0a0f9d_ulTr4R3krK?auth_key=1707292094-0-0-4948ced6ff580c20d4488bb58fcf52aa",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "aa252d9669325c9ff8676bd34d0a0f9d_ulTr4R3krK",
+                            "query": "auth_key=1707292094-0-0-4948ced6ff580c20d4488bb58fcf52aa"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T04:48:19.790Z",
+                "endedAt": "2024-02-07T04:48:27.646Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T04:51:33.175Z",
+                "createdAt": "2024-02-07T04:48:14.868Z",
+                "streamId": "aa252d9669325c9ff8676bd34d0a0f9d",
+                "userId": "fah01",
+                "userInternalId": "63d0ac0c5defa429baaae43c",
+                "userPublicId": "fah01",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/aa252d9669325c9ff8676bd34d0a0f9d_ulTr4R3krK/2024-02-07-12-48-18_2024-02-07-12-48-29.mp4",
+                            "duration": 7.467,
+                            "startTime": 1707281301,
+                            "stopTime": 1707281309
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "hi",
+                "description": "@ android2 @ android3",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/3cd26096ad9857e6c72a130671971a80?auth_key=1707291978-0-0-196339fc101fd5739fe7841494244e13",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "3cd26096ad9857e6c72a130671971a80",
+                        "query": "auth_key=1707291978-0-0-196339fc101fd5739fe7841494244e13"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/3cd26096ad9857e6c72a130671971a80_ulTr4R3krK.flv?auth_key=1707291978-0-0-cd3833d5fb63cfcb0c2d189f4dec139d",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "3cd26096ad9857e6c72a130671971a80_ulTr4R3krK",
+                            "query": "auth_key=1707291978-0-0-cd3833d5fb63cfcb0c2d189f4dec139d"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/3cd26096ad9857e6c72a130671971a80_ulTr4R3krK.m3u8?auth_key=1707291978-0-0-109cc04c7281036011b06fac21ee567e",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "3cd26096ad9857e6c72a130671971a80_ulTr4R3krK",
+                            "query": "auth_key=1707291978-0-0-109cc04c7281036011b06fac21ee567e"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/3cd26096ad9857e6c72a130671971a80_ulTr4R3krK?auth_key=1707291978-0-0-3912282b70b85c3f2b7c39f84869cd23",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "3cd26096ad9857e6c72a130671971a80_ulTr4R3krK",
+                            "query": "auth_key=1707291978-0-0-3912282b70b85c3f2b7c39f84869cd23"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": true,
+                "startedAt": "2024-02-07T04:46:24.165Z",
+                "endedAt": "2024-02-07T04:46:42.941Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T04:51:23.591Z",
+                "createdAt": "2024-02-07T04:46:18.245Z",
+                "streamId": "3cd26096ad9857e6c72a130671971a80",
+                "userId": "fah01",
+                "userInternalId": "63d0ac0c5defa429baaae43c",
+                "userPublicId": "fah01",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/3cd26096ad9857e6c72a130671971a80_ulTr4R3krK/2024-02-07-12-46-23_2024-02-07-12-46-43.mp4",
+                            "duration": 18.333,
+                            "startTime": 1707281185,
+                            "stopTime": 1707281203
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "individual mention",
+                "description": "@fah01",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/7a6e4cb35676e89a9abb96e9f193128c?auth_key=1707291372-0-0-f1a3a7803ab314eb4c0b9723bd61b59e",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "7a6e4cb35676e89a9abb96e9f193128c",
+                        "query": "auth_key=1707291372-0-0-f1a3a7803ab314eb4c0b9723bd61b59e"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/7a6e4cb35676e89a9abb96e9f193128c_ulTr4R3krK.flv?auth_key=1707291372-0-0-6569d79f43e5d75865bc971dd4a594cb",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "7a6e4cb35676e89a9abb96e9f193128c_ulTr4R3krK",
+                            "query": "auth_key=1707291372-0-0-6569d79f43e5d75865bc971dd4a594cb"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/7a6e4cb35676e89a9abb96e9f193128c_ulTr4R3krK.m3u8?auth_key=1707291372-0-0-dea21bd197f0d1ea3570fa7776af0532",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "7a6e4cb35676e89a9abb96e9f193128c_ulTr4R3krK",
+                            "query": "auth_key=1707291372-0-0-dea21bd197f0d1ea3570fa7776af0532"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/7a6e4cb35676e89a9abb96e9f193128c_ulTr4R3krK?auth_key=1707291372-0-0-30ea87372848fbb4ac8a16fc03eb8ffe",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "7a6e4cb35676e89a9abb96e9f193128c_ulTr4R3krK",
+                            "query": "auth_key=1707291372-0-0-30ea87372848fbb4ac8a16fc03eb8ffe"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T04:36:20.093Z",
+                "endedAt": "2024-02-07T04:36:26.082Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T04:39:30.558Z",
+                "createdAt": "2024-02-07T04:36:12.401Z",
+                "streamId": "7a6e4cb35676e89a9abb96e9f193128c",
+                "userId": "fah01",
+                "userInternalId": "63d0ac0c5defa429baaae43c",
+                "userPublicId": "fah01",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/7a6e4cb35676e89a9abb96e9f193128c_ulTr4R3krK/2024-02-07-12-36-19_2024-02-07-12-36-27.mp4",
+                            "duration": 5.267,
+                            "startTime": 1707280582,
+                            "stopTime": 1707280587
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "multi yyyyyy",
+                "description": "@ android2 @ android3",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/14006dde10f3c17ddad975f4f71bda9b?auth_key=1707291311-0-0-31a5be781702660c78bcb49ee7b7335b",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "14006dde10f3c17ddad975f4f71bda9b",
+                        "query": "auth_key=1707291311-0-0-31a5be781702660c78bcb49ee7b7335b"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/14006dde10f3c17ddad975f4f71bda9b_ulTr4R3krK.flv?auth_key=1707291311-0-0-d55bfafec9004015e45e58fff1ebad8a",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "14006dde10f3c17ddad975f4f71bda9b_ulTr4R3krK",
+                            "query": "auth_key=1707291311-0-0-d55bfafec9004015e45e58fff1ebad8a"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/14006dde10f3c17ddad975f4f71bda9b_ulTr4R3krK.m3u8?auth_key=1707291311-0-0-6e619499129dd0f279dc1fca29b1e6bc",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "14006dde10f3c17ddad975f4f71bda9b_ulTr4R3krK",
+                            "query": "auth_key=1707291311-0-0-6e619499129dd0f279dc1fca29b1e6bc"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/14006dde10f3c17ddad975f4f71bda9b_ulTr4R3krK?auth_key=1707291311-0-0-5334053683f82f8aec393197a75d547c",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "14006dde10f3c17ddad975f4f71bda9b_ulTr4R3krK",
+                            "query": "auth_key=1707291311-0-0-5334053683f82f8aec393197a75d547c"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T04:35:20.907Z",
+                "endedAt": "2024-02-07T04:35:26.728Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T04:40:04.957Z",
+                "createdAt": "2024-02-07T04:35:11.735Z",
+                "streamId": "14006dde10f3c17ddad975f4f71bda9b",
+                "userId": "fah01",
+                "userInternalId": "63d0ac0c5defa429baaae43c",
+                "userPublicId": "fah01",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/14006dde10f3c17ddad975f4f71bda9b_ulTr4R3krK/2024-02-07-12-35-19_2024-02-07-12-35-28.mp4",
+                            "duration": 5.733,
+                            "startTime": 1707280522,
+                            "stopTime": 1707280528
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "my timeline",
+                "description": "@fah11 @ android3",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/307f54498207436d6c5cdc1688fe6c6e?auth_key=1707291209-0-0-9954f3d379d9ab688454da7e599cc85f",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "307f54498207436d6c5cdc1688fe6c6e",
+                        "query": "auth_key=1707291209-0-0-9954f3d379d9ab688454da7e599cc85f"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/307f54498207436d6c5cdc1688fe6c6e_ulTr4R3krK.flv?auth_key=1707291209-0-0-c722772a0ffcddccbc80d5f015f33224",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "307f54498207436d6c5cdc1688fe6c6e_ulTr4R3krK",
+                            "query": "auth_key=1707291209-0-0-c722772a0ffcddccbc80d5f015f33224"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/307f54498207436d6c5cdc1688fe6c6e_ulTr4R3krK.m3u8?auth_key=1707291209-0-0-426896165539fd476888d68f280668c0",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "307f54498207436d6c5cdc1688fe6c6e_ulTr4R3krK",
+                            "query": "auth_key=1707291209-0-0-426896165539fd476888d68f280668c0"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/307f54498207436d6c5cdc1688fe6c6e_ulTr4R3krK?auth_key=1707291209-0-0-77e13e03dace722772fe69325fc4fb81",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "307f54498207436d6c5cdc1688fe6c6e_ulTr4R3krK",
+                            "query": "auth_key=1707291209-0-0-77e13e03dace722772fe69325fc4fb81"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T04:33:40.329Z",
+                "endedAt": "2024-02-07T04:33:47.767Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T04:36:51.273Z",
+                "createdAt": "2024-02-07T04:33:29.016Z",
+                "streamId": "307f54498207436d6c5cdc1688fe6c6e",
+                "userId": "fah01",
+                "userInternalId": "63d0ac0c5defa429baaae43c",
+                "userPublicId": "fah01",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/307f54498207436d6c5cdc1688fe6c6e_ulTr4R3krK/2024-02-07-12-33-39_2024-02-07-12-33-48.mp4",
+                            "duration": 7.267,
+                            "startTime": 1707280421,
+                            "stopTime": 1707280428
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "livemultiplemention",
+                "description": "@fah11 @ android3",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/9b570e8a792335ec94bae6034841d00a?auth_key=1707291136-0-0-a9ab7685777c249039a7427f43233f6a",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "9b570e8a792335ec94bae6034841d00a",
+                        "query": "auth_key=1707291136-0-0-a9ab7685777c249039a7427f43233f6a"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/9b570e8a792335ec94bae6034841d00a_ulTr4R3krK.flv?auth_key=1707291136-0-0-e9c56a4af3a4c71648ff09ae5eba9b54",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "9b570e8a792335ec94bae6034841d00a_ulTr4R3krK",
+                            "query": "auth_key=1707291136-0-0-e9c56a4af3a4c71648ff09ae5eba9b54"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/9b570e8a792335ec94bae6034841d00a_ulTr4R3krK.m3u8?auth_key=1707291136-0-0-27d46d9ffa5db336962589a2ccd921d6",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "9b570e8a792335ec94bae6034841d00a_ulTr4R3krK",
+                            "query": "auth_key=1707291136-0-0-27d46d9ffa5db336962589a2ccd921d6"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/9b570e8a792335ec94bae6034841d00a_ulTr4R3krK?auth_key=1707291136-0-0-81a3436e6706ca0a2e45ba8e7fbcfa5d",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "9b570e8a792335ec94bae6034841d00a_ulTr4R3krK",
+                            "query": "auth_key=1707291136-0-0-81a3436e6706ca0a2e45ba8e7fbcfa5d"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T04:32:27.799Z",
+                "endedAt": "2024-02-07T04:32:35.451Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T04:35:39.728Z",
+                "createdAt": "2024-02-07T04:32:16.771Z",
+                "streamId": "9b570e8a792335ec94bae6034841d00a",
+                "userId": "fah01",
+                "userInternalId": "63d0ac0c5defa429baaae43c",
+                "userPublicId": "fah01",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/9b570e8a792335ec94bae6034841d00a_ulTr4R3krK/2024-02-07-12-32-26_2024-02-07-12-32-36.mp4",
+                            "duration": 7.6,
+                            "startTime": 1707280348,
+                            "stopTime": 1707280356
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "liveCha",
+                "description": "@fah11",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/a3a1c63505b10c23151f325a39311235?auth_key=1707291056-0-0-8e79008b639c6c4dca77c5d45320a8a1",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "a3a1c63505b10c23151f325a39311235",
+                        "query": "auth_key=1707291056-0-0-8e79008b639c6c4dca77c5d45320a8a1"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/a3a1c63505b10c23151f325a39311235_ulTr4R3krK.flv?auth_key=1707291056-0-0-9ac7b0a34d6e81a416badd998e8116bb",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "a3a1c63505b10c23151f325a39311235_ulTr4R3krK",
+                            "query": "auth_key=1707291056-0-0-9ac7b0a34d6e81a416badd998e8116bb"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/a3a1c63505b10c23151f325a39311235_ulTr4R3krK.m3u8?auth_key=1707291056-0-0-450a2867cce44024479fa9574a73b6f9",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "a3a1c63505b10c23151f325a39311235_ulTr4R3krK",
+                            "query": "auth_key=1707291056-0-0-450a2867cce44024479fa9574a73b6f9"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/a3a1c63505b10c23151f325a39311235_ulTr4R3krK?auth_key=1707291056-0-0-a8053841a0198b9c953105acca63d020",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "a3a1c63505b10c23151f325a39311235_ulTr4R3krK",
+                            "query": "auth_key=1707291056-0-0-a8053841a0198b9c953105acca63d020"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-07T04:31:14.636Z",
+                "endedAt": "2024-02-07T04:31:19.097Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-07T04:34:23.652Z",
+                "createdAt": "2024-02-07T04:30:56.412Z",
+                "streamId": "a3a1c63505b10c23151f325a39311235",
+                "userId": "fah01",
+                "userInternalId": "63d0ac0c5defa429baaae43c",
+                "userPublicId": "fah01",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/a3a1c63505b10c23151f325a39311235_ulTr4R3krK/2024-02-07-12-31-13_2024-02-07-12-31-20.mp4",
+                            "duration": 4.667,
+                            "startTime": 1707280275,
+                            "stopTime": 1707280280
+                        }
+                    }
+                ]
+            },
+            {
+                "title": "Time : 10 : 35",
+                "description": "Date : 6/2/2024",
+                "streamerUrl": {
+                    "url": "rtmp://live-ingest-staging-01.amityco.live/631f16be1e440400da5663b0/029a9a2c6c432e4732eb1174d72c4253?auth_key=1707201311-0-0-21bbb1560dd87772f4868b5b44fbb1c4",
+                    "components": {
+                        "origin": "rtmp://live-ingest-staging-01.amityco.live",
+                        "appName": "631f16be1e440400da5663b0",
+                        "streamName": "029a9a2c6c432e4732eb1174d72c4253",
+                        "query": "auth_key=1707201311-0-0-21bbb1560dd87772f4868b5b44fbb1c4"
+                    }
+                },
+                "watcherUrl": {
+                    "flv": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/029a9a2c6c432e4732eb1174d72c4253_ulTr4R3krK.flv?auth_key=1707201311-0-0-7beef518baab7b2579f7bb394de744f1",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "029a9a2c6c432e4732eb1174d72c4253_ulTr4R3krK",
+                            "query": "auth_key=1707201311-0-0-7beef518baab7b2579f7bb394de744f1"
+                        }
+                    },
+                    "hls": {
+                        "url": "http://live-stream-staging.amityco.live/631f16be1e440400da5663b0/029a9a2c6c432e4732eb1174d72c4253_ulTr4R3krK.m3u8?auth_key=1707201311-0-0-e489924189fb3b5c4353f348d3570f48",
+                        "components": {
+                            "origin": "http://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "029a9a2c6c432e4732eb1174d72c4253_ulTr4R3krK",
+                            "query": "auth_key=1707201311-0-0-e489924189fb3b5c4353f348d3570f48"
+                        }
+                    },
+                    "rtmp": {
+                        "url": "rtmp://live-stream-staging.amityco.live/631f16be1e440400da5663b0/029a9a2c6c432e4732eb1174d72c4253_ulTr4R3krK?auth_key=1707201311-0-0-4b66d9087b6bf91d2fa8c81e260ccead",
+                        "components": {
+                            "origin": "rtmp://live-stream-staging.amityco.live",
+                            "appName": "631f16be1e440400da5663b0",
+                            "streamName": "029a9a2c6c432e4732eb1174d72c4253_ulTr4R3krK",
+                            "query": "auth_key=1707201311-0-0-4b66d9087b6bf91d2fa8c81e260ccead"
+                        }
+                    }
+                },
+                "status": "recorded",
+                "isLive": false,
+                "isDeleted": false,
+                "startedAt": "2024-02-06T03:35:14.233Z",
+                "endedAt": "2024-02-06T03:35:31.409Z",
+                "resolution": "HD",
+                "updatedAt": "2024-02-06T03:38:36.283Z",
+                "createdAt": "2024-02-06T03:35:11.289Z",
+                "streamId": "029a9a2c6c432e4732eb1174d72c4253",
+                "userId": "asc_deleted_b946d6dc-b316-47e1-9c27-b7095f376cba",
+                "userInternalId": "632949a97a6aa100db7f11ac",
+                "userPublicId": "asc_deleted_b946d6dc-b316-47e1-9c27-b7095f376cba",
+                "thumbnailFileId": null,
+                "platform": {
+                    "name": "apsara",
+                    "version": "2016-11-01"
+                },
+                "recordings": [
+                    {
+                        "mp4": {
+                            "url": "https://playback.staging.amity.co/transcodeRecord/631f16be1e440400da5663b0/029a9a2c6c432e4732eb1174d72c4253_ulTr4R3krK/2024-02-06-11-35-12_2024-02-06-11-35-32.mp4",
+                            "duration": 17.2,
+                            "startTime": 1707190515,
+                            "stopTime": 1707190532
+                        }
+                    }
+                ]
+            }
+        ],
+        "users": [
+            {
+                "_id": "632413076de41000d9558028",
+                "path": "631f16be1e440400da5663b0/user/632413076de41000d9558028",
+                "description": "",
+                "createdAt": "2022-09-16T06:09:11.524Z",
+                "updatedAt": "2024-02-09T03:20:21.395Z",
+                "isDeleted": false,
+                "displayName": "swag",
+                "userId": "swag",
+                "userInternalId": "632413076de41000d9558028",
+                "userPublicId": "swag",
+                "metadata": {
+                    "text": "world"
+                },
+                "roles": [],
+                "permissions": [],
+                "flagCount": 0,
+                "hashFlag": null,
+                "avatarFileId": "2a4fcecdb190470c804274cd1e5c268f",
+                "isGlobalBan": false
+            },
+            {
+                "_id": "632949a97a6aa100db7f11ac",
+                "path": "631f16be1e440400da5663b0/user/632949a97a6aa100db7f11ac",
+                "description": "Deleted user",
+                "createdAt": "2022-09-20T05:03:37.965Z",
+                "updatedAt": "2024-02-08T07:54:36.840Z",
+                "isDeleted": true,
+                "displayName": "Deleted user",
+                "userId": "asc_deleted_b946d6dc-b316-47e1-9c27-b7095f376cba",
+                "userInternalId": "632949a97a6aa100db7f11ac",
+                "userPublicId": "asc_deleted_b946d6dc-b316-47e1-9c27-b7095f376cba",
+                "metadata": {},
+                "roles": [],
+                "permissions": [],
+                "flagCount": 2,
+                "hashFlag": {
+                    "bits": 40,
+                    "hashes": 14,
+                    "hash": "xogxt3I="
+                },
+                "avatarCustomUrl": null,
+                "avatarFileId": null,
+                "isGlobalBan": false
+            },
+            {
+                "_id": "63d0ac0c5defa429baaae43c",
+                "path": "631f16be1e440400da5663b0/user/63d0ac0c5defa429baaae43c",
+                "description": "",
+                "createdAt": "2023-01-25T04:11:56.123Z",
+                "updatedAt": "2023-12-08T03:57:37.220Z",
+                "isDeleted": false,
+                "displayName": "fah01",
+                "userId": "fah01",
+                "userInternalId": "63d0ac0c5defa429baaae43c",
+                "userPublicId": "fah01",
+                "metadata": {},
+                "roles": [
+                    "global-admin"
+                ],
+                "permissions": [
+                    "CREATE_ROLE",
+                    "DELETE_ROLE",
+                    "EDIT_ROLE",
+                    "CREATE_COMMUNITY_CATEGORY",
+                    "EDIT_COMMUNITY_CATEGORY",
+                    "DELETE_COMMUNITY_CATEGORY",
+                    "DELETE_COMMUNITY",
+                    "EDIT_COMMUNITY",
+                    "EDIT_COMMUNITY_USER",
+                    "ADD_COMMUNITY_USER",
+                    "BAN_COMMUNITY_USER",
+                    "REMOVE_COMMUNITY_USER",
+                    "EDIT_COMMUNITY_POST",
+                    "DELETE_COMMUNITY_POST",
+                    "REVIEW_COMMUNITY_POST",
+                    "EDIT_COMMUNITY_COMMENT",
+                    "DELETE_COMMUNITY_COMMENT",
+                    "CREATE_PRIVILEGED_POST",
+                    "EDIT_USER_FEED_POST",
+                    "DELETE_USER_FEED_POST",
+                    "EDIT_USER_FEED_COMMENT",
+                    "DELETE_USER_FEED_COMMENT",
+                    "BAN_USER",
+                    "EDIT_USER",
+                    "EDIT_CHANNEL_USER",
+                    "BAN_USER_FROM_CHANNEL",
+                    "ADD_CHANNEL_USER",
+                    "REMOVE_CHANNEL_USER",
+                    "EDIT_CHANNEL",
+                    "MUTE_CHANNEL",
+                    "MUTE_USER_INSIDE_CHANNEL",
+                    "EDIT_CHANNEL_RATELIMIT",
+                    "DELETE_MESSAGE",
+                    "EDIT_MESSAGE",
+                    "Channel/BanUser",
+                    "Channel/MuteUser",
+                    "Channel/MuteChannel",
+                    "Channel/RateLimitUser",
+                    "Channel/RateLimitChannel",
+                    "Channel/ManageMessages",
+                    "Channel/ManageUsers",
+                    "Channel/GlobalAccess",
+                    "User/ExemptFromFilters",
+                    "User/ExemptFromRateLimits",
+                    "User/ExemptFromMute",
+                    "User/ExempFromBan",
+                    "User/ExempFromBlacklist",
+                    "User/ExempFromWhitelist",
+                    "User/ExempFromRepetitionCheck",
+                    "Post/ManagePosts",
+                    "Post/ManageComments",
+                    "Community/ManageCommunities",
+                    "MANAGE_NOTIFICATION_NETWORK_SETTING",
+                    "MANAGE_COMMUNITY_STORY"
+                ],
+                "flagCount": 0,
+                "hashFlag": null,
+                "avatarFileId": "b70dc23a6d0e4fbf94626d5cff7d93d4",
+                "isGlobalBan": false
+            },
+            {
+                "_id": "64c750f6a8ed6e20cd67511d",
+                "path": "631f16be1e440400da5663b0/user/64c750f6a8ed6e20cd67511d",
+                "createdAt": "2023-07-31T06:13:10.824Z",
+                "updatedAt": "2023-11-16T06:52:40.726Z",
+                "isDeleted": false,
+                "displayName": "nike",
+                "userId": "nike",
+                "userInternalId": "64c750f6a8ed6e20cd67511d",
+                "userPublicId": "nike",
+                "metadata": {},
+                "roles": [],
+                "permissions": [],
+                "flagCount": 1,
+                "hashFlag": {
+                    "bits": 24,
+                    "hashes": 17,
+                    "hash": "qqqq"
+                },
+                "avatarFileId": null,
+                "isGlobalBan": false
+            }
+        ],
+        "files": [
+            {
+                "fileId": "b70dc23a6d0e4fbf94626d5cff7d93d4",
+                "fileUrl": "https://api.staging.amity.co/api/v3/files/b70dc23a6d0e4fbf94626d5cff7d93d4/download",
+                "type": "image",
+                "createdAt": "2023-11-16T04:18:13.922Z",
+                "updatedAt": "2023-11-16T04:18:14.418Z",
+                "attributes": {
+                    "name": "image_3B2767AD-3B24-490F-A126-E44AA7AA3D19_ios.jpeg",
+                    "extension": "jpg",
+                    "size": 2071700,
+                    "mimeType": "image/jpeg",
+                    "metadata": {
+                        "height": 4032,
+                        "width": 3024,
+                        "orientation": 1,
+                        "isFull": true
+                    }
+                }
+            },
+            {
+                "fileId": "2a4fcecdb190470c804274cd1e5c268f",
+                "fileUrl": "https://api.staging.amity.co/api/v3/files/2a4fcecdb190470c804274cd1e5c268f/download",
+                "type": "image",
+                "createdAt": "2023-12-08T06:30:02.770Z",
+                "updatedAt": "2023-12-08T06:30:03.406Z",
+                "attributes": {
+                    "name": "img_cache_4cb32032-43fb-4cf2-b96c-e9b429f8e769.jpg",
+                    "extension": "jpg",
+                    "size": 105193,
+                    "mimeType": "image/jpeg",
+                    "metadata": {
+                        "height": 1280,
+                        "width": 960,
+                        "isFull": false
+                    }
+                }
+            }
+        ]
+    },
+    "paging": {
+        "next": "eyJza2lwIjoyMCwibGltaXQiOjIwfQ=="
+    }
+}

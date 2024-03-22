@@ -20,7 +20,8 @@ extension FileHiveEntityExtension on FileHiveEntity {
       //Metadata
       ..height = height
       ..width = width
-      ..isFull = isFull;
+      ..isFull = isFull
+      ..rawFile = rawFile;
     return properties;
   }
 }

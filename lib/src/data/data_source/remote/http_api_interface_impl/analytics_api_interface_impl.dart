@@ -47,7 +47,7 @@ class AnalyticsApiInterfaceImpl extends AnalyticsApiInterface{
   Future<UsersResponse> queryStorySeenUsers(GetReachUserRequest request) async {
     try {
       final data = await httpApiClient().get(
-        "$REACH_STORIES${request.postId!}/users",
+        "$REACH_STORIES${request.storyId!}/users",
         queryParameters: request.toJson(),
       );
       return UsersResponse.fromJson(data.data);

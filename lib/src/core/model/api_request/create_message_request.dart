@@ -4,7 +4,6 @@
 
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_data_hive_entity_19.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_hive_entity_18.dart';

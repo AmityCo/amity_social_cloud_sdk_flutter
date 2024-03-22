@@ -1,4 +1,5 @@
 import 'package:amity_sdk/amity_sdk.dart';
+import 'package:flutter/widgets.dart';
 
 class AmityChannelMemberQuery {
   /* begin_sample_code
@@ -9,6 +10,7 @@ class AmityChannelMemberQuery {
     */
   final _amityChannelMembers = <AmityChannelMember>[];
   late PagingController<AmityChannelMember> _channelMembersController;
+  final scrollcontroller = ScrollController();
 
   void queryChannelMembers(String channelId) {
     _channelMembersController = PagingController(
@@ -31,6 +33,20 @@ class AmityChannelMemberQuery {
           }
         },
       );
+
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      _channelMembersController.fetchNextPage();
+    });
+
+    scrollcontroller.addListener(pagination);
+  }
+
+  void pagination() {
+    if ((scrollcontroller.position.pixels ==
+            scrollcontroller.position.maxScrollExtent) &&
+        _channelMembersController.hasMoreItems) {
+      _channelMembersController.fetchNextPage();
+    }
   }
   /* end_sample_code */
 }

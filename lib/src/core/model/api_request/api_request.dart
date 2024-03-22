@@ -31,3 +31,7 @@ export 'update_user_request.dart';
 export 'upload_file_request.dart';
 export 'user_global_permission_check_request.dart';
 export 'users_request.dart';
+export 'get_stories_by_target_request.dart';
+export 'analytics_event_request.dart';
+export 'get_reach_user_request.dart';
+export 'send_analytics_event_request.dart';
