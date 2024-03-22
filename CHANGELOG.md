@@ -1,3 +1,9 @@
+## 0.36.0
+* Feat: Video Story can be created using AmitySocialClient.newStoryRepository().createVideoStory.
+* Feat: Image Story can be created using AmitySocialClient.newStoryRepository().createImageStory.
+* Feat: StoryLiveCollection can be used to observe Active stories.
+
+
 ## 0.35.0
 * Feat: Added Post Impression, now post can be marked as read using amityPost.analytics().markPostAsViewed(). Likewise post impression and reach can be get by using amityPost.impression and amityPost.reach
 * Upgrade: Upgraded dart version from ">=2.15.1 <4.0.0" to ">=3.0.0 <4.0.0"
