@@ -17,7 +17,6 @@
 * Feat: Now user can get category by AmitySocialClient.newCommunityRepository().getCategory(categoryId)
 * Feat: Now user can get global feed custom ranking by AmitySocialClient.newFeedRepository().getCustomRankingGlobalFeed()
 
-
 ## 0.33.0
 * Feat: Upgraded, Upgradable libraries that would not cuase breaking changes
 * Refactor: AmitySocialClient.newCommunityRepository().getCurentUserRoles is depercated in favor of AmitySocialClient.newCommunityRepository().getCurrentUserRoles 
