@@ -21,4 +21,9 @@ class CommunityFeedDbAdapterImpl extends CommunityFeedDbAdapter {
   Future saveCommunityFeedEntity(CommunityFeedHiveEntity entity) async {
     await box.put(entity.feedId, entity);
   }
+  
+  @override
+  CommunityFeedHiveEntity getCommunityFeedByFeedType(String targetId, String feedType) {
+    return box.values.firstWhere((element) => element.targetId == targetId && element.feedType == feedType);
+  }
 }
