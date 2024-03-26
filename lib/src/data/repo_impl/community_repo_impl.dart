@@ -156,4 +156,10 @@ class CommunityRepoImpl extends CommunityRepo {
   bool hasLocalCommunity(String communityId) {
     return communityDbAdapter.getCommunityEntity(communityId) != null;
   }
+  
+  @override
+  int getPostCount(String targetId, String feedType) {
+    var feed =  communityFeedDbAdapter.getCommunityFeedByFeedType(targetId, feedType);
+    return feed.postCount ?? 0;
+  }
 }

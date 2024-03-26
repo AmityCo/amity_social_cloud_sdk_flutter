@@ -13,6 +13,8 @@ abstract class CommunityRepo {
   Future deleteCommunity(String communityId);
   Future<AmityCommunity> updateCommunity(CreateCommunityRequest request);
 
+  int getPostCount(String targetId , String feedType);
+
   Future<AmityCommunityCategory?> getCommunityCategoryById(String categoryId);
 
   /// Has Local Community

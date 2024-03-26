@@ -10,3 +10,4 @@ export 'community_has_local_usecase.dart';
 export 'community_update_usecase.dart';
 export 'member/member.dart';
 export 'permission/permission.dart';
+export 'community_get_post_count_usecase.dart';

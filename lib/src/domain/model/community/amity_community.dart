@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/model/api_request/get_post_count_request.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
@@ -76,6 +77,10 @@ class AmityCommunity {
     return controller;
   }
 
+  Future<int> getPostCount(AmityFeedType feedType) async {
+    return  await serviceLocator<CommunityPostCountUseCase>().get(GetPostCountRequest(targetId: communityId!, feedType: feedType.value));
+  }
+  
   String toJson() => json.encode(toMap());
 
   @override
