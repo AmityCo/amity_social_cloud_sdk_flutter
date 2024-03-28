@@ -1,3 +1,6 @@
+## 0.37.0
+* Feat: The post count for a community can be fetched on the basis of AmityFeedType by using AmityCommunity.getPostCount. 
+
 ## 0.36.0
 * Feat: Video Story can be created using AmitySocialClient.newStoryRepository().createVideoStory.
 * Feat: Image Story can be created using AmitySocialClient.newStoryRepository().createImageStory.
