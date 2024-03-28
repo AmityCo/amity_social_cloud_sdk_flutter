@@ -11,7 +11,7 @@ class AmityFileRepository {
   api_style: async
   */
   /// funtion to upload the file type
-  StreamController<AmityUploadResult<AmityFile>> uploadFile(File file, {String? uploadId}) {
+  StreamController<AmityUploadResult<AmityFile>> uploadFile(File file, {String? uploadId }) {
     return serviceLocator<FileUploadUsecase>().listen(UploadFileRequest(files: [file], uploadId: uploadId));
   }
   /* end_public_function */
@@ -42,8 +42,8 @@ class AmityFileRepository {
   api_style: async
   */
   /// funtion to upload the video type
-  StreamController<AmityUploadResult<AmityVideo>> uploadVideo(File file, {String? uploadId}) {
-    return serviceLocator<FileVideoUploadUsecase>().listen(UploadFileRequest(files: [file], uploadId: uploadId));
+  StreamController<AmityUploadResult<AmityVideo>> uploadVideo(File file, {String? uploadId , AmityContentFeedType? feedtype}) {
+    return serviceLocator<FileVideoUploadUsecase>().listen(UploadFileRequest(files: [file], uploadId: uploadId , feedtype: feedtype?.value));
   }
   /* end_public_function */
 
