@@ -124,7 +124,7 @@ class CoreClient {
   /// Login with userId, this will create user session
   static LoginQueryBuilder login(String userId, {Function(AccessTokenRenewal)? sessionHandler}) {
     if (sessionHandler != null) {
-      _tokenRenewalSessionComponent?.sessionWillRenewAccessToken = sessionHandler;
+      _tokenRenewalSessionComponent?.setSessionWillRenewAccessToken(sessionHandler);
     }
     return LoginQueryBuilder(useCase: serviceLocator<LoginUsecase>(), userId: userId, sessionLifeCycleEventBus: _sessionLifeCycleEventBus!, appEventBus: _appEventBus!, isLegacyVersion: sessionHandler == null);
   }
@@ -245,7 +245,7 @@ class CoreClient {
   }
 
   static bool isLegacyLogin() {
-    return _tokenRenewalSessionComponent?.sessionWillRenewAccessToken == null;
+    return _tokenRenewalSessionComponent?.isLegacyLogin() ?? true;
   }
   
   static DateTime getServerTime() {

@@ -5,14 +5,13 @@ import 'package:amity_sdk/src/core/enum/amity_error.dart';
 import 'package:amity_sdk/src/core/session/component/session_component.dart';
 import 'package:amity_sdk/src/core/session/event_bus/app_event_bus.dart';
 import 'package:amity_sdk/src/core/session/model/app_event.dart';
-import 'package:amity_sdk/src/core/session/token/access_token_renewal.dart';
 import 'package:amity_sdk/src/core/session/token/access_token_renewal_impl.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:dio/dio.dart';
 
 class TokenRenewalSessionComponent extends SessionComponent {
   final AppEventBus appEventBus;
-  Function(AccessTokenRenewal)? sessionWillRenewAccessToken;
+  Function(AccessTokenRenewal)? _sessionWillRenewAccessToken;
   AccessTokenRenewalImpl? currentRenewal;
 
   //initiate the first one to be never failed
@@ -88,7 +87,7 @@ class TokenRenewalSessionComponent extends SessionComponent {
     );
 
     _initiateRenewal(accessTokenRenewal);
-    sessionWillRenewAccessToken?.call(accessTokenRenewal);
+    _sessionWillRenewAccessToken?.call(accessTokenRenewal);
   }
 
   bool _canInitiateRenewal() {
@@ -116,5 +115,18 @@ class TokenRenewalSessionComponent extends SessionComponent {
     currentRenewal?.invalidate();
     currentRenewal = null;
     lastFailedDateTime = DateTime.now().subtract(const Duration(days: 999));
+  }
+
+  void setSessionWillRenewAccessToken(Function(AccessTokenRenewal)? sessionHandler) {
+    if (sessionHandler != null) {
+      currentRenewal?.invalidate();
+      currentRenewal = null;
+      _sessionWillRenewAccessToken = sessionHandler;
+      _initiateRenewalIfNeeded();
+    }
+  }
+
+  bool isLegacyLogin() {
+    return _sessionWillRenewAccessToken == null;
   }
 }

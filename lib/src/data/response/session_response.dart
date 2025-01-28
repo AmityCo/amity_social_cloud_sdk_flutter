@@ -15,7 +15,7 @@ String sessionResponseToJson(SessionResponse data) =>
 class SessionResponse {
   SessionResponse({
     required this.accessToken,
-    required this.refreshToken,
+    this.refreshToken,
     required this.users,
     required this.files,
     required this.issuedAt,
@@ -23,7 +23,7 @@ class SessionResponse {
   });
 
   final String accessToken;
-  final String refreshToken;
+  final String? refreshToken;
   final List<UserResponse> users;
   final List<FileResponse> files;
   final DateTime? issuedAt;
