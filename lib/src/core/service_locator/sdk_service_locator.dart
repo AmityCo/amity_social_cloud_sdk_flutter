@@ -741,6 +741,7 @@ class SdkServiceLocator {
               communityRepo: serviceLocator(),
               communityMemberRepo: serviceLocator(),
               communityComposerUsecase: serviceLocator(),
+              pollRepo: serviceLocator(),
             ));
     serviceLocator.registerLazySingleton<CommentComposerUsecase>(() =>
         CommentComposerUsecase(

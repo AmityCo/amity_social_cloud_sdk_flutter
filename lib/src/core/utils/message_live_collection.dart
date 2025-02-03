@@ -6,6 +6,7 @@ import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/usecase/message/message_fetch_use_case.dart';
 import 'package:amity_sdk/src/domain/usecase/message/message_observe_list_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/message/message_observe_new_item_usecase.dart';
+import 'package:flutter/foundation.dart';
 
 /// Message Live Collection
 class MessageLiveCollection extends LiveCollection<AmityMessage> {
@@ -15,6 +16,7 @@ class MessageLiveCollection extends LiveCollection<AmityMessage> {
   /// Init [MessageLiveCollection] with message request
   MessageLiveCollection({required this.request});
 
+  @protected
   @override
   Future<PageListData<List<AmityMessage>, String>> getFirstPageRequest() async {
     final params = request();
@@ -23,8 +25,9 @@ class MessageLiveCollection extends LiveCollection<AmityMessage> {
     return await serviceLocator<MessageFetchUseCase>().get(params);
   }
 
+  @protected
   @override
-  Future<PageListData<List<AmityMessage>, String>> getNextPageRequest(
+  Future<PageListData<List<AmityMessage>, String>> getNextPageRequestInternal(
       String? token) async {
     final params = request();
     params.options?.token = token;
@@ -37,7 +40,7 @@ class MessageLiveCollection extends LiveCollection<AmityMessage> {
     return serviceLocator<MessageObserveListUseCase>().listen(request);
   }
 
-
+  @protected
   @override
   StreamController<PagingIdHiveEntity> observeNewItem() {
     return serviceLocator<MessageObserveNewItemUseCase>().listen(request);

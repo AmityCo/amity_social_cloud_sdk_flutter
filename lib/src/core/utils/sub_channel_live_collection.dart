@@ -5,12 +5,14 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/model/api_request/get_sub_channels_request.dart';
 import 'package:amity_sdk/src/domain/usecase/subchannel/sub_channel_get_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/subchannel/sub_channel_obsever_usecase.dart';
+import 'package:flutter/foundation.dart';
 
 class SubChannelLiveCollection extends LiveCollection<AmitySubChannel> {
   
   RequestBuilder<GetSubChannelsRequest> request;
   SubChannelLiveCollection({required this.request});
 
+  @protected
   @override
   Future<PageListData<List<AmitySubChannel>, String>> getFirstPageRequest() async {
     final params = request();
@@ -18,8 +20,9 @@ class SubChannelLiveCollection extends LiveCollection<AmitySubChannel> {
     return await serviceLocator<SubChannelGetUsecase>().get(params);
   }
 
+  @protected
   @override
-  Future<PageListData<List<AmitySubChannel>, String>> getNextPageRequest(String? token) async {
+  Future<PageListData<List<AmitySubChannel>, String>> getNextPageRequestInternal(String? token) async {
     final params = request();
     params.options?.token = token;
     params.options?.limit = null;

@@ -5,6 +5,7 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/model/api_request/get_global_story_target_request.dart';
 import 'package:amity_sdk/src/domain/usecase/story/global_story_targets_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/story/story_target_observe_usercase.dart';
+import 'package:flutter/foundation.dart';
 
 class GlobalStoryTargetLiveCollection extends LiveCollection<AmityStoryTarget> {
   AmityGlobalStoryTargetsQueryOption queryOption;
@@ -20,6 +21,7 @@ class GlobalStoryTargetLiveCollection extends LiveCollection<AmityStoryTarget> {
     }
   }
 
+  @protected
   @override
   Future<PageListData<List<AmityStoryTarget>, String>>
       getFirstPageRequest() async {
@@ -41,14 +43,15 @@ class GlobalStoryTargetLiveCollection extends LiveCollection<AmityStoryTarget> {
 
     if (queryOption == AmityGlobalStoryTargetsQueryOption.SMART) {
       if (pagingData.token == 'next') {
-        getNextPageRequest(pagingData.token);
+        getNextPageRequestInternal(pagingData.token);
       }
     }
     return pagingData;
   }
 
+  @protected
   @override
-  Future<PageListData<List<AmityStoryTarget>, String>> getNextPageRequest(
+  Future<PageListData<List<AmityStoryTarget>, String>> getNextPageRequestInternal(
       String? token) async {
     GetGlobalStoryTargetRequest params = GetGlobalStoryTargetRequest();
     if (queryOption == AmityGlobalStoryTargetsQueryOption.SMART) {

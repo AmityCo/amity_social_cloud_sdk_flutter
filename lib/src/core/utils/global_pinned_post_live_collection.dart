@@ -5,12 +5,14 @@ import 'package:amity_sdk/src/core/model/api_request/query_global_pinned_post_re
 import 'package:amity_sdk/src/domain/model/amity_pinned_post.dart';
 import 'package:amity_sdk/src/domain/usecase/pin/global_pinned_post_observe_query_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/pin/global_pinned_post_query_usecase.dart';
+import 'package:flutter/foundation.dart';
 
 class GlobalPinnedPostLiveCollection extends LiveCollection<AmityPinnedPost> {
   RequestBuilder<QueryGlobalPinnedPostRequest> request;
 
   GlobalPinnedPostLiveCollection({required this.request});
 
+  @protected
   @override
   Future<PageListData<List<AmityPinnedPost>, String>>
       getFirstPageRequest() async {
@@ -18,8 +20,9 @@ class GlobalPinnedPostLiveCollection extends LiveCollection<AmityPinnedPost> {
     return await serviceLocator<GlobalPinnedPostQueryUseCase>().get(params);
   }
 
+  @protected
   @override
-  Future<PageListData<List<AmityPinnedPost>, String>> getNextPageRequest(
+  Future<PageListData<List<AmityPinnedPost>, String>> getNextPageRequestInternal(
       String? token) async {
     return Future.value(PageListData([], ''));
   }

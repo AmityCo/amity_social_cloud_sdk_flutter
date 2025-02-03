@@ -7,6 +7,7 @@ import 'package:amity_sdk/src/data/data_source/data_source.dart';
 import 'package:amity_sdk/src/domain/usecase/reaction/reaction_observe_new_item_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/reaction/reaction_observe_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/reaction/reaction_query_usecase.dart';
+import 'package:flutter/foundation.dart';
 
 class ReactionLiveCollection extends LiveCollection<AmityReaction> {
   RequestBuilder<GetReactionRequest> request;
@@ -23,6 +24,7 @@ class ReactionLiveCollection extends LiveCollection<AmityReaction> {
     return request().getHashCode();
   }
 
+  @protected
   @override
   Future<PageListData<List<AmityReaction>, String>> getFirstPageRequest() async {
     final params = request();
@@ -30,8 +32,9 @@ class ReactionLiveCollection extends LiveCollection<AmityReaction> {
     return await serviceLocator<ReactionQueryUsecase>().get(params);
   }
 
+  @protected
   @override
-  Future<PageListData<List<AmityReaction>, String>> getNextPageRequest(
+  Future<PageListData<List<AmityReaction>, String>> getNextPageRequestInternal(
       String? token) async {
     final params = request();
     params.options?.token = token;
@@ -44,6 +47,7 @@ class ReactionLiveCollection extends LiveCollection<AmityReaction> {
     return serviceLocator<ReactionObserveUseCase>().listen(request);
   }
 
+  @protected
   @override
   StreamController<PagingIdHiveEntity> observeNewItem() {
     return serviceLocator<ReactionObserveNewItemUseCase>().listen(request);

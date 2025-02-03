@@ -7,6 +7,7 @@ import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/usecase/channel/channel_fetch_list_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/channel/channel_observe_list_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/channel/channel_observe_new_item_usecase.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
 
 class ChannelLiveCollection extends LiveCollection<AmityChannel> {
   RequestBuilder<GetChannelRequest> request;
@@ -23,6 +24,7 @@ class ChannelLiveCollection extends LiveCollection<AmityChannel> {
     return request().getHashCode();
   }
 
+  @protected
   @override
   Future<PageListData<List<AmityChannel>, String>>
       getFirstPageRequest() async {
@@ -34,8 +36,9 @@ class ChannelLiveCollection extends LiveCollection<AmityChannel> {
     return await serviceLocator<ChannelFetchListUseCase>().get(params);
   }
 
+  @protected
   @override
-  Future<PageListData<List<AmityChannel>, String>> getNextPageRequest(
+  Future<PageListData<List<AmityChannel>, String>> getNextPageRequestInternal(
       String? token) async {
     final params = request();
     params.options?.token = token;
@@ -48,6 +51,7 @@ class ChannelLiveCollection extends LiveCollection<AmityChannel> {
     return serviceLocator<ChannelObserveListUseCase>().listen(request);
   }
 
+  @protected
   @override
   StreamController<PagingIdHiveEntity> observeNewItem() {
     return serviceLocator<ChannelObserveNewItemUseCase>().listen(request);

@@ -46,8 +46,8 @@ class AuthenticationRepoImpl extends AuthenticationRepo {
     accountHiveEntity.deviceId = params.deviceId;
 
     //3. Save the dto in the db
-    accountDbAdapter.saveAccountEntity(accountHiveEntity);
-    userDbAdapter.saveUserEntity(userHiveEntity);
+    await accountDbAdapter.saveAccountEntity(accountHiveEntity);
+    await userDbAdapter.saveUserEntity(userHiveEntity);
     for (var e in fileHiveEntities) {
       await fileDbAdapter.saveFileEntity(e);
     }
@@ -66,8 +66,6 @@ class AuthenticationRepoImpl extends AuthenticationRepo {
       serviceLocator.unregister<AmityUser>();
     }
     serviceLocator.registerSingleton<AmityUser>(amityUser);
-
-
 
     return Future.value(amityUser);
   }

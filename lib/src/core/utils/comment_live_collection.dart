@@ -7,12 +7,14 @@ import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/usecase/comment/comment_fetch_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/comment/comment_observe_new_item_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/comment/comment_observe_usecase.dart';
+import 'package:flutter/foundation.dart';
 
 class CommentLiveCollection extends LiveCollection<AmityComment> {
   RequestBuilder<GetCommentRequest> request;
 
   CommentLiveCollection({required this.request});
 
+  @protected
   @override
   Future<PageListData<List<AmityComment>, String>> getFirstPageRequest() async {
     final params = request();
@@ -21,8 +23,9 @@ class CommentLiveCollection extends LiveCollection<AmityComment> {
     return await serviceLocator<CommentFetchUseCase>().get(params);
   }
 
+  @protected
   @override
-  Future<PageListData<List<AmityComment>, String>> getNextPageRequest(
+  Future<PageListData<List<AmityComment>, String>> getNextPageRequestInternal(
       String? token) async {
     final params = request();
     params.options?.token = token;
@@ -35,6 +38,7 @@ class CommentLiveCollection extends LiveCollection<AmityComment> {
     return serviceLocator<CommentObserveUseCase>().listen(request);
   }
   
+  @protected
   @override
   StreamController<PagingIdHiveEntity> observeNewItem() {
     return serviceLocator<CommentObserveNewItemUseCase>().listen(request);

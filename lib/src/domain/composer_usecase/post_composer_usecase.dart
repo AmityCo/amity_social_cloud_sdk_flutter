@@ -24,6 +24,8 @@ class PostComposerUsecase extends UseCase<AmityPost, AmityPost> {
   /// Community Composer Usecase
   final CommunityComposerUsecase communityComposerUsecase;
 
+  final PollRepo pollRepo;
+
   /// Community Member Usecase
   CommunityMemberRepo communityMemberRepo;
 
@@ -36,7 +38,9 @@ class PostComposerUsecase extends UseCase<AmityPost, AmityPost> {
       required this.fileComposerUsecase,
       required this.communityRepo,
       required this.communityComposerUsecase,
-      required this.communityMemberRepo});
+      required this.communityMemberRepo,
+      required this.pollRepo});
+
   @override
   Future<AmityPost> get(AmityPost params) async {
     //Compose Target User/Community
@@ -46,25 +50,31 @@ class PostComposerUsecase extends UseCase<AmityPost, AmityPost> {
           await userRepo.getUserByIdFromDb(target.targetUserId!);
       target.targetUser = await userComposerUsecase.get(target.targetUser!);
     } else if (target is CommunityTarget) {
-
-
       var targetCommunityId = target.targetCommunityId;
       if (targetCommunityId != null) {
-        var targetCommunity = await communityRepo.getCommunityById(targetCommunityId);
+        var targetCommunity =
+            await communityRepo.getCommunityById(targetCommunityId);
         if (targetCommunity != null) {
-          target.targetCommunity = await communityComposerUsecase.get(targetCommunity);
-          if(params.postedUserId!=null){
-           target.postedCommunityMember = await communityMemberRepo.getMemberOptional(targetCommunityId, params.postedUserId!);
+          target.targetCommunity =
+              await communityComposerUsecase.get(targetCommunity);
+          if (params.postedUserId != null) {
+            target.postedCommunityMember = await communityMemberRepo
+                .getMemberOptional(targetCommunityId, params.postedUserId!);
+          }
         }
-        }
-        
       }
     }
 
     //Add File url to DataType != TEXT
     final data = params.data;
-    if (data != null && data is! TextData && data is! LiveStreamData) {
+    if (data != null &&
+        (data is ImageData || data is VideoData || data is FileData)) {
       params.data = await fileComposerUsecase.get(data);
+    }
+
+    if (data != null && data is PollData) {
+      data.poll = await pollRepo.getPollByIdFromDb(data.pollId);
+      params.data = data;
     }
 
     //Compose latest comment
@@ -73,17 +83,19 @@ class PostComposerUsecase extends UseCase<AmityPost, AmityPost> {
       params.latestComments =
           await Stream.fromIterable(params.latestCommentIds!)
               .asyncMap((element) async {
-        AmityComment? comment = await commentRepo.getCommentByIdFromDb(element);
-        var commentUserId = comment?.userId;
-        if (comment != null && commentUserId != null) {
-          var commentUser = await userRepo.getUserByIdFromDb(commentUserId);
-          comment.user = await userComposerUsecase.get(commentUser);
-        }
-        return comment;
-      })
-        .where((element) => element != null)
-        .cast<AmityComment>()
-        .toList();
+                AmityComment? comment =
+                    await commentRepo.getCommentByIdFromDb(element);
+                var commentUserId = comment?.userId;
+                if (comment != null && commentUserId != null) {
+                  var commentUser =
+                      await userRepo.getUserByIdFromDb(commentUserId);
+                  comment.user = await userComposerUsecase.get(commentUser);
+                }
+                return comment;
+              })
+              .where((element) => element != null)
+              .cast<AmityComment>()
+              .toList();
     }
 
     //Compose Children post

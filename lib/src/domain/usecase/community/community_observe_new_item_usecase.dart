@@ -51,9 +51,9 @@ class CommunityObserveNewItemUsecase
       final communityIds = pagingIds.map((e) => e.id).toList();
       communityEntities.sort((a, b) {
         var positionA =
-            pagingIds.firstWhere((p) => p.id == a.communityId).position ?? 0;
+            pagingIds.firstWhere((p) => p.id == a.communityId, orElse: () => PagingIdHiveEntity(position: 0)).position ?? 0;
         var positionB =
-            pagingIds.firstWhere((p) => p.id == b.communityId).position ?? 0;
+            pagingIds.firstWhere((p) => p.id == b.communityId, orElse: () => PagingIdHiveEntity(position: 0)).position ?? 0;
         return positionA.compareTo(positionB);
       });
 
