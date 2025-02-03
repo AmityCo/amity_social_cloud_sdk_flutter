@@ -9,9 +9,13 @@ class AuthenticationApiInterfaceImpl extends AuthenticationApiInterface {
   final HttpApiClient httpApiClient;
   final AmityCoreClientOption amityCoreClientOption;
   @override
-  Future<SessionResponse> login(AuthenticationRequest request) async {
+  Future<SessionResponse> login(
+    AuthenticationRequest request,
+    { bool isLegacyVersion = true }
+  ) async {
     try {
-      final data = await httpApiClient().post(SESSION_URL,
+      final url = isLegacyVersion ? SESSION_URL_LEGACY : SESSION_URL;
+      final data = await httpApiClient().post(url,
           data: request,
           options: dio.Options(
               headers: {'X-API-Key': amityCoreClientOption.apiKey}));
@@ -34,6 +38,18 @@ class AuthenticationApiInterfaceImpl extends AuthenticationApiInterface {
         queryParameters: {'userId': userId, 'refreshToken': refreshToken},
       );
       return SessionResponse.fromJson(data.data);
+    } on dio.DioException catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
+
+  @override
+  Future verifyAccessToken() async {
+    try {
+      await httpApiClient().get(SESSION_URL_LEGACY,
+          options: dio.Options(
+              headers: {'X-API-Key': amityCoreClientOption.apiKey}));
     } on dio.DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());

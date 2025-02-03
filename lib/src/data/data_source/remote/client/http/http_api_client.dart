@@ -48,7 +48,7 @@ class HttpApiClient {
         ///get the session request params
         final params = serviceLocator<AuthenticationRequest>();
 
-        serviceLocator<AuthenticationRepo>().login(params).then((value) {
+        serviceLocator<AuthenticationRepo>().login(params, isLegacyVersion: CoreClient.isLegacyLogin()).then((value) {
           var options = e.response!.requestOptions;
           dio.fetch(options).then((value) {
             handler.resolve(value);

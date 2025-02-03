@@ -9,6 +9,9 @@ import 'package:amity_sdk/src/core/session/event_bus/session_state_event_bus.dar
 import 'package:amity_sdk/src/core/session/model/app_event.dart';
 import 'package:amity_sdk/src/core/session/model/session_life_cycle.dart';
 import 'package:amity_sdk/src/core/session/session_state_manager.dart';
+import 'package:amity_sdk/src/core/session/token/access_token_renewal.dart';
+import 'package:amity_sdk/src/core/session/token/token_renewal.dart';
+import 'package:amity_sdk/src/core/session/token/token_watcher.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/public/public.dart';
@@ -21,7 +24,10 @@ class CoreClient {
   static SessionLifeCycleEventBus? _sessionLifeCycleEventBus;
   static AppEventBus? _appEventBus;
   static final SessionStateEventBus _sessionStateEventBus = SessionStateEventBus();
+  static TokenRenewalSessionComponent? _tokenRenewalSessionComponent = null;
+  static TokenWatcherSessionComponent? _tokenWatcherSessionComponent = null;
   static AnalyticsEngine? analyticsEngine = null;
+  static int millisTimeDiff = 0;
 
   ///Do the intial set
   static Future setup({
@@ -101,7 +107,14 @@ class CoreClient {
         appEventBus: _appEventBus!,
         sessionStateEventBus: _sessionStateEventBus,
         sessionLifeCycleEventBus: _sessionLifeCycleEventBus!);
-
+    _tokenRenewalSessionComponent ??= TokenRenewalSessionComponent(
+        sessionStateEventBus: _sessionStateEventBus,
+        sessionLifeCycleEventBus: _sessionLifeCycleEventBus!,
+        appEventBus: _appEventBus!);
+    _tokenWatcherSessionComponent ??= TokenWatcherSessionComponent(
+        sessionStateEventBus: _sessionStateEventBus,
+        sessionLifeCycleEventBus: _sessionLifeCycleEventBus!,
+        appEventBus: _appEventBus!);
     analyticsEngine = AnalyticsEngine(
       sessionLifeCycleEventBus: _sessionLifeCycleEventBus!,
       sessionStateEventBus: _sessionStateEventBus,
@@ -109,8 +122,11 @@ class CoreClient {
   }
 
   /// Login with userId, this will create user session
-  static LoginQueryBuilder login(String userId) {
-    return LoginQueryBuilder(useCase: serviceLocator(), userId: userId, sessionLifeCycleEventBus: _sessionLifeCycleEventBus!, appEventBus: _appEventBus!);
+  static LoginQueryBuilder login(String userId, {Function(AccessTokenRenewal)? sessionHandler}) {
+    if (sessionHandler != null) {
+      _tokenRenewalSessionComponent?.setSessionWillRenewAccessToken(sessionHandler);
+    }
+    return LoginQueryBuilder(useCase: serviceLocator<LoginUsecase>(), userId: userId, sessionLifeCycleEventBus: _sessionLifeCycleEventBus!, appEventBus: _appEventBus!, isLegacyVersion: sessionHandler == null);
   }
 
   /// Logout will wipe out all the data [AmityCoreClient] holds.
@@ -226,5 +242,13 @@ class CoreClient {
 
   static void onAppEvent(AppEvent event) {
     _appEventBus?.publish(event);
+  }
+
+  static bool isLegacyLogin() {
+    return _tokenRenewalSessionComponent?.isLegacyLogin() ?? true;
+  }
+  
+  static DateTime getServerTime() {
+    return DateTime.now().add(Duration(milliseconds: millisTimeDiff));
   }
 }

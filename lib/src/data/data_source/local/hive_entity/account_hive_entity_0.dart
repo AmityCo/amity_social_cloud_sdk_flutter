@@ -43,6 +43,13 @@ class AccountHiveEntity extends HiveObject {
   String? accessToken;
   @HiveField(17)
   String? lastInactiveChannelIdsQuery;
+  @HiveField(18)
+  DateTime? issuedAt;
+  @HiveField(19)
+  DateTime? expiresAt;
+  @HiveField(20)
+  DateTime? aboutToExpireAt;
+
   AccountHiveEntity({
     this.id,
     this.userId,
@@ -62,5 +69,8 @@ class AccountHiveEntity extends HiveObject {
     this.refreshToken,
     this.accessToken,
     this.lastInactiveChannelIdsQuery,
+    this.issuedAt,
+    this.expiresAt,
+    this.aboutToExpireAt,
   });
 }

@@ -154,12 +154,15 @@ class PollData extends AmityPostData {
   /// Poll id
   String pollId;
 
+  AmityPoll? poll;
+
   late PollGetLiveObject live;
 
   /// init Poll Data
   PollData({
     required String postId,
     required this.pollId,
+    this.poll,
     Map<String, dynamic>? rawData,
   }) : super(postId: postId, rawData: rawData) {
     live = PollGetLiveObject(pollId);

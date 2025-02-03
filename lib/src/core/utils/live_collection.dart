@@ -6,6 +6,7 @@ import 'package:amity_sdk/src/core/utils/amity_nonce.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/data/data_source/data_source.dart';
 import 'package:amity_sdk/src/domain/usecase/paging/paging_id_insert_usecase.dart';
+import 'package:flutter/foundation.dart';
 
 typedef RequestBuilder<T> = T Function();
 
@@ -22,9 +23,17 @@ abstract class LiveCollection<Model> {
 
   final defaultPageSize = 20;
 
+  @protected
   /// get the next page request
-  Future<PageListData<List<Model>, String>> getNextPageRequest(String? token);
+  Future<PageListData<List<Model>, String>> getNextPageRequestInternal(String? token);
 
+  @protected
+  /// get the next page request
+  Future<PageListData<List<Model>, String>> getNextPageRequest(String? token) {
+    return getNextPageRequestInternal(token);
+  }
+
+  @protected
   /// get the first page request( with out token)
   Future<PageListData<List<Model>, String>> getFirstPageRequest();
 
@@ -73,7 +82,7 @@ abstract class LiveCollection<Model> {
           }
         });
       } else {
-        return await getNextPageRequest(currentToken).then((value) {
+        return await getNextPageRequestInternal(currentToken).then((value) {
           currentToken = value.token;
           isFetching = false;
           _loadingStateStream.addData(false);
@@ -110,6 +119,7 @@ abstract class LiveCollection<Model> {
     return _loadingStateStream.stream;
   }
 
+  @protected
   StreamController<PagingIdHiveEntity> observeNewItem() {
     return StreamController();
   }

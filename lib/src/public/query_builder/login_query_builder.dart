@@ -19,13 +19,15 @@ class LoginQueryBuilder {
   String? _authToken;
   SessionLifeCycleEventBus? _sessionLifeCycleEventBus;
   AppEventBus? _appEventBus;
+  bool isLegacyVersion;
 
   /// Init Login Query Builder
   LoginQueryBuilder(
-      {required LoginUsecase useCase,
+      {required useCase,
       required String userId,
       required SessionLifeCycleEventBus sessionLifeCycleEventBus,
-      required AppEventBus appEventBus}) {
+      required AppEventBus appEventBus,
+      required this.isLegacyVersion}) {
     _useCase = useCase;
     _userId = userId;
     _sessionLifeCycleEventBus = sessionLifeCycleEventBus;

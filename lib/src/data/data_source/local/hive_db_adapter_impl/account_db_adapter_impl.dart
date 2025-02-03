@@ -31,7 +31,7 @@ class AccountDbAdapterImpl extends AccountDbAdapter {
   }
 
   @override
-  void saveAccountEntity(AccountHiveEntity entity) async {
+  Future saveAccountEntity(AccountHiveEntity entity) async {
     await box.clear();
     await box.put(entity.userId, entity);
   }

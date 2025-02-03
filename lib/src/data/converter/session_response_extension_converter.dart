@@ -12,6 +12,8 @@ extension SessionResponseExtension on SessionResponse {
       ..displayName = users[0].displayName
       ..isActive = users[0].isGlobalBan
       ..accessToken = accessToken
-      ..refreshToken = refreshToken;
+      ..refreshToken = refreshToken
+      ..issuedAt = issuedAt
+      ..expiresAt = expiresAt;
   }
 }

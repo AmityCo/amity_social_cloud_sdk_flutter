@@ -113,6 +113,7 @@ import 'package:amity_sdk/src/domain/usecase/subchannel/sub_channel_get_usecase.
 import 'package:amity_sdk/src/domain/usecase/subchannel/sub_channel_has_local_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/subchannel/sub_channel_obsever_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/subchannel/sub_channel_update_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/user/get_current_account_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/user/get_reach_user_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/user/user_fetch_list_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/user/user_observe_list_usecase.dart';
@@ -341,6 +342,7 @@ class SdkServiceLocator {
               accountDbAdapter: serviceLocator(),
               userDbAdapter: serviceLocator(),
               fileDbAdapter: serviceLocator(),
+              coreClientOption: configServiceLocator(),
             ));
     serviceLocator.registerLazySingleton<UserRepo>(() => UserRepoImpl(
         userApiInterface: serviceLocator(),
@@ -538,6 +540,8 @@ class SdkServiceLocator {
         authenticationRepo: serviceLocator(),
         userComposerUsecase: serviceLocator(),
         accountDbAdapter: serviceLocator()));
+    serviceLocator.registerLazySingleton<GetCurrentAccountUseCase>(() => GetCurrentAccountUseCase(
+        accountRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<GetUserTokenUsecase>(
         () => GetUserTokenUsecase(authenticationRepo: serviceLocator()));
     serviceLocator.registerLazySingleton<GetAllUserUseCase>(() =>
@@ -737,6 +741,7 @@ class SdkServiceLocator {
               communityRepo: serviceLocator(),
               communityMemberRepo: serviceLocator(),
               communityComposerUsecase: serviceLocator(),
+              pollRepo: serviceLocator(),
             ));
     serviceLocator.registerLazySingleton<CommentComposerUsecase>(() =>
         CommentComposerUsecase(

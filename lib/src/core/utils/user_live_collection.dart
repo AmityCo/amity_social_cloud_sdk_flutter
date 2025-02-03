@@ -5,6 +5,7 @@ import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/utils/amity_nonce.dart';
 import 'package:amity_sdk/src/domain/usecase/user/user_fetch_list_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/user/user_observe_list_usecase.dart';
+import 'package:flutter/foundation.dart';
 
 class UserLiveCollection extends LiveCollection<AmityUser> {
   RequestBuilder<UsersRequest> request;
@@ -21,6 +22,7 @@ class UserLiveCollection extends LiveCollection<AmityUser> {
     return request().getHashCode();
   }
 
+  @protected
   @override
   Future<PageListData<List<AmityUser>, String>>
       getFirstPageRequest() async {
@@ -32,8 +34,9 @@ class UserLiveCollection extends LiveCollection<AmityUser> {
     return await serviceLocator<UserFetchListUseCase>().get(params);
   }
 
+  @protected
   @override
-  Future<PageListData<List<AmityUser>, String>> getNextPageRequest(
+  Future<PageListData<List<AmityUser>, String>> getNextPageRequestInternal(
       String? token) async {
     final params = request();
     params.options?.token = token;

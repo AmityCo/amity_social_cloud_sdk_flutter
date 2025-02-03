@@ -18,7 +18,8 @@ const US_MQTT_ENDPOINT = "ssq.us.amity.co";
 const STAGING_MQTT_ENDPOINT = "ssq.staging.amity.co";
 
 //API link
-const SESSION_URL = 'api/v3/sessions';
+const SESSION_URL_LEGACY = 'api/v3/sessions';
+const SESSION_URL = 'api/v5/sessions';
 const REFRESH_TOKEN = 'api/v1/accessToken';
 const USERS_URL = 'api/v3/users';
 const USERS_V4_URL = 'api/v4/users/';

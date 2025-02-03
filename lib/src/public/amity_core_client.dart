@@ -1,6 +1,9 @@
+import 'dart:ui';
+
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/core_client.dart';
 import 'package:amity_sdk/src/core/engine/analytics_engine.dart';
+import 'package:amity_sdk/src/core/session/token/access_token_renewal.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/usecase/network/validate_text_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/network/validate_urls_usecase.dart';
@@ -25,8 +28,8 @@ class AmityCoreClient extends CoreClient {
   api_style: async
   */
   /// Login with userId, this will create user session
-  static LoginQueryBuilder login(String userId) {
-    return CoreClient.login(userId);
+  static LoginQueryBuilder login(String userId, {Function(AccessTokenRenewal)? sessionHandler}) {
+    return CoreClient.login(userId, sessionHandler: sessionHandler);
   }
   /* end_public_function */
 
