@@ -25,4 +25,6 @@ abstract class ChannelApiInterface {
 
   /// Mute Channel
   Future muteChannel(UpdateChannelMembersRequest request);
+
+  Future<CreateChannelResponse> getChannels(List<String> channelIds);
 }

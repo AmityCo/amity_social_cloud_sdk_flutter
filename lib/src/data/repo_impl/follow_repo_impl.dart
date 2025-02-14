@@ -1,8 +1,13 @@
 // ignore_for_file: unused_local_variable
 
+import 'dart:math';
+
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/utils/amity_nonce.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/repo/paging_id_repo.dart';
+import 'package:collection/collection.dart';
 
 class FollowRepoImpl extends FollowRepo {
   final FollowApiInterface followWApiInterface;
@@ -10,6 +15,7 @@ class FollowRepoImpl extends FollowRepo {
   final FollowDbAdapter followDbAdapter;
   final UserDbAdapter userDbAdapter;
   final FileDbAdapter fileDbAdapter;
+  final PagingIdRepo pagingIdRepo;
 
   FollowRepoImpl({
     required this.followWApiInterface,
@@ -17,6 +23,7 @@ class FollowRepoImpl extends FollowRepo {
     required this.followDbAdapter,
     required this.userDbAdapter,
     required this.fileDbAdapter,
+    required this.pagingIdRepo,
   });
 
   @override
@@ -32,13 +39,15 @@ class FollowRepoImpl extends FollowRepo {
     //Update the follow info
     final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
     if (followInfoHiveEntity != null) {
-      followInfoHiveEntity.followerCount = (followInfoHiveEntity.followerCount ?? 0) + 1;
+      followInfoHiveEntity.followerCount =
+          (followInfoHiveEntity.followerCount ?? 0) + 1;
       followInfoHiveEntity.status = AmityFollowStatus.ACCEPTED.value;
       await followInfoHiveEntity.save();
     }
 
-    return AmityFollowStatus.values
-        .firstWhere((element) => element.value == follow.status, orElse: (() => AmityFollowStatus.NONE));
+    return AmityFollowStatus.values.firstWhere(
+        (element) => element.value == follow.status,
+        orElse: (() => AmityFollowStatus.NONE));
   }
 
   @override
@@ -54,13 +63,15 @@ class FollowRepoImpl extends FollowRepo {
     //Update the follow info
     final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
     if (followInfoHiveEntity != null) {
-      followInfoHiveEntity.followerCount = (followInfoHiveEntity.followerCount ?? 0) - 1;
+      followInfoHiveEntity.followerCount =
+          (followInfoHiveEntity.followerCount ?? 0) - 1;
       followInfoHiveEntity.status = AmityFollowStatus.NONE.value;
       await followInfoHiveEntity.save();
     }
 
-    return AmityFollowStatus.values
-        .firstWhere((element) => element.value == follow.status, orElse: (() => AmityFollowStatus.NONE));
+    return AmityFollowStatus.values.firstWhere(
+        (element) => element.value == follow.status,
+        orElse: (() => AmityFollowStatus.NONE));
   }
 
   @override
@@ -76,7 +87,8 @@ class FollowRepoImpl extends FollowRepo {
       //Update the follow info
       final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
       if (followInfoHiveEntity != null) {
-        followInfoHiveEntity.followerCount = (followInfoHiveEntity.followerCount ?? 0) + 1;
+        followInfoHiveEntity.followerCount =
+            (followInfoHiveEntity.followerCount ?? 0) + 1;
         followInfoHiveEntity.status = AmityFollowStatus.ACCEPTED.value;
         await followInfoHiveEntity.save();
       }
@@ -91,8 +103,9 @@ class FollowRepoImpl extends FollowRepo {
       }
     }
 
-    return AmityFollowStatus.values
-        .firstWhere((element) => element.value == follow.status, orElse: (() => AmityFollowStatus.NONE));
+    return AmityFollowStatus.values.firstWhere(
+        (element) => element.value == follow.status,
+        orElse: (() => AmityFollowStatus.NONE));
   }
 
   @override
@@ -110,7 +123,8 @@ class FollowRepoImpl extends FollowRepo {
       //Update the follow info
       final followInfoHiveEntity = followInfoDbAdapter.getFollowInfo(userId);
       if (followInfoHiveEntity != null) {
-        followInfoHiveEntity.followerCount = (followInfoHiveEntity.followerCount ?? 0) - 1;
+        followInfoHiveEntity.followerCount =
+            (followInfoHiveEntity.followerCount ?? 0) - 1;
         followInfoHiveEntity.status = AmityFollowStatus.NONE.value;
         followInfoHiveEntity.save();
       }
@@ -125,8 +139,9 @@ class FollowRepoImpl extends FollowRepo {
       }
     }
 
-    return AmityFollowStatus.values
-        .firstWhere((element) => element.value == follow.status, orElse: (() => AmityFollowStatus.NONE));
+    return AmityFollowStatus.values.firstWhere(
+        (element) => element.value == follow.status,
+        orElse: (() => AmityFollowStatus.NONE));
   }
 
   @override
@@ -149,7 +164,8 @@ class FollowRepoImpl extends FollowRepo {
     await followInfoDbAdapter.saveFollowInfo(followInfoHiveEntity);
 
     //Convert the hive entity to public model
-    final amityUserFollowInfo = followInfoHiveEntity.convertToAmityUserFollowInfo();
+    final amityUserFollowInfo =
+        followInfoHiveEntity.convertToAmityUserFollowInfo();
 
     return amityUserFollowInfo;
   }
@@ -167,21 +183,77 @@ class FollowRepoImpl extends FollowRepo {
   }
 
   @override
-  Future<PageListData<List<AmityFollowRelationship>, String>> getFollower(FollowRequest request) async {
+  Future<PageListData<List<AmityFollowRelationship>, String>> getFollower(
+      FollowRequest request) async {
+    // final data = await followWApiInterface.getFollower(request);
+
+    // final followRelationships = await saveFollowResponse(data);
+
+    // return PageListData(followRelationships, data.paging!.next ?? '');
+    final hash = request.getHashCode();
+    final nonce = request.getFollowerNonce();
+    int nextIndex = 0;
     final data = await followWApiInterface.getFollower(request);
-
+    final paging = data.paging;
     final followRelationships = await saveFollowResponse(data);
-
-    return PageListData(followRelationships, data.paging!.next ?? '');
+    final isFirstPage =
+        request.options?.token == null && (request.options?.limit ?? 0) > 0;
+    if (isFirstPage) {
+      await pagingIdRepo.deletePagingIdByHash(nonce.value, hash);
+    } else {
+      nextIndex = (pagingIdRepo
+              .getPagingIdEntities(nonce.value, hash)
+              .map((e) => (e.position ?? 0))
+              .toList()
+              .reduce(max)) +
+          1;
+    }
+    data.follows.forEachIndexed((index, element) async {
+      final pagingId = PagingIdHiveEntity(
+        id: "${element.from}_${element.to}",
+        hash: hash,
+        nonce: nonce.value,
+        position: nextIndex + index,
+      );
+      await pagingIdRepo.savePagingId(pagingId);
+    });
+    return PageListData(followRelationships, paging?.next ?? '');
   }
 
   @override
-  Future<PageListData<List<AmityFollowRelationship>, String>> getFollowing(FollowRequest request) async {
+  Future<PageListData<List<AmityFollowRelationship>, String>> getFollowing(
+      FollowRequest request) async {
+    // final data = await followWApiInterface.getFollowing(request);
+    // final followRelationships = await saveFollowResponse(data);
+
+    final hash = request.getHashCode();
+    final nonce = request.getFollowingNonce();
+    int nextIndex = 0;
     final data = await followWApiInterface.getFollowing(request);
-
+    final paging = data.paging;
     final followRelationships = await saveFollowResponse(data);
-
-    return PageListData(followRelationships, data.paging!.next ?? '');
+    final isFirstPage =
+        request.options?.token == null && (request.options?.limit ?? 0) > 0;
+    if (isFirstPage) {
+      await pagingIdRepo.deletePagingIdByHash(nonce.value, hash);
+    } else {
+      nextIndex = (pagingIdRepo
+              .getPagingIdEntities(nonce.value, hash)
+              .map((e) => (e.position ?? 0))
+              .toList()
+              .reduce(max)) +
+          1;
+    }
+    data.follows.forEachIndexed((index, element) async {
+      final pagingId = PagingIdHiveEntity(
+        id: "${element.from}_${element.to}",
+        hash: hash,
+        nonce: nonce.value,
+        position: nextIndex + index,
+      );
+      await pagingIdRepo.savePagingId(pagingId);
+    });
+    return PageListData(followRelationships, paging?.next ?? '');
   }
 
   @override
@@ -191,42 +263,95 @@ class FollowRepoImpl extends FollowRepo {
     final followInfoHiveEntity = data.convertToFollowInfoHiveEntity();
     await followInfoDbAdapter.saveFollowInfo(followInfoHiveEntity);
 
-    final amityUserFollowInfo = followInfoHiveEntity.convertToAmityMyFollowInfo();
+    final amityUserFollowInfo =
+        followInfoHiveEntity.convertToAmityMyFollowInfo();
 
     return amityUserFollowInfo;
   }
 
   @override
-  Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollower(FollowRequest request) async {
+  Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollower(
+      FollowRequest request) async {
+    final hash = request.getHashCode();
+    final nonce = request.getFollowerNonce();
+    int nextIndex = 0;
     final data = await followWApiInterface.getMyFollower(request);
-
+    final paging = data.paging;
     final followRelationships = await saveFollowResponse(data);
-
-    return PageListData(followRelationships, data.paging!.next ?? '');
+    final isFirstPage =
+        request.options?.token == null && (request.options?.limit ?? 0) > 0;
+    if (isFirstPage) {
+      await pagingIdRepo.deletePagingIdByHash(nonce.value, hash);
+    } else {
+      nextIndex = (pagingIdRepo
+              .getPagingIdEntities(nonce.value, hash)
+              .map((e) => (e.position ?? 0))
+              .toList()
+              .reduce(max)) +
+          1;
+    }
+    data.follows.forEachIndexed((index, element) async {
+      final pagingId = PagingIdHiveEntity(
+        id: "${element.from}_${element.to}",
+        hash: hash,
+        nonce: nonce.value,
+        position: nextIndex + index,
+      );
+      await pagingIdRepo.savePagingId(pagingId);
+    });
+    return PageListData(followRelationships, paging?.next ?? '');
   }
 
   @override
-  Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollowing(FollowRequest request) async {
+  Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollowing(
+      FollowRequest request) async {
+    final hash = request.getHashCode();
+    final nonce = request.getFollowingNonce();
+    int nextIndex = 0;
     final data = await followWApiInterface.getMyFollowing(request);
-
+    final paging = data.paging;
     final followRelationships = await saveFollowResponse(data);
-
-    return PageListData(followRelationships, data.paging!.next ?? '');
+    final isFirstPage =
+        request.options?.token == null && (request.options?.limit ?? 0) > 0;
+    if (isFirstPage) {
+      await pagingIdRepo.deletePagingIdByHash(nonce.value, hash);
+    } else {
+      nextIndex = (pagingIdRepo
+              .getPagingIdEntities(nonce.value, hash)
+              .map((e) => (e.position ?? 0))
+              .toList()
+              .reduce(max)) +
+          1;
+    }
+    data.follows.forEachIndexed((index, element) async {
+      final pagingId = PagingIdHiveEntity(
+        id: "${element.from}_${element.to}",
+        hash: hash,
+        nonce: nonce.value,
+        position: nextIndex + index,
+      );
+      await pagingIdRepo.savePagingId(pagingId);
+    });
+    return PageListData(followRelationships, paging?.next ?? '');
   }
 
-  Future<List<AmityFollowRelationship>> saveFollowResponse(FollowResponse data) async {
+  Future<List<AmityFollowRelationship>> saveFollowResponse(
+      FollowResponse data) async {
     //Covert to Follow Hive Entity
-    List<FollowHiveEntity> followHiveEntitys = data.follows.map((e) => e.convertFollowHiveEntity()).toList();
+    List<FollowHiveEntity> followHiveEntitys =
+        data.follows.map((e) => e.convertFollowHiveEntity()).toList();
 
     //Covert to User Hive Entity
-    List<UserHiveEntity> userHiveEntitys = data.users!.map((e) => e.convertToUserHiveEntity()).toList();
+    List<UserHiveEntity> userHiveEntitys =
+        data.users!.map((e) => e.convertToUserHiveEntity()).toList();
 
     //Covert to File Hive Entity
-    List<FileHiveEntity> fileHiveEntitys = data.files!.map((e) => e.convertToFileHiveEntity()).toList();
+    List<FileHiveEntity> fileHiveEntitys =
+        data.files!.map((e) => e.convertToFileHiveEntity()).toList();
 
-    //Save Follow Hive Entity
-    for (var e in followHiveEntitys) {
-      await followDbAdapter.saveFollowEntity(e);
+    //Save File Hive Entity
+    for (var e in fileHiveEntitys) {
+      await fileDbAdapter.saveFileEntity(e);
     }
 
     //Save User Hive Entity
@@ -234,10 +359,45 @@ class FollowRepoImpl extends FollowRepo {
       await userDbAdapter.saveUserEntity(e);
     }
 
-    //Save File Hive Entity
-    for (var e in fileHiveEntitys) {
-      await fileDbAdapter.saveFileEntity(e);
+    //Save Follow Hive Entity
+    for (var e in followHiveEntitys) {
+      await followDbAdapter.saveFollowEntity(e);
     }
-    return followHiveEntitys.map((e) => e.convertToAmityFollowRelationship()).toList();
+
+    return followHiveEntitys
+        .map((e) => e.convertToAmityFollowRelationship())
+        .toList();
+  }
+
+  @override
+  Stream<List<AmityFollowRelationship>> listenFollowings(
+      RequestBuilder<FollowRequest> request) {
+    final req = request.call();
+    return followDbAdapter.listenFollowEntities(request).map((event) {
+      final List<AmityFollowRelationship> list = [];
+      for (var element in event) {
+        list.add(element.convertToAmityFollowRelationship());
+      }
+      return list;
+    });
+  }
+
+  @override
+  Stream<List<AmityFollowRelationship>> listenFollowers(
+      RequestBuilder<FollowRequest> request) {
+    final req = request.call();
+    return followDbAdapter.listenFollowEntities(request).map((event) {
+      final List<AmityFollowRelationship> list = [];
+      for (var element in event) {
+        list.add(element.convertToAmityFollowRelationship());
+      }
+      return list;
+    });
+  }
+
+  @override
+  List<FollowHiveEntity> getFollowEntities(
+      RequestBuilder<FollowRequest> request) {
+    return followDbAdapter.getFollowEntities(request);
   }
 }

@@ -86,4 +86,15 @@ class ChannelApiInterfaceImpl extends ChannelApiInterface {
       return Future.error(amityError.amityException());
     }
   }
+
+  @override
+  Future<CreateChannelResponse> getChannels(List<String> channelIds) async {
+    try {
+      final data = await httpApiClient().get('$CHANNELS_V3/list', queryParameters: {'channelIds[]': channelIds});
+      return CreateChannelResponse.fromJson(data.data);
+    } on DioException catch (error) {
+      final amityError = AmityErrorResponse.fromJson(error.response!.data);
+      return Future.error(amityError.amityException());
+    }
+  }
 }

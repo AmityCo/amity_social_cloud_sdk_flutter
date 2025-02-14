@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data_source/data_source.dart';
+import 'package:amity_sdk/src/domain/usecase/post/post_observe_new_item_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/post/post_observe_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/post/post_query_usecase.dart';
 import 'package:flutter/foundation.dart';
@@ -34,4 +36,11 @@ class PostLiveCollection extends LiveCollection<AmityPost> {
   StreamController<List<AmityPost>> getStreamController() {
     return serviceLocator<PostObserveUseCase>().listen(request);
   }
+
+  @protected
+  @override
+  StreamController<PagingIdHiveEntity> observeNewItem() {
+    return serviceLocator<PostObserveNewItemUsecase>().listen(request);
+  }
+
 }

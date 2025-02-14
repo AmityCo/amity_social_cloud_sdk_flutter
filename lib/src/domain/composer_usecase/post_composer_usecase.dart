@@ -73,7 +73,8 @@ class PostComposerUsecase extends UseCase<AmityPost, AmityPost> {
     }
 
     if (data != null && data is PollData) {
-      data.poll = await pollRepo.getPollByIdFromDb(data.pollId);
+      final pollId = (data as PollData).pollId;
+      data.poll = await pollRepo.getPollByIdFromDb(pollId);
       params.data = data;
     }
 

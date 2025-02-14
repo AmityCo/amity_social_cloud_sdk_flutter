@@ -56,11 +56,13 @@ class PostObserveUseCase
           .map((e) => e.convertToAmityPost())
           .toList()
         ..sort((a, b) {
-          var positionA =
-              pagingIds.firstWhere((p) => p.id == a.postId).position ?? 0;
-          var positionB =
-              pagingIds.firstWhere((p) => p.id == b.postId).position ?? 0;
-          return positionA.compareTo(positionB);
+          if (request().sortBy == AmityPostSortOption.FIRST_CREATED.apiKey) {
+            return (a.createdAt ?? DateTime.now())
+                .compareTo(b.createdAt ?? DateTime.now());
+          } else {
+            return (b.createdAt ?? DateTime.now())
+                .compareTo(a.createdAt ?? DateTime.now());
+          }
         });
 
       Stream.fromIterable(posts)

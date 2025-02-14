@@ -17,6 +17,11 @@ import 'package:amity_sdk/src/core/socket/event/story/story_reaction_removed_eve
 import 'package:amity_sdk/src/core/socket/event/subchannel/subchannel_create_event_listener.dart';
 import 'package:amity_sdk/src/core/socket/event/subchannel/subchannel_delete_event_listener.dart';
 import 'package:amity_sdk/src/core/socket/event/subchannel/subchannel_update_event_listener.dart';
+import 'package:amity_sdk/src/core/socket/event/user/user_deleted_event_listener.dart';
+import 'package:amity_sdk/src/core/socket/event/user/user_flag_cleared_event_listener.dart';
+import 'package:amity_sdk/src/core/socket/event/user/user_flagged_event_listener.dart';
+import 'package:amity_sdk/src/core/socket/event/user/user_unflagged_event_listerner.dart';
+import 'package:amity_sdk/src/core/socket/event/user/user_updated_event_listener.dart';
 import 'package:collection/collection.dart' show IterableExtension;
 
 class MqttEventListeners {
@@ -87,8 +92,15 @@ class MqttEventListeners {
     MessageUnflaggedEventListener(),
     MessageReactionAddedEventListener(),
     MessageReactionRemovedEventListener(),
+
+    // Users
+    UserDeletedEventListener(),
+    UserFlagClearedEventListener(),
+    UserFlaggedEventListener(),
+    UserUnflaggedEventListener(),
+    UserUpdatedEventListener()
   ]);
 
-  SocketEventListener? getEvent(String eventType) =>
-      listeners.firstWhereOrNull((element) => element.getEventName() == eventType);
+  SocketEventListener? getEvent(String eventType) => listeners
+      .firstWhereOrNull((element) => element.getEventName() == eventType);
 }

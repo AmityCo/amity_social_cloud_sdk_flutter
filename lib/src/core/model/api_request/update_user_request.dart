@@ -49,5 +49,7 @@ class UpdateUserRequest {
         "avatarFileId": avatarFileId,
         "avatarCustomUrl": avatarCustomUrl,
         "description": description,
-      };
+      }..removeWhere(
+        (key, value) => value == null,
+    );
 }

@@ -7,4 +7,5 @@ class AmityFollowRelationship {
   AmityUser? sourceUser;
   AmityUser? targetUser;
   AmityFollowStatus? status = AmityFollowStatus.NONE;
+  DateTime? createdAt;
 }

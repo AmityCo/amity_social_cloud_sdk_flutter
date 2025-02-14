@@ -42,4 +42,8 @@ abstract class ChannelRepo {
 
   /// Has Channel in Local
   bool hasInLocal(String channelId);
+
+  Future<List<AmityChannel>> getChannels(List<String> channelIds);
+
+  Future<String?> getMessagePreviewId(String channelId);
 }

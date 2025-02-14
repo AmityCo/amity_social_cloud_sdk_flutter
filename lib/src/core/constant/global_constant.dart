@@ -111,5 +111,8 @@ const NOTIFICATION_SETTINGS = "api/v3/notification/setting";
 const PINNED_POST_QUERY = "api/v1/pinned-posts/communities/";
 const GLOBAL_PINNED_POST_QUERY = "api/v1/pinned-posts/global";
 
+// Chat settings
+const CHAT_SETTINGS = "api/v3/network-settings/chat";
+
 const MESSAGE_FEED_V5 = "api/v5/message-feeds";
 

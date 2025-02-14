@@ -6,7 +6,6 @@ import 'package:amity_sdk/src/public/query_builder/user/user_get_live_object.dar
 
 /// User Repository
 class UserRepository {
-
   UserGetLiveObject live = UserGetLiveObject();
 
   /* begin_public_function 
@@ -14,7 +13,8 @@ class UserRepository {
   */
   /// get the user query builder
   AmityAllUserQueryBuilder getUsers() {
-    return AmityAllUserQueryBuilder(useCase: serviceLocator<GetAllUserUseCase>());
+    return AmityAllUserQueryBuilder(
+        useCase: serviceLocator<GetAllUserUseCase>());
   }
   /* end_public_function */
 
@@ -22,8 +22,10 @@ class UserRepository {
   id: user.search
   */
   /// Search the user by their display name
-  AmityUserSearchDisplayNameQueryBuilder searchUserByDisplayName(String keyword) {
-    return AmityUserSearchDisplayNameQueryBuilder(useCase: serviceLocator<GetAllUserUseCase>(), keyword: keyword);
+  AmityUserSearchDisplayNameQueryBuilder searchUserByDisplayName(
+      String keyword) {
+    return AmityUserSearchDisplayNameQueryBuilder(
+        useCase: serviceLocator<GetAllUserUseCase>(), keyword: keyword);
   }
   /* end_public_function */
 
@@ -55,9 +57,10 @@ class UserRepository {
     return AmityBlockUserQueryBuilder(useCase: serviceLocator());
   }
 
-
   /// API to get blocked users
-  AmityQueryReachUserBuilder getViewedUsers({ required AmityViewedType viewedType , required String  viewedId}) {
-    return AmityQueryReachUserBuilder(useCase: serviceLocator() , viewedType: viewedType , viewedId: viewedId);
+  AmityQueryReachUserBuilder getViewedUsers(
+      {required AmityViewedType viewedType, required String viewedId}) {
+    return AmityQueryReachUserBuilder(
+        useCase: serviceLocator(), viewedType: viewedType, viewedId: viewedId);
   }
 }

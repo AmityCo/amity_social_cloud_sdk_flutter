@@ -11,8 +11,7 @@ import 'package:amity_sdk/src/domain/repo/paging_id_repo.dart';
 import 'package:collection/collection.dart';
 
 /// Post Repo
-class PostRepoImpl extends PostRepo
- {
+class PostRepoImpl extends PostRepo {
   /// Public post API interface
   final PublicPostApiInterface publicPostApiInterface;
 
@@ -194,19 +193,26 @@ class PostRepoImpl extends PostRepo
   }
 
   @override
-  Future<PageListData<List<AmityPost>, String>> queryPostList(GetPostRequest request) async {
+  Future<PageListData<List<AmityPost>, String>> queryPostList(
+      GetPostRequest request) async {
     final nonce = request.getNonce();
     final hash = request.getHashCode();
     final pagingIdDbAdapter = dbAdapterRepo.pagingIdDbAdapter;
     int nextIndex = 0;
-    final isFirstPage = request.options?.token == null && (request.options?.limit ?? 0) > 0;
+    final isFirstPage =
+        request.options?.token == null && (request.options?.limit ?? 0) > 0;
     //TODO: request.options.token is gone after call data.saveToDb, might cause further issue in the future
     final data = await publicPostApiInterface.queryPost(request);
     await data.saveToDb(dbAdapterRepo);
     if (isFirstPage) {
       await pagingIdDbAdapter.deletePagingIdByHash(nonce.value, hash);
-    }else {
-    nextIndex = (pagingIdRepo.getPagingIdEntities(nonce.value, hash).map((e) => (e.position ?? 0)).toList().reduce(max)) + 1;
+    } else {
+      nextIndex = (pagingIdRepo
+              .getPagingIdEntities(nonce.value, hash)
+              .map((e) => (e.position ?? 0))
+              .toList()
+              .reduce(max)) +
+          1;
     }
     data.posts.forEachIndexed((index, element) async {
       final pagingId = PagingIdHiveEntity(
@@ -222,20 +228,19 @@ class PostRepoImpl extends PostRepo
   }
 
   @override
-  Stream<List<AmityPost>> listenPosts(
-    RequestBuilder<GetPostRequest> request) {
-      final entities = dbAdapterRepo.postDbAdapter.listenPostEntities(request);
-        return entities.map((event) => event.map((e) => e.convertToAmityPost()).toList());
-    }
-  
+  Stream<List<AmityPost>> listenPosts(RequestBuilder<GetPostRequest> request) {
+    final entities = dbAdapterRepo.postDbAdapter.listenPostEntities(request);
+    return entities
+        .map((event) => event.map((e) => e.convertToAmityPost()).toList());
+  }
+
   @override
-  Stream<List<PostHiveEntity>>listenAllPostEntities() {
+  Stream<List<PostHiveEntity>> listenAllPostEntities() {
     return dbAdapterRepo.postDbAdapter.listenAllPostEntities();
   }
-  
+
   @override
-  List<PostHiveEntity> getPostEntities(
-    RequestBuilder<GetPostRequest> request) {
-      return dbAdapterRepo.postDbAdapter.getPostEntities(request);
-    }
+  List<PostHiveEntity> getPostEntities(RequestBuilder<GetPostRequest> request) {
+    return dbAdapterRepo.postDbAdapter.getPostEntities(request);
+  }
 }

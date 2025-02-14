@@ -7,45 +7,96 @@ part 'poll_hive_entity_16.g.dart';
 
 /// Poll post Hive Entity
 @HiveType(typeId: AmityHiveType.poll)
-class PollHiveEntity extends  EkoObject {
-  /// Poll Id
+class PollHiveEntity extends EkoObject {
+  @HiveField(0)
+  String? id;
+
+  @HiveField(1)
   String? pollId;
 
-  /// User Id who created the poll
+  @HiveField(2)
   String? userId;
 
-  /// Question in the poll post
+  @HiveField(3)
   String? question;
 
-  /// List of Answer in the poll post
+  @HiveField(4)
   List<PollAnswerHiveEntity>? answers;
 
-  /// Answer type in the poll post
+  @HiveField(5)
   String? answerType = AmityPollAnswerType.UNKNOWN.value;
 
-  /// Poll post status
+  @HiveField(6)
   String? status = AmityPollStatus.UNKNOWN.value;
 
-  /// Close time for the poll post
+  @HiveField(7)
   DateTime? closedAt;
 
-  /// local flag for deleting the post
+  @HiveField(8)
   bool? isDeleted = false;
 
-  /// Flag to check if user have alrady voted the poll
+  @HiveField(9)
   bool? isVoted = false;
 
-  /// Created Time for the poll post
+  @HiveField(10)
   DateTime? createdAt;
 
-  /// Updated Time for the poll post
+  @HiveField(11)
   DateTime? updatedAt;
 
-  /// Poll close In
+  @HiveField(12)
   int? closeIn;
-  
+
+  PollHiveEntity({
+    this.id,
+    this.pollId,
+    this.userId,
+    this.question,
+    this.answers,
+    this.answerType,
+    this.status,
+    this.closedAt,
+    this.isDeleted,
+    this.isVoted,
+    this.createdAt,
+    this.updatedAt,
+    this.closeIn,
+  });
+
+  PollHiveEntity copyWith({
+    String? id,
+    String? pollId,
+    String? userId,
+    String? question,
+    List<PollAnswerHiveEntity>? answers,
+    String? answerType,
+    String? status,
+    DateTime? closedAt,
+    bool? isDeleted,
+    bool? isVoted,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    int? closeIn,
+  }) {
+    return PollHiveEntity(
+      id: id ?? this.id,
+      pollId: pollId ?? this.pollId,
+      userId: userId ?? this.userId,
+      question: question ?? this.question,
+      answers: answers ?? this.answers,
+      answerType: answerType ?? this.answerType,
+      status: status ?? this.status,
+      closedAt: closedAt ?? this.closedAt,
+      isDeleted: isDeleted ?? this.isDeleted,
+      isVoted: isVoted ?? this.isVoted,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      closeIn: closeIn ?? this.closeIn,
+    );
+  }
+
   @override
   String? getId() {
-    return pollId;
+    return id;
   }
 }

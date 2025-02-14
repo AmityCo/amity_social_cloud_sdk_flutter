@@ -13,11 +13,20 @@ class GetUserFollowersUsecase extends UseCase<
   @override
   Future<PageListData<List<AmityFollowRelationship>, String>> get(
       FollowRequest params) async {
-    final followers = await followRepo.getFollower(params);
-    final followersComposed = await Stream.fromIterable(followers.data)
-        .asyncMap((element) async =>
-            await amityFollowRelationshipComposerUsecase.get(element))
-        .toList();
-    return followers.withItem1(followersComposed);
+    if (params.userId == null) {
+      final followers = await followRepo.getMyFollower(params);
+      final followersComposed = await Stream.fromIterable(followers.data)
+          .asyncMap((element) async =>
+              await amityFollowRelationshipComposerUsecase.get(element))
+          .toList();
+      return followers.withItem1(followersComposed);
+    } else {
+      final followers = await followRepo.getFollower(params);
+      final followersComposed = await Stream.fromIterable(followers.data)
+          .asyncMap((element) async =>
+              await amityFollowRelationshipComposerUsecase.get(element))
+          .toList();
+      return followers.withItem1(followersComposed);
+    }
   }
 }

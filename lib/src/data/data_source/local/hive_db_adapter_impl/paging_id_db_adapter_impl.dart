@@ -15,12 +15,12 @@ class PagingIdDbAdapterImpl extends PagingIdDbAdapter {
   
   @override
   Future savePagingIdEntity(PagingIdHiveEntity data) async {
-    await box.put(data.id, data);
+    await box.put(data.getId(), data);
   }
 
   @override
   Future savePagingIdEntities(List<PagingIdHiveEntity> data) async {
-    final pagingIds = { for (var e in data) e.id : e };
+    final pagingIds = { for (var e in data) e.getId() : e };
     await box.putAll(pagingIds);
   }
   
@@ -47,7 +47,7 @@ class PagingIdDbAdapterImpl extends PagingIdDbAdapter {
   Future deletePagingIdByHash(int nonce, int hash) async {
     final pagingIds = box.values
       .where((pagingId) => pagingId.hash == hash && pagingId.nonce == nonce)
-      .map((pagingId) => pagingId.id)
+      .map((pagingId) => pagingId.getId())
       .toList();
     await box.deleteAll(pagingIds);
   }

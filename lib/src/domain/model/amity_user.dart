@@ -110,15 +110,18 @@ class AmityUser {
   bool get isFlaggedByMe {
     if (hashFlag == null) return false;
     return (_flaggedByMe ?? false) ||
-        BloomFilter(hash: (hashFlag!['hash'] as String), m: hashFlag!['bits'] as int, k: hashFlag!['hashes'] as int)
+        BloomFilter(
+                hash: (hashFlag!['hash'] as String),
+                m: hashFlag!['bits'] as int,
+                k: hashFlag!['hashes'] as int)
             .mightContains(AmityCoreClient.getUserId());
   }
   //* end_public_function */
 
-  @override bool operator ==(Object other) {
+  @override
+  bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
     return other is AmityUser && MapEquality().equals(other.toMap(), toMap());
   }
-
 }

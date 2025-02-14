@@ -1,4 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/utils/community_member_live_collection.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 /// [CommunityMemberQueryBuilder]
@@ -63,5 +64,23 @@ class CommunityMemberQueryBuilder {
     final data = await usecase.get(_request);
 
     return data.data;
+  }
+
+  GetCommunityMembersRequest build({int? pageSize = 20}) {
+    GetCommunityMembersRequest request =
+        GetCommunityMembersRequest(communityId: _request.communityId,
+        keyword: _request.keyword,
+        memberships: _request.memberships,
+        roles: _request.roles,
+        sortBy: _request.sortBy,
+        isDeleted: _request.isDeleted,
+        options: OptionsRequest(limit: pageSize)
+        );
+
+    return request;
+  }
+
+  CommunityMemberLiveCollection getLiveCollection({int? pageSize = 20}) {
+    return CommunityMemberLiveCollection(request: () => build(pageSize: pageSize));
   }
 }

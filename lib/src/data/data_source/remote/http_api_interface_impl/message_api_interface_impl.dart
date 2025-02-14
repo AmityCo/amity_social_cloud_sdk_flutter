@@ -49,11 +49,11 @@ class MessageApiInterfaceImpl extends MessageApiInterface {
   }
 
   @override
-  Future deleteMessage(String messageId) async {
+  Future<CreateMessageResponse> deleteMessage(String messageId) async {
     try {
-      await httpApiClient()
+     final data = await httpApiClient()
           .delete('$MESSAGE_V5/$messageId', data: {'messageId': messageId});
-      return;
+      return CreateMessageResponse.fromJson(data.data);
     } on DioException catch (error) {
       final amityError = AmityErrorResponse.fromJson(error.response!.data);
       return Future.error(amityError.amityException());

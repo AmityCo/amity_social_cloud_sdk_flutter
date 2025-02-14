@@ -1,3 +1,5 @@
+import 'package:amity_sdk/amity_sdk.dart';
+import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/enum/amity_membership_sorting_order.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:hive/hive.dart';
@@ -5,7 +7,7 @@ import 'package:hive/hive.dart';
 class CommunityMemberDbAdapterImpl extends CommunityMemberDbAdapter {
   final DBClient dbClient;
   CommunityMemberDbAdapterImpl({required this.dbClient});
-  late Box box;
+  late Box<CommunityMemberHiveEntity> box;
 
   Future<CommunityMemberDbAdapterImpl> init() async {
     Hive.registerAdapter(CommunityMemberHiveEntityAdapter(), override: true);
@@ -14,13 +16,11 @@ class CommunityMemberDbAdapterImpl extends CommunityMemberDbAdapter {
   }
 
   @override
-  CommunityMemberHiveEntity getCommunityMemberEntities(
-      String communityId,
-      List<String> roles,
-      List<String> memberships,
-      AmityMembershipSortOption sortOption) {
-    // TODO: implement getCommunityMemberEntities
-    throw UnimplementedError();
+  List<CommunityMemberHiveEntity> getCommunityMemberEntities(
+      RequestBuilder<GetCommunityMembersRequest> request) {
+        return box.values
+        .where((entity) => entity.isMatchingFilter(request.call()))
+        .toList();
   }
 
   @override
@@ -51,5 +51,12 @@ class CommunityMemberDbAdapterImpl extends CommunityMemberDbAdapter {
   @override
   Stream<CommunityMemberHiveEntity> listenCommnunityMemberEntity(String id) {
     return box.watch(key: id).map((event) => event.value);
+  }
+
+  @override
+  Stream<List<CommunityMemberHiveEntity>> listenCommnunityMemberEntities(RequestBuilder<GetCommunityMembersRequest> request) {
+    return box.watch().map((event) => box.values
+        .where((member) => member.isMatchingFilter(request.call()))
+        .toList());
   }
 }

@@ -6,6 +6,8 @@ export 'global_feed_live_collection.dart';
 export 'live_collection.dart';
 export 'live_collection_without_pagination.dart';
 export 'message_live_collection.dart';
+export 'following_live_collection.dart';
+export 'follower_live_collection.dart';
 export 'page_list_data.dart';
 export 'paging_controller.dart';
 export 'paging_data.dart';

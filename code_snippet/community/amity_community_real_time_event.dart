@@ -10,25 +10,24 @@ class AmityCommunityRealTimeEvent {
   void subscribePostsAndComments(AmityCommunity amityCommunity) async {
     // ex. subscribing community topic
     await amityCommunity
-      .subscription(AmityCommunityEvents.COMMUNITY)
-      .subscribeTopic();
+        .subscription(AmityCommunityEvents.COMMUNITY)
+        .subscribeTopic();
     // ex. subscribing posts topic
     await amityCommunity
-      .subscription(AmityCommunityEvents.POSTS)
-      .subscribeTopic();
+        .subscription(AmityCommunityEvents.POSTS)
+        .subscribeTopic();
     // ex. subscribing comments topic
     await amityCommunity
-      .subscription(AmityCommunityEvents.COMMENTS)
-      .subscribeTopic();
+        .subscription(AmityCommunityEvents.COMMENTS)
+        .subscribeTopic();
     // ex. subscribing posts & comments topic
     await amityCommunity
-      .subscription(AmityCommunityEvents.POSTS_AND_COMMENTS)
-      .subscribeTopic();
+        .subscription(AmityCommunityEvents.POSTS_AND_COMMENTS)
+        .subscribeTopic();
     // ex. subscribing stories & comments topic
     await amityCommunity
-      .subscription(AmityCommunityEvents.STORIES_AND_COMMENTS)
-      .subscribeTopic();
-    
+        .subscription(AmityCommunityEvents.STORIES_AND_COMMENTS)
+        .subscribeTopic();
   }
   /* end_sample_code */
 }
