@@ -151,4 +151,17 @@ class ChannelRepoImpl extends ChannelRepo {
     }
     return channel != null;
   }
+
+  @override
+  Future<List<AmityChannel>> getChannels(List<String> channelIds) async {
+    final data = await channelApiInterface.getChannels(channelIds);
+    final amityChannel = await data.saveToDb<AmityChannel>(commonDbAdapter);
+    return amityChannel;
+  }
+
+  @override
+  Future<String?> getMessagePreviewId(String channelId) async {
+    final messgePreview = await commonDbAdapter.messagePreviewDbAdapter.getMessagePreviewByChannelId(channelId);
+    return messgePreview?.messagePreviewId;
+  }
 }

@@ -2,8 +2,11 @@ import 'dart:io' if (dart.library.html) 'dart:html';
 import 'dart:math';
 
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/enum/events/message_preview_event.dart';
+import 'package:amity_sdk/src/core/session/event_bus/message_preview_event_bus.dart';
 import 'package:amity_sdk/src/core/utils/amity_nonce.dart';
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/response/core_response/sub_channel_response.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/repo/paging_id_repo.dart';
 import 'package:amity_sdk/src/domain/usecase/channel/channel_update_last_activity_usecase.dart';
@@ -86,6 +89,7 @@ class MessageRepoImpl extends MessageRepo {
       final data = await messageApiInterface.createMessage(request);
       final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
       await ChannelUpdateLastActivityUsecase(channelRepo: channelRepo).process(request.subchannelId);
+      _publishMessagePreviewEvent(data, MessagePreviewEventName.messageCreated);
       return (amitMessages as List).first;
     } catch (error) {
       entity.syncState = AmityMessageSyncState.FAILED.value;
@@ -95,11 +99,27 @@ class MessageRepoImpl extends MessageRepo {
     }
   }
 
+  void _publishMessagePreviewEvent(CreateMessageResponse data, MessagePreviewEventName eventName) {
+    for (var message in data.messages) {
+      final subChannel = data.subChannels.cast<SubChannelResponse?>().firstWhere((subChannel) => subChannel?.subChannelId == message.subChannelId, orElse: () => null);
+      if (subChannel != null) {
+        if (eventName == MessagePreviewEventName.messageCreated) {
+          MessagePreviewEventBus().publish(MessagePreviewEvent.messageCreated(message, subChannel));
+        } else if (eventName == MessagePreviewEventName.messageUpdated) {
+          MessagePreviewEventBus().publish(MessagePreviewEvent.messageUpdated(message, subChannel));
+        } else if (eventName == MessagePreviewEventName.messageDeleted) {
+          MessagePreviewEventBus().publish(MessagePreviewEvent.messageDeleted(message, subChannel));
+        }
+      }
+    }
+  }
+
   @override
   Future<AmityMessage> updateMessage(CreateMessageRequest request) async {
     try {
       final data = await messageApiInterface.updateMessage(request);
       final amitMessages = await data.saveToDb<AmityMessage>(dbAdapterRepo);
+      _publishMessagePreviewEvent(data, MessagePreviewEventName.messageUpdated);
       return (amitMessages as List).first;
     } catch (error) {
 
@@ -198,9 +218,10 @@ class MessageRepoImpl extends MessageRepo {
       final messageId = entity.messageId;
       if (entity.syncState == AmityMessageSyncState.SYNCED.value && messageId != null) {
         try { 
-          await messageApiInterface.deleteMessage(messageId!);
+          final data = await messageApiInterface.deleteMessage(messageId!);
           entity.isDeleted = true;
           entity.save();
+          _publishMessagePreviewEvent(data, MessagePreviewEventName.messageDeleted);
         } catch (error) {
           return Future.error(error);
         }

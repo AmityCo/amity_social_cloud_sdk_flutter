@@ -1,4 +1,7 @@
+import 'package:amity_sdk/src/data/converter/message_preview/message_preview_response_converter.dart';
+import 'package:amity_sdk/src/data/converter/message_preview/message_preview_response_extension_converter.dart';
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/response/core_response/subchannel_info_response.dart';
 import 'package:collection/collection.dart';
 
 /// [CreateChannelResponseExtension]
@@ -35,9 +38,14 @@ extension CreateChannelResponseExtension on CreateChannelResponse {
 
     //Save the Channel User Hive
     for (var e in channelUserHiveEntities) {
-      final UserHiveEntity? user = userHiveEntities.firstWhereOrNull((element) => element.userId == e.userId);
+      final UserHiveEntity? user = userHiveEntities
+          .firstWhereOrNull((element) => element.userId == e.userId);
       await dbRepo.channelUserDbAdapter.saveEntity(e, user);
     }
+
+    final messagePreviewEntities = MessagePreviewResponseConverter().mapSubChannelInfoToMessagePreview(
+        messagePreviews, subChannelInfo);
+    await dbRepo.messagePreviewDbAdapter.saveMessagePreviews(messagePreviewEntities);
 
     //Save the Channel Hive
     for (var e in channelHiveEntities) {

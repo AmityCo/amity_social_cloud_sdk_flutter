@@ -167,7 +167,7 @@ class MessageAudioData extends AmityMessageData {
   /// init [MessageFileData]
   MessageAudioData({
     required String messageId,
-    required String fileId,
+    String? fileId,
   }) : super(messageId: messageId, fileId: fileId);
 
   @override

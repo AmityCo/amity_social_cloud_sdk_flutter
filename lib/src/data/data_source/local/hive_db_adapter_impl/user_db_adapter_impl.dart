@@ -20,13 +20,18 @@ class UserDbAdapterImpl extends UserDbAdapter {
   }
 
   @override
+  UserHiveEntity? getUserEntityIfPresent(String userId) {
+    return box.get(userId);
+  }
+
+  @override
   Future saveUserEntity(UserHiveEntity entity) async {
     await box.put(entity.userId, entity);
   }
 
   @override
   Future saveUserEntities(List<UserHiveEntity> entities) async {
-    final users = { for (var e in entities) e.userId : e };
+    final users = {for (var e in entities) e.userId: e};
     await box.putAll(users);
   }
 
@@ -43,18 +48,14 @@ class UserDbAdapterImpl extends UserDbAdapter {
   @override
   Stream<List<UserHiveEntity>> listenUserEntities(
       RequestBuilder<UsersRequest> request) {
-    return box.watch()
-      .map((event) => 
-        box.values
-          .where((user) => user != null)
-          .toList()
-      )
-      .distinct((a, b) => ListEquality().equals(a, b));
-    }
+    return box
+        .watch()
+        .map((event) => box.values.where((user) => user != null).toList())
+        .distinct((a, b) => ListEquality().equals(a, b));
+  }
 
   @override
-  List<UserHiveEntity> getUserEntities(
-      RequestBuilder<UsersRequest> request) {
+  List<UserHiveEntity> getUserEntities(RequestBuilder<UsersRequest> request) {
     return box.values.toList();
   }
 }

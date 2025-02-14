@@ -3,6 +3,9 @@ import 'dart:io' as io;
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/engine/analytics_engine.dart';
+import 'package:amity_sdk/src/core/engine/message_preview_engine.dart';
+import 'package:amity_sdk/src/core/engine/object_resolver_engine.dart';
+import 'package:amity_sdk/src/core/session/component/user_settings.dart';
 import 'package:amity_sdk/src/core/session/event_bus/app_event_bus.dart';
 import 'package:amity_sdk/src/core/session/event_bus/session_life_cycle_event_bus.dart';
 import 'package:amity_sdk/src/core/session/event_bus/session_state_event_bus.dart';
@@ -27,6 +30,9 @@ class CoreClient {
   static TokenRenewalSessionComponent? _tokenRenewalSessionComponent = null;
   static TokenWatcherSessionComponent? _tokenWatcherSessionComponent = null;
   static AnalyticsEngine? analyticsEngine = null;
+  static ObjectResolverEngine? _objectResolverEngine = null;
+  static UserSettingSessionComponent? _userSettingSessionComponent;
+  static MessagePreviewEngine? _messagePreviewEngine;
   static int millisTimeDiff = 0;
 
   ///Do the intial set
@@ -119,6 +125,26 @@ class CoreClient {
       sessionLifeCycleEventBus: _sessionLifeCycleEventBus!,
       sessionStateEventBus: _sessionStateEventBus,
     );
+    _userSettingSessionComponent = UserSettingSessionComponent(
+      sessionLifeCycleEventBus: _sessionLifeCycleEventBus!,
+      sessionStateEventBus: _sessionStateEventBus,
+    );
+    _objectResolverEngine = ObjectResolverEngine(
+      sessionLifeCycleEventBus: _sessionLifeCycleEventBus!,
+      sessionStateEventBus: _sessionStateEventBus,
+    );
+    _messagePreviewEngine = MessagePreviewEngine(
+      sessionLifeCycleEventBus: _sessionLifeCycleEventBus!,
+      sessionStateEventBus: _sessionStateEventBus,
+    );
+  }
+
+  static void resolve(String id, ResolveRefType referenceType) {
+    _objectResolverEngine?.resolve(id, referenceType);
+  }
+
+  static void resolveAll(List<String> ids, ResolveRefType referenceType) {
+    _objectResolverEngine?.resolveAll(ids, referenceType);
   }
 
   /// Login with userId, this will create user session
@@ -247,7 +273,7 @@ class CoreClient {
   static bool isLegacyLogin() {
     return _tokenRenewalSessionComponent?.isLegacyLogin() ?? true;
   }
-  
+
   static DateTime getServerTime() {
     return DateTime.now().add(Duration(milliseconds: millisTimeDiff));
   }

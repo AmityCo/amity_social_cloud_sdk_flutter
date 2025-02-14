@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:amity_sdk/src/data/response/core_response/message_preview_response.dart';
+import 'package:amity_sdk/src/data/response/core_response/subchannel_info_response.dart';
 import 'package:amity_sdk/src/data/response/response.dart';
 
 CreateChannelResponse amityChannelResponseFromJson(String str) =>
@@ -21,6 +23,8 @@ class CreateChannelResponse {
     required this.users,
     required this.files,
     required this.paging,
+    required this.messagePreviews,
+    required this.subChannelInfo,
   });
 
   /// Channels
@@ -38,6 +42,10 @@ class CreateChannelResponse {
   /// Paging
   final PagingResponse? paging;
 
+  final List<MessagePreviewResponse> messagePreviews;
+
+  final List<SubChannelInfoResponse> subChannelInfo;
+
   /// Get [CreateChannelResponse] from Map
   factory CreateChannelResponse.fromJson(Map<String, dynamic> json) =>
       CreateChannelResponse(
@@ -52,6 +60,10 @@ class CreateChannelResponse {
         paging: json["paging"] == null
             ? null
             : PagingResponse.fromJson(json['paging']),
+        messagePreviews: List<MessagePreviewResponse>.from(
+            json["messagePreviews"].map((x) => MessagePreviewResponse.fromJson(x))),
+        subChannelInfo: List<SubChannelInfoResponse>.from(
+            json["messageFeedsInfo"].map((x) => SubChannelInfoResponse.fromJson(x))),
       );
 
   /// Convert [CreateChannelResponse] to Map
@@ -61,5 +73,7 @@ class CreateChannelResponse {
         "users": List<dynamic>.from(users.map((x) => x.toJson())),
         "files": List<dynamic>.from(files.map((x) => x.toJson())),
         "paging": paging,
+        "messagePreviews": List<dynamic>.from(messagePreviews.map((x) => x.toJson())),
+        "messageFeedsInfo": List<dynamic>.from(subChannelInfo.map((x) => x.toJson())),
       };
 }

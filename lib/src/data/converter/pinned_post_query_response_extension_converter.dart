@@ -102,14 +102,14 @@ extension PinnedPostQueryResponseExtension on PinnedPostQueryResponse {
       await dbRepo.postDbAdapter.savePostEntity(e);
     }
 
-    //Save Post Entity
-    for (var e in postHiveEntities) {
-      await dbRepo.postDbAdapter.savePostEntity(e);
+    //Save Poll Entity
+    for (var e in pollHiveEntities) {
+      await dbRepo.pollDbAdapter.savePollEntity(e);
     }
 
     //Save Post Entity
-    for (var e in pollHiveEntities) {
-      await dbRepo.pollDbAdapter.savePollEntity(e);
+    for (var e in postHiveEntities) {
+      await dbRepo.postDbAdapter.savePostEntity(e);
     }
 
     //Save Pin Entity

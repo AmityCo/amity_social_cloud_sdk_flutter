@@ -7,9 +7,8 @@ import 'package:amity_sdk/src/public/query_builder/community/community_live_obje
 
 /// Community Repository for all community related operation
 class AmityCommunityRepository {
-
   CommunityGetLiveObject live = CommunityGetLiveObject();
-  
+
   /* begin_public_function 
   id: community.create
   api_style: async
@@ -48,7 +47,6 @@ class AmityCommunityRepository {
   }
   /* end_public_function */
 
-
   /* begin_public_function 
   id: community.category.get
   */
@@ -62,7 +60,8 @@ class AmityCommunityRepository {
   id: community.get
   */
   /// Get Community with Community Id
-  @Deprecated("Use AmitySocialClient.newCommunityRepository().live.getCommunity(communityId) instead")
+  @Deprecated(
+      "Use AmitySocialCgitlient.newCommunityRepository().live.getCommunity(communityId) instead")
   Future<AmityCommunity> getCommunity(String communityId) {
     return serviceLocator<CommunityGetUseCase>().get(communityId);
   }
@@ -109,7 +108,8 @@ class AmityCommunityRepository {
   id: community.query.recommended_communities
   */
   /// Get the Recommended Community for the network
-  Future<List<AmityCommunity>> getRecommendedCommunities({String? token, int? limit}) {
+  Future<List<AmityCommunity>> getRecommendedCommunities(
+      {String? token, int? limit}) {
     final optionsRequest = OptionsRequest(limit: 5);
     return serviceLocator<CommunityGetRecommendedUseCase>().get(optionsRequest);
   }
@@ -127,14 +127,18 @@ class AmityCommunityRepository {
 
   /// Get User Roles for the Community
   Future<List<String>?> _getUserRoles(String communityId, String userId) async {
-    AmityCommunityMember? amityCommunityMember = await serviceLocator<CommunityMemberGetOptionalUsecase>().get(
-        CommunityMemberPermissionCheckRequest(
-            communityId: communityId, userId: userId, permission: AmityPermission.BAN_USER));
+    AmityCommunityMember? amityCommunityMember =
+        await serviceLocator<CommunityMemberGetOptionalUsecase>().get(
+            CommunityMemberPermissionCheckRequest(
+                communityId: communityId,
+                userId: userId,
+                permission: AmityPermission.BAN_USER));
     return Future.value(amityCommunityMember?.roles);
   }
 
   /// Deprecated menthod to get current user roles for community
-  @Deprecated("Use AmitySocialClient.newCommunityRepository().getCurrentUserRoles(communityId) instead")
+  @Deprecated(
+      "Use AmitySocialClient.newCommunityRepository().getCurrentUserRoles(communityId) instead")
   Future<List<String>?> getCurentUserRoles(String communityId) async {
     return _getUserRoles(communityId, AmityCoreClient.getUserId());
   }

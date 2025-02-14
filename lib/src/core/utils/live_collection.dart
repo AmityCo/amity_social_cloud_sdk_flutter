@@ -23,9 +23,12 @@ abstract class LiveCollection<Model> {
 
   final defaultPageSize = 20;
 
+  StreamSubscription? _reactorSubscription;
+
   @protected
   /// get the next page request
-  Future<PageListData<List<Model>, String>> getNextPageRequestInternal(String? token);
+  Future<PageListData<List<Model>, String>> getNextPageRequestInternal(
+      String? token);
 
   @protected
   /// get the next page request
@@ -54,12 +57,12 @@ abstract class LiveCollection<Model> {
 
   LiveCollection() {
     _loadingStateStream.add(true);
-    _startInteractor();
+    _startReactor();
   }
 
   /// Load next page for live collection
   Future loadNext() async {
-    if(!_isFirstPage && !hasNextPage()) {
+    if (!_isFirstPage && !hasNextPage()) {
       return;
     }
 
@@ -73,6 +76,7 @@ abstract class LiveCollection<Model> {
           isFetching = false;
           _loadingStateStream.addData(false);
           _isFirstPage = false;
+          _startReactor();
         }).onError((error, stackTrace) {
           isFetching = false;
           _loadingStateStream.addData(false);
@@ -111,6 +115,7 @@ abstract class LiveCollection<Model> {
     isFetching = false;
     _isFirstPage = true;
     _loadingStateStream.addData(false);
+    _stopReactor();
     return true;
   }
 
@@ -124,11 +129,18 @@ abstract class LiveCollection<Model> {
     return StreamController();
   }
 
-  void _startInteractor() {
-    interactorStream = observeNewItem();
-    interactorStream?.stream.listen((pagingId) async {
-      await serviceLocator<PagingIdInsertUsecase>().process(pagingId);
-    });
+  void _startReactor() {
+    if (_reactorSubscription == null) {
+      interactorStream = observeNewItem();
+      _reactorSubscription = interactorStream?.stream.listen((pagingId) async {
+        await serviceLocator<PagingIdInsertUsecase>().process(pagingId);
+      });
+    }
+  }
+
+  void _stopReactor() {
+    _reactorSubscription?.cancel();
+    _reactorSubscription = null;
   }
 
   AmityNonce getNonce() {

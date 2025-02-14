@@ -7,8 +7,17 @@ extension FollowHiveEntityExtension on FollowHiveEntity {
     return AmityFollowRelationship()
       ..sourceUserId = sourceUserId
       ..targetUserId = targetUserId
+      ..createdAt = createdAt
       ..status = AmityFollowStatus.values.firstWhere(
           (element) => element.value == status,
           orElse: (() => AmityFollowStatus.NONE));
+  }
+
+  bool isMatchingFilter(FollowRequest request) {
+    return _statusCondition(request);
+  }
+
+  bool _statusCondition(FollowRequest request) {
+    return request.status == null || request.status == status;
   }
 }

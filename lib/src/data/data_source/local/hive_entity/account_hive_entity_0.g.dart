@@ -35,13 +35,16 @@ class AccountHiveEntityAdapter extends TypeAdapter<AccountHiveEntity> {
       refreshToken: fields[15] as String?,
       accessToken: fields[16] as String?,
       lastInactiveChannelIdsQuery: fields[17] as String?,
+      issuedAt: fields[18] as DateTime?,
+      expiresAt: fields[19] as DateTime?,
+      aboutToExpireAt: fields[20] as DateTime?,
     );
   }
 
   @override
   void write(BinaryWriter writer, AccountHiveEntity obj) {
     writer
-      ..writeByte(18)
+      ..writeByte(21)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -77,7 +80,13 @@ class AccountHiveEntityAdapter extends TypeAdapter<AccountHiveEntity> {
       ..writeByte(16)
       ..write(obj.accessToken)
       ..writeByte(17)
-      ..write(obj.lastInactiveChannelIdsQuery);
+      ..write(obj.lastInactiveChannelIdsQuery)
+      ..writeByte(18)
+      ..write(obj.issuedAt)
+      ..writeByte(19)
+      ..write(obj.expiresAt)
+      ..writeByte(20)
+      ..write(obj.aboutToExpireAt);
   }
 
   @override

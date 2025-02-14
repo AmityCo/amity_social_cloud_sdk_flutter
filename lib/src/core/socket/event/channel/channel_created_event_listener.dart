@@ -7,27 +7,27 @@ class ChannelCreatedEventListener extends ChannelEventListener {
   void processEvent(Map<String, dynamic> json) {
     final data = CreateChannelResponse.fromJson(json);
     final myUserId = CoreClient.getUserId();
-    var hasMyMembership = data.channelUsers.where((element) => element.userId == myUserId).isNotEmpty;
+    var hasMyMembership = data.channelUsers
+        .where((element) => element.userId == myUserId)
+        .isNotEmpty;
     if (!hasMyMembership) {
       // Assume being member on channel created event
-      data.channelUsers.add(
-        ChannelUserResponse(
-            id: '',
-            channelId: data.channels.firstOrNull?.channelId ?? "",
-            membership: "member",
-            isBanned: false,
-            lastActivity: DateTime.now(),
-            roles: [],
-            permissions: [],
-            readToSegment: 0,
-            lastMentionedSegment: 0,
-            isMuted: false,
-            muteTimeout: null,
-            createdAt: DateTime.now(),
-            updatedAt: DateTime.now(),
-            userId: myUserId,
-        )
-      );
+      data.channelUsers.add(ChannelUserResponse(
+        id: '',
+        channelId: data.channels.firstOrNull?.channelId ?? "",
+        membership: "member",
+        isBanned: false,
+        lastActivity: DateTime.now(),
+        roles: [],
+        permissions: [],
+        readToSegment: 0,
+        lastMentionedSegment: 0,
+        isMuted: false,
+        muteTimeout: null,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        userId: myUserId,
+      ));
     }
     super.processEvent(data.toJson());
   }

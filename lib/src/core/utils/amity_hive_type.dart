@@ -36,4 +36,6 @@ class AmityHiveType {
   static const int adSettings = 34;
   static const int subChannel = 35;
   static const int pin = 36;
+  static const int messagePreview = 37;
+  static const int chatSettings = 38;
 }

@@ -1,7 +1,9 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/utils/amity_nonce.dart';
+import 'package:amity_sdk/src/core/utils/model_mapper.dart';
 import 'package:amity_sdk/src/data/converter/user/users_response_extension.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
@@ -238,5 +240,52 @@ class UserRepoImpl extends UserRepo {
   List<AmityUser> getUsersFromDB() {
     final userHiveEntities = userDbAdapter.getUsers();
     return userHiveEntities.map((e) => e.convertToAmityUser()).toList();
+  }
+
+  @override
+  bool hasLocalUser(String userId) {
+    final userHiveEntity = userDbAdapter.getUserEntityIfPresent(userId);
+    return userHiveEntity != null;
+  }
+
+  @override
+  Future<AmityUser?> fetchAndSave(String objectId) async {
+    var user = await getUserById(objectId);
+    if (user != null) {
+      return user;
+    } else {
+      return Future.value(null);
+    }
+  }
+
+  @override
+  ModelMapper<UserHiveEntity, AmityUser> mapper() {
+    return UserModelMapper();
+  }
+
+  @override
+  StreamController<UserHiveEntity> observeFromCache(String objectId) {
+    final streamController = StreamController<UserHiveEntity>();
+    userDbAdapter.listenEntity(objectId).listen((event) {
+      streamController.add(event);
+    });
+    return streamController;
+  }
+
+  @override
+  Future<UserHiveEntity?> queryFromCache(String objectId) async {
+    return userDbAdapter.getUserEntity(objectId);
+  }
+
+  @override
+  Stream<List<UserHiveEntity>> listenUserEntities() {
+    return userDbAdapter.listenUserEntities(() => UsersRequest());
+  }
+}
+
+class UserModelMapper extends ModelMapper<UserHiveEntity, AmityUser> {
+  @override
+  AmityUser map(UserHiveEntity entity) {
+    return entity.convertToAmityUser();
   }
 }

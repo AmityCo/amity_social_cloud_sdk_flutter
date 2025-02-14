@@ -10,15 +10,15 @@ extension PollHiveEntityExtension on PollHiveEntity {
       ..pollId = pollId
       ..userId = userId
       ..question = question
-      ..answers = answers!
-          .map<AmityPollAnswer>((e) => e.convertToAmityPollAnswer())
-          .toList()
-      ..answerType = AmityPollAnswerTypeExtension.enumOf(answerType!)
+      ..answers = answers
+          ?.map<AmityPollAnswer>((e) => e.convertToAmityPollAnswer())
+          ?.toList()
+      ..answerType = answerType != null ? AmityPollAnswerTypeExtension.enumOf(answerType!) : null
       ..closedAt = closedAt
       ..createdAt = createdAt
       ..updatedAt = updatedAt
       ..isVoted = isVoted
-      ..status = AmityPollStatusExtension.enumOf(status!)
+      ..status = status != null ? AmityPollStatusExtension.enumOf(status!) : null
       ..closedIn = closeIn
       ..isDeleted = isDeleted;
   }

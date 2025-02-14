@@ -1,3 +1,4 @@
+import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
@@ -53,5 +54,23 @@ class AmityCommunityMemberSearch {
     final data = await usecase.get(_request);
 
     return data;
+  }
+
+  GetCommunityMembersRequest build({int? pageSize = 20}) {
+    GetCommunityMembersRequest request =
+        GetCommunityMembersRequest(communityId: _request.communityId,
+        keyword: _request.keyword,
+        memberships: _request.memberships,
+        roles: _request.roles,
+        sortBy: _request.sortBy,
+        isDeleted: _request.isDeleted,
+        options: OptionsRequest(limit: pageSize)
+        );
+
+    return request;
+  }
+
+  CommunityMemberLiveCollection getLiveCollection({int? pageSize = 20}) {
+    return CommunityMemberLiveCollection(request: () => build(pageSize: pageSize));
   }
 }

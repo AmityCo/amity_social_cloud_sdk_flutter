@@ -15,6 +15,7 @@ class PollDbAdapterImpl extends PollDbAdapter {
   /// Async Init Db Adapter
   Future<PollDbAdapter> init() async {
     Hive.registerAdapter(PollHiveEntityAdapter(), override: true);
+    Hive.registerAdapter(PollAnswerHiveEntityAdapter(), override: true);
     box = await Hive.openBox<PollHiveEntity>('poll_db');
     return this;
   }

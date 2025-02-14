@@ -1,3 +1,9 @@
+## 0.57.0
+* Feat: Update Community membership Live Collection to support RTE
+* Feat: Introduce Following / Follower Live Collection
+* Feat: Introduce User RTE
+* Feat: Introduce Message Preview on channel object
+
 ## 0.56.0
 * Feat: Introduce poll object as Linked object in post object
 

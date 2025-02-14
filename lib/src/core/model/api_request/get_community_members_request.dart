@@ -1,4 +1,5 @@
 import 'package:amity_sdk/src/core/model/api_request/core/option_request.dart';
+import 'package:amity_sdk/src/core/utils/amity_nonce.dart';
 
 class GetCommunityMembersRequest {
   GetCommunityMembersRequest(
@@ -30,4 +31,14 @@ class GetCommunityMembersRequest {
             roles == null ? null : List<dynamic>.from(roles!.map((x) => x)),
         "options": options?.toJson(),
       }..removeWhere((key, value) => value == null);
+
+
+  int getHashCode() {
+    final jsonString = (toJson()..remove('options')).toString();
+    return jsonString.hashCode;
+  }
+
+  AmityNonce getNonce() {
+    return AmityNonce.COMMUNITY_MEMBER_LIST;
+  }
 }

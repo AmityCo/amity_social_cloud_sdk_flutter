@@ -4,6 +4,7 @@ import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/model/message/amity_message_preview.dart';
 
 /// Amity Channel
 class AmityChannel {
@@ -60,6 +61,8 @@ class AmityChannel {
 
   /// Updated At
   DateTime? updatedAt;
+
+  AmityMessagePreview? messagePreview;
 
   StreamController<AmityChannel> get listen {
     StreamController<AmityChannel> controller =

@@ -1,5 +1,6 @@
 import 'package:amity_sdk/src/data/converter/message/message_data_response_extension_converter.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/message_hive_entity_18.dart';
+import 'package:amity_sdk/src/data/response/core_response/message_preview_response.dart';
 import 'package:amity_sdk/src/data/response/response.dart';
 
 /// [MessageResponseExtensionConverter]
@@ -31,5 +32,21 @@ extension MessageResponseExtensionConverter on MessageResponse {
       ..updatedAt = updatedAt
       ..editedAt = editedAt
       ..mentionees = mentionees;
+  }
+
+  MessagePreviewResponse toMessagePreview() {
+    final message = this;
+    return MessagePreviewResponse(
+      messagePreviewId: message.messageId,
+      dataType: message.type,
+      data: message.data,
+      channelId: message.channelId,
+      subChannelId: message.subChannelId!,
+      creatorId: message.userId,
+      isDeleted: message.isDeleted,
+      segment: message.segment,
+      createdAt: message.createdAt,
+      updatedAt: message.updatedAt,
+    );
   }
 }

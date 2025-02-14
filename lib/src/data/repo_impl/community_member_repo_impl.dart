@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:math';
 
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/core/utils/amity_nonce.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/repo/paging_id_repo.dart';
 import 'package:collection/collection.dart';
 
 class CommunityMemberRepoImpl extends CommunityMemberRepo {
@@ -12,6 +15,7 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
   final CommunityDbAdapter communityDbAdapter;
   final UserDbAdapter userDbAdapter;
   final FileDbAdapter fileDbAdapter;
+  final PagingIdRepo pagingIdRepo;
 
   CommunityMemberRepoImpl(
       {required this.communityMemmberApiInterface,
@@ -19,7 +23,8 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
       required this.communityMemberDbAdapter,
       required this.communityDbAdapter,
       required this.userDbAdapter,
-      required this.fileDbAdapter});
+      required this.fileDbAdapter,
+      required this.pagingIdRepo});
 
   @override
   Future<PageListData<List<AmityCommunityMember>, String>> queryMembers(GetCommunityMembersRequest request) async {
@@ -57,8 +62,17 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
 
   @override
   Future removeMember(UpdateCommunityMembersRequest request) async {
-    final data = await communityMemmberApiInterface.removeMember(request);
-    await _saveDataToDb(data);
+    await communityMemmberApiInterface.removeMember(request);
+
+    for (var userId in request.userIds) {
+      final entity = communityMemberDbAdapter.getCommunityMemberEntity(request.communityId + userId);
+      if (entity != null) {
+        entity
+          ..isDeleted = true
+          ..save();
+      }
+    }
+
     return true;
   }
 
@@ -155,5 +169,50 @@ class CommunityMemberRepoImpl extends CommunityMemberRepo {
   @override
   bool hasLocalCommunity(String communityId, String userId) {
     return communityMemberDbAdapter.getCommunityMemberEntity(communityId + userId) != null;
+  }
+
+  /// LiveCollection related functions
+  
+  @override
+  Stream<List<AmityCommunityMember>> listenCommunityMembers(RequestBuilder<GetCommunityMembersRequest> request) {
+    return communityMemberDbAdapter.listenCommnunityMemberEntities(request).map((event) {
+      return event.map((e) => e.convertToAmityCommunityMember()).toList();
+    });
+  }
+
+  @override
+  List<CommunityMemberHiveEntity> getComunityMemberEntities(RequestBuilder<GetCommunityMembersRequest> request) {
+    return communityMemberDbAdapter.getCommunityMemberEntities(request);
+  }
+
+  @override
+  Future<PageListData<List<AmityCommunityMember>, String>> queryCommunityMembers(GetCommunityMembersRequest request) async {
+    final hash = request.getHashCode();
+    final nonce = request.getNonce();
+    int nextIndex = 0;
+    final data = await communityMemmberApiInterface.getCommunityMembers(request);
+  
+    await _saveDataToDb(data);
+
+    if (request.options?.token == null) {
+      await pagingIdRepo.deletePagingIdByHash(nonce.value, hash);
+    } else {
+      nextIndex = (pagingIdRepo
+              .getPagingIdEntities(nonce.value, hash)
+              .map((e) => (e.position ?? 0))
+              .toList()
+              .reduce(max)) +
+          1;
+    }
+    data.communityUsers.forEachIndexed((index, element) async {
+      final pagingId = PagingIdHiveEntity(
+        id: element.communityId + element.userId,
+        hash: hash,
+        nonce: nonce.value,
+        position: nextIndex + index,
+      );
+      await pagingIdRepo.savePagingId(pagingId);
+    });
+    return PageListData([], data.paging?.next ?? '');
   }
 }

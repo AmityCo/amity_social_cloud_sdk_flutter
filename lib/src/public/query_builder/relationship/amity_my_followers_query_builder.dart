@@ -32,4 +32,24 @@ class AmityMyFollowersQueryBuilder {
 
     return data;
   }
+
+  FollowerLiveCollection getLiveCollection() {
+    final request = FollowRequest();
+    request.status = _status.value;
+
+    // request.stackFromEnd = stackFromEnd;
+
+    request.options = OptionsRequest();
+
+    // request.options!.type = 'scrollable';
+    // if (!_stackFromEnd) {
+    //   request.options!.first = pageSize;
+    // } else {
+    //   request.options!.last = pageSize;
+    // }
+
+    return FollowerLiveCollection(
+      request: () => request,
+    );
+  }
 }

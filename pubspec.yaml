@@ -1,7 +1,7 @@
 name: amity_sdk
 description: The SDK that enables social features such as Feeds, Groups,
   Profiles, Content Posts, and Social Media Type Interactions
-version: 0.56.0
+version: 0.57.0
 
 homepage: https://amity.co
 documentation: https://docs.amity.co/social/flutter-beta
@@ -30,6 +30,7 @@ dependencies:
   build_runner: ^2.4.8
   frontend_server_client: ^4.0.0
   win32: ^5.5.4
+  connectivity_plus: ^6.1.1
 # Add the lib from the pub dev before deploying
   # amity_api:
   #   path: ../amity_api

@@ -11,11 +11,18 @@ abstract class AmityTopic {
 
   String getKey() => nonce + id + events;
 
-  factory AmityTopic.POST(AmityPost amityPost, AmityPostEvents events) = AmityTopicPost;
+  factory AmityTopic.USER(AmityUser amityUser, AmityUserEvents events) =
+      AmityTopicUser;
 
-  factory AmityTopic.COMMENT(AmityComment amityComment, AmityCommentEvents events) = AmityTopicComment;
+  factory AmityTopic.POST(AmityPost amityPost, AmityPostEvents events) =
+      AmityTopicPost;
 
-  factory AmityTopic.COMMUNITY(AmityCommunity amityCommunity, AmityCommunityEvents events) = AmityTopicCommunity;
+  factory AmityTopic.COMMENT(
+      AmityComment amityComment, AmityCommentEvents events) = AmityTopicComment;
+
+  factory AmityTopic.COMMUNITY(
+          AmityCommunity amityCommunity, AmityCommunityEvents events) =
+      AmityTopicCommunity;
 
   factory AmityTopic.NETWORK(String networkId) = AmityTopicNetwork;
 
@@ -23,11 +30,14 @@ abstract class AmityTopic {
 
   factory AmityTopic.SUB_CHANNEL(AmitySubChannel story) = AmityTopicSubChannel;
 
-  factory AmityTopic.SMART_CHANNEL(String networkId, String userId) = AmityTopicSmartChannel;
+  factory AmityTopic.SMART_CHANNEL(String networkId, String userId) =
+      AmityTopicSmartChannel;
 
-  factory AmityTopic.SMART_SUBCHANNEL(String networkId, String userId) = AmityTopicSmartSubchannel;
+  factory AmityTopic.SMART_SUBCHANNEL(String networkId, String userId) =
+      AmityTopicSmartSubchannel;
 
-  factory AmityTopic.SMART_MESSAGE(String networkId, String userId) = AmityTopicSmartMessage;
+  factory AmityTopic.SMART_MESSAGE(String networkId, String userId) =
+      AmityTopicSmartMessage;
 
   /// Generate topic
   String generateTopic();
@@ -50,7 +60,8 @@ abstract class AmityTopic {
 class AmityTopicPost extends AmityTopic {
   final AmityPost amityPost;
   final AmityPostEvents event;
-  AmityTopicPost(this.amityPost, this.event) : super._('post', amityPost.postId!, event.name);
+  AmityTopicPost(this.amityPost, this.event)
+      : super._('post', amityPost.postId!, event.name);
 
   @override
   String generateTopic() {
@@ -76,7 +87,7 @@ class AmityTopicNetwork extends AmityTopic {
 ///  Amity Topic for Story
 class AmityTopicStory extends AmityTopic {
   AmityStory story;
-  AmityTopicStory( this.story) : super._('story', story.storyId??"", "");
+  AmityTopicStory(this.story) : super._('story', story.storyId ?? "", "");
 
   @override
   String generateTopic() {
@@ -88,7 +99,8 @@ class AmityTopicStory extends AmityTopic {
 class AmityTopicComment extends AmityTopic {
   final AmityComment amityComment;
   final AmityCommentEvents event;
-  AmityTopicComment(this.amityComment, this.event) : super._('comment', amityComment.commentId!, event.name);
+  AmityTopicComment(this.amityComment, this.event)
+      : super._('comment', amityComment.commentId!, event.name);
 
   @override
   String generateTopic() {
@@ -99,11 +111,10 @@ class AmityTopicComment extends AmityTopic {
   }
 }
 
-
-
 class AmityTopicSubChannel extends AmityTopic {
   final AmitySubChannel amitySubChannel;
-  AmityTopicSubChannel(this.amitySubChannel) : super._('sub_channel', amitySubChannel.channelId!, "");
+  AmityTopicSubChannel(this.amitySubChannel)
+      : super._('sub_channel', amitySubChannel.channelId!, "");
 
   @override
   String generateTopic() {
@@ -115,7 +126,8 @@ class AmityTopicSubChannel extends AmityTopic {
 class AmityTopicCommunity extends AmityTopic {
   final AmityCommunity amityCommunity;
   final AmityCommunityEvents event;
-  AmityTopicCommunity(this.amityCommunity, this.event) : super._('community', amityCommunity.communityId!, event.name);
+  AmityTopicCommunity(this.amityCommunity, this.event)
+      : super._('community', amityCommunity.communityId!, event.name);
 
   @override
   String generateTopic() {
@@ -139,7 +151,8 @@ class AmityTopicSmartChannel extends AmityTopic {
   String networkId;
   String userId;
 
-  AmityTopicSmartChannel(this.networkId, this.userId) : super._('smart_channel', networkId, "");
+  AmityTopicSmartChannel(this.networkId, this.userId)
+      : super._('smart_channel', networkId, "");
 
   @override
   String generateTopic() {
@@ -152,7 +165,8 @@ class AmityTopicSmartSubchannel extends AmityTopic {
   String networkId;
   String userId;
 
-  AmityTopicSmartSubchannel(this.networkId, this.userId) : super._('smart_subchannel', networkId, "");
+  AmityTopicSmartSubchannel(this.networkId, this.userId)
+      : super._('smart_subchannel', networkId, "");
 
   @override
   String generateTopic() {
@@ -160,16 +174,51 @@ class AmityTopicSmartSubchannel extends AmityTopic {
   }
 }
 
-
 ///  Amity Topic for Smart message
 class AmityTopicSmartMessage extends AmityTopic {
   String networkId;
   String userId;
 
-  AmityTopicSmartMessage(this.networkId, this.userId) : super._('smart_message', networkId, "");
+  AmityTopicSmartMessage(this.networkId, this.userId)
+      : super._('smart_message', networkId, "");
 
   @override
   String generateTopic() {
     return "${networkId}/smartfeed/${userId}/messages";
+  }
+}
+
+class AmityTopicUser extends AmityTopic {
+  final AmityUser user;
+  final AmityUserEvents event;
+  AmityTopicUser(this.user, this.event)
+      : super._('user', user.userId!, event.name);
+
+  @override
+  String generateTopic() {
+    // Default topic path is networkId/user/....
+    String defaultTopicPath = user.path ?? "";
+    String socialTopicPath = "";
+
+    // Social topic path should be networkId/social/user.. Backend cannot send this path in User Model.
+    // So we need to construct it here ourselves.
+    List<String> topicBreakdown = defaultTopicPath.split("/");
+    List<String> topicArr = List.from(topicBreakdown);
+
+    topicArr.insert(1, "social");
+    socialTopicPath = topicArr.join("/");
+
+    switch (event) {
+      case AmityUserEvents.USER:
+        return defaultTopicPath;
+      case AmityUserEvents.POSTS:
+        return "${socialTopicPath}/post/+";
+      case AmityUserEvents.COMMENTS:
+        return "${socialTopicPath}/post/+/comment/+";
+      case AmityUserEvents.POSTS_AND_COMMENTS:
+        return "${socialTopicPath}/post/#";
+      default:
+        throw Exception("Unknown event type");
+    }
   }
 }

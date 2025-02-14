@@ -48,7 +48,8 @@ class AmityUserRelationshipsRepository {
 
   /// Get the following user list for the user
   AmityUserFollowingsQueryBuilder getFollowings(String userId) {
-    return AmityUserFollowingsQueryBuilder(useCase: serviceLocator(), userId: userId);
+    return AmityUserFollowingsQueryBuilder(
+        useCase: serviceLocator(), userId: userId);
   }
 
   /// Get the Followers user list for the user
@@ -58,7 +59,8 @@ class AmityUserRelationshipsRepository {
 
   /// Get the Followers user list for the user
   AmityUserFollowersQueryBuilder getFollowers(String userId) {
-    return AmityUserFollowersQueryBuilder(useCase: serviceLocator(), userId: userId);
+    return AmityUserFollowersQueryBuilder(
+        useCase: serviceLocator(), userId: userId);
   }
 
   ///Get Follow info for user Id

@@ -1,4 +1,5 @@
 import 'package:amity_sdk/src/core/core.dart';
+import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 abstract class CommunityMemberRepo {
@@ -14,8 +15,15 @@ abstract class CommunityMemberRepo {
   Future banMember(UpdateCommunityMembersRequest request);
   Future unbanMember(UpdateCommunityMembersRequest request);
   Future<AmityCommunityMember> getMember(String communityId, String userId);
-  Future<AmityCommunityMember?> getMemberOptional(String communityId, String userId);
+  Future<AmityCommunityMember?> getMemberOptional(
+      String communityId, String userId);
 
   /// Has Local Community
   bool hasLocalCommunity(String communityId, String userId);
+  Stream<List<AmityCommunityMember>> listenCommunityMembers(
+      RequestBuilder<GetCommunityMembersRequest> request);
+  List<CommunityMemberHiveEntity> getComunityMemberEntities(
+      RequestBuilder<GetCommunityMembersRequest> request);
+  Future<PageListData<List<AmityCommunityMember>, String>> queryCommunityMembers(
+      GetCommunityMembersRequest request);
 }

@@ -7,6 +7,7 @@ class MessageResponse {
     this.referenceId,
     required this.messageId,
     required this.channelId,
+    required this.segment,
     required this.userId,
     this.type,
     required this.data,
@@ -39,6 +40,9 @@ class MessageResponse {
   final String channelId;
 
   final String? subChannelId;
+
+  /// Segment
+  final int segment;
 
   /// User ID
   final String userId;
@@ -106,6 +110,7 @@ class MessageResponse {
         referenceId: json["referenceId"],
         messageId: json["messageId"],
         channelId: json["channelId"],
+        segment: json["segment"],
         subChannelId: json["messageFeedId"],
         userId: json["creatorPublicId"] ?? json["userId"],
         type: json["dataType"],
@@ -119,9 +124,9 @@ class MessageResponse {
         hashFlag: json["hashFlag"] == null
             ? null
             : HashFlag.fromJson(json["hashFlag"]),
-        childrenNumber: json["childrenNumber"] ?? 0 ,
-        reactionsCount: json["reactionsCount"]??0,
-        reactions: json["reactions"]!=null ? Map.from(json["reactions"]) : null,
+        childrenNumber: json["childrenNumber"] ?? 0,
+        reactionsCount: json["reactionsCount"] ?? 0,
+        reactions: json["reactions"] != null ? Map.from(json["reactions"]) : null,
         myReactions: json["myReactions"] == null
             ? null
             : List<String>.from(json["myReactions"].map((x) => x)),
@@ -129,9 +134,10 @@ class MessageResponse {
         isDeleted: json["isDeleted"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
-        editedAt: json["editedAt"]!=null ?DateTime.parse(json["editedAt"]) : null,
-        mentionees: json["mentionees"]!=null? List<Mentionee>.from(
-            json["mentionees"].map((x) => Mentionee.fromJson(x))): [],
+        editedAt: json["editedAt"] != null ? DateTime.parse(json["editedAt"]) : null,
+        mentionees: json["mentionees"] != null
+            ? List<Mentionee>.from(json["mentionees"].map((x) => Mentionee.fromJson(x)))
+            : [],
       );
 
   /// Convert [MessageResponse] to Map
@@ -139,6 +145,7 @@ class MessageResponse {
         "referenceId": referenceId,
         "messageId": messageId,
         "channelId": channelId,
+        "segment": segment,
         "userId": userId,
         "dataType": type,
         "data": data.toJson(),
@@ -168,6 +175,7 @@ class MessageResponse {
     String? referenceId,
     String? messageId,
     String? channelId,
+    int? segment,
     String? userId,
     String? type,
     MessageDataResponse? data,
@@ -194,6 +202,7 @@ class MessageResponse {
       referenceId: referenceId ?? this.referenceId,
       messageId: messageId ?? this.messageId,
       channelId: channelId ?? this.channelId,
+      segment: segment ?? this.segment,
       userId: userId ?? this.userId,
       type: type ?? this.type,
       data: data ?? this.data,

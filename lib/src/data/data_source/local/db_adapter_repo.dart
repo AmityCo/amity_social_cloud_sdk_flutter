@@ -1,7 +1,8 @@
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/ad_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/analytics_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/chat_settings_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/db_adapter.dart';
-import 'package:amity_sdk/src/data/data_source/local/db_adapter/pin_db_adapter.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/message_preview_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/story_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/story_target_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/stream_db_adapter.dart';
@@ -76,6 +77,10 @@ class DbAdapterRepo {
 
   final SubChannelDbAdapter subChannelDbAdapter;
 
+  final MessagePreviewDbAdapter messagePreviewDbAdapter;
+
+  final ChatSettingsDbAdapter chatSettingsDbAdapter;
+
   /// Init DbAdapter Repo
   DbAdapterRepo({
     required this.postDbAdapter,
@@ -101,5 +106,7 @@ class DbAdapterRepo {
     required this.pagingIdDbAdapter,
     required this.pinDbAdapter,
     required this.subChannelDbAdapter,
+    required this.messagePreviewDbAdapter,
+    required this.chatSettingsDbAdapter,
   });
 }

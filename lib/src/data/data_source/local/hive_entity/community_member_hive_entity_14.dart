@@ -1,4 +1,4 @@
-
+import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/core/utils/amity_hive_type.dart';
 import 'package:hive/hive.dart';
 

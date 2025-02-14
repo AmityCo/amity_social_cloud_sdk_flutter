@@ -32,5 +32,8 @@ extension AmityUserExtenstion on AmityUser {
     return serviceLocator<UserUnblockUsecase>().get(userId!);
   }
 
-  
+  /// Subscribe to user events
+  AmityTopicSubscription subscription(AmityUserEvents events) {
+    return AmityTopicSubscription(AmityTopic.USER(this, events));
+  }
 }

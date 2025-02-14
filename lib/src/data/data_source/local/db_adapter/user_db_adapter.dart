@@ -10,6 +10,7 @@ abstract class UserDbAdapter {
   List<UserHiveEntity> getUsers();
   Stream<List<UserHiveEntity>> listenUserEntities(
       RequestBuilder<UsersRequest> request);
-  List<UserHiveEntity> getUserEntities(
-      RequestBuilder<UsersRequest> request);
+  List<UserHiveEntity> getUserEntities(RequestBuilder<UsersRequest> request);
+
+  UserHiveEntity? getUserEntityIfPresent(String userId);
 }
