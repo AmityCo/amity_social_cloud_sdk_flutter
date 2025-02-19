@@ -18,7 +18,9 @@ class ChatSettingsDbAdapterImpl extends ChatSettingsDbAdapter {
 
   @override
   Future deleteAllSettings() async {
-    return await box.clear();
+    if (box.isOpen) {
+      return await box.clear();
+    }
   }
   
   @override
