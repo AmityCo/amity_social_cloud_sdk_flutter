@@ -1,3 +1,6 @@
+## 0.57.1
+* Fix: Fix random crash when logout
+
 ## 0.57.0
 * Feat: Update Community membership Live Collection to support RTE
 * Feat: Introduce Following / Follower Live Collection
