@@ -2,13 +2,14 @@
 
 import 'package:amity_sdk/src/core/core.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
+import 'package:amity_sdk/src/domain/usecase/relationship/get_my_followers_legacy_usecase.dart';
 
 class AmityMyFollowersQueryBuilder {
-  late GetMyFollowersUsecase _useCase;
+  late GetMyFollowersLegacyUsecase _legacyUseCase;
   AmityFollowStatusFilter _status = AmityFollowStatusFilter.ALL;
 
-  AmityMyFollowersQueryBuilder({required GetMyFollowersUsecase useCase}) {
-    _useCase = useCase;
+  AmityMyFollowersQueryBuilder({required GetMyFollowersLegacyUsecase legacyUseCase}) {
+    _legacyUseCase = legacyUseCase;
   }
 
   AmityMyFollowersQueryBuilder status(AmityFollowStatusFilter status) {
@@ -28,7 +29,7 @@ class AmityMyFollowersQueryBuilder {
       request.limit = limit;
     }
 
-    final data = await _useCase.get(request);
+    final data = await _legacyUseCase.get(request);
 
     return data;
   }

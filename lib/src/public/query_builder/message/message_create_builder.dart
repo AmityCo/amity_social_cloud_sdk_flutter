@@ -19,12 +19,6 @@ class AmityMessageCreateTargetSelector {
     _useCase = useCase;
   }
 
-  /// Channel ID
-  AmityMessageCreateDataTypeSelector channelId(String channelId) {
-    _subChannelId = channelId;
-    return AmityMessageCreateDataTypeSelector(useCase: _useCase, subChannelId: _subChannelId!);
-  }
-
   AmityMessageCreateDataTypeSelector subchannelId(String subChannelId) {
     _subChannelId = subChannelId;
     return AmityMessageCreateDataTypeSelector(useCase: _useCase, subChannelId: _subChannelId!);

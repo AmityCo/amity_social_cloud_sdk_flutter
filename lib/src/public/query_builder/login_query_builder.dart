@@ -7,7 +7,7 @@ import 'package:amity_sdk/src/core/session/event_bus/session_life_cycle_event_bu
 import 'package:amity_sdk/src/core/session/model/app_event.dart';
 import 'package:amity_sdk/src/core/session/model/session_life_cycle.dart';
 import 'package:amity_sdk/src/data/data_source/data_source.dart';
-import 'package:amity_sdk/src/data/mqtt/amity_mqtt.dart';
+import 'package:amity_sdk/src/core/mqtt/amity_mqtt.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:uuid/uuid.dart';
 
@@ -116,7 +116,6 @@ class LoginQueryBuilder {
 
   static void onSessionEstablished(
       SessionLifeCycleEventBus sessionLifeCycleEventBus) {
-    serviceLocator<AmitySocket>().connect();
     serviceLocator<AmityMQTT>().connect();
     sessionLifeCycleEventBus.publish(SessionLifeCycle.Establish);
   }

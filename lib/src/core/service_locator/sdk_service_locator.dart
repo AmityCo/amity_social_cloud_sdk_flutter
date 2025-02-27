@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:amity_sdk/amity_sdk.dart';
-import 'package:amity_sdk/src/core/socket/amity_socket.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/ad_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/db_adapter/analytics_db_adapter.dart';
@@ -116,6 +115,10 @@ import 'package:amity_sdk/src/domain/usecase/relationship/follower_observe_new_i
 import 'package:amity_sdk/src/domain/usecase/relationship/follower_user_observe_list_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/relationship/following_observe_new_item_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/relationship/following_user_observe_list_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/relationship/get_my_followers_legacy_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/relationship/get_my_followings_legacy_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/relationship/get_user_followers_legacy_usecase.dart';
+import 'package:amity_sdk/src/domain/usecase/relationship/get_user_followings_legacy_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/story/delete_story_by_id_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/story/get_failed_stories_usecase.dart';
 import 'package:amity_sdk/src/domain/usecase/story/get_targets_by_targets_usecase.dart';
@@ -682,12 +685,21 @@ class SdkServiceLocator {
               followRepo: serviceLocator(),
               amityFollowRelationshipComposerUsecase: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<GetMyFollowersLegacyUsecase>(
+        () => GetMyFollowersLegacyUsecase(
+              followRepo: serviceLocator(),
+              amityFollowRelationshipComposerUsecase: serviceLocator(),
+            ));
     serviceLocator.registerLazySingleton<GetMyFollowingsUsecase>(
         () => GetMyFollowingsUsecase(
               followRepo: serviceLocator(),
               amityFollowRelationshipComposerUsecase: serviceLocator(),
             ));
-
+    serviceLocator.registerLazySingleton<GetMyFollowingsLegacyUsecase>(
+        () => GetMyFollowingsLegacyUsecase(
+              followRepo: serviceLocator(),
+              amityFollowRelationshipComposerUsecase: serviceLocator(),
+            ));
     serviceLocator.registerLazySingleton<GetUserFollowInfoUsecase>(
         () => GetUserFollowInfoUsecase(
               followRepo: serviceLocator(),
@@ -697,12 +709,21 @@ class SdkServiceLocator {
               followRepo: serviceLocator(),
               amityFollowRelationshipComposerUsecase: serviceLocator(),
             ));
+    serviceLocator.registerLazySingleton<GetUserFollowersLegacyUsecase>(
+        () => GetUserFollowersLegacyUsecase(
+              followRepo: serviceLocator(),
+              amityFollowRelationshipComposerUsecase: serviceLocator(),
+            ));
     serviceLocator.registerLazySingleton<GetUserFollowingsUsecase>(
         () => GetUserFollowingsUsecase(
               followRepo: serviceLocator(),
               amityFollowRelationshipComposerUsecase: serviceLocator(),
             ));
-
+    serviceLocator.registerLazySingleton<GetUserFollowingsLegacyUsecase>(
+        () => GetUserFollowingsLegacyUsecase(
+              followRepo: serviceLocator(),
+              amityFollowRelationshipComposerUsecase: serviceLocator(),
+            ));
     serviceLocator.registerLazySingleton<CommunityComposerUsecase>(
         () => CommunityComposerUsecase(
               communityRepo: serviceLocator(),
@@ -1379,13 +1400,6 @@ class SdkServiceLocator {
     //MQTT Client
     serviceLocator.registerLazySingleton<AmityMQTT>(
       () => AmityMQTT(
-          accountRepo: serviceLocator(),
-          amityCoreClientOption: configServiceLocator()),
-    );
-
-    //socket client
-    serviceLocator.registerLazySingleton<AmitySocket>(
-      () => AmitySocket(
           accountRepo: serviceLocator(),
           amityCoreClientOption: configServiceLocator()),
     );

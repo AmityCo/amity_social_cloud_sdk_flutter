@@ -1,3 +1,9 @@
+## 0.57.3
+* Fix: Fix issues when fetch following/follower user by getPagingData()
+
+## 0.57.2
+* Fix: Fix issue where message, follower and following is not updated in live collection
+
 ## 0.57.1
 * Fix: Fix random crash when logout
 

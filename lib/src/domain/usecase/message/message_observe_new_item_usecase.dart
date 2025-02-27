@@ -14,7 +14,6 @@ class MessageObserveNewItemUseCase
   /// Message Repo
   final MessageRepo messageRepo;
   final PagingIdRepo pagingIdRepo;
-  HashMap<String, bool> uniqueIdMap = HashMap();
 
   MessageObserveNewItemUseCase(
       {required this.messageRepo, required this.pagingIdRepo});
@@ -22,19 +21,21 @@ class MessageObserveNewItemUseCase
   @override
   StreamController<PagingIdHiveEntity> listen(
       RequestBuilder<MessageQueryRequest> request) {
+    HashMap<String, bool> uniqueIdMap = HashMap();
     final streamController = StreamController<PagingIdHiveEntity>();
     final hash = request().getHashCode();
     final nonce = request().getNonce().value;
     pagingIdRepo.listenPagingIdEntities(nonce, hash).listen((event) async {
-      _onChanges(streamController, request);
+      _onChanges(uniqueIdMap, streamController, request);
     });
     messageRepo.listenMessages(request).listen((event) async {
-      _onChanges(streamController, request);
+      _onChanges(uniqueIdMap, streamController, request);
     });
     return streamController;
   }
 
   void _onChanges(
+    HashMap<String, bool> uniqueIdMap,
     StreamController streamController,
     RequestBuilder<MessageQueryRequest> request,
   ) {

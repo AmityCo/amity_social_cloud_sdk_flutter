@@ -35,11 +35,11 @@ abstract class FollowRepo {
 
   /// Get my follower list
   Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollower(
-      FollowRequest request);
+      FollowRequest request, bool isLegacy);
 
   /// Get my following list
   Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollowing(
-      FollowRequest request);
+      FollowRequest request, bool isLegacy);
 
   Stream<List<AmityFollowRelationship>> listenFollowings(
       RequestBuilder<FollowRequest> request);

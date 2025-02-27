@@ -11,34 +11,17 @@ class MessageRepository {
   /*  begin_public_function
   id: message.query
   */
-  /// Query messages with the given channelId.
-  ///
-  /// **Deprecated**: Use [newGetMessages] instead to query messages.
-  ///
-  /// This function is maintained for backward compatibility but is no longer
-  /// recommended for use in new implementations.
-  ///
-  /// Note: This function only supports system generated channelId.
-  /// In case of custom channelId, replace with AmityChannel.defaultSubChannelId
-  ///
-  /// Example:
-  /// ```dart
-  /// var defaultSubChannelId = channel.defaultSubChannelId;
-  /// getMessages(defaultSubChannelId);
-  /// ```
-  @Deprecated("Now only support system generated channelId. In case of custom channelId, replace with channel.defaultSubChannelId")
-  MessageGetQueryBuilder getMessages(String channelId) {
-    return MessageGetQueryBuilder(serviceLocator<MessageQueryUseCase>(), channelId);
+  MessageGetQueryBuilder getMessages(String subchannelId) {
+    return newGetMessages(subchannelId);
   }
   /* end_public_function */
 
-
-
+  @Deprecated("newGetMessages is deprecated, use getMessages instead")
   MessageGetQueryBuilder newGetMessages(String subchannelId) {
     return MessageGetQueryBuilder(serviceLocator<MessageQueryUseCase>(), subchannelId);
   }
 
-
+  @Deprecated("newCreateMessage is deprecated, use createMessage instead")
   AmityMessageCreateDataTypeSelector newCreateMessage(String subchannelId) {
     return AmityMessageCreateTargetSelector(useCase: serviceLocator<MessageCreateUsecase>()).subchannelId(subchannelId);
   }
@@ -57,8 +40,8 @@ class MessageRepository {
   api_style: async
   */
   /// Create Message
-  AmityMessageCreateDataTypeSelector createMessage(String channelId) {
-    return AmityMessageCreateTargetSelector(useCase: serviceLocator<MessageCreateUsecase>()).channelId(channelId);
+  AmityMessageCreateDataTypeSelector createMessage(String subchannelId) {
+    return newCreateMessage(subchannelId);
   }
   /* end_public_function */
 

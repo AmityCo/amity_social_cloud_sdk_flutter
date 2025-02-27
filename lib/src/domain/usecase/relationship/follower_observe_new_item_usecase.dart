@@ -14,7 +14,6 @@ class FollowerObserveNewItemUsecase
   final UserRepo userRepo;
   final FollowRepo followRepo;
   final PagingIdRepo pagingIdRepo;
-  HashMap<String, bool> uniqueIdMap = HashMap();
 
   FollowerObserveNewItemUsecase(
       {required this.userRepo,
@@ -24,22 +23,24 @@ class FollowerObserveNewItemUsecase
   @override
   StreamController<PagingIdHiveEntity> listen(
       RequestBuilder<FollowRequest> request) {
+    HashMap<String, bool> uniqueIdMap = HashMap();
     final streamController = StreamController<PagingIdHiveEntity>();
     final hash = request().getHashCode();
     final nonce = request().getFollowerNonce().value;
     pagingIdRepo.listenPagingIdEntities(nonce, hash).listen((event) async {
-      _onChanges(streamController, request);
+      _onChanges(uniqueIdMap, streamController, request);
     });
     followRepo.listenFollowers(request).listen((event) async {
-      _onChanges(streamController, request);
+      _onChanges(uniqueIdMap, streamController, request);
     });
     userRepo.listenUserEntities().listen((event) async {
-      _onChanges(streamController, request);
+      _onChanges(uniqueIdMap, streamController, request);
     });
     return streamController;
   }
 
   void _onChanges(
+    HashMap<String, bool> uniqueIdMap,
     StreamController streamController,
     RequestBuilder<FollowRequest> request,
   ) {
