@@ -139,4 +139,14 @@ class StoryDbAdapterImpl extends StoryDbAdapter {
 
     return stories;
   }
+  
+  @override
+  Future<StoryHiveEntity?> getEntity(String id) async {
+    return getStoryEntity(id);
+  }
+  
+  @override
+  Future saveEntity(StoryHiveEntity entity) {
+    return saveStoryEntity(entity);
+  }
 }

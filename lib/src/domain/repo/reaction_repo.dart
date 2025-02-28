@@ -1,5 +1,4 @@
 import 'package:amity_sdk/src/core/core.dart';
-import 'package:amity_sdk/src/data/response/response.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 
 /// ReactionRepo Abstract Layer

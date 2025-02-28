@@ -1,11 +1,12 @@
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/data_source/local/interface/reaction_related_entity.dart';
 import 'package:hive/hive.dart';
 
 part 'comment_hive_entity_6.g.dart';
 
 /// Comment Hive Entity
 @HiveType(typeId: 6)
-class CommentHiveEntity extends EkoObject {
+class CommentHiveEntity extends EkoObject implements ReactionRelatedEntity<CommentHiveEntity> {
   /// Comment doc id
   String? id;
 
@@ -54,12 +55,15 @@ class CommentHiveEntity extends EkoObject {
   // ReactionResponse? reactions;
 
   /// Comment Reaction
+  @override
   Map<String, int>? reactions;
 
   /// Comment Reaction Count
+  @override
   int? reactionsCount;
 
   /// My Reaction
+  @override
   List<String>? myReactions;
 
   /// flag is Comment Delete
@@ -193,6 +197,11 @@ class CommentHiveEntity extends EkoObject {
       targetId: targetId ?? this.targetId,
       targetType: targetType ?? this.targetType,
     );
+  }
+
+  @override
+  CommentHiveEntity copyEntity() {
+    return copyWith();
   }
   
   @override

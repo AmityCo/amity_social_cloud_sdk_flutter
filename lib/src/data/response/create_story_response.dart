@@ -1,7 +1,9 @@
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/response/core_response/base_reponse.dart';
 import 'package:amity_sdk/src/data/response/core_response/story_target_response.dart';
+import 'package:amity_sdk/src/data/response/reaction_related_response.dart';
 
-class CreateStoryResponse {
+class CreateStoryResponse with ReactionRelatedResponse {
   final List<StoryResponse> stories;
   final List<CommentResponse> comments;
   final List<UserResponse> users;
@@ -74,4 +76,9 @@ class CreateStoryResponse {
         "categories": List<dynamic>.from(categories.map((x) => x)),
         "storyTargets": List<dynamic>.from(storyTargets.map((x) => x)),
       };
+
+  @override
+  List<BaseResponse> getResponses() {
+    return stories;
+  }
 }

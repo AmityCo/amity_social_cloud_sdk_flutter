@@ -93,4 +93,14 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
       box.put(element.messageId, element);
     });
   }
+  
+  @override
+  Future saveEntity(MessageHiveEntity data) async {
+    await saveMessageEntity(data);
+  }
+
+  @override
+  Future<MessageHiveEntity?> getEntity(String id) async {
+    return getMessageEntity(id);
+  }
 }

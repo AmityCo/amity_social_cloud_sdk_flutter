@@ -1,6 +1,7 @@
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/response/core_response/base_reponse.dart';
 
-class CommentResponse {
+class CommentResponse implements BaseResponse {
   CommentResponse({
     required this.id,
     required this.path,
@@ -131,4 +132,9 @@ class CommentResponse {
         "mentionees": List<dynamic>.from(mentionees.map((x) => x.toJson())),
         "attachments": List<dynamic>.from(attanchment.map((x) => x.toJson())),
       };
+      
+        @override
+        String getId() {
+          return commentId;
+        }
 }

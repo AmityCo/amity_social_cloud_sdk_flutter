@@ -8,6 +8,8 @@ import 'package:amity_sdk/src/core/socket/event/channel/channel_members_removed_
 import 'package:amity_sdk/src/core/socket/event/channel/channel_unbanned_event_listener.dart';
 import 'package:amity_sdk/src/core/socket/event/channel/channel_updated_event_listener.dart';
 import 'package:amity_sdk/src/core/socket/event/event.dart';
+import 'package:amity_sdk/src/core/socket/event/message/message_reaction_added_event_listener.dart';
+import 'package:amity_sdk/src/core/socket/event/message/message_reaction_removed_event_listener.dart';
 import 'package:amity_sdk/src/core/socket/event/post/post_approved_event_listener.dart';
 import 'package:amity_sdk/src/core/socket/event/post/post_declined_event_listener.dart';
 import 'package:amity_sdk/src/core/socket/event/story/story_create_event_listener.dart';
@@ -78,6 +80,9 @@ class MqttEventListeners {
     ChannelUnbannedEventListener(),
     ChannelJoinedEventListener(),
     ChannelLeftEventListener(),
+    
+    MessageReactionAddedEventListener(),
+    MessageReactionRemovedEventListener(),
   ]);
 
   SocketEventListener? getEvent(String eventType) =>

@@ -1,21 +1,25 @@
+import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/data/data.dart';
 
 /// Create Comment Response Extension
 extension CreateCommentResponseExtension on CreateCommentResponse {
   /// extension method to save the create comment response to db
-  Future saveToDb<T>(DbAdapterRepo dbRepo) async {
+  Future saveToDb<T>(DbAdapterRepo dbRepo, {bool fromAddReactionEvent = false}) async {
     //Convert to File Hive Entity
-    List<FileHiveEntity> fileHiveEntities = files.map((e) => e.convertToFileHiveEntity()).toList();
+    List<FileHiveEntity> fileHiveEntities =
+        files.map((e) => e.convertToFileHiveEntity()).toList();
 
     //Convert to User Hive Entity
-    List<UserHiveEntity> userHiveEntities = users.map((e) => e.convertToUserHiveEntity()).toList();
+    List<UserHiveEntity> userHiveEntities =
+        users.map((e) => e.convertToUserHiveEntity()).toList();
 
     //Convert to Child Comment Hive Entity
     List<CommentHiveEntity> childCommentHiveEntities =
         commentChildren.map((e) => e.convertToCommentHiveEntity()).toList();
 
     //Convert to Comment Hive Entity
-    List<CommentHiveEntity> commentHiveEntities = comments.map((e) => e.convertToCommentHiveEntity()).toList();
+    List<CommentHiveEntity> commentHiveEntities =
+        comments.map((e) => e.convertToCommentHiveEntity()).toList();
 
     //Save the File Entity
     for (var e in fileHiveEntities) {
@@ -34,6 +38,10 @@ extension CreateCommentResponseExtension on CreateCommentResponse {
 
     //Save the Comment Entity
     for (var e in commentHiveEntities) {
+      if (fromAddReactionEvent && e.myReactions == null) {
+          final entity = dbRepo.commentDbAdapter.getCommentEntity(e.commentId);
+          e.myReactions = entity?.myReactions;
+      }
       await dbRepo.commentDbAdapter.saveCommentEntity(e);
     }
 
@@ -41,5 +49,10 @@ extension CreateCommentResponseExtension on CreateCommentResponse {
     if (T.toString() == 'AmityComment') {
       return commentHiveEntities.map((e) => e.convertToAmityComment()).toList();
     }
+  }
+
+  Future saveEventToDb<T>(DbAdapterRepo dbRepo, {bool fromAddReactionEvent = false}) async {
+    await saveToDb<T>(dbRepo, fromAddReactionEvent: fromAddReactionEvent);
+    await saveReactionFromEvent(dbRepo, users, reactor, AmityReactionReferenceType.COMMENT);
   }
 }

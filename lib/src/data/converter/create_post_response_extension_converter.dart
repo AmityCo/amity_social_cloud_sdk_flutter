@@ -13,7 +13,7 @@ extension CreatePostResponseExtension on CreatePostResponse {
     ..nextToken = paging?.next;
 
   /// Utils Method to save the Post Response to Db
-  Future saveToDb<T>(DbAdapterRepo dbRepo) async {
+  Future saveToDb<T>(DbAdapterRepo dbRepo, { bool fromAddReactionEvent = false }) async {
     //Convert to File Hive Entity
 
     //we have save the file first, since every object depends on file
@@ -29,8 +29,9 @@ extension CreatePostResponseExtension on CreatePostResponse {
     List<CommunityHiveEntity> communityHiveEntities =
         communities.map((e) => e.convertToCommunityHiveEntity()).toList();
 
-    List<CommunityMemberHiveEntity> communityUsersHiveEntities =
-        communityUsers.map((e) => e.convertToCommnityMemberHiveEntity()).toList();
+    List<CommunityMemberHiveEntity> communityUsersHiveEntities = communityUsers
+        .map((e) => e.convertToCommnityMemberHiveEntity())
+        .toList();
 
     //Convert to User Hive Entity
     List<UserHiveEntity> userHiveEntities =
@@ -52,10 +53,11 @@ extension CreatePostResponseExtension on CreatePostResponse {
         videoStreamings.map((e) => e.convertToStreamHiveEntity()).toList();
 
     //Conver Post to Post Hive Entity
-    List<PostHiveEntity> postHiveEntities =
-        posts.map((e) {var postEntity = e.convertToPostHiveEntity();
+    List<PostHiveEntity> postHiveEntities = posts.map((e) {
+      var postEntity = e.convertToPostHiveEntity();
       postEntity.feedType = getFeedTypeFromId(e.feedId, feeds);
-      return postEntity;}).toList();
+      return postEntity;
+    }).toList();
 
     //Conver Post to Poll Hive Entity
     List<PollHiveEntity> pollHiveEntities =
@@ -92,7 +94,8 @@ extension CreatePostResponseExtension on CreatePostResponse {
     }
 
     for (var e in communityUsersHiveEntities) {
-      final UserHiveEntity? user = userHiveEntities.firstWhereOrNull((element) => element.userId == e.userId);
+      final UserHiveEntity? user = userHiveEntities
+          .firstWhereOrNull((element) => element.userId == e.userId);
       await dbRepo.communityMemberDbAdapter.saveCommunityMemberEntity(e, user);
     }
 
@@ -103,6 +106,10 @@ extension CreatePostResponseExtension on CreatePostResponse {
 
     //Save Post Entity
     for (var e in postHiveEntities) {
+      if (fromAddReactionEvent && e.myReactions == null) {
+          final entity = dbRepo.postDbAdapter.getPostEntity(e.postId!);
+          e.myReactions = entity?.myReactions;
+      }
       await dbRepo.postDbAdapter.savePostEntity(e);
     }
 
@@ -120,6 +127,11 @@ extension CreatePostResponseExtension on CreatePostResponse {
     if (T.toString() == 'AmityPoll') {
       return pollHiveEntities.map((e) => e.convertToAmityPoll()).toList();
     }
+  }
+
+  Future saveEventToDb<T>(DbAdapterRepo dbRepo, {bool fromAddReactionEvent = false}) async {
+    await saveToDb<T>(dbRepo, fromAddReactionEvent: fromAddReactionEvent);
+    await saveReactionFromEvent(dbRepo, users, reactor, AmityReactionReferenceType.POST);
   }
 
   String getFeedTypeFromId(String? feedId, List<CommunityFeedResponse> feeds) {

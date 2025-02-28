@@ -1,3 +1,6 @@
+## 0.52.2
+* Fix: Fix reaction missing when receive post event through RTE
+
 ## 0.52.1
 * Fix: Exclude deleted posts from global feed and custom post ranking Live Collection
 

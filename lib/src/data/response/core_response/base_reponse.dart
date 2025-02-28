@@ -1,0 +1,3 @@
+mixin BaseResponse {
+  String getId();
+}

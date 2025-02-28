@@ -1,7 +1,8 @@
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/response/core_response/base_reponse.dart';
 
 /// [MessageResponse]
-class MessageResponse {
+class MessageResponse implements BaseResponse {
   /// init [MessageResponse]
   MessageResponse({
     required this.messageId,
@@ -80,7 +81,7 @@ class MessageResponse {
   List<String>? myReactions;
 
   /// Latest Reaction
-  final Map<String, dynamic>? latestReaction;
+  Map<String, dynamic>? latestReaction;
 
   /// Is Deleted
   final bool isDeleted;
@@ -209,6 +210,11 @@ class MessageResponse {
       editedAt: editedAt ?? this.editedAt,
       mentionees: mentionees ?? this.mentionees,
     );
+  }
+  
+  @override
+  String getId() {
+    return messageId;
   }
 }
 

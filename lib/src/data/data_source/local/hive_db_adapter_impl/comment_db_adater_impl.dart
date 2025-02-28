@@ -59,4 +59,14 @@ class CommentDbAdapterImpl extends CommentDbAdapter {
         .toList()
     );
   }
+  
+  @override
+  Future saveEntity(CommentHiveEntity entity) async {
+    await saveCommentEntity(entity);
+  }
+
+  @override
+  Future<CommentHiveEntity?> getEntity(String id) async {
+    return getCommentEntity(id);
+  }
 }

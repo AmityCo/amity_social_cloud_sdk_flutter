@@ -13,16 +13,22 @@ class MessageEventListener extends SocketEventListener {
 
   @override
   void processEvent(Map<String, dynamic> json) {
-    final data = CreateMessageResponse.fromJson(json);
-
-    /// Exclude the update if we dont have my rection key
-    if (data.messages[0].myReactions == null) {
-      final amityMessage = serviceLocator<MessageGetLocalUsecase>()
-          .get(data.messages[0].messageId);
-      data.messages[0].myReactions = amityMessage?.myReactions;
+    final event = getEventName();
+    var reactor =
+        json["reactor"] == null ? null : Reactor.fromJson(json['reactor']);
+    final fromAddReactionEvent = event == 'message.reactionAdded';
+    if (fromAddReactionEvent) {
+      if (reactor != null) {
+        json["reactor"] = reactor.copyWith(eventName: "add").toJson();
+      }
+    } else if (event == 'message.reactionRemoved') {
+      if (reactor != null) {
+        json["reactor"] = reactor.copyWith(eventName: "remove").toJson();
+      }
     }
 
-    data.saveToDb(serviceLocator());
+    final data = CreateMessageResponse.fromJson(json);
+    data.saveEventToDb(serviceLocator(), fromAddReactionEvent: fromAddReactionEvent);
 
     final channelId = data.messages[0].channelId;
     serviceLocator<ChannelUpdateLastActivityUsecase>().process(channelId);
