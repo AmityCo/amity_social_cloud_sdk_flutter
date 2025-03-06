@@ -33,7 +33,7 @@ class AmityMQTT {
   void connect() {
     logger('AMITY_MQTT::Connecting to mqtt server');
     final currentUser = AmityCoreClient.getCurrentUser();
-    
+
     // If account is already available, connect to the mqtt server
     final accountCache = accountRepo.getAccount(currentUser.userId!);
     if (accountCache != null && accountCache.accessToken != null) {

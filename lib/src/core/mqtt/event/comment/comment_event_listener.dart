@@ -7,9 +7,21 @@ import 'package:amity_sdk/src/domain/domain.dart';
 abstract class CommentEventListener extends MQTTEventListener {
   @override
   void processEvent(Map<String, dynamic> json) {
+    final event = getEventName();
+    var reactor =
+        json["reactor"] == null ? null : Reactor.fromJson(json['reactor']);
+    final fromAddReactionEvent = event == 'comment.addReaction';
+    if (fromAddReactionEvent) {
+      if (reactor != null) {
+        json["reactor"] = reactor.copyWith(eventName: "add").toJson();
+      }
+    } else if (event == 'comment.removeReaction') {
+      if (reactor != null) {
+        json["reactor"] = reactor.copyWith(eventName: "remove").toJson();
+      }
+    }
     final data = CreateCommentResponse.fromJson(json);
-
-    data.saveToDb(serviceLocator());
+    data.saveEventToDb(serviceLocator(), fromAddReactionEvent: fromAddReactionEvent);
   }
 
   @override

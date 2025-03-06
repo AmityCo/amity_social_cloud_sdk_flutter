@@ -13,7 +13,7 @@ extension CreatePostResponseExtension on CreatePostResponse {
     ..nextToken = paging?.next;
 
   /// Utils Method to save the Post Response to Db
-  Future saveToDb<T>(DbAdapterRepo dbRepo) async {
+  Future saveToDb<T>(DbAdapterRepo dbRepo, { bool fromAddReactionEvent = false }) async {
     //Convert to File Hive Entity
 
     //we have save the file first, since every object depends on file
@@ -110,6 +110,10 @@ extension CreatePostResponseExtension on CreatePostResponse {
 
     //Save Post Entity
     for (var e in postHiveEntities) {
+      if (fromAddReactionEvent && e.myReactions == null) {
+          final entity = dbRepo.postDbAdapter.getPostEntity(e.postId!);
+          e.myReactions = entity?.myReactions;
+      }
       await dbRepo.postDbAdapter.savePostEntity(e);
     }
 
@@ -122,6 +126,11 @@ extension CreatePostResponseExtension on CreatePostResponse {
     if (T.toString() == 'AmityPoll') {
       return pollHiveEntities.map((e) => e.convertToAmityPoll()).toList();
     }
+  }
+
+  Future saveEventToDb<T>(DbAdapterRepo dbRepo, {bool fromAddReactionEvent = false}) async {
+    await saveToDb<T>(dbRepo, fromAddReactionEvent: fromAddReactionEvent);
+    await saveReactionFromEvent(dbRepo, users, reactor, AmityReactionReferenceType.POST);
   }
 
   String getFeedTypeFromId(String? feedId, List<CommunityFeedResponse> feeds) {

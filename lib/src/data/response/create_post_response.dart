@@ -5,6 +5,8 @@
 import 'dart:convert';
 
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/response/core_response/base_reponse.dart';
+import 'package:amity_sdk/src/data/response/reaction_related_response.dart';
 
 CreatePostResponse createPostResponseFromJson(String str) =>
     CreatePostResponse.fromJson(json.decode(str));
@@ -12,7 +14,7 @@ CreatePostResponse createPostResponseFromJson(String str) =>
 String createPostResponseToJson(CreatePostResponse data) =>
     json.encode(data.toJson());
 
-class CreatePostResponse {
+class CreatePostResponse with ReactionRelatedResponse {
   CreatePostResponse({
     required this.posts,
     required this.postChildren,
@@ -25,6 +27,7 @@ class CreatePostResponse {
     required this.feeds,
     required this.videoStreamings,
     required this.polls,
+    required this.reactor,
     required this.paging,
   });
 
@@ -39,6 +42,7 @@ class CreatePostResponse {
   final List<CommunityFeedResponse> feeds;
   final List<VideoStreamingResponse> videoStreamings;
   final List<PollResponse> polls;
+  final Reactor? reactor;
   final PagingResponse? paging;
 
   factory CreatePostResponse.fromJson(Map<String, dynamic> json) =>
@@ -87,6 +91,9 @@ class CreatePostResponse {
             ? []
             : List<PollResponse>.from(
                 json["polls"].map((x) => PollResponse.fromJson(x))),
+        reactor: json["reactor"] == null
+            ? null
+            : Reactor.fromJson(json['reactor']),
         paging: json["paging"] == null
             ? null
             : PagingResponse.fromJson(json['paging']),
@@ -106,6 +113,12 @@ class CreatePostResponse {
         "videoStreamings":
             List<dynamic>.from(videoStreamings.map((x) => x.toJson())),
         "polls": List<dynamic>.from(polls.map((x) => x.toJson())),
-        "paging": paging,
+        "reactor": reactor?.toJson(),
+        "paging": paging?.toJson(),
       };
+
+  @override
+  List<BaseResponse> getResponses() {
+    return posts;
+  }
 }

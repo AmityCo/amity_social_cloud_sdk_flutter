@@ -1,6 +1,7 @@
 import 'package:amity_sdk/src/core/enum/amity_story_state.dart';
 import 'package:amity_sdk/src/core/utils/amity_hive_type.dart';
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/data_source/local/interface/reaction_related_entity.dart';
 import 'package:amity_sdk/src/data/response/core_response/story_data_response.dart';
 import 'package:amity_sdk/src/domain/model/amity_story_item.dart';
 import 'package:hive/hive.dart';
@@ -8,7 +9,7 @@ import 'package:hive/hive.dart';
 part 'story_hive_entity_27.g.dart';
 
 @HiveType(typeId: AmityHiveType.story)
-class StoryHiveEntity extends EkoObject {
+class StoryHiveEntity extends EkoObject implements ReactionRelatedEntity<StoryHiveEntity> {
   String? storyId;
   String? path;
   String? creatorId;
@@ -26,8 +27,11 @@ class StoryHiveEntity extends EkoObject {
   DateTime? createdAt;
   DateTime? updatedAt;
   DateTime? expiresAt;
+  @override
   Map<String, int>? reactions;
+  @override
   int? reactionsCount;
+  @override
   List<String>? myReactions;
   int? commentsCount;
   bool? isDeleted;
@@ -125,9 +129,14 @@ class StoryHiveEntity extends EkoObject {
       referenceId: referenceId ?? this.referenceId,
     );
   }
-  
+
   @override
   String? getId() {
     return referenceId;
+  }
+
+  @override
+  StoryHiveEntity copyEntity() {
+    return copyWith();
   }
 }

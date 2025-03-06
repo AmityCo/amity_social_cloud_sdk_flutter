@@ -13,7 +13,7 @@ class MessageReactionRemovedEventListener extends MessageEventListener {
   void processEvent(Map<String, dynamic> json) {
     final data = CreateMessageResponse.fromJson(json);
     final reactor = data.reactions.firstOrNull;
-    reactor?.eventName = "remove";
+    reactor?.copyWith(eventName: "remove");
     data.messages.firstOrNull?.latestReaction = reactor?.toJson();
     data.saveToDb(serviceLocator());
   }

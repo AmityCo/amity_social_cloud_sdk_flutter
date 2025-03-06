@@ -1,12 +1,13 @@
 import 'package:amity_sdk/src/core/enum/amity_message_sync_state.dart';
 import 'package:amity_sdk/src/core/utils/amity_hive_type.dart';
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/data_source/local/interface/reaction_related_entity.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 part 'message_hive_entity_18.g.dart';
 
 @HiveType(typeId: AmityHiveType.message)
-class MessageHiveEntity extends EkoObject {
+class MessageHiveEntity extends EkoObject implements ReactionRelatedEntity<MessageHiveEntity> {
   @HiveField(0)
   String? uniqueId;
 
@@ -52,12 +53,18 @@ class MessageHiveEntity extends EkoObject {
   @HiveField(14)
   int? childrenNumber;
 
+  /// Reactions count
+  @override
   @HiveField(15)
   int? reactionsCount;
 
+  /// Reactions
+  @override
   @HiveField(16)
   Map<String, int>? reactions;
 
+  /// My Reaction
+  @override
   @HiveField(17)
   List<String>? myReactions;
 
@@ -175,5 +182,10 @@ class MessageHiveEntity extends EkoObject {
   @override
   String? getId() {
     return uniqueId;
+  }
+
+  @override
+  MessageHiveEntity copyEntity() {
+    return copyWith();
   }
 }

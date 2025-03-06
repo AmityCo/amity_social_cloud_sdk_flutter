@@ -7,8 +7,21 @@ import 'package:amity_sdk/src/domain/domain.dart';
 abstract class PostEventListener extends MQTTEventListener {
   @override
   void processEvent(Map<String, dynamic> json) {
+    final event = getEventName();
+    var reactor =
+        json["reactor"] == null ? null : Reactor.fromJson(json['reactor']);
+    final fromAddReactionEvent = event == 'post.addReaction';
+    if (fromAddReactionEvent) {
+      if (reactor != null) {
+        json["reactor"] = reactor.copyWith(eventName: "add").toJson();
+      }
+    } else if (event == 'post.removeReaction') {
+      if (reactor != null) {
+        json["reactor"] = reactor.copyWith(eventName: "remove").toJson();
+      }
+    }
     final data = CreatePostResponse.fromJson(json);
-    data.saveToDb(serviceLocator());
+    data.saveEventToDb(serviceLocator(), fromAddReactionEvent: fromAddReactionEvent);
   }
 
   /// This method is used to check if the event should be processed or not.

@@ -66,4 +66,14 @@ class CommentDbAdapterImpl extends CommentDbAdapter {
     .where((comment) => comment.isMatchingFilter(request.call()))
     .toList();
   }
+
+  @override
+  Future saveEntity(CommentHiveEntity entity) async {
+    await saveCommentEntity(entity);
+  }
+
+  @override
+  Future<CommentHiveEntity?> getEntity(String id) async {
+    return getCommentEntity(id);
+  }
 }

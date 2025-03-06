@@ -115,4 +115,14 @@ class MessageDbAdapterImpl extends MessageDbAdapter {
     };
     await box.putAll(unsyncMessagesMap);
   }
+
+  @override
+  Future saveEntity(MessageHiveEntity data) async {
+    await saveMessageEntity(data);
+  }
+
+  @override
+  Future<MessageHiveEntity?> getEntity(String id) async {
+    return getMessageEntity(id);
+  }
 }

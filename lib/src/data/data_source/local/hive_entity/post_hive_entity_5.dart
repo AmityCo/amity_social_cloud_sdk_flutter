@@ -1,13 +1,13 @@
 import 'package:amity_sdk/src/core/utils/amity_hive_type.dart';
 import 'package:amity_sdk/src/data/data.dart';
-import 'package:amity_sdk/src/data/data_source/local/hive_entity/mentionee_hive_entity_30.dart';
+import 'package:amity_sdk/src/data/data_source/local/interface/reaction_related_entity.dart';
 import 'package:hive/hive.dart';
 
 part 'post_hive_entity_5.g.dart';
 
 /// Post Hive entity
 @HiveType(typeId: AmityHiveType.post)
-class PostHiveEntity extends EkoObject {
+class PostHiveEntity extends EkoObject  implements ReactionRelatedEntity<PostHiveEntity> {
   /// doc Id
   @HiveField(0)
   String? id;
@@ -77,14 +77,17 @@ class PostHiveEntity extends EkoObject {
   DateTime? updatedAt;
 
   /// reactions map
+  @override
   @HiveField(17)
   Map<String, int>? reactions;
 
   /// reaction count
+  @override
   @HiveField(18)
   int? reactionsCount;
 
   /// my reaction list
+  @override
   @HiveField(19)
   List<String>? myReactions;
 
@@ -254,7 +257,12 @@ class PostHiveEntity extends EkoObject {
       reach: reach ?? this.reach,
     );
   }
-  
+
+  @override
+  PostHiveEntity copyEntity() {
+    return copyWith();
+  }
+
   @override
   String? getId() {
     return id;

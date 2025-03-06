@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:amity_sdk/src/data/response/core_response/base_reponse.dart';
 import 'package:amity_sdk/src/data/response/core_response/core_response.dart';
+import 'package:amity_sdk/src/data/response/reaction_related_response.dart';
 
 CreateCommentResponse createCommentResponseFromJson(String str) =>
     CreateCommentResponse.fromJson(json.decode(str));
@@ -8,14 +10,15 @@ CreateCommentResponse createCommentResponseFromJson(String str) =>
 String createCommentResponseToJson(CreateCommentResponse data) =>
     json.encode(data.toJson());
 
-class CreateCommentResponse {
+class CreateCommentResponse with ReactionRelatedResponse {
   CreateCommentResponse({
     required this.comments,
     required this.commentChildren,
     required this.users,
     required this.files,
-    required this.paging,
     required this.communityUsers,
+    required this.reactor,
+    required this.paging,
   });
 
   final List<CommentResponse> comments;
@@ -24,6 +27,7 @@ class CreateCommentResponse {
   final List<FileResponse> files;
   final PagingResponse? paging;
   final List<CommunityUserResponse> communityUsers;
+  final Reactor? reactor;
 
   factory CreateCommentResponse.fromJson(Map<String, dynamic> json) =>
       CreateCommentResponse(
@@ -39,6 +43,9 @@ class CreateCommentResponse {
             ? []
             : List<CommunityUserResponse>.from(json["communityUsers"]
                 .map((x) => CommunityUserResponse.fromJson(x))),
+        reactor: json["reactor"] == null
+            ? null
+            : Reactor.fromJson(json['reactor']),
         paging: json["paging"] == null
             ? null
             : PagingResponse.fromJson(json["paging"]),
@@ -52,6 +59,12 @@ class CreateCommentResponse {
         "files": List<dynamic>.from(files.map((x) => x.toJson())),
         "communityUsers":
             List<dynamic>.from(communityUsers.map((x) => x.toJson())),
+        "reactor": reactor?.toJson(),
         "paging": paging?.toJson(),
       };
+
+  @override
+  List<BaseResponse> getResponses() {
+    return comments;
+  }
 }

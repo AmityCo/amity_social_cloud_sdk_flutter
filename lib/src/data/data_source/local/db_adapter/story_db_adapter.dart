@@ -1,8 +1,9 @@
 import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/core/model/api_request/get_stories_by_target_request.dart';
+import 'package:amity_sdk/src/data/data_source/local/db_adapter/reaction_related_db_adapter.dart';
 import 'package:amity_sdk/src/data/data_source/local/hive_entity/story_hive_entity_27.dart';
 
-abstract class StoryDbAdapter {
+abstract class StoryDbAdapter with ReactionRelatedDBAdapter<StoryHiveEntity> {
   Future saveStoryEntity(StoryHiveEntity data);
 
   Future deleteStoryEntity(String storyId);

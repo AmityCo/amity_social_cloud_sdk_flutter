@@ -1,8 +1,9 @@
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/response/core_response/base_reponse.dart';
 import 'package:amity_sdk/src/data/response/core_response/story_data_response.dart';
 import 'package:amity_sdk/src/domain/model/amity_story_item.dart';
 
-class StoryResponse{
+class StoryResponse implements BaseResponse{
   final String? storyId;
   final String? path;
   final String? creatorId;
@@ -120,6 +121,11 @@ class StoryResponse{
     map['reach'] = reach;
     map['referenceId'] = referenceId;
     return map;
+  }
+  
+  @override
+  String getId() {
+    return storyId ?? "";
   }
   
 

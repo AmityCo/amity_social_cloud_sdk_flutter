@@ -1,4 +1,4 @@
-/// SocketEventListener
+/// MQTTEventListener
 abstract class MQTTEventListener {
   /// init [MQTTEventListener]
   MQTTEventListener();

@@ -1,3 +1,8 @@
+## 7.0.0
+* Breaking Change: Removed AmityRegionalSocketEndpoint from AmityCoreClientOption.
+* Deprecate: Deprecated newGetMessages(String subchannelId), newCreateMessage(String subchannelId) API in MessageRepository.
+* Feat: Introduced getMessages(String subchannelId) and createMessage(String subchannelId) API in MessageRepository.
+
 ## 0.57.3
 * Fix: Fix issues when fetch following/follower user by getPagingData()
 
@@ -71,6 +76,9 @@
 ## 0.53.0
 * Feat: Expose default subchannelId for channel object
 * Deprecate: Channel creation with custom channelId
+
+## 0.52.2
+* Fix: Fix reaction missing when receive post event through RTE
 
 ## 0.52.1
 * Fix: Exclude deleted posts from global feed and custom post ranking Live Collection

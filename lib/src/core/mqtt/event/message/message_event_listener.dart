@@ -1,5 +1,4 @@
 import 'package:amity_sdk/src/core/service_locator/service_locator.dart';
-import 'package:amity_sdk/src/core/mqtt/event/mqtt_event_listener.dart';
 import 'package:amity_sdk/src/data/data.dart';
 import 'package:amity_sdk/src/domain/domain.dart';
 import 'package:amity_sdk/src/domain/usecase/channel/channel_update_last_activity_usecase.dart';
@@ -13,16 +12,23 @@ class MessageEventListener extends MQTTEventListener {
 
   @override
   void processEvent(Map<String, dynamic> json) {
+    final event = getEventName();
+    var reactor =
+        json["reactor"] == null ? null : Reactor.fromJson(json['reactor']);
+    final fromAddReactionEvent = event == 'message.reactionAdded';
+    if (fromAddReactionEvent) {
+      if (reactor != null) {
+        json["reactor"] = reactor.copyWith(eventName: "add").toJson();
+      }
+    } else if (event == 'message.reactionRemoved') {
+      if (reactor != null) {
+        json["reactor"] = reactor.copyWith(eventName: "remove").toJson();
+      }
+    }
+
     final data = CreateMessageResponse.fromJson(json);
 
-    /// Exclude the update if we dont have my rection key
-    if (data.messages[0].myReactions == null) {
-      final amityMessage = serviceLocator<MessageGetLocalUsecase>()
-          .get(data.messages[0].referenceId ?? data.messages[0].messageId);
-      data.messages[0].myReactions = amityMessage?.myReactions;
-    }
-    final dbRepo = serviceLocator<DbAdapterRepo>();
-    data.saveToDb(dbRepo);
+    data.saveEventToDb(serviceLocator(), fromAddReactionEvent: fromAddReactionEvent);
 
     final channelId = data.messages[0].channelId;
     serviceLocator<ChannelUpdateLastActivityUsecase>().process(channelId);

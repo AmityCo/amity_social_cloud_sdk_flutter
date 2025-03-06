@@ -5,6 +5,11 @@ class AmityMentionMetadataGetter {
   AmityMentionMetadataGetter({required this.metadata});
 
   List<AmityUserMentionMetadata> getMentionedUsers() {
+    if (metadata['mentioned'] == null ||
+        metadata['mentioned'] is! List) {
+      return List.empty();
+    }
+
     List mentionMetadata = metadata['mentioned'];
     return mentionMetadata
         .where((element) => element['type'] == 'user')

@@ -1,10 +1,10 @@
-import 'package:amity_sdk/src/core/enum/amity_message_sync_state.dart';
+import 'package:amity_sdk/amity_sdk.dart';
 import 'package:amity_sdk/src/data/data.dart';
 
 /// [CreateMessageResponseExtension]
 extension CreateMessageResponseExtension on CreateMessageResponse {
   /// Utils Method to save the Post Response to Db
-  Future saveToDb<T>(DbAdapterRepo dbRepo) async {
+  Future saveToDb<T>(DbAdapterRepo dbRepo, {bool fromAddReactionEvent = false}) async {
     //Convert to File Hive Entity
 
     //we have save the file first, since every object depends on file
@@ -37,6 +37,10 @@ extension CreateMessageResponseExtension on CreateMessageResponse {
       }
       /// Save all message with sync state
       e.syncState = AmityMessageSyncState.SYNCED.value;
+      if (fromAddReactionEvent && e.myReactions == null) {
+          final entity = dbRepo.messageDbAdapter.getMessageEntity(e.messageId!);
+          e.myReactions = entity?.myReactions;
+      }
       await dbRepo.messageDbAdapter.saveMessageEntity(e);
     }
 
@@ -46,5 +50,10 @@ extension CreateMessageResponseExtension on CreateMessageResponse {
           .map((e) => e.convertToAmityMessage())
           .toList();
     }
+  }
+
+  Future saveEventToDb<T>(DbAdapterRepo dbRepo, {bool fromAddReactionEvent = false}) async {
+    await saveToDb<T>(dbRepo, fromAddReactionEvent: fromAddReactionEvent);
+    await saveReactionFromEvent(dbRepo, users, reactor, AmityReactionReferenceType.MESSAGE);
   }
 }
