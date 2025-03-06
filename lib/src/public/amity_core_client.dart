@@ -161,9 +161,6 @@ class AmityCoreClientOption {
   /// Http endpoint for amity client
   final AmityRegionalHttpEndpoint httpEndpoint;
 
-  /// Socket endpoint for amity client
-  final AmityRegionalSocketEndpoint socketEndpoint;
-
   /// MQTT endpoint for amity client
   final AmityRegionalMqttEndpoint mqttEndpoint;
 
@@ -174,7 +171,6 @@ class AmityCoreClientOption {
   AmityCoreClientOption({
     required this.apiKey,
     this.httpEndpoint = AmityRegionalHttpEndpoint.SG,
-    this.socketEndpoint = AmityRegionalSocketEndpoint.SG,
     this.mqttEndpoint = AmityRegionalMqttEndpoint.SG,
     this.showLogs = false,
   });
@@ -182,14 +178,12 @@ class AmityCoreClientOption {
   AmityCoreClientOption copyWith({
     String? apiKey,
     AmityRegionalHttpEndpoint? httpEndpoint,
-    AmityRegionalSocketEndpoint? socketEndpoint,
     AmityRegionalMqttEndpoint? mqttEndpoint,
     bool? showLogs,
   }) {
     return AmityCoreClientOption(
       apiKey: apiKey ?? this.apiKey,
       httpEndpoint: httpEndpoint ?? this.httpEndpoint,
-      socketEndpoint: socketEndpoint ?? this.socketEndpoint,
       mqttEndpoint: mqttEndpoint ?? this.mqttEndpoint,
       showLogs: showLogs ?? this.showLogs,
     );

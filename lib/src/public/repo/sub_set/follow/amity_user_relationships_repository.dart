@@ -43,24 +43,24 @@ class AmityUserRelationshipsRepository {
 
   /// Get the following user list for the user
   AmityMyFollowingsQueryBuilder getMyFollowings() {
-    return AmityMyFollowingsQueryBuilder(useCase: serviceLocator());
+    return AmityMyFollowingsQueryBuilder(legacyUseCase: serviceLocator());
   }
 
   /// Get the following user list for the user
   AmityUserFollowingsQueryBuilder getFollowings(String userId) {
     return AmityUserFollowingsQueryBuilder(
-        useCase: serviceLocator(), userId: userId);
+        legacyUseCase: serviceLocator(), userId: userId);
   }
 
   /// Get the Followers user list for the user
   AmityMyFollowersQueryBuilder getMyFollowers() {
-    return AmityMyFollowersQueryBuilder(useCase: serviceLocator());
+    return AmityMyFollowersQueryBuilder(legacyUseCase: serviceLocator());
   }
 
   /// Get the Followers user list for the user
   AmityUserFollowersQueryBuilder getFollowers(String userId) {
     return AmityUserFollowersQueryBuilder(
-        useCase: serviceLocator(), userId: userId);
+        legacyUseCase: serviceLocator(), userId: userId);
   }
 
   ///Get Follow info for user Id

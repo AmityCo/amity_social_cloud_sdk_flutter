@@ -88,4 +88,14 @@ class PostDbAdapterImpl extends PostDbAdapter {
   Future savePostEntities(List<PostHiveEntity> data) {
     return box.addAll(data);
   }
+  
+  @override
+  Future saveEntity(PostHiveEntity entity) async{
+    await savePostEntity(entity);
+  }
+
+  @override
+  Future<PostHiveEntity?> getEntity(String id) async{
+    return getPostEntity(id);
+  }
 }

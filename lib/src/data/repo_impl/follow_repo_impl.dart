@@ -271,67 +271,71 @@ class FollowRepoImpl extends FollowRepo {
 
   @override
   Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollower(
-      FollowRequest request) async {
+      FollowRequest request, bool isLegacy) async {
     final hash = request.getHashCode();
     final nonce = request.getFollowerNonce();
     int nextIndex = 0;
     final data = await followWApiInterface.getMyFollower(request);
     final paging = data.paging;
     final followRelationships = await saveFollowResponse(data);
-    final isFirstPage =
-        request.options?.token == null && (request.options?.limit ?? 0) > 0;
-    if (isFirstPage) {
-      await pagingIdRepo.deletePagingIdByHash(nonce.value, hash);
-    } else {
-      nextIndex = (pagingIdRepo
-              .getPagingIdEntities(nonce.value, hash)
-              .map((e) => (e.position ?? 0))
-              .toList()
-              .reduce(max)) +
-          1;
+    if (!isLegacy) {
+      final isFirstPage =
+          request.options?.token == null && (request.options?.limit ?? 0) > 0;
+      if (isFirstPage) {
+        await pagingIdRepo.deletePagingIdByHash(nonce.value, hash);
+      } else {
+        nextIndex = (pagingIdRepo
+                .getPagingIdEntities(nonce.value, hash)
+                .map((e) => (e.position ?? 0))
+                .toList()
+                .reduce(max)) +
+            1;
+      }
+      data.follows.forEachIndexed((index, element) async {
+        final pagingId = PagingIdHiveEntity(
+          id: "${element.from}_${element.to}",
+          hash: hash,
+          nonce: nonce.value,
+          position: nextIndex + index,
+        );
+        await pagingIdRepo.savePagingId(pagingId);
+      });
     }
-    data.follows.forEachIndexed((index, element) async {
-      final pagingId = PagingIdHiveEntity(
-        id: "${element.from}_${element.to}",
-        hash: hash,
-        nonce: nonce.value,
-        position: nextIndex + index,
-      );
-      await pagingIdRepo.savePagingId(pagingId);
-    });
     return PageListData(followRelationships, paging?.next ?? '');
   }
 
   @override
   Future<PageListData<List<AmityFollowRelationship>, String>> getMyFollowing(
-      FollowRequest request) async {
+      FollowRequest request, bool isLegacy) async {
     final hash = request.getHashCode();
     final nonce = request.getFollowingNonce();
     int nextIndex = 0;
     final data = await followWApiInterface.getMyFollowing(request);
     final paging = data.paging;
     final followRelationships = await saveFollowResponse(data);
-    final isFirstPage =
-        request.options?.token == null && (request.options?.limit ?? 0) > 0;
-    if (isFirstPage) {
-      await pagingIdRepo.deletePagingIdByHash(nonce.value, hash);
-    } else {
-      nextIndex = (pagingIdRepo
-              .getPagingIdEntities(nonce.value, hash)
-              .map((e) => (e.position ?? 0))
-              .toList()
-              .reduce(max)) +
-          1;
+    if (!isLegacy) {
+      final isFirstPage =
+          request.options?.token == null && (request.options?.limit ?? 0) > 0;
+      if (isFirstPage) {
+        await pagingIdRepo.deletePagingIdByHash(nonce.value, hash);
+      } else {
+        nextIndex = (pagingIdRepo
+                .getPagingIdEntities(nonce.value, hash)
+                .map((e) => (e.position ?? 0))
+                .toList()
+                .reduce(max)) +
+            1;
+      }
+      data.follows.forEachIndexed((index, element) async {
+        final pagingId = PagingIdHiveEntity(
+          id: "${element.from}_${element.to}",
+          hash: hash,
+          nonce: nonce.value,
+          position: nextIndex + index,
+        );
+        await pagingIdRepo.savePagingId(pagingId);
+      });
     }
-    data.follows.forEachIndexed((index, element) async {
-      final pagingId = PagingIdHiveEntity(
-        id: "${element.from}_${element.to}",
-        hash: hash,
-        nonce: nonce.value,
-        position: nextIndex + index,
-      );
-      await pagingIdRepo.savePagingId(pagingId);
-    });
     return PageListData(followRelationships, paging?.next ?? '');
   }
 

@@ -50,7 +50,7 @@ class AmityMyUserRelationshipRepository {
   /// Get following user list
   @Deprecated("Use AmityCoreClient.newUserRepository().relationship().getMyFollowings() instead")
   AmityMyFollowingsQueryBuilder getFollowings() {
-    return AmityMyFollowingsQueryBuilder(useCase: serviceLocator());
+    return AmityMyFollowingsQueryBuilder(legacyUseCase: serviceLocator());
   }
   /* end_public_function */
 
@@ -60,7 +60,7 @@ class AmityMyUserRelationshipRepository {
   /// Get Followers user list
   @Deprecated("Use AmityCoreClient.newUserRepository().relationship().getMyFollowers() instead")
   AmityMyFollowersQueryBuilder getFollowers() {
-    return AmityMyFollowersQueryBuilder(useCase: serviceLocator());
+    return AmityMyFollowersQueryBuilder(legacyUseCase: serviceLocator());
   }
   /* end_public_function */
 

@@ -157,8 +157,6 @@ class CoreClient {
 
   /// Logout will wipe out all the data [AmityCoreClient] holds.
   static Future<void> logout() async {
-    //terminate current activeSocket
-    serviceLocator<AmitySocket>().terminate();
     serviceLocator<AmityMQTT>().disconnect();
     _sessionLifeCycleEventBus!.publish(SessionLifeCycle.Destroy);
     _appEventBus!.publish(AppEvent.ManualLogout);
@@ -174,7 +172,6 @@ class CoreClient {
   ///temporarily disconnect chat real-time events from the system,
   //call the function 'login(String userId)' to restore a connection
   static void disconnect() {
-    serviceLocator<AmitySocket>().terminate();
     serviceLocator<AmityMQTT>().disconnect();
   }
 

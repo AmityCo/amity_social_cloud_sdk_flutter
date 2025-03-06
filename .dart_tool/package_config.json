@@ -3,9 +3,15 @@
   "packages": [
     {
       "name": "_fe_analyzer_shared",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-64.0.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/_fe_analyzer_shared-76.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "_macros",
+      "rootUri": "file:///Users/warakorn/Applications/flutter/bin/cache/dart-sdk/pkg/_macros",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
     },
     {
       "name": "amity_sdk_api",
@@ -15,15 +21,15 @@
     },
     {
       "name": "analyzer",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/analyzer-6.2.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/analyzer-6.11.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "args",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/args-2.4.2",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/args-2.6.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.3"
     },
     {
       "name": "async",
@@ -39,39 +45,39 @@
     },
     {
       "name": "build",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/build-2.4.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/build-2.4.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.6"
     },
     {
       "name": "build_config",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/build_config-1.1.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/build_config-1.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "3.6"
     },
     {
       "name": "build_daemon",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/build_daemon-4.0.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/build_daemon-4.0.4",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.6"
     },
     {
       "name": "build_resolvers",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/build_resolvers-2.4.2",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/build_resolvers-2.4.4",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.6"
     },
     {
       "name": "build_runner",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/build_runner-2.4.13",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/build_runner-2.4.15",
       "packageUri": "lib/",
-      "languageVersion": "3.5"
+      "languageVersion": "3.6"
     },
     {
       "name": "build_runner_core",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/build_runner_core-7.3.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/build_runner_core-8.0.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.6"
     },
     {
       "name": "built_collection",
@@ -81,7 +87,7 @@
     },
     {
       "name": "built_value",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/built_value-8.9.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/built_value-8.9.3",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -99,9 +105,9 @@
     },
     {
       "name": "charcode",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/charcode-1.3.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/charcode-1.4.0",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.0"
     },
     {
       "name": "checked_yaml",
@@ -117,9 +123,9 @@
     },
     {
       "name": "code_builder",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/code_builder-4.10.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/code_builder-4.10.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.5"
     },
     {
       "name": "collection",
@@ -141,25 +147,25 @@
     },
     {
       "name": "convert",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/convert-3.1.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/convert-3.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.4"
     },
     {
       "name": "crypto",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/crypto-3.0.3",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/crypto-3.0.6",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.4"
     },
     {
       "name": "csslib",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/csslib-1.0.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/csslib-1.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.1"
     },
     {
       "name": "dart_style",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/dart_style-2.3.4",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/dart_style-2.3.8",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -177,19 +183,25 @@
     },
     {
       "name": "device_info_plus_platform_interface",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/device_info_plus_platform_interface-7.0.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/device_info_plus_platform_interface-7.0.2",
       "packageUri": "lib/",
       "languageVersion": "2.18"
     },
     {
       "name": "dio",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/dio-5.4.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/dio-5.8.0+1",
       "packageUri": "lib/",
-      "languageVersion": "2.15"
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "dio_web_adapter",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/dio_web_adapter-2.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
     },
     {
       "name": "event_bus",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/event_bus-2.0.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/event_bus-2.0.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -207,15 +219,15 @@
     },
     {
       "name": "file",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/file-7.0.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/file-7.0.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "fixnum",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/fixnum-1.1.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/fixnum-1.1.1",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.1"
     },
     {
       "name": "flutter",
@@ -225,15 +237,15 @@
     },
     {
       "name": "flutter_dotenv",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/flutter_dotenv-5.1.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/flutter_dotenv-5.2.1",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "flutter_lints",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/flutter_lints-3.0.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/flutter_lints-3.0.2",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.1"
     },
     {
       "name": "flutter_test",
@@ -249,15 +261,15 @@
     },
     {
       "name": "freezed",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/freezed-2.4.7",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/freezed-2.5.7",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.0"
     },
     {
       "name": "freezed_annotation",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/freezed_annotation-2.4.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/freezed_annotation-2.4.4",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.0"
     },
     {
       "name": "frontend_server_client",
@@ -267,21 +279,21 @@
     },
     {
       "name": "get_it",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/get_it-7.6.7",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/get_it-7.7.0",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
     {
       "name": "glob",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/glob-2.1.2",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/glob-2.1.3",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.3"
     },
     {
       "name": "graphs",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/graphs-2.3.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/graphs-2.3.2",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.4"
     },
     {
       "name": "hive",
@@ -309,27 +321,33 @@
     },
     {
       "name": "html",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/html-0.15.4",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/html-0.15.5",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.2"
+    },
+    {
+      "name": "http",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/http-1.3.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
     },
     {
       "name": "http_multi_server",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/http_multi_server-3.2.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/http_multi_server-3.2.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.2"
     },
     {
       "name": "http_parser",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/http_parser-4.0.2",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/http_parser-4.1.2",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.4"
     },
     {
       "name": "io",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/io-1.0.4",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/io-1.0.5",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.4"
     },
     {
       "name": "js",
@@ -339,9 +357,9 @@
     },
     {
       "name": "json_annotation",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/json_annotation-4.8.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/json_annotation-4.9.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.0"
     },
     {
       "name": "leak_tracker",
@@ -369,9 +387,15 @@
     },
     {
       "name": "logging",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/logging-1.2.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/logging-1.3.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.4"
+    },
+    {
+      "name": "macros",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/macros-0.1.3-main.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.4"
     },
     {
       "name": "matcher",
@@ -393,19 +417,19 @@
     },
     {
       "name": "mime",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/mime-1.0.5",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/mime-2.0.0",
       "packageUri": "lib/",
       "languageVersion": "3.2"
     },
     {
       "name": "mocktail",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/mocktail-1.0.3",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/mocktail-1.0.4",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
     {
       "name": "mqtt_client",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/mqtt_client-10.0.3",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/mqtt_client-10.5.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -417,9 +441,9 @@
     },
     {
       "name": "package_config",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/package_config-2.1.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/package_config-2.1.1",
       "packageUri": "lib/",
-      "languageVersion": "2.12"
+      "languageVersion": "3.4"
     },
     {
       "name": "path",
@@ -429,21 +453,21 @@
     },
     {
       "name": "path_provider",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/path_provider-2.1.2",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/path_provider-2.1.5",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.4"
     },
     {
       "name": "path_provider_android",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/path_provider_android-2.2.2",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/path_provider_android-2.2.15",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.5"
     },
     {
       "name": "path_provider_foundation",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/path_provider_foundation-2.3.2",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/path_provider_foundation-2.4.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "path_provider_linux",
@@ -459,9 +483,9 @@
     },
     {
       "name": "path_provider_windows",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/path_provider_windows-2.2.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/path_provider_windows-2.3.0",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.2"
     },
     {
       "name": "petitparser",
@@ -471,9 +495,9 @@
     },
     {
       "name": "platform",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/platform-3.1.4",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/platform-3.1.6",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.2"
     },
     {
       "name": "plugin_platform_interface",
@@ -489,45 +513,33 @@
     },
     {
       "name": "pub_semver",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/pub_semver-2.1.4",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/pub_semver-2.1.5",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.4"
     },
     {
       "name": "pubspec_parse",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/pubspec_parse-1.2.3",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/pubspec_parse-1.5.0",
       "packageUri": "lib/",
-      "languageVersion": "2.18"
+      "languageVersion": "3.6"
     },
     {
       "name": "shelf",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/shelf-1.4.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/shelf-1.4.2",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.4"
     },
     {
       "name": "shelf_web_socket",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/shelf_web_socket-1.0.4",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/shelf_web_socket-3.0.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.5"
     },
     {
       "name": "sky_engine",
       "rootUri": "file:///Users/warakorn/Applications/flutter/bin/cache/pkg/sky_engine",
       "packageUri": "lib/",
       "languageVersion": "3.2"
-    },
-    {
-      "name": "socket_io_client",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/socket_io_client-1.0.2",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
-    },
-    {
-      "name": "socket_io_common",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/socket_io_common-1.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.12"
     },
     {
       "name": "source_gen",
@@ -537,9 +549,9 @@
     },
     {
       "name": "source_helper",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/source_helper-1.3.4",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/source_helper-1.3.5",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.4"
     },
     {
       "name": "source_span",
@@ -567,9 +579,9 @@
     },
     {
       "name": "stream_transform",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/stream_transform-2.1.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/stream_transform-2.1.1",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "3.1"
     },
     {
       "name": "string_scanner",
@@ -591,15 +603,15 @@
     },
     {
       "name": "timing",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/timing-1.0.1",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/timing-1.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.14"
+      "languageVersion": "3.4"
     },
     {
       "name": "typed_data",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/typed_data-1.3.2",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/typed_data-1.4.0",
       "packageUri": "lib/",
-      "languageVersion": "2.17"
+      "languageVersion": "3.5"
     },
     {
       "name": "universal_html",
@@ -615,7 +627,7 @@
     },
     {
       "name": "uuid",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/uuid-4.3.3",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/uuid-4.5.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
     },
@@ -633,39 +645,45 @@
     },
     {
       "name": "watcher",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/watcher-1.1.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/watcher-1.1.1",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.1"
     },
     {
       "name": "web",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/web-1.0.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/web-1.1.0",
       "packageUri": "lib/",
       "languageVersion": "3.4"
+    },
+    {
+      "name": "web_socket",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/web_socket-0.1.6",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
     },
     {
       "name": "web_socket_channel",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/web_socket_channel-2.4.0",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/web_socket_channel-3.0.2",
       "packageUri": "lib/",
-      "languageVersion": "2.15"
+      "languageVersion": "3.3"
     },
     {
       "name": "win32",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/win32-5.5.4",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/win32-5.10.1",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "3.5"
     },
     {
       "name": "win32_registry",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/win32_registry-1.1.4",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/win32_registry-1.1.5",
       "packageUri": "lib/",
       "languageVersion": "3.4"
     },
     {
       "name": "xdg_directories",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/xdg_directories-1.0.4",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/xdg_directories-1.1.0",
       "packageUri": "lib/",
-      "languageVersion": "3.0"
+      "languageVersion": "3.3"
     },
     {
       "name": "xml",
@@ -675,9 +693,9 @@
     },
     {
       "name": "yaml",
-      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/yaml-3.1.2",
+      "rootUri": "file:///Users/warakorn/.pub-cache/hosted/pub.dev/yaml-3.1.3",
       "packageUri": "lib/",
-      "languageVersion": "2.19"
+      "languageVersion": "3.4"
     },
     {
       "name": "amity_sdk",
@@ -686,7 +704,7 @@
       "languageVersion": "3.0"
     }
   ],
-  "generated": "2025-02-13T09:09:58.099386Z",
+  "generated": "2025-02-27T10:15:42.014176Z",
   "generator": "pub",
   "generatorVersion": "3.6.1",
   "flutterRoot": "file:///Users/warakorn/Applications/flutter",

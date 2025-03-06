@@ -1,7 +1,8 @@
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/response/core_response/base_reponse.dart';
 
 /// [MessageResponse]
-class MessageResponse {
+class MessageResponse implements BaseResponse {
   /// init [MessageResponse]
   MessageResponse({
     this.referenceId,
@@ -225,6 +226,11 @@ class MessageResponse {
       editedAt: editedAt ?? this.editedAt,
       mentionees: mentionees ?? this.mentionees,
     );
+  }
+  
+  @override
+  String getId() {
+    return messageId;
   }
 }
 

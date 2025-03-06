@@ -41,9 +41,6 @@ class AmitySessionEstablisher{
 
     var amityUser = await _useCase.get(params);
 
-    //TODO uncomment when ready
-    //connect to socket if login is successful
-    serviceLocator<AmitySocket>().connect();
     serviceLocator<AmityMQTT>().connect();
 
     return amityUser;

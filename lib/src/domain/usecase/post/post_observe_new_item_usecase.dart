@@ -55,7 +55,9 @@ class PostObserveNewItemUsecase
       unsyncEntities.sort((a, b) => (a.createdAt ?? DateTime.now()).compareTo((b.createdAt ?? DateTime.now())));
       unsyncEntities.forEachIndexed((index, post) {
         final entityId = post.postId;
-        if (entityId != null && !entityIdMap.containsKey(entityId)) {
+        if (entityId != null
+            && !entityIdMap.containsKey(entityId)
+            && post.parentPostId == null) {
           final pagingId = PagingIdHiveEntity(
             id: entityId,
             hash: hash,

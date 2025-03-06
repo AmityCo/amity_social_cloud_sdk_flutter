@@ -1,9 +1,10 @@
 import 'dart:convert';
 
 import 'package:amity_sdk/src/data/data.dart';
+import 'package:amity_sdk/src/data/response/core_response/base_reponse.dart';
 
 /// Post Response from BR
-class PostResponse {
+class PostResponse implements BaseResponse {
   /// init [PostResponse]
   PostResponse({
     required this.id,
@@ -216,6 +217,11 @@ class PostResponse {
         "reach": reach,
         "mentionees": List<dynamic>.from(mentionees.map((x) => x.toJson())),
       };
+      
+        @override
+        String getId() {
+          return postId;
+        }
 }
 
 /// Hash Flag
