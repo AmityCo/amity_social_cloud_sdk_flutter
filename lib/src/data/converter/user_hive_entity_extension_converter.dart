@@ -20,6 +20,7 @@ extension UserHiveEntityExtension on UserHiveEntity {
       ..isGlobalBan = isGlobalBan
       ..isDeleted = isDeleted
       ..flagCount = flagCount
-      ..hashFlag = hashFlag;
+      ..hashFlag = hashFlag
+      ..isBrand = isBrand;
   }
 }

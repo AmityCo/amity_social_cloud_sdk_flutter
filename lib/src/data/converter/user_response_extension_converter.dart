@@ -20,6 +20,7 @@ extension UserResponseExtension on UserResponse {
       ..isDeleted = isDeleted
       ..isGlobalBan = isGlobalBan
       ..flagCount = flagCount
-      ..hashFlag = hashFlag?.toJson();
+      ..hashFlag = hashFlag?.toJson()
+      ..isBrand = isBrand;
   }
 }

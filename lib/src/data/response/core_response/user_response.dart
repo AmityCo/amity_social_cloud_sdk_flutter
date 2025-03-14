@@ -19,7 +19,8 @@ class UserResponse {
     this.isGlobalBan,
     this.createdAt,
     this.updatedAt,
-    this.path
+    this.path,
+    this.isBrand
   });
 
   /// DocId for user
@@ -69,6 +70,9 @@ class UserResponse {
   /// User path with networkid
   final String? path;
 
+  /// Flag to check if user is brand
+  final bool? isBrand;
+
   /// Factory method to create user model from the json
   factory UserResponse.fromJson(Map<String, dynamic> json) => UserResponse(
         id: json["_id"],
@@ -93,6 +97,7 @@ class UserResponse {
         updatedAt: json["updatedAt"] == null
             ? null
             : DateTime.tryParse(json["updatedAt"]),
+        isBrand: json["isBrand"]
       );
 
   /// Covnert the User model to map
@@ -116,5 +121,6 @@ class UserResponse {
         "isGlobalBan": isGlobalBan,
         "createdAt": createdAt?.toIso8601String(),
         "updatedAt": updatedAt?.toIso8601String(),
+        "isBrand": isBrand
       };
 }
