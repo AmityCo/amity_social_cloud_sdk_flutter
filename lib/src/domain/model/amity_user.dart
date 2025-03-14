@@ -60,6 +60,9 @@ class AmityUser {
   /// Flagged By Me
   bool? _flaggedByMe;
 
+  /// Flag to check if user is brand
+  bool? isBrand;
+
   /// Convert [AmityUser] to Map object
   Map<String, dynamic> toMap() {
     return {
@@ -77,6 +80,7 @@ class AmityUser {
       'isDeleted': isDeleted,
       'createdAt': createdAt?.millisecondsSinceEpoch,
       'updatedAt': updatedAt?.millisecondsSinceEpoch,
+      'isBrand': isBrand,
     };
   }
 
@@ -85,7 +89,7 @@ class AmityUser {
 
   @override
   String toString() {
-    return 'AmityUser(id: $id, userId: $userId, roles: $roles, displayName: $displayName, description: $description, avatarFileId: $avatarFileId, avatarUrl: $avatarUrl, avatarCustomUrl: $avatarCustomUrl, flagCount: $flagCount, hashFlag: $hashFlag, metadata: $metadata, isGlobalBan: $isGlobalBan, isDeleted: $isDeleted, createdAt: $createdAt, updatedAt: $updatedAt, flaggedByMe: $_flaggedByMe)';
+    return 'AmityUser(id: $id, userId: $userId, roles: $roles, displayName: $displayName, description: $description, avatarFileId: $avatarFileId, avatarUrl: $avatarUrl, avatarCustomUrl: $avatarCustomUrl, flagCount: $flagCount, hashFlag: $hashFlag, metadata: $metadata, isGlobalBan: $isGlobalBan, isDeleted: $isDeleted, createdAt: $createdAt, updatedAt: $updatedAt, flaggedByMe: $_flaggedByMe, isBrand: $isBrand)';
   }
 
   StreamController<AmityUser> get listen {

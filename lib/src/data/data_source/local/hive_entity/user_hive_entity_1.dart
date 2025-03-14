@@ -72,6 +72,10 @@ class UserHiveEntity extends EkoObject {
   @HiveField(15)
   Map<String, dynamic>? hashFlag;
 
+  /// flag to check brand user
+  @HiveField(16)
+  bool? isBrand;
+
   @override
   String? getId() {
     return id;
@@ -94,6 +98,7 @@ class UserHiveEntity extends EkoObject {
     this.createdAt,
     this.updatedAt,
     this.hashFlag,
+    this.isBrand,
   });
 
   @override bool operator ==(Object other) {
@@ -115,6 +120,7 @@ class UserHiveEntity extends EkoObject {
       other.isGlobalBan == isGlobalBan &&
       other.createdAt == createdAt &&
       other.updatedAt == updatedAt &&
-      other.hashFlag == hashFlag;
+      other.hashFlag == hashFlag &&
+      other.isBrand == isBrand;
   }
 }

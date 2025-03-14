@@ -1,3 +1,6 @@
+## 7.1.0
+* Feat: post & comment as a brand
+
 ## 7.0.0
 * Breaking Change: Removed AmityRegionalSocketEndpoint from AmityCoreClientOption.
 * Deprecate: Deprecated newGetMessages(String subchannelId), newCreateMessage(String subchannelId) API in MessageRepository.
